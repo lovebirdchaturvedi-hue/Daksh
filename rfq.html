@@ -1,51 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Live Buyer RFQs | APD Global Trade</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Live Buyer RFQs | Verified Import & Export Requirements | APD Global Trade</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="/assets/css/style.css">
+<!-- SEO -->
+<meta name="description" content="View live verified buyer RFQs for export and import markets. Access genuine domestic and international buyer requirements with controlled supplier membership on APD Global Trade.">
+<meta name="keywords" content="buyer RFQs, export RFQs, import buyer leads, international trade RFQs, verified buyer requirements">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+html, body {
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:#f5f7fb;
+  color:#0f172a;
+}
+
+:root {
+  --navy:#0b1d36;
+  --navy-dark:#071427;
+  --gold:#c9a44a;
+  --gold-soft:#e7cf88;
+  --muted:#6b7280;
+}
+
+/* HEADER */
+header{
+  height:80px;
+  background:linear-gradient(180deg,var(--navy),var(--navy-dark));
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+header .logo{
+  color:var(--gold);
+  font-weight:600;
+  font-size:15px;
+}
+header nav a{
+  color:#e5e7eb;
+  margin:0 14px;
+  text-decoration:none;
+  font-size:13px;
+  opacity:.85;
+}
+header nav a:hover{
+  opacity:1;
+  color:var(--gold-soft);
+}
+
+/* HERO */
+.hero{
+  background:linear-gradient(180deg,rgba(11,29,54,.9),rgba(7,20,39,.95)),
+  url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d");
+  background-size:cover;
+  background-position:center;
+  color:#fff;
+  text-align:center;
+  padding:110px 20px;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,4vw,3rem);
+}
+.hero p{
+  max-width:900px;
+  margin:20px auto;
+  color:#cbd5e1;
+}
+
+/* SECTIONS */
+.section{
+  max-width:1100px;
+  margin:auto;
+  padding:100px 20px;
+}
+
+/* RFQ GRID */
+.rfq-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+  margin-top:50px;
+}
+
+.rfq-card{
+  background:#fff;
+  padding:28px;
+  border-radius:16px;
+  border:1px solid #e5e7eb;
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.rfq-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 25px 60px rgba(0,0,0,.08);
+}
+
+.lock{
+  color:#991b1b;
+  font-size:13px;
+  font-weight:600;
+  margin-top:8px;
+}
+
+/* CTA */
+.cta{
+  background:#020617;
+  color:#fff;
+  text-align:center;
+  padding:100px 20px;
+}
+.cta p{
+  color:#9ca3af;
+  max-width:800px;
+  margin:20px auto 30px;
+}
+
+.btn{
+  background:linear-gradient(135deg,var(--gold),var(--gold-soft));
+  color:#000;
+  padding:14px 38px;
+  border-radius:999px;
+  text-decoration:none;
+  font-weight:600;
+}
+
+/* FOOTER */
+footer{
+  background:#020617;
+  color:#9ca3af;
+  text-align:center;
+  padding:40px 20px;
+  font-size:14px;
+}
+footer a{
+  color:var(--gold);
+  text-decoration:none;
+}
+
+/* WHATSAPP */
+.whatsapp{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:56px;
+  height:56px;
+  background:#25D366;
+  color:#fff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
+  z-index:9999;
+}
+</style>
 </head>
+
 <body>
 
-<header class="header">
-  <div class="container">
-    <div class="logo">APD Global Trade</div>
-    <nav class="nav">
-      <a href="/index.html">Home</a>
-      <a href="/rfq.html" class="active">Buyer RFQs</a>
-      <a href="/membership.html">Membership</a>
-      <a href="/suppliers.html">Suppliers</a>
-      <a href="/contact.html">Contact</a>
-    </nav>
-  </div>
+<header>
+  <div class="logo">APD Global Trade</div>
+  <nav>
+    <a href="/index.html">Home</a>
+    <a href="/rfq.html">Buyer RFQs</a>
+    <a href="/membership.html">Membership</a>
+    <a href="/suppliers.html">Suppliers</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
 </header>
 
-<section class="page-title">
-  <div class="container">
-    <h1>Live Buyer Requirements</h1>
-    <p>Buyer contact details are locked for non-members.</p>
+<section class="hero">
+  <h1>Live Verified Buyer RFQs</h1>
+  <p>
+    Explore genuine domestic and international buyer requirements.
+    Buyer contact details are shared only with approved supplier members.
+  </p>
+</section>
+
+<section class="section">
+  <h2>Latest Buyer Requirements</h2>
+  <p style="color:var(--muted); max-width:900px;">
+    Below are sample buyer RFQs sourced from verified importers and procurement agencies.
+    Contact details are locked to maintain controlled and professional trade access.
+  </p>
+
+  <div class="rfq-grid">
+
+    <div class="rfq-card">
+      <h3>Basmati Rice (1121)</h3>
+      <p>Quantity: 500 MT</p>
+      <p>Destination: UAE</p>
+      <p>Packaging: 25kg / 50kg bags</p>
+      <span class="lock">🔒 Buyer Contact Locked</span>
+    </div>
+
+    <div class="rfq-card">
+      <h3>Red Chilli Powder</h3>
+      <p>Quantity: 20 MT</p>
+      <p>Destination: USA</p>
+      <p>Quality: ASTA 180+</p>
+      <span class="lock">🔒 Buyer Contact Locked</span>
+    </div>
+
+    <div class="rfq-card">
+      <h3>Soybean Meal</h3>
+      <p>Quantity: 200 MT</p>
+      <p>Destination: Vietnam</p>
+      <p>Protein: 46%</p>
+      <span class="lock">🔒 Buyer Contact Locked</span>
+    </div>
+
+    <div class="rfq-card">
+      <h3>Industrial Packaging Bags</h3>
+      <p>Quantity: 1 Million Units</p>
+      <p>Destination: Africa</p>
+      <p>Material: PP / HDPE</p>
+      <span class="lock">🔒 Buyer Contact Locked</span>
+    </div>
+
   </div>
 </section>
 
-<section class="rfq-section">
-  <div class="container" id="rfqContainer">
-    <!-- RFQs injected by JS -->
-  </div>
+<section class="cta">
+  <h2>Unlock Buyer Contact Details</h2>
+  <p>
+    Upgrade to a supplier membership to access full RFQ details,
+    buyer contact information, and priority trade opportunities.
+  </p>
+  <a href="/membership.html" class="btn">View Membership Plans</a>
 </section>
 
-<section class="lock-info">
-  <div class="container">
-    <p>🔒 Upgrade membership to unlock buyer contact details.</p>
-    <a href="/membership.html" class="btn-primary">View Membership Plans</a>
-  </div>
-</section>
-
-<footer class="footer">
-  <p>© 2026 APD Global Trade. All Rights Reserved.</p>
+<footer>
+  <p><strong>APD Global Trade</strong></p>
+  <p>Elite B2B Trade Facilitation Platform</p>
+  <p>
+    <a href="/terms.html">Terms</a> |
+    <a href="/privacy.html">Privacy</a> |
+    <a href="/disclaimer.html">Disclaimer</a>
+  </p>
+  <p>📧 info@apdglobaltradehub.com · 💬 +91 92664 18868</p>
 </footer>
 
-<script src="/assets/js/data-rfq.js" defer></script>
+<a class="whatsapp" href="https://wa.me/919266418868" target="_blank">💬</a>
+
 </body>
 </html>
