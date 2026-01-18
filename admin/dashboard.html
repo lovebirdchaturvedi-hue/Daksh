@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="assets/admin.css">
+</head>
+<body>
+
+<div class="sidebar">
+  <h2>APD Admin</h2>
+  <a href="dashboard.html">Dashboard</a>
+  <a href="rfqs.html">RFQs</a>
+  <a href="suppliers.html">Suppliers</a>
+  <button class="logout" id="logoutBtn">Logout</button>
+</div>
+
+<div class="main">
+  <h1>Dashboard</h1>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Total RFQs</h3>
+      <p id="rfqCount">0</p>
+    </div>
+    <div class="card">
+      <h3>Suppliers</h3>
+      <p id="supplierCount">0</p>
+    </div>
+    <div class="card">
+      <h3>Buyers</h3>
+      <p id="buyerCount">0</p>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAB-FuXAKzTnVDKCety55SD7W5Xlf1vSm4",
+    authDomain: "apd-global-trade.firebaseapp.com",
+    projectId: "apd-global-trade",
+    storageBucket: "apd-global-trade.appspot.com",
+    messagingSenderId: "821359117885",
+    appId: "1:821359117885:web:9107322b75d38baaba4c54"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  onAuthStateChanged(auth, user => {
+    if (!user) location.href = "login.html";
+  });
+
+  document.getElementById("logoutBtn").onclick = () => {
+    signOut(auth).then(() => location.href = "login.html");
+  };
+</script>
+
+</body>
+</html>
