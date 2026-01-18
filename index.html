@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Main CSS -->
+  <!-- Main CSS (optional, can stay empty) -->
   <link rel="stylesheet" href="/assets/css/style.css">
 
   <style>
@@ -28,7 +28,6 @@
       font-family: 'Inter', sans-serif;
       background: #f5f7fb;
       color: #0f172a;
-      letter-spacing: 0.15px;
     }
 
     h1, h2, h3 {
@@ -62,20 +61,20 @@
       color: var(--gold-soft);
     }
 
-    /* HERO VIDEO */
+    /* ================= HERO VIDEO ================= */
     .hero-video {
       position: relative;
       height: 85vh;
+      width: 100%;
       overflow: hidden;
+      background: #071427;
     }
 
     .hero-video video {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      min-width: 100%;
-      min-height: 100%;
-      transform: translate(-50%, -50%);
+      inset: 0;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       z-index: 1;
     }
@@ -84,18 +83,19 @@
       position: relative;
       z-index: 2;
       height: 100%;
+      width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
       padding: 20px;
-      color: #fff;
       background: linear-gradient(
         180deg,
-        rgba(11,29,54,0.7),
+        rgba(11,29,54,0.65),
         rgba(7,20,39,0.85)
       );
+      color: #fff;
     }
 
     .hero-overlay h1 {
@@ -111,20 +111,13 @@
     }
 
     .btn-primary {
-      display: inline-block;
       background: linear-gradient(135deg, var(--gold), var(--gold-soft));
       color: #000;
       padding: 14px 38px;
-      text-decoration: none;
-      font-weight: 600;
       border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
       letter-spacing: 0.8px;
-      transition: all 0.3s ease;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
     }
 
     /* SECTIONS */
@@ -134,7 +127,6 @@
       padding: 100px 20px;
     }
 
-    /* RFQ PREVIEW */
     .rfq-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
@@ -147,16 +139,6 @@
       padding: 26px;
       border-radius: 16px;
       border: 1px solid #e5e7eb;
-      transition: all 0.3s ease;
-    }
-
-    .rfq-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 25px 60px rgba(0,0,0,0.08);
-    }
-
-    .locked {
-      filter: blur(2px);
     }
 
     .lock {
@@ -165,14 +147,12 @@
       font-weight: 600;
     }
 
-    /* BUYER / SUPPLIER */
     .two-col {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
       gap: 50px;
     }
 
-    /* TESTIMONIALS */
     .testimonial-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
@@ -186,10 +166,8 @@
       border-radius: 18px;
       border-left: 5px solid var(--gold);
       font-style: italic;
-      line-height: 1.8;
     }
 
-    /* STATS */
     .stats {
       background: linear-gradient(180deg, var(--navy), var(--navy-dark));
       color: #fff;
@@ -204,17 +182,11 @@
       font-size: 2.2rem;
     }
 
-    /* CTA */
     .cta {
       background: linear-gradient(180deg, #020617, #000);
       color: #fff;
       text-align: center;
       padding: 100px 20px;
-    }
-
-    .cta p {
-      color: var(--text-muted);
-      margin-bottom: 30px;
     }
 
     footer {
@@ -227,7 +199,6 @@
 
     footer a {
       color: var(--gold);
-      text-decoration: none;
     }
 
     /* WHATSAPP FLOAT */
@@ -253,10 +224,6 @@
       .hero-video {
         height: 70vh;
       }
-
-      .container {
-        padding: 70px 20px;
-      }
     }
   </style>
 </head>
@@ -276,7 +243,8 @@
 
 <!-- HERO VIDEO -->
 <section class="hero-video">
-  <video autoplay muted loop playsinline preload="auto">
+  <video autoplay muted loop playsinline preload="metadata"
+    poster="https://images.unsplash.com/photo-1519452575417-564c1401ecc0">
     <source src="https://cdn.coverr.co/videos/coverr-container-ship-transport-5170/1080p.mp4" type="video/mp4">
   </video>
 
@@ -290,123 +258,8 @@
   </div>
 </section>
 
-<!-- RFQ PREVIEW -->
-<section class="container">
-  <h2>Live Buyer RFQs (Preview)</h2>
-  <p>Real buyer requirements. Contact details are visible only to approved members.</p>
-
-  <div class="rfq-grid">
-    <div class="rfq-card">
-      <h4>Basmati Rice (1121)</h4>
-      <p>Quantity: 500 MT</p>
-      <p>Destination: UAE</p>
-      <span class="lock">🔒 Buyer Contact Locked</span>
-    </div>
-
-    <div class="rfq-card">
-      <h4>Red Chilli Powder</h4>
-      <p>Quantity: 20 MT</p>
-      <p>Destination: USA</p>
-      <span class="lock">🔒 Buyer Contact Locked</span>
-    </div>
-
-    <div class="rfq-card locked">
-      <h4>International Agro RFQ</h4>
-      <p>Members Only</p>
-    </div>
-  </div>
-</section>
-
-<!-- BUYERS / SUPPLIERS -->
-<section class="container two-col">
-  <div>
-    <h3>For Buyers</h3>
-    <p>
-      Post verified RFQs and connect only with serious,
-      pre-screened suppliers across global markets.
-    </p>
-  </div>
-
-  <div>
-    <h3>For Suppliers</h3>
-    <p>
-      Access live buyer requirements, unlock protected contact details,
-      and expand your business with verified trade leads.
-    </p>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="container">
-  <h2>Trusted by Global Trade Professionals</h2>
-
-  <div class="testimonial-grid">
-    <div class="testimonial">
-      “The RFQs are genuine and filtered.
-      APD Global Trade saved us months of lead generation.”
-      <strong>— Exporter, India</strong>
-    </div>
-
-    <div class="testimonial">
-      “Serious buyers and controlled access.
-      This platform respects professional trade.”
-      <strong>— Importer, UAE</strong>
-    </div>
-  </div>
-</section>
-
-<!-- STATS -->
-<section class="stats">
-  <div>
-    <h3>500+</h3>
-    <p>Verified RFQs</p>
-  </div>
-  <div>
-    <h3>20+</h3>
-    <p>Countries Served</p>
-  </div>
-  <div>
-    <h3>100%</h3>
-    <p>Manual Verification</p>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta">
-  <h2>Serious About Global Trade?</h2>
-  <p>
-    Membership unlocks verified buyer RFQs,
-    protected contact details, and premium access.
-  </p>
-  <a href="/membership.html" class="btn-primary">View Membership Plans</a>
-</section>
-
-<footer>
-  <p><strong>APD Global Trade</strong></p>
-  <p>Elite B2B Trade Facilitation Platform</p>
-
-  <p>
-    <a href="/terms.html">Terms</a> |
-    <a href="/privacy.html">Privacy</a> |
-    <a href="/disclaimer.html">Disclaimer</a>
-  </p>
-
-  <p>
-    📧 info@apdglobaltradehub.com<br>
-    ☎ +1 (202) 780-1366<br>
-    💬 WhatsApp: +91 92664 18868
-  </p>
-</footer>
-
-<!-- WHATSAPP BUTTON -->
-<a
-  href="https://wa.me/919266418868?text=Hello%20APD%20Global%20Trade%2C%20I%20am%20interested%20in%20your%20services."
-  class="whatsapp-float"
-  target="_blank"
-  aria-label="Chat on WhatsApp"
->
-  💬
-</a>
+<!-- WHATSAPP -->
+<a href="https://wa.me/919266418868" class="whatsapp-float" target="_blank">💬</a>
 
 </body>
 </html>
