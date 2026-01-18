@@ -1,58 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Contact Us | APD Global Trade</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="UTF-8">
+<title>Contact Us | APD Global Trade</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="Contact APD Global Trade – an elite B2B trade facilitation platform connecting verified buyers and trusted suppliers worldwide.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+html,body{
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:#f5f7fb;
+  color:#0f172a;
+}
+
+:root{
+  --navy:#0b1d36;
+  --navy-dark:#071427;
+  --gold:#c9a44a;
+  --gold-soft:#e7cf88;
+  --text-muted:#9ca3af;
+}
+
+/* HEADER */
+header{
+  height:80px;
+  background:linear-gradient(180deg,var(--navy),var(--navy-dark));
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+header .logo{
+  color:var(--gold);
+  font-weight:600;
+  font-size:15px;
+}
+header nav a{
+  color:#e5e7eb;
+  margin:0 14px;
+  text-decoration:none;
+  font-size:13px;
+  opacity:.85;
+}
+header nav a:hover{
+  opacity:1;
+  color:var(--gold-soft);
+}
+
+/* HERO */
+.hero{
+  background:linear-gradient(180deg,#020617,#071427);
+  color:#fff;
+  text-align:center;
+  padding:100px 20px;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:3rem;
+  margin-bottom:10px;
+}
+.hero p{
+  color:var(--text-muted);
+  max-width:700px;
+  margin:auto;
+}
+
+/* CONTENT */
+.section{
+  max-width:1100px;
+  margin:auto;
+  padding:100px 20px;
+}
+.contact-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:50px;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  padding:40px;
+  border-radius:20px;
+  box-shadow:0 25px 60px rgba(0,0,0,.08);
+}
+.card h2{
+  font-family:'Playfair Display',serif;
+  margin-bottom:20px;
+}
+.card p{
+  margin-bottom:14px;
+  font-size:15px;
+}
+
+/* CTA BUTTON */
+.btn{
+  display:inline-block;
+  margin-top:15px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-soft));
+  color:#000;
+  padding:14px 30px;
+  border-radius:999px;
+  text-decoration:none;
+  font-weight:600;
+}
+
+/* SOCIAL */
+.social{
+  margin-top:25px;
+}
+.social a{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  color:#1877f2;
+  text-decoration:none;
+  font-weight:600;
+  font-size:15px;
+}
+.social i{
+  font-size:22px;
+}
+
+/* GLOBAL */
+.global-list{
+  list-style:none;
+  padding:0;
+}
+.global-list li{
+  margin-bottom:10px;
+  font-size:15px;
+}
+
+/* FOOTER */
+footer{
+  background:#020617;
+  color:#9ca3af;
+  text-align:center;
+  padding:40px 20px;
+  font-size:14px;
+}
+footer a{
+  color:var(--gold);
+  text-decoration:none;
+}
+
+/* WHATSAPP FLOAT */
+.whatsapp{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:56px;
+  height:56px;
+  background:#25D366;
+  color:#fff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
+  z-index:9999;
+}
+</style>
 </head>
 
 <body>
 
-<header class="header">
-  <div class="container">
-    <div class="logo">APD Global Trade</div>
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="rfq.html">Buyer RFQs</a>
-      <a href="membership.html">Membership</a>
-    </nav>
-  </div>
+<header>
+  <div class="logo">APD Global Trade</div>
+  <nav>
+    <a href="/index.html">Home</a>
+    <a href="/rfq.html">Buyer RFQs</a>
+    <a href="/membership.html">Membership</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
 </header>
 
-<section class="page-title">
-  <div class="container">
-    <h1>Contact Us</h1>
+<section class="hero">
+  <h1>Contact Us</h1>
+  <p>
+    Get in touch with APD Global Trade for verified buyer requirements,
+    supplier memberships, and global trade facilitation.
+  </p>
+</section>
+
+<section class="section">
+  <div class="contact-grid">
+
+    <!-- CONTACT -->
+    <div class="card">
+      <h2>Get in Touch</h2>
+
+      <p><strong>Email:</strong><br>
+        info@apdglobaltradehub.com
+      </p>
+
+      <p><strong>Phone:</strong><br>
+        +1 (202) 780-1366
+      </p>
+
+      <a href="https://wa.me/919266418868" target="_blank" class="btn">
+        💬 Chat on WhatsApp
+      </a>
+
+      <div class="social">
+        <a href="https://www.facebook.com/share/1At1wN1REj/" target="_blank">
+          <i class="fab fa-facebook"></i> Follow us on Facebook
+        </a>
+      </div>
+    </div>
+
+    <!-- GLOBAL -->
+    <div class="card">
+      <h2>Our Global Presence</h2>
+      <ul class="global-list">
+        <li>🇮🇳 India</li>
+        <li>🇺🇸 United States</li>
+        <li>🇦🇪 United Arab Emirates</li>
+        <li>🌍 International Trade Partners</li>
+      </ul>
+
+      <p style="margin-top:20px;color:var(--text-muted);">
+        We facilitate connections across domestic and international
+        markets with a focus on verified, professional trade.
+      </p>
+    </div>
+
   </div>
 </section>
 
-<section class="content">
-  <div class="container">
-
-    <h3>Get in Touch</h3>
-    <p>Email: <strong>info@apdglobaltradehub.com</strong></p>
-    <p>Phone: <strong>+1 (202) 780-1366</strong></p>
-
-    <a href="https://wa.me/919266418868" target="_blank" class="btn-primary">
-      💬 Chat on WhatsApp
-    </a>
-
-    <h3 style="margin-top:40px;">Our Global Presence</h3>
-    <ul>
-      <li>🇮🇳 India</li>
-      <li>🇺🇸 United States</li>
-      <li>🇦🇪 United Arab Emirates</li>
-      <li>🌍 International Trade Partners</li>
-    </ul>
-
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="container">
-    <p>© 2026 APD Global Trade. All Rights Reserved.</p>
-  </div>
+<footer>
+  <p><strong>APD Global Trade</strong></p>
+  <p>Elite B2B Trade Facilitation Platform</p>
+  <p>
+    <a href="/terms.html">Terms</a> |
+    <a href="/privacy.html">Privacy</a> |
+    <a href="/disclaimer.html">Disclaimer</a>
+  </p>
+  <p>📧 info@apdglobaltradehub.com · 💬 +91 92664 18868</p>
 </footer>
+
+<a class="whatsapp" href="https://wa.me/919266418868" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
 
 </body>
 </html>
