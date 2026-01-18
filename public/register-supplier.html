@@ -1,97 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Register as Supplier – APD Global Trade</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<title>Supplier Registration | APD Global Trade</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:#f5f7fb;
+}
+
+.form-box {
+  max-width:520px;
+  margin:80px auto;
+  background:#fff;
+  padding:40px;
+  border-radius:18px;
+  box-shadow:0 25px 60px rgba(0,0,0,.1);
+}
+
+h1 {
+  font-family:'Playfair Display',serif;
+  text-align:center;
+}
+
+input {
+  width:100%;
+  padding:14px;
+  margin-bottom:14px;
+  border-radius:10px;
+  border:1px solid #e5e7eb;
+}
+
+button {
+  width:100%;
+  padding:14px;
+  background:#0b1d36;
+  color:#fff;
+  border:none;
+  border-radius:999px;
+  font-weight:600;
+}
+</style>
 </head>
 
 <body>
 
-<h2>Supplier Registration</h2>
+<div class="form-box">
+  <h1>Apply as Supplier</h1>
 
-<form id="supplierForm">
-  <input type="text" id="companyName" placeholder="Company Name" required /><br><br>
-  <input type="text" id="contactPerson" placeholder="Contact Person" required /><br><br>
-  <input type="text" id="phone" placeholder="Phone Number" required /><br><br>
-  <input type="text" id="country" placeholder="Country" required /><br><br>
-  <textarea id="products" placeholder="Products you deal in" required></textarea><br><br>
+  <input id="company" placeholder="Company Name">
+  <input id="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
 
-  <button type="submit">Submit for Approval</button>
-</form>
-
-<p id="msg" style="margin-top:15px;color:red;"></p>
+  <button onclick="register()">Submit Application</button>
+</div>
 
 <script type="module">
-import { auth, db } from "./js/firebase-init.js";
-import { onAuthStateChanged } from
+import { auth, db } from "/assets/js/firebase-init.js";
+import { createUserWithEmailAndPassword } from
   "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { doc, setDoc, getDoc, serverTimestamp } from
+import { doc, setDoc, serverTimestamp } from
   "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const form = document.getElementById("supplierForm");
-const msg = document.getElementById("msg");
+window.register = async () => {
+  const company = document.getElementById("company").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-let currentUser = null;
+  const user = await createUserWithEmailAndPassword(auth, email, password);
 
-/* 🔐 Ensure user is logged in */
-onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    window.location.href = "/supplier-login.html";
-    return;
-  }
+  await setDoc(doc(db, "suppliers", user.user.uid), {
+    companyName: company,
+    email,
+    status: "pending",
+    plan: "basic",
+    createdAt: serverTimestamp()
+  });
 
-  currentUser = user;
-
-  // Prevent duplicate registration
-  const ref = doc(db, "suppliers", user.uid);
-  const snap = await getDoc(ref);
-
-  if (snap.exists()) {
-    const status = snap.data().status;
-
-    if (status === "approved") {
-      window.location.href = "/supplier-dashboard.html";
-    } else if (status === "pending") {
-      window.location.href = "/pending-approval.html";
-    } else if (status === "rejected") {
-      window.location.href = "/account-rejected.html";
-    }
-  }
-});
-
-/* 📝 Submit supplier registration */
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  msg.innerText = "";
-
-  if (!currentUser) return;
-
-  try {
-    await setDoc(doc(db, "suppliers", currentUser.uid), {
-      uid: currentUser.uid,
-      email: currentUser.email,
-      companyName: document.getElementById("companyName").value,
-      contactPerson: document.getElementById("contactPerson").value,
-      phone: document.getElementById("phone").value,
-      country: document.getElementById("country").value,
-      products: document.getElementById("products").value,
-      status: "pending",
-      createdAt: serverTimestamp()
-    });
-
-    msg.style.color = "green";
-    msg.innerText = "Submitted successfully. Waiting for admin approval ⏳";
-
-    setTimeout(() => {
-      window.location.href = "/pending-approval.html";
-    }, 1500);
-
-  } catch (err) {
-    msg.style.color = "red";
-    msg.innerText = err.message;
-  }
-});
+  alert("Application submitted. Approval pending.");
+  window.location.href = "/supplier-login.html";
+};
 </script>
 
 </body>
