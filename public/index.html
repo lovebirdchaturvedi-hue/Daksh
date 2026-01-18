@@ -6,23 +6,19 @@
   <title>APD Global Trade | Elite B2B Trade Facilitation Platform</title>
 
   <!-- SEO -->
-  <meta name="description" content="APD Global Trade is an elite B2B trade facilitation platform connecting verified buyers and trusted suppliers worldwide.">
-  <meta name="keywords" content="B2B trade platform, global trade, suppliers, buyers, export import">
+  <meta name="description" content="APD Global Trade is an elite B2B trade facilitation platform connecting verified buyers and trusted suppliers worldwide across agro and industrial markets.">
+  <meta name="keywords" content="B2B trade platform, global trade, buyer RFQ, supplier marketplace, agro commodities export import">
   <meta name="robots" content="index, follow">
 
   <!-- MOBILE -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- CSS -->
   <link rel="stylesheet" href="/assets/css/style.css">
 
-  <!-- CRITICAL MOBILE FIX -->
+  <!-- INLINE FIXES -->
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: Arial, sans-serif;
@@ -46,21 +42,30 @@
       font-weight: 500;
     }
 
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
     /* HERO VIDEO */
-    .hero-video {
+    .hero-video,
+    .trade-video {
       position: relative;
       width: 100%;
       height: 85vh;
       overflow: hidden;
     }
 
-    .hero-video video {
+    .hero-video video,
+    .trade-video video {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .hero-overlay {
+    .hero-overlay,
+    .trade-video-overlay {
       position: absolute;
       inset: 0;
       background: rgba(0,0,0,0.45);
@@ -69,18 +74,12 @@
       justify-content: center;
       text-align: center;
       padding: 20px;
+      color: #fff;
     }
 
     .hero-overlay h1 {
-      color: #fff;
       font-size: 2.2rem;
       margin-bottom: 12px;
-    }
-
-    .hero-overlay p {
-      color: #eee;
-      margin-bottom: 20px;
-      max-width: 600px;
     }
 
     .btn-primary {
@@ -90,12 +89,6 @@
       color: #fff;
       text-decoration: none;
       border-radius: 4px;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 40px 20px;
     }
 
     footer {
@@ -110,7 +103,7 @@
       text-decoration: none;
     }
 
-    /* MOBILE FIX */
+    /* MOBILE */
     @media (max-width: 768px) {
       header {
         flex-direction: column;
@@ -120,16 +113,13 @@
         margin-top: 10px;
       }
 
-      .hero-video {
+      .hero-video,
+      .trade-video {
         height: 60vh;
       }
 
       .hero-overlay h1 {
         font-size: 1.6rem;
-      }
-
-      .hero-overlay p {
-        font-size: 0.95rem;
       }
     }
   </style>
@@ -149,7 +139,7 @@
   </nav>
 </header>
 
-<!-- HERO -->
+<!-- HERO VIDEO -->
 <section class="hero-video">
   <video autoplay muted loop playsinline preload="metadata"
     poster="https://images.unsplash.com/photo-1519452575417-564c1401ecc0">
@@ -159,11 +149,32 @@
   <div class="hero-overlay">
     <div>
       <h1>Elite Global Trade Facilitation</h1>
-      <p>
-        Connecting verified buyers and trusted suppliers across global agro
-        and industrial markets.
-      </p>
+      <p>Connecting verified buyers and trusted suppliers worldwide.</p>
       <a href="/rfq.html" class="btn-primary">View Live Buyer RFQs</a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="container">
+  <h3>Verified Trade Leads</h3>
+  <p>Genuine buyer requirements sourced globally.</p>
+
+  <h3>Controlled & Secure Access</h3>
+  <p>Buyer details shared only with approved suppliers.</p>
+</section>
+
+<!-- 🔥 RESTORED MIDDLE VIDEO -->
+<section class="trade-video">
+  <video autoplay muted loop playsinline preload="metadata"
+    poster="https://images.unsplash.com/photo-1578575437130-527eed3abbec">
+    <source src="https://cdn.coverr.co/videos/coverr-port-logistics-4038/1080p.mp4" type="video/mp4">
+  </video>
+
+  <div class="trade-video-overlay">
+    <div>
+      <h2>Powering Global Trade Networks</h2>
+      <p>Verified buyer RFQs · Secure supplier access</p>
     </div>
   </div>
 </section>
@@ -173,29 +184,14 @@
   <h2>About APD Global Trade</h2>
   <p>
     APD Global Trade is a B2B trade facilitation and lead-generation platform.
-    We connect buyers and suppliers worldwide. We do not buy, sell, inspect,
-    manufacture, store, or ship goods.
+    We do not buy or sell goods. Buyers and suppliers transact independently.
   </p>
-</section>
-
-<!-- SECTORS -->
-<section class="container">
-  <h2>Key Trade Sectors</h2>
-  <ul>
-    <li>Agro Commodities & Food Products</li>
-    <li>Spices, Pulses & Oil Seeds</li>
-    <li>Chemicals & Industrial Raw Materials</li>
-    <li>Textiles & Apparel</li>
-    <li>Packaging & Industrial Products</li>
-  </ul>
 </section>
 
 <!-- CTA -->
 <section class="container">
   <h2>Are You a Supplier?</h2>
-  <p>
-    Unlock verified buyer RFQs and expand your business globally.
-  </p>
+  <p>Unlock verified buyer leads and grow globally.</p>
   <a href="/membership.html" class="btn-primary">View Membership Plans</a>
 </section>
 
@@ -203,21 +199,13 @@
 <footer>
   <p><strong>APD Global Trade</strong></p>
   <p>Elite B2B Trade Facilitation Platform</p>
-
   <p>
     <a href="/terms.html">Terms</a> |
     <a href="/privacy.html">Privacy</a> |
     <a href="/disclaimer.html">Disclaimer</a>
   </p>
-
-  <p>
-    📧 info@apdglobaltradehub.com<br>
-    ☎ +1 (202) 780-1366<br>
-    💬 WhatsApp: +91 92664 18868
-  </p>
 </footer>
 
-<!-- OPTIONAL JS -->
 <script src="/assets/js/main.js" defer></script>
 
 </body>
