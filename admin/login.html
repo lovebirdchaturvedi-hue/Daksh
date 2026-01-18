@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Login – APD Global Trade</title>
+</head>
+<body>
+
+<h2>Admin Login</h2>
+
+<input type="email" id="email" placeholder="Admin Email">
+<br><br>
+<input type="password" id="password" placeholder="Password">
+<br><br>
+<button onclick="login()">Login</button>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  window.login = function () {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        window.location.href = "panel.html";
+      })
+      .catch(() => alert("Invalid admin credentials"));
+  };
+</script>
+
+</body>
+</html>

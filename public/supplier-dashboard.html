@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Supplier Dashboard</h2>
+
+<p>Welcome! You are approved 🎉</p>
+
+<script type="module">
+import { auth } from "./js/firebase-init.js";
+import { onAuthStateChanged } from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    location.href = "/supplier-login.html";
+    return;
+  }
+
+  const token = await user.getIdTokenResult();
+  if (!token.claims.approved) {
+    location.href = "/pending-approval.html";
+  }
+});
+</script>
+</body>
+</html>
