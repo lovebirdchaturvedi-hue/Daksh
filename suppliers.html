@@ -1,58 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Suppliers | APD Global Trade</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="UTF-8">
+<title>Supplier Access | APD Global Trade</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="Supplier access to verified buyer RFQs on APD Global Trade. Membership-based access with manual approval and protected buyer contacts.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --navy:#0b1d36;
+  --navy-dark:#071427;
+  --gold:#c9a44a;
+  --gold-soft:#e7cf88;
+  --text-light:#e5e7eb;
+  --text-muted:#9ca3af;
+}
+
+body {
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:#f5f7fb;
+  color:#0f172a;
+}
+
+h1,h2,h3 {
+  font-family:'Playfair Display',serif;
+  letter-spacing:.4px;
+}
+
+/* HEADER */
+header {
+  height:80px;
+  background:linear-gradient(180deg,var(--navy),var(--navy-dark));
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+header .logo {
+  color:var(--gold);
+  font-weight:600;
+  margin-bottom:4px;
+}
+
+header nav a {
+  color:var(--text-light);
+  margin:0 14px;
+  text-decoration:none;
+  font-size:13px;
+  opacity:.85;
+}
+header nav a:hover { color:var(--gold-soft); }
+
+/* HERO */
+.hero {
+  min-height:70vh;
+  background:
+    linear-gradient(180deg,rgba(11,29,54,.75),rgba(7,20,39,.9)),
+    url("https://images.unsplash.com/photo-1581093588401-22d4f2c47f2d");
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:40px 20px;
+  color:#fff;
+}
+
+.hero h1 {
+  font-size:clamp(2.4rem,4vw,3.4rem);
+  margin-bottom:18px;
+}
+
+.hero p {
+  max-width:760px;
+  margin:auto;
+  color:var(--text-muted);
+  font-size:1.05rem;
+}
+
+/* SECTIONS */
+.section {
+  max-width:1100px;
+  margin:auto;
+  padding:100px 20px;
+}
+
+.center { text-align:center; }
+
+/* STEPS */
+.steps {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:30px;
+  margin-top:50px;
+}
+
+.step {
+  background:#fff;
+  padding:30px;
+  border-radius:18px;
+  border:1px solid #e5e7eb;
+  transition:.3s;
+}
+.step:hover {
+  transform:translateY(-5px);
+  box-shadow:0 20px 50px rgba(0,0,0,.08);
+}
+.step span {
+  display:inline-block;
+  background:var(--gold);
+  color:#000;
+  font-weight:700;
+  padding:6px 14px;
+  border-radius:999px;
+  margin-bottom:14px;
+}
+
+/* CTA */
+.cta {
+  background:linear-gradient(180deg,#020617,#000);
+  color:#fff;
+  text-align:center;
+  padding:100px 20px;
+}
+
+.cta p {
+  color:var(--text-muted);
+  max-width:720px;
+  margin:0 auto 30px;
+}
+
+.btn {
+  display:inline-block;
+  background:linear-gradient(135deg,var(--gold),var(--gold-soft));
+  color:#000;
+  padding:14px 38px;
+  border-radius:999px;
+  text-decoration:none;
+  font-weight:600;
+  letter-spacing:.8px;
+}
+
+/* FOOTER */
+footer {
+  background:#020617;
+  color:#9ca3af;
+  text-align:center;
+  padding:40px 20px;
+  font-size:14px;
+}
+
+footer a { color:var(--gold); text-decoration:none; }
+
+/* WHATSAPP */
+.whatsapp {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:56px;
+  height:56px;
+  background:#25D366;
+  color:#fff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
+  z-index:999;
+}
+</style>
 </head>
 
 <body>
 
-<header class="header">
-  <div class="container">
-    <div class="logo">APD Global Trade</div>
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="rfq.html">Buyer RFQs</a>
-      <a href="membership.html">Membership</a>
-      <a href="suppliers.html" class="active">Suppliers</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
+<header>
+  <div class="logo">APD Global Trade</div>
+  <nav>
+    <a href="/index.html">Home</a>
+    <a href="/rfq.html">Buyer RFQs</a>
+    <a href="/membership.html">Membership</a>
+    <a href="/suppliers.html">Suppliers</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
 </header>
 
-<section class="page-title">
-  <div class="container">
+<section class="hero">
+  <div>
     <h1>Supplier Access</h1>
     <p>
-      APD Global Trade provides controlled access to verified buyer requirements.
-      Supplier profiles are created only after manual verification and payment confirmation.
+      APD Global Trade provides controlled, membership-based access
+      to verified domestic and international buyer RFQs.
+      Supplier profiles are activated only after manual verification.
     </p>
   </div>
 </section>
 
-<section class="content">
-  <div class="container">
-    <h2>How It Works</h2>
-    <ul>
-      <li>✔ Browse buyer RFQs publicly (limited)</li>
-      <li>✔ Apply for supplier membership</li>
-      <li>✔ Profile activated by admin</li>
-      <li>✔ Access buyer details as per plan</li>
-    </ul>
+<section class="section center">
+  <h2>How Supplier Access Works</h2>
 
-    <a href="supplier/index.html" class="btn-primary">
-      Supplier Login
-    </a>
+  <div class="steps">
+    <div class="step">
+      <span>Step 1</span>
+      <h3>Browse Sample RFQs</h3>
+      <p>View limited buyer RFQs to understand demand and categories.</p>
+    </div>
+
+    <div class="step">
+      <span>Step 2</span>
+      <h3>Apply for Membership</h3>
+      <p>Submit supplier details and choose a suitable membership plan.</p>
+    </div>
+
+    <div class="step">
+      <span>Step 3</span>
+      <h3>Manual Verification</h3>
+      <p>Our team reviews your profile for authenticity and relevance.</p>
+    </div>
+
+    <div class="step">
+      <span>Step 4</span>
+      <h3>Unlock Buyer Contacts</h3>
+      <p>Approved members access buyer contact details as per plan.</p>
+    </div>
   </div>
 </section>
 
-<footer class="footer">
-  <div class="container">
-    <p>© 2026 APD Global Trade. All Rights Reserved.</p>
-  </div>
+<section class="cta">
+  <h2>Ready to Access Verified Buyer RFQs?</h2>
+  <p>
+    Join APD Global Trade to unlock serious buyer inquiries,
+    protected contact details, and premium trade opportunities.
+  </p>
+  <a href="/membership.html" class="btn">View Membership Plans</a>
+</section>
+
+<footer>
+  <p><strong>APD Global Trade</strong></p>
+  <p>Elite B2B Trade Facilitation Platform</p>
+  <p>
+    <a href="/terms.html">Terms</a> |
+    <a href="/privacy.html">Privacy</a> |
+    <a href="/disclaimer.html">Disclaimer</a>
+  </p>
+  <p>📧 info@apdglobaltradehub.com · 💬 +91 92664 18868</p>
 </footer>
+
+<a class="whatsapp" href="https://wa.me/919266418868" target="_blank">💬</a>
 
 </body>
 </html>
