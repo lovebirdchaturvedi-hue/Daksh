@@ -10,13 +10,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-body {
+body{
   margin:0;
   font-family:Inter,sans-serif;
   background:#f5f7fb;
 }
 
-.form-box {
+.form{
   max-width:520px;
   margin:80px auto;
   background:#fff;
@@ -25,12 +25,13 @@ body {
   box-shadow:0 25px 60px rgba(0,0,0,.1);
 }
 
-h1 {
+h1{
   font-family:'Playfair Display',serif;
   text-align:center;
+  margin-bottom:20px;
 }
 
-input {
+input{
   width:100%;
   padding:14px;
   margin-bottom:14px;
@@ -38,7 +39,7 @@ input {
   border:1px solid #e5e7eb;
 }
 
-button {
+button{
   width:100%;
   padding:14px;
   background:#0b1d36;
@@ -46,14 +47,15 @@ button {
   border:none;
   border-radius:999px;
   font-weight:600;
+  cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<div class="form-box">
-  <h1>Apply as Supplier</h1>
+<div class="form">
+  <h1>Supplier Registration</h1>
 
   <input id="company" placeholder="Company Name">
   <input id="email" placeholder="Email">
@@ -64,28 +66,32 @@ button {
 
 <script type="module">
 import { auth, db } from "/assets/js/firebase-init.js";
-import { createUserWithEmailAndPassword } from
-  "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { doc, setDoc, serverTimestamp } from
-  "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { createUserWithEmailAndPassword }
+  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { doc, setDoc, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 window.register = async () => {
-  const company = document.getElementById("company").value;
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  try{
+    const user = await createUserWithEmailAndPassword(
+      auth,
+      document.getElementById("email").value,
+      document.getElementById("password").value
+    );
 
-  const user = await createUserWithEmailAndPassword(auth, email, password);
+    await setDoc(doc(db,"suppliers",user.user.uid),{
+      companyName: document.getElementById("company").value,
+      email: document.getElementById("email").value,
+      status:"pending",
+      plan:"basic",
+      createdAt: serverTimestamp()
+    });
 
-  await setDoc(doc(db, "suppliers", user.user.uid), {
-    companyName: company,
-    email,
-    status: "pending",
-    plan: "basic",
-    createdAt: serverTimestamp()
-  });
-
-  alert("Application submitted. Approval pending.");
-  window.location.href = "/supplier-login.html";
+    alert("Application submitted. Approval pending.");
+    window.location.href="/supplier-login.html";
+  }catch(e){
+    alert(e.message);
+  }
 };
 </script>
 
