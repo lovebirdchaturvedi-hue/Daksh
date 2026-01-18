@@ -3,219 +3,223 @@
 <head>
   <meta charset="UTF-8">
   <title>APD Global Trade | Elite B2B Trade Facilitation Platform</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- GOOGLE FONTS (LUXURY) -->
+  <!-- Luxury Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  <!-- MAIN CSS -->
+  <!-- Main CSS -->
   <link rel="stylesheet" href="/assets/css/style.css">
 
-  <!-- PREMIUM UI (SAFE INLINE) -->
+  <!-- ELITE UI SYSTEM -->
   <style>
+    :root {
+      --navy: #0b1d36;
+      --navy-dark: #071427;
+      --gold: #c9a44a;
+      --gold-soft: #e7cf88;
+      --text-light: #e5e7eb;
+      --text-muted: #9ca3af;
+    }
+
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: #f8fafc;
-      color: #111;
-      letter-spacing: 0.1px;
+      background: #f5f7fb;
+      color: #0f172a;
+      letter-spacing: 0.15px;
     }
 
-    h1, h2, h3, h4 {
+    h1, h2, h3 {
       font-family: 'Playfair Display', serif;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.4px;
     }
 
+    /* HEADER */
     header {
-      background: #0b2545;
-      padding: 18px;
+      background: linear-gradient(180deg, var(--navy), var(--navy-dark));
+      padding: 20px;
       text-align: center;
     }
 
     header .logo {
-      color: #facc15;
+      color: var(--gold);
       font-weight: 600;
       margin-bottom: 6px;
     }
 
     header nav a {
-      color: #fff;
-      margin: 0 12px;
+      color: var(--text-light);
+      margin: 0 14px;
       text-decoration: none;
       font-size: 14px;
-      opacity: 0.9;
+      opacity: 0.85;
     }
 
     header nav a:hover {
       opacity: 1;
+      color: var(--gold-soft);
     }
 
-    /* HERO */
+    /* CINEMATIC HERO */
     .hero {
-      height: 75vh;
-      background-image: url("https://images.unsplash.com/photo-1519452575417-564c1401ecc0");
+      height: 85vh;
+      background-image:
+        linear-gradient(180deg, rgba(11,29,54,0.75), rgba(7,20,39,0.9)),
+        url("https://images.unsplash.com/photo-1519452575417-564c1401ecc0");
       background-size: cover;
       background-position: center;
-      position: relative;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.55);
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      color: #fff;
+      color: var(--text-light);
       padding: 20px;
     }
 
-    .hero-content h1 {
-      font-size: clamp(2.2rem, 4vw, 3.2rem);
-      margin-bottom: 14px;
+    .hero h1 {
+      font-size: clamp(2.6rem, 4vw, 3.6rem);
+      margin-bottom: 16px;
+      color: #fff;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: auto;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 30px;
     }
 
     .btn-primary {
       display: inline-block;
-      background: #facc15;
+      background: linear-gradient(135deg, var(--gold), var(--gold-soft));
       color: #000;
-      padding: 14px 36px;
+      padding: 14px 38px;
       text-decoration: none;
       font-weight: 600;
       border-radius: 999px;
-      letter-spacing: 0.6px;
+      letter-spacing: 0.8px;
       transition: all 0.3s ease;
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
     }
 
+    /* SECTIONS */
     .container {
       max-width: 1100px;
       margin: auto;
-      padding: 90px 20px;
+      padding: 100px 20px;
     }
 
     /* RFQ PREVIEW */
     .rfq-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-      gap: 24px;
-      margin-top: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+      gap: 28px;
+      margin-top: 40px;
     }
 
     .rfq-card {
       background: #fff;
-      padding: 24px;
-      border-radius: 14px;
+      padding: 26px;
+      border-radius: 16px;
       border: 1px solid #e5e7eb;
       transition: all 0.3s ease;
     }
 
     .rfq-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+      transform: translateY(-5px);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.08);
     }
 
-    .rfq-card.locked {
+    .locked {
       filter: blur(2px);
     }
 
     .lock {
-      color: #b91c1c;
+      color: #991b1b;
       font-size: 13px;
       font-weight: 600;
     }
 
-    /* TWO COL */
+    /* BUYER / SUPPLIER */
     .two-col {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
-      gap: 40px;
+      gap: 50px;
     }
 
     /* TESTIMONIALS */
     .testimonial-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-      gap: 30px;
-      margin-top: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+      gap: 40px;
+      margin-top: 40px;
     }
 
     .testimonial {
       background: #fff;
-      padding: 24px;
-      border-radius: 16px;
-      border-left: 4px solid #0b2545;
+      padding: 28px;
+      border-radius: 18px;
+      border-left: 5px solid var(--gold);
       font-style: italic;
-      line-height: 1.7;
-    }
-
-    .testimonial strong {
-      display: block;
-      margin-top: 14px;
-      font-style: normal;
-      font-weight: 600;
+      line-height: 1.8;
     }
 
     /* STATS */
     .stats {
-      background: #0b2545;
+      background: linear-gradient(180deg, var(--navy), var(--navy-dark));
       color: #fff;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+      grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
       text-align: center;
-      padding: 50px 20px;
+      padding: 60px 20px;
     }
 
     .stats h3 {
-      color: #facc15;
-      font-size: 2rem;
-      letter-spacing: 1px;
+      color: var(--gold);
+      font-size: 2.2rem;
     }
 
     /* CTA */
     .cta {
-      background: #020617;
+      background: linear-gradient(180deg, #020617, #000);
       color: #fff;
       text-align: center;
-      padding: 80px 20px;
+      padding: 100px 20px;
+    }
+
+    .cta p {
+      color: var(--text-muted);
+      margin-bottom: 30px;
     }
 
     footer {
       background: #020617;
-      color: #cbd5f5;
+      color: var(--text-muted);
       text-align: center;
       padding: 40px 20px;
       font-size: 14px;
-      line-height: 1.8;
     }
 
     footer a {
-      color: #facc15;
+      color: var(--gold);
       text-decoration: none;
     }
 
     @media (max-width: 768px) {
-      .container {
-        padding: 60px 20px;
+      .hero {
+        height: 70vh;
       }
 
-      .hero-content h1 {
-        font-size: 1.6rem;
+      .container {
+        padding: 70px 20px;
       }
     }
   </style>
@@ -223,7 +227,6 @@
 
 <body>
 
-<!-- HEADER -->
 <header>
   <div class="logo">APD Global Trade</div>
   <nav>
@@ -237,33 +240,34 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-content">
-    <div>
-      <h1>Elite Global Trade Facilitation</h1>
-      <p>Verified buyers · Trusted suppliers · Controlled access</p>
-      <a href="/rfq.html" class="btn-primary">View Live Buyer RFQs</a>
-    </div>
+  <div>
+    <h1>Where Verified Buyers Meet Serious Suppliers</h1>
+    <p>
+      APD Global Trade is an elite B2B trade facilitation platform.
+      Access genuine buyer RFQs, protected contacts, and controlled global opportunities.
+    </p>
+    <a href="/rfq.html" class="btn-primary">Access Live Buyer RFQs</a>
   </div>
 </section>
 
-<!-- LIVE RFQ PREVIEW -->
+<!-- RFQ PREVIEW -->
 <section class="container">
-  <h2>Live Buyer RFQs</h2>
-  <p>Preview real buyer requirements. Contact details visible to members only.</p>
+  <h2>Live Buyer RFQs (Preview)</h2>
+  <p>Real buyer requirements. Contact details are visible only to approved members.</p>
 
   <div class="rfq-grid">
     <div class="rfq-card">
-      <h4>Basmati Rice 1121</h4>
+      <h4>Basmati Rice (1121)</h4>
       <p>Quantity: 500 MT</p>
       <p>Destination: UAE</p>
-      <span class="lock">🔒 Contact Locked</span>
+      <span class="lock">🔒 Buyer Contact Locked</span>
     </div>
 
     <div class="rfq-card">
       <h4>Red Chilli Powder</h4>
       <p>Quantity: 20 MT</p>
       <p>Destination: USA</p>
-      <span class="lock">🔒 Contact Locked</span>
+      <span class="lock">🔒 Buyer Contact Locked</span>
     </div>
 
     <div class="rfq-card locked">
@@ -277,41 +281,35 @@
 <section class="container two-col">
   <div>
     <h3>For Buyers</h3>
-    <ul>
-      <li>✔ Post verified RFQs</li>
-      <li>✔ Access serious suppliers</li>
-      <li>✔ No commissions</li>
-    </ul>
+    <p>
+      Post verified RFQs and connect only with serious,
+      pre-screened suppliers across global markets.
+    </p>
   </div>
 
   <div>
     <h3>For Suppliers</h3>
-    <ul>
-      <li>✔ Live buyer RFQs</li>
-      <li>✔ Verified & filtered leads</li>
-      <li>✔ Controlled buyer access</li>
-    </ul>
+    <p>
+      Access live buyer requirements, unlock protected contact details,
+      and expand your business with verified trade leads.
+    </p>
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
 <section class="container">
-  <h2>What Our Members Say</h2>
+  <h2>Trusted by Global Trade Professionals</h2>
 
   <div class="testimonial-grid">
     <div class="testimonial">
-      <p>
-        “APD Global Trade provides genuine RFQs.
-        A serious platform for exporters.”
-      </p>
+      “The RFQs are genuine and filtered.
+      APD Global Trade saved us months of lead generation.”
       <strong>— Exporter, India</strong>
     </div>
 
     <div class="testimonial">
-      <p>
-        “Controlled access keeps spam away.
-        Very professional.”
-      </p>
+      “Serious buyers and controlled access.
+      This platform respects professional trade.”
       <strong>— Importer, UAE</strong>
     </div>
   </div>
@@ -325,7 +323,7 @@
   </div>
   <div>
     <h3>20+</h3>
-    <p>Countries</p>
+    <p>Countries Served</p>
   </div>
   <div>
     <h3>100%</h3>
@@ -335,12 +333,14 @@
 
 <!-- CTA -->
 <section class="cta">
-  <h2>Ready to Access Live Buyer RFQs?</h2>
-  <p>No fake leads. No spam. Only verified opportunities.</p>
+  <h2>Serious About Global Trade?</h2>
+  <p>
+    Membership unlocks verified buyer RFQs,
+    protected contact details, and premium access.
+  </p>
   <a href="/membership.html" class="btn-primary">View Membership Plans</a>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <p><strong>APD Global Trade</strong></p>
   <p>Elite B2B Trade Facilitation Platform</p>
