@@ -11,10 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    /* ================= RESET & ROOT ================= */
     html, body {
       width: 100%;
-      height: 100%;
       margin: 0;
     }
 
@@ -35,10 +33,9 @@
 
     h1, h2, h3 {
       font-family: 'Playfair Display', serif;
-      letter-spacing: 0.4px;
     }
 
-    /* ================= HEADER ================= */
+    /* HEADER */
     header {
       height: 80px;
       background: linear-gradient(180deg, var(--navy), var(--navy-dark));
@@ -69,19 +66,13 @@
       color: var(--gold-soft);
     }
 
-    /* ================= HERO VIDEO ================= */
+    /* HERO */
     .hero-video {
       position: relative;
       min-height: calc(100vh - 80px);
       width: 100%;
       overflow: hidden;
       background: #071427;
-    }
-
-    @supports (height: 100svh) {
-      .hero-video {
-        min-height: calc(100svh - 80px);
-      }
     }
 
     .hero-video video {
@@ -96,8 +87,7 @@
     .hero-overlay {
       position: relative;
       z-index: 2;
-      height: 100%;
-      width: 100%;
+      min-height: calc(100vh - 80px);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -134,7 +124,40 @@
       letter-spacing: 0.8px;
     }
 
-    /* ================= WHATSAPP ================= */
+    /* LIVE RFQ SECTION */
+    .rfq-section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 100px 20px;
+    }
+
+    .rfq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .rfq-card {
+      background: #fff;
+      padding: 26px;
+      border-radius: 16px;
+      border: 1px solid #e5e7eb;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .rfq-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.08);
+    }
+
+    .lock {
+      color: #991b1b;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* WHATSAPP */
     .whatsapp-float {
       position: fixed;
       bottom: 20px;
@@ -157,7 +180,6 @@
 
 <body>
 
-<!-- HEADER -->
 <header>
   <div class="logo">APD Global Trade</div>
   <nav>
@@ -186,12 +208,40 @@
   </div>
 </section>
 
-<!-- WHATSAPP BUTTON -->
+<!-- LIVE RFQs ON SAME PAGE -->
+<section class="rfq-section">
+  <h2>Live Buyer RFQs</h2>
+  <p>Preview verified buyer requirements. Buyer contacts are visible to approved members.</p>
+
+  <div class="rfq-grid">
+    <div class="rfq-card">
+      <h4>Basmati Rice (1121)</h4>
+      <p>Quantity: 500 MT</p>
+      <p>Destination: UAE</p>
+      <span class="lock">🔒 Buyer Contact Locked</span>
+    </div>
+
+    <div class="rfq-card">
+      <h4>Red Chilli Powder</h4>
+      <p>Quantity: 20 MT</p>
+      <p>Destination: USA</p>
+      <span class="lock">🔒 Buyer Contact Locked</span>
+    </div>
+
+    <div class="rfq-card">
+      <h4>Soybean Meal</h4>
+      <p>Quantity: 200 MT</p>
+      <p>Destination: Vietnam</p>
+      <span class="lock">🔒 Buyer Contact Locked</span>
+    </div>
+  </div>
+</section>
+
+<!-- WHATSAPP -->
 <a
   href="https://wa.me/919266418868?text=Hello%20APD%20Global%20Trade"
   class="whatsapp-float"
   target="_blank"
-  aria-label="Chat on WhatsApp"
 >
   💬
 </a>
