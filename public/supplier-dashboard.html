@@ -71,20 +71,13 @@ header a {
   margin-bottom:10px;
 }
 
-.badge {
-  display:inline-block;
-  padding:6px 14px;
-  border-radius:999px;
-  font-size:12px;
+.status {
   font-weight:600;
+  margin-top:8px;
 }
 
-.approved { background:#dcfce7; color:#166534; }
-.pending { background:#fef3c7; color:#92400e; }
-.locked { background:#fee2e2; color:#991b1b; }
-
 .plan {
-  margin-top:10px;
+  margin-top:6px;
   font-weight:600;
   color:var(--navy);
 }
@@ -177,50 +170,33 @@ footer {
 
 <div class="dashboard">
 
-  <!-- WELCOME -->
+  <!-- SUPPLIER INFO -->
   <div class="welcome">
     <div class="card">
       <h2>Welcome, Supplier</h2>
-      <span class="badge approved">Approved</span>
-      <p class="plan">Current Plan: <strong>Gold</strong></p>
-      <p>Status verified by APD Global Trade</p>
+      <p class="status">Status: <strong id="supplierStatus">Loading...</strong></p>
+      <p class="plan">Plan: <strong id="supplierPlan">Loading...</strong></p>
+      <p>Your account is managed by APD Global Trade</p>
     </div>
 
     <div class="card">
       <h2>Access Summary</h2>
-      <p>✔ View live buyer RFQs</p>
-      <p>✔ Buyer contacts unlocked</p>
-      <p>✔ Priority support</p>
+      <p>✔ Live buyer RFQs</p>
+      <p>✔ Contact access based on plan</p>
+      <p>✔ Priority support for paid members</p>
     </div>
   </div>
 
-  <!-- UPGRADE CTA -->
+  <!-- UPGRADE -->
   <div class="upgrade">
-    <h2>Upgrade for More Opportunities</h2>
-    <p>Unlock priority RFQs and premium buyer access.</p>
+    <h2>Upgrade Your Membership</h2>
+    <p>Unlock buyer contact details and premium RFQs.</p>
     <a href="/membership.html">Upgrade Membership</a>
   </div>
 
   <!-- RFQS -->
   <h2>Latest Buyer RFQs</h2>
-  <div class="rfq-grid">
-
-    <div class="rfq-card">
-      <h4>Basmati Rice (1121)</h4>
-      <p>500 MT · UAE</p>
-      <div class="contact">
-        📧 buyer@uaeimport.com<br>
-        📞 +971 50 123 4567
-      </div>
-    </div>
-
-    <div class="rfq-card">
-      <h4>Red Chilli Powder</h4>
-      <p>20 MT · USA</p>
-      <div class="lock">🔒 Upgrade to view buyer contact</div>
-    </div>
-
-  </div>
+  <div id="rfqGrid" class="rfq-grid"></div>
 
 </div>
 
@@ -231,6 +207,10 @@ footer {
 </footer>
 
 <a class="whatsapp" href="https://wa.me/919266418868" target="_blank">💬</a>
+
+<!-- 🔥 LIVE FIREBASE DASHBOARD -->
+<script type="module" src="/assets/js/firebase-init.js"></script>
+<script type="module" src="/assets/js/dashboard.js"></script>
 
 </body>
 </html>
