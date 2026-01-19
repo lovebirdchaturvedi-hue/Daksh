@@ -4,22 +4,104 @@
 <meta charset="UTF-8">
 <title>Live Buyer RFQs | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="View verified domestic and international buyer RFQs. Buyer contact details are visible only to approved supplier members on APD Global Trade.">
+<meta name="description" content="View verified domestic and international buyer RFQs. Buyer contact details are visible only to approved Gold & Platinum suppliers on APD Global Trade.">
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-body { margin:0; font-family:Inter,sans-serif; background:#f5f7fb; color:#0f172a; }
-header { height:80px; background:#071427; display:flex; align-items:center; justify-content:center; flex-direction:column; }
-header .logo { color:#c9a44a; font-weight:600; }
-header nav a { color:#e5e7eb; margin:0 12px; text-decoration:none; font-size:13px; }
-.section { max-width:1100px; margin:auto; padding:80px 20px; }
-.rfq-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:30px; margin-top:40px; }
-.rfq-card { background:#fff; padding:26px; border-radius:16px; border:1px solid #e5e7eb; }
-.lock { color:#991b1b; font-size:13px; font-weight:600; }
-.cta { background:#020617; color:#fff; text-align:center; padding:80px 20px; }
-.cta a { background:#c9a44a; color:#000; padding:14px 32px; border-radius:999px; text-decoration:none; font-weight:600; }
-footer { background:#020617; color:#9ca3af; text-align:center; padding:50px 20px; font-size:14px; }
+body {
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:#f5f7fb;
+  color:#0f172a;
+}
+
+header {
+  height:80px;
+  background:#071427;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+}
+
+header .logo {
+  color:#c9a44a;
+  font-weight:600;
+}
+
+header nav a {
+  color:#e5e7eb;
+  margin:0 12px;
+  text-decoration:none;
+  font-size:13px;
+}
+
+.section {
+  max-width:1100px;
+  margin:auto;
+  padding:80px 20px;
+}
+
+.rfq-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+  margin-top:40px;
+}
+
+.rfq-card {
+  background:#fff;
+  padding:26px;
+  border-radius:16px;
+  border:1px solid #e5e7eb;
+}
+
+.buyer-contact {
+  display:none;
+  font-size:14px;
+  margin-top:10px;
+  line-height:1.6;
+}
+
+.lock-message {
+  color:#991b1b;
+  font-size:13px;
+  font-weight:600;
+  margin-top:12px;
+}
+
+.lock-message a {
+  display:inline-block;
+  margin-top:6px;
+  color:#020617;
+  text-decoration:underline;
+  font-weight:600;
+}
+
+.cta {
+  background:#020617;
+  color:#fff;
+  text-align:center;
+  padding:80px 20px;
+}
+
+.cta a {
+  background:#c9a44a;
+  color:#000;
+  padding:14px 32px;
+  border-radius:999px;
+  text-decoration:none;
+  font-weight:600;
+}
+
+footer {
+  background:#020617;
+  color:#9ca3af;
+  text-align:center;
+  padding:50px 20px;
+  font-size:14px;
+}
 </style>
 </head>
 
@@ -38,27 +120,53 @@ footer { background:#020617; color:#9ca3af; text-align:center; padding:50px 20px
   <h1>Live Buyer RFQs</h1>
 
   <div style="margin:20px 0;">
-    <a href="/create-rfq.html" style="background:#020617;color:#fff;padding:12px 26px;border-radius:999px;text-decoration:none;">
+    <a href="/create-rfq.html"
+       style="background:#020617;color:#fff;padding:12px 26px;border-radius:999px;text-decoration:none;">
       Submit Your Buying Requirement
     </a>
   </div>
 
-  <p>Verified buyer requirements. Buyer contact details are visible to Gold & Platinum members only.</p>
+  <p>
+    Verified buyer requirements. Buyer contact details are visible only to
+    <strong>approved Gold & Platinum suppliers</strong>.
+  </p>
 
   <div class="rfq-grid">
 
+    <!-- RFQ CARD 1 -->
     <div class="rfq-card">
       <h3>Basmati Rice (1121)</h3>
       <p>Quantity: 500 MT</p>
       <p>Destination: UAE</p>
-      <span class="lock">🔒 Buyer Contact Locked</span>
+
+      <!-- Buyer contact (ONLY unlocked for approved paid suppliers) -->
+      <div class="buyer-contact">
+        📧 buyer@uaeimport.com<br>
+        📞 +971 50 123 4567
+      </div>
+
+      <!-- Lock message -->
+      <div class="lock-message">
+        🔒 Buyer contact available to verified Gold & Platinum suppliers only<br>
+        <a href="/membership.html">Upgrade Membership</a>
+      </div>
     </div>
 
+    <!-- RFQ CARD 2 -->
     <div class="rfq-card">
       <h3>Red Chilli Powder</h3>
       <p>Quantity: 20 MT</p>
       <p>Destination: USA</p>
-      <span class="lock">🔒 Buyer Contact Locked</span>
+
+      <div class="buyer-contact">
+        📧 procurement@usfoods.com<br>
+        📞 +1 312 555 8821
+      </div>
+
+      <div class="lock-message">
+        🔒 Buyer contact available to verified Gold & Platinum suppliers only<br>
+        <a href="/membership.html">Upgrade Membership</a>
+      </div>
     </div>
 
   </div>
@@ -80,6 +188,11 @@ footer { background:#020617; color:#9ca3af; text-align:center; padding:50px 20px
   </p>
   <p>📧 admin@apdglobaltrade.com</p>
 </footer>
+
+<!-- 🔥 FIREBASE & LOCK LOGIC -->
+<script type="module" src="/assets/js/firebase-init.js"></script>
+<script type="module" src="/assets/js/auth-plan.js"></script>
+<script type="module" src="/assets/js/rfq-lock.js"></script>
 
 </body>
 </html>
