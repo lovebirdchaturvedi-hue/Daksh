@@ -14,7 +14,7 @@ document.body.style.display = "none";
 auth.onAuthStateChanged(async (user) => {
   // ❌ Not logged in → redirect
   if (!user) {
-    window.location.href = "/login.html";
+    window.location.href = "/supplier-login.html";
     return;
   }
 
@@ -78,3 +78,4 @@ window.setPlan = async (id, plan) => {
   });
   loadSuppliers();
 };
+
