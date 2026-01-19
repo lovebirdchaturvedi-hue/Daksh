@@ -5,7 +5,7 @@
 <title>APD Global Trade | Elite B2B Trade Facilitation Platform</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- ✅ PWA -->
+<!-- ✅ PWA (SAFE) -->
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#020617">
 
@@ -70,14 +70,6 @@ header nav a:hover{opacity:1;color:var(--gold-soft);}
   cursor:pointer;
 }
 
-/* INSTALL BANNER */
-.install-hint{
-  margin-top:14px;
-  font-size:14px;
-  color:#e7cf88;
-  display:none;
-}
-
 /* SECTIONS */
 .section{max-width:1100px;margin:auto;padding:100px 20px;}
 .rfq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px;}
@@ -106,7 +98,7 @@ footer a{color:var(--gold);text-decoration:none;}
 </header>
 
 <section class="hero">
-  <video autoplay muted loop playsinline>
+  <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1519452575417-564c1401ecc0">
     <source src="https://cdn.coverr.co/videos/coverr-container-ship-transport-5170/1080p.mp4" type="video/mp4">
   </video>
 
@@ -118,15 +110,29 @@ footer a{color:var(--gold);text-decoration:none;}
       <a href="/create-rfq.html" class="btn">Post Buyer RFQ</a>
       <a href="/rfq.html" class="btn">View Buyer RFQs</a>
 
-      <!-- ✅ INSTALL BUTTON -->
+      <!-- ✅ DOWNLOAD APP BUTTON (ADDED) -->
       <button id="installBtn" class="btn" style="display:none;">
         📲 Download Supplier App
       </button>
-
-      <div id="installHint" class="install-hint">
-        Install the APD Supplier App for faster access
-      </div>
     </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Live Buyer RFQs</h2>
+  <div class="rfq-grid">
+    <div class="card"><h4>Basmati Rice (1121)</h4><p>500 MT · UAE</p><span class="lock">🔒 Locked</span></div>
+    <div class="card"><h4>Red Chilli Powder</h4><p>20 MT · USA</p><span class="lock">🔒 Locked</span></div>
+    <div class="card"><h4>Soybean Meal</h4><p>200 MT · Vietnam</p><span class="lock">🔒 Locked</span></div>
+  </div>
+
+  <section class="section two-col">
+    <div><h3>For Buyers</h3><p>Post verified RFQs and connect with serious suppliers.</p></div>
+    <div><h3>For Suppliers</h3><p>Unlock protected buyer contacts and premium trade leads.</p></div>
+  </section>
+
+  <div style="text-align:center;margin-top:40px;">
+    <a href="/create-rfq.html" class="btn">Post Your Buyer RFQ</a>
   </div>
 </section>
 
@@ -140,7 +146,26 @@ footer a{color:var(--gold);text-decoration:none;}
 <footer>
   <p style="color:#c9a44a;font-weight:600;">APD Global Trade</p>
   <p>Elite B2B Trade Facilitation Platform</p>
+  <p>
+    <a href="/terms.html">Terms</a> |
+    <a href="/privacy.html">Privacy</a> |
+    <a href="/disclaimer.html">Disclaimer</a>
+  </p>
+  <p>
+    📧 info@apdglobaltradehub.com <br>
+    ☎ +1 (202) 780-1366 <br>
+    💬 WhatsApp: +91 92664 18868
+  </p>
 </footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/919266418868" target="_blank"
+   style="position:fixed;bottom:20px;right:20px;width:56px;height:56px;
+   background:#25D366;color:#fff;border-radius:50%;display:flex;
+   align-items:center;justify-content:center;font-size:28px;
+   box-shadow:0 10px 25px rgba(0,0,0,.25);z-index:9999;text-decoration:none;">
+  💬
+</a>
 
 <!-- ✅ SERVICE WORKER -->
 <script>
@@ -149,28 +174,27 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 
-<!-- ✅ SMART INSTALL LOGIC -->
+<!-- ✅ SMART INSTALL LOGIC (ADDED) -->
 <script>
 let deferredPrompt;
 const installBtn = document.getElementById("installBtn");
-const installHint = document.getElementById("installHint");
 
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
-  installBtn.style.display = "inline-block";
-  installHint.style.display = "block";
+  if (installBtn) installBtn.style.display = "inline-block";
 });
 
-installBtn.addEventListener("click", async () => {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    await deferredPrompt.userChoice;
-    deferredPrompt = null;
-  }
-});
+if (installBtn) {
+  installBtn.addEventListener("click", async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+    }
+  });
+}
 
-// iOS & in-app fallback
 window.addEventListener("load", () => {
   const ua = navigator.userAgent;
   const isIOS = /iphone|ipad|ipod/i.test(ua);
@@ -180,7 +204,7 @@ window.addEventListener("load", () => {
     alert("To install the APD Supplier App, please open this site in Chrome or Safari.");
   }
 
-  if (isIOS) {
+  if (isIOS && installBtn) {
     installBtn.style.display = "inline-block";
     installBtn.onclick = () => {
       alert("Tap Share → Add to Home Screen to install the APD Supplier App.");
