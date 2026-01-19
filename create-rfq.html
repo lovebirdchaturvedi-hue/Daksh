@@ -39,19 +39,65 @@ footer { background:#020617; color:#9ca3af; text-align:center; padding:40px 20px
   <!-- ✅ FORMSPREE RFQ FORM -->
   <form action="https://formspree.io/f/xgookqzz" method="POST">
 
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <input type="text" name="company" placeholder="Company Name">
-    <input type="text" name="product" placeholder="Product Required" required>
-    <textarea name="message" placeholder="RFQ Details (quantity, specs, destination)" required></textarea>
+  <h3>Buyer Contact Details</h3>
 
-    <!-- metadata -->
-    <input type="hidden" name="form_type" value="RFQ Submission">
-    <input type="hidden" name="source" value="apdglobaltrade.com">
+  <input type="text"
+         name="buyer_name"
+         placeholder="Buyer Full Name"
+         required>
 
-    <button type="submit">Submit RFQ</button>
+  <input type="email"
+         name="buyer_email"
+         placeholder="Buyer Email Address"
+         required>
 
-  </form>
+  <input type="tel"
+         name="buyer_phone"
+         placeholder="Buyer Phone / WhatsApp (with country code)"
+         required>
+
+  <input type="text"
+         name="buyer_company"
+         placeholder="Company Name"
+         required>
+
+  <input type="text"
+         name="buyer_country"
+         placeholder="Country"
+         required>
+
+  <hr style="margin:30px 0;">
+
+  <h3>Buying Requirement</h3>
+
+  <input type="text"
+         name="product"
+         placeholder="Product Required"
+         required>
+
+  <input type="text"
+         name="quantity"
+         placeholder="Quantity (e.g. 50 MT)"
+         required>
+
+  <input type="text"
+         name="destination"
+         placeholder="Delivery Destination Country"
+         required>
+
+  <textarea name="requirements"
+            placeholder="Specifications, packaging, standards, delivery timeline"
+            required></textarea>
+
+  <!-- metadata -->
+  <input type="hidden" name="form_type" value="Buyer RFQ">
+  <input type="hidden" name="source" value="apdglobaltrade.com">
+
+  <button type="submit">
+    Submit RFQ
+  </button>
+
+</form>
 </section>
 
 <footer>
@@ -61,3 +107,4 @@ footer { background:#020617; color:#9ca3af; text-align:center; padding:40px 20px
 
 </body>
 </html>
+
