@@ -83,15 +83,11 @@ button {
   <button id="loginBtn">Login</button>
 
   <div class="links">
-    <!-- ✅ FORGOT PASSWORD -->
     <a href="#" id="forgotPassword">Forgot password?</a>
-
-    <!-- Existing -->
     <a href="/register-supplier.html">New supplier? Register here</a>
   </div>
 </div>
 
-<!-- 🔥 FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
@@ -100,19 +96,28 @@ import {
   sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
+/* ✅ REAL FIREBASE CONFIG (CORRECT) */
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT",
+  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+  authDomain: "apd-globaltrade-prod.firebaseapp.com",
+  projectId: "apd-globaltrade-prod",
+  storageBucket: "apd-globaltrade-prod.firebasestorage.app",
+  messagingSenderId: "226407312435",
+  appId: "1:226407312435:web:f8a54b1132af3899170746"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// LOGIN
+/* LOGIN */
 document.getElementById("loginBtn").addEventListener("click", async () => {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
+
+  if (!email || !password) {
+    alert("Please enter email and password.");
+    return;
+  }
 
   try {
     await signInWithEmailAndPassword(auth, email, password);
@@ -122,7 +127,7 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
   }
 });
 
-// FORGOT PASSWORD
+/* FORGOT PASSWORD */
 document.getElementById("forgotPassword").addEventListener("click", async (e) => {
   e.preventDefault();
 
