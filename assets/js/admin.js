@@ -8,12 +8,26 @@ import {
 
 const table = document.getElementById("supplierTable");
 
+// 🔒 Hide page until auth check completes
+document.body.style.display = "none";
+
 auth.onAuthStateChanged(async (user) => {
+  // ❌ Not logged in → redirect
   if (!user) {
-    alert("Admin login required");
-    location.href = "/login.html";
+    window.location.href = "/login.html";
     return;
   }
+
+  // 🔐 Only allow ADMIN email
+  if (user.email !== "admin@apdglobaltrade.com") {
+    alert("Unauthorized access");
+    await auth.signOut();
+    window.location.href = "/login.html";
+    return;
+  }
+
+  // ✅ Admin verified → show page
+  document.body.style.display = "block";
 
   loadSuppliers();
 });
