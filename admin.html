@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard | APD Global Trade</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family: Inter, sans-serif;
+  background:#f5f7fb;
+  padding:40px;
+}
+
+h1 {
+  margin-bottom:20px;
+}
+
+table {
+  width:100%;
+  border-collapse:collapse;
+  background:#fff;
+  border-radius:12px;
+  overflow:hidden;
+}
+
+th, td {
+  padding:14px;
+  border-bottom:1px solid #e5e7eb;
+  text-align:left;
+  font-size:14px;
+}
+
+th {
+  background:#020617;
+  color:#fff;
+}
+
+button {
+  padding:6px 12px;
+  margin:2px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:13px;
+}
+
+.approve { background:#16a34a; color:#fff; }
+.suspend { background:#dc2626; color:#fff; }
+.gold { background:#c9a44a; color:#000; }
+.platinum { background:#6366f1; color:#fff; }
+.free { background:#9ca3af; color:#000; }
+</style>
+</head>
+
+<body>
+
+<h1>Admin – Supplier Management</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Email</th>
+      <th>Status</th>
+      <th>Plan</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="supplierTable"></tbody>
+</table>
+
+<!-- Firebase -->
+<script type="module" src="/assets/js/firebase-init.js"></script>
+<script type="module" src="/assets/js/admin.js"></script>
+
+</body>
+</html>
