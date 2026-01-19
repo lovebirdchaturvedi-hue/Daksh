@@ -50,6 +50,19 @@ button {
 .gold { background:#c9a44a; color:#000; }
 .platinum { background:#6366f1; color:#fff; }
 .free { background:#9ca3af; color:#000; }
+
+.reset {
+  background:#991b1b;
+  color:#fff;
+}
+
+.badge {
+  padding:4px 10px;
+  border-radius:999px;
+  font-size:12px;
+}
+.approved { background:#dcfce7; color:#166534; }
+.pending { background:#fef3c7; color:#92400e; }
 </style>
 </head>
 
@@ -70,15 +83,108 @@ button {
   <tbody id="supplierTable"></tbody>
 </table>
 
-<h3>Change Your Password</h3>
+<hr style="margin:40px 0;">
 
+<h3>Change Your Password</h3>
 <input type="password" id="newPassword" placeholder="New password">
 <button id="changePasswordBtn">Update Password</button>
 
-<!-- Firebase -->
+<!-- 🔥 Firebase Init -->
 <script type="module" src="/assets/js/firebase-init.js"></script>
-<script type="module" src="/assets/js/admin.js"></script>
+
+<!-- 🔐 Admin Logic -->
+<script type="module">
+import { getAuth, onAuthStateChanged, updatePassword } from
+"https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  updateDoc,
+  doc
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const auth = getAuth();
+const db = getFirestore();
+const table = document.getElementById("supplierTable");
+
+/* 🔐 ADMIN ACCESS GUARD */
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    window.location.href = "/supplier-login.html";
+    return;
+  }
+
+  const adminRef = doc(db, "admins", user.uid);
+  const adminSnap = await getDocs(collection(db, "admins"));
+
+  let isAdmin = false;
+  adminSnap.forEach(d => {
+    if (d.id === user.uid) isAdmin = true;
+  });
+
+  if (!isAdmin) {
+    alert("Access denied");
+    window.location.href = "/";
+    return;
+  }
+
+  loadSuppliers();
+});
+
+/* 📦 LOAD SUPPLIERS */
+async function loadSuppliers() {
+  const snap = await getDocs(collection(db, "suppliers"));
+  table.innerHTML = "";
+
+  snap.forEach(docSnap => {
+    const d = docSnap.data();
+
+    table.innerHTML += `
+      <tr>
+        <td>${d.companyName || "-"}</td>
+        <td>${d.email}</td>
+        <td>
+          <span class="badge ${d.status === "approved" ? "approved" : "pending"}">
+            ${d.status}
+          </span>
+        </td>
+        <td>${d.plan || "free"}</td>
+        <td>
+          <button class="approve" onclick="approve('${docSnap.id}')">Approve</button>
+          <button class="gold" onclick="setPlan('${docSnap.id}','gold')">Gold</button>
+          <button class="platinum" onclick="setPlan('${docSnap.id}','platinum')">Platinum</button>
+          <button class="reset" onclick="resetPassword('${d.email}')">Reset Password</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+/* ✅ ACTIONS */
+window.approve = async (id) => {
+  await updateDoc(doc(db, "suppliers", id), { status: "approved" });
+  loadSuppliers();
+};
+
+window.setPlan = async (id, plan) => {
+  await updateDoc(doc(db, "suppliers", id), { plan });
+  loadSuppliers();
+};
+
+window.resetPassword = (email) => {
+  alert(`Ask supplier (${email}) to use "Forgot Password" on login page.`);
+};
+
+/* 🔑 CHANGE ADMIN PASSWORD */
+document.getElementById("changePasswordBtn").onclick = async () => {
+  const pwd = document.getElementById("newPassword").value;
+  if (!pwd) return alert("Enter password");
+  await updatePassword(auth.currentUser, pwd);
+  alert("Password updated successfully");
+};
+</script>
 
 </body>
 </html>
-
