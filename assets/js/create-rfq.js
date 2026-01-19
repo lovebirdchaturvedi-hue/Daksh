@@ -20,7 +20,7 @@ form.addEventListener("submit", async (e) => {
     email: document.getElementById("email").value,
     phone: document.getElementById("phone").value,
     details: document.getElementById("details").value,
-    status: "pending",      // admin approval
+    status: "active",
     createdAt: serverTimestamp()
   };
 
@@ -29,3 +29,4 @@ form.addEventListener("submit", async (e) => {
   form.reset();
   successMsg.style.display = "block";
 });
+
