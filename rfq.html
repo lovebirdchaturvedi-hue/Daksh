@@ -4,93 +4,22 @@
 <meta charset="UTF-8">
 <title>Live Buyer RFQs | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="View verified domestic and international buyer RFQs. Buyer contact details are visible only to approved supplier members on APD Global Trade.">
 
-<meta name="description" content="View verified domestic and international buyer RFQs. Buyer contact details are shared only with approved supplier members on APD Global Trade.">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 body { margin:0; font-family:Inter,sans-serif; background:#f5f7fb; color:#0f172a; }
-header {
-  height:80px;
-  background:#071427;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-}
+header { height:80px; background:#071427; display:flex; align-items:center; justify-content:center; flex-direction:column; }
 header .logo { color:#c9a44a; font-weight:600; }
 header nav a { color:#e5e7eb; margin:0 12px; text-decoration:none; font-size:13px; }
-
 .section { max-width:1100px; margin:auto; padding:80px 20px; }
-
-.rfq-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:30px;
-  margin-top:40px;
-}
-
-.rfq-card {
-  background:#fff;
-  padding:26px;
-  border-radius:16px;
-  border:1px solid #e5e7eb;
-}
-
-.lock {
-  color:#991b1b;
-  font-size:13px;
-  font-weight:600;
-}
-
-.buyer-contact {
-  margin-top:10px;
-  font-size:14px;
-  line-height:1.6;
-}
-
-.cta {
-  background:#020617;
-  color:#fff;
-  text-align:center;
-  padding:80px 20px;
-}
-
-.cta a {
-  background:#c9a44a;
-  color:#000;
-  padding:14px 32px;
-  border-radius:999px;
-  text-decoration:none;
-  font-weight:600;
-}
-
-footer {
-  background:#020617;
-  color:#9ca3af;
-  text-align:center;
-  padding:40px 20px;
-  font-size:14px;
-}
-
-.whatsapp {
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:56px;
-  height:56px;
-  background:#25D366;
-  color:#fff;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:28px;
-  box-shadow:0 10px 25px rgba(0,0,0,.25);
-}
+.rfq-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:30px; margin-top:40px; }
+.rfq-card { background:#fff; padding:26px; border-radius:16px; border:1px solid #e5e7eb; }
+.lock { color:#991b1b; font-size:13px; font-weight:600; }
+.cta { background:#020617; color:#fff; text-align:center; padding:80px 20px; }
+.cta a { background:#c9a44a; color:#000; padding:14px 32px; border-radius:999px; text-decoration:none; font-weight:600; }
+footer { background:#020617; color:#9ca3af; text-align:center; padding:50px 20px; font-size:14px; }
 </style>
 </head>
 
@@ -107,11 +36,13 @@ footer {
 
 <section class="section">
   <h1>Live Buyer RFQs</h1>
+
   <div style="margin:20px 0;">
-  <a href="/create-rfq.html" class="btn">
-    Submit Your Buying Requirement
-  </a>
-</div>
+    <a href="/create-rfq.html" style="background:#020617;color:#fff;padding:12px 26px;border-radius:999px;text-decoration:none;">
+      Submit Your Buying Requirement
+    </a>
+  </div>
+
   <p>Verified buyer requirements. Buyer contact details are visible to Gold & Platinum members only.</p>
 
   <div class="rfq-grid">
@@ -120,13 +51,6 @@ footer {
       <h3>Basmati Rice (1121)</h3>
       <p>Quantity: 500 MT</p>
       <p>Destination: UAE</p>
-
-      <!-- BUYER CONTACT (LOCKED) -->
-      <p class="buyer-contact" style="display:none;">
-        📧 buyer@uaeimport.com<br>
-        📞 +971 50 123 4567
-      </p>
-
       <span class="lock">🔒 Buyer Contact Locked</span>
     </div>
 
@@ -134,12 +58,6 @@ footer {
       <h3>Red Chilli Powder</h3>
       <p>Quantity: 20 MT</p>
       <p>Destination: USA</p>
-
-      <p class="buyer-contact" style="display:none;">
-        📧 procurement@usfoods.com<br>
-        📞 +1 312 555 8821
-      </p>
-
       <span class="lock">🔒 Buyer Contact Locked</span>
     </div>
 
@@ -152,84 +70,16 @@ footer {
   <a href="/membership.html">View Membership Plans</a>
 </section>
 
-</section>
-
-<!-- ✅ GLOBAL FOOTER START -->
-<footer style="
-  background:#020617;
-  color:#9ca3af;
-  text-align:center;
-  padding:50px 20px;
-  font-size:14px;
-">
-
-  <p style="color:#c9a44a;font-weight:600;">
-    APD Global Trade
-  </p>
-
+<footer>
+  <p style="color:#c9a44a;font-weight:600;">APD Global Trade</p>
+  <p>Elite B2B Trade Facilitation Platform</p>
   <p>
-    Elite B2B Trade Facilitation Platform
+    <a href="/terms.html" style="color:#c9a44a;">Terms</a> |
+    <a href="/privacy.html" style="color:#c9a44a;">Privacy</a> |
+    <a href="/disclaimer.html" style="color:#c9a44a;">Disclaimer</a>
   </p>
-
-  <p style="margin:14px 0;">
-    <a href="/terms.html" style="color:#c9a44a;text-decoration:none;">Terms</a> |
-    <a href="/privacy.html" style="color:#c9a44a;text-decoration:none;">Privacy</a> |
-    <a href="/disclaimer.html" style="color:#c9a44a;text-decoration:none;">Disclaimer</a>
-  </p>
-
-  <p>
-    📧 info@apdglobaltradehub.com <br>
-    ☎ +1 (202) 780-1366 <br>
-    💬 WhatsApp: +91 92664 18868
-  </p>
-
-  <p style="margin-top:18px;">
-    🌍 India · United States · United Arab Emirates · Global Partners
-  </p>
-
-  <p style="margin-top:18px;">
-    <a href="https://www.facebook.com/share/1At1wN1REj/"
-       target="_blank"
-       style="color:#1877f2;text-decoration:none;font-weight:600;">
-      Follow us on Facebook
-    </a>
-  </p>
-
+  <p>📧 admin@apdglobaltrade.com</p>
 </footer>
 
-<!-- FLOATING WHATSAPP (GLOBAL) -->
-<a href="https://wa.me/919266418868"
-   target="_blank"
-   style="
-     position:fixed;
-     bottom:20px;
-     right:20px;
-     width:56px;
-     height:56px;
-     background:#25D366;
-     color:#fff;
-     border-radius:50%;
-     display:flex;
-     align-items:center;
-     justify-content:center;
-     font-size:28px;
-     box-shadow:0 10px 25px rgba(0,0,0,.25);
-     z-index:9999;
-     text-decoration:none;
-   ">
-  💬
-</a>
-<!-- ✅ GLOBAL FOOTER END -->
-
 </body>
 </html>
-
-<!-- 🔥 FIREBASE SCRIPTS (VERY IMPORTANT) -->
-<script type="module" src="/assets/js/firebase-init.js"></script>
-<script type="module" src="/assets/js/auth.js"></script>
-<script type="module" src="/assets/js/rfq-lock.js"></script>
-
-</body>
-</html>
-
-
