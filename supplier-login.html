@@ -8,63 +8,57 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-body {
+body{
   margin:0;
   font-family:Inter,sans-serif;
-  background:linear-gradient(180deg,#071427,#020617);
+  background:linear-gradient(135deg,#071427,#020617);
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
 }
-
-.card {
+.card{
   background:#fff;
   padding:40px;
+  width:360px;
   border-radius:18px;
-  width:100%;
-  max-width:420px;
   text-align:center;
 }
-
-h1 {
+h1{
   font-family:'Playfair Display',serif;
   margin-bottom:6px;
 }
-
-p {
+p{
   color:#6b7280;
   font-size:14px;
-  margin-bottom:26px;
 }
-
-input {
+input{
   width:100%;
-  padding:14px;
-  margin-bottom:14px;
+  padding:12px;
+  margin-top:14px;
   border-radius:10px;
   border:1px solid #e5e7eb;
   font-size:14px;
 }
-
-button {
+button{
   width:100%;
   padding:14px;
-  border-radius:999px;
+  margin-top:18px;
   background:#c9a44a;
+  color:#000;
   border:none;
+  border-radius:999px;
   font-weight:600;
   cursor:pointer;
 }
-
-.links {
+.links{
   margin-top:14px;
   font-size:13px;
 }
-
-.links a {
-  color:#c9a44a;
+.links a{
+  color:#020617;
   text-decoration:none;
+  font-weight:500;
   display:block;
   margin-top:6px;
 }
@@ -88,6 +82,7 @@ button {
   </div>
 </div>
 
+<!-- 🔥 FIREBASE SDKs -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
@@ -95,8 +90,13 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* ✅ REAL FIREBASE CONFIG (CORRECT) */
+/* 🔑 YOUR FIREBASE CONFIG */
 const firebaseConfig = {
   apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
   authDomain: "apd-globaltrade-prod.firebaseapp.com",
@@ -108,42 +108,50 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
-/* LOGIN */
-document.getElementById("loginBtn").addEventListener("click", async () => {
+/* 🔐 LOGIN */
+document.getElementById("loginBtn").onclick = async () => {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
   if (!email || !password) {
-    alert("Please enter email and password.");
+    alert("Enter email & password");
     return;
   }
 
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+    const cred = await signInWithEmailAndPassword(auth, email, password);
+    const user = cred.user;
+
+    // 🔐 CHECK ADMIN COLLECTION
+    const adminRef = doc(db, "admins", user.uid);
+    const adminSnap = await getDoc(adminRef);
+
+    if (adminSnap.exists()) {
+      // ✅ ADMIN
+      window.location.href = "/admin.html";
+      return;
+    }
+
+    // 👤 SUPPLIER
     window.location.href = "/rfq.html";
+
   } catch (err) {
     alert(err.message);
   }
-});
+};
 
-/* FORGOT PASSWORD */
-document.getElementById("forgotPassword").addEventListener("click", async (e) => {
-  e.preventDefault();
-
+/* 🔁 FORGOT PASSWORD */
+document.getElementById("forgotPassword").onclick = async () => {
   const email = document.getElementById("email").value;
   if (!email) {
-    alert("Please enter your email first.");
+    alert("Enter your email first");
     return;
   }
-
-  try {
-    await sendPasswordResetEmail(auth, email);
-    alert("Password reset email sent. Please check your inbox.");
-  } catch (err) {
-    alert(err.message);
-  }
-});
+  await sendPasswordResetEmail(auth, email);
+  alert("Password reset email sent");
+};
 </script>
 
 </body>
