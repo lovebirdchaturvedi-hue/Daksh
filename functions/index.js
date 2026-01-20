@@ -1,18 +1,19 @@
 /**
  * APD Global Trade – Firebase Functions
- * - Approve supplier (HTTP v2)
- * - Email admin on new supplier registration
+ * - Approve supplier (HTTP)
+ * - Email admin when supplier registers (Firestore trigger)
  */
 
 const { onRequest } = require("firebase-functions/v2/https");
 const { onDocumentCreated } = require("firebase-functions/v2/firestore");
+const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const nodemailer = require("nodemailer");
 
 admin.initializeApp();
 
 /* ===============================
-   1️⃣ APPROVE SUPPLIER (HTTP)
+   APPROVE SUPPLIER (HTTP)
    =============================== */
 exports.approveSupplier = onRequest(async (req, res) => {
   try {
@@ -22,67 +23,58 @@ exports.approveSupplier = onRequest(async (req, res) => {
       return res.status(400).json({ error: "supplierId required" });
     }
 
-    const supplierRef = admin
-      .firestore()
-      .collection("suppliers")
-      .doc(supplierId);
-
-    const snap = await supplierRef.get();
+    const ref = admin.firestore().collection("suppliers").doc(supplierId);
+    const snap = await ref.get();
 
     if (!snap.exists) {
       return res.status(404).json({ error: "Supplier not found" });
     }
 
-    await supplierRef.update({
+    await ref.update({
       approved: true,
       approvedAt: admin.firestore.FieldValue.serverTimestamp(),
     });
 
     res.json({ success: true });
-  } catch (error) {
-    console.error("approveSupplier error:", error);
-    res.status(500).json({ error: error.message });
+  } catch (err) {
+    console.error("approveSupplier error:", err);
+    res.status(500).json({ error: err.message });
   }
 });
 
 /* =========================================
-   2️⃣ EMAIL ADMIN WHEN SUPPLIER REGISTERS
+   EMAIL ADMIN ON SUPPLIER REGISTER (v2)
    ========================================= */
 
-// Read env config
-const config = JSON.parse(process.env.FIREBASE_CONFIG || "{}");
+const emailConfig = functions.config().email;
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: config.email_user,
-    pass: config.email_pass,
+    user: emailConfig.user,
+    pass: emailConfig.pass,
   },
 });
 
 exports.notifyAdminOnSupplierRegister = onDocumentCreated(
   "suppliers/{supplierId}",
   async (event) => {
-    try {
-      const data = event.data?.data();
-      if (!data) return;
+    const data = event.data?.data();
+    if (!data) return;
 
-      const mailOptions = {
-        from: `"APD Global Trade" <${config.email_user}>`,
-        to: config.email_admin,
-        subject: "🆕 New Supplier Registration",
-        html: `
-          <h2>New Supplier Registered</h2>
-          <p><b>Company:</b> ${data.companyName || "N/A"}</p>
-          <p><b>Email:</b> ${data.email || "N/A"}</p>
-          <p><b>Country:</b> ${data.country || "N/A"}</p>
-          <p><b>Status:</b> Pending Approval</p>
-        `,
-      };
+    const mailOptions = {
+      from: `"APD Global Trade" <${emailConfig.user}>`,
+      to: emailConfig.admin,
+      subject: "🆕 New Supplier Registration",
+      html: `
+        <h2>New Supplier Registered</h2>
+        <p><b>Company:</b> ${data.companyName || "N/A"}</p>
+        <p><b>Email:</b> ${data.email || "N/A"}</p>
+        <p><b>Country:</b> ${data.country || "N/A"}</p>
+        <p>Status: Pending Approval</p>
+      `,
+    };
 
-      await transporter.sendMail(mailOptions);
-    } catch (err) {
-      console.error("Email notification failed:", err);
-    }
+    await transporter.sendMail(mailOptions);
   }
 );
