@@ -79,68 +79,9 @@ header nav a:hover{opacity:1;color:var(--gold-soft);}
 .cta{background:#020617;color:#fff;text-align:center;padding:100px 20px;}
 footer{background:#020617;color:#9ca3af;text-align:center;padding:40px 20px;font-size:14px;}
 footer a{color:var(--gold);text-decoration:none;}
-</style>
-</head>
 
-<body>
 
-<header>
-  <div class="logo">APD Global Trade</div>
-  <nav>
-    <a href="/index.html">Home</a>
-    <a href="/rfq.html">Buyer RFQs</a>
-    <a href="/membership.html">Membership</a>
-    <a href="/suppliers.html">Suppliers</a>
-    <a href="/supplier-login.html">Supplier Login</a>
-    <a href="/register-supplier.html">Register</a>
-    <a href="/contact.html">Contact</a>
-  </nav>
-</header>
-
-<section class="hero">
-  <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1519452575417-564c1401ecc0">
-    <source src="https://cdn.coverr.co/videos/coverr-container-ship-transport-5170/1080p.mp4" type="video/mp4">
-  </video>
-
-  <div class="hero-overlay">
-    <h1>Where Verified Buyers Meet Serious Suppliers</h1>
-    <p>Access genuine buyer RFQs, protected contacts, and controlled global opportunities.</p>
-
-    <div>
-  <a href="/create-rfq.html" class="btn">Post Buyer RFQ</a>
-  <a href="/rfq.html" class="btn">View Buyer RFQs</a>
-
-  <button id="installBtn" class="btn" style="display:none;">
-    📲 Download Supplier App
-  </button>
-
-  <!-- ✅ NEW: ONBOARDING LINK -->
-  <a href="/supplier-onboarding.html" class="btn">
-    Supplier App – How It Works
-  </a>
-</div>
-</div>
-</section>
-
-<section class="section">
-  <h2>Live Buyer RFQs</h2>
-  <div class="rfq-grid">
-    <div class="card"><h4>Basmati Rice (1121)</h4><p>500 MT · UAE</p><span class="lock">🔒 Locked</span></div>
-    <div class="card"><h4>Red Chilli Powder</h4><p>20 MT · USA</p><span class="lock">🔒 Locked</span></div>
-    <div class="card"><h4>Soybean Meal</h4><p>200 MT · Vietnam</p><span class="lock">🔒 Locked</span></div>
-  </div>
-
-  <section class="section two-col">
-    <div><h3>For Buyers</h3><p>Post verified RFQs and connect with serious suppliers.</p></div>
-    <div><h3>For Suppliers</h3><p>Unlock protected buyer contacts and premium trade leads.</p></div>
-  </section>
-
-  <div style="text-align:center;margin-top:40px;">
-    <a href="/create-rfq.html" class="btn">Post Your Buyer RFQ</a>
-  </div>
-</section>
-
-<style>/* ===============================
+/* ===============================
    MOBILE FIX – DO NOT TOUCH DESKTOP
    =============================== */
 
@@ -205,7 +146,65 @@ footer a{color:var(--gold);text-decoration:none;}
     padding: 70px 16px;
   }
 }
+</style>
+</head>
 
+<body>
+
+<header>
+  <div class="logo">APD Global Trade</div>
+  <nav>
+    <a href="/index.html">Home</a>
+    <a href="/rfq.html">Buyer RFQs</a>
+    <a href="/membership.html">Membership</a>
+    <a href="/suppliers.html">Suppliers</a>
+    <a href="/supplier-login.html">Supplier Login</a>
+    <a href="/register-supplier.html">Register</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1519452575417-564c1401ecc0">
+    <source src="https://cdn.coverr.co/videos/coverr-container-ship-transport-5170/1080p.mp4" type="video/mp4">
+  </video>
+
+  <div class="hero-overlay">
+    <h1>Where Verified Buyers Meet Serious Suppliers</h1>
+    <p>Access genuine buyer RFQs, protected contacts, and controlled global opportunities.</p>
+
+    <div>
+      <a href="/create-rfq.html" class="btn">Post Buyer RFQ</a>
+      <a href="/rfq.html" class="btn">View Buyer RFQs</a>
+
+      <button id="installBtn" class="btn" style="display:none;">
+        📲 Download Supplier App
+      </button>
+
+      <a href="/supplier-onboarding.html" class="btn">
+        Supplier App – How It Works
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Live Buyer RFQs</h2>
+  <div class="rfq-grid">
+    <div class="card"><h4>Basmati Rice (1121)</h4><p>500 MT · UAE</p><span class="lock">🔒 Locked</span></div>
+    <div class="card"><h4>Red Chilli Powder</h4><p>20 MT · USA</p><span class="lock">🔒 Locked</span></div>
+    <div class="card"><h4>Soybean Meal</h4><p>200 MT · Vietnam</p><span class="lock">🔒 Locked</span></div>
+  </div>
+
+  <section class="section two-col">
+    <div><h3>For Buyers</h3><p>Post verified RFQs and connect with serious suppliers.</p></div>
+    <div><h3>For Suppliers</h3><p>Unlock protected buyer contacts and premium trade leads.</p></div>
+  </section>
+
+  <div style="text-align:center;margin-top:40px;">
+    <a href="/create-rfq.html" class="btn">Post Your Buyer RFQ</a>
+  </div>
+</section>
 
 <section class="cta">
   <h2>Are You a Supplier?</h2>
@@ -245,7 +244,7 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 
-<!-- ✅ SMART INSTALL LOGIC (ADDED) -->
+<!-- ✅ SMART INSTALL LOGIC -->
 <script>
 let deferredPrompt;
 const installBtn = document.getElementById("installBtn");
@@ -286,5 +285,3 @@ window.addEventListener("load", () => {
 
 </body>
 </html>
-
-
