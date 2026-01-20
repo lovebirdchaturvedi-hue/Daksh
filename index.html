@@ -5,7 +5,6 @@
 <title>APD Global Trade | Elite B2B Trade Facilitation Platform</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- ✅ PWA (SAFE) -->
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#020617">
 
@@ -14,91 +13,129 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-html, body { margin:0; font-family:Inter,sans-serif; background:#f5f7fb; }
-:root {
-  --navy:#0b1d36; --navy-dark:#071427;
-  --gold:#c9a44a; --gold-soft:#e7cf88;
-  --text-muted:#9ca3af;
+html,body{margin:0;font-family:Inter,sans-serif;background:#f5f7fb}
+:root{
+--navy:#0b1d36;--navy-dark:#071427;
+--gold:#c9a44a;--gold-soft:#e7cf88;
+--text-muted:#9ca3af
 }
 
 /* HEADER */
 header{
-  height:80px;
-  background:linear-gradient(180deg,var(--navy),var(--navy-dark));
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
+background:linear-gradient(180deg,var(--navy),var(--navy-dark));
+padding:14px 20px;
+position:sticky;top:0;z-index:1000
 }
-header .logo{color:var(--gold);font-weight:600;font-size:15px;}
-header nav a{
-  color:#e5e7eb;margin:0 12px;text-decoration:none;font-size:13px;opacity:.85;
+.header-inner{
+max-width:1200px;margin:auto;
+display:flex;align-items:center;justify-content:space-between
 }
-header nav a:hover{opacity:1;color:var(--gold-soft);}
+.logo{color:var(--gold);font-weight:600;font-size:15px}
+
+/* NAV */
+nav{display:flex;gap:18px}
+nav a{color:#e5e7eb;text-decoration:none;font-size:13px;opacity:.85}
+nav a:hover{color:var(--gold-soft);opacity:1}
+
+/* HAMBURGER */
+.menu-btn{display:none;font-size:22px;color:#fff;cursor:pointer}
 
 /* HERO */
-.hero{
-  min-height:calc(100vh - 80px);
-  position:relative; overflow:hidden;
-}
+.hero{min-height:100vh;position:relative;overflow:hidden}
 .hero video{
-  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+position:absolute;inset:0;width:100%;height:100%;object-fit:cover
 }
 .hero-overlay{
-  position:relative; z-index:2;
-  min-height:calc(100vh - 80px);
-  display:flex; flex-direction:column; justify-content:center; align-items:center;
-  text-align:center; padding:20px;
-  background:linear-gradient(180deg,rgba(11,29,54,.6),rgba(7,20,39,.85));
-  color:#fff;
+position:relative;z-index:2;
+min-height:100%;
+display:flex;flex-direction:column;
+align-items:center;justify-content:center;
+text-align:center;
+padding:120px 20px 80px;
+background:linear-gradient(180deg,rgba(11,29,54,.6),rgba(7,20,39,.85));
+color:#fff
 }
 .hero h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2.6rem,4vw,3.6rem);
+font-family:'Playfair Display',serif;
+font-size:clamp(2.2rem,5vw,3.6rem)
 }
 .hero p{
-  max-width:720px;
-  color:var(--text-muted);
-  margin:20px auto 30px;
+max-width:720px;
+color:var(--text-muted);
+margin:20px auto 30px
+}
+
+/* BUTTONS */
+.hero-actions{
+display:flex;gap:14px;flex-wrap:wrap;justify-content:center
 }
 .btn{
-  background:linear-gradient(135deg,var(--gold),var(--gold-soft));
-  color:#000;
-  padding:14px 38px;
-  border-radius:999px;
-  text-decoration:none;
-  font-weight:600;
-  margin:6px;
-  border:none;
-  cursor:pointer;
+background:linear-gradient(135deg,var(--gold),var(--gold-soft));
+color:#000;
+padding:14px 36px;
+border-radius:999px;
+text-decoration:none;
+font-weight:600;
+border:none;
+cursor:pointer;
+transition:all .25s ease;
+box-shadow:0 10px 30px rgba(0,0,0,.25)
+}
+.btn:hover{
+transform:translateY(-2px) scale(1.03);
+box-shadow:0 18px 45px rgba(0,0,0,.35)
+}
+.btn:active{
+transform:scale(.96)
 }
 
 /* SECTIONS */
-.section{max-width:1100px;margin:auto;padding:100px 20px;}
-.rfq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px;}
-.card{background:#fff;padding:26px;border-radius:16px;border:1px solid #e5e7eb;}
-.lock{color:#991b1b;font-size:13px;font-weight:600;}
-.two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:50px;}
-.cta{background:#020617;color:#fff;text-align:center;padding:100px 20px;}
-footer{background:#020617;color:#9ca3af;text-align:center;padding:40px 20px;font-size:14px;}
-footer a{color:var(--gold);text-decoration:none;}
+.section{max-width:1100px;margin:auto;padding:100px 20px}
+.rfq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px}
+.card{background:#fff;padding:26px;border-radius:16px;border:1px solid #e5e7eb}
+.lock{color:#991b1b;font-size:13px;font-weight:600}
+.two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:50px}
+.cta{background:#020617;color:#fff;text-align:center;padding:100px 20px}
+footer{background:#020617;color:#9ca3af;text-align:center;padding:40px 20px;font-size:14px}
+footer a{color:var(--gold);text-decoration:none}
+
+/* MOBILE */
+@media(max-width:768px){
+nav{
+position:absolute;top:60px;left:0;right:0;
+background:#020617;
+flex-direction:column;
+display:none
+}
+nav a{padding:14px;border-top:1px solid #111827}
+nav.show{display:flex}
+.menu-btn{display:block}
+.hero-actions{flex-direction:column}
+.hero-actions .btn{width:90%;max-width:360px}
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">APD Global Trade</div>
-  <nav>
-    <a href="/index.html">Home</a>
-    <a href="/rfq.html">Buyer RFQs</a>
-    <a href="/membership.html">Membership</a>
-    <a href="/suppliers.html">Suppliers</a>
-    <a href="/supplier-login.html">Supplier Login</a>
-    <a href="/register-supplier.html">Register</a>
-    <a href="/contact.html">Contact</a>
-  </nav>
+  <div class="header-inner">
+    <div class="logo">APD Global Trade</div>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    <nav id="nav">
+      <a href="/">Home</a>
+      <a href="/rfq.html">Buyer RFQs</a>
+      <a href="/membership.html">Membership</a>
+      <a href="/suppliers.html">Suppliers</a>
+      <a href="/supplier-login.html">Supplier Login</a>
+      <a href="/register-supplier.html">Register</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
 </header>
 
 <section class="hero">
-  <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1519452575417-564c1401ecc0">
+  <video autoplay muted loop playsinline>
     <source src="https://cdn.coverr.co/videos/coverr-container-ship-transport-5170/1080p.mp4" type="video/mp4">
   </video>
 
@@ -106,20 +143,12 @@ footer a{color:var(--gold);text-decoration:none;}
     <h1>Where Verified Buyers Meet Serious Suppliers</h1>
     <p>Access genuine buyer RFQs, protected contacts, and controlled global opportunities.</p>
 
-    <div>
-  <a href="/create-rfq.html" class="btn">Post Buyer RFQ</a>
-  <a href="/rfq.html" class="btn">View Buyer RFQs</a>
-
-  <button id="installBtn" class="btn" style="display:none;">
-    📲 Download Supplier App
-  </button>
-
-  <!-- ✅ NEW: ONBOARDING LINK -->
-  <a href="/supplier-onboarding.html" class="btn">
-    Supplier App – How It Works
-  </a>
-</div>
-</div>
+    <div class="hero-actions">
+      <a href="/create-rfq.html" class="btn">Post Buyer RFQ</a>
+      <a href="/rfq.html" class="btn">View Buyer RFQs</a>
+      <a href="/supplier-onboarding.html" class="btn">Supplier App – How It Works</a>
+    </div>
+  </div>
 </section>
 
 <section class="section">
@@ -128,15 +157,6 @@ footer a{color:var(--gold);text-decoration:none;}
     <div class="card"><h4>Basmati Rice (1121)</h4><p>500 MT · UAE</p><span class="lock">🔒 Locked</span></div>
     <div class="card"><h4>Red Chilli Powder</h4><p>20 MT · USA</p><span class="lock">🔒 Locked</span></div>
     <div class="card"><h4>Soybean Meal</h4><p>200 MT · Vietnam</p><span class="lock">🔒 Locked</span></div>
-  </div>
-
-  <section class="section two-col">
-    <div><h3>For Buyers</h3><p>Post verified RFQs and connect with serious suppliers.</p></div>
-    <div><h3>For Suppliers</h3><p>Unlock protected buyer contacts and premium trade leads.</p></div>
-  </section>
-
-  <div style="text-align:center;margin-top:40px;">
-    <a href="/create-rfq.html" class="btn">Post Your Buyer RFQ</a>
   </div>
 </section>
 
@@ -150,73 +170,13 @@ footer a{color:var(--gold);text-decoration:none;}
 <footer>
   <p style="color:#c9a44a;font-weight:600;">APD Global Trade</p>
   <p>Elite B2B Trade Facilitation Platform</p>
-  <p>
-    <a href="/terms.html">Terms</a> |
-    <a href="/privacy.html">Privacy</a> |
-    <a href="/disclaimer.html">Disclaimer</a>
-  </p>
-  <p>
-    📧 info@apdglobaltradehub.com <br>
-    ☎ +1 (202) 780-1366 <br>
-    💬 WhatsApp: +91 92664 18868
-  </p>
 </footer>
 
-<!-- FLOATING WHATSAPP -->
-<a href="https://wa.me/919266418868" target="_blank"
-   style="position:fixed;bottom:20px;right:20px;width:56px;height:56px;
-   background:#25D366;color:#fff;border-radius:50%;display:flex;
-   align-items:center;justify-content:center;font-size:28px;
-   box-shadow:0 10px 25px rgba(0,0,0,.25);z-index:9999;text-decoration:none;">
-  💬
-</a>
-
-<!-- ✅ SERVICE WORKER -->
 <script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/sw.js");
+function toggleMenu(){
+document.getElementById('nav').classList.toggle('show')
 }
-</script>
-
-<!-- ✅ SMART INSTALL LOGIC (ADDED) -->
-<script>
-let deferredPrompt;
-const installBtn = document.getElementById("installBtn");
-
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  if (installBtn) installBtn.style.display = "inline-block";
-});
-
-if (installBtn) {
-  installBtn.addEventListener("click", async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      await deferredPrompt.userChoice;
-      deferredPrompt = null;
-    }
-  });
-}
-
-window.addEventListener("load", () => {
-  const ua = navigator.userAgent;
-  const isIOS = /iphone|ipad|ipod/i.test(ua);
-  const isInApp = /FBAN|FBAV|Instagram|WhatsApp|Messenger/i.test(ua);
-
-  if (isInApp) {
-    alert("To install the APD Supplier App, please open this site in Chrome or Safari.");
-  }
-
-  if (isIOS && installBtn) {
-    installBtn.style.display = "inline-block";
-    installBtn.onclick = () => {
-      alert("Tap Share → Add to Home Screen to install the APD Supplier App.");
-    };
-  }
-});
 </script>
 
 </body>
 </html>
-
