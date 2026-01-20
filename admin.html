@@ -71,6 +71,15 @@ button {
 .approved { background:#dcfce7; color:#166534; }
 .pending { background:#fef3c7; color:#92400e; }
 .suspended { background:#fee2e2; color:#991b1b; }
+
+input {
+  padding:10px;
+  margin:6px 0;
+  width:280px;
+  display:block;
+  border:1px solid #e5e7eb;
+  border-radius:6px;
+}
 </style>
 </head>
 
@@ -99,6 +108,14 @@ button {
 <h3>Change Your Password</h3>
 <input type="password" id="newPassword" placeholder="New password">
 <button id="changePasswordBtn">Update Password</button>
+
+<!-- ✅ CREATE NEW ADMIN (ADDED – SAFE) -->
+<hr style="margin:40px 0;">
+
+<h3>Create New Admin</h3>
+<input type="email" id="newAdminEmail" placeholder="Admin email">
+<input type="password" id="newAdminPassword" placeholder="Temporary password">
+<button id="createAdminBtn">Create Admin</button>
 
 <!-- 🔥 Firebase Init -->
 <script type="module" src="/assets/js/firebase-init.js"></script>
