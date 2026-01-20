@@ -1,19 +1,19 @@
 /**
  * ======================================
  * APD Global Trade – Firebase Functions
+ * (ALL v2 – SAFE & FUTURE PROOF)
  * ======================================
  */
 
 const { onCall } = require("firebase-functions/v2/https");
-const functions = require("firebase-functions/v1");
+const { onDocumentCreated } = require("firebase-functions/v2/firestore");
 const admin = require("firebase-admin");
 const nodemailer = require("nodemailer");
 
-// 🔥 Initialize Firebase Admin
 admin.initializeApp();
 
 /* ======================================================
-   1️⃣ CREATE ADMIN USER (CALLABLE FUNCTION)
+   1️⃣ CREATE ADMIN USER (CALLABLE – v2)
    ====================================================== */
 exports.createAdminUser = onCall(async (request) => {
   const callerUid = request.auth?.uid;
@@ -53,7 +53,7 @@ exports.createAdminUser = onCall(async (request) => {
 
 
 /* ======================================================
-   2️⃣ EMAIL TRANSPORT (TEMP – WILL SWITCH TO SENDGRID)
+   2️⃣ EMAIL TRANSPORT (TEMP – SENDGRID LATER)
    ====================================================== */
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -65,17 +65,18 @@ const transporter = nodemailer.createTransport({
 
 
 /* ======================================================
-   3️⃣ NOTIFY ADMIN WHEN SUPPLIER SIGNS UP
+   3️⃣ NOTIFY ADMIN ON SUPPLIER SIGNUP (FIRESTORE v2)
    ====================================================== */
-exports.notifyNewSupplier = functions.firestore
-  .document("suppliers/{supplierId}")
-  .onCreate(async (snap) => {
+exports.notifyNewSupplier = onDocumentCreated(
+  "suppliers/{supplierId}",
+  async (event) => {
 
-    const data = snap.data();
+    const data = event.data?.data();
+    if (!data) return;
 
     const mailOptions = {
       from: "APD Global Trade <lovebird.chaturvedi@gmail.com>",
-      to: "lovebird.chaturvedi@gmail.com",
+      to: "admin@apdglobaltrade.com",
       subject: "🆕 New Supplier Registration – APD Global Trade",
       html: `
         <h2>New Supplier Signed Up</h2>
@@ -91,8 +92,7 @@ exports.notifyNewSupplier = functions.firestore
     try {
       await transporter.sendMail(mailOptions);
     } catch (err) {
-      console.error("Email send failed:", err.message);
+      console.error("Email failed:", err.message);
     }
-
-    return null;
-  });
+  }
+);
