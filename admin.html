@@ -5,50 +5,68 @@
 <title>Admin Dashboard | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
 body {
-  font-family: Arial, sans-serif;
+  font-family: Inter, sans-serif;
   background:#f5f7fb;
   padding:40px;
   display:none;
 }
 
-h1 {
+.topbar {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
   margin-bottom:20px;
-}
-
-button {
-  padding:6px 12px;
-  margin:2px;
-  cursor:pointer;
 }
 
 table {
   width:100%;
   border-collapse:collapse;
   background:#fff;
+  border-radius:12px;
+  overflow:hidden;
 }
 
 th, td {
-  border:1px solid #ddd;
-  padding:10px;
+  padding:14px;
+  border-bottom:1px solid #e5e7eb;
   text-align:left;
+  font-size:14px;
 }
 
 th {
   background:#020617;
   color:#fff;
 }
+
+button {
+  padding:6px 12px;
+  margin:2px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:13px;
+}
+
+.approve { background:#16a34a; color:#fff; }
+.gold { background:#c9a44a; color:#000; }
+.platinum { background:#6366f1; color:#fff; }
+.free { background:#9ca3af; color:#000; }
+.ban { background:#dc2626; color:#fff; }
+.unban { background:#059669; color:#fff; }
+.logout { background:#020617; color:#fff; }
 </style>
 </head>
 
 <body>
 
-<h1>Admin – Supplier Management</h1>
-
-<button onclick="logout()">Logout</button>
-
-<br><br>
+<div class="topbar">
+  <h1>Admin – Supplier Management</h1>
+  <button class="logout" onclick="logout()">Logout</button>
+</div>
 
 <table>
   <thead>
@@ -63,10 +81,10 @@ th {
   <tbody id="supplierTable"></tbody>
 </table>
 
-<!-- 🔥 Firebase Init -->
+<!-- Firebase init -->
 <script type="module" src="/assets/js/firebase-init.js"></script>
 
-<!-- 🔐 Admin Logic -->
+<!-- Admin logic -->
 <script type="module" src="/assets/js/admin.js"></script>
 
 </body>
