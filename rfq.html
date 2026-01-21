@@ -18,6 +18,18 @@ body{
 h1,h2,h3{letter-spacing:-.3px}
 
 /* ================= HEADER ================= */
+<button onclick="logout()" style="
+  background:#020617;
+  color:#fff;
+  border:none;
+  padding:8px 16px;
+  border-radius:999px;
+  font-size:13px;
+  cursor:pointer;
+">
+Logout
+</button>
+
 .header{
   height:72px;
   background:#071427;
@@ -349,4 +361,15 @@ onAuthStateChanged(auth, async (user)=>{
 
 </body>
 </html>
+<script type="module">
+import { auth } from "/assets/js/firebase-init.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+window.logout = async () => {
+  await signOut(auth);
+  window.location.href = "/supplier-login.html";
+};
+</script>
+
+
 
