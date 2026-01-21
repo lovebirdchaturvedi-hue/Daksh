@@ -114,21 +114,10 @@ document.getElementById("loginBtn").onclick = async () => {
   }
 
   try {
-    const cred = await signInWithEmailAndPassword(auth, email, password);
+const cred = await signInWithEmailAndPassword(auth, email, password);
+const token = await cred.user.getIdTokenResult(true);
 
-    // 🔥 FORCE TOKEN REFRESH
-    const token = await cred.user.getIdTokenResult(true);
-
-    // ✅ ADMIN
-    if (token.claims.admin === true) {
-      window.location.replace("/admin.html");
-      return;
-    }
-
-    // 👤 SUPPLIER
-    window.location.replace("/rfq.html");
-
-  } catch (err) {
+} catch (err) {
     alert(err.message);
   }
 };
@@ -147,3 +136,4 @@ document.getElementById("forgotPassword").onclick = async () => {
 
 </body>
 </html>
+
