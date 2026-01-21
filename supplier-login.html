@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Login | APD Global Trade</title>
+<title>Supplier Login | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 body{
@@ -23,71 +24,130 @@ body{
   border-radius:18px;
   text-align:center;
 }
+h1{
+  font-family:'Playfair Display',serif;
+  margin-bottom:6px;
+}
+p{
+  color:#6b7280;
+  font-size:14px;
+}
 input{
   width:100%;
   padding:12px;
   margin-top:14px;
   border-radius:10px;
   border:1px solid #e5e7eb;
+  font-size:14px;
 }
 button{
   width:100%;
   padding:14px;
   margin-top:18px;
   background:#c9a44a;
+  color:#000;
   border:none;
   border-radius:999px;
   font-weight:600;
+  cursor:pointer;
+}
+.links{
+  margin-top:14px;
+  font-size:13px;
+}
+.links a{
+  color:#020617;
+  text-decoration:none;
+  font-weight:500;
+  display:block;
+  margin-top:6px;
 }
 </style>
 </head>
 
 <body>
+
 <div class="card">
-<h2>Login</h2>
-<input id="email" type="email" placeholder="Email">
-<input id="password" type="password" placeholder="Password">
-<button id="loginBtn">Login</button>
+  <h1>Supplier Login</h1>
+  <p>Access verified buyer RFQs</p>
+
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+
+  <button id="loginBtn">Login</button>
+
+  <div class="links">
+    <a href="#" id="forgotPassword">Forgot password?</a>
+    <a href="/register-supplier.html">New supplier? Register here</a>
+  </div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-const app = initializeApp({
+/* 🔥 FIREBASE CONFIG */
+const firebaseConfig = {
   apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
   authDomain: "apd-globaltrade-prod.firebaseapp.com",
-  projectId: "apd-globaltrade-prod"
-});
+  projectId: "apd-globaltrade-prod",
+  storageBucket: "apd-globaltrade-prod.firebasestorage.app",
+  messagingSenderId: "226407312435",
+  appId: "1:226407312435:web:f8a54b1132af3899170746"
+};
 
+const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
 
-document.getElementById("loginBtn").onclick = async () => {
+/* 🔐 LOGIN */
+document.getElementById("loginBtn").addEventListener("click", async () => {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  if (!email || !password) {
+    alert("Enter email & password");
+    return;
+  }
+
   try {
-    const cred = await signInWithEmailAndPassword(
-      auth,
-      email.value,
-      password.value
-    );
+    const cred = await signInWithEmailAndPassword(auth, email, password);
 
-    const uid = cred.user.uid;
+    // 🚨 FORCE REFRESH TOKEN (THIS IS THE KEY FIX)
+    await cred.user.getIdToken(true);
+    const token = await cred.user.getIdTokenResult();
 
-    // 🔐 ADMIN CHECK
-    const adminSnap = await getDoc(doc(db,"admins",uid));
-    if(adminSnap.exists()){
-      window.location.href="/admin.html";
+    console.log("AUTH CLAIMS 👉", token.claims);
+
+    // ✅ ADMIN REDIRECT (ONLY THIS CHECK)
+    if (token.claims.admin === true) {
+      window.location.replace("/admin.html");
       return;
     }
 
-    // 👤 SUPPLIER
-    window.location.href="/rfq.html";
+    // 👤 SUPPLIER REDIRECT
+    window.location.replace("/rfq.html");
 
-  } catch(e){
-    alert(e.message);
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
   }
+});
+
+/* 🔁 FORGOT PASSWORD */
+document.getElementById("forgotPassword").onclick = async () => {
+  const email = document.getElementById("email").value;
+  if (!email) {
+    alert("Enter your email first");
+    return;
+  }
+  await sendPasswordResetEmail(auth, email);
+  alert("Password reset email sent");
 };
 </script>
+
 </body>
 </html>
