@@ -18,18 +18,6 @@ body{
 h1,h2,h3{letter-spacing:-.3px}
 
 /* ================= HEADER ================= */
-<button onclick="logout()" style="
-  background:#020617;
-  color:#fff;
-  border:none;
-  padding:8px 16px;
-  border-radius:999px;
-  font-size:13px;
-  cursor:pointer;
-">
-Logout
-</button>
-
 .header{
   height:72px;
   background:#071427;
@@ -39,12 +27,28 @@ Logout
   padding:0 22px;
 }
 .logo{color:#c9a44a;font-weight:600}
+.nav-desktop{
+  display:flex;
+  align-items:center;
+}
 .nav-desktop a{
   color:#e5e7eb;
   margin-left:18px;
   text-decoration:none;
   font-size:14px;
 }
+.logout-btn{
+  margin-left:18px;
+  background:#020617;
+  color:#fff;
+  border:none;
+  padding:8px 16px;
+  border-radius:999px;
+  font-size:13px;
+  cursor:pointer;
+}
+
+/* ================= HAMBURGER ================= */
 .hamburger{
   display:none;
   flex-direction:column;
@@ -68,12 +72,17 @@ Logout
   transition:.4s ease;
   z-index:9999;
 }
-.mobile-nav a{
+.mobile-nav a,
+.mobile-nav button{
   display:block;
+  width:100%;
+  text-align:left;
+  background:none;
+  border:none;
   color:#fff;
-  text-decoration:none;
   font-size:18px;
   margin-bottom:24px;
+  cursor:pointer;
 }
 
 /* ================= CONTENT ================= */
@@ -132,18 +141,6 @@ Logout
 .buyer-locked{color:#991b1b;font-size:13px;font-weight:600;margin-top:12px}
 .buyer-locked a{color:#991b1b}
 
-/* ================= SKELETON ================= */
-.skeleton{
-  background:linear-gradient(90deg,#e5e7eb 25%,#f3f4f6 37%,#e5e7eb 63%);
-  background-size:400% 100%;
-  animation:skeleton 1.4s ease infinite;
-  border-radius:12px;
-}
-@keyframes skeleton{
-  0%{background-position:100% 50%}
-  100%{background-position:0 50%}
-}
-
 /* ================= FOOTER ================= */
 footer{
   background:#020617;
@@ -167,7 +164,6 @@ footer{
     background:#020617;
     padding:12px;
     z-index:9998;
-    box-shadow:0 -10px 30px rgba(0,0,0,.3);
   }
   .sticky-cta a{
     display:block;
@@ -188,11 +184,14 @@ footer{
 <!-- ================= HEADER ================= -->
 <header class="header">
   <div class="logo">APD Global Trade</div>
+
   <nav class="nav-desktop">
     <a href="/index.html">Home</a>
     <a href="/rfq.html">Buyer RFQs</a>
     <a href="/membership.html">Membership</a>
+    <button class="logout-btn" onclick="logout()">Logout</button>
   </nav>
+
   <div class="hamburger" id="hamburger">
     <span></span><span></span><span></span>
   </div>
@@ -202,6 +201,7 @@ footer{
   <a href="/index.html">Home</a>
   <a href="/rfq.html">Buyer RFQs</a>
   <a href="/membership.html">Membership</a>
+  <button onclick="logout()">Logout</button>
 </div>
 
 <!-- ================= PRIORITY RFQs ================= -->
@@ -213,11 +213,7 @@ footer{
     <input id="searchInput" placeholder="Search product or country">
   </div>
 
-  <div class="rfq-grid" id="priorityRFQs">
-    <div class="rfq-card skeleton" style="height:180px"></div>
-    <div class="rfq-card skeleton" style="height:180px"></div>
-    <div class="rfq-card skeleton" style="height:180px"></div>
-  </div>
+  <div class="rfq-grid" id="priorityRFQs"></div>
 </section>
 
 <!-- ================= MOCK RFQs ================= -->
@@ -225,11 +221,7 @@ footer{
   <h1>Other Live Buyer RFQs</h1>
   <p>Ongoing global buyer requirements.</p>
 
-  <div class="rfq-grid" id="mockRFQs">
-    <div class="rfq-card skeleton" style="height:180px"></div>
-    <div class="rfq-card skeleton" style="height:180px"></div>
-    <div class="rfq-card skeleton" style="height:180px"></div>
-  </div>
+  <div class="rfq-grid" id="mockRFQs"></div>
 </section>
 
 <footer>
@@ -241,7 +233,7 @@ footer{
   <a href="/membership.html">🔓 Unlock Buyer Contacts</a>
 </div>
 
-<!-- ================= MOBILE NAV SCRIPT ================= -->
+<!-- ================= MOBILE NAV ================= -->
 <script>
 const hamburger=document.getElementById("hamburger");
 const mobileNav=document.getElementById("mobileNav");
@@ -276,8 +268,6 @@ const priorityRFQs = [
 ];
 
 const priorityGrid=document.getElementById("priorityRFQs");
-priorityGrid.innerHTML="";
-
 priorityRFQs.forEach((rfq,i)=>{
   const card=document.createElement("div");
   card.className="rfq-card";
@@ -299,7 +289,6 @@ priorityRFQs.forEach((rfq,i)=>{
 const products=["Basmati Rice","IR-64 Rice","Sugar ICUMSA 45","Sunflower Oil","Soybean Oil"];
 const destinations=["UAE","USA","UK","Germany","France"];
 const mockGrid=document.getElementById("mockRFQs");
-mockGrid.innerHTML="";
 
 for(let i=1;i<=100;i++){
   const card=document.createElement("div");
@@ -341,7 +330,7 @@ const observer=new IntersectionObserver(entries=>{
 document.querySelectorAll(".rfq-card").forEach(c=>observer.observe(c));
 </script>
 
-<!-- ================= FIREBASE ACCESS CONTROL (UNCHANGED) ================= -->
+<!-- ================= FIREBASE ACCESS CONTROL ================= -->
 <script type="module">
 import { auth, db } from "/assets/js/firebase-init.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
@@ -359,8 +348,7 @@ onAuthStateChanged(auth, async (user)=>{
 });
 </script>
 
-</body>
-</html>
+<!-- ================= LOGOUT ================= -->
 <script type="module">
 import { auth } from "/assets/js/firebase-init.js";
 import { signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
@@ -371,5 +359,5 @@ window.logout = async () => {
 };
 </script>
 
-
-
+</body>
+</html>
