@@ -108,16 +108,16 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
     const cred = await signInWithEmailAndPassword(auth, email, password);
     const user = cred.user;
 
-    // 🔍 CHECK ADMIN (FIRESTORE-BASED)
-    const adminSnap = await getDoc(doc(db, "admins", user.uid));
+    // ✅ ADMIN CHECK (CORRECT COLLECTION NAME)
+    const adminSnap = await getDoc(doc(db, "admin", user.uid));
 
     if (adminSnap.exists()) {
-      // ✅ ADMIN
+      // ADMIN → ADMIN DASHBOARD
       window.location.replace("/admin.html");
       return;
     }
 
-    // 👤 SUPPLIER
+    // SUPPLIER → RFQ PAGE
     window.location.replace("/rfq.html");
 
   } catch (err) {
