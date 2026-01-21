@@ -8,16 +8,26 @@
 <link rel="stylesheet" href="assets/admin.css">
 
 <style>
+body{
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:#f5f7fb;
+}
 .main{
   padding:40px;
+}
+h1{
+  margin-bottom:20px;
 }
 table{
   width:100%;
   border-collapse:collapse;
   background:#fff;
+  border-radius:12px;
+  overflow:hidden;
 }
 th,td{
-  padding:12px;
+  padding:14px;
   border-bottom:1px solid #e5e7eb;
   text-align:left;
 }
@@ -26,13 +36,23 @@ th{
   color:#fff;
 }
 button{
-  padding:6px 12px;
-  border-radius:6px;
+  padding:6px 14px;
+  border-radius:999px;
   border:none;
   cursor:pointer;
+  font-size:13px;
 }
 .approve{background:#16a34a;color:#fff}
 .reject{background:#dc2626;color:#fff}
+.logout{
+  margin-top:20px;
+  background:#020617;
+  color:#fff;
+  padding:10px 18px;
+  border-radius:999px;
+  border:none;
+  cursor:pointer;
+}
 </style>
 </head>
 
@@ -41,9 +61,7 @@ button{
 <!-- SIDEBAR -->
 <div class="sidebar">
   <h2>APD Admin</h2>
-  <a href="dashboard.html">Dashboard</a>
-  <a href="rfqs.html">RFQs</a>
-  <a href="suppliers.html" class="active">Suppliers</a>
+  <a href="/suppliers.html" class="active">Suppliers</a>
   <button class="logout" id="logoutBtn">Logout</button>
 </div>
 
@@ -63,7 +81,7 @@ button{
     </thead>
     <tbody id="supplierTable">
       <tr>
-        <td colspan="5">Loading suppliers…</td>
+        <td colspan="5">⏳ Loading suppliers…</td>
       </tr>
     </tbody>
   </table>
@@ -93,7 +111,7 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
-  // ✅ ADMIN CHECK (SINGULAR COLLECTION)
+  // ✅ ADMIN CHECK (admin/{uid})
   const adminSnap = await getDoc(doc(db, "admin", user.uid));
   if (!adminSnap.exists()) {
     window.location.replace("/rfq.html");
