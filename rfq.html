@@ -52,6 +52,9 @@ header nav a {
   border-radius:16px;
   border:1px solid #e5e7eb;
 }
+.rfq-card h3 {
+  margin-top:0;
+}
 .buyer-contact {
   display:none;
   margin-top:12px;
@@ -62,6 +65,9 @@ header nav a {
   font-size:13px;
   font-weight:600;
   margin-top:12px;
+}
+.buyer-locked a {
+  color:#991b1b;
 }
 .cta {
   background:#020617;
@@ -100,45 +106,12 @@ footer {
 
 <section class="section">
   <h1>Live Buyer RFQs</h1>
-  <p>Verified buyer requirements. Buyer contact details are visible only to approved Gold & Platinum suppliers.</p>
+  <p>
+    Verified buyer requirements. Buyer contact details are visible only to
+    approved Gold & Platinum suppliers.
+  </p>
 
-  <div class="rfq-grid">
-
-    <!-- RFQ 1 -->
-    <div class="rfq-card">
-      <h3>Basmati Rice (1121)</h3>
-      <p>Quantity: 500 MT</p>
-      <p>Destination: UAE</p>
-
-      <div class="buyer-contact">
-        📧 buyer1@company.com<br>
-        📞 +971-XXX-XXX
-      </div>
-
-      <div class="buyer-locked">
-        🔒 Buyer contact available to verified Gold & Platinum suppliers only<br>
-        <a href="/membership.html">Upgrade Membership</a>
-      </div>
-    </div>
-
-    <!-- RFQ 2 -->
-    <div class="rfq-card">
-      <h3>Red Chilli Powder</h3>
-      <p>Quantity: 20 MT</p>
-      <p>Destination: USA</p>
-
-      <div class="buyer-contact">
-        📧 buyer2@company.com<br>
-        📞 +1-XXX-XXX
-      </div>
-
-      <div class="buyer-locked">
-        🔒 Buyer contact available to verified Gold & Platinum suppliers only<br>
-        <a href="/membership.html">Upgrade Membership</a>
-      </div>
-    </div>
-
-  </div>
+  <div class="rfq-grid" id="rfqGrid"></div>
 </section>
 
 <section class="cta">
@@ -152,7 +125,52 @@ footer {
   <p>Elite B2B Trade Facilitation Platform</p>
 </footer>
 
-<!-- 🔥 SINGLE FIREBASE LOGIC (NO DUPLICATE INIT) -->
+<!-- ================= MOCK RFQ GENERATOR (100 RFQs) ================= -->
+<script>
+const products = [
+  "Basmati Rice 1121","Non Basmati Rice","Red Chilli Powder","Turmeric Finger",
+  "Fresh Onion","Fresh Garlic","Cashew Nuts","Raw Cotton",
+  "Indian Spice Mix","Sugar ICUMSA 45","Wheat Flour","Maize Corn",
+  "Frozen Chicken","Seafood Shrimps","Granite Slabs","Ceramic Tiles",
+  "Steel TMT Bars","Aluminium Ingots","Plastic Granules","LED Lights"
+];
+
+const destinations = [
+  "UAE","USA","UK","Germany","France","Saudi Arabia","Qatar","Oman",
+  "South Africa","Nigeria","Kenya","Bangladesh","Vietnam","Malaysia"
+];
+
+const grid = document.getElementById("rfqGrid");
+
+for (let i = 1; i <= 100; i++) {
+  const product = products[Math.floor(Math.random() * products.length)];
+  const destination = destinations[Math.floor(Math.random() * destinations.length)];
+  const qty = Math.floor(Math.random() * 900 + 50) + " MT";
+
+  const card = document.createElement("div");
+  card.className = "rfq-card";
+
+  card.innerHTML = `
+    <h3>${product}</h3>
+    <p>Quantity: ${qty}</p>
+    <p>Destination: ${destination}</p>
+
+    <div class="buyer-contact">
+      📧 buyer${i}@company.com<br>
+      📞 +XXX-XXX-${1000 + i}
+    </div>
+
+    <div class="buyer-locked">
+      🔒 Buyer contact available to verified Gold & Platinum suppliers only<br>
+      <a href="/membership.html">Upgrade Membership</a>
+    </div>
+  `;
+
+  grid.appendChild(card);
+}
+</script>
+
+<!-- ================= FIREBASE ACCESS CONTROL ================= -->
 <script type="module">
 import { auth, db } from "/assets/js/firebase-init.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
@@ -161,7 +179,7 @@ import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
 onAuthStateChanged(auth, async (user) => {
   if (!user) return;
 
-  // 🔐 Admin auto redirect
+  // 🔐 Admin redirect
   const token = await user.getIdTokenResult(true);
   if (token.claims.admin === true) {
     window.location.replace("/admin.html");
@@ -179,8 +197,10 @@ onAuthStateChanged(auth, async (user) => {
     supplier.status === "approved" &&
     (supplier.plan === "gold" || supplier.plan === "platinum")
   ) {
-    document.querySelectorAll(".buyer-locked").forEach(el => el.style.display = "none");
-    document.querySelectorAll(".buyer-contact").forEach(el => el.style.display = "block");
+    document.querySelectorAll(".buyer-locked")
+      .forEach(el => el.style.display = "none");
+    document.querySelectorAll(".buyer-contact")
+      .forEach(el => el.style.display = "block");
   }
 });
 </script>
