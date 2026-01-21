@@ -82,26 +82,17 @@ button{
   </div>
 </div>
 
+<!-- ✅ FINAL, CORRECT LOGIN LOGIC -->
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { auth, db } from "/assets/js/firebase-init.js";
 import {
-  getAuth,
   signInWithEmailAndPassword,
   sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-/* 🔥 FIREBASE CONFIG */
-const firebaseConfig = {
-  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-  authDomain: "apd-globaltrade-prod.firebaseapp.com",
-  projectId: "apd-globaltrade-prod",
-  storageBucket: "apd-globaltrade-prod.firebasestorage.app",
-  messagingSenderId: "226407312435",
-  appId: "1:226407312435:web:f8a54b1132af3899170746"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+import {
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 /* 🔐 LOGIN */
 document.getElementById("loginBtn").addEventListener("click", async () => {
@@ -115,20 +106,18 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
 
   try {
     const cred = await signInWithEmailAndPassword(auth, email, password);
+    const user = cred.user;
 
-    // 🚨 FORCE REFRESH TOKEN (THIS IS THE KEY FIX)
-    await cred.user.getIdToken(true);
-    const token = await cred.user.getIdTokenResult();
+    // 🔍 CHECK ADMIN (FIRESTORE-BASED)
+    const adminSnap = await getDoc(doc(db, "admins", user.uid));
 
-    console.log("AUTH CLAIMS 👉", token.claims);
-
-    // ✅ ADMIN REDIRECT (ONLY THIS CHECK)
-    if (token.claims.admin === true) {
+    if (adminSnap.exists()) {
+      // ✅ ADMIN
       window.location.replace("/admin.html");
       return;
     }
 
-    // 👤 SUPPLIER REDIRECT
+    // 👤 SUPPLIER
     window.location.replace("/rfq.html");
 
   } catch (err) {
@@ -139,7 +128,7 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
 
 /* 🔁 FORGOT PASSWORD */
 document.getElementById("forgotPassword").onclick = async () => {
-  const email = document.getElementById("email").value;
+  const email = document.getElementById("email").value.trim();
   if (!email) {
     alert("Enter your email first");
     return;
