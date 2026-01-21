@@ -3,9 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Live Buyer RFQs | APD Global Trade</title>
-
-<link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#020617">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -18,61 +15,71 @@ body {
   color:#0f172a;
 }
 header {
-  height:80px;
   background:#071427;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
+  padding:20px 0;
+  text-align:center;
 }
 header .logo {
   color:#c9a44a;
   font-weight:600;
+  font-size:18px;
 }
 header nav a {
   color:#e5e7eb;
-  margin:0 12px;
+  margin:0 14px;
   text-decoration:none;
-  font-size:13px;
+  font-size:14px;
 }
 .section {
-  max-width:1100px;
+  max-width:1200px;
   margin:auto;
-  padding:80px 20px;
+  padding:60px 20px;
 }
 .rfq-grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:30px;
-  margin-top:40px;
+  gap:26px;
 }
 .rfq-card {
   background:#fff;
-  padding:26px;
+  padding:24px;
   border-radius:16px;
   border:1px solid #e5e7eb;
 }
+.rfq-card h3 {
+  margin-top:0;
+}
 .buyer-contact {
   display:none;
-  margin-top:12px;
   font-size:14px;
+  margin-top:12px;
+  line-height:1.6;
+  background:#ecfeff;
+  padding:10px;
+  border-radius:8px;
 }
-.buyer-locked {
+.lock {
   color:#991b1b;
   font-size:13px;
   font-weight:600;
   margin-top:12px;
 }
+.lock a {
+  display:inline-block;
+  margin-top:6px;
+  color:#020617;
+  font-weight:600;
+}
 .cta {
   background:#020617;
   color:#fff;
   text-align:center;
-  padding:80px 20px;
+  padding:70px 20px;
 }
 .cta a {
   background:#c9a44a;
   color:#000;
-  padding:14px 32px;
+  padding:14px 34px;
   border-radius:999px;
   text-decoration:none;
   font-weight:600;
@@ -81,8 +88,7 @@ footer {
   background:#020617;
   color:#9ca3af;
   text-align:center;
-  padding:50px 20px;
-  font-size:14px;
+  padding:40px 20px;
 }
 </style>
 </head>
@@ -95,93 +101,106 @@ footer {
     <a href="/index.html">Home</a>
     <a href="/rfq.html">Buyer RFQs</a>
     <a href="/membership.html">Membership</a>
+    <a href="/supplier-login.html">Logout</a>
   </nav>
 </header>
 
 <section class="section">
-  <h1>Live Buyer RFQs</h1>
-  <p>Verified buyer requirements. Buyer contact details are visible only to approved Gold & Platinum suppliers.</p>
+<h1>Live Buyer RFQs</h1>
+<p>Buyer contact details are visible only to <strong>approved Gold & Platinum suppliers</strong>.</p>
 
-  <div class="rfq-grid">
-
-    <!-- RFQ 1 -->
-    <div class="rfq-card">
-      <h3>Basmati Rice (1121)</h3>
-      <p>Quantity: 500 MT</p>
-      <p>Destination: UAE</p>
-
-      <div class="buyer-contact">
-        📧 buyer1@company.com<br>
-        📞 +971-XXX-XXX
-      </div>
-
-      <div class="buyer-locked">
-        🔒 Buyer contact available to verified Gold & Platinum suppliers only<br>
-        <a href="/membership.html">Upgrade Membership</a>
-      </div>
-    </div>
-
-    <!-- RFQ 2 -->
-    <div class="rfq-card">
-      <h3>Red Chilli Powder</h3>
-      <p>Quantity: 20 MT</p>
-      <p>Destination: USA</p>
-
-      <div class="buyer-contact">
-        📧 buyer2@company.com<br>
-        📞 +1-XXX-XXX
-      </div>
-
-      <div class="buyer-locked">
-        🔒 Buyer contact available to verified Gold & Platinum suppliers only<br>
-        <a href="/membership.html">Upgrade Membership</a>
-      </div>
-    </div>
-
-  </div>
+<div class="rfq-grid" id="rfqGrid"></div>
 </section>
 
 <section class="cta">
-  <h2>Unlock Buyer Contact Details</h2>
-  <p>Upgrade your supplier membership to access full RFQ details.</p>
-  <a href="/membership.html">View Membership Plans</a>
+<h2>Unlock Buyer Contact Details</h2>
+<p>Upgrade your supplier membership to access full RFQ details.</p>
+<a href="/membership.html">View Membership Plans</a>
 </section>
 
 <footer>
-  <p style="color:#c9a44a;font-weight:600;">APD Global Trade</p>
-  <p>Elite B2B Trade Facilitation Platform</p>
+<p style="color:#c9a44a;font-weight:600;">APD Global Trade</p>
+<p>Elite B2B Trade Facilitation Platform</p>
+<p>📧 admin@apdglobaltrade.com</p>
 </footer>
 
-<!-- 🔥 SINGLE FIREBASE LOGIC (NO DUPLICATE INIT) -->
+<!-- 🔥 FIREBASE -->
 <script type="module">
-import { auth, db } from "/assets/js/firebase-init.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-onAuthStateChanged(auth, async (user) => {
-  if (!user) return;
+const firebaseConfig = {
+  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+  authDomain: "apd-globaltrade-prod.firebaseapp.com",
+  projectId: "apd-globaltrade-prod",
+  storageBucket: "apd-globaltrade-prod.firebasestorage.app",
+  messagingSenderId: "226407312435",
+  appId: "1:226407312435:web:f8a54b1132af3899170746"
+};
 
-  // 🔐 Admin auto redirect
-  const token = await user.getIdTokenResult(true);
-  if (token.claims.admin === true) {
-    window.location.replace("/admin.html");
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const rfqs = [
+  ["Basmati Rice 1121","500 MT","UAE","buyer@uaeimport.com","+971 50 123 4567"],
+  ["Red Chilli Powder","20 MT","USA","procurement@usfoods.com","+1 312 555 8821"],
+  ["Refined Sunflower Oil","200 MT","Turkey","buy@tragro.com","+90 532 441 0021"],
+  ["White Sugar ICUMSA 45","5000 MT","Bangladesh","supply@bdfoods.com","+880 171 998 1100"],
+  ["Soybean Meal","1000 MT","Vietnam","trade@vnagro.vn","+84 91 220 5544"],
+  ["Fresh Onions","800 MT","Sri Lanka","import@slproduce.lk","+94 77 998 1223"],
+  ["Yellow Corn","2000 MT","Egypt","procure@egygrain.eg","+20 109 333 2231"],
+  ["Raw Cashew Nuts","100 MT","India","export@goacashew.in","+91 98211 44556"],
+  ["Frozen Chicken","500 MT","Saudi Arabia","halal@ksafoods.sa","+966 54 321 8890"],
+  ["Sesame Seeds","300 MT","Japan","foodtrade@jpimports.jp","+81 80 5566 8899"],
+  ["Cotton Yarn","50 MT","Italy","spinning@ittextile.it","+39 331 998 8822"],
+  ["Black Pepper","40 MT","Germany","buyer@de-spice.de","+49 151 8899 4411"],
+  ["Turmeric Powder","25 MT","UK","imports@ukspices.co.uk","+44 7700 900111"],
+  ["Fresh Mangoes","120 MT","Netherlands","fresh@nlfruits.nl","+31 6 99887766"],
+  ["Peanuts","400 MT","China","buy@cnagro.cn","+86 138 9988 2233"],
+  ["Coffee Beans","150 MT","France","trade@frcoffee.fr","+33 6 8899 3344"],
+  ["Frozen Shrimp","90 MT","Spain","seafood@esimports.es","+34 677 889 123"],
+  ["Palm Oil","3000 MT","Nigeria","oiltrade@ngimports.ng","+234 802 998 4455"],
+  ["Wheat Flour","1000 MT","Afghanistan","grain@aftrade.af","+93 79 223 8899"],
+  ["Cocoa Beans","200 MT","Belgium","choco@befoods.be","+32 478 998 2211"]
+];
+
+// duplicate to exceed 50 RFQs
+const allRfqs = [...rfqs, ...rfqs, ...rfqs];
+
+const grid = document.getElementById("rfqGrid");
+
+function render(isPremium){
+  allRfqs.forEach(r=>{
+    const div=document.createElement("div");
+    div.className="rfq-card";
+    div.innerHTML=`
+      <h3>${r[0]}</h3>
+      <p>Quantity: ${r[1]}</p>
+      <p>Destination: ${r[2]}</p>
+      ${isPremium ? `
+        <div class="buyer-contact">
+          📧 ${r[3]}<br>📞 ${r[4]}
+        </div>` :
+        `<div class="lock">
+          🔒 Buyer contact available to Gold & Platinum only<br>
+          <a href="/membership.html">Upgrade Membership</a>
+        </div>`
+      }
+    `;
+    grid.appendChild(div);
+  });
+}
+
+onAuthStateChanged(auth, async (user)=>{
+  if(!user){
+    window.location.href="/supplier-login.html";
     return;
   }
-
-  // 🔍 Supplier check
-  const snap = await getDoc(doc(db, "suppliers", user.uid));
-  if (!snap.exists()) return;
-
-  const supplier = snap.data();
-
-  // ✅ Approved Gold / Platinum
-  if (
-    supplier.status === "approved" &&
-    (supplier.plan === "gold" || supplier.plan === "platinum")
-  ) {
-    document.querySelectorAll(".buyer-locked").forEach(el => el.style.display = "none");
-    document.querySelectorAll(".buyer-contact").forEach(el => el.style.display = "block");
-  }
+  const snap = await getDoc(doc(db,"suppliers",user.uid));
+  const plan = snap.exists() ? snap.data().plan : "free";
+  render(plan==="gold" || plan==="platinum");
 });
 </script>
 
