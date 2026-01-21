@@ -12,22 +12,22 @@ body{
   padding:40px;
 }
 .card{
-  max-width:600px;
+  max-width:640px;
   margin:auto;
   background:#fff;
-  padding:30px;
-  border-radius:16px;
-  box-shadow:0 20px 40px rgba(0,0,0,.08);
+  padding:34px;
+  border-radius:18px;
+  box-shadow:0 25px 60px rgba(0,0,0,.08);
 }
 textarea{
   width:100%;
-  min-height:140px;
+  min-height:160px;
   padding:14px;
-  border-radius:10px;
+  border-radius:12px;
   border:1px solid #e5e7eb;
 }
 button{
-  margin-top:16px;
+  margin-top:18px;
   width:100%;
   padding:14px;
   background:#020617;
@@ -37,19 +37,30 @@ button{
   font-weight:600;
   cursor:pointer;
 }
+.denied{
+  text-align:center;
+  margin-top:120px;
+  color:#991b1b;
+  font-weight:600;
+}
 </style>
 </head>
 
 <body>
 
-<div class="card">
-  <h2>Add New RFQ</h2>
+<div class="card" id="adminPanel" style="display:none">
+  <h2>Admin – Add New RFQ</h2>
   <p>Paste full RFQ text below.</p>
 
   <textarea id="rfqText"
     placeholder="COUNTRY / PRODUCT / QTY / PORT / TERMS / PACKING"></textarea>
 
   <button id="addRFQ">Add RFQ</button>
+</div>
+
+<div class="denied" id="accessDenied" style="display:none">
+  ❌ Access Denied<br><br>
+  This page is restricted to administrators only.
 </div>
 
 <script type="module">
@@ -61,17 +72,29 @@ import { onAuthStateChanged }
 
 onAuthStateChanged(auth, async (user)=>{
   if(!user){
-    alert("Login required");
+    document.getElementById("accessDenied").style.display="block";
     return;
   }
 
+  const token = await user.getIdTokenResult(true);
+
+  // 🔐 ADMIN CHECK
+  if(token.claims.admin !== true){
+    document.getElementById("accessDenied").style.display="block";
+    return;
+  }
+
+  // ✅ ADMIN ALLOWED
+  document.getElementById("adminPanel").style.display="block";
+
   document.getElementById("addRFQ").onclick = async ()=>{
     const text = document.getElementById("rfqText").value.trim();
-    if(!text) return alert("Enter RFQ");
+    if(!text) return alert("Enter RFQ details");
 
     await addDoc(collection(db,"rfqs"),{
       text,
-      createdAt: serverTimestamp()
+      createdAt: serverTimestamp(),
+      createdBy: user.uid
     });
 
     alert("RFQ added successfully");
