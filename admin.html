@@ -18,7 +18,9 @@ body{
   justify-content:space-between;
   align-items:center;
 }
-h1{margin:0}
+h1{
+  margin:0;
+}
 button{
   padding:10px 18px;
   border:none;
@@ -114,7 +116,7 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
-  // 🔐 ADMIN CHECK (Firestore)
+  // 🔐 ADMIN CHECK
   const adminSnap = await getDoc(doc(db, "admins", user.uid));
   if (!adminSnap.exists()) {
     tableBody.innerHTML = "";
@@ -122,7 +124,7 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
-  // ✅ NOW SAFE TO LOAD SUPPLIERS
+  // ✅ LOAD SUPPLIERS
   const snap = await getDocs(collection(db, "suppliers"));
 
   tableBody.innerHTML = "";
@@ -152,11 +154,11 @@ onAuthStateChanged(auth, async (user) => {
   });
 });
 
-// ✅ SAFE LOGOUT (NO FIRESTORE)
-logoutBtn.onclick = async () => {
+// ✅ SAFE LOGOUT
+logoutBtn.addEventListener("click", async () => {
   await signOut(auth);
   window.location.href = "/supplier-login.html";
-};
+});
 </script>
 
 </body>
