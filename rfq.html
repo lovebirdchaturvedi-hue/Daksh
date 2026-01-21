@@ -52,8 +52,12 @@ header nav a {
   border-radius:16px;
   border:1px solid #e5e7eb;
 }
-.buyer-contact { display:none; }
-.lock-message {
+.buyer-contact {
+  display:none;
+  margin-top:12px;
+  font-size:14px;
+}
+.buyer-locked {
   color:#991b1b;
   font-size:13px;
   font-weight:600;
@@ -99,25 +103,41 @@ footer {
   <p>Verified buyer requirements. Buyer contact details are visible only to approved Gold & Platinum suppliers.</p>
 
   <div class="rfq-grid">
+
+    <!-- RFQ 1 -->
     <div class="rfq-card">
       <h3>Basmati Rice (1121)</h3>
       <p>Quantity: 500 MT</p>
       <p>Destination: UAE</p>
-      <div class="lock-message">
+
+      <div class="buyer-contact">
+        📧 buyer1@company.com<br>
+        📞 +971-XXX-XXX
+      </div>
+
+      <div class="buyer-locked">
         🔒 Buyer contact available to verified Gold & Platinum suppliers only<br>
         <a href="/membership.html">Upgrade Membership</a>
       </div>
     </div>
 
+    <!-- RFQ 2 -->
     <div class="rfq-card">
       <h3>Red Chilli Powder</h3>
       <p>Quantity: 20 MT</p>
       <p>Destination: USA</p>
-      <div class="lock-message">
+
+      <div class="buyer-contact">
+        📧 buyer2@company.com<br>
+        📞 +1-XXX-XXX
+      </div>
+
+      <div class="buyer-locked">
         🔒 Buyer contact available to verified Gold & Platinum suppliers only<br>
         <a href="/membership.html">Upgrade Membership</a>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -132,63 +152,38 @@ footer {
   <p>Elite B2B Trade Facilitation Platform</p>
 </footer>
 
-<!-- 🔥 ADMIN SAFETY REDIRECT -->
-<script type="module">
-import { getAuth, onAuthStateChanged } 
-  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-import { initializeApp } 
-  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-  authDomain: "apd-globaltrade-prod.firebaseapp.com",
-  projectId: "apd-globaltrade-prod",
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-onAuthStateChanged(auth, async (user) => {
-  if (!user) return;
-
-  const token = await user.getIdTokenResult(true);
-
-  if (token.claims.admin === true) {
-    window.location.replace("/admin.html");
-  }
-});
-</script>
-
-</body>
-</html>
-
+<!-- 🔥 SINGLE FIREBASE LOGIC (NO DUPLICATE INIT) -->
 <script type="module">
 import { auth, db } from "/assets/js/firebase-init.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 onAuthStateChanged(auth, async (user) => {
-  if (!user) return; // not logged in
+  if (!user) return;
 
+  // 🔐 Admin auto redirect
+  const token = await user.getIdTokenResult(true);
+  if (token.claims.admin === true) {
+    window.location.replace("/admin.html");
+    return;
+  }
+
+  // 🔍 Supplier check
   const snap = await getDoc(doc(db, "suppliers", user.uid));
   if (!snap.exists()) return;
 
   const supplier = snap.data();
 
-  // Only approved Gold / Platinum can see buyer contact
+  // ✅ Approved Gold / Platinum
   if (
     supplier.status === "approved" &&
     (supplier.plan === "gold" || supplier.plan === "platinum")
   ) {
-    document.querySelectorAll(".buyer-locked").forEach(el => {
-      el.style.display = "none";
-    });
-
-    document.querySelectorAll(".buyer-contact").forEach(el => {
-      el.style.display = "block";
-    });
+    document.querySelectorAll(".buyer-locked").forEach(el => el.style.display = "none");
+    document.querySelectorAll(".buyer-contact").forEach(el => el.style.display = "block");
   }
 });
 </script>
 
+</body>
+</html>
