@@ -1,12 +1,5 @@
-import {
-  auth,
-  db,
-  onAuthStateChanged,
-  collection,
-  getDocs,
-  doc,
-  updateDoc
-} from "./firebase-init.js";
+import { auth } from "./firebase-init.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
@@ -17,16 +10,12 @@ onAuthStateChanged(auth, async (user) => {
   const token = await user.getIdTokenResult(true);
 
   if (token.claims.role !== "admin") {
-    alert("Access denied");
+    alert("You are not an admin");
+    await auth.signOut();
     return;
   }
 
-  loadSuppliers();
+  // ✅ ADMIN ACCESS GRANTED
+  console.log("ADMIN LOGGED IN");
+  loadAdminDashboard();
 });
-
-async function loadSuppliers() {
-  const snap = await getDocs(collection(db, "suppliers"));
-  snap.forEach(docu => {
-    console.log(docu.id, docu.data());
-  });
-}
