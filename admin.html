@@ -1,75 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Admin Dashboard</title>
 <meta charset="UTF-8">
+<title>Admin Dashboard | APD Global Trade</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-body{font-family:Inter;padding:40px;background:#f5f7fb;display:none}
-table{width:100%;background:#fff;border-collapse:collapse}
-th,td{padding:12px;border-bottom:1px solid #ddd}
-button{padding:6px 10px;margin:2px}
+body {
+  font-family: Arial, sans-serif;
+  background:#f5f7fb;
+  padding:40px;
+  display:none;
+}
+
+h1 {
+  margin-bottom:20px;
+}
+
+button {
+  padding:6px 12px;
+  margin:2px;
+  cursor:pointer;
+}
+
+table {
+  width:100%;
+  border-collapse:collapse;
+  background:#fff;
+}
+
+th, td {
+  border:1px solid #ddd;
+  padding:10px;
+  text-align:left;
+}
+
+th {
+  background:#020617;
+  color:#fff;
+}
 </style>
 </head>
 
 <body>
-<h2>Admin – Supplier Management</h2>
+
+<h1>Admin – Supplier Management</h1>
+
 <button onclick="logout()">Logout</button>
 
+<br><br>
+
 <table>
-<thead>
-<tr>
-<th>Company</th>
-<th>Email</th>
-<th>Status</th>
-<th>Plan</th>
-<th>Actions</th>
-</tr>
-</thead>
-<tbody id="list"></tbody>
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Email</th>
+      <th>Status</th>
+      <th>Plan</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="supplierTable"></tbody>
 </table>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+<!-- 🔥 Firebase Init -->
+<script type="module" src="/assets/js/firebase-init.js"></script>
 
-const app = initializeApp({
-  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-  authDomain: "apd-globaltrade-prod.firebaseapp.com",
-  projectId: "apd-globaltrade-prod"
-});
+<!-- 🔐 Admin Logic -->
+<script type="module" src="/assets/js/admin.js"></script>
 
-const auth = getAuth(app);
-const db = getFirestore(app);
-const tbody = document.getElementById("list");
-
-onAuthStateChanged(auth, async user=>{
-  if(!user){ location.href="/supplier-login.html"; return; }
-  document.body.style.display="block";
-
-  const snap = await getDocs(collection(db,"suppliers"));
-  snap.forEach(d=>{
-    const s=d.data();
-    const tr=document.createElement("tr");
-    tr.innerHTML=`
-      <td>${s.companyName||"-"}</td>
-      <td>${s.email}</td>
-      <td>${s.status||"pending"}</td>
-      <td>${s.plan||"free"}</td>
-      <td>
-        <button onclick="approve('${d.id}')">Approve</button>
-        <button onclick="setPlan('${d.id}','gold')">Gold</button>
-        <button onclick="setPlan('${d.id}','platinum')">Platinum</button>
-        <button onclick="setPlan('${d.id}','free')">Free</button>
-      </td>
-    `;
-    tbody.appendChild(tr);
-  });
-});
-
-window.approve = id => updateDoc(doc(db,"suppliers",id),{status:"approved"});
-window.setPlan = (id,plan)=> updateDoc(doc(db,"suppliers",id),{plan});
-window.logout = async ()=>{ await signOut(auth); location.href="/supplier-login.html"; };
-</script>
 </body>
 </html>
