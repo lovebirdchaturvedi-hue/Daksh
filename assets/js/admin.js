@@ -1,66 +1,57 @@
-import { auth, db } from "./firebase-init.js";
+import { auth } from "./firebase-init.js";
 import {
   collection,
   getDocs,
   doc,
   updateDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { db } from "./firebase-init.js";
 import {
-  sendPasswordResetEmail,
-  signOut,
-  onAuthStateChanged
+  onAuthStateChanged,
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const table = document.getElementById("supplierTable");
 
-// 🔒 Hide page until admin verified
+// Hide page until verified
 document.body.style.display = "none";
 
-/* 🔐 ADMIN AUTH GUARD (CUSTOM CLAIMS) */
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
     window.location.href = "/supplier-login.html";
     return;
   }
 
-  // Force refresh token to get latest claims
+  // 🔐 CHECK ADMIN CLAIM (ONLY SOURCE OF TRUTH)
   const token = await user.getIdTokenResult(true);
 
-  // ✅ ADMIN CHECK
-  if (!token.claims.admin) {
+  console.log("ADMIN CLAIM CHECK:", token.claims);
+
+  if (token.claims.role !== "admin") {
     alert("Unauthorized access");
     await signOut(auth);
-    window.location.href = "/supplier-login.html";
+    window.location.href = "/";
     return;
   }
 
-  // ✅ Admin verified
+  // ✅ ADMIN VERIFIED
   document.body.style.display = "block";
   loadSuppliers();
 });
 
-/* 📦 LOAD SUPPLIERS */
+// 📦 LOAD SUPPLIERS
 async function loadSuppliers() {
-  const snapshot = await getDocs(collection(db, "suppliers"));
   table.innerHTML = "";
+  const snap = await getDocs(collection(db, "suppliers"));
 
-  if (snapshot.empty) {
-    table.innerHTML = `<tr><td colspan="5">No suppliers found</td></tr>`;
-    return;
-  }
-
-  snapshot.forEach((docSnap) => {
+  snap.forEach(docSnap => {
     const s = docSnap.data();
 
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${s.companyName || "-"}</td>
-      <td>${s.email || "-"}</td>
-      <td>
-        <span class="badge ${s.status || "pending"}">
-          ${s.status || "pending"}
-        </span>
-      </td>
+      <td>${s.email}</td>
+      <td>${s.status || "pending"}</td>
       <td>${s.plan || "free"}</td>
       <td>
         <button class="approve" onclick="approve('${docSnap.id}')">Approve</button>
@@ -68,40 +59,22 @@ async function loadSuppliers() {
         <button class="gold" onclick="setPlan('${docSnap.id}','gold')">Gold</button>
         <button class="platinum" onclick="setPlan('${docSnap.id}','platinum')">Platinum</button>
         <button class="free" onclick="setPlan('${docSnap.id}','free')">Free</button>
-        <button class="reset" onclick="resetPwd('${s.email}')">Reset Password</button>
       </td>
     `;
     table.appendChild(row);
   });
 }
 
-/* ✅ ACTIONS */
-window.approve = async (id) => {
-  await updateDoc(doc(db, "suppliers", id), { status: "approved" });
-  loadSuppliers();
-};
+// ACTIONS
+window.approve = id =>
+  updateDoc(doc(db, "suppliers", id), { status: "approved" }).then(loadSuppliers);
 
-window.suspend = async (id) => {
-  await updateDoc(doc(db, "suppliers", id), {
-    status: "suspended",
-    plan: "free"
-  });
-  loadSuppliers();
-};
+window.suspend = id =>
+  updateDoc(doc(db, "suppliers", id), { status: "suspended", plan: "free" }).then(loadSuppliers);
 
-window.setPlan = async (id, plan) => {
-  await updateDoc(doc(db, "suppliers", id), { plan });
-  loadSuppliers();
-};
+window.setPlan = (id, plan) =>
+  updateDoc(doc(db, "suppliers", id), { plan }).then(loadSuppliers);
 
-/* 🔑 RESET SUPPLIER PASSWORD */
-window.resetPwd = async (email) => {
-  if (!confirm(`Send password reset email to ${email}?`)) return;
-  await sendPasswordResetEmail(auth, email);
-  alert("Password reset email sent.");
-};
-
-/* 🚪 LOGOUT */
 window.logout = async () => {
   await signOut(auth);
   window.location.href = "/supplier-login.html";
