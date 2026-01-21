@@ -4,92 +4,23 @@
 <meta charset="UTF-8">
 <title>Live Buyer RFQs | APD Global Trade</title>
 
-<link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#020617">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin:0;
-  font-family:Inter,sans-serif;
-  background:#f5f7fb;
-  color:#0f172a;
-}
-header {
-  height:80px;
-  background:#071427;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-}
-header .logo {
-  color:#c9a44a;
-  font-weight:600;
-}
-header nav a {
-  color:#e5e7eb;
-  margin:0 12px;
-  text-decoration:none;
-  font-size:13px;
-}
-.section {
-  max-width:1100px;
-  margin:auto;
-  padding:80px 20px;
-}
-.rfq-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:30px;
-  margin-top:40px;
-}
-.rfq-card {
-  background:#fff;
-  padding:26px;
-  border-radius:16px;
-  border:1px solid #e5e7eb;
-}
-.rfq-card h3 {
-  margin-top:0;
-}
-.buyer-contact {
-  display:none;
-  margin-top:12px;
-  font-size:14px;
-}
-.buyer-locked {
-  color:#991b1b;
-  font-size:13px;
-  font-weight:600;
-  margin-top:12px;
-}
-.buyer-locked a {
-  color:#991b1b;
-}
-.cta {
-  background:#020617;
-  color:#fff;
-  text-align:center;
-  padding:80px 20px;
-}
-.cta a {
-  background:#c9a44a;
-  color:#000;
-  padding:14px 32px;
-  border-radius:999px;
-  text-decoration:none;
-  font-weight:600;
-}
-footer {
-  background:#020617;
-  color:#9ca3af;
-  text-align:center;
-  padding:50px 20px;
-  font-size:14px;
-}
+body{margin:0;font-family:Inter,sans-serif;background:#f5f7fb;color:#0f172a}
+header{height:80px;background:#071427;display:flex;flex-direction:column;align-items:center;justify-content:center}
+header .logo{color:#c9a44a;font-weight:600}
+header nav a{color:#e5e7eb;margin:0 12px;text-decoration:none;font-size:13px}
+.section{max-width:1200px;margin:auto;padding:80px 20px}
+.rfq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px;margin-top:40px}
+.rfq-card{background:#fff;padding:24px;border-radius:16px;border:1px solid #e5e7eb}
+.rfq-card h3{margin:0 0 8px}
+.badge{display:inline-block;background:#c9a44a;color:#000;font-size:11px;padding:4px 10px;border-radius:999px;font-weight:600;margin-bottom:10px}
+.buyer-contact{display:none;font-size:14px;margin-top:12px}
+.buyer-locked{color:#991b1b;font-size:13px;font-weight:600;margin-top:12px}
+.buyer-locked a{color:#991b1b}
+footer{background:#020617;color:#9ca3af;text-align:center;padding:50px 20px;font-size:14px}
 </style>
 </head>
 
@@ -105,19 +36,15 @@ footer {
 </header>
 
 <section class="section">
-  <h1>Live Buyer RFQs</h1>
-  <p>
-    Verified buyer requirements. Buyer contact details are visible only to
-    approved Gold & Platinum suppliers.
-  </p>
-
-  <div class="rfq-grid" id="rfqGrid"></div>
+  <h1>Priority Buyer RFQs</h1>
+  <p>High-demand verified buyer requirements.</p>
+  <div class="rfq-grid" id="priorityRFQs"></div>
 </section>
 
-<section class="cta">
-  <h2>Unlock Buyer Contact Details</h2>
-  <p>Upgrade your supplier membership to access full RFQ details.</p>
-  <a href="/membership.html">View Membership Plans</a>
+<section class="section">
+  <h1>Other Live Buyer RFQs</h1>
+  <p>Ongoing global buyer requirements.</p>
+  <div class="rfq-grid" id="mockRFQs"></div>
 </section>
 
 <footer>
@@ -125,48 +52,71 @@ footer {
   <p>Elite B2B Trade Facilitation Platform</p>
 </footer>
 
-<!-- ================= MOCK RFQ GENERATOR (100 RFQs) ================= -->
+<!-- ================= PRIORITY RFQs (YOUR DATA) ================= -->
 <script>
-const products = [
-  "Basmati Rice 1121","Non Basmati Rice","Red Chilli Powder","Turmeric Finger",
-  "Fresh Onion","Fresh Garlic","Cashew Nuts","Raw Cotton",
-  "Indian Spice Mix","Sugar ICUMSA 45","Wheat Flour","Maize Corn",
-  "Frozen Chicken","Seafood Shrimps","Granite Slabs","Ceramic Tiles",
-  "Steel TMT Bars","Aluminium Ingots","Plastic Granules","LED Lights"
+const priorityRFQs = [
+`SAUDI ARABIA / IR-64 / 26 MT / WHITE RICE / CIF JEDDAH PORT / 30% ADVANCE + DOCS / 50 KG PP BAG`,
+`SAUDI ARABIA / SWARNA / 26 MT / WHITE RICE / CIF JEDDAH PORT / 30% ADVANCE + DOCS / 50 KG PP BAG`,
+`NETHERLAND / REFINED SUNFLOWER OIL / 200 MT / CIF ROTTERDAM PORT / EU STANDARDS`,
+`SOUTH AFRICA / REFINED CANOLA OIL / 25 MT / CIF DURBAN PORT / LC AT SIGHT / FLEXI TANK`,
+`ALGERIA / PEANUT KERNEL / 20 MT / SIZE 40-50 / CIF ALGIERS PORT`,
+`SAUDI ARABIA / GREEN LENTILS / 18 MT / CIF RIYADH PORT`,
+`EGYPT / 1121 CREAMY SELLA / 26 MT / CIF AL SOKHNA PORT`,
+`EGYPT / 1121 STEAM / 26 MT / CIF AL SOKHNA PORT`,
+`SAUDI ARABIA / SOYBEANS (ANIMAL) / 5000 MT / CIF JEDDAH PORT`,
+`SAUDI ARABIA / BARLEY GRAIN / 8000 MT / CIF JEDDAH PORT`,
+`MOROCCO / IR-64 PARBOILED / 26 MT / CIF CASABLANCA PORT`,
+`BENIN / IR-64 RAW / 60 MT / CIF COTONOU PORT`,
+`KENYA / IR-64 RAW / 500 MT / CIF MOMBASA PORT`,
+`ALGERIA / IR-64 PARBOILED / 100 MT / CIF ALGIERS PORT`,
+`TANZANIA / ICUMSA 45 / 250 MT / CIF DAR ES SALAAM`,
+`BAHRAIN / 1121 CREAMY SELLA / 26 MT / CIF KHALIFA PORT`,
+`SYRIA / BLACK PEPPER / 3 MT / CIF TARTOUS PORT`,
+`MADAGASCAR / IR-64 RAW / 1000 MT / CIF TAMATAVE PORT`,
+`GHANA / LONG GRAIN PARBOILED / 52 MT / CIF TEMA PORT`,
+`LIBYA / ICUMSA 45 / 500 MT / CIF TRIPOLI PORT`
 ];
 
-const destinations = [
-  "UAE","USA","UK","Germany","France","Saudi Arabia","Qatar","Oman",
-  "South Africa","Nigeria","Kenya","Bangladesh","Vietnam","Malaysia"
-];
+const priorityGrid = document.getElementById("priorityRFQs");
 
-const grid = document.getElementById("rfqGrid");
-
-for (let i = 1; i <= 100; i++) {
-  const product = products[Math.floor(Math.random() * products.length)];
-  const destination = destinations[Math.floor(Math.random() * destinations.length)];
-  const qty = Math.floor(Math.random() * 900 + 50) + " MT";
-
-  const card = document.createElement("div");
-  card.className = "rfq-card";
-
-  card.innerHTML = `
-    <h3>${product}</h3>
-    <p>Quantity: ${qty}</p>
-    <p>Destination: ${destination}</p>
-
+priorityRFQs.forEach((rfq,i)=>{
+  const card=document.createElement("div");
+  card.className="rfq-card";
+  card.innerHTML=`
+    <span class="badge">PRIORITY RFQ</span>
+    <h3>Buyer RFQ #${i+1}</h3>
+    <p>${rfq}</p>
     <div class="buyer-contact">
-      📧 buyer${i}@company.com<br>
-      📞 +XXX-XXX-${1000 + i}
+      📧 buyer@company.com<br>📞 +XXX-XXX-XXXX
     </div>
-
     <div class="buyer-locked">
-      🔒 Buyer contact available to verified Gold & Platinum suppliers only<br>
+      🔒 Buyer contact available to Gold & Platinum suppliers only<br>
       <a href="/membership.html">Upgrade Membership</a>
-    </div>
-  `;
+    </div>`;
+  priorityGrid.appendChild(card);
+});
+</script>
 
-  grid.appendChild(card);
+<!-- ================= MOCK RFQs (KEEPING EXISTING ~100) ================= -->
+<script>
+const products=["Basmati Rice","IR-64 Rice","Sugar ICUMSA 45","Sunflower Oil","Soybean Oil","Cashew","Turmeric","Red Chilli"];
+const destinations=["UAE","USA","UK","Germany","France","Nigeria","Kenya","Bangladesh","Vietnam"];
+
+const mockGrid=document.getElementById("mockRFQs");
+
+for(let i=1;i<=100;i++){
+  const card=document.createElement("div");
+  card.className="rfq-card";
+  card.innerHTML=`
+    <h3>${products[Math.floor(Math.random()*products.length)]}</h3>
+    <p>Quantity: ${Math.floor(Math.random()*900+50)} MT</p>
+    <p>Destination: ${destinations[Math.floor(Math.random()*destinations.length)]}</p>
+    <div class="buyer-contact">📧 buyer${i}@company.com</div>
+    <div class="buyer-locked">
+      🔒 Buyer contact available to Gold & Platinum suppliers only<br>
+      <a href="/membership.html">Upgrade Membership</a>
+    </div>`;
+  mockGrid.appendChild(card);
 }
 </script>
 
@@ -176,31 +126,14 @@ import { auth, db } from "/assets/js/firebase-init.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-onAuthStateChanged(auth, async (user) => {
-  if (!user) return;
-
-  // 🔐 Admin redirect
-  const token = await user.getIdTokenResult(true);
-  if (token.claims.admin === true) {
-    window.location.replace("/admin.html");
-    return;
-  }
-
-  // 🔍 Supplier check
-  const snap = await getDoc(doc(db, "suppliers", user.uid));
-  if (!snap.exists()) return;
-
-  const supplier = snap.data();
-
-  // ✅ Approved Gold / Platinum
-  if (
-    supplier.status === "approved" &&
-    (supplier.plan === "gold" || supplier.plan === "platinum")
-  ) {
-    document.querySelectorAll(".buyer-locked")
-      .forEach(el => el.style.display = "none");
-    document.querySelectorAll(".buyer-contact")
-      .forEach(el => el.style.display = "block");
+onAuthStateChanged(auth, async (user)=>{
+  if(!user) return;
+  const snap=await getDoc(doc(db,"suppliers",user.uid));
+  if(!snap.exists()) return;
+  const s=snap.data();
+  if(s.status==="approved" && (s.plan==="gold"||s.plan==="platinum")){
+    document.querySelectorAll(".buyer-locked").forEach(e=>e.style.display="none");
+    document.querySelectorAll(".buyer-contact").forEach(e=>e.style.display="block");
   }
 });
 </script>
