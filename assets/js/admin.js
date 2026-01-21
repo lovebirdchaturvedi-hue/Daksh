@@ -3,33 +3,34 @@ import {
   collection,
   getDocs,
   doc,
-  updateDoc,
-  getDoc
+  updateDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import {
   sendPasswordResetEmail,
-  signOut
+  signOut,
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const table = document.getElementById("supplierTable");
 
-// 🔒 Hide page until auth check completes
+// 🔒 Hide page until admin verified
 document.body.style.display = "none";
 
-auth.onAuthStateChanged(async (user) => {
+/* 🔐 ADMIN AUTH GUARD (CUSTOM CLAIMS) */
+onAuthStateChanged(auth, async (user) => {
   if (!user) {
     window.location.href = "/supplier-login.html";
     return;
   }
 
-  // 🔐 Check admin role via Firestore
-  const adminRef = doc(db, "admins", user.uid);
-  const adminSnap = await getDoc(adminRef);
+  // Force refresh token to get latest claims
+  const token = await user.getIdTokenResult(true);
 
-  if (!adminSnap.exists()) {
+  // ✅ ADMIN CHECK
+  if (!token.claims.admin) {
     alert("Unauthorized access");
     await signOut(auth);
-    window.location.href = "/";
+    window.location.href = "/supplier-login.html";
     return;
   }
 
@@ -43,14 +44,23 @@ async function loadSuppliers() {
   const snapshot = await getDocs(collection(db, "suppliers"));
   table.innerHTML = "";
 
-  snapshot.forEach(docSnap => {
+  if (snapshot.empty) {
+    table.innerHTML = `<tr><td colspan="5">No suppliers found</td></tr>`;
+    return;
+  }
+
+  snapshot.forEach((docSnap) => {
     const s = docSnap.data();
 
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${s.companyName || "-"}</td>
-      <td>${s.email}</td>
-      <td>${s.status || "pending"}</td>
+      <td>${s.email || "-"}</td>
+      <td>
+        <span class="badge ${s.status || "pending"}">
+          ${s.status || "pending"}
+        </span>
+      </td>
       <td>${s.plan || "free"}</td>
       <td>
         <button class="approve" onclick="approve('${docSnap.id}')">Approve</button>
