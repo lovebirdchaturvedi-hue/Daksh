@@ -8,39 +8,158 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-body{margin:0;font-family:Inter,sans-serif;background:#f5f7fb;color:#0f172a}
-header{height:80px;background:#071427;display:flex;flex-direction:column;align-items:center;justify-content:center}
-header .logo{color:#c9a44a;font-weight:600}
-header nav a{color:#e5e7eb;margin:0 12px;text-decoration:none;font-size:13px}
-.section{max-width:1200px;margin:auto;padding:80px 20px}
-.rfq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px;margin-top:40px}
-.rfq-card{background:#fff;padding:24px;border-radius:16px;border:1px solid #e5e7eb}
-.rfq-card h3{margin:0 0 8px}
-.badge{display:inline-block;background:#c9a44a;color:#000;font-size:11px;padding:4px 10px;border-radius:999px;font-weight:600;margin-bottom:10px}
+/* ================= BASE ================= */
+body{
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:#f5f7fb;
+  color:#0f172a;
+}
+h1,h2,h3{letter-spacing:-.3px}
+
+/* ================= HEADER ================= */
+.header{
+  height:72px;
+  background:#071427;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 22px;
+}
+.logo{color:#c9a44a;font-weight:600}
+.nav-desktop a{
+  color:#e5e7eb;
+  margin-left:18px;
+  text-decoration:none;
+  font-size:14px;
+}
+.hamburger{
+  display:none;
+  flex-direction:column;
+  cursor:pointer;
+}
+.hamburger span{
+  width:24px;
+  height:2px;
+  background:#fff;
+  margin:4px 0;
+}
+
+/* ================= MOBILE NAV ================= */
+.mobile-nav{
+  position:fixed;
+  top:0;right:-100%;
+  width:75%;
+  height:100%;
+  background:#020617;
+  padding:90px 30px;
+  transition:.4s ease;
+  z-index:9999;
+}
+.mobile-nav a{
+  display:block;
+  color:#fff;
+  text-decoration:none;
+  font-size:18px;
+  margin-bottom:24px;
+}
+
+/* ================= CONTENT ================= */
+.section{
+  max-width:1200px;
+  margin:auto;
+  padding:80px 20px;
+}
+.section p{
+  max-width:720px;
+  color:#475569;
+}
+.rfq-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:26px;
+  margin-top:40px;
+}
+.rfq-card{
+  background:#fff;
+  padding:24px;
+  border-radius:16px;
+  border:1px solid #e5e7eb;
+  opacity:0;
+  transform:translateY(30px);
+  transition:.4s ease;
+}
+.rfq-card.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+.rfq-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 40px rgba(0,0,0,.08);
+}
+.badge{
+  display:inline-block;
+  background:#c9a44a;
+  color:#000;
+  font-size:11px;
+  padding:4px 10px;
+  border-radius:999px;
+  font-weight:600;
+  margin-bottom:10px;
+}
 .buyer-contact{display:none;font-size:14px;margin-top:12px}
 .buyer-locked{color:#991b1b;font-size:13px;font-weight:600;margin-top:12px}
 .buyer-locked a{color:#991b1b}
-footer{background:#020617;color:#9ca3af;text-align:center;padding:50px 20px;font-size:14px}
+
+/* ================= FOOTER ================= */
+footer{
+  background:#020617;
+  color:#9ca3af;
+  text-align:center;
+  padding:50px 20px;
+  font-size:14px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:768px){
+  .nav-desktop{display:none}
+  .hamburger{display:flex}
+}
 </style>
 </head>
 
 <body>
 
-<header>
+<!-- ================= HEADER ================= -->
+<header class="header">
   <div class="logo">APD Global Trade</div>
-  <nav>
+
+  <nav class="nav-desktop">
     <a href="/index.html">Home</a>
     <a href="/rfq.html">Buyer RFQs</a>
     <a href="/membership.html">Membership</a>
   </nav>
+
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
 </header>
 
+<!-- ================= MOBILE NAV ================= -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="/index.html">Home</a>
+  <a href="/rfq.html">Buyer RFQs</a>
+  <a href="/membership.html">Membership</a>
+</div>
+
+<!-- ================= PRIORITY RFQs ================= -->
 <section class="section">
   <h1>Priority Buyer RFQs</h1>
   <p>High-demand verified buyer requirements.</p>
   <div class="rfq-grid" id="priorityRFQs"></div>
 </section>
 
+<!-- ================= MOCK RFQs ================= -->
 <section class="section">
   <h1>Other Live Buyer RFQs</h1>
   <p>Ongoing global buyer requirements.</p>
@@ -52,32 +171,28 @@ footer{background:#020617;color:#9ca3af;text-align:center;padding:50px 20px;font
   <p>Elite B2B Trade Facilitation Platform</p>
 </footer>
 
-<!-- ================= PRIORITY RFQs (YOUR DATA) ================= -->
+<!-- ================= MOBILE NAV SCRIPT ================= -->
 <script>
-const priorityRFQs = [
-`SAUDI ARABIA / IR-64 / 26 MT / WHITE RICE / CIF JEDDAH PORT / 30% ADVANCE + DOCS / 50 KG PP BAG`,
-`SAUDI ARABIA / SWARNA / 26 MT / WHITE RICE / CIF JEDDAH PORT / 30% ADVANCE + DOCS / 50 KG PP BAG`,
-`NETHERLAND / REFINED SUNFLOWER OIL / 200 MT / CIF ROTTERDAM PORT / EU STANDARDS`,
-`SOUTH AFRICA / REFINED CANOLA OIL / 25 MT / CIF DURBAN PORT / LC AT SIGHT / FLEXI TANK`,
-`ALGERIA / PEANUT KERNEL / 20 MT / SIZE 40-50 / CIF ALGIERS PORT`,
-`SAUDI ARABIA / GREEN LENTILS / 18 MT / CIF RIYADH PORT`,
-`EGYPT / 1121 CREAMY SELLA / 26 MT / CIF AL SOKHNA PORT`,
-`EGYPT / 1121 STEAM / 26 MT / CIF AL SOKHNA PORT`,
-`SAUDI ARABIA / SOYBEANS (ANIMAL) / 5000 MT / CIF JEDDAH PORT`,
-`SAUDI ARABIA / BARLEY GRAIN / 8000 MT / CIF JEDDAH PORT`,
-`MOROCCO / IR-64 PARBOILED / 26 MT / CIF CASABLANCA PORT`,
-`BENIN / IR-64 RAW / 60 MT / CIF COTONOU PORT`,
-`KENYA / IR-64 RAW / 500 MT / CIF MOMBASA PORT`,
-`ALGERIA / IR-64 PARBOILED / 100 MT / CIF ALGIERS PORT`,
-`TANZANIA / ICUMSA 45 / 250 MT / CIF DAR ES SALAAM`,
-`BAHRAIN / 1121 CREAMY SELLA / 26 MT / CIF KHALIFA PORT`,
-`SYRIA / BLACK PEPPER / 3 MT / CIF TARTOUS PORT`,
-`MADAGASCAR / IR-64 RAW / 1000 MT / CIF TAMATAVE PORT`,
-`GHANA / LONG GRAIN PARBOILED / 52 MT / CIF TEMA PORT`,
-`LIBYA / ICUMSA 45 / 500 MT / CIF TRIPOLI PORT`
+const hamburger=document.getElementById("hamburger");
+const mobileNav=document.getElementById("mobileNav");
+
+hamburger.onclick=()=>{
+  mobileNav.style.right =
+    mobileNav.style.right==="0px" ? "-100%" : "0px";
+};
+</script>
+
+<!-- ================= PRIORITY RFQs DATA ================= -->
+<script>
+const priorityRFQs=[
+`SAUDI ARABIA / IR-64 / 26 MT / WHITE RICE / CIF JEDDAH PORT`,
+`SAUDI ARABIA / SWARNA / 26 MT / WHITE RICE / CIF JEDDAH PORT`,
+`NETHERLAND / REFINED SUNFLOWER OIL / 200 MT / CIF ROTTERDAM`,
+`SOUTH AFRICA / REFINED CANOLA OIL / 25 MT / CIF DURBAN`,
+`ALGERIA / PEANUT KERNEL / 20 MT / CIF ALGIERS`
 ];
 
-const priorityGrid = document.getElementById("priorityRFQs");
+const priorityGrid=document.getElementById("priorityRFQs");
 
 priorityRFQs.forEach((rfq,i)=>{
   const card=document.createElement("div");
@@ -86,9 +201,7 @@ priorityRFQs.forEach((rfq,i)=>{
     <span class="badge">PRIORITY RFQ</span>
     <h3>Buyer RFQ #${i+1}</h3>
     <p>${rfq}</p>
-    <div class="buyer-contact">
-      📧 buyer@company.com<br>📞 +XXX-XXX-XXXX
-    </div>
+    <div class="buyer-contact">📧 buyer@company.com</div>
     <div class="buyer-locked">
       🔒 Buyer contact available to Gold & Platinum suppliers only<br>
       <a href="/membership.html">Upgrade Membership</a>
@@ -97,10 +210,10 @@ priorityRFQs.forEach((rfq,i)=>{
 });
 </script>
 
-<!-- ================= MOCK RFQs (KEEPING EXISTING ~100) ================= -->
+<!-- ================= MOCK RFQs SCRIPT ================= -->
 <script>
-const products=["Basmati Rice","IR-64 Rice","Sugar ICUMSA 45","Sunflower Oil","Soybean Oil","Cashew","Turmeric","Red Chilli"];
-const destinations=["UAE","USA","UK","Germany","France","Nigeria","Kenya","Bangladesh","Vietnam"];
+const products=["Basmati Rice","IR-64 Rice","Sugar ICUMSA 45","Sunflower Oil","Soybean Oil"];
+const destinations=["UAE","USA","UK","Germany","France"];
 
 const mockGrid=document.getElementById("mockRFQs");
 
@@ -120,7 +233,22 @@ for(let i=1;i<=100;i++){
 }
 </script>
 
-<!-- ================= FIREBASE ACCESS CONTROL ================= -->
+<!-- ================= PREMIUM SCROLL ANIMATION ================= -->
+<script>
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("visible");
+      observer.unobserve(e.target);
+    }
+  });
+},{threshold:.15});
+
+document.querySelectorAll(".rfq-card")
+  .forEach(card=>observer.observe(card));
+</script>
+
+<!-- ================= FIREBASE ACCESS (UNCHANGED) ================= -->
 <script type="module">
 import { auth, db } from "/assets/js/firebase-init.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
