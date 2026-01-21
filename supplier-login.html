@@ -82,7 +82,6 @@ button{
   </div>
 </div>
 
-<!-- 🔥 FIREBASE SDKs -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
@@ -104,9 +103,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-/* 🔐 LOGIN (ADMIN-AWARE) */
+/* 🔐 LOGIN (ADMIN AWARE) */
 document.getElementById("loginBtn").onclick = async () => {
-  const email = document.getElementById("email").value;
+  const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
 
   if (!email || !password) {
@@ -117,17 +116,17 @@ document.getElementById("loginBtn").onclick = async () => {
   try {
     const cred = await signInWithEmailAndPassword(auth, email, password);
 
-    // 🔐 FORCE TOKEN REFRESH → GET ADMIN CLAIM
+    // 🔥 FORCE TOKEN REFRESH
     const token = await cred.user.getIdTokenResult(true);
 
-    // ✅ ADMIN → ADMIN DASHBOARD
+    // ✅ ADMIN
     if (token.claims.admin === true) {
-      window.location.href = "/admin.html";
+      window.location.replace("/admin.html");
       return;
     }
 
-    // 👤 SUPPLIER → RFQ PAGE
-    window.location.href = "/rfq.html";
+    // 👤 SUPPLIER
+    window.location.replace("/rfq.html");
 
   } catch (err) {
     alert(err.message);
@@ -136,7 +135,7 @@ document.getElementById("loginBtn").onclick = async () => {
 
 /* 🔁 FORGOT PASSWORD */
 document.getElementById("forgotPassword").onclick = async () => {
-  const email = document.getElementById("email").value;
+  const email = document.getElementById("email").value.trim();
   if (!email) {
     alert("Enter your email first");
     return;
