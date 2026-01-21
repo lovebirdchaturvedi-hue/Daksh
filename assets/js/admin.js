@@ -54,11 +54,15 @@ async function loadSuppliers() {
       <td>${s.status || "pending"}</td>
       <td>${s.plan || "free"}</td>
       <td>
-        <button class="approve" onclick="approve('${docSnap.id}')">Approve</button>
-        <button class="suspend" onclick="suspend('${docSnap.id}')">Suspend</button>
-        <button class="gold" onclick="setPlan('${docSnap.id}','gold')">Gold</button>
-        <button class="platinum" onclick="setPlan('${docSnap.id}','platinum')">Platinum</button>
-        <button class="free" onclick="setPlan('${docSnap.id}','free')">Free</button>
+        <td>
+  <button onclick="approve('${docSnap.id}')">Approve</button>
+  <button onclick="setPlan('${docSnap.id}','gold')">Gold</button>
+  <button onclick="setPlan('${docSnap.id}','platinum')">Platinum</button>
+  <button onclick="setPlan('${docSnap.id}','free')">Free</button>
+  <button onclick="banSupplier('${docSnap.id}')">Ban</button>
+  <button onclick="unbanSupplier('${docSnap.id}')">Unban</button>
+</td>
+>
       </td>
     `;
     table.appendChild(row);
@@ -79,3 +83,4 @@ window.logout = async () => {
   await signOut(auth);
   window.location.href = "/supplier-login.html";
 };
+
