@@ -99,39 +99,44 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
-  // 🔑 SINGLE SOURCE OF TRUTH FOR ADMIN
-  const adminSnap = await getDoc(doc(db, "admins", user.uid));
+  try {
+    // ✅ MATCHES YOUR FIRESTORE: admin/{uid}
+    const adminSnap = await getDoc(doc(db, "admin", user.uid));
 
-  // ❌ LOGGED IN BUT NOT ADMIN
-  if (!adminSnap.exists()) {
-    window.location.replace("/rfq.html");
-    return;
+    // ❌ LOGGED IN BUT NOT ADMIN
+    if (!adminSnap.exists()) {
+      window.location.replace("/rfq.html");
+      return;
+    }
+
+    // ✅ ADMIN CONFIRMED → LOAD SUPPLIERS
+    const snap = await getDocs(collection(db, "suppliers"));
+    tbody.innerHTML = "";
+
+    if (snap.empty) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="4" class="center">No suppliers found</td>
+        </tr>
+      `;
+      return;
+    }
+
+    snap.forEach(docSnap => {
+      const s = docSnap.data();
+      tbody.innerHTML += `
+        <tr>
+          <td>${s.companyName || "-"}</td>
+          <td>${s.email || "-"}</td>
+          <td>${s.status || "-"}</td>
+          <td>${s.plan || "-"}</td>
+        </tr>
+      `;
+    });
+
+  } catch (err) {
+    console.error("Admin auth error:", err);
   }
-
-  // ✅ ADMIN CONFIRMED → LOAD SUPPLIERS
-  const snap = await getDocs(collection(db, "suppliers"));
-  tbody.innerHTML = "";
-
-  if (snap.empty) {
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="4" class="center">No suppliers found</td>
-      </tr>
-    `;
-    return;
-  }
-
-  snap.forEach(docSnap => {
-    const s = docSnap.data();
-    tbody.innerHTML += `
-      <tr>
-        <td>${s.companyName || "-"}</td>
-        <td>${s.email || "-"}</td>
-        <td>${s.status || "-"}</td>
-        <td>${s.plan || "-"}</td>
-      </tr>
-    `;
-  });
 });
 
 // 🚪 LOGOUT
