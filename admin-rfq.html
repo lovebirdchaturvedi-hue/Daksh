@@ -17,6 +17,7 @@ body{
   background:#fff;
   padding:34px;
   border-radius:18px;
+  reminder:1px solid #eee;
   box-shadow:0 25px 60px rgba(0,0,0,.08);
 }
 textarea{
@@ -25,7 +26,6 @@ textarea{
   padding:14px;
   border-radius:12px;
   border:1px solid #e5e7eb;
-  font-size:14px;
 }
 button{
   margin-top:18px;
@@ -38,16 +38,23 @@ button{
   font-weight:600;
   cursor:pointer;
 }
-.denied{
+.center{
   text-align:center;
   margin-top:120px;
-  color:#991b1b;
   font-weight:600;
+}
+.error{
+  color:#991b1b;
 }
 </style>
 </head>
 
 <body>
+
+<!-- ================= LOADING ================= -->
+<div class="center" id="loading">
+  ⏳ Checking admin access…
+</div>
 
 <!-- ================= ADMIN PANEL ================= -->
 <div class="card" id="adminPanel" style="display:none">
@@ -61,56 +68,75 @@ button{
 </div>
 
 <!-- ================= ACCESS DENIED ================= -->
-<div class="denied" id="accessDenied" style="display:none">
+<div class="center error" id="accessDenied" style="display:none">
   ❌ Access Denied<br><br>
   This page is restricted to administrators only.
 </div>
 
-<!-- ================= FIREBASE ADMIN CHECK ================= -->
+<!-- ================= ERROR ================= -->
+<div class="center error" id="fatalError" style="display:none">
+  ❌ Application Error<br><br>
+  Firebase failed to load. Check console.
+</div>
+
 <script type="module">
-import { auth, db } from "/assets/js/firebase-init.js";
-import { onAuthStateChanged }
-  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import {
-  addDoc,
-  collection,
-  serverTimestamp,
-  doc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+try {
+  // 🔥 IMPORTANT: this MUST load or page will be blank
+  import { auth, db } from "/assets/js/firebase-init.js";
+  import { onAuthStateChanged }
+    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import {
+    addDoc,
+    collection,
+    serverTimestamp,
+    doc,
+    getDoc
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-onAuthStateChanged(auth, async (user)=>{
-  if(!user){
-    document.getElementById("accessDenied").style.display="block";
-    return;
-  }
+  const loading = document.getElementById("loading");
+  const denied = document.getElementById("accessDenied");
+  const adminPanel = document.getElementById("adminPanel");
 
-  // 🔐 CHECK ADMIN IN FIRESTORE
-  const adminRef = doc(db, "admins", user.uid);
-  const adminSnap = await getDoc(adminRef);
+  onAuthStateChanged(auth, async (user)=>{
+    if(!user){
+      loading.style.display="none";
+      denied.style.display="block";
+      return;
+    }
 
-  if(!adminSnap.exists()){
-    document.getElementById("accessDenied").style.display="block";
-    return;
-  }
+    // 🔐 CHECK ADMIN
+    const adminSnap = await getDoc(doc(db,"admins",user.uid));
 
-  // ✅ ADMIN VERIFIED
-  document.getElementById("adminPanel").style.display="block";
+    if(!adminSnap.exists()){
+      loading.style.display="none";
+      denied.style.display="block";
+      return;
+    }
 
-  document.getElementById("addRFQ").onclick = async ()=>{
-    const text = document.getElementById("rfqText").value.trim();
-    if(!text) return alert("Enter RFQ details");
+    // ✅ ADMIN VERIFIED
+    loading.style.display="none";
+    adminPanel.style.display="block";
 
-    await addDoc(collection(db,"rfqs"),{
-      text,
-      createdAt: serverTimestamp(),
-      createdBy: user.uid
-    });
+    document.getElementById("addRFQ").onclick = async ()=>{
+      const text = document.getElementById("rfqText").value.trim();
+      if(!text) return alert("Enter RFQ");
 
-    alert("RFQ added successfully");
-    document.getElementById("rfqText").value="";
-  };
-});
+      await addDoc(collection(db,"rfqs"),{
+        text,
+        createdAt: serverTimestamp(),
+        createdBy: user.uid
+      });
+
+      alert("RFQ added successfully");
+      document.getElementById("rfqText").value="";
+    };
+  });
+
+} catch (e) {
+  console.error(e);
+  document.getElementById("loading").style.display="none";
+  document.getElementById("fatalError").style.display="block";
+}
 </script>
 
 </body>
