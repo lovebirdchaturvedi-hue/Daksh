@@ -74,6 +74,15 @@ h1,h2,h3{letter-spacing:-.3px}
   max-width:720px;
   color:#475569;
 }
+.search-box{
+  margin-top:30px;
+}
+.search-box input{
+  padding:14px;
+  border-radius:12px;
+  border:1px solid #e5e7eb;
+  width:280px;
+}
 .rfq-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
@@ -111,6 +120,18 @@ h1,h2,h3{letter-spacing:-.3px}
 .buyer-locked{color:#991b1b;font-size:13px;font-weight:600;margin-top:12px}
 .buyer-locked a{color:#991b1b}
 
+/* ================= SKELETON ================= */
+.skeleton{
+  background:linear-gradient(90deg,#e5e7eb 25%,#f3f4f6 37%,#e5e7eb 63%);
+  background-size:400% 100%;
+  animation:skeleton 1.4s ease infinite;
+  border-radius:12px;
+}
+@keyframes skeleton{
+  0%{background-position:100% 50%}
+  100%{background-position:0 50%}
+}
+
 /* ================= FOOTER ================= */
 footer{
   background:#020617;
@@ -120,10 +141,32 @@ footer{
   font-size:14px;
 }
 
-/* ================= RESPONSIVE ================= */
+/* ================= STICKY MOBILE CTA ================= */
+.sticky-cta{display:none}
 @media(max-width:768px){
   .nav-desktop{display:none}
   .hamburger{display:flex}
+  .sticky-cta{
+    display:block;
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#020617;
+    padding:12px;
+    z-index:9998;
+    box-shadow:0 -10px 30px rgba(0,0,0,.3);
+  }
+  .sticky-cta a{
+    display:block;
+    text-align:center;
+    background:#c9a44a;
+    color:#020617;
+    padding:14px;
+    border-radius:999px;
+    font-weight:600;
+    text-decoration:none;
+  }
 }
 </style>
 </head>
@@ -133,19 +176,16 @@ footer{
 <!-- ================= HEADER ================= -->
 <header class="header">
   <div class="logo">APD Global Trade</div>
-
   <nav class="nav-desktop">
     <a href="/index.html">Home</a>
     <a href="/rfq.html">Buyer RFQs</a>
     <a href="/membership.html">Membership</a>
   </nav>
-
   <div class="hamburger" id="hamburger">
     <span></span><span></span><span></span>
   </div>
 </header>
 
-<!-- ================= MOBILE NAV ================= -->
 <div class="mobile-nav" id="mobileNav">
   <a href="/index.html">Home</a>
   <a href="/rfq.html">Buyer RFQs</a>
@@ -156,14 +196,28 @@ footer{
 <section class="section">
   <h1>Priority Buyer RFQs</h1>
   <p>High-demand verified buyer requirements.</p>
-  <div class="rfq-grid" id="priorityRFQs"></div>
+
+  <div class="search-box">
+    <input id="searchInput" placeholder="Search product or country">
+  </div>
+
+  <div class="rfq-grid" id="priorityRFQs">
+    <div class="rfq-card skeleton" style="height:180px"></div>
+    <div class="rfq-card skeleton" style="height:180px"></div>
+    <div class="rfq-card skeleton" style="height:180px"></div>
+  </div>
 </section>
 
 <!-- ================= MOCK RFQs ================= -->
 <section class="section">
   <h1>Other Live Buyer RFQs</h1>
   <p>Ongoing global buyer requirements.</p>
-  <div class="rfq-grid" id="mockRFQs"></div>
+
+  <div class="rfq-grid" id="mockRFQs">
+    <div class="rfq-card skeleton" style="height:180px"></div>
+    <div class="rfq-card skeleton" style="height:180px"></div>
+    <div class="rfq-card skeleton" style="height:180px"></div>
+  </div>
 </section>
 
 <footer>
@@ -171,43 +225,31 @@ footer{
   <p>Elite B2B Trade Facilitation Platform</p>
 </footer>
 
+<div class="sticky-cta">
+  <a href="/membership.html">🔓 Unlock Buyer Contacts</a>
+</div>
+
 <!-- ================= MOBILE NAV SCRIPT ================= -->
 <script>
 const hamburger=document.getElementById("hamburger");
 const mobileNav=document.getElementById("mobileNav");
-
 hamburger.onclick=()=>{
-  mobileNav.style.right =
-    mobileNav.style.right==="0px" ? "-100%" : "0px";
+  mobileNav.style.right = mobileNav.style.right==="0px" ? "-100%" : "0px";
 };
 </script>
 
-<!-- ================= PRIORITY RFQs (YOUR DATA) ================= -->
+<!-- ================= PRIORITY RFQs DATA ================= -->
 <script>
-const priorityRFQs = [
-`SAUDI ARABIA / IR-64 / 26 MT / WHITE RICE / CIF JEDDAH PORT / 30% ADVANCE + DOCS / 50 KG PP BAG`,
-`SAUDI ARABIA / SWARNA / 26 MT / WHITE RICE / CIF JEDDAH PORT / 30% ADVANCE + DOCS / 50 KG PP BAG`,
-`NETHERLAND / REFINED SUNFLOWER OIL / 200 MT / CIF ROTTERDAM PORT / EU STANDARDS`,
-`SOUTH AFRICA / REFINED CANOLA OIL / 25 MT / CIF DURBAN PORT / LC AT SIGHT / FLEXI TANK`,
-`ALGERIA / PEANUT KERNEL / 20 MT / SIZE 40-50 / CIF ALGIERS PORT`,
-`SAUDI ARABIA / GREEN LENTILS / 18 MT / CIF RIYADH PORT`,
-`EGYPT / 1121 CREAMY SELLA / 26 MT / CIF AL SOKHNA PORT`,
-`EGYPT / 1121 STEAM / 26 MT / CIF AL SOKHNA PORT`,
-`SAUDI ARABIA / SOYBEANS (ANIMAL) / 5000 MT / CIF JEDDAH PORT`,
-`SAUDI ARABIA / BARLEY GRAIN / 8000 MT / CIF JEDDAH PORT`,
-`MOROCCO / IR-64 PARBOILED / 26 MT / CIF CASABLANCA PORT`,
-`BENIN / IR-64 RAW / 60 MT / CIF COTONOU PORT`,
-`KENYA / IR-64 RAW / 500 MT / CIF MOMBASA PORT`,
-`ALGERIA / IR-64 PARBOILED / 100 MT / CIF ALGIERS PORT`,
-`TANZANIA / ICUMSA 45 / 250 MT / CIF DAR ES SALAAM`,
-`BAHRAIN / 1121 CREAMY SELLA / 26 MT / CIF KHALIFA PORT`,
-`SYRIA / BLACK PEPPER / 3 MT / CIF TARTOUS PORT`,
-`MADAGASCAR / IR-64 RAW / 1000 MT / CIF TAMATAVE PORT`,
-`GHANA / LONG GRAIN PARBOILED / 52 MT / CIF TEMA PORT`,
-`LIBYA / ICUMSA 45 / 500 MT / CIF TRIPOLI PORT`
+const priorityRFQs=[
+`SAUDI ARABIA / IR-64 / 26 MT / WHITE RICE / CIF JEDDAH PORT`,
+`SAUDI ARABIA / SWARNA / 26 MT / WHITE RICE / CIF JEDDAH PORT`,
+`NETHERLAND / REFINED SUNFLOWER OIL / 200 MT / CIF ROTTERDAM`,
+`SOUTH AFRICA / REFINED CANOLA OIL / 25 MT / CIF DURBAN`,
+`ALGERIA / PEANUT KERNEL / 20 MT / CIF ALGIERS`
 ];
 
 const priorityGrid=document.getElementById("priorityRFQs");
+priorityGrid.innerHTML="";
 
 priorityRFQs.forEach((rfq,i)=>{
   const card=document.createElement("div");
@@ -225,12 +267,12 @@ priorityRFQs.forEach((rfq,i)=>{
 });
 </script>
 
-<!-- ================= MOCK RFQs (KEEPING EXISTING ~100) ================= -->
+<!-- ================= MOCK RFQs ================= -->
 <script>
-const products=["Basmati Rice","IR-64 Rice","Sugar ICUMSA 45","Sunflower Oil","Soybean Oil","Cashew","Turmeric","Red Chilli"];
-const destinations=["UAE","USA","UK","Germany","France","Nigeria","Kenya","Bangladesh","Vietnam"];
-
+const products=["Basmati Rice","IR-64 Rice","Sugar ICUMSA 45","Sunflower Oil","Soybean Oil"];
+const destinations=["UAE","USA","UK","Germany","France"];
 const mockGrid=document.getElementById("mockRFQs");
+mockGrid.innerHTML="";
 
 for(let i=1;i<=100;i++){
   const card=document.createElement("div");
@@ -248,7 +290,18 @@ for(let i=1;i<=100;i++){
 }
 </script>
 
-<!-- ================= PREMIUM SCROLL ANIMATION ================= -->
+<!-- ================= SEARCH FILTER ================= -->
+<script>
+const searchInput=document.getElementById("searchInput");
+searchInput.addEventListener("input",()=>{
+  const v=searchInput.value.toLowerCase();
+  document.querySelectorAll(".rfq-card").forEach(c=>{
+    c.style.display=c.innerText.toLowerCase().includes(v)?"block":"none";
+  });
+});
+</script>
+
+<!-- ================= SCROLL ANIMATION ================= -->
 <script>
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
@@ -258,12 +311,10 @@ const observer=new IntersectionObserver(entries=>{
     }
   });
 },{threshold:.15});
-
-document.querySelectorAll(".rfq-card")
-  .forEach(card=>observer.observe(card));
+document.querySelectorAll(".rfq-card").forEach(c=>observer.observe(c));
 </script>
 
-<!-- ================= FIREBASE ACCESS (UNCHANGED) ================= -->
+<!-- ================= FIREBASE ACCESS CONTROL (UNCHANGED) ================= -->
 <script type="module">
 import { auth, db } from "/assets/js/firebase-init.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
@@ -283,4 +334,3 @@ onAuthStateChanged(auth, async (user)=>{
 
 </body>
 </html>
-
