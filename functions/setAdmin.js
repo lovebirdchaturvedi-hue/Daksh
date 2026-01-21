@@ -1,17 +1,20 @@
-onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    window.location.href = "/login.html";
-    return;
+const { onCall } = require("firebase-functions/v2/https");
+const admin = require("firebase-admin");
+
+admin.initializeApp();
+
+exports.setAdmin = onCall(async (request) => {
+  const email = request.data.email;
+
+  if (!email) {
+    throw new Error("Email required");
   }
 
-  const token = await user.getIdTokenResult(true);
+  const user = await admin.auth().getUserByEmail(email);
 
-  if (!token.claims.admin) {
-    alert("Access denied");
-    window.location.href = "/";
-    return;
-  }
+  await admin.auth().setCustomUserClaims(user.uid, {
+    admin: true
+  });
 
-  document.body.style.display = "block";
-  loadSuppliers();
+  return { success: true, message: "Admin role assigned" };
 });
