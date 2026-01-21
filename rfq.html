@@ -332,20 +332,16 @@ document.querySelectorAll(".rfq-card").forEach(c=>observer.observe(c));
 
 <!-- ================= FIREBASE ACCESS CONTROL ================= -->
 <script type="module">
-import { auth, db } from "/assets/js/firebase-init.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { auth } from "/assets/js/firebase-init.js";
+import { signOut }
+  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-onAuthStateChanged(auth, async (user)=>{
-  if(!user) return;
-  const snap=await getDoc(doc(db,"suppliers",user.uid));
-  if(!snap.exists()) return;
-  const s=snap.data();
-  if(s.status==="approved" && (s.plan==="gold"||s.plan==="platinum")){
-    document.querySelectorAll(".buyer-locked").forEach(e=>e.style.display="none");
-    document.querySelectorAll(".buyer-contact").forEach(e=>e.style.display="block");
-  }
-});
+window.logout = async () => {
+  await signOut(auth);
+
+  // DO NOT force supplier login from public page
+  window.location.href = "/index.html";
+};
 </script>
 
 <!-- ================= LOGOUT ================= -->
@@ -361,3 +357,4 @@ window.logout = async () => {
 
 </body>
 </html>
+
