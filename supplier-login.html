@@ -51,6 +51,10 @@ button{
   font-weight:600;
   cursor:pointer;
 }
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
 .links{
   margin-top:14px;
   font-size:13px;
@@ -103,22 +107,44 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-/* 🔐 LOGIN (ADMIN AWARE) */
-document.getElementById("loginBtn").onclick = async () => {
+const loginBtn = document.getElementById("loginBtn");
+
+/* 🔐 LOGIN */
+loginBtn.onclick = async () => {
   const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
+  const password = document.getElementById("password").value.trim();
 
   if (!email || !password) {
     alert("Enter email & password");
     return;
   }
 
-  try {
-const cred = await signInWithEmailAndPassword(auth, email, password);
-const token = await cred.user.getIdTokenResult(true);
+  loginBtn.disabled = true;
+  loginBtn.innerText = "Signing in...";
 
-} catch (err) {
-    alert(err.message);
+  try {
+    const cred = await signInWithEmailAndPassword(auth, email, password);
+    const user = cred.user;
+
+    // 🔐 FORCE TOKEN REFRESH (SAFE)
+    const token = await user.getIdTokenResult(true);
+
+    console.log("CLAIMS:", token.claims);
+
+    // ✅ ADMIN
+    if (token.claims.role === "admin") {
+      window.location.href = "/admin.html";
+      return;
+    }
+
+    // 👤 SUPPLIER
+    window.location.href = "/rfq.html";
+
+  } catch (err) {
+    console.error(err);
+    alert(err.message || "Login failed");
+    loginBtn.disabled = false;
+    loginBtn.innerText = "Login";
   }
 };
 
@@ -136,4 +162,3 @@ document.getElementById("forgotPassword").onclick = async () => {
 
 </body>
 </html>
-
