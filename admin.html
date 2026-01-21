@@ -57,9 +57,6 @@ th{
   padding:120px 20px;
   font-weight:600;
 }
-.error{
-  color:#991b1b;
-}
 </style>
 </head>
 
@@ -89,10 +86,6 @@ th{
   </table>
 </div>
 
-<div id="errorBox" class="center error" style="display:none">
-  ❌ Unauthorized access (admin only)
-</div>
-
 <script type="module">
 import { auth, db } from "/assets/js/firebase-init.js";
 import { onAuthStateChanged, signOut }
@@ -105,22 +98,21 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const tableBody = document.getElementById("supplierTableBody");
-const errorBox  = document.getElementById("errorBox");
 const logoutBtn = document.getElementById("logoutBtn");
 
-// 🔐 AUTH → ADMIN → LOAD SUPPLIERS (IN THIS ORDER)
+// 🔐 AUTH → ADMIN → LOAD SUPPLIERS
 onAuthStateChanged(auth, async (user) => {
+
+  // ✅ REDIRECT IF NOT LOGGED IN
   if (!user) {
-    tableBody.innerHTML = "";
-    errorBox.style.display = "block";
+    window.location.href = "/supplier-login.html";
     return;
   }
 
   // 🔐 ADMIN CHECK
   const adminSnap = await getDoc(doc(db, "admins", user.uid));
   if (!adminSnap.exists()) {
-    tableBody.innerHTML = "";
-    errorBox.style.display = "block";
+    window.location.href = "/rfq.html";
     return;
   }
 
@@ -154,7 +146,7 @@ onAuthStateChanged(auth, async (user) => {
   });
 });
 
-// ✅ SAFE LOGOUT
+// ✅ LOGOUT
 logoutBtn.addEventListener("click", async () => {
   await signOut(auth);
   window.location.href = "/supplier-login.html";
