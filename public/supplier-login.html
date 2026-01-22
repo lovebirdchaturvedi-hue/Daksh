@@ -62,11 +62,6 @@ button{
   display:block;
   margin-top:6px;
 }
-.note{
-  margin-top:10px;
-  font-size:12px;
-  color:#9ca3af;
-}
 </style>
 </head>
 
@@ -83,36 +78,20 @@ button{
 
   <div class="links">
     <a href="#" id="forgotPassword">Forgot password?</a>
-    <a href="/register-supplier.html">New supplier? Register here</a>
-  </div>
-
-  <div class="note">
-    You will be logged out before login.
   </div>
 </div>
 
 <script type="module">
-/* ======================================
-   IMPORTS
-====================================== */
-import { auth, db } from "/assets/js/firebase-init.js";
+/* ===== IMPORTS ===== */
+import { auth, db } from "./js/firebase-init.js";
 import {
   signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  signOut
+  sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { doc, getDoc }
   from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* ======================================
-   🔥 FORCE LOGOUT ON PAGE LOAD
-   THIS IS THE KEY FIX
-====================================== */
-await signOut(auth);
-
-/* ======================================
-   LOGIN
-====================================== */
+/* ===== LOGIN ONLY ON BUTTON CLICK ===== */
 document.getElementById("loginBtn").addEventListener("click", async () => {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
@@ -129,29 +108,24 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
     const adminSnap = await getDoc(doc(db, "admin", user.uid));
 
     if (adminSnap.exists()) {
-      window.location.replace("/admin.html");
-      return;
+      window.location.href = "/admin.html";
+    } else {
+      window.location.href = "/supplier-dashboard.html";
     }
-
-    window.location.replace("/rfq.html");
 
   } catch (err) {
     alert(err.message);
   }
 });
 
-/* ======================================
-   FORGOT PASSWORD
-====================================== */
+/* ===== FORGOT PASSWORD ===== */
 document.getElementById("forgotPassword").addEventListener("click", async (e) => {
   e.preventDefault();
   const email = document.getElementById("email").value.trim();
-
   if (!email) {
-    alert("Enter your email first");
+    alert("Enter email first");
     return;
   }
-
   await sendPasswordResetEmail(auth, email);
   alert("Password reset email sent");
 });
