@@ -87,35 +87,32 @@ button{
   </div>
 
   <div class="note">
-    You will be redirected after login.
+    You will be logged out before login.
   </div>
 </div>
 
 <script type="module">
-/* ===============================
+/* ======================================
    IMPORTS
-================================ */
+====================================== */
 import { auth, db } from "/assets/js/firebase-init.js";
 import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
-  onAuthStateChanged
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { doc, getDoc }
   from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* ===============================
-   🔒 IMPORTANT:
-   DO NOT AUTO REDIRECT ON LOAD
-================================ */
-onAuthStateChanged(auth, (user) => {
-  // INTENTIONALLY EMPTY
-  // This PREVENTS auto-redirect when already logged in
-});
+/* ======================================
+   🔥 FORCE LOGOUT ON PAGE LOAD
+   THIS IS THE KEY FIX
+====================================== */
+await signOut(auth);
 
-/* ===============================
-   LOGIN BUTTON
-================================ */
+/* ======================================
+   LOGIN
+====================================== */
 document.getElementById("loginBtn").addEventListener("click", async () => {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
@@ -129,7 +126,6 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
     const cred = await signInWithEmailAndPassword(auth, email, password);
     const user = cred.user;
 
-    // 🔐 ADMIN CHECK
     const adminSnap = await getDoc(doc(db, "admin", user.uid));
 
     if (adminSnap.exists()) {
@@ -137,18 +133,16 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
       return;
     }
 
-    // 👤 SUPPLIER
     window.location.replace("/rfq.html");
 
   } catch (err) {
-    console.error(err);
     alert(err.message);
   }
 });
 
-/* ===============================
+/* ======================================
    FORGOT PASSWORD
-================================ */
+====================================== */
 document.getElementById("forgotPassword").addEventListener("click", async (e) => {
   e.preventDefault();
   const email = document.getElementById("email").value.trim();
