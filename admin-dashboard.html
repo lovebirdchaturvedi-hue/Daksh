@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Admin Dashboard – APD Global Trade</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
     body {
@@ -11,9 +12,7 @@
       padding: 20px;
     }
 
-    h1 {
-      margin-bottom: 5px;
-    }
+    h1 { margin-bottom: 5px; }
 
     #status {
       margin-bottom: 10px;
@@ -54,22 +53,38 @@
 
 <body>
 
-  <div class="top-bar">
-    <div>
-      <h1>Admin Dashboard</h1>
-      <p id="status">Checking login…</p>
+  <!-- 🔒 Hidden until admin verified -->
+  <div id="adminContent" style="display:none;">
+
+    <div class="top-bar">
+      <div>
+        <h1>Admin Dashboard</h1>
+        <p id="status">Checking login…</p>
+      </div>
+      <button id="logoutBtn">Logout</button>
     </div>
-    <button id="logoutBtn" style="display:none;">Logout</button>
+
+    <hr>
+    <div id="supplierList"></div>
+
   </div>
-
-  <hr>
-
-  <div id="supplierList"></div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-    import { getFirestore, collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signOut,
+      setPersistence,
+      browserLocalPersistence
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import {
+      getFirestore,
+      collection,
+      getDocs,
+      doc,
+      updateDoc
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     /* 🔐 Firebase Config */
     const firebaseConfig = {
@@ -82,30 +97,35 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
+    const ADMIN_EMAILS = ["admin@apdglobaltrade.com"];
+
+    const adminContent = document.getElementById("adminContent");
     const statusEl = document.getElementById("status");
     const supplierList = document.getElementById("supplierList");
     const logoutBtn = document.getElementById("logoutBtn");
 
-    /* 🔐 ADMIN CHECK (SIMPLE & STABLE) */
+    /* 🔒 Keep user logged in on refresh */
+    setPersistence(auth, browserLocalPersistence);
+
+    /* 🔐 Auth check */
     onAuthStateChanged(auth, async (user) => {
       if (!user) {
         statusEl.innerText = "Please login as admin.";
-        supplierList.innerHTML = "";
         return;
       }
 
-      if (user.email !== "admin@apdglobaltrade.com") {
-        statusEl.innerText = "Access denied.";
-        supplierList.innerHTML = "";
+      if (!ADMIN_EMAILS.includes(user.email.toLowerCase())) {
+        document.body.innerHTML = "<h2>Access denied</h2>";
         return;
       }
 
+      // ✅ ADMIN VERIFIED
+      adminContent.style.display = "block";
       statusEl.innerText = "Admin logged in";
-      logoutBtn.style.display = "inline-block";
       loadSuppliers();
     });
 
-    /* 📦 LOAD SUPPLIERS */
+    /* 📦 Load suppliers */
     async function loadSuppliers() {
       supplierList.innerHTML = "";
       const snap = await getDocs(collection(db, "suppliers"));
@@ -139,34 +159,20 @@
       });
     }
 
-    /* 🔘 ACTION HANDLER */
+    /* 🔘 Supplier actions */
     window.updateSupplier = async (id, action) => {
       const ref = doc(db, "suppliers", id);
 
-      if (action === "approved") {
-        await updateDoc(ref, { status: "approved" });
-      }
-
-      if (action === "gold") {
-        await updateDoc(ref, { plan: "gold" });
-      }
-
-      if (action === "platinum") {
-        await updateDoc(ref, { plan: "platinum" });
-      }
-
-      if (action === "banned") {
-        await updateDoc(ref, { status: "banned" });
-      }
-
-      if (action === "unban") {
-        await updateDoc(ref, { status: "active" });
-      }
+      if (action === "approved") await updateDoc(ref, { status: "approved" });
+      if (action === "gold") await updateDoc(ref, { plan: "gold" });
+      if (action === "platinum") await updateDoc(ref, { plan: "platinum" });
+      if (action === "banned") await updateDoc(ref, { status: "banned" });
+      if (action === "unban") await updateDoc(ref, { status: "active" });
 
       loadSuppliers();
     };
 
-    /* 🚪 LOGOUT */
+    /* 🚪 Logout */
     logoutBtn.addEventListener("click", async () => {
       await signOut(auth);
       location.reload();
