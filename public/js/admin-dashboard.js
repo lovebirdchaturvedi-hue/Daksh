@@ -6,23 +6,30 @@ const statusEl = document.getElementById("status");
 const listEl = document.getElementById("supplierList");
 const logoutBtn = document.getElementById("logoutBtn");
 
+// 🔐 AUTH GATE (HARD)
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
-    statusEl.innerText = "Please login as admin.";
+    // NOT LOGGED IN → FORCE LOGIN
+    window.location.replace("/supplier-login.html");
     return;
   }
 
+  // NOT ADMIN → BLOCK
   if (user.email !== "admin@apdglobaltrade.com") {
+    document.body.style.display = "block";
     statusEl.innerText = "Access denied.";
     return;
   }
 
-  statusEl.innerText = "Loading suppliers…";
+  // ✅ ADMIN AUTHORIZED
+  document.body.style.display = "block";
   logoutBtn.style.display = "inline-block";
+  statusEl.innerText = "Loading suppliers…";
 
   loadSuppliers();
 });
 
+// 📦 LOAD SUPPLIERS
 async function loadSuppliers() {
   listEl.innerHTML = "";
 
@@ -59,6 +66,7 @@ async function loadSuppliers() {
   }
 }
 
+// 🔘 BUTTON ACTIONS
 document.addEventListener("click", async (e) => {
   const id = e.target.dataset.id;
   const action = e.target.dataset.action;
@@ -68,8 +76,8 @@ document.addEventListener("click", async (e) => {
   loadSuppliers();
 });
 
+// 🚪 LOGOUT
 logoutBtn.addEventListener("click", async () => {
   await signOut(auth);
-  statusEl.innerText = "Logged out.";
-  listEl.innerHTML = "";
+  window.location.replace("/supplier-login.html");
 });
