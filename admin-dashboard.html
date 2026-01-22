@@ -3,139 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <title>Admin Dashboard – APD Global Trade</title>
-
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-    .card {
-      border: 1px solid #ccc;
-      padding: 12px;
-      margin-bottom: 12px;
-    }
-    button {
-      padding: 6px 12px;
-      margin-right: 8px;
-      margin-top: 8px;
-      cursor: pointer;
-    }
-    .approved { color: green; font-weight: bold; }
-    .rejected { color: red; font-weight: bold; }
-    .pending { color: orange; font-weight: bold; }
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    button { margin-right: 8px; padding: 6px 12px; cursor: pointer; }
   </style>
 </head>
-
 <body>
 
-  <h1>Admin Dashboard</h1>
-  <p id="status">Checking access…</p>
+<h1>Admin Dashboard</h1>
+<p id="status">Checking access…</p>
+<button id="logoutBtn" style="display:none;">Logout</button>
 
-  <button id="logoutBtn" style="display:none;">Logout</button>
+<hr>
+<h2>Supplier Approvals</h2>
+<div id="supplierList"></div>
 
-  <hr />
-
-  <h2>Supplier Approvals</h2>
-  <div id="supplierList"></div>
-
-  <script type="module">
-    import { auth, db } from "./js/firebase-init.js";
-    import { onAuthStateChanged, signOut }
-      from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-    import {
-      collection,
-      getDocs,
-      doc,
-      updateDoc
-    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-    const statusEl = document.getElementById("status");
-    const listEl = document.getElementById("supplierList");
-    const logoutBtn = document.getElementById("logoutBtn");
-
-    // 🔐 ADMIN CHECK — NO REDIRECTS
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) {
-        statusEl.innerText = "Please login as admin.";
-        return;
-      }
-
-      // SIMPLE & STABLE ADMIN CHECK
-      if (user.email !== "admin@apdglobaltrade.com") {
-        statusEl.innerText = "Access denied.";
-        return;
-      }
-
-      logoutBtn.style.display = "inline-block";
-      statusEl.innerText = "Loading suppliers…";
-      loadSuppliers();
-    });
-
-    // 📦 LOAD SUPPLIERS
-    async function loadSuppliers() {
-      listEl.innerHTML = "";
-
-      const snap = await getDocs(collection(db, "suppliers"));
-
-      if (snap.empty) {
-        listEl.innerHTML = "<p>No suppliers found.</p>";
-        return;
-      }
-
-      snap.forEach((docSnap) => {
-        const data = docSnap.data();
-        const uid = docSnap.id;
-
-        const div = document.createElement("div");
-        div.className = "card";
-
-        let statusClass = "pending";
-        if (data.status === "approved") statusClass = "approved";
-        if (data.status === "rejected") statusClass = "rejected";
-
-        div.innerHTML = `
-          <strong>${data.companyName || "N/A"}</strong><br/>
-          Status: <span class="${statusClass}">${data.status}</span><br/>
-
-          ${
-            data.status === "pending"
-              ? `
-                <button data-action="approve" data-id="${uid}">Approve</button>
-                <button data-action="reject" data-id="${uid}">Reject</button>
-              `
-              : ""
-          }
-        `;
-
-        listEl.appendChild(div);
-      });
-    }
-
-    // 🔘 BUTTON HANDLERS
-    document.addEventListener("click", async (e) => {
-      const id = e.target.dataset.id;
-      if (!id) return;
-
-      const ref = doc(db, "suppliers", id);
-
-      if (e.target.dataset.action === "approve") {
-        await updateDoc(ref, { status: "approved" });
-        loadSuppliers();
-      }
-
-      if (e.target.dataset.action === "reject") {
-        await updateDoc(ref, { status: "rejected" });
-        loadSuppliers();
-      }
-    });
-
-    // 🚪 LOGOUT (MANUAL ONLY)
-    logoutBtn.addEventListener("click", async () => {
-      await signOut(auth);
-      statusEl.innerText = "Logged out. Refresh page.";
-      listEl.innerHTML = "";
-    });
-  </script>
+<script type="module" src="/js/firebase-init.js"></script>
+<script type="module" src="/js/admin-dashboard.js"></script>
 
 </body>
 </html>
