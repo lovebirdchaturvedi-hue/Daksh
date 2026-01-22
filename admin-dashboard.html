@@ -1,17 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Admin Dashboard</title>
+<meta charset="UTF-8">
+<title>Admin Dashboard – APD Global Trade</title>
+
+<style>
+body {
+  font-family: Inter, Arial, sans-serif;
+  background: #f5f7fb;
+  padding: 30px;
+}
+
+h1 {
+  margin-bottom: 5px;
+}
+
+#status {
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
+
+.actions button {
+  margin-right: 8px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.approve { background:#22c55e; color:#fff; }
+.ban { background:#ef4444; color:#fff; }
+.upgrade { background:#6366f1; color:#fff; }
+.unban { background:#f59e0b; color:#fff; }
+
+.plan {
+  font-weight: bold;
+  margin-left: 8px;
+}
+</style>
 </head>
+
 <body>
 
 <h1>Admin Dashboard</h1>
-<p id="status">Checking login…</p>
-<ul id="list"></ul>
+<p id="status">Checking access…</p>
+
+<button id="logoutBtn">Logout</button>
+
+<hr>
+
+<div id="supplierList"></div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { getFirestore, collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -24,39 +74,85 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const status = document.getElementById("status");
-const list = document.getElementById("list");
+const statusEl = document.getElementById("status");
+const listEl = document.getElementById("supplierList");
 
 onAuthStateChanged(auth, async (user) => {
-
   if (!user) {
-    status.innerText = "Please login first.";
+    statusEl.innerText = "Please login as admin.";
     return;
   }
 
   if (user.email !== "admin@apdglobaltrade.com") {
-    status.innerText = "Access denied.";
+    statusEl.innerText = "Access denied.";
+    await signOut(auth);
     return;
   }
 
-  status.innerText = "Admin logged in. Loading suppliers…";
-
-  const snap = await getDocs(collection(db, "suppliers"));
-  list.innerHTML = "";
-
-  snap.forEach(d => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      ${d.data().companyName || "Supplier"}
-      <button onclick="approve('${d.id}')">Approve</button>
-    `;
-    list.appendChild(li);
-  });
+  statusEl.innerText = "Admin logged in";
+  loadSuppliers();
 });
 
-window.approve = async (id) => {
-  await updateDoc(doc(db, "suppliers", id), { status: "approved" });
-  alert("Approved");
+async function loadSuppliers() {
+  listEl.innerHTML = "";
+  const snap = await getDocs(collection(db, "suppliers"));
+
+  snap.forEach((docSnap) => {
+    const s = docSnap.data();
+    const id = docSnap.id;
+
+    const div = document.createElement("div");
+    div.className = "card";
+
+    div.innerHTML = `
+      <strong>${s.companyName || "Supplier"}</strong><br>
+      Email: ${s.email || "—"}<br>
+      Status: ${s.banned ? "BANNED" : "ACTIVE"}<br>
+      Plan: <span class="plan">${s.plan || "Free"}</span>
+
+      <div class="actions">
+        <button class="approve" data-id="${id}" data-action="approve">Approve</button>
+        <button class="upgrade" data-id="${id}" data-plan="Gold">Upgrade Gold</button>
+        <button class="upgrade" data-id="${id}" data-plan="Platinum">Upgrade Platinum</button>
+        ${s.banned
+          ? `<button class="unban" data-id="${id}" data-action="unban">Unban</button>`
+          : `<button class="ban" data-id="${id}" data-action="ban">Ban</button>`
+        }
+      </div>
+    `;
+
+    listEl.appendChild(div);
+  });
+}
+
+document.addEventListener("click", async (e) => {
+  const id = e.target.dataset.id;
+  if (!id) return;
+
+  const ref = doc(db, "suppliers", id);
+
+  if (e.target.dataset.action === "approve") {
+    await updateDoc(ref, { approved: true });
+  }
+
+  if (e.target.dataset.action === "ban") {
+    await updateDoc(ref, { banned: true });
+  }
+
+  if (e.target.dataset.action === "unban") {
+    await updateDoc(ref, { banned: false });
+  }
+
+  if (e.target.dataset.plan) {
+    await updateDoc(ref, { plan: e.target.dataset.plan });
+  }
+
+  loadSuppliers();
+});
+
+document.getElementById("logoutBtn").onclick = async () => {
+  await signOut(auth);
+  location.reload();
 };
 </script>
 
