@@ -1,68 +1,75 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-/* 🔐 Firebase config */
-const firebaseConfig = {
-  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-  authDomain: "apd-globaltrade-prod.firebaseapp.com",
-  projectId: "apd-globaltrade-prod"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+import { auth, db } from "./firebase-init.js";
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const statusEl = document.getElementById("status");
 const listEl = document.getElementById("supplierList");
+const logoutBtn = document.getElementById("logoutBtn");
 
-/* 🚫 NO REDIRECTS. NO RELOADS. */
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
     statusEl.innerText = "Please login as admin.";
     return;
   }
 
-  /* SIMPLE ADMIN CHECK (SAFE) */
   if (user.email !== "admin@apdglobaltrade.com") {
     statusEl.innerText = "Access denied.";
     return;
   }
 
   statusEl.innerText = "Loading suppliers…";
+  logoutBtn.style.display = "inline-block";
 
-  const snap = await getDocs(collection(db, "suppliers"));
-  listEl.innerHTML = "";
-
-  snap.forEach((docSnap) => {
-    const s = docSnap.data();
-    const li = document.createElement("li");
-
-    li.innerHTML = `
-      <strong>${s.companyName || "Supplier"}</strong>
-      <button data-id="${docSnap.id}" data-action="approve">Approve</button>
-      <button data-id="${docSnap.id}" data-action="ban">Ban</button>
-    `;
-
-    listEl.appendChild(li);
-  });
-
-  statusEl.innerText = `Suppliers loaded: ${snap.size}`;
+  loadSuppliers();
 });
 
-/* 🔘 Button actions */
+async function loadSuppliers() {
+  listEl.innerHTML = "";
+
+  try {
+    const snap = await getDocs(collection(db, "suppliers"));
+
+    if (snap.empty) {
+      listEl.innerHTML = "<p>No suppliers found.</p>";
+      return;
+    }
+
+    snap.forEach((docSnap) => {
+      const s = docSnap.data();
+      const id = docSnap.id;
+
+      const div = document.createElement("div");
+      div.style.border = "1px solid #ccc";
+      div.style.padding = "10px";
+      div.style.marginBottom = "10px";
+
+      div.innerHTML = `
+        <strong>${s.companyName || "Supplier"}</strong><br>
+        Status: ${s.status || "pending"}<br><br>
+        <button data-id="${id}" data-action="approved">Approve</button>
+        <button data-id="${id}" data-action="rejected">Reject</button>
+      `;
+
+      listEl.appendChild(div);
+    });
+
+  } catch (err) {
+    statusEl.innerText = "Firestore error";
+    alert(err.message);
+  }
+}
+
 document.addEventListener("click", async (e) => {
-  if (!e.target.dataset.id) return;
+  const id = e.target.dataset.id;
+  const action = e.target.dataset.action;
+  if (!id || !action) return;
 
-  const ref = doc(db, "suppliers", e.target.dataset.id);
+  await updateDoc(doc(db, "suppliers", id), { status: action });
+  loadSuppliers();
+});
 
-  if (e.target.dataset.action === "approve") {
-    await updateDoc(ref, { approved: true });
-    alert("Approved");
-  }
-
-  if (e.target.dataset.action === "ban") {
-    await updateDoc(ref, { banned: true });
-    alert("Banned");
-  }
+logoutBtn.addEventListener("click", async () => {
+  await signOut(auth);
+  statusEl.innerText = "Logged out.";
+  listEl.innerHTML = "";
 });
