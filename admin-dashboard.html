@@ -1,109 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Admin Dashboard – APD Global Trade</title>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-    .card {
-      border: 1px solid #ccc;
-      padding: 12px;
-      margin-bottom: 10px;
-    }
-    button {
-      margin-right: 6px;
-      padding: 5px 10px;
-      cursor: pointer;
-    }
-    .error { color: red; }
-    .ok { color: green; }
-  </style>
+  <title>Admin Dashboard</title>
 </head>
-
 <body>
 
 <h1>Admin Dashboard</h1>
-<p id="status">Checking access…</p>
-
-<hr>
-
-<h2>Supplier Approvals</h2>
-<div id="supplierList"></div>
+<p id="status">Checking login…</p>
+<ul id="list"></ul>
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-  import { getFirestore, collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-    authDomain: "apd-globaltrade-prod.firebaseapp.com",
-    projectId: "apd-globaltrade-prod"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+  authDomain: "apd-globaltrade-prod.firebaseapp.com",
+  projectId: "apd-globaltrade-prod"
+};
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-  const statusEl = document.getElementById("status");
-  const listEl = document.getElementById("supplierList");
+const status = document.getElementById("status");
+const list = document.getElementById("list");
 
-  onAuthStateChanged(auth, async (user) => {
+onAuthStateChanged(auth, async (user) => {
 
-    if (!user) {
-      statusEl.innerHTML = "<span class='error'>Not logged in. Please login first.</span>";
-      return;
-    }
+  if (!user) {
+    status.innerText = "Please login first.";
+    return;
+  }
 
-    if (user.email !== "admin@apdglobaltrade.com") {
-      statusEl.innerHTML = "<span class='error'>Access denied. Admin only.</span>";
-      return;
-    }
+  if (user.email !== "admin@apdglobaltrade.com") {
+    status.innerText = "Access denied.";
+    return;
+  }
 
-    statusEl.innerHTML = "<span class='ok'>Admin verified. Loading suppliers…</span>";
+  status.innerText = "Admin logged in. Loading suppliers…";
 
-    const snap = await getDocs(collection(db, "suppliers"));
-    listEl.innerHTML = "";
+  const snap = await getDocs(collection(db, "suppliers"));
+  list.innerHTML = "";
 
-    if (snap.empty) {
-      listEl.innerHTML = "<p>No suppliers found.</p>";
-      return;
-    }
-
-    snap.forEach(docSnap => {
-      const s = docSnap.data();
-
-      const div = document.createElement("div");
-      div.className = "card";
-      div.innerHTML = `
-        <strong>${s.companyName || "Supplier"}</strong><br><br>
-        <button data-id="${docSnap.id}" data-action="approve">Approve</button>
-        <button data-id="${docSnap.id}" data-action="reject">Reject</button>
-      `;
-
-      listEl.appendChild(div);
-    });
+  snap.forEach(d => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      ${d.data().companyName || "Supplier"}
+      <button onclick="approve('${d.id}')">Approve</button>
+    `;
+    list.appendChild(li);
   });
+});
 
-  document.addEventListener("click", async (e) => {
-    if (!e.target.dataset.id) return;
-
-    const ref = doc(db, "suppliers", e.target.dataset.id);
-
-    if (e.target.dataset.action === "approve") {
-      await updateDoc(ref, { status: "approved" });
-      alert("Approved");
-    }
-
-    if (e.target.dataset.action === "reject") {
-      await updateDoc(ref, { status: "rejected" });
-      alert("Rejected");
-    }
-  });
+window.approve = async (id) => {
+  await updateDoc(doc(db, "suppliers", id), { status: "approved" });
+  alert("Approved");
+};
 </script>
 
 </body>
