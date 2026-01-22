@@ -1,126 +1,68 @@
-// admin-dashboard.js
-// Works with Firebase v10 (MODULAR SDK ONLY)
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-import {
-  auth,
-  db,
-  onAuthStateChanged,
-  collection,
-  getDocs,
-  doc,
-  updateDoc
-} from "./firebase-init.js";
+/* 🔐 Firebase config */
+const firebaseConfig = {
+  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+  authDomain: "apd-globaltrade-prod.firebaseapp.com",
+  projectId: "apd-globaltrade-prod"
+};
 
-/* -------------------------------
-   AUTH GUARD (ADMIN ONLY)
--------------------------------- */
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const statusEl = document.getElementById("status");
+const listEl = document.getElementById("supplierList");
+
+/* 🚫 NO REDIRECTS. NO RELOADS. */
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
-    window.location.href = "/supplier-login.html";
+    statusEl.innerText = "Please login as admin.";
     return;
   }
 
-  try {
-    // Force refresh token to get latest claims
-    const token = await user.getIdTokenResult(true);
-
-    console.log("ADMIN CLAIMS:", token.claims);
-
-    if (token.claims.role !== "admin") {
-      alert("Access denied: Admins only");
-      await auth.signOut();
-      window.location.href = "/supplier-login.html";
-      return;
-    }
-
-    // ✅ ADMIN VERIFIED
-    loadSuppliers();
-
-  } catch (err) {
-    console.error("Auth error:", err);
-    alert("Authentication error");
+  /* SIMPLE ADMIN CHECK (SAFE) */
+  if (user.email !== "admin@apdglobaltrade.com") {
+    statusEl.innerText = "Access denied.";
+    return;
   }
+
+  statusEl.innerText = "Loading suppliers…";
+
+  const snap = await getDocs(collection(db, "suppliers"));
+  listEl.innerHTML = "";
+
+  snap.forEach((docSnap) => {
+    const s = docSnap.data();
+    const li = document.createElement("li");
+
+    li.innerHTML = `
+      <strong>${s.companyName || "Supplier"}</strong>
+      <button data-id="${docSnap.id}" data-action="approve">Approve</button>
+      <button data-id="${docSnap.id}" data-action="ban">Ban</button>
+    `;
+
+    listEl.appendChild(li);
+  });
+
+  statusEl.innerText = `Suppliers loaded: ${snap.size}`;
 });
 
-/* -------------------------------
-   LOAD SUPPLIERS
--------------------------------- */
-async function loadSuppliers() {
-  const tableBody = document.getElementById("suppliersTableBody");
+/* 🔘 Button actions */
+document.addEventListener("click", async (e) => {
+  if (!e.target.dataset.id) return;
 
-  if (!tableBody) {
-    console.error("suppliersTableBody not found in HTML");
-    return;
+  const ref = doc(db, "suppliers", e.target.dataset.id);
+
+  if (e.target.dataset.action === "approve") {
+    await updateDoc(ref, { approved: true });
+    alert("Approved");
   }
 
-  tableBody.innerHTML = "";
-
-  try {
-    const snapshot = await getDocs(collection(db, "suppliers"));
-
-    snapshot.forEach((docSnap) => {
-      const data = docSnap.data();
-      const supplierId = docSnap.id;
-
-      const tr = document.createElement("tr");
-
-      tr.innerHTML = `
-        <td>${data.companyName || "-"}</td>
-        <td>${data.email || "-"}</td>
-        <td>${data.status || "pending"}</td>
-        <td>
-          <button data-id="${supplierId}" data-action="approve">Approve</button>
-          <button data-id="${supplierId}" data-action="ban">Ban</button>
-        </td>
-      `;
-
-      tableBody.appendChild(tr);
-    });
-
-    attachActionHandlers();
-
-  } catch (err) {
-    console.error("Error loading suppliers:", err);
-    alert("Missing or insufficient permissions");
+  if (e.target.dataset.action === "ban") {
+    await updateDoc(ref, { banned: true });
+    alert("Banned");
   }
-}
-
-/* -------------------------------
-   APPROVE / BAN HANDLERS
--------------------------------- */
-function attachActionHandlers() {
-  document.querySelectorAll("button[data-action]").forEach((btn) => {
-    btn.addEventListener("click", async () => {
-      const supplierId = btn.dataset.id;
-      const action = btn.dataset.action;
-
-      try {
-        if (action === "approve") {
-          await updateSupplierStatus(supplierId, "approved");
-        }
-
-        if (action === "ban") {
-          await updateSupplierStatus(supplierId, "banned");
-        }
-
-        loadSuppliers();
-
-      } catch (err) {
-        console.error("Update error:", err);
-        alert("Action failed");
-      }
-    });
-  });
-}
-
-/* -------------------------------
-   UPDATE SUPPLIER STATUS
--------------------------------- */
-async function updateSupplierStatus(supplierId, status) {
-  const ref = doc(db, "suppliers", supplierId);
-
-  await updateDoc(ref, {
-    status: status,
-    updatedAt: new Date()
-  });
-}
+});
