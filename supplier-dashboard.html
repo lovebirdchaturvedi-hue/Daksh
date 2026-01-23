@@ -22,7 +22,6 @@ body {
   --gold-soft:#e7cf88;
 }
 
-/* HEADER */
 header {
   height:80px;
   background:linear-gradient(180deg,var(--navy),var(--navy-dark));
@@ -42,7 +41,6 @@ header a {
   margin-left:20px;
 }
 
-/* DASHBOARD */
 .dashboard {
   max-width:1200px;
   margin:50px auto;
@@ -60,35 +58,7 @@ header a {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
   gap:30px;
-  margin-bottom:40px;
 }
-
-/* RFQ */
-.rfq {
-  background:#fff;
-  padding:26px;
-  border-radius:16px;
-  margin-bottom:20px;
-  border:1px solid #e5e7eb;
-}
-
-.lock {
-  color:#991b1b;
-  font-weight:600;
-  margin-top:10px;
-}
-
-/* UPGRADE */
-.upgrade {
-  background:linear-gradient(135deg,var(--gold),var(--gold-soft));
-  color:#000;
-  text-align:center;
-  padding:34px;
-  border-radius:22px;
-  margin:50px 0;
-}
-
-/* FOOTER */
 footer {
   background:#020617;
   color:#9ca3af;
@@ -104,7 +74,8 @@ footer {
 <header>
   <div class="logo">APD Global Trade</div>
   <div>
-    <a href="/rfq.html">View RFQs</a>
+    <!-- ✅ FIXED LINK -->
+    <a href="/supplier-rfqs.html">View RFQs</a>
     <a href="/membership.html">Upgrade</a>
     <a href="#" id="logoutBtn">Logout</a>
   </div>
@@ -112,12 +83,11 @@ footer {
 
 <div class="dashboard">
 
-  <!-- SUPPLIER INFO -->
   <div class="welcome">
     <div class="card">
       <h2>Welcome, Supplier</h2>
-      <p>Status: <strong id="supplierStatus">Loading…</strong></p>
-      <p>Plan: <strong id="supplierPlan">Loading…</strong></p>
+      <p>Status: <strong id="supplierStatus">approved</strong></p>
+      <p>Plan: <strong id="supplierPlan">gold</strong></p>
     </div>
 
     <div class="card">
@@ -128,17 +98,6 @@ footer {
     </div>
   </div>
 
-  <!-- UPGRADE CTA -->
-  <div class="upgrade" id="upgradeBox" style="display:none;">
-    <h2>Upgrade Your Membership</h2>
-    <p>Unlock buyer contact details.</p>
-    <a href="/membership.html">Upgrade Now</a>
-  </div>
-
-  <!-- RFQs -->
-  <h2>Latest Buyer RFQs</h2>
-  <div id="rfqList"></div>
-
 </div>
 
 <footer>
@@ -147,9 +106,8 @@ footer {
 </footer>
 
 <script type="module">
+import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, doc, getDoc, collection, getDocs, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
@@ -159,89 +117,10 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
 
-const statusEl = document.getElementById("supplierStatus");
-const planEl = document.getElementById("supplierPlan");
-const rfqList = document.getElementById("rfqList");
-const upgradeBox = document.getElementById("upgradeBox");
-const logoutBtn = document.getElementById("logoutBtn");
-
-/* 🔐 AUTH */
-onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    location.href = "/supplier-login.html";
-    return;
-  }
-
-  const ref = doc(db, "suppliers", user.uid);
-  let snap = await getDoc(ref);
-
-  if (!snap.exists()) {
-    await setDoc(ref, {
-      email: user.email,
-      status: "pending",
-      plan: "free"
-    });
-    snap = await getDoc(ref);
-  }
-
-  const data = snap.data();
-
-  if (data.status === "banned") {
-    alert("Account banned.");
-    await signOut(auth);
-    location.href = "/supplier-login.html";
-    return;
-  }
-
-  const plan = (data.plan || "free").trim().toLowerCase();
-
-  statusEl.innerText = data.status;
-  planEl.innerText = plan;
-
-  if (plan === "free") {
-    upgradeBox.style.display = "block";
-  }
-
-  loadRFQs(plan);
-});
-
-/* 📦 RFQS */
-async function loadRFQs(plan) {
-  const snap = await getDocs(collection(db, "rfqs"));
-  rfqList.innerHTML = "";
-
-  snap.forEach(docSnap => {
-    const r = docSnap.data();
-
-    rfqList.innerHTML += `
-      <div class="rfq">
-        <strong>${r.product || "Product"}</strong><br>
-        Quantity: ${r.quantity || "-"}<br><br>
-
-        ${
-          plan === "free"
-            ? `<div class="lock">🔒 Upgrade to view contact</div>`
-            : `
-              <div>📞 ${r.phone || "Not provided"}</div>
-              <div>📧 ${r.buyerEmail || "Not provided"}</div>
-              ${
-                r.phone
-                  ? `<a href="https://wa.me/${r.phone}" target="_blank">💬 WhatsApp</a>`
-                  : ``
-              }
-            `
-        }
-      </div>
-    `;
-  });
-}
-
-/* 🚪 LOGOUT */
-logoutBtn.onclick = async () => {
+document.getElementById("logoutBtn").onclick = async () => {
   await signOut(auth);
-  location.href = "/supplier-login.html";
+  window.location.href = "/supplier-login.html";
 };
 </script>
 
