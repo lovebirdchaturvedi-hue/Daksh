@@ -5,6 +5,20 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/buyer-rfqs",
+        "destination": "/buyer-rfqs.html"
+      },
+      {
+        "source": "/buyer-rfq",
+        "destination": "/buyer-rfqs.html"
+      },
+      {
+        "source": "/buyer-rfq.html",
+        "destination": "/buyer-rfqs.html"
+      }
     ]
   }
 }
