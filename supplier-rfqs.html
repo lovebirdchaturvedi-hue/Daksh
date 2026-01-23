@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Live Buyer RFQs | APD Global Trade</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:#f5f7fb;
+  color:#0f172a;
+}
+
+header {
+  height:80px;
+  background:#071427;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 40px;
+}
+
+header .logo {
+  color:#c9a44a;
+  font-weight:600;
+}
+
+header a {
+  color:#e5e7eb;
+  text-decoration:none;
+  margin-left:20px;
+  font-size:14px;
+}
+
+.container {
+  max-width:1100px;
+  margin:60px auto;
+  padding:0 20px;
+}
+
+h1 {
+  margin-bottom:30px;
+}
+
+.rfq {
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:26px;
+  margin-bottom:20px;
+}
+
+.rfq strong {
+  font-size:18px;
+}
+
+.lock {
+  color:#991b1b;
+  font-weight:600;
+  margin-top:10px;
+}
+
+.contact {
+  margin-top:10px;
+  font-size:14px;
+}
+
+.contact a {
+  display:inline-block;
+  margin-top:6px;
+  color:#0b1d36;
+  font-weight:600;
+  text-decoration:none;
+}
+
+.empty {
+  background:#fff;
+  padding:40px;
+  border-radius:14px;
+  text-align:center;
+  color:#64748b;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">APD Global Trade</div>
+  <div>
+    <a href="/supplier-dashboard.html">Dashboard</a>
+    <a href="/membership.html">Upgrade</a>
+    <a href="#" id="logoutBtn">Logout</a>
+  </div>
+</header>
+
+<div class="container">
+  <h1>Latest Buyer RFQs</h1>
+  <div id="rfqList">Loading RFQs…</div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+/* 🔥 FIREBASE CONFIG */
+const firebaseConfig = {
+  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+  authDomain: "apd-globaltrade-prod.firebaseapp.com",
+  projectId: "apd-globaltrade-prod"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const rfqList = document.getElementById("rfqList");
+const logoutBtn = document.getElementById("logoutBtn");
+
+/* 🔐 AUTH + LOAD */
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    window.location.href = "/supplier-login.html";
+    return;
+  }
+
+  // 🔎 Get supplier plan
+  const supplierSnap = await getDoc(doc(db, "suppliers", user.uid));
+  if (!supplierSnap.exists()) {
+    rfqList.innerHTML = "<div class='empty'>Supplier record not found</div>";
+    return;
+  }
+
+  const supplier = supplierSnap.data();
+  const plan = (supplier.plan || "free").toLowerCase();
+
+  loadRFQs(plan);
+});
+
+/* 📦 LOAD RFQS */
+async function loadRFQs(plan) {
+  rfqList.innerHTML = "";
+
+  const snap = await getDocs(collection(db, "rfqs"));
+
+  if (snap.empty) {
+    rfqList.innerHTML = "<div class='empty'>No RFQs available yet</div>";
+    return;
+  }
+
+  snap.forEach(d => {
+    const r = d.data();
+
+    rfqList.innerHTML += `
+      <div class="rfq">
+        <strong>${r.product || "Product"}</strong><br>
+        Quantity: ${r.quantity || "-"}<br>
+        Destination: ${r.destination || "-"}<br>
+
+        ${
+          plan === "free"
+          ? `<div class="lock">🔒 Upgrade to view buyer contact</div>`
+          : `
+            <div class="contact">
+              📞 ${r.phone || "Not provided"}<br>
+              📧 ${r.buyerEmail || "Not provided"}<br>
+              ${r.phone ? `<a href="https://wa.me/${r.phone}" target="_blank">💬 WhatsApp Buyer</a>` : ""}
+            </div>
+          `
+        }
+      </div>
+    `;
+  });
+}
+
+/* 🚪 LOGOUT */
+logoutBtn.onclick = async () => {
+  await signOut(auth);
+  window.location.href = "/supplier-login.html";
+};
+</script>
+
+</body>
+</html>
