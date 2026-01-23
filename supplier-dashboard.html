@@ -167,8 +167,6 @@ const rfqList = document.getElementById("rfqList");
 const upgradeBox = document.getElementById("upgradeBox");
 const logoutBtn = document.getElementById("logoutBtn");
 
-let supplierPlan = "free";
-
 /* 🔐 AUTH */
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
@@ -197,21 +195,20 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
-  supplierPlan = data.plan || "free";
-  const planNormalized = supplierPlan.trim().toLowerCase();
+  const plan = (data.plan || "free").trim().toLowerCase();
 
   statusEl.innerText = data.status;
-  planEl.innerText = supplierPlan;
+  planEl.innerText = plan;
 
-  if (planNormalized === "free") {
+  if (plan === "free") {
     upgradeBox.style.display = "block";
   }
 
-  loadRFQs(planNormalized);
+  loadRFQs(plan);
 });
 
 /* 📦 RFQS */
-async function loadRFQs(planNormalized) {
+async function loadRFQs(plan) {
   const snap = await getDocs(collection(db, "rfqs"));
   rfqList.innerHTML = "";
 
@@ -221,11 +218,20 @@ async function loadRFQs(planNormalized) {
     rfqList.innerHTML += `
       <div class="rfq">
         <strong>${r.product || "Product"}</strong><br>
-        Quantity: ${r.quantity || "-"}<br>
+        Quantity: ${r.quantity || "-"}<br><br>
+
         ${
-          planNormalized === "free"
+          plan === "free"
             ? `<div class="lock">🔒 Upgrade to view contact</div>`
-            : `<div>📞 ${r.phone || "Contact not provided"}</div>`
+            : `
+              <div>📞 ${r.phone || "Not provided"}</div>
+              <div>📧 ${r.email || "Not provided"}</div>
+              ${
+                r.phone
+                  ? `<a href="https://wa.me/${r.phone}" target="_blank">💬 WhatsApp</a>`
+                  : ``
+              }
+            `
         }
       </div>
     `;
@@ -238,28 +244,6 @@ logoutBtn.onclick = async () => {
   location.href = "/supplier-login.html";
 };
 </script>
-
-<!-- WhatsApp Button -->
-<a href="https://wa.me/919266418868"
-   target="_blank"
-   style="
-     position:fixed;
-     bottom:20px;
-     right:20px;
-     width:56px;
-     height:56px;
-     background:#25D366;
-     color:#fff;
-     border-radius:50%;
-     display:flex;
-     align-items:center;
-     justify-content:center;
-     font-size:28px;
-     box-shadow:0 10px 25px rgba(0,0,0,.25);
-     text-decoration:none;
-     z-index:999;">
-💬
-</a>
 
 </body>
 </html>
