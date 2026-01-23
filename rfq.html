@@ -21,9 +21,9 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 /*
-  RULE:
-  - Logged-in supplier → dashboard
-  - Not logged in → buyer RFQ form
+  HARD RULE (NO CONFUSION):
+  - Logged-in supplier  → supplier-dashboard.html
+  - Not logged in       → create-rfq.html (buyer form)
 */
 
 onAuthStateChanged(auth, (user) => {
