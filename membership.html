@@ -3,358 +3,195 @@
 <head>
 <meta charset="UTF-8">
 <title>Supplier Membership Plans | APD Global Trade</title>
+
+<meta name="description" content="Choose the right supplier membership to access verified domestic and international buyer RFQs on APD Global Trade.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- SEO -->
-<meta name="description" content="APD Global Trade supplier membership plans for domestic and international suppliers. Access verified buyer RFQs, unlock buyer contacts, and expand global trade opportunities.">
-
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
 <style>
-html, body {
+body{
   margin:0;
-  font-family:Inter,sans-serif;
-  background:#f5f7fb;
-  color:#0f172a;
+  font-family:Inter,Arial,sans-serif;
+  background:#f6f7f9;
+  color:#222;
 }
-
-:root {
-  --navy:#0b1d36;
-  --navy-dark:#071427;
-  --gold:#c9a44a;
-  --gold-soft:#e7cf88;
-  --muted:#6b7280;
-}
-
-/* HEADER */
-header{
-  height:80px;
-  background:linear-gradient(180deg,var(--navy),var(--navy-dark));
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
-header .logo{
-  color:var(--gold);
-  font-weight:600;
-  font-size:15px;
-}
-header nav a{
-  color:#e5e7eb;
-  margin:0 14px;
-  text-decoration:none;
-  font-size:13px;
-  opacity:.85;
-}
-header nav a:hover{
-  opacity:1;
-  color:var(--gold-soft);
-}
-
-/* HERO */
-.hero{
-  background:linear-gradient(180deg,rgba(11,29,54,.9),rgba(7,20,39,.95)),
-  url("https://images.unsplash.com/photo-1529070538774-1843cb3265df");
-  background-size:cover;
-  background-position:center;
-  color:#fff;
-  text-align:center;
-  padding:120px 20px;
-}
-.hero h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2.4rem,4vw,3.2rem);
-}
-.hero p{
-  max-width:900px;
-  margin:20px auto;
-  color:#cbd5e1;
-}
-
-/* SECTIONS */
 .section{
-  max-width:1100px;
+  max-width:1200px;
   margin:auto;
-  padding:100px 20px;
+  padding:60px 20px;
 }
-.section.alt{
-  background:#fff;
+h1{
+  text-align:center;
+  font-size:32px;
+  margin-bottom:8px;
+}
+.sub{
+  text-align:center;
+  color:#555;
+  margin-bottom:40px;
 }
 
-.pricing-grid{
+.plans{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:40px;
-  margin-top:50px;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px;
 }
 
-.card{
+.plan{
   background:#fff;
-  padding:40px;
-  border-radius:18px;
-  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:28px;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+  position:relative;
 }
-.card.featured{
-  border:2px solid var(--gold);
+
+.plan h2{
+  margin:0 0 6px;
 }
 
 .price{
-  font-size:36px;
-  font-weight:600;
+  font-size:28px;
+  font-weight:700;
   margin:12px 0;
 }
-.price span{
+
+.duration{
+  font-size:13px;
+  color:#777;
+}
+
+.plan ul{
+  list-style:none;
+  padding:0;
+  margin:20px 0;
+}
+
+.plan li{
+  margin-bottom:10px;
   font-size:14px;
-  color:var(--muted);
 }
 
-ul{
-  padding-left:18px;
-  line-height:1.9;
-}
-
-.btn{
-  display:inline-block;
-  margin-top:25px;
-  background:linear-gradient(135deg,var(--gold),var(--gold-soft));
-  color:#000;
-  padding:14px 38px;
-  border-radius:999px;
-  text-decoration:none;
-  font-weight:600;
-}
-
-/* FOOTER */
-footer{
-  background:#020617;
-  color:#9ca3af;
+.plan a{
+  display:block;
   text-align:center;
-  padding:40px 20px;
-  font-size:14px;
-}
-footer a{
-  color:var(--gold);
+  margin-top:18px;
+  background:#d6b25e;
+  color:#000;
+  padding:12px;
+  border-radius:30px;
+  font-weight:600;
   text-decoration:none;
 }
 
-/* WHATSAPP */
-.whatsapp{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:56px;
-  height:56px;
-  background:#25D366;
-  color:#fff;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:28px;
-  box-shadow:0 10px 25px rgba(0,0,0,.25);
-  z-index:9999;
+.highlight{
+  border:2px solid #d6b25e;
+}
+
+.section-title{
+  font-size:26px;
+  margin-bottom:6px;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">APD Global Trade</div>
-  <nav>
-    <a href="/index.html">Home</a>
-    <a href="/rfq.html">Buyer RFQs</a>
-    <a href="/membership.html">Membership</a>
-    <a href="/suppliers.html">Suppliers</a>
-    <a href="/contact.html">Contact</a>
-  </nav>
-</header>
-
-<section class="hero">
-  <h1>Supplier Membership Plans</h1>
-  <p>
-    APD Global Trade follows a controlled-access model.
-    Buyer contact details are shared only with approved and verified suppliers.
-  </p>
-</section>
-
-<!-- DOMESTIC SUPPLIERS -->
+<!-- ================= DOMESTIC ================= -->
 <section class="section">
-  <h2>Domestic Supplier Membership (India)</h2>
-  <p style="color:var(--muted); max-width:900px;">
-    Designed for Indian suppliers targeting both domestic and international buyer requirements.
-  </p>
+<h1>Domestic Supplier Membership (India)</h1>
+<p class="sub">Designed for Indian suppliers targeting both domestic and international buyer requirements.</p>
 
-  <div class="pricing-grid">
+<div class="plans">
 
-    <div class="card">
-      <h3>Domestic Basic</h3>
-      <div class="price">₹24,999 <span>/ 3 months</span></div>
-      <ul>
-        <li>✔ View verified domestic buyer RFQs</li>
-        <li>✔ Limited RFQ visibility</li>
-        <li>✔ Buyer contact details locked</li>
-        <li>✔ Email support</li>
-      </ul>
-      <a href="https://wa.me/919266418868" class="btn">Apply for Basic</a>
-    </div>
+<div class="plan">
+<h2>Domestic Basic</h2>
+<div class="price">₹24,999</div>
+<div class="duration">/ 3 months</div>
+<ul>
+<li>✔ View verified domestic buyer RFQs</li>
+<li>✔ Limited RFQ visibility</li>
+<li>✔ Buyer contact details locked</li>
+<li>✔ Email support</li>
+</ul>
+<a href="#">Apply for Basic</a>
+</div>
 
-    <div class="card featured">
-      <h3>Domestic Gold</h3>
-      <div class="price">₹59,999 <span>/ 6 months</span></div>
-      <ul>
-        <li>✔ Full domestic & international RFQ access</li>
-        <li>✔ Buyer contact details unlocked</li>
-        <li>✔ Priority RFQ notifications</li>
-        <li>✔ WhatsApp & email support</li>
-      </ul>
-      <a href="https://wa.me/919266418868" class="btn">Apply for Gold</a>
-    </div>
+<div class="plan highlight">
+<h2>Domestic Gold</h2>
+<div class="price">₹59,999</div>
+<div class="duration">/ 6 months</div>
+<ul>
+<li>✔ Full domestic & international RFQ access</li>
+<li>✔ Buyer contact details unlocked</li>
+<li>✔ Priority RFQ notifications</li>
+<li>✔ WhatsApp & email support</li>
+</ul>
+<a href="#">Apply for Gold</a>
+</div>
 
-    <div class="card">
-      <h3>Domestic Platinum</h3>
-      <div class="price">₹99,999 <span>/ 12 months</span></div>
-      <ul>
-        <li>✔ Full domestic & international RFQ access</li>
-        <li>✔ Buyer contact details unlocked</li>
-        <li>✔ Priority RFQ notifications</li>
-        <li>✔ WhatsApp & email support</li>
-      </ul>
-      <a href="https://wa.me/919266418868" class="btn">Apply for Platinum</a>
-    </div>
+<div class="plan">
+<h2>Domestic Platinum</h2>
+<div class="price">₹99,999</div>
+<div class="duration">/ 12 months</div>
+<ul>
+<li>✔ Full domestic & international RFQ access</li>
+<li>✔ Buyer contact details unlocked</li>
+<li>✔ Priority RFQ notifications</li>
+<li>✔ WhatsApp & email support</li>
+</ul>
+<a href="#">Apply for Platinum</a>
+</div>
 
-  </div>
+</div>
 </section>
 
-<!-- INTERNATIONAL SUPPLIERS -->
-<section class="section alt">
-  <h2>International Supplier Membership</h2>
-  <p style="color:var(--muted); max-width:900px;">
-    For exporters and manufacturers outside India targeting global buyer requirements.
-  </p>
-
-  <div class="pricing-grid">
-
-    <div class="card">
-      <h3>International Basic</h3>
-      <div class="price">USD 899 <span>/ 3 months</span></div>
-      <ul>
-        <li>✔ View verified international buyer RFQs</li>
-        <li>✔ Limited RFQ visibility</li>
-        <li>✔ Buyer contact details locked</li>
-        <li>✔ Email support</li>
-      </ul>
-      <a href="https://wa.me/919266418868" class="btn">Apply for Basic</a>
-    </div>
-
-    <div class="card featured">
-      <h3>International Gold</h3>
-      <div class="price">USD 1,799 <span>/ 6 months</span></div>
-      <ul>
-        <li>✔ Full international & domestic RFQ access</li>
-        <li>✔ Buyer contact details unlocked</li>
-        <li>✔ Priority RFQ notifications</li>
-        <li>✔ WhatsApp & email support</li>
-      </ul>
-      <a href="https://wa.me/919266418868" class="btn">Apply for Gold</a>
-    </div>
-
-    <div class="card">
-      <h3>International Platinum</h3>
-      <div class="price">USD 2,999 <span>/ 12 months</span></div>
-      <ul>
-        <li>✔ Full international & domestic RFQ access</li>
-        <li>✔ Buyer contact details unlocked</li>
-        <li>✔ Priority RFQ notifications</li>
-        <li>✔ Dedicated account assistance</li>
-      </ul>
-      <a href="https://wa.me/919266418868" class="btn">Apply for Platinum</a>
-    </div>
-
-  </div>
-</section>
-
+<!-- ================= INTERNATIONAL ================= -->
 <section class="section">
-  <p style="color:var(--muted); max-width:900px;">
-    ⚠ APD Global Trade does not guarantee orders or contracts.
-    We provide verified buyer information and controlled access to trade opportunities.
-    Final negotiations and transactions are conducted directly between buyers and suppliers.
-  </p>
+<h1>International Supplier Membership</h1>
+<p class="sub">For exporters and manufacturers outside India targeting global buyer requirements.</p>
+
+<div class="plans">
+
+<div class="plan">
+<h2>International Basic</h2>
+<div class="price">USD 899</div>
+<div class="duration">/ 3 months</div>
+<ul>
+<li>✔ View verified international buyer RFQs</li>
+<li>✔ Limited RFQ visibility</li>
+<li>✔ Buyer contact details locked</li>
+<li>✔ Email support</li>
+</ul>
+<a href="#">Apply for Basic</a>
+</div>
+
+<div class="plan highlight">
+<h2>International Gold</h2>
+<div class="price">USD 1,799</div>
+<div class="duration">/ 6 months</div>
+<ul>
+<li>✔ Full international & domestic RFQ access</li>
+<li>✔ Buyer contact details unlocked</li>
+<li>✔ Priority RFQ notifications</li>
+<li>✔ WhatsApp & email support</li>
+</ul>
+<a href="#">Apply for Gold</a>
+</div>
+
+<div class="plan">
+<h2>International Platinum</h2>
+<div class="price">USD 2,999</div>
+<div class="duration">/ 12 months</div>
+<ul>
+<li>✔ Full international & domestic RFQ access</li>
+<li>✔ Buyer contact details unlocked</li>
+<li>✔ Priority RFQ notifications</li>
+<li>✔ Dedicated account assistance</li>
+</ul>
+<a href="#">Apply for Platinum</a>
+</div>
+
+</div>
 </section>
-
-</section>
-
-<!-- ✅ GLOBAL FOOTER START -->
-<footer style="
-  background:#020617;
-  color:#9ca3af;
-  text-align:center;
-  padding:50px 20px;
-  font-size:14px;
-">
-
-  <p style="color:#c9a44a;font-weight:600;">
-    APD Global Trade
-  </p>
-
-  <p>
-    Elite B2B Trade Facilitation Platform
-  </p>
-
-  <p style="margin:14px 0;">
-    <a href="/terms.html" style="color:#c9a44a;text-decoration:none;">Terms</a> |
-    <a href="/privacy.html" style="color:#c9a44a;text-decoration:none;">Privacy</a> |
-    <a href="/disclaimer.html" style="color:#c9a44a;text-decoration:none;">Disclaimer</a>
-  </p>
-
-  <p>
-    📧 info@apdglobaltradehub.com <br>
-    ☎ +1 (202) 780-1366 <br>
-    💬 WhatsApp: +91 92664 18868
-  </p>
-
-  <p style="margin-top:18px;">
-    🌍 India · United States · United Arab Emirates · Global Partners
-  </p>
-
-  <p style="margin-top:18px;">
-    <a href="https://www.facebook.com/share/1At1wN1REj/"
-       target="_blank"
-       style="color:#1877f2;text-decoration:none;font-weight:600;">
-      Follow us on Facebook
-    </a>
-  </p>
-
-</footer>
-
-<!-- FLOATING WHATSAPP (GLOBAL) -->
-<a href="https://wa.me/919266418868"
-   target="_blank"
-   style="
-     position:fixed;
-     bottom:20px;
-     right:20px;
-     width:56px;
-     height:56px;
-     background:#25D366;
-     color:#fff;
-     border-radius:50%;
-     display:flex;
-     align-items:center;
-     justify-content:center;
-     font-size:28px;
-     box-shadow:0 10px 25px rgba(0,0,0,.25);
-     z-index:9999;
-     text-decoration:none;
-   ">
-  💬
-</a>
-<!-- ✅ GLOBAL FOOTER END -->
 
 </body>
 </html>
