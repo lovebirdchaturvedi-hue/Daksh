@@ -118,7 +118,6 @@ footer {
 
 <div class="dashboard">
 
-  <!-- SUPPLIER INFO -->
   <div class="welcome">
     <div class="card">
       <h2>Welcome, Supplier</h2>
@@ -135,7 +134,6 @@ footer {
     </div>
   </div>
 
-  <!-- UPGRADE CTA -->
   <div class="upgrade">
     <h2>Upgrade Your Membership</h2>
     <p>Unlock buyer contact details and premium RFQs.</p>
@@ -149,6 +147,7 @@ footer {
   <p>Elite B2B Trade Facilitation Platform</p>
 </footer>
 
+<!-- 🔥 FIREBASE LOGIC -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
@@ -175,9 +174,9 @@ onAuthStateChanged(auth, async (user) => {
   }
 
   const ref = doc(db, "suppliers", user.uid);
-  const snap = await getDoc(ref);
+  let snap = await getDoc(ref);
 
-  // AUTO-CREATE SUPPLIER DOC IF MISSING
+  // AUTO CREATE SUPPLIER DOC
   if (!snap.exists()) {
     await setDoc(ref, {
       email: user.email,
@@ -185,13 +184,19 @@ onAuthStateChanged(auth, async (user) => {
       plan: "free",
       createdAt: Date.now()
     });
-
-    statusEl.innerText = "pending";
-    planEl.innerText = "free";
-    return;
+    snap = await getDoc(ref);
   }
 
   const data = snap.data();
+
+  // 🔴 HARD BAN LOCK
+  if (data.status === "banned") {
+    alert("Your account has been banned. Contact support.");
+    await signOut(auth);
+    window.location.href = "/supplier-login.html";
+    return;
+  }
+
   statusEl.innerText = data.status || "pending";
   planEl.innerText = data.plan || "free";
 });
