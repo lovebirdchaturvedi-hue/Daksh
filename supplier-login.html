@@ -24,43 +24,17 @@ body{
   border-radius:18px;
   text-align:center;
 }
-h1{
-  font-family:'Playfair Display',serif;
-  margin-bottom:6px;
-}
-p{
-  color:#6b7280;
-  font-size:14px;
-}
-input{
+input,button{
   width:100%;
   padding:12px;
   margin-top:14px;
-  border-radius:10px;
-  border:1px solid #e5e7eb;
-  font-size:14px;
 }
 button{
-  width:100%;
-  padding:14px;
-  margin-top:18px;
   background:#c9a44a;
-  color:#000;
   border:none;
   border-radius:999px;
   font-weight:600;
   cursor:pointer;
-}
-.links{
-  margin-top:14px;
-  font-size:13px;
-}
-.links a{
-  color:#020617;
-  text-decoration:none;
-  font-weight:500;
-  display:block;
-  margin-top:6px;
 }
 </style>
 </head>
@@ -69,21 +43,16 @@ button{
 
 <div class="card">
   <h1>Supplier Login</h1>
-  <p>Access verified buyer RFQs</p>
 
-  <input type="email" id="email" placeholder="Email">
-  <input type="password" id="password" placeholder="Password">
+  <input id="email" type="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
 
   <button id="loginBtn">Login</button>
-
-  <div class="links">
-    <a href="#" id="forgotPassword">Forgot password?</a>
-  </div>
+  <p><a href="#" id="forgot">Forgot password?</a></p>
 </div>
 
 <script type="module">
-/* ===== IMPORTS ===== */
-import { auth, db } from "./js/firebase-init.js";
+import { auth, db } from "/assets/js/firebase-init.js";
 import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail
@@ -91,13 +60,12 @@ import {
 import { doc, getDoc }
   from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* ===== LOGIN ONLY ON BUTTON CLICK ===== */
-document.getElementById("loginBtn").addEventListener("click", async () => {
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
+document.getElementById("loginBtn").onclick = async () => {
+  const email = email.value.trim();
+  const password = password.value.trim();
 
   if (!email || !password) {
-    alert("Enter email & password");
+    alert("Enter email and password");
     return;
   }
 
@@ -108,27 +76,22 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
     const adminSnap = await getDoc(doc(db, "admin", user.uid));
 
     if (adminSnap.exists()) {
-      window.location.href = "/admin.html";
+      location.href = "/admin.html";
     } else {
-      window.location.href = "/supplier-dashboard.html";
+      location.href = "/supplier-dashboard.html";
     }
 
-  } catch (err) {
-    alert(err.message);
+  } catch (e) {
+    alert(e.message);
   }
-});
+};
 
-/* ===== FORGOT PASSWORD ===== */
-document.getElementById("forgotPassword").addEventListener("click", async (e) => {
+document.getElementById("forgot").onclick = async (e) => {
   e.preventDefault();
-  const email = document.getElementById("email").value.trim();
-  if (!email) {
-    alert("Enter email first");
-    return;
-  }
-  await sendPasswordResetEmail(auth, email);
+  if (!email.value) return alert("Enter email first");
+  await sendPasswordResetEmail(auth, email.value);
   alert("Password reset email sent");
-});
+};
 </script>
 
 </body>
