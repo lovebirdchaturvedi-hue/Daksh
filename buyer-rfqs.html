@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Live Buyer RFQs | Global Import Export Leads</title>
+
+<meta name="description" content="Browse live buyer RFQs from verified global importers. Contact details partially visible. Upgrade membership to unlock full access.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://www.apdglobaltrade.com/buyer-rfqs.html">
+
+<style>
+body{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  background:#f6f7f9;
+  color:#222;
+}
+.section{
+  max-width:1200px;
+  margin:auto;
+  padding:40px 20px;
+}
+h1{margin-bottom:8px}
+p{color:#555}
+
+.search-box input{
+  width:100%;
+  padding:12px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  margin:20px 0;
+  font-size:15px;
+}
+
+.rfq-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;
+}
+
+.rfq-card{
+  background:#fff;
+  border-radius:12px;
+  padding:18px;
+  box-shadow:0 10px 25px rgba(0,0,0,.07);
+  position:relative;
+}
+
+.rfq-card h3{
+  margin:10px 0;
+  font-size:18px;
+}
+
+.badge{
+  display:inline-block;
+  font-size:12px;
+  padding:5px 10px;
+  border-radius:20px;
+  margin-right:6px;
+}
+
+.priority{background:#ffe8cc;color:#a65b00}
+.verified{background:#e7f7ef;color:#1b7f4b}
+
+.meta{font-size:14px;color:#444;margin:6px 0}
+.qty{font-weight:600;margin-top:10px}
+
+.contact{
+  font-size:14px;
+  margin-top:10px;
+  background:#f2f3f5;
+  padding:8px;
+  border-radius:6px;
+}
+
+.locked{
+  margin-top:12px;
+  font-size:14px;
+  color:#a00;
+}
+
+.locked a{
+  display:inline-block;
+  margin-top:6px;
+  color:#0a66ff;
+  font-weight:600;
+  text-decoration:none;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  background:#0f172a;
+  color:#c9a44a;
+}
+
+.sticky-cta{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#0a66ff;
+  padding:14px;
+  text-align:center;
+  z-index:999;
+}
+
+.sticky-cta a{
+  color:#fff;
+  font-size:16px;
+  font-weight:600;
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= PRIORITY RFQs ================= -->
+<section class="section">
+<h1>Priority Buyer RFQs</h1>
+<p>High-demand requirements from verified buyers.</p>
+
+<div class="search-box">
+  <input id="searchInput" placeholder="Search product or country">
+</div>
+
+<div class="rfq-grid" id="priorityRFQs"></div>
+</section>
+
+<!-- ================= OTHER RFQs ================= -->
+<section class="section">
+<h1>Other Live Buyer RFQs</h1>
+<p>Ongoing global buyer requirements.</p>
+
+<div class="rfq-grid" id="mockRFQs"></div>
+</section>
+
+<footer>
+<p>APD Global Trade</p>
+<p>Elite B2B Trade Facilitation Platform</p>
+</footer>
+
+<div class="sticky-cta">
+<a href="/membership.html">🔓 Unlock Buyer Contacts</a>
+</div>
+
+<!-- ================= PRIORITY RFQ DATA ================= -->
+<script>
+const priorityRFQs = [
+  {
+    product:"IR-64 White Rice",
+    country:"Saudi Arabia",
+    industry:"Agriculture",
+    quantity:"26 MT",
+    email:"buyer@ri*******.com",
+    phone:"Not Available",
+    verified:true
+  },
+  {
+    product:"Refined Sunflower Oil",
+    country:"Netherlands",
+    industry:"Edible Oils",
+    quantity:"200 MT",
+    email:"procurement@su*******.nl",
+    phone:"Not Available",
+    verified:true
+  },
+  {
+    product:"ICUMSA 45 Sugar",
+    country:"Tanzania",
+    industry:"Food Commodities",
+    quantity:"250 MT",
+    email:"trade@su*******.tz",
+    phone:"Not Available",
+    verified:true
+  }
+];
+
+const priorityGrid=document.getElementById("priorityRFQs");
+
+priorityRFQs.forEach(rfq=>{
+  const card=document.createElement("div");
+  card.className="rfq-card";
+  card.innerHTML=`
+    <span class="badge priority">PRIORITY RFQ</span>
+    ${rfq.verified ? `<span class="badge verified">Verified Buyer</span>` : ""}
+    <h3>${rfq.product}</h3>
+    <div class="meta">Industry: ${rfq.industry}</div>
+    <div class="meta">Country: ${rfq.country}</div>
+    <div class="qty">Quantity: ${rfq.quantity}</div>
+
+    <div class="contact">
+      📧 ${rfq.email}<br>
+      📞 ${rfq.phone}
+    </div>
+
+    <div class="locked">
+      🔒 Full buyer contact available to Gold & Platinum suppliers only<br>
+      <a href="/membership.html">Upgrade Membership</a>
+    </div>
+  `;
+  priorityGrid.appendChild(card);
+});
+</script>
+
+<!-- ================= MOCK RFQs ================= -->
+<script>
+const products=["Basmati Rice","Sugar ICUMSA 45","Soybean Oil","HDPE Bags","LED Lights"];
+const countries=["UAE","UK","Germany","Nigeria","France"];
+const mockGrid=document.getElementById("mockRFQs");
+
+for(let i=1;i<=30;i++){
+  const card=document.createElement("div");
+  card.className="rfq-card";
+  card.innerHTML=`
+    <h3>${products[Math.floor(Math.random()*products.length)]}</h3>
+    <div class="meta">Country: ${countries[Math.floor(Math.random()*countries.length)]}</div>
+    <div class="qty">Quantity: ${Math.floor(Math.random()*900+50)} MT</div>
+
+    <div class="contact">
+      📧 buyer${i}@ex*******.com<br>
+      📞 Not Available
+    </div>
+
+    <div class="locked">
+      🔒 Contact unlock requires membership<br>
+      <a href="/membership.html">Upgrade Membership</a>
+    </div>
+  `;
+  mockGrid.appendChild(card);
+}
+</script>
+
+<!-- ================= SEARCH ================= -->
+<script>
+document.getElementById("searchInput").addEventListener("input",function(){
+  const v=this.value.toLowerCase();
+  document.querySelectorAll(".rfq-card").forEach(card=>{
+    card.style.display=card.innerText.toLowerCase().includes(v)?"block":"none";
+  });
+});
+</script>
+
+</body>
+</html>
