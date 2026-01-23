@@ -198,18 +198,20 @@ onAuthStateChanged(auth, async (user) => {
   }
 
   supplierPlan = data.plan || "free";
+  const planNormalized = supplierPlan.trim().toLowerCase();
+
   statusEl.innerText = data.status;
   planEl.innerText = supplierPlan;
 
-  if (supplierPlan === "free") {
+  if (planNormalized === "free") {
     upgradeBox.style.display = "block";
   }
 
-  loadRFQs();
+  loadRFQs(planNormalized);
 });
 
 /* 📦 RFQS */
-async function loadRFQs() {
+async function loadRFQs(planNormalized) {
   const snap = await getDocs(collection(db, "rfqs"));
   rfqList.innerHTML = "";
 
@@ -218,12 +220,12 @@ async function loadRFQs() {
 
     rfqList.innerHTML += `
       <div class="rfq">
-        <strong>${r.product}</strong><br>
-        Quantity: ${r.quantity}<br>
+        <strong>${r.product || "Product"}</strong><br>
+        Quantity: ${r.quantity || "-"}<br>
         ${
-          supplierPlan === "free"
-          ? `<div class="lock">🔒 Upgrade to view contact</div>`
-          : `<div>📞 ${r.phone || "N/A"}</div>`
+          planNormalized === "free"
+            ? `<div class="lock">🔒 Upgrade to view contact</div>`
+            : `<div>📞 ${r.phone || "Contact not provided"}</div>`
         }
       </div>
     `;
@@ -236,6 +238,8 @@ logoutBtn.onclick = async () => {
   location.href = "/supplier-login.html";
 };
 </script>
+
+<!-- WhatsApp Button -->
 <a href="https://wa.me/919266418868"
    target="_blank"
    style="
@@ -259,4 +263,3 @@ logoutBtn.onclick = async () => {
 
 </body>
 </html>
-
