@@ -4,9 +4,8 @@
 <meta charset="UTF-8">
 <title>Live Buyer RFQs | APD Global Trade</title>
 
-<meta name="description" content="Browse live buyer RFQs from verified global importers. Upgrade membership to unlock buyer contacts.">
+<meta name="description" content="Browse live buyer RFQs from global importers. Upgrade membership to unlock buyer contacts.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="canonical" href="https://www.apdglobaltrade.com/buyer-rfqs.html">
 
 <style>
 body{
@@ -43,7 +42,6 @@ p{color:#555}
   border-radius:12px;
   padding:18px;
   box-shadow:0 10px 25px rgba(0,0,0,.07);
-  position:relative;
 }
 
 .rfq-card h3{
@@ -102,7 +100,6 @@ footer{
   background:#0a66ff;
   padding:14px;
   text-align:center;
-  z-index:999;
 }
 
 .sticky-cta a{
@@ -116,7 +113,6 @@ footer{
 
 <body>
 
-<!-- ================= PRIORITY RFQs ================= -->
 <section class="section">
 <h1>Priority Buyer RFQs</h1>
 <p>High-demand requirements from verified buyers.</p>
@@ -128,7 +124,6 @@ footer{
 <div class="rfq-grid" id="priorityRFQs"></div>
 </section>
 
-<!-- ================= OTHER RFQs ================= -->
 <section class="section">
 <h1>Other Live Buyer RFQs</h1>
 <p>Ongoing global buyer requirements.</p>
@@ -145,79 +140,77 @@ footer{
 <a href="/membership.html">🔓 Unlock Buyer Contacts</a>
 </div>
 
-<!-- ================= FIREBASE + FIRESTORE ================= -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  query,
-  where,
-  orderBy,
-  getDocs
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-/* ✅ YOUR REAL CONFIG (ALREADY ADDED) */
-const firebaseConfig = {
-  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-  authDomain: "apd-globaltrade-prod.firebaseapp.com",
-  projectId: "apd-globaltrade-prod",
-  storageBucket: "apd-globaltrade-prod.firebasestorage.app",
-  messagingSenderId: "226407312435",
-  appId: "1:226407312435:web:f8a54b1132af3899170746"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+<script>
+const rfqs = [
+  {
+    product:"IR-64 White Rice",
+    industry:"Agriculture",
+    country:"Saudi Arabia",
+    quantity:"26 MT",
+    email:"buyer@ri*******.com",
+    priority:true,
+    verified:true
+  },
+  {
+    product:"ICUMSA 45 Sugar",
+    industry:"Food Commodities",
+    country:"Tanzania",
+    quantity:"250 MT",
+    email:"trade@su*******.tz",
+    priority:true,
+    verified:true
+  },
+  {
+    product:"Refined Sunflower Oil",
+    industry:"Edible Oils",
+    country:"Netherlands",
+    quantity:"200 MT",
+    email:"procurement@su*******.nl",
+    priority:false,
+    verified:false
+  },
+  {
+    product:"HDPE Packaging Bags",
+    industry:"Packaging",
+    country:"UAE",
+    quantity:"100 MT",
+    email:"buyer@pa*******.ae",
+    priority:false,
+    verified:false
+  }
+];
 
 const priorityGrid = document.getElementById("priorityRFQs");
 const otherGrid = document.getElementById("otherRFQs");
 
-async function loadRFQs() {
-  const q = query(
-    collection(db,"rfqs"),
-    where("status","==","active"),
-    orderBy("createdAt","desc")
-  );
+rfqs.forEach(r=>{
+  const card=document.createElement("div");
+  card.className="rfq-card";
+  card.innerHTML=`
+    ${r.priority ? `<span class="badge priority">PRIORITY RFQ</span>` : ""}
+    ${r.verified ? `<span class="badge verified">Verified Buyer</span>` : ""}
+    <h3>${r.product}</h3>
+    <div class="meta">Industry: ${r.industry}</div>
+    <div class="meta">Country: ${r.country}</div>
+    <div class="qty">Quantity: ${r.quantity}</div>
 
-  const snap = await getDocs(q);
+    <div class="contact">
+      📧 ${r.email}<br>
+      📞 Not Available
+    </div>
 
-  snap.forEach(doc=>{
-    const r = doc.data();
-    const card = document.createElement("div");
-    card.className="rfq-card";
+    <div class="locked">
+      🔒 Full buyer contact available to members<br>
+      <a href="/membership.html">Upgrade Membership</a>
+    </div>
+  `;
+  r.priority ? priorityGrid.appendChild(card) : otherGrid.appendChild(card);
+});
 
-    card.innerHTML = `
-      ${r.priority ? `<span class="badge priority">PRIORITY RFQ</span>` : ""}
-      ${r.verifiedBuyer ? `<span class="badge verified">Verified Buyer</span>` : ""}
-      <h3>${r.product}</h3>
-      <div class="meta">Industry: ${r.industry}</div>
-      <div class="meta">Country: ${r.country}</div>
-      <div class="qty">Quantity: ${r.quantity}</div>
-
-      <div class="contact">
-        📧 ${r.emailMasked}<br>
-        📞 ${r.phone || "Not Available"}
-      </div>
-
-      <div class="locked">
-        🔒 Full buyer contact available to members<br>
-        <a href="/membership.html">Upgrade Membership</a>
-      </div>
-    `;
-
-    r.priority ? priorityGrid.appendChild(card) : otherGrid.appendChild(card);
-  });
-}
-
-loadRFQs();
-
-/* 🔍 SEARCH */
 document.getElementById("searchInput").addEventListener("input",function(){
   const v=this.value.toLowerCase();
-  document.querySelectorAll(".rfq-card").forEach(card=>{
-    card.style.display = card.innerText.toLowerCase().includes(v)
-      ? "block" : "none";
+  document.querySelectorAll(".rfq-card").forEach(c=>{
+    c.style.display=c.innerText.toLowerCase().includes(v)?"block":"none";
   });
 });
 </script>
