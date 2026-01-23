@@ -2,110 +2,103 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Live Buyer RFQs | APD Global Trade</title>
+<title>Buyer RFQs | APD Global Trade</title>
 
-<meta name="description" content="Browse live buyer RFQs from global importers. Upgrade membership to unlock buyer contacts.">
+<meta name="description" content="Browse live buyer RFQs from global importers and distributors on APD Global Trade.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+*{box-sizing:border-box}
 body{
   margin:0;
-  font-family:Inter,Arial,sans-serif;
+  font-family:Arial, Helvetica, sans-serif;
   background:#f6f7f9;
-  color:#222;
+  color:#111;
 }
-.section{
+.container{
   max-width:1200px;
   margin:auto;
   padding:40px 20px;
 }
-h1{margin-bottom:8px}
-p{color:#555}
+h1{margin:0 0 8px}
+p{color:#555;margin:0 0 20px}
 
-.search-box input{
+.search input{
   width:100%;
   padding:12px;
-  border-radius:8px;
-  border:1px solid #ccc;
-  margin:20px 0;
   font-size:15px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  margin-bottom:30px;
 }
 
-.rfq-grid{
+.grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:20px;
 }
 
-.rfq-card{
+.card{
   background:#fff;
-  border-radius:12px;
+  border-radius:10px;
   padding:18px;
-  box-shadow:0 10px 25px rgba(0,0,0,.07);
-}
-
-.rfq-card h3{
-  margin:10px 0;
-  font-size:18px;
+  box-shadow:0 8px 20px rgba(0,0,0,.08);
 }
 
 .badge{
   display:inline-block;
   font-size:12px;
-  padding:5px 10px;
+  padding:4px 10px;
   border-radius:20px;
   margin-right:6px;
 }
+.priority{background:#ffe7c7;color:#9a4f00}
+.verified{background:#e6f6ee;color:#0b6b3a}
 
-.priority{background:#ffe8cc;color:#a65b00}
-.verified{background:#e7f7ef;color:#1b7f4b}
-
-.meta{font-size:14px;color:#444;margin:6px 0}
-.qty{font-weight:600;margin-top:10px}
-
-.contact{
+.meta{
   font-size:14px;
+  color:#444;
+  margin:6px 0;
+}
+.qty{
+  font-weight:bold;
   margin-top:10px;
-  background:#f2f3f5;
-  padding:8px;
-  border-radius:6px;
 }
 
-.locked{
+.lock{
   margin-top:12px;
+  padding:10px;
+  background:#f1f2f4;
+  border-radius:6px;
   font-size:14px;
-  color:#a00;
 }
-
-.locked a{
-  display:inline-block;
-  margin-top:6px;
-  color:#0a66ff;
-  font-weight:600;
+.lock a{
+  color:#0057ff;
+  font-weight:bold;
   text-decoration:none;
 }
 
 footer{
-  text-align:center;
+  margin-top:60px;
   padding:30px;
+  text-align:center;
   background:#0f172a;
   color:#c9a44a;
 }
 
-.sticky-cta{
+.sticky{
   position:fixed;
   bottom:0;
   left:0;
   right:0;
-  background:#0a66ff;
-  padding:14px;
+  background:#0057ff;
   text-align:center;
+  padding:14px;
 }
-
-.sticky-cta a{
+.sticky a{
   color:#fff;
   font-size:16px;
-  font-weight:600;
+  font-weight:bold;
   text-decoration:none;
 }
 </style>
@@ -113,31 +106,28 @@ footer{
 
 <body>
 
-<section class="section">
-<h1>Priority Buyer RFQs</h1>
-<p>High-demand requirements from verified buyers.</p>
+<div class="container">
+  <h1>Live Buyer RFQs</h1>
+  <p>High-demand buyer requirements from global importers.</p>
 
-<div class="search-box">
-  <input id="searchInput" placeholder="Search product or country">
+  <div class="search">
+    <input id="searchBox" placeholder="Search product or country">
+  </div>
+
+  <h2>Priority Buyer RFQs</h2>
+  <div class="grid" id="priority"></div>
+
+  <h2 style="margin-top:40px;">Other Live Buyer RFQs</h2>
+  <div class="grid" id="other"></div>
 </div>
 
-<div class="rfq-grid" id="priorityRFQs"></div>
-</section>
-
-<section class="section">
-<h1>Other Live Buyer RFQs</h1>
-<p>Ongoing global buyer requirements.</p>
-
-<div class="rfq-grid" id="otherRFQs"></div>
-</section>
-
 <footer>
-<p>APD Global Trade</p>
-<p>Elite B2B Trade Facilitation Platform</p>
+  <div>APD Global Trade</div>
+  <div>Elite B2B Trade Facilitation Platform</div>
 </footer>
 
-<div class="sticky-cta">
-<a href="/membership.html">🔓 Unlock Buyer Contacts</a>
+<div class="sticky">
+  <a href="/membership.html">🔓 Unlock Buyer Contacts</a>
 </div>
 
 <script>
@@ -147,7 +137,6 @@ const rfqs = [
     industry:"Agriculture",
     country:"Saudi Arabia",
     quantity:"26 MT",
-    email:"buyer@ri*******.com",
     priority:true,
     verified:true
   },
@@ -156,16 +145,14 @@ const rfqs = [
     industry:"Food Commodities",
     country:"Tanzania",
     quantity:"250 MT",
-    email:"trade@su*******.tz",
     priority:true,
     verified:true
   },
   {
-    product:"Refined Sunflower Oil",
+    product:"Sunflower Oil",
     industry:"Edible Oils",
     country:"Netherlands",
     quantity:"200 MT",
-    email:"procurement@su*******.nl",
     priority:false,
     verified:false
   },
@@ -174,42 +161,35 @@ const rfqs = [
     industry:"Packaging",
     country:"UAE",
     quantity:"100 MT",
-    email:"buyer@pa*******.ae",
     priority:false,
     verified:false
   }
 ];
 
-const priorityGrid = document.getElementById("priorityRFQs");
-const otherGrid = document.getElementById("otherRFQs");
+const priority=document.getElementById("priority");
+const other=document.getElementById("other");
 
 rfqs.forEach(r=>{
-  const card=document.createElement("div");
-  card.className="rfq-card";
-  card.innerHTML=`
-    ${r.priority ? `<span class="badge priority">PRIORITY RFQ</span>` : ""}
-    ${r.verified ? `<span class="badge verified">Verified Buyer</span>` : ""}
+  const d=document.createElement("div");
+  d.className="card";
+  d.innerHTML=`
+    ${r.priority?'<span class="badge priority">PRIORITY</span>':''}
+    ${r.verified?'<span class="badge verified">VERIFIED</span>':''}
     <h3>${r.product}</h3>
     <div class="meta">Industry: ${r.industry}</div>
     <div class="meta">Country: ${r.country}</div>
     <div class="qty">Quantity: ${r.quantity}</div>
-
-    <div class="contact">
-      📧 ${r.email}<br>
-      📞 Not Available
-    </div>
-
-    <div class="locked">
-      🔒 Full buyer contact available to members<br>
+    <div class="lock">
+      🔒 Buyer contact available for members only<br>
       <a href="/membership.html">Upgrade Membership</a>
     </div>
   `;
-  r.priority ? priorityGrid.appendChild(card) : otherGrid.appendChild(card);
+  r.priority ? priority.appendChild(d) : other.appendChild(d);
 });
 
-document.getElementById("searchInput").addEventListener("input",function(){
-  const v=this.value.toLowerCase();
-  document.querySelectorAll(".rfq-card").forEach(c=>{
+document.getElementById("searchBox").addEventListener("input",e=>{
+  const v=e.target.value.toLowerCase();
+  document.querySelectorAll(".card").forEach(c=>{
     c.style.display=c.innerText.toLowerCase().includes(v)?"block":"none";
   });
 });
