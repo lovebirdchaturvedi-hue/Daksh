@@ -1,119 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Submit RFQ | APD Global Trade</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-<style>
-body {
-  margin:0;
-  font-family:Inter,sans-serif;
-  background:#f5f7fb;
-  color:#0f172a;
-}
-header {
-  height:80px;
-  background:#071427;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-header .logo {
-  color:#c9a44a;
-  font-weight:600;
-}
-.section {
-  max-width:700px;
-  margin:auto;
-  padding:80px 20px;
-}
-form {
-  background:#fff;
-  padding:40px;
-  border-radius:16px;
-  border:1px solid #e5e7eb;
-}
-input, textarea {
-  width:100%;
-  padding:12px;
-  margin-bottom:16px;
-  border-radius:8px;
-  border:1px solid #cbd5e1;
-  font-family:Inter;
-}
-button {
-  background:#020617;
-  color:#fff;
-  padding:14px;
-  border:none;
-  border-radius:999px;
-  width:100%;
-  font-size:15px;
-  font-weight:600;
-  cursor:pointer;
-}
-.success {
-  background:#dcfce7;
-  color:#166534;
-  padding:14px;
-  border-radius:10px;
-  margin-top:16px;
-  display:none;
-}
-</style>
+  <meta charset="UTF-8">
+  <title>Buyer RFQs | APD Global Trade</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-
-<header>
-  <div class="logo">APD Global Trade</div>
-</header>
-
-<section class="section">
-  <h1>Submit Your Buying Requirement</h1>
-  <p>Your RFQ will be shared with verified suppliers.</p>
-
-  <form id="rfqForm">
-
-    <h3>Buyer Contact Details</h3>
-
-    <input id="buyer_name" placeholder="Buyer Full Name" required>
-    <input id="buyer_email" type="email" placeholder="Buyer Email" required>
-    <input id="buyer_phone" placeholder="Buyer Phone / WhatsApp" required>
-    <input id="buyer_company" placeholder="Company Name" required>
-    <input id="buyer_country" placeholder="Country" required>
-
-    <hr style="margin:30px 0;">
-
-    <h3>Buying Requirement</h3>
-
-    <input id="product" placeholder="Product Required" required>
-    <input id="quantity" placeholder="Quantity (e.g. 50 MT)" required>
-    <input id="destination" placeholder="Delivery Destination" required>
-    <textarea id="requirements" placeholder="Specifications & details" required></textarea>
-
-    <button type="submit">Submit RFQ</button>
-
-    <div class="success" id="successMsg">
-      ✅ RFQ submitted successfully. Suppliers will contact you shortly.
-    </div>
-
-  </form>
-</section>
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-/* 🔥 SINGLE SOURCE OF TRUTH */
 const firebaseConfig = {
   apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
   authDomain: "apd-globaltrade-prod.firebaseapp.com",
@@ -121,40 +18,21 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const auth = getAuth(app);
 
-const form = document.getElementById("rfqForm");
-const successMsg = document.getElementById("successMsg");
+/*
+  RULE:
+  - Logged-in supplier → dashboard
+  - Not logged in → buyer RFQ form
+*/
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  try {
-    await addDoc(collection(db, "rfqs"), {
-      buyerName: buyer_name.value.trim(),
-      buyerEmail: buyer_email.value.trim(),
-      phone: buyer_phone.value.trim(),     // 🔑 used for GOLD unlock
-      company: buyer_company.value.trim(),
-      country: buyer_country.value.trim(),
-
-      product: product.value.trim(),
-      quantity: quantity.value.trim(),
-      destination: destination.value.trim(),
-      requirements: requirements.value.trim(),
-
-      status: "approved",                  // visible instantly
-      createdAt: serverTimestamp()
-    });
-
-    form.reset();
-    successMsg.style.display = "block";
-
-  } catch (err) {
-    console.error("RFQ ERROR:", err);
-    alert("Something went wrong. Please try again.");
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    window.location.replace("/supplier-dashboard.html");
+  } else {
+    window.location.replace("/create-rfq.html");
   }
 });
 </script>
-
 </body>
 </html>
