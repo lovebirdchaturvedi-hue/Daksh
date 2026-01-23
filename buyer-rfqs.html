@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Live Buyer RFQs | Global Import Export Leads</title>
+<title>Live Buyer RFQs | APD Global Trade</title>
 
-<meta name="description" content="Browse live buyer RFQs from global importers. Upgrade membership to unlock buyer contacts and respond to RFQs.">
+<meta name="description" content="Browse live buyer RFQs from verified global importers. Upgrade membership to unlock buyer contacts.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://www.apdglobaltrade.com/buyer-rfqs.html">
 
@@ -157,11 +157,14 @@ import {
   getDocs
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* 🔥 REPLACE WITH YOUR OWN CONFIG */
+/* ✅ YOUR REAL CONFIG (ALREADY ADDED) */
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID"
+  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+  authDomain: "apd-globaltrade-prod.firebaseapp.com",
+  projectId: "apd-globaltrade-prod",
+  storageBucket: "apd-globaltrade-prod.firebasestorage.app",
+  messagingSenderId: "226407312435",
+  appId: "1:226407312435:web:f8a54b1132af3899170746"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -209,11 +212,11 @@ async function loadRFQs() {
 
 loadRFQs();
 
-/* 🔍 SEARCH FILTER */
+/* 🔍 SEARCH */
 document.getElementById("searchInput").addEventListener("input",function(){
-  const value=this.value.toLowerCase();
+  const v=this.value.toLowerCase();
   document.querySelectorAll(".rfq-card").forEach(card=>{
-    card.style.display = card.innerText.toLowerCase().includes(value)
+    card.style.display = card.innerText.toLowerCase().includes(v)
       ? "block" : "none";
   });
 });
