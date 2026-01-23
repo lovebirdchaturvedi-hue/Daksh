@@ -225,7 +225,7 @@ async function loadRFQs(plan) {
             ? `<div class="lock">🔒 Upgrade to view contact</div>`
             : `
               <div>📞 ${r.phone || "Not provided"}</div>
-              <div>📧 ${r.email || "Not provided"}</div>
+              <div>📧 ${r.buyerEmail || "Not provided"}</div>
               ${
                 r.phone
                   ? `<a href="https://wa.me/${r.phone}" target="_blank">💬 WhatsApp</a>`
