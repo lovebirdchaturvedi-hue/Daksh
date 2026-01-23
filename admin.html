@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Admin Dashboard</title>
+<title>Admin Dashboard | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
 
 <h1>Admin Dashboard</h1>
-<button id="logout">Logout</button>
+<button id="logoutBtn">Logout</button>
 
 <script type="module">
 import { auth, db } from "/assets/js/firebase-init.js";
@@ -20,20 +20,20 @@ import { doc, getDoc }
 
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
-    location.href = "/supplier-login.html";
+    window.location.href = "/supplier-login.html";
     return;
   }
 
   const adminSnap = await getDoc(doc(db, "admin", user.uid));
   if (!adminSnap.exists()) {
     alert("Access denied");
-    location.href = "/supplier-dashboard.html";
+    window.location.href = "/supplier-dashboard.html";
   }
 });
 
-logout.onclick = async () => {
+document.getElementById("logoutBtn").onclick = async () => {
   await signOut(auth);
-  location.href = "/supplier-login.html";
+  window.location.href = "/supplier-login.html";
 };
 </script>
 
