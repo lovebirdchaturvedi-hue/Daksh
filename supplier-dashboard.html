@@ -5,30 +5,15 @@
 <title>Supplier Dashboard | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
 <style>
 body{margin:0;font-family:Inter,sans-serif;background:#f5f7fb}
 header{
-  background:#071427;
-  color:#c9a44a;
-  padding:20px 40px;
-  display:flex;
-  justify-content:space-between;
+  background:#071427;color:#c9a44a;
+  padding:20px 40px;display:flex;justify-content:space-between
 }
-a{color:#e5e7eb;text-decoration:none;margin-left:20px}
 .card{
-  max-width:600px;
-  margin:80px auto;
-  background:#fff;
-  padding:30px;
-  border-radius:16px;
-}
-footer{
-  background:#020617;
-  color:#9ca3af;
-  text-align:center;
-  padding:40px 20px;
+  max-width:600px;margin:80px auto;
+  background:#fff;padding:30px;border-radius:16px
 }
 </style>
 </head>
@@ -45,48 +30,61 @@ footer{
 </header>
 
 <div class="card">
-  <h2>Welcome, Supplier</h2>
-  <p>Status: approved</p>
-  <p>Plan: gold</p>
+  <h2 id="welcome">Welcome</h2>
+  <p>Status: <b id="status"></b></p>
+  <p>Plan: <b id="plan"></b></p>
 </div>
 
-<footer>
-  <strong>APD Global Trade</strong><br>
-  Elite B2B Trade Facilitation Platform<br><br>
-  <a href="/terms.html">Terms</a> |
-  <a href="/privacy.html">Privacy</a> |
-  <a href="/disclaimer.html">Disclaimer</a><br><br>
-  📧 info@apdglobaltradehub.com<br>
-  ☎ +1 (202) 780-1366<br>
-  💬 WhatsApp: +91 92664 18868
+<!-- FOOTER -->
+<footer style="background:#020617;color:#9ca3af;text-align:center;padding:40px 20px">
+<p style="color:#c9a44a;font-weight:600">APD Global Trade</p>
+<p>Elite B2B Trade Facilitation Platform</p>
+<p>
+<a href="/terms.html" style="color:#c9a44a">Terms</a> |
+<a href="/privacy.html" style="color:#c9a44a">Privacy</a> |
+<a href="/disclaimer.html" style="color:#c9a44a">Disclaimer</a>
+</p>
+<p>
+📧 info@apdglobaltradehub.com<br>
+☎ +1 (202) 780-1366<br>
+💬 WhatsApp: +91 92664 18868
+</p>
 </footer>
+
+<a href="https://wa.me/919266418868" target="_blank"
+style="position:fixed;bottom:20px;right:20px;width:56px;height:56px;
+background:#25D366;color:#fff;border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+font-size:28px;box-shadow:0 10px 25px rgba(0,0,0,.25);
+z-index:9999;text-decoration:none">💬</a>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth,onAuthStateChanged,signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore,doc,getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const ADMIN_EMAIL = "admin@apdglobaltrade.com";
-
-const app = initializeApp({
+const app=initializeApp({
   apiKey:"AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
   authDomain:"apd-globaltrade-prod.firebaseapp.com",
   projectId:"apd-globaltrade-prod"
 });
 
-const auth = getAuth(app);
+const auth=getAuth(app);
+const db=getFirestore(app);
 
-onAuthStateChanged(auth,user=>{
-  if(!user){
-    location.href="/supplier-login.html";
-    return;
-  }
+onAuthStateChanged(auth,async user=>{
+  if(!user) return location.href="/supplier-login.html";
 
-  if(user.email === ADMIN_EMAIL){
-    location.href="/admin.html";
-  }
+  const snap=await getDoc(doc(db,"suppliers",user.uid));
+  if(!snap.exists()) return alert("Supplier profile missing");
+
+  const s=snap.data();
+  document.getElementById("welcome").innerText="Welcome, "+(s.companyName||"Supplier");
+  document.getElementById("status").innerText=s.status;
+  document.getElementById("plan").innerText=s.plan;
 });
 
-document.getElementById("logout").onclick = async ()=>{
+document.getElementById("logout").onclick=async()=>{
   await signOut(auth);
   location.href="/supplier-login.html";
 };
@@ -94,6 +92,3 @@ document.getElementById("logout").onclick = async ()=>{
 
 </body>
 </html>
-
-
-
