@@ -5,9 +5,7 @@
 <title>Supplier Registration | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 body{
@@ -25,24 +23,14 @@ body{
   box-shadow:0 25px 60px rgba(0,0,0,.1);
 }
 
-h1{
-  font-family:'Playfair Display',serif;
-  text-align:center;
-  margin-bottom:20px;
-}
+h1{text-align:center;margin-bottom:20px}
 
-input, textarea{
+input{
   width:100%;
   padding:14px;
   margin-bottom:14px;
   border-radius:10px;
   border:1px solid #e5e7eb;
-  font-family:Inter,sans-serif;
-}
-
-textarea{
-  resize:none;
-  height:90px;
 }
 
 button{
@@ -56,10 +44,8 @@ button{
   cursor:pointer;
 }
 
-button:disabled{
-  opacity:.6;
-  cursor:not-allowed;
-}
+#error{color:#dc2626;text-align:center;margin-top:10px}
+#success{color:#16a34a;text-align:center;margin-top:10px}
 </style>
 </head>
 
@@ -68,29 +54,33 @@ button:disabled{
 <div class="form">
   <h1>Supplier Registration</h1>
 
-  <input id="company" placeholder="Company Name">
-  <input id="contact" placeholder="Contact Number / WhatsApp">
-  <input id="email" type="email" placeholder="Email">
-  <textarea id="product" placeholder="Which Product do you supply?"></textarea>
-  <input id="password" type="password" placeholder="Your Password">
+  <input id="company" placeholder="Company Name" required>
+  <input id="contact" placeholder="Contact Number" required>
+  <input id="product" placeholder="Which Product?" required>
+  <input id="email" type="email" placeholder="Email" required>
+  <input id="password" type="password" placeholder="Password" required>
 
   <button id="submitBtn">Submit Application</button>
+
+  <div id="error"></div>
+  <div id="success"></div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { 
-  getAuth, 
-  createUserWithEmailAndPassword 
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { 
-  getFirestore, 
-  doc, 
-  setDoc, 
-  serverTimestamp 
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* 🔐 Firebase Config */
+/* 🔥 FIREBASE CONFIG */
 const firebaseConfig = {
   apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
   authDomain: "apd-globaltrade-prod.firebaseapp.com",
@@ -101,56 +91,53 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const submitBtn = document.getElementById("submitBtn");
+const error = document.getElementById("error");
+const success = document.getElementById("success");
 
-submitBtn.addEventListener("click", async () => {
-  try {
-    const company = companyEl.value.trim();
-    const contact = contactEl.value.trim();
-    const email = emailEl.value.trim();
-    const product = productEl.value.trim();
-    const password = passwordEl.value;
+document.getElementById("submitBtn").onclick = async () => {
+  error.textContent = "";
+  success.textContent = "";
 
-    if (!company || !contact || !email || !product || !password) {
-      alert("Please fill all fields");
-      return;
-    }
+  const company = company.value.trim();
+  const contact = contact.value.trim();
+  const product = product.value.trim();
+  const email = email.value.trim();
+  const password = password.value;
 
-    submitBtn.disabled = true;
-    submitBtn.innerText = "Submitting...";
+  if(!company || !contact || !product || !email || !password){
+    error.textContent = "Please fill all fields";
+    return;
+  }
 
-    // 1️⃣ Create Auth user
-    const cred = await createUserWithEmailAndPassword(auth, email, password);
+  try{
+    // 1️⃣ Create Auth User
+    const cred = await createUserWithEmailAndPassword(auth,email,password);
     const user = cred.user;
 
-    // 2️⃣ Firestore Supplier Record
-    await setDoc(doc(db, "suppliers", user.uid), {
+    // 2️⃣ Save Firestore Supplier Record
+    await setDoc(doc(db,"suppliers",user.uid),{
       companyName: company,
       contact: contact,
-      email: email,
       product: product,
+      email: email,
       status: "pending",
       plan: "basic",
       createdAt: serverTimestamp()
     });
 
-    alert("Application submitted. Approval pending.");
-    window.location.href = "/supplier-login.html";
+    // 3️⃣ FORCE LOGOUT (THIS FIXES YOUR ISSUE)
+    await signOut(auth);
 
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-    submitBtn.disabled = false;
-    submitBtn.innerText = "Submit Application";
+    success.textContent = "Application submitted. Await admin approval.";
+
+    setTimeout(()=>{
+      location.href="/supplier-login.html";
+    },1500);
+
+  }catch(e){
+    error.textContent = e.message;
   }
-});
-
-// Element refs
-const companyEl = document.getElementById("company");
-const contactEl = document.getElementById("contact");
-const emailEl = document.getElementById("email");
-const productEl = document.getElementById("product");
-const passwordEl = document.getElementById("password");
+};
 </script>
 
 <!-- ================= FOOTER ================= -->
@@ -165,19 +152,20 @@ const passwordEl = document.getElementById("password");
     APD Global Trade
   </p>
   <p>Elite B2B Trade Facilitation Platform</p>
+
   <p style="margin:10px 0;">
     <a href="/terms.html" style="color:#c9a44a;text-decoration:none;">Terms</a> |
     <a href="/privacy.html" style="color:#c9a44a;text-decoration:none;">Privacy</a> |
     <a href="/disclaimer.html" style="color:#c9a44a;text-decoration:none;">Disclaimer</a>
   </p>
-  <p style="line-height:1.6;">
-    📧 info@apdglobaltradehub.com<br>
-    ☎ +1 (202) 780-1366<br>
+
+  <p style="margin:10px 0;line-height:1.6;">
+    📧 info@apdglobaltradehub.com <br>
+    ☎ +1 (202) 780-1366 <br>
     💬 WhatsApp: +91 92664 18868
   </p>
 </footer>
 
-<!-- FLOATING WHATSAPP -->
 <a href="https://wa.me/919266418868" target="_blank"
 style="
 position:fixed;
