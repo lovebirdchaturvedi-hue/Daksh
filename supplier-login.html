@@ -1,116 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8" />
-<title>Supplier Login | APD Global Trade</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<!-- 🔥 DISABLE SW CACHE FOR LOGIN -->
-<meta http-equiv="Cache-Control" content="no-store" />
-<meta http-equiv="Pragma" content="no-cache" />
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Supplier Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-store">
 
 <style>
-body{
-  margin:0;
-  font-family:Inter,sans-serif;
-  background:linear-gradient(135deg,#071427,#020617);
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.card{
-  background:#fff;
-  padding:42px;
-  width:380px;
-  border-radius:18px;
-  text-align:center;
-  box-shadow:0 30px 80px rgba(0,0,0,.35);
-}
-input{
-  width:100%;
-  padding:14px;
-  margin-top:14px;
-  border-radius:12px;
-  border:1px solid #e5e7eb;
-}
-button{
-  width:100%;
-  padding:15px;
-  margin-top:22px;
-  background:#2563eb;
-  color:#fff;
-  border:none;
-  border-radius:999px;
-  font-weight:600;
-  cursor:pointer;
-}
-.error{margin-top:14px;color:#dc2626;font-size:13px}
+body{font-family:Arial;background:#071427;color:#fff;display:flex;justify-content:center;align-items:center;height:100vh}
+.box{background:#fff;color:#000;padding:30px;border-radius:10px;width:320px}
+input,button{width:100%;padding:12px;margin-top:10px}
+button{background:#2563eb;color:#fff;border:none}
+.error{color:red;font-size:13px;margin-top:8px}
 </style>
 </head>
-
 <body>
 
-<div class="card">
-  <h1>Supplier Login</h1>
-
-  <input id="email" type="email" placeholder="Email">
+<div class="box">
+  <h3>Login</h3>
+  <input id="email" placeholder="Email">
   <input id="password" type="password" placeholder="Password">
-
   <button id="loginBtn" type="button">Login</button>
-
   <div class="error" id="msg"></div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const firebaseConfig = {
+const app = initializeApp({
   apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
   authDomain: "apd-globaltrade-prod.firebaseapp.com",
   projectId: "apd-globaltrade-prod"
-};
+});
 
-const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const emailEl = document.getElementById("email");
-const passEl = document.getElementById("password");
-const msgEl = document.getElementById("msg");
-
-/* 🔐 LOGIN CLICK */
 document.getElementById("loginBtn").onclick = async () => {
-  msgEl.textContent = "";
-
+  document.getElementById("msg").textContent = "";
   try {
     await signInWithEmailAndPassword(
       auth,
-      emailEl.value.trim(),
-      passEl.value.trim()
+      email.value.trim(),
+      password.value.trim()
     );
   } catch (e) {
-    msgEl.textContent = e.message;
+    document.getElementById("msg").textContent = e.message;
   }
 };
 
-/* ✅ REAL REDIRECT LOGIC (THIS IS KEY) */
 onAuthStateChanged(auth, async (user) => {
   if (!user) return;
 
   const adminSnap = await getDoc(doc(db, "admin", user.uid));
   if (adminSnap.exists()) {
-    location.replace("/admin.html");
+    location.href = "/admin.html";
   } else {
-    location.replace("/supplier-dashboard.html");
+    location.href = "/supplier-dashboard.html";
   }
 });
 </script>
