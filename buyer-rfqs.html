@@ -2,17 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Buyer RFQs | APD Global Trade</title>
-
-<meta name="description" content="Browse live buyer RFQs from global importers and distributors on APD Global Trade.">
+<title>Live Buyer RFQs | APD Global Trade</title>
+<meta name="description" content="Browse live bulk buyer RFQs from verified global importers and distributors.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{box-sizing:border-box}
 body{
   margin:0;
-  font-family:Arial, Helvetica, sans-serif;
-  background:#f6f7f9;
+  font-family:Inter,Arial,sans-serif;
+  background:#f5f7fb;
   color:#111;
 }
 .container{
@@ -20,29 +18,29 @@ body{
   margin:auto;
   padding:40px 20px;
 }
-h1{margin:0 0 8px}
-p{color:#555;margin:0 0 20px}
+h1{margin-bottom:6px}
+.sub{color:#555;margin-bottom:20px}
 
 .search input{
   width:100%;
-  padding:12px;
-  font-size:15px;
+  padding:14px;
+  border-radius:8px;
   border:1px solid #ccc;
-  border-radius:6px;
   margin-bottom:30px;
+  font-size:15px;
 }
 
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:20px;
+  gap:22px;
 }
 
 .card{
   background:#fff;
-  border-radius:10px;
-  padding:18px;
-  box-shadow:0 8px 20px rgba(0,0,0,.08);
+  padding:20px;
+  border-radius:14px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
 .badge{
@@ -52,54 +50,32 @@ p{color:#555;margin:0 0 20px}
   border-radius:20px;
   margin-right:6px;
 }
-.priority{background:#ffe7c7;color:#9a4f00}
+.priority{background:#ffe6c7;color:#9a4f00}
 .verified{background:#e6f6ee;color:#0b6b3a}
 
-.meta{
-  font-size:14px;
-  color:#444;
-  margin:6px 0;
-}
-.qty{
-  font-weight:bold;
-  margin-top:10px;
-}
+.meta{font-size:14px;color:#444;margin:6px 0}
+.qty{font-weight:600;margin-top:10px}
 
 .lock{
-  margin-top:12px;
-  padding:10px;
+  margin-top:14px;
   background:#f1f2f4;
-  border-radius:6px;
+  padding:12px;
+  border-radius:8px;
   font-size:14px;
 }
 .lock a{
   color:#0057ff;
-  font-weight:bold;
+  font-weight:600;
   text-decoration:none;
 }
 
 footer{
+  background:#020617;
+  color:#9ca3af;
+  text-align:center;
+  padding:40px 20px;
   margin-top:60px;
-  padding:30px;
-  text-align:center;
-  background:#0f172a;
-  color:#c9a44a;
-}
-
-.sticky{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:#0057ff;
-  text-align:center;
-  padding:14px;
-}
-.sticky a{
-  color:#fff;
-  font-size:16px;
-  font-weight:bold;
-  text-decoration:none;
+  font-size:14px;
 }
 </style>
 </head>
@@ -107,143 +83,93 @@ footer{
 <body>
 
 <div class="container">
-  <h1>Live Buyer RFQs</h1>
-  <p>High-demand buyer requirements from global importers.</p>
+<h1>Live Buyer RFQs</h1>
+<p class="sub">Bulk buying requirements from verified global buyers</p>
 
-  <div class="search">
-    <input id="searchBox" placeholder="Search product or country">
-  </div>
-
-  <h2>Priority Buyer RFQs</h2>
-  <div class="grid" id="priority"></div>
-
-  <h2 style="margin-top:40px;">Other Live Buyer RFQs</h2>
-  <div class="grid" id="other"></div>
+<div class="search">
+  <input id="search" placeholder="Search product, country or industry">
 </div>
 
+<div class="grid" id="rfqGrid"></div>
+</div>
+
+<!-- ================= FOOTER ================= -->
 <footer>
-  <div>APD Global Trade</div>
-  <div>Elite B2B Trade Facilitation Platform</div>
+<p style="color:#c9a44a;font-weight:600">APD Global Trade</p>
+<p>Elite B2B Trade Facilitation Platform</p>
+<p>
+<a href="/terms.html" style="color:#c9a44a">Terms</a> |
+<a href="/privacy.html" style="color:#c9a44a">Privacy</a> |
+<a href="/disclaimer.html" style="color:#c9a44a">Disclaimer</a>
+</p>
+<p>
+📧 info@apdglobaltradehub.com<br>
+☎ +1 (202) 780-1366<br>
+💬 WhatsApp: +91 92664 18868
+</p>
 </footer>
 
-<div class="sticky">
-  <a href="/membership.html">🔓 Unlock Buyer Contacts</a>
-</div>
+<a href="https://wa.me/919266418868" target="_blank"
+style="position:fixed;bottom:20px;right:20px;width:56px;height:56px;
+background:#25D366;color:#fff;border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+font-size:28px;box-shadow:0 10px 25px rgba(0,0,0,.25);
+z-index:9999;text-decoration:none">💬</a>
 
 <script>
 const rfqs = [
-  {
-    product:"IR-64 White Rice",
-    industry:"Agriculture",
-    country:"Saudi Arabia",
-    quantity:"26 MT",
-    priority:true,
-    verified:true
-  },
-  {
-    product:"ICUMSA 45 Sugar",
-    industry:"Food Commodities",
-    country:"Tanzania",
-    quantity:"250 MT",
-    priority:true,
-    verified:true
-  },
-  {
-    product:"Sunflower Oil",
-    industry:"Edible Oils",
-    country:"Netherlands",
-    quantity:"200 MT",
-    priority:false,
-    verified:false
-  },
-  {
-    product:"HDPE Packaging Bags",
-    industry:"Packaging",
-    country:"UAE",
-    quantity:"100 MT",
-    priority:false,
-    verified:false
-  }
+{p:"1121 Basmati Rice",q:"500 MT",c:"UAE – Jebel Ali",i:"Food & Grains",priority:true},
+{p:"IR-64 White Rice",q:"1000 MT",c:"Saudi Arabia – Jeddah",i:"Food & Grains"},
+{p:"Sugar ICUMSA 45",q:"2500 MT",c:"Tanzania – Dar es Salaam",i:"Food Commodities",priority:true},
+{p:"Sunflower Oil",q:"1000 MT",c:"Netherlands – Rotterdam",i:"Edible Oils"},
+{p:"Palm Oil",q:"5000 MT",c:"Kenya – Mombasa",i:"Edible Oils"},
+{p:"Wheat Grain",q:"5000 MT",c:"Egypt – Alexandria",i:"Agriculture"},
+{p:"Maize Yellow",q:"10000 MT",c:"Vietnam – Ho Chi Minh",i:"Animal Feed"},
+{p:"Soybean Meal",q:"3000 MT",c:"Indonesia – Jakarta",i:"Animal Feed"},
+{p:"Chickpeas",q:"400 MT",c:"Turkey – Mersin",i:"Pulses"},
+{p:"Green Lentils",q:"300 MT",c:"UAE – Dubai",i:"Pulses"},
+{p:"HDPE Granules",q:"2000 MT",c:"UAE – Jebel Ali",i:"Plastics"},
+{p:"PVC Resin",q:"4000 MT",c:"Vietnam – Ho Chi Minh",i:"Chemicals"},
+{p:"Bitumen 60/70",q:"10000 MT",c:"Kenya – Mombasa",i:"Construction"},
+{p:"Cement",q:"50000 MT",c:"Sri Lanka – Colombo",i:"Construction"},
+{p:"TMT Steel Bars",q:"20000 MT",c:"Nepal – Birgunj",i:"Steel"},
+{p:"Aluminium Ingots",q:"5000 MT",c:"UAE – Dubai",i:"Metals"},
+{p:"Copper Cathodes",q:"2000 MT",c:"China – Shanghai",i:"Metals"},
+{p:"Plastic Packaging Bags",q:"200 MT",c:"UAE – Sharjah",i:"Packaging"},
+{p:"Corrugated Boxes",q:"500,000 pcs",c:"UK – Felixstowe",i:"Packaging"},
+{p:"Solar Panels",q:"5 MW",c:"UAE – Abu Dhabi",i:"Renewable Energy"}
 ];
 
-const priority=document.getElementById("priority");
-const other=document.getElementById("other");
+const grid=document.getElementById("rfqGrid");
 
-rfqs.forEach(r=>{
-  const d=document.createElement("div");
-  d.className="card";
-  d.innerHTML=`
-    ${r.priority?'<span class="badge priority">PRIORITY</span>':''}
-    ${r.verified?'<span class="badge verified">VERIFIED</span>':''}
-    <h3>${r.product}</h3>
-    <div class="meta">Industry: ${r.industry}</div>
-    <div class="meta">Country: ${r.country}</div>
-    <div class="qty">Quantity: ${r.quantity}</div>
-    <div class="lock">
-      🔒 Buyer contact available for members only<br>
-      <a href="/membership.html">Upgrade Membership</a>
-    </div>
-  `;
-  r.priority ? priority.appendChild(d) : other.appendChild(d);
-});
-
-document.getElementById("searchBox").addEventListener("input",e=>{
-  const v=e.target.value.toLowerCase();
-  document.querySelectorAll(".card").forEach(c=>{
-    c.style.display=c.innerText.toLowerCase().includes(v)?"block":"none";
+function render(list){
+  grid.innerHTML="";
+  list.forEach(r=>{
+    grid.innerHTML+=`
+    <div class="card">
+      ${r.priority?'<span class="badge priority">PRIORITY</span>':''}
+      <span class="badge verified">VERIFIED BUYER</span>
+      <h3>${r.p}</h3>
+      <div class="meta">Industry: ${r.i}</div>
+      <div class="meta">Destination: ${r.c}</div>
+      <div class="qty">Quantity: ${r.q}</div>
+      <div class="lock">
+        🔒 Buyer contact available for members only<br>
+        <a href="/membership.html">Unlock Buyer Contact</a>
+      </div>
+    </div>`;
   });
+}
+
+render(rfqs);
+
+document.getElementById("search").addEventListener("input",e=>{
+  const v=e.target.value.toLowerCase();
+  render(rfqs.filter(r=>
+    (r.p+r.c+r.i).toLowerCase().includes(v)
+  ));
 });
 </script>
 
 </body>
 </html>
-
-<!-- ================= FOOTER ================= -->
-<footer style="
-  background:#020617;
-  color:#9ca3af;
-  text-align:center;
-  padding:40px 20px;
-  font-size:14px;
-">
-  <p style="color:#c9a44a;font-weight:600;margin-bottom:6px;">
-    APD Global Trade
-  </p>
-  <p style="margin:6px 0;">
-    Elite B2B Trade Facilitation Platform
-  </p>
-
-  <p style="margin:10px 0;">
-    <a href="/terms.html" style="color:#c9a44a;text-decoration:none;">Terms</a> |
-    <a href="/privacy.html" style="color:#c9a44a;text-decoration:none;">Privacy</a> |
-    <a href="/disclaimer.html" style="color:#c9a44a;text-decoration:none;">Disclaimer</a>
-  </p>
-
-  <p style="margin:10px 0;line-height:1.6;">
-    📧 info@apdglobaltradehub.com <br>
-    ☎ +1 (202) 780-1366 <br>
-    💬 WhatsApp: +91 92664 18868
-  </p>
-</footer>
-
-<!-- ============ FLOATING WHATSAPP BUTTON ============ -->
-<a href="https://wa.me/919266418868" target="_blank"
-   style="
-   position:fixed;
-   bottom:20px;
-   right:20px;
-   width:56px;
-   height:56px;
-   background:#25D366;
-   color:#fff;
-   border-radius:50%;
-   display:flex;
-   align-items:center;
-   justify-content:center;
-   font-size:28px;
-   box-shadow:0 10px 25px rgba(0,0,0,.25);
-   z-index:9999;
-   text-decoration:none;">
-  💬
-</a>
-
