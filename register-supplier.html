@@ -54,13 +54,14 @@ button{
 <div class="form">
   <h1>Supplier Registration</h1>
 
-  <input id="company" placeholder="Company Name" required>
-  <input id="contact" placeholder="Contact Number" required>
-  <input id="product" placeholder="Which Product?" required>
-  <input id="email" type="email" placeholder="Email" required>
-  <input id="password" type="password" placeholder="Password" required>
+  <input id="company" placeholder="Company Name">
+  <input id="contact" placeholder="Contact Number">
+  <input id="product" placeholder="Which Product?">
+  <input id="email" type="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
 
-  <button id="submitBtn">Submit Application</button>
+  <!-- IMPORTANT: type="button" -->
+  <button type="button" id="submitBtn">Submit Application</button>
 
   <div id="error"></div>
   <div id="success"></div>
@@ -68,19 +69,12 @@ button{
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signOut
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import {
-  getFirestore,
-  doc,
-  setDoc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getAuth, createUserWithEmailAndPassword, signOut } from
+  "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, doc, setDoc, serverTimestamp } from
+  "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* 🔥 FIREBASE CONFIG */
+/* 🔥 Firebase Config */
 const firebaseConfig = {
   apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
   authDomain: "apd-globaltrade-prod.firebaseapp.com",
@@ -91,30 +85,33 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const error = document.getElementById("error");
-const success = document.getElementById("success");
+const companyEl = document.getElementById("company");
+const contactEl = document.getElementById("contact");
+const productEl = document.getElementById("product");
+const emailEl = document.getElementById("email");
+const passwordEl = document.getElementById("password");
+const errorEl = document.getElementById("error");
+const successEl = document.getElementById("success");
 
-document.getElementById("submitBtn").onclick = async () => {
-  error.textContent = "";
-  success.textContent = "";
+document.getElementById("submitBtn").addEventListener("click", async () => {
+  errorEl.textContent = "";
+  successEl.textContent = "";
 
-  const company = company.value.trim();
-  const contact = contact.value.trim();
-  const product = product.value.trim();
-  const email = email.value.trim();
-  const password = password.value;
+  const company = companyEl.value.trim();
+  const contact = contactEl.value.trim();
+  const product = productEl.value.trim();
+  const email = emailEl.value.trim();
+  const password = passwordEl.value;
 
   if(!company || !contact || !product || !email || !password){
-    error.textContent = "Please fill all fields";
+    errorEl.textContent = "Please fill all fields";
     return;
   }
 
   try{
-    // 1️⃣ Create Auth User
     const cred = await createUserWithEmailAndPassword(auth,email,password);
     const user = cred.user;
 
-    // 2️⃣ Save Firestore Supplier Record
     await setDoc(doc(db,"suppliers",user.uid),{
       companyName: company,
       contact: contact,
@@ -125,19 +122,18 @@ document.getElementById("submitBtn").onclick = async () => {
       createdAt: serverTimestamp()
     });
 
-    // 3️⃣ FORCE LOGOUT (THIS FIXES YOUR ISSUE)
     await signOut(auth);
 
-    success.textContent = "Application submitted. Await admin approval.";
+    successEl.textContent = "Application submitted. Await admin approval.";
 
     setTimeout(()=>{
       location.href="/supplier-login.html";
     },1500);
 
-  }catch(e){
-    error.textContent = e.message;
+  }catch(err){
+    errorEl.textContent = err.message;
   }
-};
+});
 </script>
 
 <!-- ================= FOOTER ================= -->
