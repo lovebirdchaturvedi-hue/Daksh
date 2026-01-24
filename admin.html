@@ -111,21 +111,24 @@ onAuthStateChanged(auth,user=>{
 async function loadSuppliers(){
   tbody.innerHTML="";
   const snap=await getDocs(collection(db,"suppliers"));
+
   if(snap.empty){
     tbody.innerHTML="<tr><td colspan='4'>No suppliers</td></tr>";
     return;
   }
+
   snap.forEach(d=>{
     const s=d.data();
+
     tbody.innerHTML+=`
     <tr>
-      <td>${s.email||"-"}</td>
-      <td>${s.status||"pending"}</td>
-      <td>${s.plan||"free"}</td>
+      <td>${s.email || "-"}</td>
+      <td>${s.status || "pending"}</td>
+      <td>${s.plan || "free"}</td>
       <td>
         <button class="approve" onclick="upd('${d.id}',{status:'approved'})">Approve</button>
         <button class="ban" onclick="upd('${d.id}',{status:'banned'})">Ban</button>
-        <button class="unban" onclick="upd('${d.id}',{status:'approved'})">Approve</button>
+        <button class="unban" onclick="upd('${d.id}',{status:'approved'})">Unban</button>
         <button class="free" onclick="upd('${d.id}',{plan:'free'})">Free</button>
         <button class="gold" onclick="upd('${d.id}',{plan:'gold'})">Gold</button>
         <button class="platinum" onclick="upd('${d.id}',{plan:'platinum'})">Platinum</button>
