@@ -2,185 +2,151 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Supplier Registration | APD Global Trade</title>
+<title>Supplier Dashboard | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-body{
-  margin:0;
-  font-family:Inter,sans-serif;
-  background:#f5f7fb;
+body{margin:0;font-family:Inter,sans-serif;background:#f5f7fb}
+header{
+  background:#071427;
+  color:#c9a44a;
+  padding:20px 40px;
+  display:flex;
+  justify-content:space-between;
 }
-
-.form{
-  max-width:520px;
+a{color:#e5e7eb;text-decoration:none;margin-left:20px}
+.card{
+  max-width:600px;
   margin:80px auto;
   background:#fff;
-  padding:40px;
-  border-radius:18px;
-  box-shadow:0 25px 60px rgba(0,0,0,.1);
+  padding:30px;
+  border-radius:16px;
 }
-
-h1{text-align:center;margin-bottom:20px}
-
-input{
-  width:100%;
-  padding:14px;
-  margin-bottom:14px;
-  border-radius:10px;
-  border:1px solid #e5e7eb;
-}
-
-button{
-  width:100%;
-  padding:14px;
-  background:#0b1d36;
-  color:#fff;
-  border:none;
+.badge{
+  display:inline-block;
+  padding:6px 12px;
   border-radius:999px;
-  font-weight:600;
-  cursor:pointer;
+  font-size:13px;
 }
-
-#error{color:#dc2626;text-align:center;margin-top:10px}
-#success{color:#16a34a;text-align:center;margin-top:10px}
+.pending{background:#fde68a}
+.approved{background:#bbf7d0}
+.banned{background:#fecaca}
+footer{
+  background:#020617;
+  color:#9ca3af;
+  text-align:center;
+  padding:40px 20px;
+}
 </style>
 </head>
 
 <body>
 
-<div class="form">
-  <h1>Supplier Registration</h1>
+<header>
+  <div>APD Global Trade</div>
+  <div>
+    <a href="/supplier-rfqs.html">View RFQs</a>
+    <a href="/membership.html">Upgrade</a>
+    <a href="#" id="logout">Logout</a>
+  </div>
+</header>
 
-  <input id="company" placeholder="Company Name">
-  <input id="contact" placeholder="Contact Number">
-  <input id="product" placeholder="Which Product?">
-  <input id="email" type="email" placeholder="Email">
-  <input id="password" type="password" placeholder="Password">
+<div class="card">
+  <h2>Welcome, Supplier</h2>
 
-  <!-- IMPORTANT: type="button" -->
-  <button type="button" id="submitBtn">Submit Application</button>
+  <p>
+    Status:
+    <span id="status" class="badge">Loading…</span>
+  </p>
 
-  <div id="error"></div>
-  <div id="success"></div>
+  <p>
+    Plan:
+    <strong id="plan">Loading…</strong>
+  </p>
+
+  <p id="notice" style="color:#b91c1c;margin-top:12px;"></p>
 </div>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <p style="color:#c9a44a;font-weight:600">APD Global Trade</p>
+  <p>Elite B2B Trade Facilitation Platform</p>
+  <p>
+    <a href="/terms.html">Terms</a> |
+    <a href="/privacy.html">Privacy</a> |
+    <a href="/disclaimer.html">Disclaimer</a>
+  </p>
+  <p>
+    📧 info@apdglobaltradehub.com<br>
+    ☎ +1 (202) 780-1366<br>
+    💬 WhatsApp: +91 92664 18868
+  </p>
+</footer>
+
+<a href="https://wa.me/919266418868" target="_blank"
+style="position:fixed;bottom:20px;right:20px;width:56px;height:56px;
+background:#25D366;color:#fff;border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+font-size:28px;box-shadow:0 10px 25px rgba(0,0,0,.25);
+z-index:9999;text-decoration:none;">💬</a>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signOut } from
+import { getAuth, onAuthStateChanged, signOut } from
   "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, doc, setDoc, serverTimestamp } from
+import { getFirestore, doc, getDoc } from
   "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* 🔥 Firebase Config */
 const firebaseConfig = {
-  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-  authDomain: "apd-globaltrade-prod.firebaseapp.com",
-  projectId: "apd-globaltrade-prod"
+  apiKey:"AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+  authDomain:"apd-globaltrade-prod.firebaseapp.com",
+  projectId:"apd-globaltrade-prod"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const companyEl = document.getElementById("company");
-const contactEl = document.getElementById("contact");
-const productEl = document.getElementById("product");
-const emailEl = document.getElementById("email");
-const passwordEl = document.getElementById("password");
-const errorEl = document.getElementById("error");
-const successEl = document.getElementById("success");
+const statusEl = document.getElementById("status");
+const planEl = document.getElementById("plan");
+const noticeEl = document.getElementById("notice");
 
-document.getElementById("submitBtn").addEventListener("click", async () => {
-  errorEl.textContent = "";
-  successEl.textContent = "";
-
-  const company = companyEl.value.trim();
-  const contact = contactEl.value.trim();
-  const product = productEl.value.trim();
-  const email = emailEl.value.trim();
-  const password = passwordEl.value;
-
-  if(!company || !contact || !product || !email || !password){
-    errorEl.textContent = "Please fill all fields";
+onAuthStateChanged(auth, async user => {
+  if(!user){
+    location.href="/supplier-login.html";
     return;
   }
 
-  try{
-    const cred = await createUserWithEmailAndPassword(auth,email,password);
-    const user = cred.user;
+  const ref = doc(db,"suppliers",user.uid);
+  const snap = await getDoc(ref);
 
-    await setDoc(doc(db,"suppliers",user.uid),{
-      companyName: company,
-      contact: contact,
-      product: product,
-      email: email,
-      status: "pending",
-      plan: "basic",
-      createdAt: serverTimestamp()
-    });
+  if(!snap.exists()){
+    noticeEl.textContent = "Supplier record not found.";
+    return;
+  }
 
-    await signOut(auth);
+  const s = snap.data();
 
-    successEl.textContent = "Application submitted. Await admin approval.";
+  statusEl.textContent = s.status;
+  statusEl.className = `badge ${s.status}`;
+  planEl.textContent = s.plan;
 
-    setTimeout(()=>{
-      location.href="/supplier-login.html";
-    },1500);
+  if(s.status !== "approved"){
+    noticeEl.textContent = "Your account is pending admin approval.";
+  }
 
-  }catch(err){
-    errorEl.textContent = err.message;
+  if(s.plan === "basic"){
+    noticeEl.textContent += " Upgrade to view full RFQs.";
   }
 });
+
+document.getElementById("logout").onclick = async()=>{
+  await signOut(auth);
+  location.href="/supplier-login.html";
+};
 </script>
-
-<!-- ================= FOOTER ================= -->
-<footer style="
-  background:#020617;
-  color:#9ca3af;
-  text-align:center;
-  padding:40px 20px;
-  font-size:14px;
-">
-  <p style="color:#c9a44a;font-weight:600;margin-bottom:6px;">
-    APD Global Trade
-  </p>
-  <p>Elite B2B Trade Facilitation Platform</p>
-
-  <p style="margin:10px 0;">
-    <a href="/terms.html" style="color:#c9a44a;text-decoration:none;">Terms</a> |
-    <a href="/privacy.html" style="color:#c9a44a;text-decoration:none;">Privacy</a> |
-    <a href="/disclaimer.html" style="color:#c9a44a;text-decoration:none;">Disclaimer</a>
-  </p>
-
-  <p style="margin:10px 0;line-height:1.6;">
-    📧 info@apdglobaltradehub.com <br>
-    ☎ +1 (202) 780-1366 <br>
-    💬 WhatsApp: +91 92664 18868
-  </p>
-</footer>
-
-<a href="https://wa.me/919266418868" target="_blank"
-style="
-position:fixed;
-bottom:20px;
-right:20px;
-width:56px;
-height:56px;
-background:#25D366;
-color:#fff;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:28px;
-box-shadow:0 10px 25px rgba(0,0,0,.25);
-z-index:9999;
-text-decoration:none;">💬</a>
 
 </body>
 </html>
-
-
