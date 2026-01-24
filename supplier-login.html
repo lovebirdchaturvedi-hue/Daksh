@@ -54,14 +54,24 @@ document.getElementById("loginBtn").onclick = async () => {
 onAuthStateChanged(auth, async (user) => {
   if (!user) return;
 
-  const adminSnap = await getDoc(doc(db, "admin", user.uid));
-  if (adminSnap.exists()) {
-    location.href = "/admin.html";
-  } else {
-    location.href = "/supplier-dashboard.html";
-  }
+const userSnap = await getDoc(doc(db, "users", user.uid));
+
+if (!userSnap.exists()) {
+  msgEl.textContent = "Account not found. Contact support.";
+  return;
+}
+
+const role = userSnap.data().role;
+
+if (role === "admin") {
+  window.location.href = "/admin.html";
+} else {
+  window.location.href = "/supplier-dashboard.html";
+}
+
 });
 </script>
 
 </body>
 </html>
+
