@@ -59,7 +59,7 @@ const list = document.getElementById("list");
 
 onAuthStateChanged(auth, async user => {
   if (!user) {
-    location.href = "/supplier-login.html";
+    window.location.replace("/supplier-login.html");
     return;
   }
 
@@ -71,7 +71,7 @@ onAuthStateChanged(auth, async user => {
     list.innerHTML += `
       <div class="rfq">
         <strong>${r.product || "-"}</strong><br>
-        Quantity: ${r.quantity || "-"}<br><br>
+        Quantity: ${r.quantity || "-"}<br>
         📞 ${r.phone || "N/A"}<br>
         📧 ${r.buyerEmail || "N/A"}
       </div>
