@@ -1,114 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Supplier Dashboard | APD Global Trade</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<title>Supplier Login | APD Global Trade</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-body {
+body{
   margin:0;
   font-family:Inter,sans-serif;
-  background:#f5f7fb;
-  color:#0f172a;
-}
-
-:root {
-  --navy:#0b1d36;
-  --navy-dark:#071427;
-  --gold:#c9a44a;
-  --gold-soft:#e7cf88;
-}
-
-header {
-  height:80px;
-  background:linear-gradient(180deg,var(--navy),var(--navy-dark));
+  background:linear-gradient(135deg,#071427,#020617);
+  min-height:100vh;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  padding:0 40px;
-}
-header .logo {
-  color:var(--gold);
-  font-weight:600;
-}
-header a {
-  color:#e5e7eb;
-  text-decoration:none;
-  font-size:14px;
-  margin-left:20px;
+  justify-content:center;
 }
 
-.dashboard {
-  max-width:1200px;
-  margin:50px auto;
-  padding:0 20px;
-}
-
-.card {
+.card{
   background:#fff;
-  padding:30px;
+  padding:42px;
+  width:380px;
   border-radius:18px;
-  box-shadow:0 20px 50px rgba(0,0,0,.08);
+  text-align:center;
+  box-shadow:0 30px 80px rgba(0,0,0,.35);
 }
 
-.welcome {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-  gap:30px;
+h1{
+  font-family:'Playfair Display',serif;
+  margin-bottom:6px;
+  color:#020617;
 }
-footer {
-  background:#020617;
-  color:#9ca3af;
-  text-align:center;
-  padding:40px 20px;
+
+p.subtitle{
+  color:#6b7280;
   font-size:14px;
+  margin-bottom:18px;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  margin-top:14px;
+  border-radius:12px;
+  border:1px solid #e5e7eb;
+  font-size:14px;
+}
+
+button{
+  width:100%;
+  padding:15px;
+  margin-top:22px;
+  background:#2563eb;
+  color:#fff;
+  border:none;
+  border-radius:999px;
+  font-weight:600;
+  font-size:15px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#1d4ed8;
+}
+
+.links{
+  margin-top:18px;
+  font-size:13px;
+}
+
+.links a{
+  color:#020617;
+  text-decoration:none;
+  font-weight:500;
+  display:block;
+  margin-top:8px;
+}
+
+.error{
+  margin-top:14px;
+  font-size:13px;
+  color:#dc2626;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">APD Global Trade</div>
-  <div>
-    <!-- ✅ FIXED LINK -->
-    <a href="/supplier-rfqs.html">View RFQs</a>
-    <a href="/membership.html">Upgrade</a>
-    <a href="#" id="logoutBtn">Logout</a>
-  </div>
-</header>
+<div class="card">
+  <h1>Supplier Login</h1>
+  <p class="subtitle">Access verified buyer RFQs</p>
 
-<div class="dashboard">
+  <input id="email" type="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
 
-  <div class="welcome">
-    <div class="card">
-      <h2>Welcome, Supplier</h2>
-      <p>Status: <strong id="supplierStatus">approved</strong></p>
-      <p>Plan: <strong id="supplierPlan">gold</strong></p>
-    </div>
+  <button id="loginBtn">Login</button>
 
-    <div class="card">
-      <h2>Access Summary</h2>
-      <p>✔ Live buyer RFQs</p>
-      <p>✔ Contact access based on plan</p>
-      <p>✔ Priority support for paid members</p>
-    </div>
+  <div class="links">
+    <a href="#" id="forgotPassword">Forgot password?</a>
+    <a href="/register-supplier.html">New supplier? Register here</a>
+    <a href="/membership.html">View membership plans</a>
   </div>
 
+  <div class="error" id="msg"></div>
 </div>
 
-<footer>
-  <p><strong>APD Global Trade</strong></p>
-  <p>Elite B2B Trade Facilitation Platform</p>
-</footer>
-
 <script type="module">
-import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+/* 🔥 FIREBASE CONFIG */
 const firebaseConfig = {
   apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
   authDomain: "apd-globaltrade-prod.firebaseapp.com",
@@ -117,11 +128,58 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
-document.getElementById("logoutBtn").onclick = async () => {
-  await signOut(auth);
-  window.location.href = "/supplier-login.html";
-};
+const emailEl = document.getElementById("email");
+const passwordEl = document.getElementById("password");
+const loginBtn = document.getElementById("loginBtn");
+const msgEl = document.getElementById("msg");
+const forgotBtn = document.getElementById("forgotPassword");
+
+/* 🔐 LOGIN */
+loginBtn.addEventListener("click", async () => {
+  msgEl.textContent = "";
+
+  const email = emailEl.value.trim();
+  const password = passwordEl.value.trim();
+
+  if (!email || !password) {
+    msgEl.textContent = "Enter email and password";
+    return;
+  }
+
+  try {
+    const cred = await signInWithEmailAndPassword(auth, email, password);
+    const user = cred.user;
+
+    /* ✅ CHECK ADMIN */
+    const adminSnap = await getDoc(doc(db, "admin", user.uid));
+
+    if (adminSnap.exists()) {
+      window.location.href = "/admin.html";
+      return;
+    }
+
+    /* ✅ NORMAL SUPPLIER → DASHBOARD */
+    window.location.href = "/supplier-dashboard.html";
+
+  } catch (err) {
+    msgEl.textContent = err.message;
+  }
+});
+
+/* 🔁 FORGOT PASSWORD */
+forgotBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const email = emailEl.value.trim();
+  if (!email) {
+    msgEl.textContent = "Enter your email first";
+    return;
+  }
+  await sendPasswordResetEmail(auth, email);
+  msgEl.style.color = "#16a34a";
+  msgEl.textContent = "Password reset email sent";
+});
 </script>
 
 </body>
