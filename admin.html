@@ -6,60 +6,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f7fb;
+body { margin:0;font-family:Arial,sans-serif;background:#f5f7fb }
+header{
+  background:#020617;color:#fff;
+  padding:16px 40px;
+  display:flex;justify-content:space-between;align-items:center;
 }
-
-header {
-  background: #020617;
-  color: #fff;
-  padding: 16px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.container{
+  max-width:1200px;margin:40px auto;
+  background:#fff;border-radius:12px;overflow:hidden;
 }
-
-.container {
-  max-width: 1200px;
-  margin: 40px auto;
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
+table{width:100%;border-collapse:collapse}
+th,td{padding:14px;border-bottom:1px solid #e5e7eb;text-align:left}
+th{background:#020617;color:#fff}
+button{
+  padding:6px 10px;margin:2px;
+  border:none;border-radius:4px;
+  cursor:pointer;font-size:12px;
 }
-
-table {
-  width: 100%;
-  border-collapse: collapse;
+.approve{background:#16a34a;color:#fff}
+.ban{background:#dc2626;color:#fff}
+.unban{background:#2563eb;color:#fff}
+.free{background:#64748b;color:#fff}
+.gold{background:#d97706;color:#fff}
+.platinum{background:#4f46e5;color:#fff}
+footer{
+  background:#020617;color:#9ca3af;
+  text-align:center;padding:40px 20px;font-size:14px;
 }
-
-th, td {
-  padding: 14px;
-  border-bottom: 1px solid #e5e7eb;
-  text-align: left;
-}
-
-th {
-  background: #020617;
-  color: #fff;
-}
-
-button {
-  padding: 6px 10px;
-  margin: 2px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 12px;
-}
-
-.approve { background: #16a34a; color: #fff; }
-.ban { background: #dc2626; color: #fff; }
-.unban { background: #2563eb; color: #fff; }
-.free { background: #64748b; color: #fff; }
-.gold { background: #d97706; color: #fff; }
-.platinum { background: #4f46e5; color: #fff; }
 </style>
 </head>
 
@@ -71,92 +45,103 @@ button {
 </header>
 
 <div class="container">
-  <table>
-    <thead>
-      <tr>
-        <th>Email</th>
-        <th>Status</th>
-        <th>Plan</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody id="tbody">
-      <tr>
-        <td colspan="4">Loading suppliers…</td>
-      </tr>
-    </tbody>
-  </table>
+<table>
+<thead>
+<tr>
+<th>Email</th>
+<th>Status</th>
+<th>Plan</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="tbody">
+<tr><td colspan="4">Loading suppliers…</td></tr>
+</tbody>
+</table>
 </div>
+
+<footer>
+<p style="color:#c9a44a;font-weight:600">APD Global Trade</p>
+<p>Elite B2B Trade Facilitation Platform</p>
+<p>
+<a href="/terms.html">Terms</a> |
+<a href="/privacy.html">Privacy</a> |
+<a href="/disclaimer.html">Disclaimer</a>
+</p>
+<p>
+📧 info@apdglobaltradehub.com<br>
+☎ +1 (202) 780-1366<br>
+💬 WhatsApp: +91 92664 18868
+</p>
+</footer>
+
+<a href="https://wa.me/919266418868" target="_blank"
+style="position:fixed;bottom:20px;right:20px;width:56px;height:56px;
+background:#25D366;color:#fff;border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+font-size:28px;box-shadow:0 10px 25px rgba(0,0,0,.25);
+z-index:9999;text-decoration:none;">💬</a>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getAuth,onAuthStateChanged,signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore,collection,getDocs,doc,updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-  authDomain: "apd-globaltrade-prod.firebaseapp.com",
-  projectId: "apd-globaltrade-prod"
-};
+const ADMIN_EMAIL = "admin@apdglobaltrade.com";
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+const app = initializeApp({
+  apiKey:"AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+  authDomain:"apd-globaltrade-prod.firebaseapp.com",
+  projectId:"apd-globaltrade-prod"
+});
 
-const tbody = document.getElementById("tbody");
-const logoutBtn = document.getElementById("logoutBtn");
+const auth=getAuth(app);
+const db=getFirestore(app);
+const tbody=document.getElementById("tbody");
 
-// 🔐 ADMIN CHECK (basic – already working for you)
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    window.location.href = "/supplier-login.html";
-    return;
+onAuthStateChanged(auth,user=>{
+  if(!user) return location.href="/supplier-login.html";
+  if(user.email!==ADMIN_EMAIL){
+    alert("Admins only");
+    return location.href="/supplier-dashboard.html";
   }
   loadSuppliers();
 });
 
-// 📦 LOAD SUPPLIERS
-async function loadSuppliers() {
-  tbody.innerHTML = "";
-  const snap = await getDocs(collection(db, "suppliers"));
-
-  if (snap.empty) {
-    tbody.innerHTML = "<tr><td colspan='4'>No suppliers found</td></tr>";
+async function loadSuppliers(){
+  tbody.innerHTML="";
+  const snap=await getDocs(collection(db,"suppliers"));
+  if(snap.empty){
+    tbody.innerHTML="<tr><td colspan='4'>No suppliers</td></tr>";
     return;
   }
-
-  snap.forEach(docSnap => {
-    const s = docSnap.data();
-    const id = docSnap.id;
-
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${s.email || "-"}</td>
-      <td>${s.status || "pending"}</td>
-      <td>${s.plan || "free"}</td>
+  snap.forEach(d=>{
+    const s=d.data();
+    tbody.innerHTML+=`
+    <tr>
+      <td>${s.email||"-"}</td>
+      <td>${s.status||"pending"}</td>
+      <td>${s.plan||"free"}</td>
       <td>
-        <button class="approve" onclick="updateSupplier('${id}', {status:'approved'})">Approve</button>
-        <button class="ban" onclick="updateSupplier('${id}', {status:'banned'})">Ban</button>
-        <button class="unban" onclick="updateSupplier('${id}', {status:'approved'})">Unban</button>
-        <button class="free" onclick="updateSupplier('${id}', {plan:'free'})">Free</button>
-        <button class="gold" onclick="updateSupplier('${id}', {plan:'gold'})">Gold</button>
-        <button class="platinum" onclick="updateSupplier('${id}', {plan:'platinum'})">Platinum</button>
+        <button class="approve" onclick="upd('${d.id}',{status:'approved'})">Approve</button>
+        <button class="ban" onclick="upd('${d.id}',{status:'banned'})">Ban</button>
+        <button class="unban" onclick="upd('${d.id}',{status:'approved'})">Approve</button>
+        <button class="free" onclick="upd('${d.id}',{plan:'free'})">Free</button>
+        <button class="gold" onclick="upd('${d.id}',{plan:'gold'})">Gold</button>
+        <button class="platinum" onclick="upd('${d.id}',{plan:'platinum'})">Platinum</button>
       </td>
-    `;
-    tbody.appendChild(tr);
+    </tr>`;
   });
 }
 
-// 🔧 UPDATE SUPPLIER
-window.updateSupplier = async (id, data) => {
-  await updateDoc(doc(db, "suppliers", id), data);
+window.upd=async(id,data)=>{
+  await updateDoc(doc(db,"suppliers",id),data);
   loadSuppliers();
 };
 
-// 🚪 LOGOUT
-logoutBtn.onclick = async () => {
+document.getElementById("logoutBtn").onclick=async()=>{
   await signOut(auth);
-  window.location.href = "/supplier-login.html";
+  location.href="/supplier-login.html";
 };
 </script>
 
