@@ -5,6 +5,10 @@
 <title>Supplier Login | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+<!-- 🔥 DISABLE SW CACHE FOR LOGIN -->
+<meta http-equiv="Cache-Control" content="no-store" />
+<meta http-equiv="Pragma" content="no-cache" />
+
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
@@ -17,7 +21,6 @@ body{
   align-items:center;
   justify-content:center;
 }
-
 .card{
   background:#fff;
   padding:42px;
@@ -26,28 +29,13 @@ body{
   text-align:center;
   box-shadow:0 30px 80px rgba(0,0,0,.35);
 }
-
-h1{
-  font-family:'Playfair Display',serif;
-  margin-bottom:6px;
-  color:#020617;
-}
-
-p.subtitle{
-  color:#6b7280;
-  font-size:14px;
-  margin-bottom:18px;
-}
-
 input{
   width:100%;
   padding:14px;
   margin-top:14px;
   border-radius:12px;
   border:1px solid #e5e7eb;
-  font-size:14px;
 }
-
 button{
   width:100%;
   padding:15px;
@@ -57,32 +45,9 @@ button{
   border:none;
   border-radius:999px;
   font-weight:600;
-  font-size:15px;
   cursor:pointer;
 }
-
-button:hover{
-  background:#1d4ed8;
-}
-
-.links{
-  margin-top:18px;
-  font-size:13px;
-}
-
-.links a{
-  color:#020617;
-  text-decoration:none;
-  font-weight:500;
-  display:block;
-  margin-top:8px;
-}
-
-.error{
-  margin-top:14px;
-  font-size:13px;
-  color:#dc2626;
-}
+.error{margin-top:14px;color:#dc2626;font-size:13px}
 </style>
 </head>
 
@@ -90,18 +55,11 @@ button:hover{
 
 <div class="card">
   <h1>Supplier Login</h1>
-  <p class="subtitle">Access verified buyer RFQs</p>
 
   <input id="email" type="email" placeholder="Email">
   <input id="password" type="password" placeholder="Password">
 
-  <button id="loginBtn">Login</button>
-
-  <div class="links">
-    <a href="#" id="forgotPassword">Forgot password?</a>
-    <a href="/register-supplier.html">New supplier? Register here</a>
-    <a href="/membership.html">View membership plans</a>
-  </div>
+  <button id="loginBtn" type="button">Login</button>
 
   <div class="error" id="msg"></div>
 </div>
@@ -111,15 +69,10 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 import {
   getAuth,
   signInWithEmailAndPassword,
-  sendPasswordResetEmail
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import {
-  getFirestore,
-  doc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* 🔥 FIREBASE CONFIG */
 const firebaseConfig = {
   apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
   authDomain: "apd-globaltrade-prod.firebaseapp.com",
@@ -131,51 +84,34 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 const emailEl = document.getElementById("email");
-const passwordEl = document.getElementById("password");
-const loginBtn = document.getElementById("loginBtn");
+const passEl = document.getElementById("password");
 const msgEl = document.getElementById("msg");
-const forgotBtn = document.getElementById("forgotPassword");
 
-/* 🔐 LOGIN */
-loginBtn.addEventListener("click", async () => {
+/* 🔐 LOGIN CLICK */
+document.getElementById("loginBtn").onclick = async () => {
   msgEl.textContent = "";
 
-  const email = emailEl.value.trim();
-  const password = passwordEl.value.trim();
-
-  if (!email || !password) {
-    msgEl.textContent = "Enter email and password";
-    return;
-  }
-
   try {
-    const cred = await signInWithEmailAndPassword(auth, email, password);
-    const user = cred.user;
-
-    const adminSnap = await getDoc(doc(db, "admin", user.uid));
-
-    if (adminSnap.exists()) {
-      window.location.href = "/admin.html";
-    } else {
-      window.location.href = "/supplier-dashboard.html";
-    }
-
-  } catch (err) {
-    msgEl.textContent = err.message;
+    await signInWithEmailAndPassword(
+      auth,
+      emailEl.value.trim(),
+      passEl.value.trim()
+    );
+  } catch (e) {
+    msgEl.textContent = e.message;
   }
-});
+};
 
-/* 🔁 FORGOT PASSWORD */
-forgotBtn.addEventListener("click", async (e) => {
-  e.preventDefault();
-  const email = emailEl.value.trim();
-  if (!email) {
-    msgEl.textContent = "Enter your email first";
-    return;
+/* ✅ REAL REDIRECT LOGIC (THIS IS KEY) */
+onAuthStateChanged(auth, async (user) => {
+  if (!user) return;
+
+  const adminSnap = await getDoc(doc(db, "admin", user.uid));
+  if (adminSnap.exists()) {
+    location.replace("/admin.html");
+  } else {
+    location.replace("/supplier-dashboard.html");
   }
-  await sendPasswordResetEmail(auth, email);
-  msgEl.style.color = "#16a34a";
-  msgEl.textContent = "Password reset email sent";
 });
 </script>
 
