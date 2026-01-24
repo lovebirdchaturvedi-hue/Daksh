@@ -68,47 +68,56 @@ button{
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth,signInWithEmailAndPassword,sendPasswordResetEmail,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const ADMIN_EMAIL = "admin@apdglobaltrade.com";
 
 const app = initializeApp({
-  apiKey:"AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-  authDomain:"apd-globaltrade-prod.firebaseapp.com",
-  projectId:"apd-globaltrade-prod"
+  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+  authDomain: "apd-globaltrade-prod.firebaseapp.com",
+  projectId: "apd-globaltrade-prod"
 });
 
-const auth=getAuth(app);
-const msg=document.getElementById("msg");
+const auth = getAuth(app);
 
-document.getElementById("loginBtn").onclick=async()=>{
-  msg.textContent="";
-  try{
-    await signInWithEmailAndPassword(
-      auth,
-      email.value,
-      password.value
-    );
-    location.href="/supplier-dashboard.html";
-  }catch(e){
-    msg.className="error";
-    msg.textContent=e.message;
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+const msg = document.getElementById("msg");
+
+document.getElementById("loginBtn").onclick = async () => {
+  msg.textContent = "";
+  try {
+    const cred = await signInWithEmailAndPassword(auth, email.value, password.value);
+
+    if (cred.user.email === ADMIN_EMAIL) {
+      window.location.href = "/admin.html";
+    } else {
+      window.location.href = "/supplier-dashboard.html";
+    }
+  } catch (e) {
+    msg.className = "error";
+    msg.textContent = e.message;
   }
 };
 
-document.getElementById("forgotBtn").onclick=async(e)=>{
-  e.preventDefault();
-  if(!email.value){
-    msg.textContent="Enter email first";
-    msg.className="error";
-    return;
-  }
-  await sendPasswordResetEmail(auth,email.value);
-  msg.textContent="Password reset email sent";
-};
+// 🔁 Auto redirect ONLY if role matches
+onAuthStateChanged(auth, user => {
+  if (!user) return;
 
-onAuthStateChanged(auth,user=>{
-  if(user) location.href="/supplier-dashboard.html";
+  if (user.email === ADMIN_EMAIL) {
+    location.href = "/admin.html";
+  } else {
+    location.href = "/supplier-dashboard.html";
+  }
 });
 </script>
 
+
 </body>
 </html>
+
