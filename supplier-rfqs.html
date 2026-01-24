@@ -5,44 +5,26 @@
 <title>Supplier RFQs | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-body{
-  margin:0;
-  font-family:Inter,sans-serif;
-  background:#f5f7fb;
-  color:#0f172a;
-}
+body{margin:0;font-family:Inter,sans-serif;background:#f5f7fb}
 header{
-  height:80px;
+  height:70px;
   background:#071427;
+  color:#c9a44a;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  padding:0 40px;
+  align-items:center;
+  padding:0 30px;
 }
-header .logo{color:#c9a44a;font-weight:600}
-header a{color:#e5e7eb;text-decoration:none;margin-left:20px;font-size:14px}
-
-.container{
-  max-width:1200px;
-  margin:60px auto;
-  padding:0 20px;
-}
+header a{color:#fff;text-decoration:none;margin-left:20px}
 .rfq{
   background:#fff;
-  padding:26px;
-  border-radius:16px;
-  margin-bottom:20px;
-  border:1px solid #e5e7eb;
-}
-.lock{color:#991b1b;font-weight:600}
-footer{
-  background:#020617;
-  color:#9ca3af;
-  text-align:center;
-  padding:40px 20px;
+  padding:20px;
+  margin:20px auto;
+  max-width:700px;
+  border-radius:14px;
 }
 </style>
 </head>
@@ -50,80 +32,54 @@ footer{
 <body>
 
 <header>
-  <div class="logo">APD Global Trade</div>
+  <div>APD Global Trade</div>
   <div>
     <a href="/supplier-dashboard.html">Dashboard</a>
     <a href="/membership.html">Upgrade</a>
-    <a href="#" id="logoutBtn">Logout</a>
+    <a href="#" id="logout">Logout</a>
   </div>
 </header>
 
-<div class="container">
-  <h1>Latest Buyer RFQs</h1>
-  <div id="rfqList">Loading RFQs…</div>
-</div>
-
-<footer>
-  <p><strong>APD Global Trade</strong></p>
-  <p>Elite B2B Trade Facilitation Platform</p>
-</footer>
+<div id="list"></div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const firebaseConfig = {
+const app = initializeApp({
   apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
   authDomain: "apd-globaltrade-prod.firebaseapp.com",
   projectId: "apd-globaltrade-prod"
-};
+});
 
-const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const list = document.getElementById("list");
 
-const rfqList = document.getElementById("rfqList");
-const logoutBtn = document.getElementById("logoutBtn");
-
-onAuthStateChanged(auth, async (user) => {
+onAuthStateChanged(auth, async user => {
   if (!user) {
     location.href = "/supplier-login.html";
     return;
   }
 
-  const supplierSnap = await getDoc(doc(db, "suppliers", user.uid));
-  if (!supplierSnap.exists()) return;
-
-  const supplier = supplierSnap.data();
-  const plan = (supplier.plan || "free").toLowerCase();
-
   const snap = await getDocs(collection(db, "rfqs"));
-  rfqList.innerHTML = "";
+  list.innerHTML = "";
 
   snap.forEach(d => {
     const r = d.data();
-
-    rfqList.innerHTML += `
+    list.innerHTML += `
       <div class="rfq">
         <strong>${r.product || "-"}</strong><br>
         Quantity: ${r.quantity || "-"}<br><br>
-
-        ${
-          plan === "gold" || plan === "platinum"
-          ? `
-            📞 ${r.phone || "N/A"}<br>
-            📧 ${r.buyerEmail || "N/A"}<br>
-            <a href="https://wa.me/${r.phone}" target="_blank">💬 WhatsApp</a>
-          `
-          : `<div class="lock">🔒 Upgrade to view contact</div>`
-        }
+        📞 ${r.phone || "N/A"}<br>
+        📧 ${r.buyerEmail || "N/A"}
       </div>
     `;
   });
 });
 
-logoutBtn.onclick = async () => {
+logout.onclick = async () => {
   await signOut(auth);
   location.href = "/supplier-login.html";
 };
