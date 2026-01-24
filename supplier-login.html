@@ -5,31 +5,38 @@
 <title>Supplier Login | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
 body{
   margin:0;
+  font-family:Inter,sans-serif;
+  background:linear-gradient(135deg,#071427,#020617);
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:linear-gradient(135deg,#071427,#020617);
-  font-family:Inter,Arial,sans-serif;
 }
 .card{
   background:#fff;
   padding:36px;
-  width:360px;
+  width:380px;
   border-radius:16px;
   text-align:center;
 }
+h1{margin-bottom:6px}
+p{font-size:14px;color:#555}
 input{
   width:100%;
-  padding:12px;
-  margin:12px 0;
+  padding:14px;
+  margin-top:14px;
+  border-radius:10px;
+  border:1px solid #ddd;
 }
 button{
   width:100%;
   padding:14px;
+  margin-top:20px;
   background:#2563eb;
   color:#fff;
   border:none;
@@ -37,10 +44,25 @@ button{
   font-weight:600;
   cursor:pointer;
 }
-.error{
-  margin-top:12px;
-  color:#dc2626;
-  font-size:14px;
+.links{
+  margin-top:16px;
+  font-size:13px;
+}
+.links a{
+  display:block;
+  margin-top:8px;
+  color:#2563eb;
+  text-decoration:none;
+}
+.error{color:#dc2626;font-size:13px;margin-top:10px}
+.success{color:#16a34a;font-size:13px;margin-top:10px}
+footer{
+  position:fixed;
+  bottom:10px;
+  width:100%;
+  text-align:center;
+  color:#cbd5e1;
+  font-size:12px;
 }
 </style>
 </head>
@@ -48,16 +70,34 @@ button{
 <body>
 
 <div class="card">
-  <h2>Supplier Login</h2>
+  <h1>Supplier Login</h1>
+  <p>Access verified buyer RFQs</p>
+
   <input id="email" type="email" placeholder="Email">
   <input id="password" type="password" placeholder="Password">
+
   <button id="loginBtn">Login</button>
-  <div class="error" id="msg"></div>
+
+  <div class="links">
+    <a href="#" id="forgotBtn">Forgot password?</a>
+    <a href="/register-supplier.html">New supplier? Register</a>
+  </div>
+
+  <div id="msg"></div>
 </div>
+
+<footer>
+  APD Global Trade · Elite B2B Trade Facilitation Platform
+</footer>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
@@ -68,36 +108,89 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-document.getElementById("loginBtn").onclick = async () => {
-  const email = email.value.trim();
-  const password = password.value.trim();
-  msg.textContent = "";
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+const msg = document.getElementById("msg");
 
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    window.location.replace("/supplier-dashboard.html");
-  } catch (e) {
-    msg.textContent = e.message;
+document.getElementById("loginBtn").onclick = async () => {
+  msg.textContent = "";
+  try{
+    await signInWithEmailAndPassword(auth, email.value, password.value);
+    window.location.href = "/supplier-dashboard.html";
+  }catch(err){
+    msg.className="error";
+    msg.textContent = err.message;
   }
 };
+
+document.getElementById("forgotBtn").onclick = async (e) => {
+  e.preventDefault();
+  if(!email.value){
+    msg.className="error";
+    msg.textContent="Enter email first";
+    return;
+  }
+  await sendPasswordResetEmail(auth,email.value);
+  msg.className="success";
+  msg.textContent="Password reset email sent";
+};
+
+// ✅ Prevent logged-in users seeing login again
+onAuthStateChanged(auth,user=>{
+  if(user){
+    window.location.href="/supplier-dashboard.html";
+  }
+});
 </script>
-
-<!-- FOOTER -->
-<footer style="position:fixed;bottom:0;width:100%;text-align:center;background:#020617;color:#9ca3af;padding:16px;font-size:13px;">
-  <strong style="color:#c9a44a;">APD Global Trade</strong><br>
-  Elite B2B Trade Facilitation Platform<br>
-  <a href="/terms.html">Terms</a> |
-  <a href="/privacy.html">Privacy</a> |
-  <a href="/disclaimer.html">Disclaimer</a><br>
-  📧 info@apdglobaltradehub.com |
-  ☎ +1 (202) 780-1366 |
-  💬 WhatsApp: +91 92664 18868
-</footer>
-
-<a href="https://wa.me/919266418868" target="_blank"
-style="position:fixed;bottom:80px;right:20px;background:#25D366;color:#fff;
-width:56px;height:56px;border-radius:50%;display:flex;align-items:center;
-justify-content:center;font-size:26px;text-decoration:none;">💬</a>
 
 </body>
 </html>
+
+<!-- ================= FOOTER ================= -->
+<footer style="
+  background:#020617;
+  color:#9ca3af;
+  text-align:center;
+  padding:40px 20px;
+  font-size:14px;
+">
+  <p style="color:#c9a44a;font-weight:600;margin-bottom:6px;">
+    APD Global Trade
+  </p>
+  <p style="margin:6px 0;">
+    Elite B2B Trade Facilitation Platform
+  </p>
+
+  <p style="margin:10px 0;">
+    <a href="/terms.html" style="color:#c9a44a;text-decoration:none;">Terms</a> |
+    <a href="/privacy.html" style="color:#c9a44a;text-decoration:none;">Privacy</a> |
+    <a href="/disclaimer.html" style="color:#c9a44a;text-decoration:none;">Disclaimer</a>
+  </p>
+
+  <p style="margin:10px 0;line-height:1.6;">
+    📧 info@apdglobaltradehub.com <br>
+    ☎ +1 (202) 780-1366 <br>
+    💬 WhatsApp: +91 92664 18868
+  </p>
+</footer>
+
+<!-- ============ FLOATING WHATSAPP BUTTON ============ -->
+<a href="https://wa.me/919266418868" target="_blank"
+   style="
+   position:fixed;
+   bottom:20px;
+   right:20px;
+   width:56px;
+   height:56px;
+   background:#25D366;
+   color:#fff;
+   border-radius:50%;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   font-size:28px;
+   box-shadow:0 10px 25px rgba(0,0,0,.25);
+   z-index:9999;
+   text-decoration:none;">
+  💬
+</a>
