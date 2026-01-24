@@ -92,36 +92,33 @@ footer{
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getAuth,signInWithEmailAndPassword,sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-  authDomain: "apd-globaltrade-prod.firebaseapp.com",
-  projectId: "apd-globaltrade-prod"
-};
+const ADMIN_EMAIL="admin@apdglobaltrade.com";
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+const app=initializeApp({
+  apiKey:"AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+  authDomain:"apd-globaltrade-prod.firebaseapp.com",
+  projectId:"apd-globaltrade-prod"
+});
 
-const email = document.getElementById("email");
-const password = document.getElementById("password");
-const msg = document.getElementById("msg");
+const auth=getAuth(app);
 
-document.getElementById("loginBtn").onclick = async () => {
-  msg.textContent = "";
+loginBtn.onclick=async()=>{
+  msg.textContent="";
   try{
-    await signInWithEmailAndPassword(auth, email.value, password.value);
-    window.location.href = "/supplier-dashboard.html";
-  }catch(err){
+    const cred=await signInWithEmailAndPassword(auth,email.value,password.value);
+    if(cred.user.email===ADMIN_EMAIL){
+      location.href="/admin.html";
+    }else{
+      location.href="/supplier-dashboard.html";
+    }
+  }catch(e){
     msg.className="error";
-    msg.textContent = err.message;
+    msg.textContent=e.message;
   }
 };
+</script>
 
 document.getElementById("forgotBtn").onclick = async (e) => {
   e.preventDefault();
@@ -194,3 +191,4 @@ onAuthStateChanged(auth,user=>{
    text-decoration:none;">
   💬
 </a>
+
