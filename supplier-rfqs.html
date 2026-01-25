@@ -30,6 +30,7 @@ a{color:#e5e7eb;text-decoration:none;margin-left:16px}
   border-radius:14px;
   padding:20px;
   margin-bottom:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
 }
 .badge{
   display:inline-block;
@@ -62,7 +63,6 @@ a{color:#e5e7eb;text-decoration:none;margin-left:16px}
   <div id="rfqList">Loading RFQs…</div>
 </div>
 
-<!-- FOOTER -->
 <footer style="background:#020617;color:#9ca3af;text-align:center;padding:40px 20px">
 <p style="color:#c9a44a;font-weight:600">APD Global Trade</p>
 <p>Elite B2B Trade Facilitation Platform</p>
@@ -110,13 +110,7 @@ onAuthStateChanged(auth, async (user)=>{
   }
 
   const supplier = snap.data();
-
-  if(supplier.plan === "basic"){
-    rfqList.innerHTML = "<p class='locked'>Upgrade to Gold to view RFQs</p>";
-    return;
-  }
-
-  loadRFQs(supplier.plan);
+  loadRFQs(supplier.plan || "basic");
 });
 
 async function loadRFQs(plan){
@@ -138,13 +132,17 @@ async function loadRFQs(plan){
         <h3>${r.product || "-"}</h3>
         <p><b>Quantity:</b> ${r.quantity || "-"}</p>
         <p><b>Country:</b> ${r.country || "-"}</p>
+
         ${
-          plan === "platinum"
-          ? `<p><b>Buyer:</b> ${r.buyerName}<br>
-             📧 ${r.email}<br>
-             ☎ ${r.phone}</p>`
-          : `<p class="locked">Upgrade to Platinum to unlock buyer contact</p>`
+          plan === "basic"
+          ? `<p class="locked">🔒 Buyer contact locked. Upgrade to Gold or Platinum.</p>`
+          : `<p>
+              <b>Buyer:</b> ${r.buyerName || "-"}<br>
+              📧 ${r.email || "-"}<br>
+              ☎ ${r.phone || "-"}
+            </p>`
         }
+
         <span class="badge">New RFQ</span>
       </div>
     `;
