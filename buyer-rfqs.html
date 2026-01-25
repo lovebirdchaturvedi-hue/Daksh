@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Live Buyer RFQs | APD Global Trade</title>
-<meta name="description" content="Browse live bulk buyer RFQs from verified global importers and distributors.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -11,70 +10,43 @@ body{
   margin:0;
   font-family:Inter,Arial,sans-serif;
   background:#f5f7fb;
-  color:#111;
+}
+header{
+  background:#020617;
+  color:#fff;
+  padding:16px 40px;
 }
 .container{
   max-width:1200px;
-  margin:auto;
-  padding:40px 20px;
+  margin:40px auto;
+  padding:0 20px;
 }
-h1{margin-bottom:6px}
-.sub{color:#555;margin-bottom:20px}
-
-.search input{
-  width:100%;
-  padding:14px;
-  border-radius:8px;
-  border:1px solid #ccc;
-  margin-bottom:30px;
-  font-size:15px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:22px;
-}
-
 .card{
   background:#fff;
   padding:20px;
   border-radius:14px;
-  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  margin-bottom:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,.06);
 }
-
+.card h3{margin:0 0 10px}
 .badge{
   display:inline-block;
-  font-size:12px;
+  background:#16a34a;
+  color:#fff;
   padding:4px 10px;
-  border-radius:20px;
-  margin-right:6px;
+  border-radius:999px;
+  font-size:12px;
 }
-.priority{background:#ffe6c7;color:#9a4f00}
-.verified{background:#e6f6ee;color:#0b6b3a}
-
-.meta{font-size:14px;color:#444;margin:6px 0}
-.qty{font-weight:600;margin-top:10px}
-
 .lock{
-  margin-top:14px;
-  background:#f1f2f4;
-  padding:12px;
-  border-radius:8px;
-  font-size:14px;
-}
-.lock a{
-  color:#0057ff;
+  color:#991b1b;
   font-weight:600;
-  text-decoration:none;
+  font-size:13px;
 }
-
 footer{
   background:#020617;
   color:#9ca3af;
   text-align:center;
   padding:40px 20px;
-  margin-top:60px;
   font-size:14px;
 }
 </style>
@@ -82,31 +54,27 @@ footer{
 
 <body>
 
-<div class="container">
-<h1>Live Buyer RFQs</h1>
-<p class="sub">Bulk buying requirements from verified global buyers</p>
+<header>
+  <h2>Live Buyer RFQs</h2>
+</header>
 
-<div class="search">
-  <input id="search" placeholder="Search product, country or industry">
+<div class="container" id="rfqList">
+  <p>Loading RFQs…</p>
 </div>
 
-<div class="grid" id="rfqGrid"></div>
-</div>
-
-<!-- ================= FOOTER ================= -->
 <footer>
-<p style="color:#c9a44a;font-weight:600">APD Global Trade</p>
-<p>Elite B2B Trade Facilitation Platform</p>
-<p>
-<a href="/terms.html" style="color:#c9a44a">Terms</a> |
-<a href="/privacy.html" style="color:#c9a44a">Privacy</a> |
-<a href="/disclaimer.html" style="color:#c9a44a">Disclaimer</a>
-</p>
-<p>
-📧 info@apdglobaltradehub.com<br>
-☎ +1 (202) 780-1366<br>
-💬 WhatsApp: +91 92664 18868
-</p>
+  <p style="color:#c9a44a;font-weight:600">APD Global Trade</p>
+  <p>Elite B2B Trade Facilitation Platform</p>
+  <p>
+    <a href="/terms.html" style="color:#c9a44a">Terms</a> |
+    <a href="/privacy.html" style="color:#c9a44a">Privacy</a> |
+    <a href="/disclaimer.html" style="color:#c9a44a">Disclaimer</a>
+  </p>
+  <p>
+    📧 info@apdglobaltradehub.com<br>
+    ☎ +1 (202) 780-1366<br>
+    💬 WhatsApp: +91 92664 18868
+  </p>
 </footer>
 
 <a href="https://wa.me/919266418868" target="_blank"
@@ -114,61 +82,53 @@ style="position:fixed;bottom:20px;right:20px;width:56px;height:56px;
 background:#25D366;color:#fff;border-radius:50%;
 display:flex;align-items:center;justify-content:center;
 font-size:28px;box-shadow:0 10px 25px rgba(0,0,0,.25);
-z-index:9999;text-decoration:none">💬</a>
+z-index:9999;text-decoration:none;">💬</a>
 
-<script>
-const rfqs = [
-{p:"1121 Basmati Rice",q:"500 MT",c:"UAE – Jebel Ali",i:"Food & Grains",priority:true},
-{p:"IR-64 White Rice",q:"1000 MT",c:"Saudi Arabia – Jeddah",i:"Food & Grains"},
-{p:"Sugar ICUMSA 45",q:"2500 MT",c:"Tanzania – Dar es Salaam",i:"Food Commodities",priority:true},
-{p:"Sunflower Oil",q:"1000 MT",c:"Netherlands – Rotterdam",i:"Edible Oils"},
-{p:"Palm Oil",q:"5000 MT",c:"Kenya – Mombasa",i:"Edible Oils"},
-{p:"Wheat Grain",q:"5000 MT",c:"Egypt – Alexandria",i:"Agriculture"},
-{p:"Maize Yellow",q:"10000 MT",c:"Vietnam – Ho Chi Minh",i:"Animal Feed"},
-{p:"Soybean Meal",q:"3000 MT",c:"Indonesia – Jakarta",i:"Animal Feed"},
-{p:"Chickpeas",q:"400 MT",c:"Turkey – Mersin",i:"Pulses"},
-{p:"Green Lentils",q:"300 MT",c:"UAE – Dubai",i:"Pulses"},
-{p:"HDPE Granules",q:"2000 MT",c:"UAE – Jebel Ali",i:"Plastics"},
-{p:"PVC Resin",q:"4000 MT",c:"Vietnam – Ho Chi Minh",i:"Chemicals"},
-{p:"Bitumen 60/70",q:"10000 MT",c:"Kenya – Mombasa",i:"Construction"},
-{p:"Cement",q:"50000 MT",c:"Sri Lanka – Colombo",i:"Construction"},
-{p:"TMT Steel Bars",q:"20000 MT",c:"Nepal – Birgunj",i:"Steel"},
-{p:"Aluminium Ingots",q:"5000 MT",c:"UAE – Dubai",i:"Metals"},
-{p:"Copper Cathodes",q:"2000 MT",c:"China – Shanghai",i:"Metals"},
-{p:"Plastic Packaging Bags",q:"200 MT",c:"UAE – Sharjah",i:"Packaging"},
-{p:"Corrugated Boxes",q:"500,000 pcs",c:"UK – Felixstowe",i:"Packaging"},
-{p:"Solar Panels",q:"5 MW",c:"UAE – Abu Dhabi",i:"Renewable Energy"}
-];
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, getDocs, query, where, orderBy } 
+  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const grid=document.getElementById("rfqGrid");
+const app = initializeApp({
+  apiKey:"AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+  authDomain:"apd-globaltrade-prod.firebaseapp.com",
+  projectId:"apd-globaltrade-prod"
+});
 
-function render(list){
-  grid.innerHTML="";
-  list.forEach(r=>{
-    grid.innerHTML+=`
-    <div class="card">
-      ${r.priority?'<span class="badge priority">PRIORITY</span>':''}
-      <span class="badge verified">VERIFIED BUYER</span>
-      <h3>${r.p}</h3>
-      <div class="meta">Industry: ${r.i}</div>
-      <div class="meta">Destination: ${r.c}</div>
-      <div class="qty">Quantity: ${r.q}</div>
-      <div class="lock">
-        🔒 Buyer contact available for members only<br>
-        <a href="/membership.html">Unlock Buyer Contact</a>
+const db = getFirestore(app);
+const rfqList = document.getElementById("rfqList");
+
+async function loadRFQs(){
+  rfqList.innerHTML = "";
+
+  const q = query(
+    collection(db,"rfqs"),
+    where("status","==","live"),
+    orderBy("createdAt","desc")
+  );
+
+  const snap = await getDocs(q);
+
+  if(snap.empty){
+    rfqList.innerHTML = "<p>No RFQs available</p>";
+    return;
+  }
+
+  snap.forEach(doc=>{
+    const r = doc.data();
+    rfqList.innerHTML += `
+      <div class="card">
+        <span class="badge">Verified Buyer</span>
+        <h3>${r.product}</h3>
+        <p><b>Quantity:</b> ${r.quantity}</p>
+        <p><b>Country:</b> ${r.country}</p>
+        <p class="lock">🔒 Contact details locked (Login as supplier)</p>
       </div>
-    </div>`;
+    `;
   });
 }
 
-render(rfqs);
-
-document.getElementById("search").addEventListener("input",e=>{
-  const v=e.target.value.toLowerCase();
-  render(rfqs.filter(r=>
-    (r.p+r.c+r.i).toLowerCase().includes(v)
-  ));
-});
+loadRFQs();
 </script>
 
 </body>
