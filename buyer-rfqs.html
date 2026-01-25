@@ -2,60 +2,26 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Live Buyer RFQs | APD Global Trade</title>
+<title>Submit RFQ | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f5f7fb;
+body { margin:0; font-family:Inter,sans-serif; background:#f5f7fb; color:#0f172a; }
+header { height:80px; background:#071427; display:flex; align-items:center; justify-content:center; }
+header .logo { color:#c9a44a; font-weight:600; }
+.section { max-width:700px; margin:auto; padding:80px 20px; }
+form { background:#fff; padding:40px; border-radius:16px; border:1px solid #e5e7eb; }
+input, textarea {
+  width:100%; padding:12px; margin-bottom:16px;
+  border-radius:8px; border:1px solid #cbd5e1;
 }
-header{
-  background:#020617;
-  color:#fff;
-  padding:20px 40px;
-}
-.container{
-  max-width:1200px;
-  margin:20px auto;
-  padding:0 20px;
-}
-.search{
-  margin:20px 0;
-}
-.search input{
-  width:100%;
-  padding:14px;
-  border-radius:10px;
-  border:1px solid #d1d5db;
-  font-size:15px;
-}
-.card{
-  background:#fff;
-  padding:18px;
-  margin-bottom:16px;
-  border-radius:10px;
-  box-shadow:0 2px 6px rgba(0,0,0,.08);
-}
-.badge{
-  display:inline-block;
-  background:#16a34a;
-  color:#fff;
-  padding:4px 8px;
-  font-size:12px;
-  border-radius:6px;
-  margin-bottom:6px;
-}
-.lock{
-  color:#dc2626;
-  font-weight:600;
-}
-footer{
-  background:#020617;
-  color:#9ca3af;
-  text-align:center;
-  padding:40px 20px;
+button {
+  background:#020617; color:#fff;
+  padding:14px; border:none; border-radius:999px;
+  width:100%; font-size:15px; font-weight:600;
+  cursor:pointer;
 }
 </style>
 </head>
@@ -63,115 +29,137 @@ footer{
 <body>
 
 <header>
-  <h2>Live Buyer RFQs</h2>
+  <div class="logo">APD Global Trade</div>
 </header>
 
-<div class="container">
+<section class="section">
+  <h1>Submit Your Buying Requirement</h1>
+  <p>Your RFQ will be shared with verified suppliers.</p>
 
-  <!-- 🔍 SEARCH -->
-  <div class="search">
-    <input
-      type="text"
-      id="searchInput"
-      placeholder="Search by product or country..."
-    >
-  </div>
+  <form id="rfqForm">
 
-  <!-- RFQ LIST -->
-  <div id="rfqList">
-    Loading RFQs…
-  </div>
+    <h3>Buyer Contact Details</h3>
 
-</div>
+    <input id="buyer_name" placeholder="Buyer Full Name" required>
+    <input id="buyer_email" type="email" placeholder="Buyer Email" required>
+    <input id="buyer_phone" placeholder="Buyer Phone / WhatsApp" required>
+    <input id="buyer_company" placeholder="Company Name" required>
+    <input id="buyer_country" placeholder="Country" required>
 
-<footer>
-  <p style="color:#c9a44a;font-weight:600">APD Global Trade</p>
-  <p>Elite B2B Trade Facilitation Platform</p>
-  <p>
-    📧 info@apdglobaltradehub.com <br>
-    ☎ +1 (202) 780-1366 <br>
-    💬 WhatsApp: +91 92664 18868
-  </p>
-</footer>
+    <hr style="margin:30px 0;">
+
+    <h3>Buying Requirement</h3>
+
+    <input id="product" placeholder="Product Required" required>
+    <input id="quantity" placeholder="Quantity (e.g. 50 MT)" required>
+    <input id="destination" placeholder="Delivery Destination" required>
+    <textarea id="requirements" placeholder="Specifications & details" required></textarea>
+
+    <button type="submit">Submit RFQ</button>
+
+  </form>
+</section>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
   getFirestore,
   collection,
-  getDocs,
-  query,
-  where
+  addDoc,
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const app = initializeApp({
-  apiKey:"AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-  authDomain:"apd-globaltrade-prod.firebaseapp.com",
-  projectId:"apd-globaltrade-prod"
-});
+const firebaseConfig = {
+  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+  authDomain: "apd-globaltrade-prod.firebaseapp.com",
+  projectId: "apd-globaltrade-prod"
+};
 
+const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const rfqList = document.getElementById("rfqList");
-const searchInput = document.getElementById("searchInput");
 
-let allRFQs = [];
+document.getElementById("rfqForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-async function loadRFQs(){
-  rfqList.innerHTML = "<p>Loading RFQs…</p>";
+  console.log("Submitting RFQ..."); // debug
 
-  const q = query(
-    collection(db,"rfqs"),
-    where("status","==","live")
-  );
+  try {
+    const docRef = await addDoc(collection(db, "rfqs"), {
+      buyerName: buyer_name.value.trim(),
+      buyerCompany: buyer_company.value.trim(),
+      email: buyer_email.value.trim().toLowerCase(),
+      phone: buyer_phone.value.trim(),
+      country: buyer_country.value.trim(),
 
-  const snap = await getDocs(q);
+      product: product.value.trim(),
+      quantity: quantity.value.trim(),
+      deliveryPort: destination.value.trim(),
+      description: requirements.value.trim(),
 
-  if(snap.empty){
-    rfqList.innerHTML = "<p>No RFQs available</p>";
-    return;
+      status: "open",
+      source: "website",
+      createdAt: serverTimestamp()
+    });
+
+    console.log("Saved RFQ ID:", docRef.id);
+    alert("✅ RFQ submitted successfully!");
+    e.target.reset();
+
+  } catch (err) {
+    console.error("Firestore error:", err);
+    alert("❌ " + err.message);
   }
-
-  allRFQs = [];
-  snap.forEach(doc=>{
-    allRFQs.push(doc.data());
-  });
-
-  renderRFQs(allRFQs);
-}
-
-function renderRFQs(list){
-  rfqList.innerHTML = "";
-
-  if(list.length === 0){
-    rfqList.innerHTML = "<p>No matching RFQs</p>";
-    return;
-  }
-
-  list.forEach(r=>{
-    rfqList.innerHTML += `
-      <div class="card">
-        <span class="badge">Verified Buyer</span>
-        <h3>${r.product}</h3>
-        <p><b>Quantity:</b> ${r.quantity}</p>
-        <p><b>Country:</b> ${r.country}</p>
-        <p class="lock">🔒 Contact details locked (Login as supplier)</p>
-      </div>
-    `;
-  });
-}
-
-/* SEARCH LOGIC */
-searchInput.addEventListener("input", e=>{
-  const q = e.target.value.toLowerCase();
-  const filtered = allRFQs.filter(r =>
-    r.product.toLowerCase().includes(q) ||
-    r.country.toLowerCase().includes(q)
-  );
-  renderRFQs(filtered);
 });
-
-loadRFQs();
 </script>
+
+<!-- ================= FOOTER ================= -->
+<footer style="
+  background:#020617;
+  color:#9ca3af;
+  text-align:center;
+  padding:40px 20px;
+  font-size:14px;
+">
+  <p style="color:#c9a44a;font-weight:600;margin-bottom:6px;">
+    APD Global Trade
+  </p>
+  <p style="margin:6px 0;">
+    Elite B2B Trade Facilitation Platform
+  </p>
+
+  <p style="margin:10px 0;">
+    <a href="/terms.html" style="color:#c9a44a;text-decoration:none;">Terms</a> |
+    <a href="/privacy.html" style="color:#c9a44a;text-decoration:none;">Privacy</a> |
+    <a href="/disclaimer.html" style="color:#c9a44a;text-decoration:none;">Disclaimer</a>
+  </p>
+
+  <p style="margin:10px 0;line-height:1.6;">
+    📧 info@apdglobaltradehub.com <br>
+    ☎ +1 (202) 780-1366 <br>
+    💬 WhatsApp: +91 92664 18868
+  </p>
+</footer>
+
+<!-- ============ FLOATING WHATSAPP BUTTON ============ -->
+<a href="https://wa.me/919266418868" target="_blank"
+   style="
+   position:fixed;
+   bottom:20px;
+   right:20px;
+   width:56px;
+   height:56px;
+   background:#25D366;
+   color:#fff;
+   border-radius:50%;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   font-size:28px;
+   box-shadow:0 10px 25px rgba(0,0,0,.25);
+   z-index:9999;
+   text-decoration:none;">
+  💬
+</a>
 
 </body>
 </html>
