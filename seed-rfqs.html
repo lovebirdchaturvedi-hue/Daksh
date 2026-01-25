@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Seed RFQs</title>
+</head>
+
+<body>
+<h2>Uploading RFQs… check console</h2>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+    authDomain: "apd-globaltrade-prod.firebaseapp.com",
+    projectId: "apd-globaltrade-prod"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const rfqs = [
+    {
+      product: "Basmati Rice 1121",
+      quantity: "200 MT",
+      country: "India",
+      buyerName: "Shree Foods Pvt Ltd",
+      email: "buy@shreefoods.in",
+      phone: "+91 9823456789"
+    },
+    {
+      product: "Non Basmati Rice IR64",
+      quantity: "500 MT",
+      country: "India",
+      buyerName: "Agro India Trading",
+      email: "purchase@agroindia.com",
+      phone: "+91 9811122233"
+    },
+    {
+      product: "Sugar ICUMSA 45",
+      quantity: "300 MT",
+      country: "India",
+      buyerName: "Sweet India Corp",
+      email: "rfq@sweetindia.com",
+      phone: "+91 9777711111"
+    },
+    {
+      product: "Steel Rods TMT 12mm",
+      quantity: "1500 MT",
+      country: "Kenya",
+      buyerName: "Nairobi Builders Ltd",
+      email: "procurement@nairobi-builders.co.ke",
+      phone: "+254 712345678"
+    },
+    {
+      product: "Sunflower Oil",
+      quantity: "500 MT",
+      country: "Saudi Arabia",
+      buyerName: "Al Noor Trading",
+      email: "imports@alnoor.sa",
+      phone: "+966 551234567"
+    },
+    {
+      product: "Palm Oil",
+      quantity: "3000 MT",
+      country: "Malaysia",
+      buyerName: "KL Oils",
+      email: "rfq@kloils.my",
+      phone: "+60 123456789"
+    }
+  ];
+
+  for (const rfq of rfqs) {
+    await addDoc(collection(db, "rfqs"), {
+      ...rfq,
+      createdAt: serverTimestamp(),
+      status: "live"
+    });
+  }
+
+  console.log("✅ RFQs uploaded successfully");
+</script>
+
+</body>
+</html>
