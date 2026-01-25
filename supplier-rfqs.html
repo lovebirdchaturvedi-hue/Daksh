@@ -2,30 +2,46 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Supplier RFQs | APD Global Trade</title>
+<title>Live Buyer RFQs | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{margin:0;font-family:Inter,sans-serif;background:#f5f7fb}
-header{
-  background:#071427;color:#c9a44a;
-  padding:20px 40px;
-  display:flex;justify-content:space-between
+body{
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:#f5f7fb;
 }
+header{
+  background:#071427;
+  color:#c9a44a;
+  padding:16px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+a{color:#e5e7eb;text-decoration:none;margin-left:16px}
 .container{
-  max-width:1200px;margin:40px auto;padding:0 20px
+  max-width:900px;
+  margin:30px auto;
+  padding:0 16px;
 }
 .card{
-  background:#fff;padding:22px;
-  border-radius:14px;margin-bottom:20px
+  background:#fff;
+  border-radius:14px;
+  padding:20px;
+  margin-bottom:16px;
 }
-.lock{
-  background:#f1f2f4;
-  padding:12px;border-radius:8px;
-  font-size:14px
+.badge{
+  display:inline-block;
+  background:#020617;
+  color:#fff;
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:12px;
 }
-.unlock{
-  color:#16a34a;font-weight:600
+.locked{
+  color:#dc2626;
+  font-weight:600;
 }
 </style>
 </head>
@@ -42,15 +58,37 @@ header{
 </header>
 
 <div class="container">
-<h2>Live Buyer RFQs</h2>
-<div id="rfqs">Loading RFQs…</div>
+  <h2>Live Buyer RFQs</h2>
+  <div id="rfqList">Loading RFQs…</div>
 </div>
+
+<!-- FOOTER -->
+<footer style="background:#020617;color:#9ca3af;text-align:center;padding:40px 20px">
+<p style="color:#c9a44a;font-weight:600">APD Global Trade</p>
+<p>Elite B2B Trade Facilitation Platform</p>
+<p>
+<a href="/terms.html" style="color:#c9a44a">Terms</a> |
+<a href="/privacy.html" style="color:#c9a44a">Privacy</a> |
+<a href="/disclaimer.html" style="color:#c9a44a">Disclaimer</a>
+</p>
+<p>
+📧 info@apdglobaltradehub.com<br>
+☎ +1 (202) 780-1366<br>
+💬 WhatsApp: +91 92664 18868
+</p>
+</footer>
+
+<a href="https://wa.me/919266418868" target="_blank"
+style="position:fixed;bottom:20px;right:20px;width:56px;height:56px;
+background:#25D366;color:#fff;border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+font-size:28px;box-shadow:0 10px 25px rgba(0,0,0,.25);
+z-index:9999;text-decoration:none">💬</a>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth,onAuthStateChanged,signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore,collection,getDocs,doc,getDoc,query,where } 
-from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore,collection,getDocs,doc,getDoc,query,orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const app = initializeApp({
   apiKey:"AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
@@ -58,57 +96,62 @@ const app = initializeApp({
   projectId:"apd-globaltrade-prod"
 });
 
-const auth=getAuth(app);
-const db=getFirestore(app);
-const rfqBox=document.getElementById("rfqs");
+const auth = getAuth(app);
+const db = getFirestore(app);
+const rfqList = document.getElementById("rfqList");
 
-onAuthStateChanged(auth, async user=>{
+onAuthStateChanged(auth, async (user)=>{
   if(!user) return location.href="/supplier-login.html";
 
-  const supplierSnap = await getDoc(doc(db,"suppliers",user.uid));
-  if(!supplierSnap.exists()){
-    rfqBox.innerHTML="Supplier profile missing";
+  const snap = await getDoc(doc(db,"suppliers",user.uid));
+  if(!snap.exists()){
+    rfqList.innerHTML = "<p>Supplier profile not found</p>";
     return;
   }
 
-  const supplier = supplierSnap.data();
-  const isPaid = supplier.plan === "gold" || supplier.plan === "platinum";
+  const supplier = snap.data();
 
-  const q = query(
-    collection(db,"rfqs"),
-    where("status","==","active")
-  );
+  if(supplier.plan === "basic"){
+    rfqList.innerHTML = "<p class='locked'>Upgrade to Gold to view RFQs</p>";
+    return;
+  }
 
+  loadRFQs(supplier.plan);
+});
+
+async function loadRFQs(plan){
+  rfqList.innerHTML = "";
+
+  const q = query(collection(db,"rfqs"), orderBy("createdAt","desc"));
   const snap = await getDocs(q);
-  rfqBox.innerHTML="";
+
+  if(snap.empty){
+    rfqList.innerHTML = "<p>No RFQs available yet.</p>";
+    return;
+  }
 
   snap.forEach(d=>{
-    const r=d.data();
+    const r = d.data();
 
-    rfqBox.innerHTML += `
+    rfqList.innerHTML += `
       <div class="card">
-        <h3>${r.product}</h3>
-        <p>Quantity: ${r.quantity}</p>
-        <p>Destination: ${r.destinationCountry} – ${r.destinationPort}</p>
-
+        <h3>${r.product || "-"}</h3>
+        <p><b>Quantity:</b> ${r.quantity || "-"}</p>
+        <p><b>Country:</b> ${r.country || "-"}</p>
         ${
-          isPaid
-          ? `<p class="unlock">
-              📧 ${r.buyerEmail || "N/A"}<br>
-              📞 ${r.buyerPhone || "N/A"}<br>
-              <a href="https://wa.me/${r.buyerPhone}" target="_blank">💬 WhatsApp</a>
-            </p>`
-          : `<div class="lock">
-              🔒 Buyer contact for Gold & Platinum members only<br>
-              <a href="/membership.html">Upgrade Membership</a>
-            </div>`
+          plan === "platinum"
+          ? `<p><b>Buyer:</b> ${r.buyerName}<br>
+             📧 ${r.email}<br>
+             ☎ ${r.phone}</p>`
+          : `<p class="locked">Upgrade to Platinum to unlock buyer contact</p>`
         }
+        <span class="badge">New RFQ</span>
       </div>
     `;
   });
-});
+}
 
-document.getElementById("logout").onclick=async()=>{
+document.getElementById("logout").onclick = async ()=>{
   await signOut(auth);
   location.href="/supplier-login.html";
 };
