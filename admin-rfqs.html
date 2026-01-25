@@ -6,47 +6,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{margin:0;font-family:Arial;background:#f5f7fb}
+body{margin:0;font-family:Inter,Arial;background:#f5f7fb}
 header{
-  background:#020617;color:#fff;
-  padding:18px 40px;
+  background:#020617;color:#c9a44a;
+  padding:18px 30px;
   display:flex;justify-content:space-between;align-items:center
 }
+a{color:#e5e7eb;text-decoration:none;margin-left:16px}
 .container{
-  max-width:900px;
-  margin:30px auto;
-  background:#fff;
-  padding:25px;
-  border-radius:12px
+  max-width:1000px;margin:30px auto;
+  background:#fff;padding:24px;border-radius:14px
 }
 input,select{
-  width:100%;
-  padding:12px;
-  margin-bottom:12px;
-  border-radius:8px;
-  border:1px solid #d1d5db
+  width:100%;padding:10px;margin-bottom:10px;
+  border-radius:6px;border:1px solid #d1d5db
 }
 button{
-  padding:12px 18px;
-  background:#2563eb;
-  color:#fff;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  font-weight:600
+  padding:8px 12px;margin:4px;
+  border:none;border-radius:6px;
+  cursor:pointer;font-size:13px;font-weight:600
 }
+.primary{background:#c9a44a;color:#071427}
+.edit{background:#2563eb;color:#fff}
+.live{background:#16a34a;color:#fff}
+.draft{background:#f59e0b;color:#000}
+.hide{background:#64748b;color:#fff}
+.del{background:#dc2626;color:#fff}
 .rfq{
   border-bottom:1px solid #e5e7eb;
-  padding:12px 0
+  padding:14px 0
 }
+.small{font-size:13px;color:#6b7280}
+.status{font-weight:700}
 </style>
 </head>
 
 <body>
 
 <header>
-  <h2>Admin – RFQ Posting</h2>
-  <button id="logout">Logout</button>
+  <div>APD Global Trade — Admin RFQs</div>
+  <div>
+    <a href="/admin.html">Supplier Admin</a>
+    <a href="/buyer-rfqs.html" target="_blank">View RFQs</a>
+    <a href="#" id="logout">Logout</a>
+  </div>
 </header>
 
 <div class="container">
@@ -54,77 +57,106 @@ button{
 <h3>Post New RFQ</h3>
 
 <input id="product" placeholder="Product name">
-<input id="quantity" placeholder="Quantity">
+<input id="quantity" placeholder="Quantity (e.g. 500 MT)">
 <input id="country" placeholder="Country">
-<input id="buyer" placeholder="Buyer name">
+<input id="buyerName" placeholder="Buyer company">
 <input id="email" placeholder="Buyer email">
 <input id="phone" placeholder="Buyer phone">
 
-<button onclick="postRFQ()">Post RFQ</button>
+<button class="primary" onclick="postRFQ()">Publish RFQ</button>
 
 <hr style="margin:30px 0">
 
 <h3>Existing RFQs</h3>
-<div id="rfqs">Loading…</div>
+<div id="rfqs">Loading RFQs…</div>
 
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth,onAuthStateChanged,signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore,collection,addDoc,getDocs,deleteDoc,doc,serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore,collection,addDoc,getDocs,updateDoc,deleteDoc,doc,serverTimestamp } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const ADMIN_EMAIL = "admin@apdglobaltrade.com";
+const ADMIN_EMAIL="admin@apdglobaltrade.com";
 
-const app = initializeApp({
+const app=initializeApp({
   apiKey:"AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
   authDomain:"apd-globaltrade-prod.firebaseapp.com",
   projectId:"apd-globaltrade-prod"
 });
 
-const auth = getAuth(app);
-const db = getFirestore(app);
+const auth=getAuth(app);
+const db=getFirestore(app);
+const rfqsDiv=document.getElementById("rfqs");
 
 onAuthStateChanged(auth,user=>{
-  if(!user || user.email !== ADMIN_EMAIL){
+  if(!user || user.email!==ADMIN_EMAIL){
     location.href="/supplier-login.html";
+    return;
   }
   loadRFQs();
 });
 
-window.postRFQ = async ()=>{
+window.postRFQ=async()=>{
   await addDoc(collection(db,"rfqs"),{
     product:product.value,
     quantity:quantity.value,
     country:country.value,
-    buyerName:buyer.value,
+    buyerName:buyerName.value,
     email:email.value,
     phone:phone.value,
     status:"live",
     createdAt:serverTimestamp()
   });
-  alert("RFQ posted");
+  product.value=quantity.value=country.value=buyerName.value=email.value=phone.value="";
   loadRFQs();
 };
 
 async function loadRFQs(){
-  rfqs.innerHTML="";
-  const snap = await getDocs(collection(db,"rfqs"));
+  rfqsDiv.innerHTML="";
+  const snap=await getDocs(collection(db,"rfqs"));
+
+  if(snap.empty){
+    rfqsDiv.innerHTML="<p>No RFQs yet</p>";
+    return;
+  }
+
   snap.forEach(d=>{
     const r=d.data();
-    rfqs.innerHTML+=`
+    rfqsDiv.innerHTML+=`
       <div class="rfq">
-        <b>${r.product}</b> – ${r.country}
-        <br>${r.quantity}
-        <br>
-        <button onclick="del('${d.id}')">Delete</button>
+        <b>${r.product}</b> (${r.country})<br>
+        ${r.quantity}<br>
+        <span class="small">Buyer: ${r.buyerName||"-"}</span><br>
+        <span class="status">Status: ${r.status||"live"}</span><br>
+
+        <button class="edit" onclick="editRFQ('${d.id}')">Edit</button>
+        <button class="live" onclick="setStatus('${d.id}','live')">Live</button>
+        <button class="draft" onclick="setStatus('${d.id}','draft')">Draft</button>
+        <button class="hide" onclick="setStatus('${d.id}','hidden')">Hide</button>
+        <button class="del" onclick="del('${d.id}')">Delete</button>
       </div>
     `;
   });
 }
 
-window.del = async id=>{
-  await deleteDoc(doc(db,"rfqs",id));
+window.setStatus=async(id,status)=>{
+  await updateDoc(doc(db,"rfqs",id),{status});
+  loadRFQs();
+};
+
+window.del=async(id)=>{
+  if(confirm("Delete this RFQ?")){
+    await deleteDoc(doc(db,"rfqs",id));
+    loadRFQs();
+  }
+};
+
+window.editRFQ=async(id)=>{
+  const p=prompt("Product name");
+  if(!p) return;
+  await updateDoc(doc(db,"rfqs",id),{product:p});
   loadRFQs();
 };
 
