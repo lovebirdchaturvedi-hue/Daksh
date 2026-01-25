@@ -6,44 +6,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{
-  margin:0;
-  font-family:Inter,sans-serif;
-  background:#f5f7fb;
-}
+body{margin:0;font-family:Inter,sans-serif;background:#f5f7fb}
 header{
-  background:#071427;
-  color:#c9a44a;
+  background:#071427;color:#c9a44a;
   padding:16px 20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  display:flex;justify-content:space-between;align-items:center
 }
 a{color:#e5e7eb;text-decoration:none;margin-left:16px}
-.container{
-  max-width:900px;
-  margin:30px auto;
-  padding:0 16px;
-}
+.container{max-width:900px;margin:30px auto;padding:0 16px}
 .card{
-  background:#fff;
-  border-radius:14px;
-  padding:20px;
-  margin-bottom:16px;
-  box-shadow:0 2px 8px rgba(0,0,0,.06);
+  background:#fff;border-radius:14px;
+  padding:20px;margin-bottom:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,.06)
 }
 .badge{
-  display:inline-block;
-  background:#020617;
-  color:#fff;
-  padding:4px 10px;
-  border-radius:20px;
-  font-size:12px;
+  display:inline-block;background:#020617;
+  color:#fff;padding:4px 10px;
+  border-radius:20px;font-size:12px
 }
-.locked{
-  color:#dc2626;
-  font-weight:600;
-}
+.locked{color:#dc2626;font-weight:600}
 </style>
 </head>
 
@@ -63,32 +44,17 @@ a{color:#e5e7eb;text-decoration:none;margin-left:16px}
   <div id="rfqList">Loading RFQs…</div>
 </div>
 
-<footer style="background:#020617;color:#9ca3af;text-align:center;padding:40px 20px">
-<p style="color:#c9a44a;font-weight:600">APD Global Trade</p>
-<p>Elite B2B Trade Facilitation Platform</p>
-<p>
-<a href="/terms.html" style="color:#c9a44a">Terms</a> |
-<a href="/privacy.html" style="color:#c9a44a">Privacy</a> |
-<a href="/disclaimer.html" style="color:#c9a44a">Disclaimer</a>
-</p>
-<p>
-📧 info@apdglobaltradehub.com<br>
-☎ +1 (202) 780-1366<br>
-💬 WhatsApp: +91 92664 18868
-</p>
-</footer>
-
-<a href="https://wa.me/919266418868" target="_blank"
-style="position:fixed;bottom:20px;right:20px;width:56px;height:56px;
-background:#25D366;color:#fff;border-radius:50%;
-display:flex;align-items:center;justify-content:center;
-font-size:28px;box-shadow:0 10px 25px rgba(0,0,0,.25);
-z-index:9999;text-decoration:none">💬</a>
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth,onAuthStateChanged,signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore,collection,getDocs,doc,getDoc,query,orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  orderBy,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const app = initializeApp({
   apiKey:"AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
@@ -100,56 +66,62 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const rfqList = document.getElementById("rfqList");
 
-onAuthStateChanged(auth, async (user)=>{
+onAuthStateChanged(auth, async user=>{
   if(!user) return location.href="/supplier-login.html";
 
-  const snap = await getDoc(doc(db,"suppliers",user.uid));
-  if(!snap.exists()){
-    rfqList.innerHTML = "<p>Supplier profile not found</p>";
+  const qs = await getDocs(
+    query(collection(db,"suppliers"), where("email","==",user.email))
+  );
+
+  if(qs.empty){
+    rfqList.innerHTML="<p>Supplier profile not found</p>";
     return;
   }
 
-  const supplier = snap.data();
-  loadRFQs(supplier.plan || "basic");
+  const supplier = qs.docs[0].data();
+  loadRFQs(supplier.plan || "free");
 });
 
 async function loadRFQs(plan){
-  rfqList.innerHTML = "";
+  rfqList.innerHTML="";
 
-  const q = query(collection(db,"rfqs"), orderBy("createdAt","desc"));
+  const q = query(
+    collection(db,"rfqs"),
+    where("status","==","open"),
+    orderBy("createdAt","desc")
+  );
+
   const snap = await getDocs(q);
 
   if(snap.empty){
-    rfqList.innerHTML = "<p>No RFQs available yet.</p>";
+    rfqList.innerHTML="<p>No RFQs available yet.</p>";
     return;
   }
 
   snap.forEach(d=>{
-    const r = d.data();
-
-    rfqList.innerHTML += `
+    const r=d.data();
+    rfqList.innerHTML+=`
       <div class="card">
         <h3>${r.product || "-"}</h3>
         <p><b>Quantity:</b> ${r.quantity || "-"}</p>
-        <p><b>Country:</b> ${r.country || "-"}</p>
+        <p><b>Destination:</b> ${r.deliveryPort || "-"}</p>
 
         ${
-          plan === "basic"
-          ? `<p class="locked">🔒 Buyer contact locked. Upgrade to Gold or Platinum.</p>`
+          plan==="free"
+          ? `<p class="locked">🔒 Buyer contact locked. Upgrade to view.</p>`
           : `<p>
-              <b>Buyer:</b> ${r.buyerName || "-"}<br>
-              📧 ${r.email || "-"}<br>
-              ☎ ${r.phone || "-"}
+              <b>Buyer:</b> ${r.buyerName}<br>
+              📧 ${r.email}<br>
+              ☎ ${r.phone}
             </p>`
         }
 
         <span class="badge">New RFQ</span>
-      </div>
-    `;
+      </div>`;
   });
 }
 
-document.getElementById("logout").onclick = async ()=>{
+document.getElementById("logout").onclick=async()=>{
   await signOut(auth);
   location.href="/supplier-login.html";
 };
