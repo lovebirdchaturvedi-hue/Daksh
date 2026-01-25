@@ -81,8 +81,10 @@ const db = getFirestore(app);
 document.getElementById("rfqForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  console.log("Submitting RFQ..."); // debug
+
   try {
-    await addDoc(collection(db, "rfqs"), {
+    const docRef = await addDoc(collection(db, "rfqs"), {
       buyerName: buyer_name.value.trim(),
       buyerCompany: buyer_company.value.trim(),
       email: buyer_email.value.trim().toLowerCase(),
@@ -99,12 +101,13 @@ document.getElementById("rfqForm").addEventListener("submit", async (e) => {
       createdAt: serverTimestamp()
     });
 
+    console.log("Saved RFQ ID:", docRef.id);
     alert("✅ RFQ submitted successfully!");
     e.target.reset();
 
   } catch (err) {
-    console.error(err);
-    alert("❌ Error submitting RFQ. Please try again.");
+    console.error("Firestore error:", err);
+    alert("❌ " + err.message);
   }
 });
 </script>
