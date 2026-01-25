@@ -18,8 +18,18 @@ header{
 }
 .container{
   max-width:1200px;
-  margin:30px auto;
-  padding:20px;
+  margin:20px auto;
+  padding:0 20px;
+}
+.search{
+  margin:20px 0;
+}
+.search input{
+  width:100%;
+  padding:14px;
+  border-radius:10px;
+  border:1px solid #d1d5db;
+  font-size:15px;
 }
 .card{
   background:#fff;
@@ -56,9 +66,22 @@ footer{
   <h2>Live Buyer RFQs</h2>
 </header>
 
-<!-- 🔴 THIS WAS MISSING -->
-<div class="container" id="rfqList">
-  Loading RFQs…
+<div class="container">
+
+  <!-- 🔍 SEARCH -->
+  <div class="search">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search by product or country..."
+    >
+  </div>
+
+  <!-- RFQ LIST -->
+  <div id="rfqList">
+    Loading RFQs…
+  </div>
+
 </div>
 
 <footer>
@@ -73,8 +96,13 @@ footer{
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, getDocs, query, where }
-  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  where
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const app = initializeApp({
   apiKey:"AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
@@ -84,6 +112,9 @@ const app = initializeApp({
 
 const db = getFirestore(app);
 const rfqList = document.getElementById("rfqList");
+const searchInput = document.getElementById("searchInput");
+
+let allRFQs = [];
 
 async function loadRFQs(){
   rfqList.innerHTML = "<p>Loading RFQs…</p>";
@@ -100,10 +131,23 @@ async function loadRFQs(){
     return;
   }
 
+  allRFQs = [];
+  snap.forEach(doc=>{
+    allRFQs.push(doc.data());
+  });
+
+  renderRFQs(allRFQs);
+}
+
+function renderRFQs(list){
   rfqList.innerHTML = "";
 
-  snap.forEach(doc=>{
-    const r = doc.data();
+  if(list.length === 0){
+    rfqList.innerHTML = "<p>No matching RFQs</p>";
+    return;
+  }
+
+  list.forEach(r=>{
     rfqList.innerHTML += `
       <div class="card">
         <span class="badge">Verified Buyer</span>
@@ -115,6 +159,16 @@ async function loadRFQs(){
     `;
   });
 }
+
+/* SEARCH LOGIC */
+searchInput.addEventListener("input", e=>{
+  const q = e.target.value.toLowerCase();
+  const filtered = allRFQs.filter(r =>
+    r.product.toLowerCase().includes(q) ||
+    r.country.toLowerCase().includes(q)
+  );
+  renderRFQs(filtered);
+});
 
 loadRFQs();
 </script>
