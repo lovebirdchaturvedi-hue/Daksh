@@ -59,18 +59,6 @@ box-shadow:inset -40px 0 80px rgba(0,0,0,.8),0 0 60px rgba(201,164,74,.6)
 }
 @keyframes spin{from{background-position:0}to{background-position:-1400px}}
 
-.dot{
-position:absolute;width:9px;height:9px;border-radius:50%;
-background:#22d3ee;box-shadow:0 0 15px #22d3ee;
-animation:pulse 2.2s infinite
-}
-@keyframes pulse{0%{opacity:.5}50%{opacity:1}100%{opacity:.5}}
-
-.dot.india{top:58%;left:63%}
-.dot.usa{top:38%;left:30%}
-.dot.uae{top:50%;left:57%}
-.dot.vietnam{top:65%;left:72%}
-
 /* SECTIONS */
 .section{max-width:1100px;margin:auto;padding:90px 20px}
 .center{text-align:center}
@@ -81,70 +69,41 @@ background:#fff;padding:26px;border-radius:16px;
 border:1px solid #e5e7eb;
 box-shadow:0 10px 30px rgba(0,0,0,.05)
 }
-.lock{color:#991b1b;font-size:13px;font-weight:600}
-
-.badge{
-display:inline-block;
-background:#ecfeff;
-color:#0369a1;
-padding:6px 14px;
-border-radius:999px;
-font-size:13px;
-font-weight:600;
-margin-bottom:8px
-}
-
-.ribbon{
-background:#dc2626;
-color:#fff;
-padding:4px 10px;
-border-radius:6px;
-font-size:12px;
-display:inline-block;
-margin-bottom:6px
-}
 
 .dark{background:#020617;color:#fff}
 .dark p{color:#9ca3af}
 
-.counter{font-size:42px;font-weight:700;color:var(--gold)}
-
-footer{
-background:#020617;color:#9ca3af;text-align:center;
-padding:40px 20px;font-size:14px
+/* 🚢 SHIP SECTION */
+.ship-section{
+position:relative;
+height:420px;
+overflow:hidden;
 }
-footer a{color:var(--gold);text-decoration:none}
-
-/* Tablet */
-@media(max-width:768px){
-header{height:auto;padding:14px 0}
-header nav{display:flex;flex-wrap:wrap;justify-content:center}
-.hero-overlay{padding:100px 16px 60px}
+.ship-section video{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
 }
-
-/* ✅ MOBILE FIX */
-@media (max-width: 600px){
-.earth-wrap{width:180px;height:180px;margin-bottom:20px}
-.hero h1{font-size:1.9rem;line-height:1.25}
-.hero p{font-size:14px;margin:14px auto 22px}
-
-.hero-overlay > div:last-child{
+.ship-overlay{
+position:relative;
+z-index:2;
+height:100%;
 display:flex;
-flex-direction:column;
-width:100%;
-max-width:320px
-}
-
-.btn{
-width:100%;
+align-items:center;
+justify-content:center;
+background:linear-gradient(180deg,rgba(2,6,23,.7),rgba(2,6,23,.95));
+color:#fff;
 text-align:center;
-padding:14px 0;
-margin:6px 0
+padding:20px
 }
 
-.hero-overlay{padding:60px 14px 40px}
-.dot{transform:scale(.8)}
-body{overflow-x:hidden}
+@media(max-width:768px){
+.ship-section video{display:none}
+.ship-section{
+background:#020617;
+height:300px
+}
 }
 </style>
 </head>
@@ -156,28 +115,25 @@ body{overflow-x:hidden}
 <nav>
 <a href="/">Home</a>
 <a href="/buyer-rfqs.html">Buyer RFQs</a>
+
+<a href="/for-suppliers.html" style="color:#c9a44a;font-weight:600">
+For Suppliers
+</a>
+
 <a href="/membership.html">Membership</a>
-<a href="/suppliers.html">Suppliers</a>
 <a href="/supplier-login.html">Supplier Login</a>
 <a href="/register-supplier.html">Register</a>
 <a href="/contact.html">Contact</a>
 </nav>
 </header>
 
-<!-- HERO -->
 <section class="hero">
 <video autoplay muted loop playsinline>
-<source src="https://cdn.coverr.co/videos/coverr-container-ship-transport-5170/1080p.mp4" type="video/mp4">
+<source src="https://cdn.coverr.co/videos/coverr-container-ship-transport-5170/1080p.mp4">
 </video>
 
 <div class="hero-overlay">
-<div class="earth-wrap">
-<div class="earth"></div>
-<span class="dot india"></span>
-<span class="dot usa"></span>
-<span class="dot uae"></span>
-<span class="dot vietnam"></span>
-</div>
+<div class="earth-wrap"><div class="earth"></div></div>
 
 <h1>Where Verified Buyers Meet Serious Suppliers</h1>
 <p>High-intent global RFQs. Protected buyer contacts. Zero fake leads.</p>
@@ -185,105 +141,38 @@ body{overflow-x:hidden}
 <div>
 <a href="/create-rfq.html" class="btn">Post Buyer RFQ</a>
 <a href="/buyer-rfqs.html" class="btn">View Buyer RFQs</a>
-<a href="/supplier-onboarding.html" class="btn">Supplier App – How It Works</a>
+
+<a href="/for-suppliers.html" class="btn"
+style="border:2px solid #c9a44a;background:transparent;color:#c9a44a">
+Supplier Growth Engine
+</a>
 </div>
 </div>
 </section>
 
-<!-- COUNTERS -->
-<section class="section center">
-<h2>Trusted by Exporters in 100+ Countries</h2>
-<div class="grid" style="margin-top:40px">
-<div class="card"><div class="counter" data-target="100">0</div><p>Countries Served</p></div>
-<div class="card"><div class="counter" data-target="4800">0</div><p>Live Buyer RFQs</p></div>
-<div class="card"><div class="counter" data-target="320">0</div><p>$M Trade Volume</p></div>
+<!-- 🚢 SHIP GLOBAL TRADE SECTION -->
+<section class="ship-section">
+<video autoplay muted loop playsinline>
+<source src="https://cdn.coverr.co/videos/coverr-cargo-ship-1560/1080p.mp4">
+</video>
+
+<div class="ship-overlay">
+<div>
+<h2 style="font-family:'Playfair Display',serif;font-size:2.4rem">
+Global Trade in Motion
+</h2>
+<p style="max-width:700px;margin:18px auto;color:#cbd5f5">
+Powering cross-border trade through verified demand, trusted suppliers,
+and real global logistics.
+</p>
 </div>
-</section>
-
-<!-- RFQS -->
-<section class="section">
-<h2 class="center">Live Buyer Demand</h2>
-<div class="grid">
-
-<div class="card">
-<span class="ribbon">🔥 High Demand</span><br>
-<span class="badge">💵 Deal Size: $2.4M</span>
-<h4>Basmati Rice (1121)</h4>
-<p>500 MT · UAE</p>
-<span class="lock">🔒 Buyer Contact Locked</span>
-</div>
-
-<div class="card">
-<span class="ribbon">🔥 Urgent</span><br>
-<span class="badge">💵 Deal Size: $3.1M</span>
-<h4>Sugar ICUMSA 45</h4>
-<p>5,000 MT · Indonesia</p>
-<span class="lock">🔒 Buyer Contact Locked</span>
-</div>
-
-<div class="card">
-<span class="badge">💵 Deal Size: $680K</span>
-<h4>Red Chilli Powder</h4>
-<p>20 MT · USA</p>
-<span class="lock">🔒 Buyer Contact Locked</span>
-</div>
-
-</div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="section dark">
-<h2 class="center">How It Works</h2>
-<div class="grid">
-<div class="card"><h3>1. Buyers Post RFQs</h3><p>Only serious global buyers.</p></div>
-<div class="card"><h3>2. Suppliers Unlock</h3><p>Verified suppliers access contacts.</p></div>
-<div class="card"><h3>3. Close Deals</h3><p>Direct trade. No middlemen.</p></div>
-</div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="section">
-<h2 class="center">What Suppliers Say</h2>
-<div class="grid">
-<div class="card">“Closed 2 export deals in 30 days.”<br><b>– Rice Exporter, India</b></div>
-<div class="card">“Best quality leads, no fake buyers.”<br><b>– Sugar Supplier, Brazil</b></div>
-<div class="card">“This platform actually converts.”<br><b>– Spices Trader, Vietnam</b></div>
 </div>
 </section>
 
 <footer>
 <p style="color:#c9a44a;font-weight:600">APD Global Trade</p>
 <p>Elite B2B Trade Facilitation Platform</p>
-<p>
-<a href="/terms.html">Terms</a> |
-<a href="/privacy.html">Privacy</a> |
-<a href="/disclaimer.html">Disclaimer</a>
-</p>
-<p>
-📧 info@apdglobaltradehub.com<br>
-☎ +1 (202) 780-1366<br>
-💬 WhatsApp: +91 92664 18868
-</p>
 </footer>
-
-<!-- WhatsApp -->
-<a href="https://wa.me/919266418868" target="_blank"
-style="position:fixed;bottom:20px;right:20px;width:56px;height:56px;
-background:#25D366;color:#fff;border-radius:50%;
-display:flex;align-items:center;justify-content:center;
-font-size:28px;box-shadow:0 10px 25px rgba(0,0,0,.25);z-index:9999;text-decoration:none">
-💬</a>
-
-<script>
-document.querySelectorAll('.counter').forEach(c=>{
-let t=+c.dataset.target,v=0;
-let i=setInterval(()=>{
-v+=Math.ceil(t/60);
-if(v>=t){v=t;clearInterval(i)}
-c.innerText=v
-},30)
-})
-</script>
 
 </body>
 </html>
