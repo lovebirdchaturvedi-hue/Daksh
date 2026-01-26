@@ -69,9 +69,6 @@ border:1px solid #e5e7eb;
 box-shadow:0 10px 30px rgba(0,0,0,.05)
 }
 
-.dark{background:#020617;color:#fff}
-.dark p{color:#9ca3af}
-
 .counter{font-size:42px;font-weight:700;color:var(--gold)}
 
 footer{
@@ -104,6 +101,7 @@ header nav{display:flex;flex-wrap:wrap;justify-content:center}
 </nav>
 </header>
 
+<!-- HERO -->
 <section class="hero">
 <video autoplay muted loop playsinline>
 <source src="https://cdn.coverr.co/videos/coverr-container-ship-transport-5170/1080p.mp4">
@@ -121,6 +119,7 @@ header nav{display:flex;flex-wrap:wrap;justify-content:center}
 </div>
 </section>
 
+<!-- COUNTERS -->
 <section class="section center">
 <h2>Trusted by Exporters in 100+ Countries</h2>
 <div class="grid">
@@ -130,15 +129,24 @@ header nav{display:flex;flex-wrap:wrap;justify-content:center}
 </div>
 </section>
 
-<!-- 🔥 HUGE SHIP BACKGROUND (ADDED, NOTHING ABOVE TOUCHED) -->
-<section style="position:relative;height:100vh;overflow:hidden;background:#020617">
-<video autoplay muted loop playsinline style="position:absolute;width:100%;height:100%;object-fit:cover">
+<!-- HUGE SHIP SECTION -->
+<section style="position:relative;min-height:120vh;overflow:hidden;background:#020617">
+<video autoplay muted loop playsinline
+style="position:absolute;width:100%;height:100%;object-fit:cover">
 <source src="https://cdn.coverr.co/videos/coverr-cargo-ship-1560/1080p.mp4">
 </video>
 
-<div style="position:relative;z-index:2;height:100%;display:flex;align-items:center;justify-content:center;
-background:linear-gradient(180deg,rgba(2,6,23,.6),rgba(2,6,23,.95));color:#fff;text-align:center">
-<div>
+<div style="
+position:relative;z-index:2;
+min-height:120vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:40px;
+background:linear-gradient(180deg,rgba(2,6,23,.6),rgba(2,6,23,.95));
+color:#fff">
 <h2 style="font-family:'Playfair Display',serif;font-size:3rem">
 Global Trade Never Stops
 </h2>
@@ -146,6 +154,11 @@ Global Trade Never Stops
 APD Global Trade powers continuous cross-border commerce through verified buyers,
 trusted suppliers, and real global logistics.
 </p>
+
+<div style="margin-top:30px;line-height:1.8">
+📧 info@apdglobaltradehub.com<br>
+☎ +1 (202) 780-1366<br>
+💬 WhatsApp: +91 92664 18868
 </div>
 </div>
 </section>
@@ -153,14 +166,27 @@ trusted suppliers, and real global logistics.
 <footer>
 <p style="color:#c9a44a;font-weight:600">APD Global Trade</p>
 <p>Elite B2B Trade Facilitation Platform</p>
+<p>
+<a href="/terms.html">Terms</a> |
+<a href="/privacy.html">Privacy</a> |
+<a href="/disclaimer.html">Disclaimer</a>
+</p>
 </footer>
 
-<!-- 📲 DOWNLOAD APP BUTTON -->
+<!-- DOWNLOAD APP BUTTON -->
 <a href="/download-app.html" target="_blank"
-style="position:fixed;bottom:90px;right:20px;padding:14px 22px;
+style="
+position:fixed;
+bottom:20px;
+right:20px;
+padding:14px 22px;
 background:linear-gradient(135deg,#c9a44a,#e7cf88);
-color:#000;border-radius:999px;font-weight:600;
-text-decoration:none;box-shadow:0 10px 25px rgba(0,0,0,.25);z-index:9999">
+color:#000;
+border-radius:999px;
+font-weight:600;
+text-decoration:none;
+box-shadow:0 12px 30px rgba(0,0,0,.35);
+z-index:99999">
 📲 Download App
 </a>
 
