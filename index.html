@@ -123,7 +123,7 @@ header nav{display:flex;flex-wrap:wrap;justify-content:center}
 }
 
 /* ✅ MOBILE FIX */
-@media (max-width: 600px) {
+@media (max-width: 600px){
 .earth-wrap{width:180px;height:180px;margin-bottom:20px}
 .hero h1{font-size:1.9rem;line-height:1.25}
 .hero p{font-size:14px;margin:14px auto 22px}
@@ -164,6 +164,7 @@ body{overflow-x:hidden}
 </nav>
 </header>
 
+<!-- HERO -->
 <section class="hero">
 <video autoplay muted loop playsinline>
 <source src="https://cdn.coverr.co/videos/coverr-container-ship-transport-5170/1080p.mp4" type="video/mp4">
@@ -189,10 +190,89 @@ body{overflow-x:hidden}
 </div>
 </section>
 
+<!-- COUNTERS -->
+<section class="section center">
+<h2>Trusted by Exporters in 100+ Countries</h2>
+<div class="grid" style="margin-top:40px">
+<div class="card"><div class="counter" data-target="100">0</div><p>Countries Served</p></div>
+<div class="card"><div class="counter" data-target="4800">0</div><p>Live Buyer RFQs</p></div>
+<div class="card"><div class="counter" data-target="320">0</div><p>$M Trade Volume</p></div>
+</div>
+</section>
+
+<!-- RFQS -->
+<section class="section">
+<h2 class="center">Live Buyer Demand</h2>
+<div class="grid">
+
+<div class="card">
+<span class="ribbon">🔥 High Demand</span><br>
+<span class="badge">💵 Deal Size: $2.4M</span>
+<h4>Basmati Rice (1121)</h4>
+<p>500 MT · UAE</p>
+<span class="lock">🔒 Buyer Contact Locked</span>
+</div>
+
+<div class="card">
+<span class="ribbon">🔥 Urgent</span><br>
+<span class="badge">💵 Deal Size: $3.1M</span>
+<h4>Sugar ICUMSA 45</h4>
+<p>5,000 MT · Indonesia</p>
+<span class="lock">🔒 Buyer Contact Locked</span>
+</div>
+
+<div class="card">
+<span class="badge">💵 Deal Size: $680K</span>
+<h4>Red Chilli Powder</h4>
+<p>20 MT · USA</p>
+<span class="lock">🔒 Buyer Contact Locked</span>
+</div>
+
+</div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section dark">
+<h2 class="center">How It Works</h2>
+<div class="grid">
+<div class="card"><h3>1. Buyers Post RFQs</h3><p>Only serious global buyers.</p></div>
+<div class="card"><h3>2. Suppliers Unlock</h3><p>Verified suppliers access contacts.</p></div>
+<div class="card"><h3>3. Close Deals</h3><p>Direct trade. No middlemen.</p></div>
+</div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+<h2 class="center">What Suppliers Say</h2>
+<div class="grid">
+<div class="card">“Closed 2 export deals in 30 days.”<br><b>– Rice Exporter, India</b></div>
+<div class="card">“Best quality leads, no fake buyers.”<br><b>– Sugar Supplier, Brazil</b></div>
+<div class="card">“This platform actually converts.”<br><b>– Spices Trader, Vietnam</b></div>
+</div>
+</section>
+
 <footer>
 <p style="color:#c9a44a;font-weight:600">APD Global Trade</p>
 <p>Elite B2B Trade Facilitation Platform</p>
+<p>
+<a href="/terms.html">Terms</a> |
+<a href="/privacy.html">Privacy</a> |
+<a href="/disclaimer.html">Disclaimer</a>
+</p>
+<p>
+📧 info@apdglobaltradehub.com<br>
+☎ +1 (202) 780-1366<br>
+💬 WhatsApp: +91 92664 18868
+</p>
 </footer>
+
+<!-- WhatsApp -->
+<a href="https://wa.me/919266418868" target="_blank"
+style="position:fixed;bottom:20px;right:20px;width:56px;height:56px;
+background:#25D366;color:#fff;border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+font-size:28px;box-shadow:0 10px 25px rgba(0,0,0,.25);z-index:9999;text-decoration:none">
+💬</a>
 
 <script>
 document.querySelectorAll('.counter').forEach(c=>{
