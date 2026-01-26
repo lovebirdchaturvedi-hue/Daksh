@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Admin RFQ Seeder</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{font-family:Arial;background:#f5f7fb;padding:40px}
+button{padding:12px 20px;font-size:15px;margin:10px;border-radius:8px;border:none;cursor:pointer}
+.card{background:#fff;padding:30px;border-radius:12px;max-width:700px;margin:auto}
+textarea{width:100%;height:200px}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+<h2>🔐 Admin RFQ Seeder</h2>
+<p>This page is admin-only.</p>
+
+<button onclick="generateRFQs()">Generate 100 RFQs</button>
+<button onclick="uploadRFQs()">Upload RFQs</button>
+
+<textarea id="output" placeholder="RFQs JSON will appear here"></textarea>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+  authDomain: "apd-globaltrade-prod.firebaseapp.com",
+  projectId: "apd-globaltrade-prod"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const ADMIN_EMAIL = "admin@apdglobaltrade.com";
+
+onAuthStateChanged(auth, user => {
+  if (!user || user.email !== ADMIN_EMAIL) {
+    alert("Admins only");
+    location.href="/supplier-login.html";
+  }
+});
+
+const products = [
+  "Basmati Rice 1121","Sugar ICUMSA 45","Red Chilli Powder",
+  "Turmeric Powder","Soybean Meal","Maize Corn","Palm Oil"
+];
+
+const countries = ["UAE","USA","Vietnam","Indonesia","Brazil","Nigeria","Turkey"];
+
+function generateRFQs(){
+  const data=[];
+  for(let i=0;i<100;i++){
+    data.push({
+      product: products[Math.floor(Math.random()*products.length)],
+      quantity: `${Math.floor(Math.random()*500+20)} MT`,
+      deliveryPort: countries[Math.floor(Math.random()*countries.length)],
+      dealSizeUSD: Math.floor(Math.random()*3000000+200000),
+      status:"open",
+      source:"seed"
+    });
+  }
+  document.getElementById("output").value = JSON.stringify(data,null,2);
+}
+
+async function uploadRFQs(){
+  const rfqs = JSON.parse(document.getElementById("output").value);
+  for(const r of rfqs){
+    await addDoc(collection(db,"rfqs"),{
+      ...r,
+      createdAt: serverTimestamp()
+    });
+  }
+  alert("✅ RFQs uploaded successfully");
+}
+</script>
+
+</body>
+</html>
