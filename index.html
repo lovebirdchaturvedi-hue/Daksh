@@ -54,22 +54,24 @@ text-decoration:none;font-weight:600;margin:6px;border:none
 width:100%;height:100%;border-radius:50%;
 background:url("https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg") repeat-x;
 background-size:cover;
-animation:spin 30s linear infinite;
-box-shadow:inset -40px 0 80px rgba(0,0,0,.8),0 0 40px rgba(201,164,74,.6)
+animation:spin 28s linear infinite;
+box-shadow:inset -40px 0 80px rgba(0,0,0,.8),0 0 60px rgba(201,164,74,.6)
 }
-.dot{
-position:absolute;width:8px;height:8px;border-radius:50%;
-background:#22d3ee;box-shadow:0 0 12px #22d3ee;
-animation:pulse 2.5s infinite
-}
-.dot.india{top:55%;left:62%}
-.dot.usa{top:40%;left:28%}
-.dot.uae{top:48%;left:55%}
-.dot.vietnam{top:62%;left:70%}
-
 @keyframes spin{from{background-position:0}to{background-position:-1400px}}
+
+.dot{
+position:absolute;width:9px;height:9px;border-radius:50%;
+background:#22d3ee;box-shadow:0 0 15px #22d3ee;
+animation:pulse 2.2s infinite
+}
 @keyframes pulse{0%{opacity:.5}50%{opacity:1}100%{opacity:.5}}
 
+.dot.india{top:58%;left:63%}
+.dot.usa{top:38%;left:30%}
+.dot.uae{top:50%;left:57%}
+.dot.vietnam{top:65%;left:72%}
+
+/* SECTIONS */
 .section{max-width:1100px;margin:auto;padding:90px 20px}
 .center{text-align:center}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
@@ -80,6 +82,27 @@ border:1px solid #e5e7eb;
 box-shadow:0 10px 30px rgba(0,0,0,.05)
 }
 .lock{color:#991b1b;font-size:13px;font-weight:600}
+
+.badge{
+display:inline-block;
+background:#ecfeff;
+color:#0369a1;
+padding:6px 14px;
+border-radius:999px;
+font-size:13px;
+font-weight:600;
+margin-bottom:8px
+}
+
+.ribbon{
+background:#dc2626;
+color:#fff;
+padding:4px 10px;
+border-radius:6px;
+font-size:12px;
+display:inline-block;
+margin-bottom:6px
+}
 
 .dark{background:#020617;color:#fff}
 .dark p{color:#9ca3af}
@@ -122,12 +145,13 @@ header nav{display:flex;flex-wrap:wrap;justify-content:center}
 </video>
 
 <div class="hero-overlay">
+
 <div class="earth-wrap">
-<div class="earth"></div>
-<span class="dot india"></span>
-<span class="dot usa"></span>
-<span class="dot uae"></span>
-<span class="dot vietnam"></span>
+  <div class="earth"></div>
+  <span class="dot india"></span>
+  <span class="dot usa"></span>
+  <span class="dot uae"></span>
+  <span class="dot vietnam"></span>
 </div>
 
 <h1>Where Verified Buyers Meet Serious Suppliers</h1>
@@ -138,12 +162,13 @@ header nav{display:flex;flex-wrap:wrap;justify-content:center}
 <a href="/buyer-rfqs.html" class="btn">View Buyer RFQs</a>
 <a href="/supplier-onboarding.html" class="btn">Supplier App – How It Works</a>
 </div>
+
 </div>
 </section>
 
-<!-- TRUST COUNTERS -->
+<!-- COUNTERS -->
 <section class="section center">
-<h2>Trusted by Exporters Worldwide</h2>
+<h2>Trusted by Exporters in 100+ Countries</h2>
 <div class="grid" style="margin-top:40px">
 <div class="card"><div class="counter" data-target="100">0</div><p>Countries Served</p></div>
 <div class="card"><div class="counter" data-target="4800">0</div><p>Live Buyer RFQs</p></div>
@@ -151,13 +176,34 @@ header nav{display:flex;flex-wrap:wrap;justify-content:center}
 </div>
 </section>
 
-<!-- LIVE RFQS -->
+<!-- RFQS -->
 <section class="section">
 <h2 class="center">Live Buyer Demand</h2>
 <div class="grid">
-<div class="card"><h4>Basmati Rice (1121)</h4><p>500 MT · UAE</p><p><b>Deal Size:</b> $2.4M</p><span class="lock">🔒 Locked</span></div>
-<div class="card"><h4>Sugar ICUMSA 45</h4><p>5,000 MT · Indonesia</p><p><b>Deal Size:</b> $3.1M</p><span class="lock">🔒 Locked</span></div>
-<div class="card"><h4>Red Chilli Powder</h4><p>20 MT · USA</p><p><b>Deal Size:</b> $680K</p><span class="lock">🔒 Locked</span></div>
+
+<div class="card">
+<span class="ribbon">🔥 High Demand</span><br>
+<span class="badge">💵 Deal Size: $2.4M</span>
+<h4>Basmati Rice (1121)</h4>
+<p>500 MT · UAE</p>
+<span class="lock">🔒 Buyer Contact Locked</span>
+</div>
+
+<div class="card">
+<span class="ribbon">🔥 Urgent</span><br>
+<span class="badge">💵 Deal Size: $3.1M</span>
+<h4>Sugar ICUMSA 45</h4>
+<p>5,000 MT · Indonesia</p>
+<span class="lock">🔒 Buyer Contact Locked</span>
+</div>
+
+<div class="card">
+<span class="badge">💵 Deal Size: $680K</span>
+<h4>Red Chilli Powder</h4>
+<p>20 MT · USA</p>
+<span class="lock">🔒 Buyer Contact Locked</span>
+</div>
+
 </div>
 </section>
 
@@ -165,9 +211,9 @@ header nav{display:flex;flex-wrap:wrap;justify-content:center}
 <section class="section dark">
 <h2 class="center">How It Works</h2>
 <div class="grid">
-<div class="card"><h3>1. Buyers Post RFQs</h3><p>Only serious buyers with clear demand.</p></div>
-<div class="card"><h3>2. Suppliers Unlock</h3><p>Verified suppliers get protected access.</p></div>
-<div class="card"><h3>3. Close Deals</h3><p>Direct negotiations. No middlemen.</p></div>
+<div class="card"><h3>1. Buyers Post RFQs</h3><p>Only serious global buyers.</p></div>
+<div class="card"><h3>2. Suppliers Unlock</h3><p>Verified suppliers access contacts.</p></div>
+<div class="card"><h3>3. Close Deals</h3><p>Direct trade. No middlemen.</p></div>
 </div>
 </section>
 
@@ -176,8 +222,8 @@ header nav{display:flex;flex-wrap:wrap;justify-content:center}
 <h2 class="center">What Suppliers Say</h2>
 <div class="grid">
 <div class="card">“Closed 2 export deals in 30 days.”<br><b>– Rice Exporter, India</b></div>
-<div class="card">“Best quality leads, zero fake buyers.”<br><b>– Sugar Supplier, Brazil</b></div>
-<div class="card">“Finally a platform that works.”<br><b>– Spices Trader, Vietnam</b></div>
+<div class="card">“Best quality leads, no fake buyers.”<br><b>– Sugar Supplier, Brazil</b></div>
+<div class="card">“This platform actually converts.”<br><b>– Spices Trader, Vietnam</b></div>
 </div>
 </section>
 
@@ -207,7 +253,11 @@ font-size:28px;box-shadow:0 10px 25px rgba(0,0,0,.25);z-index:9999;text-decorati
 <script>
 document.querySelectorAll('.counter').forEach(c=>{
 let t=+c.dataset.target,v=0;
-let i=setInterval(()=>{v+=Math.ceil(t/60);if(v>=t){v=t;clearInterval(i)}c.innerText=v},30)
+let i=setInterval(()=>{
+v+=Math.ceil(t/60);
+if(v>=t){v=t;clearInterval(i)}
+c.innerText=v
+},30)
 })
 </script>
 
