@@ -27,9 +27,9 @@ textarea{width:100%;height:200px}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+/* 🔹 Firebase config (YOUR EXISTING WEB CONFIG) */
 const firebaseConfig = {
   apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
   authDomain: "apd-globaltrade-prod.firebaseapp.com",
@@ -37,50 +37,63 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 const db = getFirestore(app);
 
-const ADMIN_EMAIL = "admin@apdglobaltrade.com";
+/* 🔹 Elements */
+const output = document.getElementById("rfqOutput");
+const generateBtn = document.getElementById("generateBtn");
+const uploadBtn = document.getElementById("uploadBtn");
 
-onAuthStateChanged(auth, user => {
-  if (!user || user.email !== ADMIN_EMAIL) {
-    alert("Admins only");
-    location.href="/supplier-login.html";
-  }
-});
+let generatedRFQs = [];
 
-const products = [
-  "Basmati Rice 1121","Sugar ICUMSA 45","Red Chilli Powder",
-  "Turmeric Powder","Soybean Meal","Maize Corn","Palm Oil"
+/* 🔹 DATA POOLS */
+const PRODUCTS = [
+  "Basmati Rice 1121",
+  "Sugar ICUMSA 45",
+  "Non Basmati Rice",
+  "Red Chilli Powder",
+  "Turmeric Powder",
+  "Soybean Meal",
+  "Maize Corn",
+  "Palm Oil"
 ];
 
-const countries = ["UAE","USA","Vietnam","Indonesia","Brazil","Nigeria","Turkey"];
+const COUNTRIES = ["UAE", "USA", "Vietnam", "Indonesia", "Bangladesh", "Nigeria"];
 
-function generateRFQs(){
-  const data=[];
-  for(let i=0;i<100;i++){
-    data.push({
-      product: products[Math.floor(Math.random()*products.length)],
-      quantity: `${Math.floor(Math.random()*500+20)} MT`,
-      deliveryPort: countries[Math.floor(Math.random()*countries.length)],
-      dealSizeUSD: Math.floor(Math.random()*3000000+200000),
-      status:"open",
-      source:"seed"
+/* 🔹 GENERATE FUNCTION */
+generateBtn.onclick = () => {
+  generatedRFQs = [];
+
+  for (let i = 0; i < 100; i++) {
+    generatedRFQs.push({
+      product: PRODUCTS[Math.floor(Math.random() * PRODUCTS.length)],
+      quantity: `${Math.floor(Math.random() * 5000) + 50} MT`,
+      deliveryPort: COUNTRIES[Math.floor(Math.random() * COUNTRIES.length)],
+      dealSizeUSD: Math.floor(Math.random() * 4000000) + 200000,
+      status: "open",
+      source: "seed",
+      createdAt: new Date().toISOString()
     });
   }
-  document.getElementById("output").value = JSON.stringify(data,null,2);
-}
 
-async function uploadRFQs(){
-  const rfqs = JSON.parse(document.getElementById("output").value);
-  for(const r of rfqs){
-    await addDoc(collection(db,"rfqs"),{
-      ...r,
-      createdAt: serverTimestamp()
-    });
+  output.value = JSON.stringify(generatedRFQs, null, 2);
+};
+
+/* 🔹 UPLOAD FUNCTION */
+uploadBtn.onclick = async () => {
+  if (!generatedRFQs.length) {
+    alert("Generate RFQs first");
+    return;
   }
+
+  for (const rfq of generatedRFQs) {
+    await addDoc(collection(db, "rfqs"), rfq);
+  }
+
   alert("✅ RFQs uploaded successfully");
-}
+};
+</script>
+
 </script>
 
 </body>
