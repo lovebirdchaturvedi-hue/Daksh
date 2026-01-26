@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Live Buyer RFQs | APD Global Trade</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{margin:0;font-family:Inter,sans-serif;background:#f5f7fb}
+header{
+  background:#071427;color:#c9a44a;
+  padding:16px 20px;
+  display:flex;justify-content:space-between;align-items:center
+}
+a{color:#e5e7eb;text-decoration:none;margin-left:16px}
+.container{max-width:900px;margin:30px auto;padding:0 16px}
+.card{
+  background:#fff;border-radius:14px;
+  padding:20px;margin-bottom:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,.06)
+}
+.badge{
+  display:inline-block;background:#020617;
+  color:#fff;padding:4px 10px;
+  border-radius:20px;font-size:12px
+}
+.locked{color:#dc2626;font-weight:600}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div>APD Global Trade</div>
+  <div>
+    <a href="/supplier-dashboard.html">Dashboard</a>
+    <a href="/membership.html">Upgrade</a>
+    <a href="#" id="logout">Logout</a>
+  </div>
+</header>
+
+<div class="container">
+  <h2>Live Buyer RFQs</h2>
+  <div id="rfqList">Loading RFQs…</div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth,onAuthStateChanged,signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  orderBy,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const app = initializeApp({
+  apiKey:"AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+  authDomain:"apd-globaltrade-prod.firebaseapp.com",
+  projectId:"apd-globaltrade-prod"
+});
+
+const auth = getAuth(app);
+const db = getFirestore(app);
+const rfqList = document.getElementById("rfqList");
+
+onAuthStateChanged(auth, async user=>{
+  if(!user) return location.href="/supplier-login.html";
+
+  const qs = await getDocs(
+    query(collection(db,"suppliers"), where("email","==",user.email))
+  );
+
+  if(qs.empty){
+    rfqList.innerHTML="<p>Supplier profile not found</p>";
+    return;
+  }
+
+  const supplier = qs.docs[0].data();
+  loadRFQs(supplier.plan || "free");
+});
+
+async function loadRFQs(plan){
+  rfqList.innerHTML="";
+
+  const q = query(
+    collection(db,"rfqs"),
+    where("status","==","open"),
+    orderBy("createdAt","desc")
+  );
+
+  const snap = await getDocs(q);
+
+  if(snap.empty){
+    rfqList.innerHTML="<p>No RFQs available yet.</p>";
+    return;
+  }
+
+  snap.forEach(d=>{
+    const r=d.data();
+    rfqList.innerHTML+=`
+      <div class="card">
+        <h3>${r.product || "-"}</h3>
+        <p><b>Quantity:</b> ${r.quantity || "-"}</p>
+        <p><b>Destination:</b> ${r.deliveryPort || "-"}</p>
+
+        ${
+          plan==="free"
+          ? `<p class="locked">🔒 Buyer contact locked. Upgrade to view.</p>`
+          : `<p>
+              <b>Buyer:</b> ${r.buyerName}<br>
+              📧 ${r.email}<br>
+              ☎ ${r.phone}
+            </p>`
+        }
+
+        <span class="badge">New RFQ</span>
+      </div>`;
+  });
+}
+
+document.getElementById("logout").onclick=async()=>{
+  await signOut(auth);
+  location.href="/supplier-login.html";
+};
+</script>
+
+</body>
+</html>
