@@ -261,5 +261,59 @@ c.innerText=v
 })
 </script>
 
+/* ✅ MOBILE FIX — DO NOT CHANGE HTML */
+@media (max-width: 600px) {
+
+  /* Earth size fix */
+  .earth-wrap {
+    width: 180px;
+    height: 180px;
+    margin-bottom: 20px;
+  }
+
+  /* Heading size balance */
+  .hero h1 {
+    font-size: 1.9rem;
+    line-height: 1.25;
+  }
+
+  .hero p {
+    font-size: 14px;
+    margin: 14px auto 22px;
+  }
+
+  /* Buttons stack vertically */
+  .hero-overlay > div:last-child {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+    padding: 14px 0;
+    margin: 6px 0;
+  }
+
+  /* Hero spacing */
+  .hero-overlay {
+    padding: 60px 14px 40px;
+  }
+
+  /* Fix dot scaling */
+  .dot {
+    transform: scale(0.8);
+  }
+
+  /* Prevent horizontal scroll */
+  body {
+    overflow-x: hidden;
+  }
+}
+
+
 </body>
 </html>
+
