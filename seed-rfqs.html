@@ -1,35 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Admin RFQ Seeder</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<title>Admin RFQ Seeder | APD Global Trade</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-body{font-family:Arial;background:#f5f7fb;padding:40px}
-button{padding:12px 20px;font-size:15px;margin:10px;border-radius:8px;border:none;cursor:pointer}
-.card{background:#fff;padding:30px;border-radius:12px;max-width:700px;margin:auto}
-textarea{width:100%;height:200px}
+body {
+  font-family: Inter, sans-serif;
+  background: #f5f7fb;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  max-width: 900px;
+  margin: 80px auto;
+  background: #fff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,.08);
+}
+h1 {
+  margin-top: 0;
+}
+button {
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 10px;
+}
+#generateBtn {
+  background: #c9a44a;
+}
+#uploadBtn {
+  background: #020617;
+  color: #fff;
+}
+textarea {
+  width: 100%;
+  height: 300px;
+  margin-top: 20px;
+  padding: 14px;
+  font-family: monospace;
+  font-size: 13px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+.note {
+  color: #991b1b;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
 </style>
 </head>
 
 <body>
 
-<div class="card">
-<h2>🔐 Admin RFQ Seeder</h2>
-<p>This page is admin-only.</p>
+<div class="container">
+  <h1>🔐 Admin RFQ Seeder</h1>
+  <p class="note">Admin only – generates & uploads RFQs directly to Firestore</p>
 
-<button onclick="generateRFQs()">Generate 100 RFQs</button>
-<button onclick="uploadRFQs()">Upload RFQs</button>
+  <button id="generateBtn">Generate 100 RFQs</button>
+  <button id="uploadBtn">Upload RFQs</button>
 
-<textarea id="output" placeholder="RFQs JSON will appear here"></textarea>
+  <textarea id="rfqOutput" placeholder="RFQs JSON will appear here..."></textarea>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* 🔹 Firebase config (YOUR EXISTING WEB CONFIG) */
+/* 🔥 FIREBASE CONFIG (YOUR PROJECT) */
 const firebaseConfig = {
   apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
   authDomain: "apd-globaltrade-prod.firebaseapp.com",
@@ -39,61 +89,79 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-/* 🔹 Elements */
-const output = document.getElementById("rfqOutput");
+/* ELEMENTS */
 const generateBtn = document.getElementById("generateBtn");
 const uploadBtn = document.getElementById("uploadBtn");
+const output = document.getElementById("rfqOutput");
 
-let generatedRFQs = [];
-
-/* 🔹 DATA POOLS */
+/* DATA */
 const PRODUCTS = [
   "Basmati Rice 1121",
   "Sugar ICUMSA 45",
-  "Non Basmati Rice",
   "Red Chilli Powder",
   "Turmeric Powder",
   "Soybean Meal",
   "Maize Corn",
-  "Palm Oil"
+  "Palm Oil",
+  "Sunflower Oil",
+  "Wheat Flour",
+  "Cashew Nuts"
 ];
 
-const COUNTRIES = ["UAE", "USA", "Vietnam", "Indonesia", "Bangladesh", "Nigeria"];
+const COUNTRIES = [
+  "UAE","USA","Indonesia","Vietnam","Bangladesh",
+  "Saudi Arabia","Egypt","Nigeria","Brazil","Philippines"
+];
 
-/* 🔹 GENERATE FUNCTION */
+let rfqs = [];
+
+/* ✅ GENERATE RFQs */
 generateBtn.onclick = () => {
-  generatedRFQs = [];
+  rfqs = [];
 
   for (let i = 0; i < 100; i++) {
-    generatedRFQs.push({
+    rfqs.push({
       product: PRODUCTS[Math.floor(Math.random() * PRODUCTS.length)],
-      quantity: `${Math.floor(Math.random() * 5000) + 50} MT`,
+      quantity: `${Math.floor(Math.random() * 900 + 100)} MT`,
       deliveryPort: COUNTRIES[Math.floor(Math.random() * COUNTRIES.length)],
-      dealSizeUSD: Math.floor(Math.random() * 4000000) + 200000,
+      dealSizeUSD: Math.floor(Math.random() * 4000000 + 500000),
       status: "open",
-      source: "seed",
-      createdAt: new Date().toISOString()
+      source: "admin-seed"
     });
   }
 
-  output.value = JSON.stringify(generatedRFQs, null, 2);
+  output.value = JSON.stringify(rfqs, null, 2);
 };
 
-/* 🔹 UPLOAD FUNCTION */
+/* ✅ UPLOAD TO FIRESTORE */
 uploadBtn.onclick = async () => {
-  if (!generatedRFQs.length) {
+  if (!rfqs.length) {
     alert("Generate RFQs first");
     return;
   }
 
-  for (const rfq of generatedRFQs) {
-    await addDoc(collection(db, "rfqs"), rfq);
+  uploadBtn.disabled = true;
+  uploadBtn.innerText = "Uploading...";
+
+  try {
+    for (const r of rfqs) {
+      await addDoc(collection(db, "rfqs"), {
+        ...r,
+        createdAt: serverTimestamp()
+      });
+    }
+
+    alert("✅ RFQs uploaded successfully!");
+    output.value = "";
+    rfqs = [];
+  } catch (err) {
+    console.error(err);
+    alert("❌ Upload failed. Check console.");
   }
 
-  alert("✅ RFQs uploaded successfully");
+  uploadBtn.disabled = false;
+  uploadBtn.innerText = "Upload RFQs";
 };
-</script>
-
 </script>
 
 </body>
