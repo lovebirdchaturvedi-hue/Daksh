@@ -16,6 +16,18 @@ header{
 .container{
   max-width:900px;margin:40px auto;padding:0 16px
 }
+.search-box{
+  margin:20px 0;
+  display:flex;
+  gap:12px;
+}
+.search-box input{
+  flex:1;
+  padding:12px 16px;
+  border-radius:999px;
+  border:1px solid #cbd5e1;
+  font-size:14px;
+}
 .card{
   background:#fff;border-radius:16px;
   padding:22px;margin-bottom:18px;
@@ -47,6 +59,14 @@ footer a{color:#c9a44a;text-decoration:none}
 <div class="container">
   <h1>Live Buyer RFQs</h1>
   <p>Verified buying requirements from global buyers.</p>
+
+  <!-- 🔍 SEARCH -->
+  <div class="search-box">
+    <input
+      id="searchInput"
+      placeholder="Search by product, country, destination…"
+    >
+  </div>
 
   <div id="rfqList">Loading RFQs…</div>
 </div>
@@ -86,6 +106,31 @@ const app = initializeApp({
 
 const db = getFirestore(app);
 const rfqList = document.getElementById("rfqList");
+const searchInput = document.getElementById("searchInput");
+
+let allRFQs = [];
+
+function renderRFQs(list){
+  if(list.length === 0){
+    rfqList.innerHTML = "<p>No matching RFQs found.</p>";
+    return;
+  }
+
+  rfqList.innerHTML = "";
+  list.forEach(r=>{
+    rfqList.innerHTML += `
+      <div class="card">
+        <h3>${r.product || "-"}</h3>
+        <p><b>Quantity:</b> ${r.quantity || "-"}</p>
+        <p><b>Destination:</b> ${r.deliveryPort || "-"}</p>
+        <div class="locked">🔒 Buyer contact locked</div>
+        <a class="cta" href="/supplier-login.html">
+          Login / Register to Unlock
+        </a>
+      </div>
+    `;
+  });
+}
 
 async function loadRFQs(){
   try{
@@ -96,27 +141,26 @@ async function loadRFQs(){
       return;
     }
 
-    rfqList.innerHTML = "";
-    snap.forEach(d=>{
-      const r = d.data();
-      rfqList.innerHTML += `
-        <div class="card">
-          <h3>${r.product || "-"}</h3>
-          <p><b>Quantity:</b> ${r.quantity || "-"}</p>
-          <p><b>Destination:</b> ${r.deliveryPort || "-"}</p>
-          <div class="locked">🔒 Buyer contact locked</div>
-          <a class="cta" href="/supplier-login.html">
-            Login / Register to Unlock
-          </a>
-        </div>
-      `;
-    });
+    allRFQs = snap.docs.map(d => d.data());
+    renderRFQs(allRFQs);
 
   }catch(err){
     console.error(err);
     rfqList.innerHTML = "<p>Error loading RFQs.</p>";
   }
 }
+
+searchInput.addEventListener("input", ()=>{
+  const q = searchInput.value.toLowerCase();
+
+  const filtered = allRFQs.filter(r =>
+    (r.product || "").toLowerCase().includes(q) ||
+    (r.deliveryPort || "").toLowerCase().includes(q) ||
+    (r.quantity || "").toLowerCase().includes(q)
+  );
+
+  renderRFQs(filtered);
+});
 
 loadRFQs();
 </script>
