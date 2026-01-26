@@ -2,204 +2,84 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>APD Global Trade | Elite B2B Trade Platform</title>
+<title>APD Global Trade | Elite B2B Trade Facilitation Platform</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#020617">
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-html,body{
-  margin:0;
-  font-family:Inter,sans-serif;
-  background:#020617;
-  color:#fff;
+html,body{margin:0;font-family:Inter,sans-serif;background:#f5f7fb}
+:root{
+--navy:#0b1d36;--navy-dark:#071427;
+--gold:#c9a44a;--gold-soft:#e7cf88;
+--muted:#9ca3af;
 }
 
-/* ================= HEADER ================= */
 header{
-  position:fixed;
-  top:0;left:0;right:0;
-  height:72px;
-  background:rgba(2,6,23,.85);
-  backdrop-filter: blur(8px);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  z-index:50;
+height:80px;
+background:linear-gradient(180deg,var(--navy),var(--navy-dark));
+display:flex;flex-direction:column;align-items:center;justify-content:center
 }
-header .logo{
-  color:#c9a44a;
-  font-weight:600;
-  text-align:center;
-}
-header nav{
-  text-align:center;
-}
-header nav a{
-  color:#e5e7eb;
-  margin:0 10px;
-  text-decoration:none;
-  font-size:13px;
-}
+header .logo{color:var(--gold);font-weight:600}
+header nav a{color:#e5e7eb;margin:0 12px;text-decoration:none;font-size:13px}
+header nav a:hover{color:var(--gold-soft)}
 
-/* ================= HERO ================= */
-.hero{
-  position:relative;
-  min-height:100vh;
-  overflow:hidden;
+.hero{min-height:calc(100vh - 80px);position:relative}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-overlay{
+position:relative;z-index:2;
+min-height:calc(100vh - 80px);
+display:flex;flex-direction:column;justify-content:center;align-items:center;
+text-align:center;padding:20px;
+background:linear-gradient(180deg,rgba(11,29,54,.7),rgba(7,20,39,.92));
+color:#fff
 }
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,4vw,3.6rem)}
+.hero p{max-width:720px;color:var(--muted);margin:18px auto 28px}
 
-/* VIDEO */
-.hero video{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  z-index:1;
-}
-
-/* DARK OVERLAY */
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(
-    180deg,
-    rgba(2,6,23,.55),
-    rgba(2,6,23,.85)
-  );
-  z-index:2;
-}
-
-/* MOVING GLOBE */
-.globe{
-  position:absolute;
-  width:700px;
-  height:700px;
-  border-radius:50%;
-  background:
-    radial-gradient(circle at 30% 30%, #1e40af, #020617 70%);
-  opacity:.25;
-  right:-200px;
-  top:120px;
-  animation:spin 80s linear infinite;
-  z-index:2;
-}
-@keyframes spin{
-  from{transform:rotate(0deg)}
-  to{transform:rotate(360deg)}
-}
-
-/* HERO CONTENT */
-.hero-content{
-  position:relative;
-  z-index:3;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:120px 20px 40px;
-}
-.hero-content h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2.2rem,4vw,3.4rem);
-  max-width:900px;
-}
-.hero-content p{
-  max-width:720px;
-  color:#cbd5f5;
-  margin:18px auto 28px;
-}
-
-/* BUTTONS */
 .btn{
-  background:linear-gradient(135deg,#c9a44a,#e7cf88);
-  color:#000;
-  padding:14px 34px;
-  border-radius:999px;
-  font-weight:600;
-  text-decoration:none;
-  margin:6px;
-  display:inline-block;
+background:linear-gradient(135deg,var(--gold),var(--gold-soft));
+color:#000;padding:14px 38px;border-radius:999px;
+text-decoration:none;font-weight:600;margin:6px;border:none
 }
 
-/* ================= SECTIONS ================= */
-.section{
-  background:#f8fafc;
-  color:#020617;
-  padding:100px 20px;
+/* 🌍 Globe */
+.globe{
+width:220px;height:220px;border-radius:50%;
+background:radial-gradient(circle at 30% 30%,#1e3a8a,#020617);
+box-shadow:0 0 60px rgba(201,164,74,.4);
+animation:spin 18s linear infinite;
+margin-bottom:30px
 }
-.section h2{
-  text-align:center;
-  margin-bottom:12px;
-}
-.section p{
-  text-align:center;
-  color:#475569;
-}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 
-.rfq-grid{
-  max-width:1100px;
-  margin:50px auto 0;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:28px;
-}
+.section{max-width:1100px;margin:auto;padding:90px 20px}
+.center{text-align:center}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
 .card{
-  background:#fff;
-  border-radius:18px;
-  padding:26px;
-  box-shadow:0 12px 30px rgba(0,0,0,.12);
+background:#fff;padding:26px;border-radius:16px;
+border:1px solid #e5e7eb;box-shadow:0 10px 30px rgba(0,0,0,.05)
 }
-.card h3{margin:0 0 10px}
-.lock{color:#b91c1c;font-weight:600;font-size:13px}
 
-/* ================= CTA ================= */
-.cta{
-  background:#020617;
-  padding:100px 20px;
-  text-align:center;
-}
-.cta h2{margin-bottom:10px}
+.lock{color:#991b1b;font-size:13px;font-weight:600}
 
-/* ================= FOOTER ================= */
+.dark{background:#020617;color:#fff}
+.dark p{color:#9ca3af}
+
 footer{
-  background:#020617;
-  color:#9ca3af;
-  text-align:center;
-  padding:40px 20px;
-  font-size:14px;
+background:#020617;color:#9ca3af;text-align:center;
+padding:40px 20px;font-size:14px
 }
-footer a{color:#c9a44a;text-decoration:none}
+footer a{color:var(--gold);text-decoration:none}
 
-/* ================= WHATSAPP ================= */
-.whatsapp{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:56px;
-  height:56px;
-  background:#25D366;
-  color:#fff;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:28px;
-  box-shadow:0 10px 25px rgba(0,0,0,.3);
-  z-index:100;
-  text-decoration:none;
-}
-
-/* MOBILE */
 @media(max-width:768px){
-  .globe{width:420px;height:420px;right:-160px;top:180px}
+header{height:auto;padding:14px 0}
+header nav{display:flex;flex-wrap:wrap;justify-content:center}
+.hero-overlay{padding:100px 16px 60px}
 }
 </style>
 </head>
@@ -213,68 +93,81 @@ footer a{color:#c9a44a;text-decoration:none}
     <a href="/buyer-rfqs.html">Buyer RFQs</a>
     <a href="/membership.html">Membership</a>
     <a href="/supplier-login.html">Supplier Login</a>
+    <a href="/register-supplier.html">Register</a>
   </nav>
 </header>
 
 <section class="hero">
-  <video autoplay muted loop playsinline>
-    <source src="https://cdn.coverr.co/videos/coverr-container-ship-transport-5170/1080p.mp4" type="video/mp4">
-  </video>
+<video autoplay muted loop playsinline>
+<source src="https://cdn.coverr.co/videos/coverr-container-ship-transport-5170/1080p.mp4" type="video/mp4">
+</video>
 
-  <div class="globe"></div>
+<div class="hero-overlay">
+<div class="globe"></div>
 
-  <div class="hero-content">
-    <h1>Where Verified Buyers Meet Serious Suppliers</h1>
-    <p>Live global RFQs, protected buyer contacts, and high-intent trade opportunities.</p>
+<h1>Where Verified Buyers Meet Serious Suppliers</h1>
+<p>High-intent global RFQs. Protected buyer contacts. Zero fake leads.</p>
 
-    <div>
-      <a href="/create-rfq.html" class="btn">Post Buyer RFQ</a>
-      <a href="/buyer-rfqs.html" class="btn">View Buyer RFQs</a>
-    </div>
-  </div>
+<div>
+<a href="/create-rfq.html" class="btn">Post Buyer RFQ</a>
+<a href="/buyer-rfqs.html" class="btn">View Buyer RFQs</a>
+</div>
+</div>
 </section>
 
+<!-- LIVE RFQS -->
 <section class="section">
-  <h2>Live Buyer Demand</h2>
-  <p>High-value import requirements from verified buyers worldwide</p>
+<h2 class="center">Live Buyer Demand</h2>
+<p class="center">High-value import requirements from verified buyers worldwide</p>
 
-  <div class="rfq-grid">
-    <div class="card">
-      <h3>Basmati Rice (1121)</h3>
-      <p>500 MT · UAE</p>
-      <p class="lock">🔒 Buyer contact locked</p>
-    </div>
-    <div class="card">
-      <h3>Sugar ICUMSA 45</h3>
-      <p>5,000 MT · Indonesia</p>
-      <p class="lock">🔒 Buyer contact locked</p>
-    </div>
-    <div class="card">
-      <h3>Red Chilli Powder</h3>
-      <p>20 MT · USA</p>
-      <p class="lock">🔒 Buyer contact locked</p>
-    </div>
-  </div>
+<div class="grid">
+<div class="card"><h4>Basmati Rice (1121)</h4><p>500 MT · UAE</p><span class="lock">🔒 Buyer contact locked</span></div>
+<div class="card"><h4>Sugar ICUMSA 45</h4><p>5,000 MT · Indonesia</p><span class="lock">🔒 Buyer contact locked</span></div>
+<div class="card"><h4>Red Chilli Powder</h4><p>20 MT · USA</p><span class="lock">🔒 Buyer contact locked</span></div>
+</div>
 </section>
 
-<section class="cta">
-  <h2>Ready to Access Real Buyer Demand?</h2>
-  <p>Join APD Global Trade today</p>
-  <a href="/supplier-login.html" class="btn">Supplier Login</a>
-  <a href="/register-supplier.html" class="btn">Register</a>
+<!-- HOW IT WORKS -->
+<section class="section dark">
+<h2 class="center">How It Works</h2>
+<div class="grid">
+<div class="card"><h3>1. Buyers Post RFQs</h3><p>Only serious buyers with clear requirements.</p></div>
+<div class="card"><h3>2. Suppliers Get Access</h3><p>Verified suppliers unlock buyer contacts.</p></div>
+<div class="card"><h3>3. Deals Close Faster</h3><p>No middlemen. Direct trade conversations.</p></div>
+</div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+<h2 class="center">What Suppliers Say</h2>
+<div class="grid">
+<div class="card">“Closed 2 export deals in 30 days.”<br><b>– Rice Exporter, India</b></div>
+<div class="card">“Best quality leads, no time waste.”<br><b>– Sugar Supplier, Brazil</b></div>
+<div class="card">“Real buyers, real money.”<br><b>– Spices Trader, Vietnam</b></div>
+</div>
 </section>
 
 <footer>
-  <p style="color:#c9a44a;font-weight:600">APD Global Trade</p>
-  <p>Elite B2B Trade Facilitation Platform</p>
-  <p>
-    📧 info@apdglobaltradehub.com<br>
-    ☎ +1 (202) 780-1366<br>
-    💬 WhatsApp: +91 92664 18868
-  </p>
+<p style="color:#c9a44a;font-weight:600">APD Global Trade</p>
+<p>Elite B2B Trade Facilitation Platform</p>
+<p>
+<a href="/terms.html">Terms</a> |
+<a href="/privacy.html">Privacy</a> |
+<a href="/disclaimer.html">Disclaimer</a>
+</p>
+<p>
+📧 info@apdglobaltradehub.com<br>
+☎ +1 (202) 780-1366<br>
+💬 WhatsApp: +91 92664 18868
+</p>
 </footer>
 
-<a href="https://wa.me/919266418868" target="_blank" class="whatsapp">💬</a>
+<a href="https://wa.me/919266418868" target="_blank"
+style="position:fixed;bottom:20px;right:20px;width:56px;height:56px;
+background:#25D366;color:#fff;border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+font-size:28px;box-shadow:0 10px 25px rgba(0,0,0,.25);z-index:9999;text-decoration:none">
+💬</a>
 
 </body>
 </html>
