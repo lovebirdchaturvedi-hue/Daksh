@@ -83,6 +83,58 @@ header{height:auto;padding:14px 0}
 header nav{display:flex;flex-wrap:wrap;justify-content:center}
 .hero-overlay{padding:80px 16px}
 }
+
+/* ================= PREMIUM PORT + ANIMATION ================= */
+
+@keyframes portMove {
+  from { background-position: 0 0; }
+  to { background-position: -2200px 0; }
+}
+@keyframes waterGlow {
+  0% { opacity:.18 }
+  50% { opacity:.28 }
+  100% { opacity:.18 }
+}
+
+.ship-fill::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(to top, rgba(2,6,23,.98), rgba(2,6,23,.65)),
+    url("https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1920&q=60");
+  background-size:cover;
+  background-position:center bottom;
+  animation:waterGlow 6s ease-in-out infinite;
+  z-index:1;
+}
+
+.ship-fill::after{
+  content:"";
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:38%;
+  background:url("https://svgshare.com/i/14kM.svg") repeat-x;
+  background-size:auto 100%;
+  animation:portMove 140s linear infinite;
+  opacity:.28;
+  z-index:2;
+}
+
+.ship-fill > div{position:relative;z-index:3}
+
+/* Floating buttons always visible */
+a[href*="wa.me"],a[href*="download"]{
+position:fixed;
+z-index:999999 !important;
+}
+
+/* Reduce animation on mobile */
+@media(max-width:768px){
+.ship-fill::after{animation:none}
+}
 </style>
 </head>
 
@@ -129,45 +181,19 @@ header nav{display:flex;flex-wrap:wrap;justify-content:center}
 </div>
 </section>
 
-<!-- ================= PREMIUM SHIP CINEMATIC #1 ================= -->
-<section style="position:relative;min-height:120vh;overflow:hidden;background:#020617">
-<video autoplay muted loop playsinline style="position:absolute;width:100%;height:100%;object-fit:cover">
-<source src="https://cdn.coverr.co/videos/coverr-cargo-ship-1560/1080p.mp4">
-</video>
-
-<div style="position:relative;z-index:2;min-height:120vh;
-display:flex;flex-direction:column;align-items:center;justify-content:center;
-text-align:center;padding:40px;
-background:linear-gradient(180deg,rgba(2,6,23,.55),rgba(2,6,23,.95));
-color:#fff">
-<h2 style="font-family:'Playfair Display',serif;font-size:3rem">
-Global Trade Never Stops
-</h2>
+<!-- PREMIUM PORT SECTION -->
+<section class="ship-fill" style="position:relative;min-height:140vh;overflow:hidden;background:#020617">
+<div style="min-height:140vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;color:#fff">
+<h2 style="font-family:'Playfair Display',serif;font-size:3rem">Global Trade Never Stops</h2>
 <p style="max-width:760px;margin:20px auto;color:#cbd5f5;font-size:18px">
-Containers moving. Ports operating. Deals closing.  
-APD Global Trade powers nonstop international commerce.
+APD Global Trade powers continuous cross-border commerce through verified buyers,
+trusted suppliers, and real global logistics.
 </p>
-</div>
-</section>
 
-<!-- ================= PREMIUM SHIP CINEMATIC #2 ================= -->
-<section style="position:relative;min-height:100vh;overflow:hidden;background:#020617">
-<video autoplay muted loop playsinline style="position:absolute;width:100%;height:100%;object-fit:cover">
-<source src="https://cdn.coverr.co/videos/coverr-container-ship-transport-5170/1080p.mp4">
-</video>
-
-<div style="position:relative;z-index:2;min-height:100vh;
-display:flex;align-items:center;justify-content:center;
-background:linear-gradient(180deg,rgba(2,6,23,.6),rgba(2,6,23,.95));
-color:#fff;text-align:center;padding:40px">
-<div>
-<h2 style="font-family:'Playfair Display',serif;font-size:3rem">
-From Factory to Global Ports
-</h2>
-<p style="max-width:760px;margin:20px auto;color:#cbd5f5;font-size:18px">
-Real buyers. Verified demand. Serious suppliers.  
-This is how modern global trade works.
-</p>
+<div style="margin-top:30px;line-height:1.9">
+📧 info@apdglobaltradehub.com<br>
+☎ +1 (202) 780-1366<br>
+💬 WhatsApp: +91 92664 18868
 </div>
 </div>
 </section>
@@ -182,13 +208,21 @@ This is how modern global trade works.
 </p>
 </footer>
 
-<!-- DOWNLOAD APP BUTTON -->
+<!-- WHATSAPP -->
+<a href="https://wa.me/919266418868" target="_blank"
+style="position:fixed;bottom:80px;right:20px;width:56px;height:56px;
+background:#25D366;color:#fff;border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+font-size:28px;box-shadow:0 10px 25px rgba(0,0,0,.25);text-decoration:none">
+💬
+</a>
+
+<!-- DOWNLOAD APP -->
 <a href="/download-app.html" target="_blank"
 style="position:fixed;bottom:20px;right:20px;padding:14px 22px;
 background:linear-gradient(135deg,#c9a44a,#e7cf88);
 color:#000;border-radius:999px;font-weight:600;
-text-decoration:none;box-shadow:0 12px 30px rgba(0,0,0,.35);
-z-index:99999">
+text-decoration:none;box-shadow:0 12px 30px rgba(0,0,0,.35)">
 📲 Download App
 </a>
 
