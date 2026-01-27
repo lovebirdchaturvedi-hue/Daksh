@@ -5,245 +5,106 @@
 <title>APD Global Trade | Elite B2B Trade Facilitation Platform</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#020617">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-html,body{
-margin:0;
-font-family:Inter,sans-serif;
-background:#020617;
-color:#fff;
-overflow-x:hidden;
-}
+html,body{margin:0;font-family:Inter,sans-serif;background:#f5f7fb}
 :root{
---gold:#c9a44a;
---gold-soft:#e7cf88;
+--navy:#0b1d36;--navy-dark:#071427;
+--gold:#c9a44a;--gold-soft:#e7cf88;
+--muted:#9ca3af;
 }
 
-/* ================= HEADER ================= */
+/* HEADER */
 header{
 height:80px;
-background:linear-gradient(180deg,#0b1d36,#071427);
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-position:relative;
-z-index:10;
+background:linear-gradient(180deg,var(--navy),var(--navy-dark));
+display:flex;flex-direction:column;align-items:center;justify-content:center
 }
 header .logo{color:var(--gold);font-weight:600}
-header nav a{
-color:#e5e7eb;
-margin:0 12px;
-text-decoration:none;
-font-size:13px
-}
+header nav a{color:#e5e7eb;margin:0 12px;text-decoration:none;font-size:13px}
+header nav a:hover{color:var(--gold-soft)}
 
-/* ================= HERO ================= */
-.hero{
-position:relative;
-min-height:calc(100vh - 80px);
-overflow:hidden;
-background:linear-gradient(180deg,#0b1d36,#020617);
-}
-
-/* 🌊 OCEAN PARALLAX */
-.ocean{
-position:absolute;
-inset:0;
-background:
-url("https://www.transparenttextures.com/patterns/wavecut.png");
-opacity:.25;
-animation:oceanMove 60s linear infinite;
-}
-@keyframes oceanMove{
-from{background-position:0 0}
-to{background-position:2000px 0}
-}
-
-/* 🧠 HEATMAP */
-.heatmap{
-position:absolute;
-inset:0;
-pointer-events:none;
-z-index:2;
-}
-.heatmap svg{
-width:100%;
-height:100%;
-}
-.heat{
-fill:#22d3ee;
-opacity:.15;
-filter:blur(12px);
-animation:heatPulse 3.5s ease-in-out infinite;
-}
-@keyframes heatPulse{
-0%,100%{opacity:.12}
-50%{opacity:.35}
-}
-
-/* ================= HERO CONTENT ================= */
+/* HERO */
+.hero{min-height:calc(100vh - 80px);position:relative;overflow:hidden}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero-overlay{
-position:relative;
-z-index:4;
+position:relative;z-index:2;
 min-height:calc(100vh - 80px);
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:20px;
-background:
-radial-gradient(circle at 50% 35%, rgba(201,164,74,.18), transparent 60%);
+display:flex;flex-direction:column;justify-content:center;align-items:center;
+text-align:center;padding:20px;
+background:linear-gradient(180deg,rgba(11,29,54,.7),rgba(7,20,39,.92));
+color:#fff
+}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,4vw,3.6rem)}
+.hero p{max-width:720px;color:var(--muted);margin:18px auto 28px}
+
+.btn{
+background:linear-gradient(135deg,var(--gold),var(--gold-soft));
+color:#000;padding:14px 38px;border-radius:999px;
+text-decoration:none;font-weight:600;margin:6px;border:none
 }
 
-.earth-wrap{
-width:260px;height:260px;
-margin-bottom:30px;
-}
+/* EARTH */
+.earth-wrap{position:relative;width:260px;height:260px;margin-bottom:30px}
 .earth{
-width:100%;height:100%;
-border-radius:50%;
+width:100%;height:100%;border-radius:50%;
 background:url("https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg") repeat-x;
 background-size:cover;
 animation:spin 28s linear infinite;
-box-shadow:
-inset -40px 0 80px rgba(0,0,0,.85),
-0 0 90px rgba(201,164,74,.6);
+box-shadow:inset -40px 0 80px rgba(0,0,0,.8),0 0 60px rgba(201,164,74,.6)
 }
-@keyframes spin{
-from{background-position:0}
-to{background-position:-1400px}
+@keyframes spin{from{background-position:0}to{background-position:-1400px}}
+
+.section{max-width:1100px;margin:auto;padding:90px 20px}
+.center{text-align:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
+
+.card{
+background:#fff;padding:26px;border-radius:16px;
+border:1px solid #e5e7eb;
+box-shadow:0 10px 30px rgba(0,0,0,.05)
 }
 
-.hero h1{
-font-family:'Playfair Display',serif;
-font-size:clamp(2.4rem,4vw,3.6rem);
-margin:10px 0;
-}
-.hero p{
-max-width:720px;
-color:#cbd5f5;
-margin:14px auto 26px;
-}
+.counter{font-size:42px;font-weight:700;color:var(--gold)}
 
-/* ================= BUTTONS ================= */
-.btn{
-background:linear-gradient(135deg,var(--gold),var(--gold-soft));
-color:#000;
-padding:14px 36px;
-border-radius:999px;
-text-decoration:none;
-font-weight:600;
-margin:6px;
-display:inline-block;
-}
-
-/* ================= TICKER ================= */
-.ticker{
-background:#020617;
-border-top:1px solid rgba(255,255,255,.1);
-border-bottom:1px solid rgba(255,255,255,.1);
-overflow:hidden;
-white-space:nowrap;
-}
-.ticker-track{
-display:inline-block;
-padding:14px 0;
-animation:tickerMove 40s linear infinite;
-}
-@keyframes tickerMove{
-from{transform:translateX(100%)}
-to{transform:translateX(-100%)}
-}
-.ticker span{
-margin:0 40px;
-font-size:14px;
-color:#e5e7eb;
-}
-
-/* ================= PORT FILL ================= */
-.ship-fill{
-position:relative;
-min-height:120vh;
-overflow:hidden;
-background:#020617;
-}
-.ship-fill::before{
-content:"";
-position:absolute;
-inset:0;
-background:
-linear-gradient(to top,rgba(2,6,23,.98),rgba(2,6,23,.6)),
-url("https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1920&q=60");
-background-size:cover;
-background-position:center bottom;
-}
-.ship-fill::after{
-content:"";
-position:absolute;
-bottom:0;left:0;right:0;
-height:38%;
-background:url("https://svgshare.com/i/14kM.svg") repeat-x;
-background-size:auto 100%;
-opacity:.35;
-}
-
-.ship-content{
-position:relative;
-z-index:3;
-min-height:120vh;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:40px;
-}
-
-/* ================= FOOTER ================= */
 footer{
-background:#020617;
-color:#9ca3af;
-text-align:center;
-padding:40px 20px;
-font-size:14px;
+background:#020617;color:#9ca3af;text-align:center;
+padding:40px 20px;font-size:14px
 }
 footer a{color:var(--gold);text-decoration:none}
 
-/* ================= FLOATING ================= */
-a[href*="wa.me"]{
-position:fixed;
-bottom:80px;
-right:20px;
-width:56px;height:56px;
-background:#25D366;
-color:#fff;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:28px;
-text-decoration:none;
-z-index:99999;
+/* TESTIMONIALS */
+.testimonials{
+background:#f8fafc;
 }
-a[href*="download"]{
-position:fixed;
-bottom:20px;
-right:20px;
-padding:14px 22px;
-background:linear-gradient(135deg,#c9a44a,#e7cf88);
-color:#000;
-border-radius:999px;
+.testimonial-card{
+background:#fff;
+padding:30px;
+border-radius:18px;
+box-shadow:0 20px 40px rgba(0,0,0,.08);
+text-align:left;
+}
+.stars{color:#fbbf24;font-size:18px;margin-bottom:12px}
+.testimonial-card p{color:#374151;line-height:1.6}
+.testimonial-user{
+margin-top:16px;
 font-weight:600;
-text-decoration:none;
-z-index:99999;
+color:#0b1d36
+}
+.testimonial-role{
+font-size:13px;
+color:#6b7280
 }
 
-/* REDUCED MOTION */
-@media(prefers-reduced-motion:reduce){
-.ocean,.heat,.earth,.ticker-track{animation:none}
+/* MOBILE */
+@media(max-width:768px){
+header{height:auto;padding:14px 0}
+header nav{display:flex;flex-wrap:wrap;justify-content:center}
+.hero-overlay{padding:80px 16px}
 }
 </style>
 </head>
@@ -263,19 +124,11 @@ z-index:99999;
 </nav>
 </header>
 
-<!-- ================= HERO ================= -->
+<!-- HERO -->
 <section class="hero">
-<div class="ocean"></div>
-
-<!-- 🧠 Heatmap -->
-<div class="heatmap">
-<svg viewBox="0 0 1000 500">
-<circle class="heat" cx="520" cy="250" r="90"/>
-<circle class="heat" cx="650" cy="210" r="70"/>
-<circle class="heat" cx="300" cy="220" r="75"/>
-<circle class="heat" cx="760" cy="260" r="65"/>
-</svg>
-</div>
+<video autoplay muted loop playsinline>
+<source src="https://cdn.coverr.co/videos/coverr-container-ship-transport-5170/1080p.mp4">
+</video>
 
 <div class="hero-overlay">
 <div class="earth-wrap"><div class="earth"></div></div>
@@ -289,48 +142,76 @@ z-index:99999;
 </div>
 </section>
 
-<!-- ================= TICKER ================= -->
-<div class="ticker">
-<div class="ticker-track">
-<span>🇮🇳 Rice exporter closed $1.2M deal</span>
-<span>🇦🇪 UAE buyer sourced ICUMSA 45</span>
-<span>🇺🇸 US importer placed spices RFQ</span>
-<span>🇻🇳 Vietnam supplier secured contract</span>
-<span>🇪🇺 EU buyer onboarded textile exporter</span>
+<!-- COUNTERS -->
+<section class="section center">
+<h2>Trusted by Exporters in 100+ Countries</h2>
+<div class="grid">
+<div class="card"><div class="counter">100+</div><p>Countries Served</p></div>
+<div class="card"><div class="counter">4,800+</div><p>Live Buyer RFQs</p></div>
+<div class="card"><div class="counter">$320M+</div><p>Trade Volume</p></div>
 </div>
-</div>
+</section>
 
-<!-- ================= PORT ================= -->
-<section class="ship-fill">
-<div class="ship-content">
-<h2 style="font-family:'Playfair Display',serif;font-size:3rem">
-Global Trade Never Stops
+<!-- TESTIMONIALS -->
+<section class="section testimonials">
+<h2 class="center" style="font-family:'Playfair Display',serif">
+What Exporters Say About APD Global Trade
 </h2>
-<p style="max-width:760px;color:#cbd5f5">
-APD Global Trade powers continuous cross-border commerce
-through verified buyers, trusted suppliers, and real logistics.
-</p>
 
-<div style="margin-top:28px;line-height:1.9">
-📧 info@apdglobaltradehub.com<br>
-☎ +1 (202) 780-1366<br>
-💬 WhatsApp: +91 92664 18868
+<div class="grid">
+<div class="testimonial-card">
+<div class="stars">★★★★★</div>
+<p>
+We closed two international contracts within the first month.
+Every buyer was genuine and serious.
+</p>
+<div class="testimonial-user">Rajiv Mehta</div>
+<div class="testimonial-role">Rice Exporter · India</div>
+</div>
+
+<div class="testimonial-card">
+<div class="stars">★★★★★</div>
+<p>
+No brokers, no fake leads. This platform respects suppliers’ time.
+</p>
+<div class="testimonial-user">Carlos Almeida</div>
+<div class="testimonial-role">Sugar Supplier · Brazil</div>
+</div>
+
+<div class="testimonial-card">
+<div class="stars">★★★★★</div>
+<p>
+APD Global Trade delivers what others promise. Real RFQs, real buyers.
+</p>
+<div class="testimonial-user">Nguyen Tran</div>
+<div class="testimonial-role">Spices Trader · Vietnam</div>
 </div>
 </div>
 </section>
 
 <footer>
-<p style="color:var(--gold);font-weight:600">APD Global Trade</p>
+<p style="color:#c9a44a;font-weight:600">APD Global Trade</p>
 <p>Elite B2B Trade Facilitation Platform</p>
 <p>
 <a href="/terms.html">Terms</a> |
 <a href="/privacy.html">Privacy</a> |
 <a href="/disclaimer.html">Disclaimer</a>
 </p>
+<p>
+📧 info@apdglobaltradehub.com<br>
+☎ +1 (202) 780-1366<br>
+💬 WhatsApp: +91 92664 18868
+</p>
 </footer>
 
-<a href="https://wa.me/919266418868" target="_blank">💬</a>
-<a href="/download-app.html" target="_blank">📲 Download App</a>
+<!-- FLOATING DOWNLOAD -->
+<a href="/download-app.html" target="_blank"
+style="position:fixed;bottom:20px;right:20px;padding:14px 22px;
+background:linear-gradient(135deg,#c9a44a,#e7cf88);
+color:#000;border-radius:999px;font-weight:600;
+text-decoration:none;box-shadow:0 12px 30px rgba(0,0,0,.35);z-index:99999">
+📲 Download App
+</a>
 
 </body>
 </html>
