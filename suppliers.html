@@ -10,10 +10,33 @@
 <style>
 html,body{margin:0;font-family:Inter,sans-serif;background:#020617;color:#fff}
 :root{
+--navy:#0b1d36;
+--navy-dark:#071427;
 --gold:#c9a44a;
 --gold-soft:#e7cf88;
 --muted:#9ca3af;
 }
+
+/* HEADER */
+header{
+height:80px;
+background:linear-gradient(180deg,var(--navy),var(--navy-dark));
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+position:sticky;
+top:0;
+z-index:999;
+}
+header .logo{color:var(--gold);font-weight:600}
+header nav a{
+color:#e5e7eb;
+margin:0 12px;
+text-decoration:none;
+font-size:13px
+}
+header nav a:hover{color:var(--gold-soft)}
 
 /* HERO */
 .hero{
@@ -52,6 +75,8 @@ color:#cbd5f5;
 line-height:1.6;
 margin-bottom:32px;
 }
+
+/* BUTTONS */
 .btn{
 display:inline-block;
 margin:8px;
@@ -135,11 +160,27 @@ color:#9ca3af;
 /* MOBILE */
 @media(max-width:768px){
 .hero p{font-size:16px}
+header{height:auto;padding:14px 0}
+header nav{display:flex;flex-wrap:wrap;justify-content:center}
 }
 </style>
 </head>
 
 <body>
+
+<!-- ================= HEADER ================= -->
+<header>
+<div class="logo">APD Global Trade</div>
+<nav>
+<a href="/">Home</a>
+<a href="/buyer-rfqs.html">Buyer RFQs</a>
+<a href="/membership.html">Membership</a>
+<a href="/suppliers.html">Suppliers</a>
+<a href="/supplier-login.html">Supplier Login</a>
+<a href="/register-supplier.html">Register</a>
+<a href="/contact.html">Contact</a>
+</nav>
+</header>
 
 <!-- ================= HERO SHIP ================= -->
 <section class="hero">
@@ -174,39 +215,27 @@ Why Top Exporters Choose APD Global Trade
 <div class="grid">
 <div class="card">
 <h3>Only Real Buyers</h3>
-<p>
-Every RFQ is screened. No brokers, no fake inquiries,
-no random WhatsApp messages.
-</p>
+<p>Every RFQ is screened. No brokers, no fake inquiries.</p>
 </div>
 
 <div class="card">
 <h3>High-Value Deals</h3>
-<p>
-Bulk quantities. International demand.
-Suppliers close deals worth thousands to millions.
-</p>
+<p>Bulk quantities. International demand. Million-dollar potential.</p>
 </div>
 
 <div class="card">
 <h3>Direct Access</h3>
-<p>
-No middlemen. Unlock verified buyer contacts
-and negotiate directly.
-</p>
+<p>No middlemen. Unlock verified buyer contacts directly.</p>
 </div>
 
 <div class="card">
 <h3>Global Visibility</h3>
-<p>
-Your products are seen by buyers across
-Asia, Middle East, Europe, USA & Africa.
-</p>
+<p>Buyers from Asia, Middle East, Europe, USA & Africa.</p>
 </div>
 </div>
 </section>
 
-<!-- ================= MID SHIP CINEMATIC ================= -->
+<!-- ================= MID SHIP ================= -->
 <section class="ship-mid">
 <video autoplay muted loop playsinline>
 <source src="https://cdn.coverr.co/videos/coverr-container-ship-transport-5170/1080p.mp4">
@@ -218,8 +247,7 @@ Asia, Middle East, Europe, USA & Africa.
 Trade Without Limits
 </h2>
 <p style="max-width:760px;margin:20px auto;color:#cbd5f5;font-size:18px">
-From factory floor to global ports —  
-APD Global Trade powers your export growth with verified demand.
+From factory floor to global ports — APD Global Trade powers your export growth.
 </p>
 </div>
 </div>
@@ -231,17 +259,12 @@ APD Global Trade powers your export growth with verified demand.
 Start Closing Export Deals Faster
 </h2>
 <p style="max-width:720px;margin:20px auto;color:#cbd5f5">
-Join suppliers who are already converting buyer RFQs
-into real international trade.
+Join suppliers already converting RFQs into real trade.
 </p>
 
 <div>
-<a href="/register-supplier.html" class="btn btn-primary">
-Register as Supplier
-</a>
-<a href="/buyer-rfqs.html" class="btn btn-outline">
-View Live Buyer Demand
-</a>
+<a href="/register-supplier.html" class="btn btn-primary">Register as Supplier</a>
+<a href="/buyer-rfqs.html" class="btn btn-outline">View Live Buyer Demand</a>
 </div>
 </section>
 
@@ -250,11 +273,28 @@ View Live Buyer Demand
 <p style="color:var(--gold);font-weight:600">APD Global Trade</p>
 <p>Elite B2B Trade Facilitation Platform</p>
 <p>
-📧 info@apdglobaltradehub.com <br>
-☎ +1 (202) 780-1366 <br>
+📧 info@apdglobaltradehub.com<br>
+☎ +1 (202) 780-1366<br>
 💬 WhatsApp: +91 92664 18868
 </p>
 </footer>
+
+<!-- ================= DOWNLOAD APP FLOAT ================= -->
+<a href="/download-app.html" target="_blank"
+style="
+position:fixed;
+bottom:20px;
+right:20px;
+padding:14px 22px;
+background:linear-gradient(135deg,#c9a44a,#e7cf88);
+color:#000;
+border-radius:999px;
+font-weight:600;
+text-decoration:none;
+box-shadow:0 12px 30px rgba(0,0,0,.35);
+z-index:99999">
+📲 Download App
+</a>
 
 </body>
 </html>
