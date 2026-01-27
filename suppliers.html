@@ -2,178 +2,259 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Admin – Supplier Management</title>
+<title>For Suppliers | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="assets/admin.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-body{
-  margin:0;
-  font-family:Inter,sans-serif;
-  background:#f5f7fb;
+html,body{margin:0;font-family:Inter,sans-serif;background:#020617;color:#fff}
+:root{
+--gold:#c9a44a;
+--gold-soft:#e7cf88;
+--muted:#9ca3af;
 }
-.main{
-  padding:40px;
+
+/* HERO */
+.hero{
+position:relative;
+min-height:100vh;
+overflow:hidden;
 }
-h1{
-  margin-bottom:20px;
+.hero video{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+object-fit:cover;
 }
-table{
-  width:100%;
-  border-collapse:collapse;
-  background:#fff;
-  border-radius:12px;
-  overflow:hidden;
+.hero-overlay{
+position:relative;
+z-index:2;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:40px 20px;
+background:linear-gradient(180deg,rgba(2,6,23,.55),rgba(2,6,23,.95));
 }
-th,td{
-  padding:14px;
-  border-bottom:1px solid #e5e7eb;
-  text-align:left;
+.hero h1{
+font-family:'Playfair Display',serif;
+font-size:clamp(2.8rem,5vw,4rem);
+margin-bottom:16px;
 }
-th{
-  background:#020617;
-  color:#fff;
+.hero p{
+max-width:820px;
+font-size:18px;
+color:#cbd5f5;
+line-height:1.6;
+margin-bottom:32px;
 }
-button{
-  padding:6px 14px;
-  border-radius:999px;
-  border:none;
-  cursor:pointer;
-  font-size:13px;
+.btn{
+display:inline-block;
+margin:8px;
+padding:14px 36px;
+border-radius:999px;
+font-weight:600;
+text-decoration:none;
 }
-.approve{background:#16a34a;color:#fff}
-.reject{background:#dc2626;color:#fff}
-.logout{
-  margin-top:20px;
-  background:#020617;
-  color:#fff;
-  padding:10px 18px;
-  border-radius:999px;
-  border:none;
-  cursor:pointer;
+.btn-primary{
+background:linear-gradient(135deg,var(--gold),var(--gold-soft));
+color:#000;
+}
+.btn-outline{
+border:2px solid var(--gold);
+color:var(--gold);
+}
+
+/* SECTION */
+.section{
+max-width:1200px;
+margin:auto;
+padding:100px 20px;
+}
+.center{text-align:center}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+margin-top:50px;
+}
+.card{
+background:#020617;
+border:1px solid rgba(255,255,255,.1);
+border-radius:18px;
+padding:30px;
+box-shadow:0 20px 40px rgba(0,0,0,.4);
+}
+.card h3{
+color:var(--gold);
+margin-bottom:12px;
+}
+.card p{
+color:#cbd5f5;
+line-height:1.6;
+}
+
+/* MID SHIP */
+.ship-mid{
+position:relative;
+min-height:80vh;
+overflow:hidden;
+}
+.ship-mid video{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+object-fit:cover;
+}
+.ship-mid .overlay{
+position:relative;
+z-index:2;
+min-height:80vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:40px;
+background:linear-gradient(180deg,rgba(2,6,23,.65),rgba(2,6,23,.95));
+}
+
+/* FOOTER */
+footer{
+background:#020617;
+text-align:center;
+padding:50px 20px;
+color:#9ca3af;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+.hero p{font-size:16px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
-  <h2>APD Admin</h2>
-  <a href="/suppliers.html" class="active">Suppliers</a>
-  <button class="logout" id="logoutBtn">Logout</button>
+<!-- ================= HERO SHIP ================= -->
+<section class="hero">
+<video autoplay muted loop playsinline>
+<source src="https://cdn.coverr.co/videos/coverr-cargo-ship-1560/1080p.mp4">
+</video>
+
+<div class="hero-overlay">
+<h1>A Growth Engine for Serious Suppliers</h1>
+<p>
+Verified buyer demand. Real RFQs. Direct buyers.  
+No fake leads. No time waste. Only deals that convert.
+</p>
+
+<div>
+<a href="/register-supplier.html" class="btn btn-primary">
+Become a Verified Supplier
+</a>
+<a href="/download-app.html" class="btn btn-outline">
+Download Supplier App
+</a>
+</div>
+</div>
+</section>
+
+<!-- ================= WHY SUPPLIERS WIN ================= -->
+<section class="section center">
+<h2 style="font-family:'Playfair Display',serif;font-size:2.8rem">
+Why Top Exporters Choose APD Global Trade
+</h2>
+
+<div class="grid">
+<div class="card">
+<h3>Only Real Buyers</h3>
+<p>
+Every RFQ is screened. No brokers, no fake inquiries,
+no random WhatsApp messages.
+</p>
 </div>
 
-<!-- MAIN -->
-<div class="main">
-  <h1>Supplier Management</h1>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Company</th>
-        <th>Email</th>
-        <th>Status</th>
-        <th>Plan</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody id="supplierTable">
-      <tr>
-        <td colspan="5">⏳ Loading suppliers…</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="card">
+<h3>High-Value Deals</h3>
+<p>
+Bulk quantities. International demand.
+Suppliers close deals worth thousands to millions.
+</p>
 </div>
 
-<script type="module">
-import { auth, db } from "/assets/js/firebase-init.js";
-import {
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import {
-  collection,
-  getDocs,
-  updateDoc,
-  doc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+<div class="card">
+<h3>Direct Access</h3>
+<p>
+No middlemen. Unlock verified buyer contacts
+and negotiate directly.
+</p>
+</div>
 
-const table = document.getElementById("supplierTable");
-const logoutBtn = document.getElementById("logoutBtn");
+<div class="card">
+<h3>Global Visibility</h3>
+<p>
+Your products are seen by buyers across
+Asia, Middle East, Europe, USA & Africa.
+</p>
+</div>
+</div>
+</section>
 
-/* 🔐 ADMIN GUARD */
-onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    window.location.replace("/supplier-login.html");
-    return;
-  }
+<!-- ================= MID SHIP CINEMATIC ================= -->
+<section class="ship-mid">
+<video autoplay muted loop playsinline>
+<source src="https://cdn.coverr.co/videos/coverr-container-ship-transport-5170/1080p.mp4">
+</video>
 
-  // ✅ ADMIN CHECK (admin/{uid})
-  const adminSnap = await getDoc(doc(db, "admin", user.uid));
-  if (!adminSnap.exists()) {
-    window.location.replace("/rfq.html");
-    return;
-  }
+<div class="overlay">
+<div>
+<h2 style="font-family:'Playfair Display',serif;font-size:3rem">
+Trade Without Limits
+</h2>
+<p style="max-width:760px;margin:20px auto;color:#cbd5f5;font-size:18px">
+From factory floor to global ports —  
+APD Global Trade powers your export growth with verified demand.
+</p>
+</div>
+</div>
+</section>
 
-  loadSuppliers();
-});
+<!-- ================= FINAL CTA ================= -->
+<section class="section center">
+<h2 style="font-family:'Playfair Display',serif;font-size:2.8rem">
+Start Closing Export Deals Faster
+</h2>
+<p style="max-width:720px;margin:20px auto;color:#cbd5f5">
+Join suppliers who are already converting buyer RFQs
+into real international trade.
+</p>
 
-/* 📦 LOAD SUPPLIERS */
-async function loadSuppliers() {
-  table.innerHTML = "";
+<div>
+<a href="/register-supplier.html" class="btn btn-primary">
+Register as Supplier
+</a>
+<a href="/buyer-rfqs.html" class="btn btn-outline">
+View Live Buyer Demand
+</a>
+</div>
+</section>
 
-  const snap = await getDocs(collection(db, "suppliers"));
-
-  if (snap.empty) {
-    table.innerHTML = `
-      <tr>
-        <td colspan="5">No suppliers found</td>
-      </tr>`;
-    return;
-  }
-
-  snap.forEach(d => {
-    const s = d.data();
-
-    table.innerHTML += `
-      <tr>
-        <td>${s.companyName || "-"}</td>
-        <td>${s.email || "-"}</td>
-        <td><strong>${s.status || "-"}</strong></td>
-        <td>${s.plan || "basic"}</td>
-        <td>
-          <button class="approve"
-            onclick="updateStatus('${d.id}','approved')">
-            Approve
-          </button>
-          <button class="reject"
-            onclick="updateStatus('${d.id}','rejected')">
-            Reject
-          </button>
-        </td>
-      </tr>
-    `;
-  });
-}
-
-/* 🔁 UPDATE STATUS */
-window.updateStatus = async (id, status) => {
-  if (!confirm("Are you sure?")) return;
-
-  await updateDoc(doc(db, "suppliers", id), { status });
-  alert("Supplier " + status);
-  loadSuppliers();
-};
-
-/* 🚪 LOGOUT */
-logoutBtn.onclick = async () => {
-  await signOut(auth);
-  window.location.replace("/supplier-login.html");
-};
-</script>
+<!-- ================= FOOTER ================= -->
+<footer>
+<p style="color:var(--gold);font-weight:600">APD Global Trade</p>
+<p>Elite B2B Trade Facilitation Platform</p>
+<p>
+📧 info@apdglobaltradehub.com <br>
+☎ +1 (202) 780-1366 <br>
+💬 WhatsApp: +91 92664 18868
+</p>
+</footer>
 
 </body>
 </html>
