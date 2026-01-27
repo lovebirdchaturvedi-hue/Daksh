@@ -18,7 +18,7 @@ html,body{margin:0;font-family:Inter,sans-serif;background:#f5f7fb}
 --muted:#9ca3af;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 header{
 height:80px;
 background:linear-gradient(180deg,var(--navy),var(--navy-dark));
@@ -28,7 +28,7 @@ header .logo{color:var(--gold);font-weight:600}
 header nav a{color:#e5e7eb;margin:0 12px;text-decoration:none;font-size:13px}
 header nav a:hover{color:var(--gold-soft)}
 
-/* HERO */
+/* ================= HERO ================= */
 .hero{min-height:calc(100vh - 80px);position:relative;overflow:hidden}
 .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero-overlay{
@@ -41,14 +41,13 @@ color:#fff
 }
 .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,4vw,3.6rem)}
 .hero p{max-width:720px;color:var(--muted);margin:18px auto 28px}
-
 .btn{
 background:linear-gradient(135deg,var(--gold),var(--gold-soft));
 color:#000;padding:14px 38px;border-radius:999px;
 text-decoration:none;font-weight:600;margin:6px;border:none
 }
 
-/* EARTH */
+/* ================= EARTH ================= */
 .earth-wrap{position:relative;width:260px;height:260px;margin-bottom:30px}
 .earth{
 width:100%;height:100%;border-radius:50%;
@@ -59,71 +58,95 @@ box-shadow:inset -40px 0 80px rgba(0,0,0,.8),0 0 60px rgba(201,164,74,.6)
 }
 @keyframes spin{from{background-position:0}to{background-position:-1400px}}
 
+/* ================= SECTIONS ================= */
 .section{max-width:1100px;margin:auto;padding:90px 20px}
 .center{text-align:center}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
-
 .card{
 background:#fff;padding:26px;border-radius:16px;
 border:1px solid #e5e7eb;
 box-shadow:0 10px 30px rgba(0,0,0,.05)
 }
-
 .counter{font-size:42px;font-weight:700;color:var(--gold)}
 
+/* ================= FOOTER ================= */
 footer{
 background:#020617;color:#9ca3af;text-align:center;
 padding:40px 20px;font-size:14px
 }
 footer a{color:var(--gold);text-decoration:none}
 
-/* MOBILE */
-@media(max-width:768px){
-header{height:auto;padding:14px 0}
-header nav{display:flex;flex-wrap:wrap;justify-content:center}
-.hero-overlay{padding:80px 16px}
+/* ================= PORT + MAP ANIMATION ================= */
+@keyframes portMove{from{background-position:0 0}to{background-position:-2400px 0}}
+@keyframes glowPulse{0%{opacity:.35}50%{opacity:.7}100%{opacity:.35}}
+
+.ship-fill{
+position:relative;
+min-height:150vh;
+overflow:hidden;
+background:#020617;
 }
 
-/* ================= PREMIUM PORT + ANIMATION ================= */
-
-@keyframes portMove {
-  from { background-position: 0 0; }
-  to { background-position: -2200px 0; }
-}
-@keyframes waterGlow {
-  0% { opacity:.18 }
-  50% { opacity:.28 }
-  100% { opacity:.18 }
-}
-
+/* Water + port */
 .ship-fill::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(to top, rgba(2,6,23,.98), rgba(2,6,23,.65)),
-    url("https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1920&q=60");
-  background-size:cover;
-  background-position:center bottom;
-  animation:waterGlow 6s ease-in-out infinite;
-  z-index:1;
+content:"";
+position:absolute;inset:0;
+background:
+linear-gradient(to top,rgba(2,6,23,.98),rgba(2,6,23,.6)),
+url("https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1920&q=60");
+background-size:cover;
+background-position:center bottom;
+z-index:1;
 }
 
+/* Container silhouettes */
 .ship-fill::after{
-  content:"";
-  position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
-  height:38%;
-  background:url("https://svgshare.com/i/14kM.svg") repeat-x;
-  background-size:auto 100%;
-  animation:portMove 140s linear infinite;
-  opacity:.28;
-  z-index:2;
+content:"";
+position:absolute;bottom:0;left:0;right:0;
+height:40%;
+background:url("https://svgshare.com/i/14kM.svg") repeat-x;
+background-size:auto 100%;
+animation:portMove 160s linear infinite;
+opacity:.3;
+z-index:2;
 }
 
-.ship-fill > div{position:relative;z-index:3}
+/* ================= GLOWING TRADE ROUTES MAP ================= */
+.trade-map{
+position:absolute;
+inset:0;
+z-index:3;
+pointer-events:none;
+opacity:.85;
+}
+.trade-map svg{
+width:100%;
+height:100%;
+}
+.trade-route{
+fill:none;
+stroke:#22d3ee;
+stroke-width:1.5;
+stroke-dasharray:6 8;
+animation:routeMove 6s linear infinite, glowPulse 3s ease-in-out infinite;
+}
+@keyframes routeMove{
+to{stroke-dashoffset:-100}
+}
+
+/* Content layer */
+.ship-content{
+position:relative;
+z-index:4;
+min-height:150vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:40px;
+color:#fff;
+}
 
 /* Floating buttons always visible */
 a[href*="wa.me"],a[href*="download"]{
@@ -131,9 +154,17 @@ position:fixed;
 z-index:999999 !important;
 }
 
-/* Reduce animation on mobile */
+/* MOBILE */
 @media(max-width:768px){
+.trade-map{opacity:.4}
 .ship-fill::after{animation:none}
+}
+
+/* ================= MOBILE HEADER FIX ================= */
+@media(max-width:768px){
+header{height:auto;padding:14px 0}
+header nav{display:flex;flex-wrap:wrap;justify-content:center}
+.hero-overlay{padding:80px 16px}
 }
 </style>
 </head>
@@ -153,12 +184,10 @@ z-index:999999 !important;
 </nav>
 </header>
 
-<!-- HERO -->
 <section class="hero">
 <video autoplay muted loop playsinline>
 <source src="https://cdn.coverr.co/videos/coverr-container-ship-transport-5170/1080p.mp4">
 </video>
-
 <div class="hero-overlay">
 <div class="earth-wrap"><div class="earth"></div></div>
 <h1>Where Verified Buyers Meet Serious Suppliers</h1>
@@ -171,7 +200,6 @@ z-index:999999 !important;
 </div>
 </section>
 
-<!-- COUNTERS -->
 <section class="section center">
 <h2>Trusted by Exporters in 100+ Countries</h2>
 <div class="grid">
@@ -181,10 +209,23 @@ z-index:999999 !important;
 </div>
 </section>
 
-<!-- PREMIUM PORT SECTION -->
-<section class="ship-fill" style="position:relative;min-height:140vh;overflow:hidden;background:#020617">
-<div style="min-height:140vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;color:#fff">
-<h2 style="font-family:'Playfair Display',serif;font-size:3rem">Global Trade Never Stops</h2>
+<!-- ================= PREMIUM PORT + TRADE MAP ================= -->
+<section class="ship-fill">
+
+<!-- Trade routes map -->
+<div class="trade-map">
+<svg viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice">
+<path class="trade-route" d="M200,300 C350,150 650,150 800,220" />
+<path class="trade-route" d="M220,320 C380,260 600,260 760,300" />
+<path class="trade-route" d="M300,360 C450,200 550,200 700,260" />
+<path class="trade-route" d="M180,260 C420,120 620,120 860,180" />
+</svg>
+</div>
+
+<div class="ship-content">
+<h2 style="font-family:'Playfair Display',serif;font-size:3rem">
+Global Trade Never Stops
+</h2>
 <p style="max-width:760px;margin:20px auto;color:#cbd5f5;font-size:18px">
 APD Global Trade powers continuous cross-border commerce through verified buyers,
 trusted suppliers, and real global logistics.
@@ -208,18 +249,18 @@ trusted suppliers, and real global logistics.
 </p>
 </footer>
 
-<!-- WHATSAPP -->
+<!-- WhatsApp -->
 <a href="https://wa.me/919266418868" target="_blank"
-style="position:fixed;bottom:80px;right:20px;width:56px;height:56px;
+style="bottom:80px;right:20px;width:56px;height:56px;
 background:#25D366;color:#fff;border-radius:50%;
 display:flex;align-items:center;justify-content:center;
 font-size:28px;box-shadow:0 10px 25px rgba(0,0,0,.25);text-decoration:none">
 💬
 </a>
 
-<!-- DOWNLOAD APP -->
+<!-- Download -->
 <a href="/download-app.html" target="_blank"
-style="position:fixed;bottom:20px;right:20px;padding:14px 22px;
+style="bottom:20px;right:20px;padding:14px 22px;
 background:linear-gradient(135deg,#c9a44a,#e7cf88);
 color:#000;border-radius:999px;font-weight:600;
 text-decoration:none;box-shadow:0 12px 30px rgba(0,0,0,.35)">
