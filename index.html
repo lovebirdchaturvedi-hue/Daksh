@@ -150,7 +150,6 @@ header .logo{
 }
 @keyframes spin{to{background-position:-1400px}}
 
-/* TOGGLE */
 .toggle{
   margin-top:12px;
   text-align:center;
@@ -181,23 +180,40 @@ header .logo{
   position:relative;
   overflow:hidden;
   background:
-    linear-gradient(to top,rgba(2,6,23,.95),rgba(2,6,23,.4)),
+    linear-gradient(to top,rgba(2,6,23,.96),rgba(2,6,23,.55)),
     url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=60");
   background-size:cover;
+  background-position:center;
 }
 
-/* SHIP */
+/* HORIZON LINE */
+.ship-section::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:32%;
+  height:2px;
+  background:linear-gradient(to right,transparent,rgba(255,255,255,.2),transparent);
+  z-index:1;
+}
+
+/* SHIP (FIXED) */
 .ship{
   position:absolute;
-  bottom:22%;
-  left:-200px;
-  width:180px;
-  animation:shipMove 35s linear infinite;
+  bottom:32%;
+  left:-220px;
+  width:220px;
+  opacity:.95;
+  animation:shipMove 40s linear infinite;
+  z-index:2;
+  filter:drop-shadow(0 10px 20px rgba(0,0,0,.6));
 }
 @keyframes shipMove{
-  to{transform:translateX(120vw)}
+  to{transform:translateX(140vw)}
 }
 
+/* SHIP CONTENT */
 .ship-content{
   height:100%;
   display:flex;
@@ -205,7 +221,21 @@ header .logo{
   justify-content:center;
   text-align:center;
   position:relative;
-  z-index:2;
+  z-index:3;
+}
+.ship-box{
+  max-width:760px;
+  padding:40px;
+  background:rgba(2,6,23,.55);
+  backdrop-filter:blur(6px);
+  border-radius:20px;
+}
+.ship-box h2{
+  font-family:'Playfair Display',serif;
+  font-size:3rem;
+}
+.ship-box p{
+  color:#cbd5f5;
 }
 
 /* ================= FOOTER ================= */
@@ -286,12 +316,16 @@ a[href*="wa.me"],a[href*="download"]{
 
 <section class="ship-section">
   <img src="https://pngimg.com/uploads/ship/ship_PNG5436.png" class="ship">
+
   <div class="ship-content">
-    <div>
-      <h2 style="font-family:'Playfair Display',serif;font-size:3rem">
-        Global Trade Never Stops
-      </h2>
+    <div class="ship-box">
+      <h2>Global Trade Never Stops</h2>
       <p>Verified buyers. Real demand. Global logistics.</p>
+      <div style="margin-top:20px;line-height:1.9">
+        📧 info@apdglobaltradehub.com<br>
+        ☎ +1 (202) 780-1366<br>
+        💬 WhatsApp: +91 92664 18868
+      </div>
     </div>
   </div>
 </section>
