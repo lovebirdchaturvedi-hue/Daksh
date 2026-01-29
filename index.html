@@ -26,6 +26,7 @@ header{
   display:flex;
   align-items:center;
   justify-content:center;
+  position:relative;
 }
 header nav a{
   color:#e5e7eb;
@@ -34,11 +35,19 @@ header nav a{
   font-size:13px;
 }
 header nav a:hover{color:var(--gold-soft)}
+
+/* PREMIUM LOGO */
 header .logo{
   position:absolute;
   left:30px;
-  color:var(--gold);
-  font-weight:600;
+  font-family:'Playfair Display',serif;
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:.6px;
+  background:linear-gradient(135deg,#f5e7c6,#c9a44a);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 20px rgba(201,164,74,.35);
 }
 
 /* ================= HERO ================= */
@@ -47,7 +56,7 @@ header .logo{
   min-height:calc(100vh - 80px);
   overflow:hidden;
   background:
-    radial-gradient(circle at 50% 35%, rgba(201,164,74,.18), transparent 60%),
+    radial-gradient(circle at 50% 30%, rgba(201,164,74,.18), transparent 60%),
     linear-gradient(180deg,#0b1d36,#020617);
 }
 .hero::after{
@@ -58,88 +67,31 @@ header .logo{
   opacity:.15;
 }
 
+/* HERO CONTENT */
 .hero-overlay{
   position:relative;
   z-index:3;
-  min-height:calc(100vh - 80px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-
-/* ===== HERO GRID ===== */
-.hero-grid{
-  width:100%;
   max-width:1400px;
-  display:grid;
-  grid-template-columns:1fr 1.3fr 1fr;
-  align-items:center;
-  gap:40px;
-}
-
-/* ================= EARTH ================= */
-.earth-wrap{
-  position:relative;
-  width:260px;
-  height:260px;
   margin:auto;
-}
-.earth{
-  width:100%;
-  height:100%;
-  border-radius:50%;
-  background:url("https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg") repeat-x;
-  background-size:cover;
-  animation:spin 28s linear infinite;
-  box-shadow:
-    inset -40px 0 80px rgba(0,0,0,.85),
-    0 0 80px rgba(201,164,74,.6);
-}
-.earth.dim{
-  opacity:.75;
-}
-@keyframes spin{
-  to{background-position:-1400px}
+  padding:60px 20px;
 }
 
-/* ================= ROUTES + PLANE ================= */
-.route-layer{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-}
-.route{
-  fill:none;
-  stroke:#22d3ee;
-  stroke-width:1.5;
-  stroke-dasharray:6 8;
-  animation:routeMove 6s linear infinite;
-}
-@keyframes routeMove{
-  to{stroke-dashoffset:-120}
-}
-.plane{
-  fill:#22d3ee;
-  filter:drop-shadow(0 0 6px #22d3ee);
-}
-
-/* ================= CENTER CONTENT ================= */
-.center-content{
+/* ===== TEXT BLOCK (TOP) ===== */
+.hero-text{
   text-align:center;
 }
-.center-content h1{
+.hero-text h1{
   font-family:'Playfair Display',serif;
-  font-size:clamp(2.8rem,4vw,3.8rem);
-  margin:10px 0;
+  font-size:clamp(2.8rem,4vw,3.9rem);
+  margin-bottom:14px;
 }
-.center-content p{
-  max-width:720px;
+.hero-text p{
+  max-width:760px;
+  margin:0 auto 26px;
   color:#cbd5f5;
-  margin:14px auto 26px;
 }
 
-/* ================= BUTTONS ================= */
+/* BUTTONS */
 .btn{
   background:linear-gradient(135deg,var(--gold),var(--gold-soft));
   color:#000;
@@ -151,13 +103,13 @@ header .logo{
   display:inline-block;
 }
 
-/* ================= TRUST BADGES ================= */
+/* TRUST BADGES */
 .trust-badges{
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
   gap:12px;
-  margin-top:22px;
+  margin-top:26px;
 }
 .trust-badge{
   background:rgba(255,255,255,.06);
@@ -167,9 +119,9 @@ header .logo{
   font-size:13px;
 }
 
-/* ================= PREMIUM TITLE ================= */
+/* PREMIUM TITLE */
 .premium-title{
-  margin-top:30px;
+  margin-top:36px;
   font-family:'Playfair Display',serif;
   font-size:3rem;
   color:#f5e7c6;
@@ -182,71 +134,45 @@ header .logo{
   50%{opacity:1}
 }
 
-/* ================= SHIP SECTION ================= */
-.ship-fill{
-  position:relative;
-  min-height:110vh;
-  overflow:hidden;
-  background:
-    linear-gradient(to top,rgba(2,6,23,.95),rgba(2,6,23,.5)),
-    url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=60");
-  background-size:cover;
-  background-position:center;
-}
-.ship-content{
-  position:relative;
-  z-index:2;
-  min-height:110vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:40px;
-}
-
-/* ================= TESTIMONIALS ================= */
-.testimonials{
-  padding:100px 20px;
-  background:#020617;
-}
-.testimonial-grid{
-  max-width:1200px;
-  margin:auto;
+/* ===== VISUAL STRIP (BELOW TEXT) ===== */
+.visual-strip{
+  margin-top:70px;
   display:grid;
-  gap:30px;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-}
-.testimonial{
-  background:linear-gradient(180deg,#0b1d36,#020617);
-  border-radius:18px;
-  padding:30px;
+  grid-template-columns:1fr 1fr 1fr;
+  align-items:center;
 }
 
-/* ================= FOOTER ================= */
-footer{
-  background:#020617;
+/* EARTH */
+.earth-wrap{
+  width:240px;
+  height:240px;
+  margin:auto;
+}
+.earth{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  background:url("https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg") repeat-x;
+  background-size:cover;
+  animation:spin 28s linear infinite;
+  box-shadow:
+    inset -40px 0 80px rgba(0,0,0,.85),
+    0 0 70px rgba(201,164,74,.6);
+}
+.earth.dim{opacity:.75}
+@keyframes spin{to{background-position:-1400px}}
+
+/* ROUTE CENTER */
+.route-center{
   text-align:center;
-  padding:40px 20px;
-  color:#9ca3af;
-}
-footer a{
-  color:var(--gold);
-  text-decoration:none;
-  margin:0 6px;
-}
-
-/* FLOATING */
-a[href*="wa.me"],a[href*="download"]{
-  position:fixed;
-  z-index:999999;
+  opacity:.8;
 }
 
 /* MOBILE */
 @media(max-width:900px){
-  .hero-grid{
+  .visual-strip{
     grid-template-columns:1fr;
-    gap:60px;
+    gap:50px;
   }
 }
 </style>
@@ -255,92 +181,52 @@ a[href*="wa.me"],a[href*="download"]{
 <body>
 
 <header>
-<div class="logo">APD Global Trade</div>
-<nav>
-<a href="/">Home</a>
-<a href="/buyer-rfqs.html">Buyer RFQs</a>
-<a href="/membership.html">Membership</a>
-<a href="/suppliers.html">Suppliers</a>
-<a href="/contact.html">Contact</a>
-</nav>
+  <div class="logo">APD Global Trade</div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/buyer-rfqs.html">Buyer RFQs</a>
+    <a href="/membership.html">Membership</a>
+    <a href="/suppliers.html">Suppliers</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
 </header>
 
 <section class="hero">
-<div class="hero-overlay">
+  <div class="hero-overlay">
 
-<div class="hero-grid">
+    <!-- TEXT FIRST -->
+    <div class="hero-text">
+      <h1>Where Verified Buyers Meet Serious Suppliers</h1>
+      <p>High-intent global RFQs. Protected buyer contacts. Zero fake leads.</p>
 
-  <!-- LEFT EARTH -->
-  <div class="earth-wrap">
-    <div class="earth"></div>
-  </div>
+      <div>
+        <a href="/create-rfq.html" class="btn">Post Buyer RFQ</a>
+        <a href="/buyer-rfqs.html" class="btn">View Buyer RFQs</a>
+      </div>
 
-  <!-- CENTER -->
-  <div class="center-content">
-    <h1>Where Verified Buyers Meet Serious Suppliers</h1>
-    <p>High-intent global RFQs. Protected buyer contacts. Zero fake leads.</p>
+      <div class="trust-badges">
+        <div class="trust-badge">🔐 Verified Buyers</div>
+        <div class="trust-badge">🌍 100+ Countries</div>
+        <div class="trust-badge">🧾 KYC & IEC Checked</div>
+        <div class="trust-badge">🤝 Deals Closed</div>
+        <div class="trust-badge">🚫 No Brokers</div>
+        <div class="trust-badge">⚡ Real RFQs Only</div>
+      </div>
 
-    <div>
-      <a href="/create-rfq.html" class="btn">Post Buyer RFQ</a>
-      <a href="/buyer-rfqs.html" class="btn">View Buyer RFQs</a>
+      <div class="premium-title">BEST B2B TRADE PLATFORM</div>
     </div>
 
-    <div class="trust-badges">
-      <div class="trust-badge">🔐 Verified Buyers</div>
-      <div class="trust-badge">🌍 100+ Countries</div>
-      <div class="trust-badge">🧾 KYC & IEC Checked</div>
-      <div class="trust-badge">🤝 Deals Closed</div>
-      <div class="trust-badge">🚫 No Brokers</div>
-      <div class="trust-badge">⚡ Real RFQs Only</div>
+    <!-- VISUAL STRIP BELOW -->
+    <div class="visual-strip">
+      <div class="earth-wrap"><div class="earth"></div></div>
+      <div class="route-center">✈️ 🌍 🚢</div>
+      <div class="earth-wrap"><div class="earth dim"></div></div>
     </div>
 
-    <div class="premium-title">BEST B2B TRADE PLATFORM</div>
   </div>
-
-  <!-- RIGHT EARTH -->
-  <div class="earth-wrap">
-    <div class="earth dim"></div>
-  </div>
-
-</div>
-
-</div>
 </section>
 
-<section class="ship-fill">
-<div class="ship-content">
-<h2 style="font-family:'Playfair Display',serif;font-size:3rem">
-Global Trade Never Stops
-</h2>
-<p style="max-width:760px;color:#cbd5f5">
-Verified buyers. Real demand. Global logistics.
-</p>
-<div style="margin-top:28px;line-height:1.9">
-📧 info@apdglobaltradehub.com<br>
-☎ +1 (202) 780-1366<br>
-💬 WhatsApp: +91 92664 18868
-</div>
-</div>
-</section>
-
-<section class="testimonials">
-<h2 style="text-align:center;font-family:'Playfair Display',serif">
-Trusted by Global Traders
-</h2>
-<div class="testimonial-grid">
-<div class="testimonial">“Closed $1.2M export deal in 30 days.” — India</div>
-<div class="testimonial">“Only real buyers. No brokers.” — UAE</div>
-<div class="testimonial">“Long-term European contracts.” — Vietnam</div>
-</div>
-</section>
-
-<footer>
-<p style="color:var(--gold);font-weight:600">APD Global Trade</p>
-<a href="/terms.html">Terms</a> |
-<a href="/privacy.html">Privacy</a> |
-<a href="/disclaimer.html">Disclaimer</a>
-</footer>
-
+<!-- FLOATING -->
 <a href="https://wa.me/919266418868" target="_blank"
 style="bottom:80px;right:20px;width:56px;height:56px;
 background:#25D366;color:#fff;border-radius:50%;
