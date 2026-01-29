@@ -2,213 +2,188 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>APD Global Trade | Elite B2B Trade Platform</title>
+<title>APD Global Trade | Elite B2B Trade Facilitation Platform</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-html,body{
-  margin:0;
-  background:#020617;
-  color:#fff;
-  font-family:Inter,sans-serif;
-  overflow-x:hidden;
-}
-:root{
-  --gold:#c9a44a;
-  --cyan:#22d3ee;
-}
+html,body{margin:0;font-family:Inter,sans-serif;background:#020617;color:#fff}
+:root{--gold:#c9a44a;--gold-soft:#e7cf88;--cyan:#22d3ee}
 
 /* ================= HEADER ================= */
 header{
-  height:80px;
-  background:linear-gradient(180deg,#0b1d36,#071427);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
+height:80px;
+background:linear-gradient(180deg,#0b1d36,#071427);
+display:flex;flex-direction:column;align-items:center;justify-content:center
 }
 header .logo{color:var(--gold);font-weight:600}
-header nav a{
-  color:#e5e7eb;
-  margin:0 12px;
-  font-size:13px;
-  text-decoration:none;
-}
+header nav a{color:#e5e7eb;margin:0 12px;text-decoration:none;font-size:13px}
 
 /* ================= HERO ================= */
 .hero{
-  position:relative;
-  min-height:calc(100vh - 80px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 30%, rgba(201,164,74,.15), transparent 60%),
-    linear-gradient(180deg,#0b1d36,#020617);
+position:relative;
+min-height:calc(100vh - 80px);
+overflow:hidden;
+background:
+radial-gradient(circle at 50% 30%, rgba(201,164,74,.18), transparent 60%),
+linear-gradient(180deg,#0b1d36,#020617);
+}
+.hero::after{
+content:"";position:absolute;inset:0;
+background:url("https://www.transparenttextures.com/patterns/stardust.png");
+opacity:.18
 }
 .hero-overlay{
-  z-index:5;
-  text-align:center;
+position:relative;z-index:3;
+min-height:calc(100vh - 80px);
+display:flex;flex-direction:column;
+align-items:center;justify-content:center;
+text-align:center;padding:20px
 }
 
-/* ================= EARTH SYSTEM ================= */
-.earth-system{
-  position:relative;
-  width:360px;
-  height:360px;
-  margin:auto;
+/* ================= INTERACTIVE EARTH ================= */
+.earth-wrap{
+width:260px;
+height:260px;
+margin-bottom:30px;
+cursor:grab;
 }
+.earth-wrap:active{cursor:grabbing}
 
-/* EARTH */
 .earth{
-  width:100%;
-  height:100%;
-  border-radius:50%;
-  background:url("https://upload.wikimedia.org/wikipedia/commons/8/83/Earth_at_night_2012.jpg")
-    center/cover no-repeat;
-  box-shadow:
-    inset -60px 0 120px rgba(0,0,0,.95),
-    0 0 100px rgba(34,211,238,.35);
-  animation:earthSpin 90s linear infinite;
-  position:relative;
-  z-index:3;
+width:100%;
+height:100%;
+border-radius:50%;
+background:url("https://upload.wikimedia.org/wikipedia/commons/8/83/Earth_at_night_2012.jpg") repeat-x;
+background-size:cover;
+box-shadow:
+inset -40px 0 80px rgba(0,0,0,.85),
+0 0 80px rgba(34,211,238,.4);
+animation:spin 28s linear infinite;
+transform:scale(var(--zoom,1));
 }
-@keyframes earthSpin{
-  to{transform:rotate(360deg)}
-}
+@keyframes spin{to{background-position:-1400px}}
 
-/* GLOWING PORTS */
+/* glowing ports */
 .port{
-  position:absolute;
-  width:8px;
-  height:8px;
-  background:var(--cyan);
-  border-radius:50%;
-  box-shadow:0 0 14px var(--cyan),0 0 28px var(--cyan);
-  animation:portPulse 3s infinite;
-  z-index:6;
+position:absolute;
+width:8px;height:8px;
+background:var(--cyan);
+border-radius:50%;
+box-shadow:0 0 14px var(--cyan);
+animation:pulse 3s infinite;
 }
-@keyframes portPulse{
-  50%{transform:scale(2);opacity:.4}
-}
+@keyframes pulse{50%{opacity:.3;transform:scale(2)}}
 
-/* ================= ORBIT SYSTEM ================= */
-.orbit{
-  position:absolute;
-  inset:-40px;
-  border-radius:50%;
-  animation:orbitRotate linear infinite;
-  pointer-events:none;
-}
-.orbit.o1{animation-duration:6s}
-.orbit.o2{animation-duration:9s}
-.orbit.o3{animation-duration:12s}
+/* ================= TEXT ================= */
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,4vw,3.6rem)}
+.hero p{max-width:720px;color:#cbd5f5}
 
-@keyframes orbitRotate{
-  to{transform:rotate(360deg)}
-}
-
-/* PLANES */
-.plane{
-  position:absolute;
-  top:50%;
-  left:100%;
-  transform:translate(-50%,-50%);
-  width:48px;
-  filter:drop-shadow(0 0 6px var(--cyan));
-}
-
-/* ================= HERO TEXT ================= */
-.hero h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2.4rem,4vw,3.6rem);
-  margin-top:40px;
-}
-.hero p{color:#cbd5f5}
-
-/* BUTTONS */
+/* ================= BUTTONS ================= */
 .btn{
-  background:linear-gradient(135deg,var(--gold),#e7cf88);
-  color:#000;
-  padding:14px 36px;
-  border-radius:999px;
-  text-decoration:none;
-  font-weight:600;
-  margin:6px;
-  display:inline-block;
+background:linear-gradient(135deg,var(--gold),var(--gold-soft));
+color:#000;padding:14px 36px;border-radius:999px;
+font-weight:600;text-decoration:none;margin:6px;display:inline-block
 }
 
-/* TRUST */
+/* ================= TRUST BADGES ================= */
 .trust-badges{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:14px;
-  margin-top:22px;
+display:flex;flex-wrap:wrap;justify-content:center;
+gap:14px;margin-top:22px
 }
 .trust-badge{
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.14);
-  padding:10px 18px;
-  border-radius:999px;
-  font-size:13px;
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.14);
+padding:10px 18px;border-radius:999px;
+font-size:13px;backdrop-filter:blur(6px)
 }
 
-/* ================= SEA VIDEO ================= */
+/* ================= TICKER ================= */
+.ticker{
+border-top:1px solid rgba(255,255,255,.1);
+border-bottom:1px solid rgba(255,255,255,.1);
+overflow:hidden;white-space:nowrap
+}
+.ticker-track{
+display:inline-block;padding:14px 0;
+animation:ticker 40s linear infinite
+}
+@keyframes ticker{to{transform:translateX(-100%)}}
+
+/* ================= SEA (FIXED) ================= */
 .ship-fill{
-  position:relative;
-  min-height:120vh;
-  overflow:hidden;
+position:relative;
+min-height:120vh;
+overflow:hidden;
 }
-.ocean-video{
-  position:absolute;
-  inset:0;
-  object-fit:cover;
-  width:100%;
-  height:100%;
-  opacity:.35;
+.ocean-parallax{
+position:absolute;inset:-5%;
+background:url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=60");
+background-size:cover;
+background-position:center;
+opacity:.35;
 }
+.ai-heatmap{
+position:absolute;inset:0;
+background:
+radial-gradient(circle at 30% 55%, rgba(34,211,238,.35), transparent 18%),
+radial-gradient(circle at 60% 50%, rgba(251,191,36,.35), transparent 20%);
+animation:heat 6s infinite;
+}
+@keyframes heat{50%{opacity:.8}}
 
-/* SHIP */
-.ship{
-  position:absolute;
-  bottom:22%;
-  left:-300px;
-  width:260px;
-  animation:shipMove 14s linear infinite;
-  z-index:3;
+.ship-fill::after{
+content:"";position:absolute;bottom:0;left:0;right:0;height:35%;
+background:url("https://svgshare.com/i/14kM.svg") repeat-x;
+opacity:.35
 }
-@keyframes shipMove{
-  0%{left:-300px;opacity:0}
-  15%{opacity:.85}
-  100%{left:110%}
-}
-
 .ship-content{
-  position:relative;
-  z-index:4;
-  min-height:120vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
+position:relative;z-index:4;
+min-height:120vh;
+display:flex;flex-direction:column;
+align-items:center;justify-content:center;
+text-align:center;padding:40px
 }
 
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:40px;
-  color:#9ca3af;
+/* ================= PANELS ================= */
+.ship-panels{
+position:absolute;
+left:0;right:0;bottom:120px;
+display:flex;
+justify-content:space-between;
+padding:0 40px;
+z-index:3;
 }
+.ship-panel{
+width:300px;
+background:rgba(11,29,54,.55);
+border-radius:18px;
+padding:22px;
+border:1px solid rgba(255,255,255,.15)
+}
+
+/* ================= TESTIMONIALS ================= */
+.testimonials{padding:100px 20px}
+.testimonial-grid{
+max-width:1200px;margin:auto;
+display:grid;gap:30px;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr))
+}
+.testimonial{
+background:linear-gradient(180deg,#0b1d36,#020617);
+border-radius:18px;padding:30px
+}
+
+/* ================= FOOTER ================= */
+footer{text-align:center;padding:40px 20px;color:#9ca3af}
 footer a{color:var(--gold)}
 
-/* MOBILE */
+a[href*="wa.me"],a[href*="download"]{position:fixed;z-index:999999}
+
+/* mobile safety */
 @media(max-width:900px){
-  .orbit,.plane,.port,.ship{display:none}
+.ship-panels,.port{display:none}
 }
 </style>
 </head>
@@ -228,27 +203,11 @@ footer a{color:var(--gold)}
 <section class="hero">
 <div class="hero-overlay">
 
-<div class="earth-system">
-
-  <!-- ORBITS -->
-  <div class="orbit o1">
-    <img class="plane" src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Cargo_aircraft_icon.png">
-  </div>
-  <div class="orbit o2">
-    <img class="plane" src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Cargo_aircraft_icon.png">
-  </div>
-  <div class="orbit o3">
-    <img class="plane" src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Cargo_aircraft_icon.png">
-  </div>
-
-  <!-- EARTH -->
-  <div class="earth"></div>
-
-  <!-- PORTS -->
-  <div class="port" style="top:48%;left:62%"></div>
-  <div class="port" style="top:56%;left:44%"></div>
-  <div class="port" style="top:42%;left:72%"></div>
-
+<div class="earth-wrap" id="earthWrap">
+<div class="earth" id="earth"></div>
+<div class="port" style="top:45%;left:60%"></div>
+<div class="port" style="top:55%;left:40%"></div>
+<div class="port" style="top:38%;left:72%"></div>
 </div>
 
 <h1>Where Verified Buyers Meet Serious Suppliers</h1>
@@ -271,13 +230,15 @@ footer a{color:var(--gold)}
 </div>
 </section>
 
-<section class="ship-fill">
-<video class="ocean-video" autoplay muted loop playsinline>
-  <source src="https://cdn.coverr.co/videos/coverr-ocean-waves-5450/1080p.mp4" type="video/mp4">
-</video>
+<div class="ticker">
+<div class="ticker-track">
+🇮🇳 Rice exporter closed $1.2M · 🇦🇪 Sugar RFQ fulfilled · 🇺🇸 Spices imported
+</div>
+</div>
 
-<img class="ship"
-src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Container_ship_silhouette.png">
+<section class="ship-fill">
+<div class="ocean-parallax"></div>
+<div class="ai-heatmap"></div>
 
 <div class="ship-content">
 <h2>Global Trade Never Stops</h2>
@@ -290,11 +251,53 @@ src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Container_ship_silhouet
 </div>
 </section>
 
+<section class="testimonials">
+<h2 style="text-align:center">Trusted by Global Traders</h2>
+<div class="testimonial-grid">
+<div class="testimonial">“Closed $1.2M export deal in 30 days.” — India</div>
+<div class="testimonial">“Only real buyers. No brokers.” — UAE</div>
+<div class="testimonial">“Long-term European contracts.” — Vietnam</div>
+</div>
+</section>
+
 <footer>
-<p>APD Global Trade</p>
+<p style="color:var(--gold)">APD Global Trade</p>
 <a href="/terms.html">Terms</a> |
-<a href="/privacy.html">Privacy</a>
+<a href="/privacy.html">Privacy</a> |
+<a href="/disclaimer.html">Disclaimer</a>
 </footer>
+
+<a href="https://wa.me/919266418868" target="_blank"
+style="bottom:80px;right:20px;width:56px;height:56px;
+background:#25D366;border-radius:50%;display:flex;
+align-items:center;justify-content:center;font-size:28px">💬</a>
+
+<a href="/download-app.html" target="_blank"
+style="bottom:20px;right:20px;padding:14px 22px;
+background:linear-gradient(135deg,#c9a44a,#e7cf88);
+border-radius:999px;font-weight:600">📲 Download App</a>
+
+<script>
+const earth=document.getElementById("earth");
+const wrap=document.getElementById("earthWrap");
+let dragging=false,startX=0,offset=0,zoom=1;
+
+wrap.addEventListener("mousedown",e=>{
+dragging=true;startX=e.clientX;earth.style.animation="none";
+});
+window.addEventListener("mouseup",()=>{dragging=false;earth.style.animation="spin 28s linear infinite"});
+window.addEventListener("mousemove",e=>{
+if(!dragging)return;
+offset+=(e.clientX-startX)/4;
+startX=e.clientX;
+earth.style.backgroundPosition=`${offset}px 0`;
+});
+wrap.addEventListener("wheel",e=>{
+e.preventDefault();
+zoom=Math.min(1.4,Math.max(.8,zoom+(e.deltaY*-0.001)));
+earth.style.setProperty("--zoom",zoom);
+});
+</script>
 
 </body>
 </html>
