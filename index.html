@@ -8,132 +8,220 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-html,body{margin:0;font-family:Inter,sans-serif;background:#020617;color:#fff}
-:root{--gold:#c9a44a;--gold-soft:#e7cf88}
+html,body{
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:#020617;
+  color:#fff;
+}
+:root{
+  --gold:#c9a44a;
+  --gold-soft:#e7cf88;
+}
 
 /* ================= HEADER ================= */
 header{
-height:80px;
-background:linear-gradient(180deg,#0b1d36,#071427);
-display:flex;flex-direction:column;align-items:center;justify-content:center
+  height:80px;
+  background:linear-gradient(180deg,#0b1d36,#071427);
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
-header .logo{color:var(--gold);font-weight:600}
-header nav a{color:#e5e7eb;margin:0 14px;text-decoration:none;font-size:13px}
+header nav a{
+  color:#e5e7eb;
+  margin:0 14px;
+  text-decoration:none;
+  font-size:13px;
+}
+header nav a:hover{color:var(--gold-soft)}
+header .logo{
+  position:absolute;
+  left:30px;
+  color:var(--gold);
+  font-weight:600;
+}
 
 /* ================= HERO ================= */
 .hero{
-position:relative;
-min-height:calc(100vh - 80px);
-overflow:hidden;
-background:
-radial-gradient(circle at 50% 30%, rgba(201,164,74,.15), transparent 60%),
-linear-gradient(180deg,#0b1d36,#020617);
+  position:relative;
+  min-height:calc(100vh - 80px);
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(201,164,74,.18), transparent 60%),
+    linear-gradient(180deg,#0b1d36,#020617);
 }
 .hero::after{
-content:"";position:absolute;inset:0;
-background:url("https://www.transparenttextures.com/patterns/stardust.png");
-opacity:.15;
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url("https://www.transparenttextures.com/patterns/stardust.png");
+  opacity:.15;
 }
 
-/* === HERO GRID === */
-.hero-grid{
-position:relative;
-z-index:3;
-min-height:calc(100vh - 80px);
-display:grid;
-grid-template-columns:1fr 1.2fr 1fr;
-align-items:center;
-padding:0 6vw;
+.hero-overlay{
+  position:relative;
+  z-index:3;
+  min-height:calc(100vh - 80px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
 }
 
 /* ================= EARTH ================= */
-.globe{
-width:260px;height:260px;
-border-radius:50%;
-background:url("https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg") repeat-x;
-background-size:cover;
-animation:spin 28s linear infinite;
-box-shadow:inset -40px 0 80px rgba(0,0,0,.85),
-0 0 80px rgba(201,164,74,.6);
-margin:auto;
+.earth-wrap{
+  position:relative;
+  width:280px;
+  height:280px;
+  margin-bottom:30px;
 }
-.small-globe{
-width:180px;height:180px;
-opacity:.75;
+.earth{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  background:url("https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg") repeat-x;
+  background-size:cover;
+  animation:spin 28s linear infinite;
+  box-shadow:
+    inset -40px 0 80px rgba(0,0,0,.85),
+    0 0 80px rgba(201,164,74,.6);
 }
-@keyframes spin{to{background-position:-1400px}}
+@keyframes spin{
+  to{background-position:-1400px}
+}
 
-/* ================= CENTER PREMIUM TEXT ================= */
-.premium-center{
-text-align:center;
-position:relative;
+/* ================= ROUTES + PLANE ================= */
+.route-layer{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
 }
-.premium-center h1{
-font-family:'Playfair Display',serif;
-font-size:clamp(2.8rem,4vw,4rem);
-background:linear-gradient(135deg,#fff,var(--gold-soft));
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-animation:glow 4s ease-in-out infinite;
+.route{
+  fill:none;
+  stroke:#22d3ee;
+  stroke-width:1.5;
+  stroke-dasharray:6 8;
+  animation:routeMove 6s linear infinite;
 }
-@keyframes glow{
-0%,100%{text-shadow:0 0 20px rgba(201,164,74,.3)}
-50%{text-shadow:0 0 45px rgba(201,164,74,.8)}
+@keyframes routeMove{
+  to{stroke-dashoffset:-120}
 }
-.premium-center p{
-max-width:600px;
-margin:16px auto 26px;
-color:#cbd5f5;
+.plane{
+  fill:#22d3ee;
+  filter:drop-shadow(0 0 6px #22d3ee);
+}
+
+/* ================= TEXT ================= */
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.6rem,4vw,3.8rem);
+  margin:10px 0;
+}
+.hero p{
+  max-width:720px;
+  color:#cbd5f5;
+  margin:14px auto 26px;
 }
 
 /* ================= BUTTONS ================= */
 .btn{
-background:linear-gradient(135deg,var(--gold),var(--gold-soft));
-color:#000;padding:14px 36px;border-radius:999px;
-font-weight:600;text-decoration:none;margin:6px;display:inline-block
+  background:linear-gradient(135deg,var(--gold),var(--gold-soft));
+  color:#000;
+  padding:14px 36px;
+  border-radius:999px;
+  font-weight:600;
+  text-decoration:none;
+  margin:6px;
+  display:inline-block;
+}
+
+/* ================= TRUST BADGES ================= */
+.trust-badges{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+  margin-top:22px;
+}
+.trust-badge{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.14);
+  padding:10px 18px;
+  border-radius:999px;
+  font-size:13px;
+}
+
+/* ================= PREMIUM TITLE ================= */
+.premium-title{
+  margin-top:60px;
+  font-family:'Playfair Display',serif;
+  font-size:3rem;
+  color:#f5e7c6;
+  letter-spacing:2px;
+  text-shadow:0 0 25px rgba(201,164,74,.45);
 }
 
 /* ================= SHIP SECTION ================= */
 .ship-fill{
-position:relative;min-height:120vh;overflow:hidden;background:#020617
+  position:relative;
+  min-height:110vh;
+  overflow:hidden;
+  background:
+    linear-gradient(to top,rgba(2,6,23,.95),rgba(2,6,23,.5)),
+    url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=60");
+  background-size:cover;
+  background-position:center;
 }
-.ship-fill::before{
-content:"";position:absolute;inset:0;
-background:
-linear-gradient(to top,rgba(2,6,23,.98),rgba(2,6,23,.6)),
-url("https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1920&q=60");
-background-size:cover;background-position:center bottom;
-}
-
-/* SHIP (CSS – never breaks) */
-.ship{
-position:absolute;
-bottom:22%;
-left:-25%;
-width:200px;height:42px;
-background:linear-gradient(180deg,#eee,#aaa);
-clip-path:polygon(0 60%,85% 60%,100% 100%,0 100%);
-animation:sail 22s linear infinite;
-opacity:.9;
-}
-@keyframes sail{
-from{left:-25%}
-to{left:120%}
-}
-
 .ship-content{
-position:relative;z-index:3;
-min-height:120vh;
-display:flex;flex-direction:column;
-align-items:center;justify-content:center;
-text-align:center;padding:40px
+  position:relative;
+  z-index:2;
+  min-height:110vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:40px;
+}
+
+/* ================= TESTIMONIALS ================= */
+.testimonials{
+  padding:100px 20px;
+  background:#020617;
+}
+.testimonial-grid{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  gap:30px;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+}
+.testimonial{
+  background:linear-gradient(180deg,#0b1d36,#020617);
+  border-radius:18px;
+  padding:30px;
 }
 
 /* ================= FOOTER ================= */
-footer{text-align:center;padding:40px 20px;color:#9ca3af}
-footer a{color:var(--gold)}
+footer{
+  background:#020617;
+  text-align:center;
+  padding:40px 20px;
+  color:#9ca3af;
+}
+footer a{
+  color:var(--gold);
+  text-decoration:none;
+  margin:0 6px;
+}
 
-a[href*="wa.me"],a[href*="download"]{position:fixed;z-index:999999}
+/* FLOATING */
+a[href*="wa.me"],a[href*="download"]{
+  position:fixed;
+  z-index:999999;
+}
 </style>
 </head>
 
@@ -151,38 +239,49 @@ a[href*="wa.me"],a[href*="download"]{position:fixed;z-index:999999}
 </header>
 
 <section class="hero">
-<div class="hero-grid">
+<div class="hero-overlay">
 
-<!-- LEFT -->
-<div>
-<div class="globe small-globe"></div>
+<div class="earth-wrap">
+  <div class="earth"></div>
+
+  <!-- ROUTES + PLANE -->
+  <svg class="route-layer" viewBox="0 0 280 280">
+    <path class="route" d="M40,160 C100,40 180,40 240,120"/>
+    <polygon class="plane" points="238,120 228,116 230,120 228,124"/>
+  </svg>
 </div>
 
-<!-- CENTER -->
-<div class="premium-center">
-<div class="globe"></div>
-<h1>BEST B2B TRADE PLATFORM</h1>
-<p>Where verified buyers meet serious suppliers worldwide.</p>
+<h1>Where Verified Buyers Meet Serious Suppliers</h1>
+<p>High-intent global RFQs. Protected buyer contacts. Zero fake leads.</p>
+
 <div>
 <a href="/create-rfq.html" class="btn">Post Buyer RFQ</a>
 <a href="/buyer-rfqs.html" class="btn">View Buyer RFQs</a>
 </div>
+
+<div class="trust-badges">
+<div class="trust-badge">🔐 Verified Buyers</div>
+<div class="trust-badge">🌍 100+ Countries</div>
+<div class="trust-badge">🧾 KYC & IEC Checked</div>
+<div class="trust-badge">🤝 Deals Closed</div>
+<div class="trust-badge">🚫 No Brokers</div>
+<div class="trust-badge">⚡ Real RFQs Only</div>
 </div>
 
-<!-- RIGHT -->
-<div>
-<div class="globe small-globe"></div>
-</div>
+<div class="premium-title">BEST B2B TRADE PLATFORM</div>
 
 </div>
 </section>
 
 <section class="ship-fill">
-<div class="ship"></div>
 <div class="ship-content">
-<h2>Global Trade Never Stops</h2>
-<p>Verified buyers. Real demand. Global logistics.</p>
-<div>
+<h2 style="font-family:'Playfair Display',serif;font-size:3rem">
+Global Trade Never Stops
+</h2>
+<p style="max-width:760px;color:#cbd5f5">
+Verified buyers. Real demand. Global logistics.
+</p>
+<div style="margin-top:28px;line-height:1.9">
 📧 info@apdglobaltradehub.com<br>
 ☎ +1 (202) 780-1366<br>
 💬 WhatsApp: +91 92664 18868
@@ -190,22 +289,34 @@ a[href*="wa.me"],a[href*="download"]{position:fixed;z-index:999999}
 </div>
 </section>
 
+<section class="testimonials">
+<h2 style="text-align:center;font-family:'Playfair Display',serif">
+Trusted by Global Traders
+</h2>
+<div class="testimonial-grid">
+<div class="testimonial">“Closed $1.2M export deal in 30 days.” — India</div>
+<div class="testimonial">“Only real buyers. No brokers.” — UAE</div>
+<div class="testimonial">“Long-term European contracts.” — Vietnam</div>
+</div>
+</section>
+
 <footer>
-<p style="color:var(--gold)">APD Global Trade</p>
+<p style="color:var(--gold);font-weight:600">APD Global Trade</p>
 <a href="/terms.html">Terms</a> |
-<a href="/privacy.html">Privacy</a>
+<a href="/privacy.html">Privacy</a> |
+<a href="/disclaimer.html">Disclaimer</a>
 </footer>
 
 <a href="https://wa.me/919266418868" target="_blank"
 style="bottom:80px;right:20px;width:56px;height:56px;
-background:#25D366;border-radius:50%;
+background:#25D366;color:#fff;border-radius:50%;
 display:flex;align-items:center;justify-content:center;
-font-size:28px;color:#fff;text-decoration:none">💬</a>
+font-size:28px;text-decoration:none">💬</a>
 
 <a href="/download-app.html" target="_blank"
 style="bottom:20px;right:20px;padding:14px 22px;
 background:linear-gradient(135deg,#c9a44a,#e7cf88);
-border-radius:999px;font-weight:600;color:#000;
+color:#000;border-radius:999px;font-weight:600;
 text-decoration:none">📲 Download App</a>
 
 </body>
