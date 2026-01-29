@@ -9,12 +9,38 @@
 
 <style>
 body{margin:0;font-family:Inter,sans-serif;background:#f5f7fb;color:#0f172a}
+
+/* HEADER */
 header{
-  background:#071427;color:#c9a44a;
-  padding:18px 20px;text-align:center
+  background:#071427;
+  color:#c9a44a;
+  padding:16px 20px;
 }
+.header-inner{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo{
+  font-weight:600;
+  font-size:18px;
+}
+.nav a{
+  color:#e5e7eb;
+  text-decoration:none;
+  margin-left:20px;
+  font-size:14px;
+  font-weight:500;
+}
+.nav a:hover{color:#c9a44a}
+
+/* CONTENT */
 .container{
-  max-width:900px;margin:40px auto;padding:0 16px
+  max-width:900px;
+  margin:40px auto;
+  padding:0 16px
 }
 .search-box{
   margin:20px 0;
@@ -29,43 +55,64 @@ header{
   font-size:14px;
 }
 .card{
-  background:#fff;border-radius:16px;
-  padding:22px;margin-bottom:18px;
+  background:#fff;
+  border-radius:16px;
+  padding:22px;
+  margin-bottom:18px;
   box-shadow:0 2px 10px rgba(0,0,0,.06)
 }
 .locked{
-  color:#991b1b;font-weight:600;margin-top:8px
+  color:#991b1b;
+  font-weight:600;
+  margin-top:8px
 }
 .cta{
-  display:inline-block;margin-top:14px;
-  background:#020617;color:#fff;
-  padding:10px 20px;border-radius:999px;
-  text-decoration:none;font-size:14px;font-weight:600
+  display:inline-block;
+  margin-top:14px;
+  background:#020617;
+  color:#fff;
+  padding:10px 20px;
+  border-radius:999px;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:600
 }
+
+/* FOOTER */
 footer{
-  background:#020617;color:#9ca3af;
-  text-align:center;padding:40px 20px;font-size:14px
+  background:#020617;
+  color:#9ca3af;
+  text-align:center;
+  padding:40px 20px;
+  font-size:14px
 }
 footer a{color:#c9a44a;text-decoration:none}
+
+/* MOBILE */
+@media(max-width:600px){
+  .nav a{margin-left:14px;font-size:13px}
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <div>APD Global Trade</div>
+  <div class="header-inner">
+    <div class="logo">APD Global Trade</div>
+    <nav class="nav">
+      <a href="/index.html">HOME</a>
+      <a href="/submit-rfq.html">SUBMIT RFQ</a>
+    </nav>
+  </div>
 </header>
 
 <div class="container">
   <h1>Live Buyer RFQs</h1>
   <p>Verified buying requirements from global buyers.</p>
 
-  <!-- 🔍 SEARCH -->
   <div class="search-box">
-    <input
-      id="searchInput"
-      placeholder="Search by product, country, destination…"
-    >
+    <input id="searchInput" placeholder="Search by product, country, destination…">
   </div>
 
   <div id="rfqList">Loading RFQs…</div>
@@ -135,30 +182,24 @@ function renderRFQs(list){
 async function loadRFQs(){
   try{
     const snap = await getDocs(collection(db,"rfqs"));
-
     if(snap.empty){
       rfqList.innerHTML = "<p>No RFQs available yet.</p>";
       return;
     }
-
     allRFQs = snap.docs.map(d => d.data());
     renderRFQs(allRFQs);
-
   }catch(err){
-    console.error(err);
     rfqList.innerHTML = "<p>Error loading RFQs.</p>";
   }
 }
 
 searchInput.addEventListener("input", ()=>{
   const q = searchInput.value.toLowerCase();
-
   const filtered = allRFQs.filter(r =>
     (r.product || "").toLowerCase().includes(q) ||
     (r.deliveryPort || "").toLowerCase().includes(q) ||
     (r.quantity || "").toLowerCase().includes(q)
   );
-
   renderRFQs(filtered);
 });
 
