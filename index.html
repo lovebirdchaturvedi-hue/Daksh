@@ -11,7 +11,7 @@
 html,body{margin:0;font-family:Inter,sans-serif;background:#020617;color:#fff}
 :root{--gold:#c9a44a;--gold-soft:#e7cf88;--cyan:#22d3ee}
 
-/* ================= HEADER ================= */
+/* HEADER */
 header{
 height:80px;
 background:linear-gradient(180deg,#0b1d36,#071427);
@@ -20,7 +20,7 @@ display:flex;flex-direction:column;align-items:center;justify-content:center
 header .logo{color:var(--gold);font-weight:600}
 header nav a{color:#e5e7eb;margin:0 12px;text-decoration:none;font-size:13px}
 
-/* ================= HERO ================= */
+/* HERO */
 .hero{
 position:relative;
 min-height:calc(100vh - 80px);
@@ -42,30 +42,50 @@ align-items:center;justify-content:center;
 text-align:center;padding:20px
 }
 
-/* ================= INTERACTIVE EARTH ================= */
+/* ================= EARTH ================= */
 .earth-wrap{
-width:260px;
-height:260px;
-margin-bottom:30px;
+width:260px;height:260px;margin-bottom:12px;
+position:relative;
 cursor:grab;
 }
 .earth-wrap:active{cursor:grabbing}
 
 .earth{
-width:100%;
-height:100%;
+width:100%;height:100%;
 border-radius:50%;
-background:url("https://upload.wikimedia.org/wikipedia/commons/8/83/Earth_at_night_2012.jpg") repeat-x;
+background:url("https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg") repeat-x;
 background-size:cover;
 box-shadow:
 inset -40px 0 80px rgba(0,0,0,.85),
-0 0 80px rgba(34,211,238,.4);
+0 0 80px rgba(34,211,238,.35);
 animation:spin 28s linear infinite;
 transform:scale(var(--zoom,1));
 }
+
+/* night mode */
+.earth.night{
+background-image:url("https://upload.wikimedia.org/wikipedia/commons/8/83/Earth_at_night_2012.jpg");
+}
+
 @keyframes spin{to{background-position:-1400px}}
 
-/* glowing ports */
+/* SVG ROUTES (LOCKED TO EARTH) */
+.earth-routes{
+position:absolute;inset:0;
+border-radius:50%;
+pointer-events:none;
+}
+.route{
+fill:none;
+stroke:var(--cyan);
+stroke-width:1.4;
+stroke-dasharray:6 8;
+animation:routeMove 6s linear infinite;
+filter:drop-shadow(0 0 6px var(--cyan));
+}
+@keyframes routeMove{to{stroke-dashoffset:-120}}
+
+/* PORT DOTS */
 .port{
 position:absolute;
 width:8px;height:8px;
@@ -76,18 +96,30 @@ animation:pulse 3s infinite;
 }
 @keyframes pulse{50%{opacity:.3;transform:scale(2)}}
 
-/* ================= TEXT ================= */
+/* TOGGLE */
+.toggle{
+margin-top:12px;
+background:rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.18);
+padding:8px 16px;
+border-radius:999px;
+font-size:13px;
+cursor:pointer;
+user-select:none;
+}
+
+/* TEXT */
 .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,4vw,3.6rem)}
 .hero p{max-width:720px;color:#cbd5f5}
 
-/* ================= BUTTONS ================= */
+/* BUTTONS */
 .btn{
 background:linear-gradient(135deg,var(--gold),var(--gold-soft));
 color:#000;padding:14px 36px;border-radius:999px;
 font-weight:600;text-decoration:none;margin:6px;display:inline-block
 }
 
-/* ================= TRUST BADGES ================= */
+/* TRUST BADGES */
 .trust-badges{
 display:flex;flex-wrap:wrap;justify-content:center;
 gap:14px;margin-top:22px
@@ -99,7 +131,7 @@ padding:10px 18px;border-radius:999px;
 font-size:13px;backdrop-filter:blur(6px)
 }
 
-/* ================= TICKER ================= */
+/* TICKER */
 .ticker{
 border-top:1px solid rgba(255,255,255,.1);
 border-bottom:1px solid rgba(255,255,255,.1);
@@ -111,28 +143,16 @@ animation:ticker 40s linear infinite
 }
 @keyframes ticker{to{transform:translateX(-100%)}}
 
-/* ================= SEA (FIXED) ================= */
+/* SEA */
 .ship-fill{
-position:relative;
-min-height:120vh;
-overflow:hidden;
+position:relative;min-height:120vh;overflow:hidden
 }
 .ocean-parallax{
 position:absolute;inset:-5%;
 background:url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=60");
 background-size:cover;
-background-position:center;
-opacity:.35;
+opacity:.35
 }
-.ai-heatmap{
-position:absolute;inset:0;
-background:
-radial-gradient(circle at 30% 55%, rgba(34,211,238,.35), transparent 18%),
-radial-gradient(circle at 60% 50%, rgba(251,191,36,.35), transparent 20%);
-animation:heat 6s infinite;
-}
-@keyframes heat{50%{opacity:.8}}
-
 .ship-fill::after{
 content:"";position:absolute;bottom:0;left:0;right:0;height:35%;
 background:url("https://svgshare.com/i/14kM.svg") repeat-x;
@@ -146,24 +166,7 @@ align-items:center;justify-content:center;
 text-align:center;padding:40px
 }
 
-/* ================= PANELS ================= */
-.ship-panels{
-position:absolute;
-left:0;right:0;bottom:120px;
-display:flex;
-justify-content:space-between;
-padding:0 40px;
-z-index:3;
-}
-.ship-panel{
-width:300px;
-background:rgba(11,29,54,.55);
-border-radius:18px;
-padding:22px;
-border:1px solid rgba(255,255,255,.15)
-}
-
-/* ================= TESTIMONIALS ================= */
+/* TESTIMONIALS */
 .testimonials{padding:100px 20px}
 .testimonial-grid{
 max-width:1200px;margin:auto;
@@ -175,15 +178,12 @@ background:linear-gradient(180deg,#0b1d36,#020617);
 border-radius:18px;padding:30px
 }
 
-/* ================= FOOTER ================= */
+/* FOOTER */
 footer{text-align:center;padding:40px 20px;color:#9ca3af}
 footer a{color:var(--gold)}
 
-a[href*="wa.me"],a[href*="download"]{position:fixed;z-index:999999}
-
-/* mobile safety */
 @media(max-width:900px){
-.ship-panels,.port{display:none}
+.port,.earth-routes{display:none}
 }
 </style>
 </head>
@@ -204,11 +204,21 @@ a[href*="wa.me"],a[href*="download"]{position:fixed;z-index:999999}
 <div class="hero-overlay">
 
 <div class="earth-wrap" id="earthWrap">
+
 <div class="earth" id="earth"></div>
-<div class="port" style="top:45%;left:60%"></div>
-<div class="port" style="top:55%;left:40%"></div>
-<div class="port" style="top:38%;left:72%"></div>
+
+<svg class="earth-routes" viewBox="0 0 260 260">
+<path class="route" d="M30 160 C90 60 170 60 230 110"/>
+<path class="route" d="M50 120 C120 40 180 100 210 150"/>
+</svg>
+
+<div class="port" style="top:45%;left:58%"></div>
+<div class="port" style="top:55%;left:42%"></div>
+<div class="port" style="top:38%;left:70%"></div>
+
 </div>
+
+<div class="toggle" id="toggle">🌙 Switch to Night</div>
 
 <h1>Where Verified Buyers Meet Serious Suppliers</h1>
 <p>High-intent global RFQs. Zero fake leads.</p>
@@ -238,16 +248,9 @@ a[href*="wa.me"],a[href*="download"]{position:fixed;z-index:999999}
 
 <section class="ship-fill">
 <div class="ocean-parallax"></div>
-<div class="ai-heatmap"></div>
-
 <div class="ship-content">
 <h2>Global Trade Never Stops</h2>
 <p>Verified buyers. Real demand. Global logistics.</p>
-<div>
-📧 info@apdglobaltradehub.com<br>
-☎ +1 (202) 780-1366<br>
-💬 WhatsApp: +91 92664 18868
-</div>
 </div>
 </section>
 
@@ -267,25 +270,20 @@ a[href*="wa.me"],a[href*="download"]{position:fixed;z-index:999999}
 <a href="/disclaimer.html">Disclaimer</a>
 </footer>
 
-<a href="https://wa.me/919266418868" target="_blank"
-style="bottom:80px;right:20px;width:56px;height:56px;
-background:#25D366;border-radius:50%;display:flex;
-align-items:center;justify-content:center;font-size:28px">💬</a>
-
-<a href="/download-app.html" target="_blank"
-style="bottom:20px;right:20px;padding:14px 22px;
-background:linear-gradient(135deg,#c9a44a,#e7cf88);
-border-radius:999px;font-weight:600">📲 Download App</a>
-
 <script>
 const earth=document.getElementById("earth");
 const wrap=document.getElementById("earthWrap");
-let dragging=false,startX=0,offset=0,zoom=1;
+const toggle=document.getElementById("toggle");
+
+let dragging=false,startX=0,offset=0,zoom=1,night=false;
 
 wrap.addEventListener("mousedown",e=>{
 dragging=true;startX=e.clientX;earth.style.animation="none";
 });
-window.addEventListener("mouseup",()=>{dragging=false;earth.style.animation="spin 28s linear infinite"});
+window.addEventListener("mouseup",()=>{
+dragging=false;
+earth.style.animation="spin 28s linear infinite";
+});
 window.addEventListener("mousemove",e=>{
 if(!dragging)return;
 offset+=(e.clientX-startX)/4;
@@ -297,6 +295,12 @@ e.preventDefault();
 zoom=Math.min(1.4,Math.max(.8,zoom+(e.deltaY*-0.001)));
 earth.style.setProperty("--zoom",zoom);
 });
+
+toggle.onclick=()=>{
+night=!night;
+earth.classList.toggle("night",night);
+toggle.textContent=night?"☀️ Switch to Day":"🌙 Switch to Night";
+};
 </script>
 
 </body>
