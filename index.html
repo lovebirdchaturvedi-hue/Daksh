@@ -15,7 +15,7 @@ html,body{margin:0;font-family:Inter,sans-serif;background:#020617;color:#fff}
 header{
 height:80px;
 background:linear-gradient(180deg,#0b1d36,#071427);
-display:flex;flex-direction:column;align-items:center;justify-content:center
+display:flex;align-items:center;justify-content:center;flex-direction:column
 }
 header .logo{color:var(--gold);font-weight:600}
 header nav a{color:#e5e7eb;margin:0 12px;text-decoration:none;font-size:13px}
@@ -44,32 +44,28 @@ text-align:center;padding:20px
 
 /* ================= EARTH ================= */
 .earth-wrap{
-width:260px;height:260px;margin-bottom:12px;
+width:260px;height:260px;
+margin-bottom:14px;
 position:relative;
 cursor:grab;
 }
-.earth-wrap:active{cursor:grabbing}
-
 .earth{
 width:100%;height:100%;
 border-radius:50%;
 background:url("https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg") repeat-x;
 background-size:cover;
+animation:spin 28s linear infinite;
 box-shadow:
 inset -40px 0 80px rgba(0,0,0,.85),
 0 0 80px rgba(34,211,238,.35);
-animation:spin 28s linear infinite;
 transform:scale(var(--zoom,1));
 }
-
-/* night mode */
 .earth.night{
 background-image:url("https://upload.wikimedia.org/wikipedia/commons/8/83/Earth_at_night_2012.jpg");
 }
-
 @keyframes spin{to{background-position:-1400px}}
 
-/* SVG ROUTES (LOCKED TO EARTH) */
+/* ROUTES */
 .earth-routes{
 position:absolute;inset:0;
 border-radius:50%;
@@ -85,7 +81,26 @@ filter:drop-shadow(0 0 6px var(--cyan));
 }
 @keyframes routeMove{to{stroke-dashoffset:-120}}
 
-/* PORT DOTS */
+/* PLANES */
+.plane{
+fill:#fff;
+filter:drop-shadow(0 0 6px var(--cyan));
+animation:fly 10s linear infinite;
+transform-origin:center;
+}
+.plane.delay1{animation-delay:0s}
+.plane.delay2{animation-delay:3s}
+.plane.delay3{animation-delay:6s}
+
+/* plane motion */
+@keyframes fly{
+0%{offset-distance:0%;opacity:0}
+10%{opacity:1}
+90%{opacity:1}
+100%{offset-distance:100%;opacity:0}
+}
+
+/* PORTS */
 .port{
 position:absolute;
 width:8px;height:8px;
@@ -98,14 +113,13 @@ animation:pulse 3s infinite;
 
 /* TOGGLE */
 .toggle{
-margin-top:12px;
+margin-top:10px;
 background:rgba(255,255,255,.08);
 border:1px solid rgba(255,255,255,.18);
 padding:8px 16px;
 border-radius:999px;
 font-size:13px;
 cursor:pointer;
-user-select:none;
 }
 
 /* TEXT */
@@ -119,7 +133,7 @@ color:#000;padding:14px 36px;border-radius:999px;
 font-weight:600;text-decoration:none;margin:6px;display:inline-block
 }
 
-/* TRUST BADGES */
+/* TRUST */
 .trust-badges{
 display:flex;flex-wrap:wrap;justify-content:center;
 gap:14px;margin-top:22px
@@ -128,7 +142,7 @@ gap:14px;margin-top:22px
 background:rgba(255,255,255,.06);
 border:1px solid rgba(255,255,255,.14);
 padding:10px 18px;border-radius:999px;
-font-size:13px;backdrop-filter:blur(6px)
+font-size:13px
 }
 
 /* TICKER */
@@ -143,20 +157,27 @@ animation:ticker 40s linear infinite
 }
 @keyframes ticker{to{transform:translateX(-100%)}}
 
-/* SEA */
+/* SEA + SHIP */
 .ship-fill{
 position:relative;min-height:120vh;overflow:hidden
 }
 .ocean-parallax{
 position:absolute;inset:-5%;
 background:url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=60");
-background-size:cover;
-opacity:.35
+background-size:cover;opacity:.35
 }
-.ship-fill::after{
-content:"";position:absolute;bottom:0;left:0;right:0;height:35%;
-background:url("https://svgshare.com/i/14kM.svg") repeat-x;
-opacity:.35
+.ship{
+position:absolute;
+bottom:18%;
+left:-20%;
+width:240px;
+opacity:.8;
+animation:shipMove 12s linear infinite;
+}
+@keyframes shipMove{
+0%{left:-30%}
+50%{left:40%}
+100%{left:110%}
 }
 .ship-content{
 position:relative;z-index:4;
@@ -183,7 +204,7 @@ footer{text-align:center;padding:40px 20px;color:#9ca3af}
 footer a{color:var(--gold)}
 
 @media(max-width:900px){
-.port,.earth-routes{display:none}
+.earth-routes,.plane,.ship{display:none}
 }
 </style>
 </head>
@@ -204,18 +225,24 @@ footer a{color:var(--gold)}
 <div class="hero-overlay">
 
 <div class="earth-wrap" id="earthWrap">
-
 <div class="earth" id="earth"></div>
 
 <svg class="earth-routes" viewBox="0 0 260 260">
-<path class="route" d="M30 160 C90 60 170 60 230 110"/>
-<path class="route" d="M50 120 C120 40 180 100 210 150"/>
+<path id="p1" class="route" d="M30 160 C90 60 170 60 230 110"/>
+<path id="p2" class="route" d="M40 120 C120 40 180 100 210 150"/>
+<path id="p3" class="route" d="M60 180 C130 90 160 90 200 130"/>
+
+<polygon class="plane delay1" points="0,-4 8,0 0,4"
+style="offset-path:path('M30 160 C90 60 170 60 230 110')"/>
+<polygon class="plane delay2" points="0,-4 8,0 0,4"
+style="offset-path:path('M40 120 C120 40 180 100 210 150')"/>
+<polygon class="plane delay3" points="0,-4 8,0 0,4"
+style="offset-path:path('M60 180 C130 90 160 90 200 130')"/>
 </svg>
 
-<div class="port" style="top:45%;left:58%"></div>
-<div class="port" style="top:55%;left:42%"></div>
-<div class="port" style="top:38%;left:70%"></div>
-
+<div class="port" style="top:46%;left:56%"></div>
+<div class="port" style="top:54%;left:42%"></div>
+<div class="port" style="top:38%;left:68%"></div>
 </div>
 
 <div class="toggle" id="toggle">🌙 Switch to Night</div>
@@ -248,6 +275,7 @@ footer a{color:var(--gold)}
 
 <section class="ship-fill">
 <div class="ocean-parallax"></div>
+<img class="ship" src="https://pngimg.com/uploads/cargo_ship/cargo_ship_PNG24.png">
 <div class="ship-content">
 <h2>Global Trade Never Stops</h2>
 <p>Verified buyers. Real demand. Global logistics.</p>
@@ -272,30 +300,8 @@ footer a{color:var(--gold)}
 
 <script>
 const earth=document.getElementById("earth");
-const wrap=document.getElementById("earthWrap");
 const toggle=document.getElementById("toggle");
-
-let dragging=false,startX=0,offset=0,zoom=1,night=false;
-
-wrap.addEventListener("mousedown",e=>{
-dragging=true;startX=e.clientX;earth.style.animation="none";
-});
-window.addEventListener("mouseup",()=>{
-dragging=false;
-earth.style.animation="spin 28s linear infinite";
-});
-window.addEventListener("mousemove",e=>{
-if(!dragging)return;
-offset+=(e.clientX-startX)/4;
-startX=e.clientX;
-earth.style.backgroundPosition=`${offset}px 0`;
-});
-wrap.addEventListener("wheel",e=>{
-e.preventDefault();
-zoom=Math.min(1.4,Math.max(.8,zoom+(e.deltaY*-0.001)));
-earth.style.setProperty("--zoom",zoom);
-});
-
+let night=false;
 toggle.onclick=()=>{
 night=!night;
 earth.classList.toggle("night",night);
