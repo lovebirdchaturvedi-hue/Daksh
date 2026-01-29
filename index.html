@@ -18,7 +18,7 @@ background:linear-gradient(180deg,#0b1d36,#071427);
 display:flex;flex-direction:column;align-items:center;justify-content:center
 }
 header .logo{color:var(--gold);font-weight:600}
-header nav a{color:#e5e7eb;margin:0 12px;text-decoration:none;font-size:13px}
+header nav a{color:#e5e7eb;margin:0 14px;text-decoration:none;font-size:13px}
 
 /* ================= HERO ================= */
 .hero{
@@ -34,144 +34,105 @@ content:"";position:absolute;inset:0;
 background:url("https://www.transparenttextures.com/patterns/stardust.png");
 opacity:.15;
 }
-.hero-overlay{
-position:relative;z-index:4;
+
+/* === HERO GRID === */
+.hero-grid{
+position:relative;
+z-index:3;
 min-height:calc(100vh - 80px);
-display:flex;flex-direction:column;
-align-items:center;justify-content:center;
-text-align:center;padding:20px;
+display:grid;
+grid-template-columns:1fr 1.2fr 1fr;
+align-items:center;
+padding:0 6vw;
 }
 
 /* ================= EARTH ================= */
-.earth-wrap{
-position:relative;
-width:300px;
-height:300px;
-margin-bottom:30px;
-}
-.earth{
-width:100%;
-height:100%;
+.globe{
+width:260px;height:260px;
 border-radius:50%;
 background:url("https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg") repeat-x;
 background-size:cover;
 animation:spin 28s linear infinite;
-box-shadow:inset -50px 0 90px rgba(0,0,0,.9),0 0 90px rgba(201,164,74,.6)
+box-shadow:inset -40px 0 80px rgba(0,0,0,.85),
+0 0 80px rgba(201,164,74,.6);
+margin:auto;
+}
+.small-globe{
+width:180px;height:180px;
+opacity:.75;
 }
 @keyframes spin{to{background-position:-1400px}}
 
-/* ================= PLANE ROUTES ================= */
-.routes{
-position:absolute;
-inset:-40px;
-pointer-events:none;
-z-index:3;
+/* ================= CENTER PREMIUM TEXT ================= */
+.premium-center{
+text-align:center;
+position:relative;
 }
-.routes svg{width:100%;height:100%}
-.route{
-fill:none;
-stroke:#22d3ee;
-stroke-width:1.5;
-stroke-dasharray:6 8;
-animation:routeMove 6s linear infinite;
-opacity:.8;
-}
-@keyframes routeMove{to{stroke-dashoffset:-120}}
-
-.plane{
-fill:#fff;
-offset-path: path("M150,200 C300,60 500,60 650,200");
-animation:fly 7s linear infinite;
-}
-.plane.two{
-offset-path: path("M180,220 C350,100 520,120 620,240");
-animation-duration:9s;
-}
-@keyframes fly{
-from{offset-distance:0%}
-to{offset-distance:100%}
-}
-
-/* ================= TEXT ================= */
-.hero h1{
+.premium-center h1{
 font-family:'Playfair Display',serif;
-font-size:clamp(2.4rem,4vw,3.6rem);
+font-size:clamp(2.8rem,4vw,4rem);
+background:linear-gradient(135deg,#fff,var(--gold-soft));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:glow 4s ease-in-out infinite;
 }
-.hero p{max-width:720px;color:#cbd5f5}
+@keyframes glow{
+0%,100%{text-shadow:0 0 20px rgba(201,164,74,.3)}
+50%{text-shadow:0 0 45px rgba(201,164,74,.8)}
+}
+.premium-center p{
+max-width:600px;
+margin:16px auto 26px;
+color:#cbd5f5;
+}
 
 /* ================= BUTTONS ================= */
 .btn{
 background:linear-gradient(135deg,var(--gold),var(--gold-soft));
 color:#000;padding:14px 36px;border-radius:999px;
-font-weight:600;text-decoration:none;margin:6px;
-display:inline-block;
+font-weight:600;text-decoration:none;margin:6px;display:inline-block
 }
 
-/* ================= SEA ================= */
+/* ================= SHIP SECTION ================= */
 .ship-fill{
-position:relative;
-min-height:120vh;
-overflow:hidden;
-background:#020617;
+position:relative;min-height:120vh;overflow:hidden;background:#020617
 }
 .ship-fill::before{
-content:"";
-position:absolute;inset:0;
+content:"";position:absolute;inset:0;
 background:
-linear-gradient(to top,rgba(2,6,23,.98),rgba(2,6,23,.5)),
+linear-gradient(to top,rgba(2,6,23,.98),rgba(2,6,23,.6)),
 url("https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1920&q=60");
-background-size:cover;
-background-position:center bottom;
+background-size:cover;background-position:center bottom;
 }
 
-/* ===== SHIP (SVG – NEVER BROKEN) ===== */
+/* SHIP (CSS – never breaks) */
 .ship{
 position:absolute;
 bottom:22%;
-left:-20%;
-width:180px;
-height:40px;
-background:linear-gradient(180deg,#eee,#999);
+left:-25%;
+width:200px;height:42px;
+background:linear-gradient(180deg,#eee,#aaa);
 clip-path:polygon(0 60%,85% 60%,100% 100%,0 100%);
-animation:sail 20s linear infinite;
+animation:sail 22s linear infinite;
 opacity:.9;
 }
 @keyframes sail{
-from{left:-20%}
+from{left:-25%}
 to{left:120%}
 }
 
 .ship-content{
-position:relative;
-z-index:3;
+position:relative;z-index:3;
 min-height:120vh;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:40px;
-}
-
-/* ================= TESTIMONIALS ================= */
-.testimonials{
-padding:100px 20px;
-}
-.testimonial-grid{
-max-width:1200px;margin:auto;
-display:grid;gap:30px;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr))
-}
-.testimonial{
-background:linear-gradient(180deg,#0b1d36,#020617);
-border-radius:18px;padding:30px
+display:flex;flex-direction:column;
+align-items:center;justify-content:center;
+text-align:center;padding:40px
 }
 
 /* ================= FOOTER ================= */
 footer{text-align:center;padding:40px 20px;color:#9ca3af}
 footer a{color:var(--gold)}
 
-/* FLOATING */
 a[href*="wa.me"],a[href*="download"]{position:fixed;z-index:999999}
 </style>
 </head>
@@ -190,34 +151,34 @@ a[href*="wa.me"],a[href*="download"]{position:fixed;z-index:999999}
 </header>
 
 <section class="hero">
-<div class="earth-wrap">
+<div class="hero-grid">
 
-<div class="earth"></div>
-
-<div class="routes">
-<svg viewBox="0 0 800 400">
-<path class="route" d="M150,200 C300,60 500,60 650,200"/>
-<path class="route" d="M180,220 C350,100 520,120 620,240"/>
-<polygon class="plane" points="0,0 10,4 0,8 2,4"/>
-<polygon class="plane two" points="0,0 10,4 0,8 2,4"/>
-</svg>
+<!-- LEFT -->
+<div>
+<div class="globe small-globe"></div>
 </div>
 
-</div>
-
-<div class="hero-overlay">
-<h1>Where Verified Buyers Meet Serious Suppliers</h1>
-<p>High-intent global RFQs. Zero fake leads.</p>
+<!-- CENTER -->
+<div class="premium-center">
+<div class="globe"></div>
+<h1>BEST B2B TRADE PLATFORM</h1>
+<p>Where verified buyers meet serious suppliers worldwide.</p>
 <div>
 <a href="/create-rfq.html" class="btn">Post Buyer RFQ</a>
 <a href="/buyer-rfqs.html" class="btn">View Buyer RFQs</a>
 </div>
 </div>
+
+<!-- RIGHT -->
+<div>
+<div class="globe small-globe"></div>
+</div>
+
+</div>
 </section>
 
 <section class="ship-fill">
 <div class="ship"></div>
-
 <div class="ship-content">
 <h2>Global Trade Never Stops</h2>
 <p>Verified buyers. Real demand. Global logistics.</p>
@@ -226,15 +187,6 @@ a[href*="wa.me"],a[href*="download"]{position:fixed;z-index:999999}
 ☎ +1 (202) 780-1366<br>
 💬 WhatsApp: +91 92664 18868
 </div>
-</div>
-</section>
-
-<section class="testimonials">
-<h2 style="text-align:center">Trusted by Global Traders</h2>
-<div class="testimonial-grid">
-<div class="testimonial">“Closed $1.2M export deal in 30 days.” — India</div>
-<div class="testimonial">“Only real buyers. No brokers.” — UAE</div>
-<div class="testimonial">“Long-term European contracts.” — Vietnam</div>
 </div>
 </section>
 
