@@ -5,180 +5,224 @@
 <title>APD Global Trade | Elite B2B Trade Facilitation Platform</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#020617">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-html,body{margin:0;font-family:Inter,sans-serif;background:#020617;color:#fff}
-:root{--gold:#c9a44a;--gold-soft:#e7cf88}
+html,body{
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:#020617;
+  color:#fff;
+}
+:root{
+  --gold:#c9a44a;
+  --cyan:#22d3ee;
+}
 
 /* ================= HEADER ================= */
 header{
-height:80px;
-background:linear-gradient(180deg,#0b1d36,#071427);
-display:flex;flex-direction:column;align-items:center;justify-content:center
+  height:80px;
+  background:linear-gradient(180deg,#0b1d36,#071427);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
 }
 header .logo{color:var(--gold);font-weight:600}
-header nav a{color:#e5e7eb;margin:0 12px;text-decoration:none;font-size:13px}
-header nav a:hover{color:var(--gold-soft)}
+header nav a{
+  color:#e5e7eb;
+  margin:0 12px;
+  text-decoration:none;
+  font-size:13px;
+}
 
 /* ================= HERO ================= */
 .hero{
-position:relative;
-min-height:calc(100vh - 80px);
-overflow:hidden;
-background:
-radial-gradient(circle at 50% 30%, rgba(201,164,74,.18), transparent 60%),
-linear-gradient(180deg,#0b1d36,#020617);
-}
-.hero::after{
-content:"";position:absolute;inset:0;
-background:url("https://www.transparenttextures.com/patterns/stardust.png");
-opacity:.18
+  position:relative;
+  min-height:calc(100vh - 80px);
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(201,164,74,.18), transparent 60%),
+    linear-gradient(180deg,#0b1d36,#020617);
 }
 .hero-overlay{
-position:relative;z-index:3;
-min-height:calc(100vh - 80px);
-display:flex;flex-direction:column;
-align-items:center;justify-content:center;
-text-align:center;padding:20px
+  position:relative;
+  z-index:5;
+  min-height:calc(100vh - 80px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
 }
 
-/* ================= EARTH + FLIGHTS ================= */
+/* ================= EARTH SYSTEM ================= */
 .earth-wrap{
-position:relative;
-width:320px;
-height:320px;
-margin-bottom:40px;
+  position:relative;
+  width:320px;
+  height:320px;
+  margin-bottom:40px;
 }
 
 .earth{
-width:100%;
-height:100%;
-border-radius:50%;
-background:url("https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg") repeat-x;
-background-size:cover;
-animation:spin 28s linear infinite;
-box-shadow:
-inset -40px 0 80px rgba(0,0,0,.85),
-0 0 80px rgba(201,164,74,.6);
-z-index:2;
-position:relative;
-}
-@keyframes spin{to{background-position:-1400px}}
-
-/* PLANES */
-.freight{
-position:absolute;
-top:50%;
-transform:translateY(-50%);
-width:220px;
-z-index:3;
-opacity:.95;
-}
-.freight.left{left:-200px}
-.freight.right{
-right:-200px;
-transform:translateY(-50%) scaleX(-1);
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  background:
+    url("https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg")
+    center/cover no-repeat;
+  animation:earthSpin 40s linear infinite;
+  box-shadow:
+    inset -40px 0 80px rgba(0,0,0,.9),
+    0 0 80px rgba(201,164,74,.6);
+  position:relative;
+  z-index:3;
 }
 
-/* FLIGHT PATHS */
-.flight-paths{
-position:absolute;
-inset:0;
-z-index:1;
-pointer-events:none;
+@keyframes earthSpin{
+  to{transform:rotate(360deg)}
+}
+
+/* 🌍 PORTS */
+.port{
+  position:absolute;
+  width:8px;height:8px;
+  background:var(--cyan);
+  border-radius:50%;
+  box-shadow:0 0 12px var(--cyan),0 0 24px var(--cyan);
+  animation:pulse 2.5s infinite;
+  z-index:6;
+}
+@keyframes pulse{
+  50%{transform:scale(1.8);opacity:.4}
+}
+
+/* ✈️ FLIGHT PATH */
+.flight-layer{
+  position:absolute;
+  inset:0;
+  z-index:4;
+  pointer-events:none;
 }
 
 .flight-path{
-fill:none;
-stroke:#22d3ee;
-stroke-width:2;
-stroke-dasharray:8 12;
-animation:fly 6s linear infinite;
-filter:drop-shadow(0 0 6px #22d3ee);
+  fill:none;
+  stroke:var(--cyan);
+  stroke-width:2;
+  stroke-dasharray:10 14;
+  animation:pathMove 6s linear infinite;
+  filter:drop-shadow(0 0 6px var(--cyan));
+}
+@keyframes pathMove{
+  to{stroke-dashoffset:-200}
 }
 
-.flight-path.alt{
-animation-delay:3s;
-stroke:#fbbf24;
+/* ✈️ PLANE */
+.plane{
+  position:absolute;
+  width:70px;
+  offset-path:path("M40,170 C160,40 360,40 480,170");
+  offset-rotate:auto;
+  animation:planeFly 6s linear infinite;
+  z-index:7;
 }
-
-@keyframes fly{
-to{stroke-dashoffset:-220}
+@keyframes planeFly{
+  to{offset-distance:100%}
 }
 
 /* ================= TEXT ================= */
 .hero h1{
-font-family:'Playfair Display',serif;
-font-size:clamp(2.4rem,4vw,3.6rem)
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.4rem,4vw,3.6rem);
 }
-.hero p{max-width:720px;color:#cbd5f5}
+.hero p{
+  max-width:720px;
+  color:#cbd5f5;
+}
 
 /* ================= BUTTONS ================= */
 .btn{
-background:linear-gradient(135deg,var(--gold),var(--gold-soft));
-color:#000;padding:14px 36px;border-radius:999px;
-font-weight:600;text-decoration:none;margin:6px;display:inline-block
+  background:linear-gradient(135deg,#c9a44a,#e7cf88);
+  color:#000;
+  padding:14px 36px;
+  border-radius:999px;
+  font-weight:600;
+  text-decoration:none;
+  margin:6px;
+  display:inline-block;
 }
 
-/* ================= TRUST BADGES ================= */
+/* ================= TRUST ================= */
 .trust-badges{
-display:flex;flex-wrap:wrap;justify-content:center;
-gap:14px;margin-top:22px
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:14px;
+  margin-top:22px;
 }
 .trust-badge{
-background:rgba(255,255,255,.06);
-border:1px solid rgba(255,255,255,.14);
-padding:10px 18px;border-radius:999px;
-font-size:13px;backdrop-filter:blur(6px)
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.14);
+  padding:10px 18px;
+  border-radius:999px;
+  font-size:13px;
 }
 
-/* ================= TICKER ================= */
-.ticker{
-border-top:1px solid rgba(255,255,255,.1);
-border-bottom:1px solid rgba(255,255,255,.1);
-overflow:hidden;white-space:nowrap
-}
-.ticker-track{
-display:inline-block;padding:14px 0;
-animation:ticker 40s linear infinite
-}
-@keyframes ticker{to{transform:translateX(-100%)}}
-
-/* ================= SEA SECTION ================= */
+/* ================= SEA ================= */
 .ship-fill{
-position:relative;
-min-height:120vh;
-overflow:hidden
+  position:relative;
+  min-height:120vh;
+  overflow:hidden;
 }
-.ocean-parallax{
-position:absolute;inset:0;
-background:url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=60");
-background-size:120% 120%;
-animation:ocean 45s linear infinite;
-opacity:.35
+.ocean{
+  position:absolute;
+  inset:0;
+  background:url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=60");
+  background-size:120% 120%;
+  animation:oceanMove 45s linear infinite;
+  opacity:.35;
 }
-@keyframes ocean{to{background-position:100% 50%}}
+@keyframes oceanMove{
+  to{background-position:100% 50%}
+}
+
+/* 🚢 SHIP */
+.ship{
+  position:absolute;
+  bottom:22%;
+  left:-300px;
+  width:260px;
+  opacity:.85;
+  animation:shipMove 40s linear infinite;
+}
+@keyframes shipMove{
+  to{left:110%}
+}
 
 .ship-content{
-position:relative;z-index:3;
-min-height:120vh;
-display:flex;flex-direction:column;
-align-items:center;justify-content:center;
-text-align:center;padding:40px
+  position:relative;
+  z-index:4;
+  min-height:120vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:40px;
 }
 
 /* ================= FOOTER ================= */
-footer{text-align:center;padding:40px 20px;color:#9ca3af}
+footer{
+  text-align:center;
+  padding:40px;
+  color:#9ca3af;
+}
 footer a{color:var(--gold)}
-
-a[href*="wa.me"],a[href*="download"]{position:fixed;z-index:999999}
 
 /* MOBILE SAFETY */
 @media(max-width:900px){
-.freight,.flight-paths{display:none}
+  .plane,.flight-layer,.port,.ship{display:none}
 }
 </style>
 </head>
@@ -192,30 +236,29 @@ a[href*="wa.me"],a[href*="download"]{position:fixed;z-index:999999}
 <a href="/buyer-rfqs.html">Buyer RFQs</a>
 <a href="/membership.html">Membership</a>
 <a href="/suppliers.html">Suppliers</a>
-<a href="/supplier-login.html">Supplier Login</a>
-<a href="/register-supplier.html">Register</a>
-<a href="/contact.html">Contact</a>
 </nav>
 </header>
 
-<!-- ================= HERO ================= -->
 <section class="hero">
 <div class="hero-overlay">
 
 <div class="earth-wrap">
 
-<!-- FLIGHT PATHS -->
-<svg class="flight-paths" viewBox="0 0 600 300" preserveAspectRatio="none">
-<path class="flight-path" d="M40,160 C180,40 420,40 560,160"/>
-<path class="flight-path alt" d="M40,170 C200,260 400,260 560,170"/>
+<!-- FLIGHT -->
+<svg class="flight-layer" viewBox="0 0 520 320">
+  <path class="flight-path" d="M40,170 C160,40 360,40 480,170"/>
 </svg>
 
-<!-- PLANES -->
-<img src="cargo-left.png" class="freight left" alt="Cargo Aircraft">
-<img src="cargo-right.png" class="freight right" alt="Cargo Aircraft">
+<img class="plane"
+src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Cargo_aircraft_icon.png"
+alt="Cargo Plane">
 
-<!-- EARTH -->
 <div class="earth"></div>
+
+<!-- PORTS -->
+<div class="port" style="top:46%;left:60%"></div>
+<div class="port" style="top:55%;left:42%"></div>
+<div class="port" style="top:48%;left:72%"></div>
 
 </div>
 
@@ -239,15 +282,12 @@ a[href*="wa.me"],a[href*="download"]{position:fixed;z-index:999999}
 </div>
 </section>
 
-<div class="ticker">
-<div class="ticker-track">
-🇮🇳 Rice exporter closed $1.2M · 🇦🇪 Sugar RFQ fulfilled · 🇺🇸 Spices imported
-</div>
-</div>
-
-<!-- ================= SEA ================= -->
 <section class="ship-fill">
-<div class="ocean-parallax"></div>
+<div class="ocean"></div>
+
+<img class="ship"
+src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Container_ship_silhouette.png"
+alt="Cargo Ship">
 
 <div class="ship-content">
 <h2>Global Trade Never Stops</h2>
@@ -261,21 +301,10 @@ a[href*="wa.me"],a[href*="download"]{position:fixed;z-index:999999}
 </section>
 
 <footer>
-<p style="color:var(--gold)">APD Global Trade</p>
+<p>APD Global Trade</p>
 <a href="/terms.html">Terms</a> |
-<a href="/privacy.html">Privacy</a> |
-<a href="/disclaimer.html">Disclaimer</a>
+<a href="/privacy.html">Privacy</a>
 </footer>
-
-<a href="https://wa.me/919266418868" target="_blank"
-style="bottom:80px;right:20px;width:56px;height:56px;
-background:#25D366;border-radius:50%;display:flex;
-align-items:center;justify-content:center;font-size:28px">💬</a>
-
-<a href="/download-app.html" target="_blank"
-style="bottom:20px;right:20px;padding:14px 22px;
-background:linear-gradient(135deg,#c9a44a,#e7cf88);
-border-radius:999px;font-weight:600">📲 Download App</a>
 
 </body>
 </html>
