@@ -26,15 +26,7 @@ header{
   display:flex;
   align-items:center;
   justify-content:center;
-  position:sticky;
-  top:0;
-  z-index:999;
-}
-header .logo{
-  position:absolute;
-  left:30px;
-  color:var(--gold);
-  font-weight:600;
+  position:relative;
 }
 header nav a{
   color:#e5e7eb;
@@ -43,16 +35,23 @@ header nav a{
   font-size:13px;
 }
 header nav a:hover{color:var(--gold-soft)}
+header .logo{
+  position:absolute;
+  left:30px;
+  font-family:'Playfair Display',serif;
+  font-size:18px;
+  font-weight:700;
+  background:linear-gradient(135deg,#f5e7c6,#c9a44a);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 18px rgba(201,164,74,.4);
+}
 
 /* ================= HERO ================= */
 .hero{
-  min-height:calc(100vh - 80px);
-  display:grid;
-  grid-template-columns:1fr 1.2fr 1fr;
-  align-items:center;
-  padding:40px;
+  min-height:100vh;
   background:
-    radial-gradient(circle at center, rgba(201,164,74,.18), transparent 65%),
+    radial-gradient(circle at 50% 30%, rgba(201,164,74,.18), transparent 60%),
     linear-gradient(180deg,#0b1d36,#020617);
   position:relative;
   overflow:hidden;
@@ -65,41 +64,25 @@ header nav a:hover{color:var(--gold-soft)}
   opacity:.15;
 }
 
-/* ================= EARTH ================= */
-.earth-wrap{
-  width:260px;
-  height:260px;
+.hero-inner{
+  max-width:1400px;
   margin:auto;
+  padding:80px 20px 40px;
   position:relative;
-}
-.earth{
-  width:100%;
-  height:100%;
-  border-radius:50%;
-  background:url("https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg") repeat-x;
-  background-size:cover;
-  animation:spin 28s linear infinite;
-  box-shadow:inset -40px 0 80px rgba(0,0,0,.85),0 0 60px rgba(201,164,74,.5);
-}
-.night{
-  filter:brightness(.6) saturate(1.2);
-}
-@keyframes spin{
-  to{background-position:-1400px}
-}
-
-/* ================= CENTER ================= */
-.center{
-  text-align:center;
   z-index:2;
 }
-.center h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2.6rem,4vw,3.8rem);
+
+/* ================= TEXT ================= */
+.hero-text{
+  text-align:center;
 }
-.center p{
-  max-width:720px;
-  margin:16px auto 28px;
+.hero-text h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.8rem,4vw,4rem);
+}
+.hero-text p{
+  max-width:760px;
+  margin:16px auto 30px;
   color:#cbd5f5;
 }
 .btn{
@@ -107,78 +90,152 @@ header nav a:hover{color:var(--gold-soft)}
   color:#000;
   padding:14px 36px;
   border-radius:999px;
-  text-decoration:none;
   font-weight:600;
+  text-decoration:none;
   margin:6px;
   display:inline-block;
 }
-.badges{
+.trust-badges{
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
   gap:12px;
-  margin-top:22px;
+  margin-top:26px;
 }
-.badge{
+.trust-badge{
   background:rgba(255,255,255,.06);
   border:1px solid rgba(255,255,255,.14);
   padding:10px 18px;
   border-radius:999px;
   font-size:13px;
 }
-.premium{
-  margin-top:40px;
+.premium-title{
+  margin-top:36px;
   font-family:'Playfair Display',serif;
   font-size:3rem;
-  letter-spacing:2px;
   color:#f5e7c6;
-  animation:glow 4s ease-in-out infinite;
-}
-@keyframes glow{
-  50%{text-shadow:0 0 35px rgba(201,164,74,.7)}
+  letter-spacing:2px;
+  text-shadow:0 0 25px rgba(201,164,74,.45);
 }
 
-/* ================= PLANE ROUTE ================= */
-.route-layer{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
+/* ================= VISUAL STRIP ================= */
+.visual-strip{
+  margin-top:80px;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  align-items:center;
+}
+
+/* ================= EARTH ================= */
+.earth-wrap{
+  width:240px;
+  height:240px;
+  margin:auto;
+  position:relative;
+}
+.earth{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  background-size:cover;
+  animation:spin 28s linear infinite;
+  box-shadow:inset -40px 0 80px rgba(0,0,0,.85),
+             0 0 70px rgba(201,164,74,.6);
+}
+.earth.day{
+  background-image:url("https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg");
+}
+.earth.night{
+  background-image:url("https://upload.wikimedia.org/wikipedia/commons/8/83/Earth_lights_2012.jpg");
+}
+@keyframes spin{to{background-position:-1400px}}
+
+.toggle{
+  margin-top:12px;
+  text-align:center;
+  font-size:12px;
+  cursor:pointer;
+  color:var(--gold-soft);
+}
+
+/* ================= ROUTE + PLANE ================= */
+.route-center svg{
+  width:320px;
+  height:200px;
 }
 .route{
   fill:none;
   stroke:#22d3ee;
   stroke-width:2;
   stroke-dasharray:6 8;
-  animation:dash 6s linear infinite;
-}
-@keyframes dash{
-  to{stroke-dashoffset:-120}
 }
 .plane{
-  animation:fly 6s linear infinite;
-  transform-origin:center;
-}
-@keyframes fly{
-  from{offset-distance:0%}
-  to{offset-distance:100%}
+  fill:#22d3ee;
+  filter:drop-shadow(0 0 6px #22d3ee);
 }
 
-/* ================= SEA SECTION ================= */
-.sea{
-  min-height:100vh;
+/* ================= SHIP SECTION ================= */
+.ship-section{
+  height:100vh;
+  position:relative;
+  overflow:hidden;
   background:
-    linear-gradient(to top,rgba(2,6,23,.95),rgba(2,6,23,.4)),
+    linear-gradient(to top,rgba(2,6,23,.96),rgba(2,6,23,.55)),
     url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=60");
   background-size:cover;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  align-items:end;
-  padding:80px 40px;
+  background-position:center;
 }
-.sea img{
-  width:90%;
-  max-width:520px;
-  opacity:.9;
+
+/* HORIZON LINE */
+.ship-section::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:32%;
+  height:2px;
+  background:linear-gradient(to right,transparent,rgba(255,255,255,.2),transparent);
+  z-index:1;
+}
+
+/* SHIP (FIXED) */
+.ship{
+  position:absolute;
+  bottom:32%;
+  left:-220px;
+  width:220px;
+  opacity:.95;
+  animation:shipMove 40s linear infinite;
+  z-index:2;
+  filter:drop-shadow(0 10px 20px rgba(0,0,0,.6));
+}
+@keyframes shipMove{
+  to{transform:translateX(140vw)}
+}
+
+/* SHIP CONTENT */
+.ship-content{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+  z-index:3;
+}
+.ship-box{
+  max-width:760px;
+  padding:40px;
+  background:rgba(2,6,23,.55);
+  backdrop-filter:blur(6px);
+  border-radius:20px;
+}
+.ship-box h2{
+  font-family:'Playfair Display',serif;
+  font-size:3rem;
+}
+.ship-box p{
+  color:#cbd5f5;
 }
 
 /* ================= FOOTER ================= */
@@ -188,39 +245,12 @@ footer{
   padding:40px 20px;
   color:#9ca3af;
 }
-footer a{
-  color:var(--gold);
-  margin:0 6px;
-  text-decoration:none;
-}
+footer a{color:var(--gold);text-decoration:none;margin:0 6px}
 
 /* FLOATING */
-.float{
+a[href*="wa.me"],a[href*="download"]{
   position:fixed;
-  right:20px;
   z-index:9999;
-}
-.whatsapp{
-  bottom:80px;
-  width:56px;
-  height:56px;
-  background:#25D366;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:28px;
-  color:#fff;
-  text-decoration:none;
-}
-.download{
-  bottom:20px;
-  padding:14px 22px;
-  background:linear-gradient(135deg,var(--gold),var(--gold-soft));
-  color:#000;
-  border-radius:999px;
-  font-weight:600;
-  text-decoration:none;
 }
 </style>
 </head>
@@ -239,40 +269,50 @@ footer a{
 </header>
 
 <section class="hero">
+  <div class="hero-inner">
 
-  <!-- LEFT EARTH -->
-  <div class="earth-wrap">
-    <div class="earth"></div>
-  </div>
+    <div class="hero-text">
+      <h1>Where Verified Buyers Meet Serious Suppliers</h1>
+      <p>High-intent global RFQs. Protected buyer contacts. Zero fake leads.</p>
+      <a class="btn" href="/create-rfq.html">Post Buyer RFQ</a>
+      <a class="btn" href="/buyer-rfqs.html">View Buyer RFQs</a>
 
-  <!-- CENTER -->
-  <div class="center">
-    <h1>Where Verified Buyers Meet Serious Suppliers</h1>
-    <p>High-intent global RFQs. Protected buyer contacts. Zero fake leads.</p>
-    <a href="/create-rfq.html" class="btn">Post Buyer RFQ</a>
-    <a href="/buyer-rfqs.html" class="btn">View Buyer RFQs</a>
+      <div class="trust-badges">
+        <div class="trust-badge">🔐 Verified Buyers</div>
+        <div class="trust-badge">🌍 100+ Countries</div>
+        <div class="trust-badge">🧾 KYC & IEC</div>
+        <div class="trust-badge">🤝 Deals Closed</div>
+        <div class="trust-badge">🚫 No Brokers</div>
+        <div class="trust-badge">⚡ Real RFQs</div>
+      </div>
 
-    <div class="badges">
-      <div class="badge">🔐 Verified Buyers</div>
-      <div class="badge">🌍 100+ Countries</div>
-      <div class="badge">🧾 KYC & IEC</div>
-      <div class="badge">🤝 Deals Closed</div>
-      <div class="badge">🚫 No Brokers</div>
-      <div class="badge">⚡ Real RFQs</div>
+      <div class="premium-title">BEST B2B TRADE PLATFORM</div>
     </div>
 
-    <div class="premium">BEST B2B TRADE PLATFORM</div>
-  </div>
+    <div class="visual-strip">
+      <div class="earth-wrap">
+        <div id="earth" class="earth day"></div>
+        <div class="toggle" onclick="toggleEarth()">Day / Night</div>
+      </div>
 
-  <!-- RIGHT EARTH -->
-  <div class="earth-wrap">
-    <div class="earth night"></div>
-  </div>
+      <div class="route-center">
+        <svg viewBox="0 0 320 200">
+          <path id="curve" class="route" d="M20,150 C120,20 200,20 300,120"/>
+          <polygon class="plane" points="0,-5 10,0 0,5 -2,0">
+            <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
+              <mpath xlink:href="#curve"/>
+            </animateMotion>
+          </polygon>
+        </svg>
+      </div>
 
-  <!-- PLANE ROUTE -->
-  <svg class="route-layer" viewBox="0 0 1200 400" preserveAspectRatio="none">
-    <path class="route" d="M200,260 C400,80 800,80 1000,260"/>
-  </svg>
+      <div class="earth-wrap">
+        <div class="earth night"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <section class="ship-section">
   <img src="https://pngimg.com/uploads/ship/ship_PNG5436.png" class="ship">
@@ -290,24 +330,32 @@ footer a{
   </div>
 </section>
 
-</section>
-
-<section class="sea">
-  <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=900&q=60">
-  <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=900&q=60">
-</section>
-
 <footer>
   <p style="color:var(--gold);font-weight:600">APD Global Trade</p>
-  <p>
-    <a href="/terms.html">Terms</a> |
-    <a href="/privacy.html">Privacy</a> |
-    <a href="/disclaimer.html">Disclaimer</a>
-  </p>
+  <a href="/terms.html">Terms</a> |
+  <a href="/privacy.html">Privacy</a> |
+  <a href="/disclaimer.html">Disclaimer</a>
 </footer>
 
-<a class="float whatsapp" href="https://wa.me/919266418868">💬</a>
-<a class="float download" href="/download-app.html">📲 Download App</a>
+<a href="https://wa.me/919266418868" target="_blank"
+style="bottom:80px;right:20px;width:56px;height:56px;
+background:#25D366;color:#fff;border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+font-size:28px;text-decoration:none">💬</a>
+
+<a href="/download-app.html" target="_blank"
+style="bottom:20px;right:20px;padding:14px 22px;
+background:linear-gradient(135deg,#c9a44a,#e7cf88);
+color:#000;border-radius:999px;font-weight:600;
+text-decoration:none">📲 Download App</a>
+
+<script>
+function toggleEarth(){
+  const e=document.getElementById("earth");
+  e.classList.toggle("night");
+  e.classList.toggle("day");
+}
+</script>
 
 </body>
 </html>
