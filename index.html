@@ -5,206 +5,234 @@
 <title>APD Global Trade | Elite B2B Trade Facilitation Platform</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#020617">
+
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 html,body{margin:0;font-family:Inter,sans-serif;background:#020617;color:#fff}
-:root{--gold:#c9a44a;--gold-soft:#e7cf88;--cyan:#22d3ee}
+:root{
+--gold:#c9a44a;--gold-soft:#e7cf88;--muted:#9ca3af;
+}
 
-/* HEADER */
+/* ================= HEADER ================= */
 header{
 height:80px;
 background:linear-gradient(180deg,#0b1d36,#071427);
-display:flex;align-items:center;justify-content:center;flex-direction:column
+display:flex;flex-direction:column;align-items:center;justify-content:center
 }
 header .logo{color:var(--gold);font-weight:600}
 header nav a{color:#e5e7eb;margin:0 12px;text-decoration:none;font-size:13px}
+header nav a:hover{color:var(--gold-soft)}
 
-/* HERO */
+/* ================= HERO ================= */
 .hero{
 position:relative;
 min-height:calc(100vh - 80px);
 overflow:hidden;
 background:
-radial-gradient(circle at 50% 30%, rgba(201,164,74,.18), transparent 60%),
+radial-gradient(circle at 50% 30%, rgba(201,164,74,.15), transparent 60%),
 linear-gradient(180deg,#0b1d36,#020617);
 }
-.hero::after{
-content:"";position:absolute;inset:0;
-background:url("https://www.transparenttextures.com/patterns/stardust.png");
-opacity:.18
+.hero::before{
+content:"";
+position:absolute;inset:0;
+background:radial-gradient(circle at 20% 20%, rgba(255,255,255,.08), transparent 55%);
+animation:lightHero 18s ease-in-out infinite;
 }
+@keyframes lightHero{
+0%,100%{opacity:.2;transform:translateX(0)}
+50%{opacity:.5;transform:translateX(40px)}
+}
+.hero::after{
+content:"";
+position:absolute;inset:0;
+background:url("https://www.transparenttextures.com/patterns/stardust.png");
+opacity:.15;
+}
+
 .hero-overlay{
 position:relative;z-index:3;
 min-height:calc(100vh - 80px);
 display:flex;flex-direction:column;
 align-items:center;justify-content:center;
-text-align:center;padding:20px
+text-align:center;padding:20px;
 }
 
 /* ================= EARTH ================= */
-.earth-wrap{
-width:260px;height:260px;
-margin-bottom:14px;
-position:relative;
-cursor:grab;
-}
+.earth-wrap{position:relative;width:260px;height:260px;margin-bottom:30px}
 .earth{
-width:100%;height:100%;
-border-radius:50%;
+width:100%;height:100%;border-radius:50%;
 background:url("https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg") repeat-x;
 background-size:cover;
 animation:spin 28s linear infinite;
 box-shadow:
 inset -40px 0 80px rgba(0,0,0,.85),
-0 0 80px rgba(34,211,238,.35);
-transform:scale(var(--zoom,1));
+0 0 80px rgba(201,164,74,.55);
 }
-.earth.night{
-background-image:url("https://upload.wikimedia.org/wikipedia/commons/8/83/Earth_at_night_2012.jpg");
-}
-@keyframes spin{to{background-position:-1400px}}
+@keyframes spin{from{background-position:0}to{background-position:-1400px}}
 
-/* ROUTES */
-.earth-routes{
-position:absolute;inset:0;
-border-radius:50%;
-pointer-events:none;
+/* ================= ROUTE MAP ================= */
+.trade-map{
+position:absolute;inset:0;z-index:2;pointer-events:none;
 }
+.trade-map svg{width:100%;height:100%}
 .route{
 fill:none;
-stroke:var(--cyan);
-stroke-width:1.4;
+stroke:#22d3ee;
+stroke-width:1.3;
 stroke-dasharray:6 8;
 animation:routeMove 6s linear infinite;
-filter:drop-shadow(0 0 6px var(--cyan));
+opacity:.7;
 }
 @keyframes routeMove{to{stroke-dashoffset:-120}}
-
-/* PLANES */
-.plane{
-fill:#fff;
-filter:drop-shadow(0 0 6px var(--cyan));
-animation:fly 10s linear infinite;
-transform-origin:center;
+.dot{
+fill:#22d3ee;
+filter:drop-shadow(0 0 6px #22d3ee);
+animation:pulse 2.5s ease-in-out infinite;
 }
-.plane.delay1{animation-delay:0s}
-.plane.delay2{animation-delay:3s}
-.plane.delay3{animation-delay:6s}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
 
-/* plane motion */
-@keyframes fly{
-0%{offset-distance:0%;opacity:0}
-10%{opacity:1}
-90%{opacity:1}
-100%{offset-distance:100%;opacity:0}
+/* ================= TEXT ================= */
+.hero h1{
+font-family:'Playfair Display',serif;
+font-size:clamp(2.4rem,4vw,3.6rem);
+margin:10px 0;
 }
+.hero p{max-width:720px;color:#cbd5f5;margin:14px auto 26px}
 
-/* PORTS */
-.port{
-position:absolute;
-width:8px;height:8px;
-background:var(--cyan);
-border-radius:50%;
-box-shadow:0 0 14px var(--cyan);
-animation:pulse 3s infinite;
-}
-@keyframes pulse{50%{opacity:.3;transform:scale(2)}}
-
-/* TOGGLE */
-.toggle{
-margin-top:10px;
-background:rgba(255,255,255,.08);
-border:1px solid rgba(255,255,255,.18);
-padding:8px 16px;
-border-radius:999px;
-font-size:13px;
-cursor:pointer;
-}
-
-/* TEXT */
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,4vw,3.6rem)}
-.hero p{max-width:720px;color:#cbd5f5}
-
-/* BUTTONS */
+/* ================= BUTTONS ================= */
 .btn{
 background:linear-gradient(135deg,var(--gold),var(--gold-soft));
 color:#000;padding:14px 36px;border-radius:999px;
-font-weight:600;text-decoration:none;margin:6px;display:inline-block
+text-decoration:none;font-weight:600;margin:6px;
+display:inline-block;
 }
 
-/* TRUST */
-.trust-badges{
-display:flex;flex-wrap:wrap;justify-content:center;
-gap:14px;margin-top:22px
-}
-.trust-badge{
-background:rgba(255,255,255,.06);
-border:1px solid rgba(255,255,255,.14);
-padding:10px 18px;border-radius:999px;
-font-size:13px
-}
-
-/* TICKER */
+/* ================= TICKER ================= */
 .ticker{
+background:#020617;
 border-top:1px solid rgba(255,255,255,.1);
 border-bottom:1px solid rgba(255,255,255,.1);
-overflow:hidden;white-space:nowrap
+overflow:hidden;
+white-space:nowrap;
 }
 .ticker-track{
-display:inline-block;padding:14px 0;
-animation:ticker 40s linear infinite
+display:inline-block;
+padding:14px 0;
+animation:tickerMove 40s linear infinite;
 }
-@keyframes ticker{to{transform:translateX(-100%)}}
+@keyframes tickerMove{
+from{transform:translateX(100%)}
+to{transform:translateX(-100%)}
+}
+.ticker span{
+margin:0 40px;
+color:#e5e7eb;
+font-size:14px;
+}
 
-/* SEA + SHIP */
+/* ================= PORT / SEA ================= */
 .ship-fill{
-position:relative;min-height:120vh;overflow:hidden
+position:relative;
+min-height:120vh;
+overflow:hidden;
+background:#020617;
 }
-.ocean-parallax{
-position:absolute;inset:-5%;
-background:url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=60");
-background-size:cover;opacity:.35
+.ship-fill::before{
+content:"";
+position:absolute;inset:0;
+background:
+linear-gradient(to top,rgba(2,6,23,.98),rgba(2,6,23,.6)),
+url("https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1920&q=60");
+background-size:cover;
+background-position:center bottom;
 }
-.ship{
+.ship-fill::after{
+content:"";
+position:absolute;
+bottom:0;left:0;right:0;
+height:38%;
+background:url("https://svgshare.com/i/14kM.svg") repeat-x;
+background-size:auto 100%;
+opacity:.3;
+}
+
+/* ===== SAFE SHIP ANIMATION ===== */
+.ship-anim{
 position:absolute;
 bottom:18%;
-left:-20%;
-width:240px;
-opacity:.8;
-animation:shipMove 12s linear infinite;
+left:-30%;
+width:260px;
+opacity:.9;
+z-index:2;
+animation:shipSail 22s linear infinite;
+pointer-events:none;
 }
-@keyframes shipMove{
+@keyframes shipSail{
 0%{left:-30%}
-50%{left:40%}
-100%{left:110%}
-}
-.ship-content{
-position:relative;z-index:4;
-min-height:120vh;
-display:flex;flex-direction:column;
-align-items:center;justify-content:center;
-text-align:center;padding:40px
+50%{left:45%}
+100%{left:120%}
 }
 
-/* TESTIMONIALS */
-.testimonials{padding:100px 20px}
+.ship-content{
+position:relative;
+z-index:3;
+min-height:120vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:40px;
+}
+
+/* ================= TESTIMONIALS ================= */
+.testimonials{
+background:#020617;
+padding:100px 20px;
+border-top:1px solid rgba(255,255,255,.08);
+border-bottom:1px solid rgba(255,255,255,.08);
+}
+.testimonials h2{
+font-family:'Playfair Display',serif;
+font-size:2.8rem;
+text-align:center;
+margin-bottom:60px;
+}
 .testimonial-grid{
-max-width:1200px;margin:auto;
-display:grid;gap:30px;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr))
+max-width:1200px;
+margin:auto;
+display:grid;
+gap:30px;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 }
 .testimonial{
 background:linear-gradient(180deg,#0b1d36,#020617);
-border-radius:18px;padding:30px
+border:1px solid rgba(255,255,255,.1);
+border-radius:18px;
+padding:30px;
+box-shadow:0 20px 40px rgba(0,0,0,.45);
 }
+.testimonial p{color:#cbd5f5;line-height:1.7}
+.testimonial .name{margin-top:16px;color:var(--gold);font-weight:600}
+.testimonial .role{font-size:13px;color:#9ca3af}
 
-/* FOOTER */
-footer{text-align:center;padding:40px 20px;color:#9ca3af}
-footer a{color:var(--gold)}
+/* ================= FOOTER ================= */
+footer{
+background:#020617;
+color:#9ca3af;
+text-align:center;
+padding:40px 20px;
+font-size:14px;
+}
+footer a{color:var(--gold);text-decoration:none}
 
-@media(max-width:900px){
-.earth-routes,.plane,.ship{display:none}
+/* FLOATING */
+a[href*="wa.me"],a[href*="download"]{
+position:fixed;
+z-index:999999;
 }
 </style>
 </head>
@@ -218,96 +246,111 @@ footer a{color:var(--gold)}
 <a href="/buyer-rfqs.html">Buyer RFQs</a>
 <a href="/membership.html">Membership</a>
 <a href="/suppliers.html">Suppliers</a>
+<a href="/supplier-login.html">Supplier Login</a>
+<a href="/register-supplier.html">Register</a>
+<a href="/contact.html">Contact</a>
 </nav>
 </header>
 
 <section class="hero">
-<div class="hero-overlay">
-
-<div class="earth-wrap" id="earthWrap">
-<div class="earth" id="earth"></div>
-
-<svg class="earth-routes" viewBox="0 0 260 260">
-<path id="p1" class="route" d="M30 160 C90 60 170 60 230 110"/>
-<path id="p2" class="route" d="M40 120 C120 40 180 100 210 150"/>
-<path id="p3" class="route" d="M60 180 C130 90 160 90 200 130"/>
-
-<polygon class="plane delay1" points="0,-4 8,0 0,4"
-style="offset-path:path('M30 160 C90 60 170 60 230 110')"/>
-<polygon class="plane delay2" points="0,-4 8,0 0,4"
-style="offset-path:path('M40 120 C120 40 180 100 210 150')"/>
-<polygon class="plane delay3" points="0,-4 8,0 0,4"
-style="offset-path:path('M60 180 C130 90 160 90 200 130')"/>
+<div class="trade-map">
+<svg viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice">
+<path class="route" d="M300,300 C420,160 600,160 740,220"/>
+<path class="route" d="M280,260 C460,120 620,140 820,180"/>
+<circle class="dot" cx="300" cy="300" r="4"/>
+<circle class="dot" cx="520" cy="180" r="4"/>
+<circle class="dot" cx="740" cy="220" r="4"/>
 </svg>
-
-<div class="port" style="top:46%;left:56%"></div>
-<div class="port" style="top:54%;left:42%"></div>
-<div class="port" style="top:38%;left:68%"></div>
 </div>
 
-<div class="toggle" id="toggle">🌙 Switch to Night</div>
-
+<div class="hero-overlay">
+<div class="earth-wrap"><div class="earth"></div></div>
 <h1>Where Verified Buyers Meet Serious Suppliers</h1>
-<p>High-intent global RFQs. Zero fake leads.</p>
-
+<p>High-intent global RFQs. Protected buyer contacts. Zero fake leads.</p>
 <div>
 <a href="/create-rfq.html" class="btn">Post Buyer RFQ</a>
 <a href="/buyer-rfqs.html" class="btn">View Buyer RFQs</a>
+<a href="/supplier-onboarding.html" class="btn">Supplier App – How It Works</a>
 </div>
-
-<div class="trust-badges">
-<div class="trust-badge">🔐 Verified Buyers</div>
-<div class="trust-badge">🌍 100+ Countries</div>
-<div class="trust-badge">🧾 KYC & IEC Checked</div>
-<div class="trust-badge">🤝 Deals Closed</div>
-<div class="trust-badge">🚫 No Brokers</div>
-<div class="trust-badge">⚡ Real RFQs Only</div>
-</div>
-
 </div>
 </section>
 
 <div class="ticker">
 <div class="ticker-track">
-🇮🇳 Rice exporter closed $1.2M · 🇦🇪 Sugar RFQ fulfilled · 🇺🇸 Spices imported
+<span>🇮🇳 Rice Exporter closed $1.2M deal</span>
+<span>🇦🇪 UAE buyer sourced sugar IC45</span>
+<span>🇺🇸 US importer placed spices RFQ</span>
+<span>🇻🇳 Vietnam supplier secured long-term buyer</span>
+<span>🇪🇺 EU buyer onboarded bulk textile supplier</span>
 </div>
 </div>
 
 <section class="ship-fill">
-<div class="ocean-parallax"></div>
-<img class="ship" src="https://pngimg.com/uploads/cargo_ship/cargo_ship_PNG24.png">
+
+<img
+class="ship-anim"
+src="https://pngimg.com/uploads/cargo_ship/cargo_ship_PNG24.png"
+alt="Cargo Ship"
+/>
+
 <div class="ship-content">
-<h2>Global Trade Never Stops</h2>
-<p>Verified buyers. Real demand. Global logistics.</p>
+<h2 style="font-family:'Playfair Display',serif;font-size:3rem">
+Global Trade Never Stops
+</h2>
+<p style="max-width:760px;color:#cbd5f5">
+APD Global Trade powers continuous cross-border commerce through verified buyers,
+trusted suppliers, and real global logistics.
+</p>
+<div style="margin-top:28px;line-height:1.9">
+📧 info@apdglobaltradehub.com<br>
+☎ +1 (202) 780-1366<br>
+💬 WhatsApp: +91 92664 18868
+</div>
 </div>
 </section>
 
 <section class="testimonials">
-<h2 style="text-align:center">Trusted by Global Traders</h2>
+<h2>Trusted by Global Buyers & Suppliers</h2>
 <div class="testimonial-grid">
-<div class="testimonial">“Closed $1.2M export deal in 30 days.” — India</div>
-<div class="testimonial">“Only real buyers. No brokers.” — UAE</div>
-<div class="testimonial">“Long-term European contracts.” — Vietnam</div>
+<div class="testimonial">
+<p>“APD Global Trade gave us direct access to verified buyers. We closed our first export deal within 30 days.”</p>
+<div class="name">Rajesh Mehta</div>
+<div class="role">Rice Exporter · India</div>
+</div>
+<div class="testimonial">
+<p>“Unlike other platforms, every RFQ here is serious. No spam, no brokers. Real trade happens.”</p>
+<div class="name">Ahmed Al-Farsi</div>
+<div class="role">Commodity Buyer · UAE</div>
+</div>
+<div class="testimonial">
+<p>“We secured long-term buyers from Europe using APD’s verified demand model.”</p>
+<div class="name">Nguyen Tran</div>
+<div class="role">Textile Supplier · Vietnam</div>
+</div>
 </div>
 </section>
 
 <footer>
-<p style="color:var(--gold)">APD Global Trade</p>
+<p style="color:var(--gold);font-weight:600">APD Global Trade</p>
+<p>Elite B2B Trade Facilitation Platform</p>
+<p>
 <a href="/terms.html">Terms</a> |
 <a href="/privacy.html">Privacy</a> |
 <a href="/disclaimer.html">Disclaimer</a>
+</p>
 </footer>
 
-<script>
-const earth=document.getElementById("earth");
-const toggle=document.getElementById("toggle");
-let night=false;
-toggle.onclick=()=>{
-night=!night;
-earth.classList.toggle("night",night);
-toggle.textContent=night?"☀️ Switch to Day":"🌙 Switch to Night";
-};
-</script>
+<a href="https://wa.me/919266418868" target="_blank"
+style="bottom:80px;right:20px;width:56px;height:56px;
+background:#25D366;color:#fff;border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+font-size:28px;text-decoration:none">💬</a>
+
+<a href="/download-app.html" target="_blank"
+style="bottom:20px;right:20px;padding:14px 22px;
+background:linear-gradient(135deg,#c9a44a,#e7cf88);
+color:#000;border-radius:999px;font-weight:600;
+text-decoration:none">📲 Download App</a>
 
 </body>
 </html>
