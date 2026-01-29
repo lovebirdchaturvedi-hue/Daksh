@@ -63,19 +63,27 @@ header .logo{
   z-index:3;
   min-height:calc(100vh - 80px);
   display:flex;
-  flex-direction:column;
   align-items:center;
   justify-content:center;
-  text-align:center;
   padding:20px;
+}
+
+/* ===== HERO GRID ===== */
+.hero-grid{
+  width:100%;
+  max-width:1400px;
+  display:grid;
+  grid-template-columns:1fr 1.3fr 1fr;
+  align-items:center;
+  gap:40px;
 }
 
 /* ================= EARTH ================= */
 .earth-wrap{
   position:relative;
-  width:280px;
-  height:280px;
-  margin-bottom:30px;
+  width:260px;
+  height:260px;
+  margin:auto;
 }
 .earth{
   width:100%;
@@ -87,6 +95,9 @@ header .logo{
   box-shadow:
     inset -40px 0 80px rgba(0,0,0,.85),
     0 0 80px rgba(201,164,74,.6);
+}
+.earth.dim{
+  opacity:.75;
 }
 @keyframes spin{
   to{background-position:-1400px}
@@ -113,13 +124,16 @@ header .logo{
   filter:drop-shadow(0 0 6px #22d3ee);
 }
 
-/* ================= TEXT ================= */
-.hero h1{
+/* ================= CENTER CONTENT ================= */
+.center-content{
+  text-align:center;
+}
+.center-content h1{
   font-family:'Playfair Display',serif;
-  font-size:clamp(2.6rem,4vw,3.8rem);
+  font-size:clamp(2.8rem,4vw,3.8rem);
   margin:10px 0;
 }
-.hero p{
+.center-content p{
   max-width:720px;
   color:#cbd5f5;
   margin:14px auto 26px;
@@ -155,12 +169,17 @@ header .logo{
 
 /* ================= PREMIUM TITLE ================= */
 .premium-title{
-  margin-top:60px;
+  margin-top:30px;
   font-family:'Playfair Display',serif;
   font-size:3rem;
   color:#f5e7c6;
   letter-spacing:2px;
   text-shadow:0 0 25px rgba(201,164,74,.45);
+  animation:glow 3s ease-in-out infinite;
+}
+@keyframes glow{
+  0%,100{opacity:.85}
+  50%{opacity:1}
 }
 
 /* ================= SHIP SECTION ================= */
@@ -222,6 +241,14 @@ a[href*="wa.me"],a[href*="download"]{
   position:fixed;
   z-index:999999;
 }
+
+/* MOBILE */
+@media(max-width:900px){
+  .hero-grid{
+    grid-template-columns:1fr;
+    gap:60px;
+  }
+}
 </style>
 </head>
 
@@ -241,34 +268,41 @@ a[href*="wa.me"],a[href*="download"]{
 <section class="hero">
 <div class="hero-overlay">
 
-<div class="earth-wrap">
-  <div class="earth"></div>
+<div class="hero-grid">
 
-  <!-- ROUTES + PLANE -->
-  <svg class="route-layer" viewBox="0 0 280 280">
-    <path class="route" d="M40,160 C100,40 180,40 240,120"/>
-    <polygon class="plane" points="238,120 228,116 230,120 228,124"/>
-  </svg>
+  <!-- LEFT EARTH -->
+  <div class="earth-wrap">
+    <div class="earth"></div>
+  </div>
+
+  <!-- CENTER -->
+  <div class="center-content">
+    <h1>Where Verified Buyers Meet Serious Suppliers</h1>
+    <p>High-intent global RFQs. Protected buyer contacts. Zero fake leads.</p>
+
+    <div>
+      <a href="/create-rfq.html" class="btn">Post Buyer RFQ</a>
+      <a href="/buyer-rfqs.html" class="btn">View Buyer RFQs</a>
+    </div>
+
+    <div class="trust-badges">
+      <div class="trust-badge">🔐 Verified Buyers</div>
+      <div class="trust-badge">🌍 100+ Countries</div>
+      <div class="trust-badge">🧾 KYC & IEC Checked</div>
+      <div class="trust-badge">🤝 Deals Closed</div>
+      <div class="trust-badge">🚫 No Brokers</div>
+      <div class="trust-badge">⚡ Real RFQs Only</div>
+    </div>
+
+    <div class="premium-title">BEST B2B TRADE PLATFORM</div>
+  </div>
+
+  <!-- RIGHT EARTH -->
+  <div class="earth-wrap">
+    <div class="earth dim"></div>
+  </div>
+
 </div>
-
-<h1>Where Verified Buyers Meet Serious Suppliers</h1>
-<p>High-intent global RFQs. Protected buyer contacts. Zero fake leads.</p>
-
-<div>
-<a href="/create-rfq.html" class="btn">Post Buyer RFQ</a>
-<a href="/buyer-rfqs.html" class="btn">View Buyer RFQs</a>
-</div>
-
-<div class="trust-badges">
-<div class="trust-badge">🔐 Verified Buyers</div>
-<div class="trust-badge">🌍 100+ Countries</div>
-<div class="trust-badge">🧾 KYC & IEC Checked</div>
-<div class="trust-badge">🤝 Deals Closed</div>
-<div class="trust-badge">🚫 No Brokers</div>
-<div class="trust-badge">⚡ Real RFQs Only</div>
-</div>
-
-<div class="premium-title">BEST B2B TRADE PLATFORM</div>
 
 </div>
 </section>
