@@ -13,7 +13,7 @@
 html,body{margin:0;font-family:Inter,sans-serif;background:#020617;color:#fff}
 :root{--gold:#c9a44a;--gold-soft:#e7cf88}
 
-/* ================= HEADER ================= */
+/* HEADER */
 header{
 height:80px;
 background:linear-gradient(180deg,#0b1d36,#071427);
@@ -23,7 +23,7 @@ header .logo{color:var(--gold);font-weight:600}
 header nav a{color:#e5e7eb;margin:0 12px;text-decoration:none;font-size:13px}
 header nav a:hover{color:var(--gold-soft)}
 
-/* ================= HERO ================= */
+/* HERO */
 .hero{
 position:relative;
 min-height:calc(100vh - 80px);
@@ -45,8 +45,8 @@ align-items:center;justify-content:center;
 text-align:center;padding:20px
 }
 
-/* ================= EARTH ================= */
-.earth-wrap{width:260px;height:260px;margin-bottom:30px}
+/* EARTH */
+.earth-wrap{width:260px;height:260px;margin-bottom:30px;position:relative}
 .earth{
 width:100%;height:100%;border-radius:50%;
 background:url("https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg") repeat-x;
@@ -56,25 +56,35 @@ box-shadow:inset -40px 0 80px rgba(0,0,0,.85),0 0 80px rgba(201,164,74,.6)
 }
 @keyframes spin{to{background-position:-1400px}}
 
-/* ================= ROUTES ================= */
+/* FREIGHT IMAGES */
+.freight{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+width:320px;
+opacity:.9;
+}
+.freight.left{left:-360px}
+.freight.right{right:-360px}
+
+/* ROUTES */
 .trade-map{position:absolute;inset:0;z-index:2;pointer-events:none}
 .route{fill:none;stroke:#22d3ee;stroke-width:1.3;stroke-dasharray:6 8;animation:route 6s linear infinite}
 @keyframes route{to{stroke-dashoffset:-120}}
-.dot{fill:#22d3ee;filter:drop-shadow(0 0 6px #22d3ee);animation:pulse 2.5s infinite}
-@keyframes pulse{50%{opacity:1}}
+.dot{fill:#22d3ee;filter:drop-shadow(0 0 6px #22d3ee)}
 
-/* ================= TEXT ================= */
+/* TEXT */
 .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,4vw,3.6rem)}
 .hero p{max-width:720px;color:#cbd5f5}
 
-/* ================= BUTTONS ================= */
+/* BUTTONS */
 .btn{
 background:linear-gradient(135deg,var(--gold),var(--gold-soft));
 color:#000;padding:14px 36px;border-radius:999px;
 font-weight:600;text-decoration:none;margin:6px;display:inline-block
 }
 
-/* ================= TRUST BADGES ================= */
+/* TRUST BADGES */
 .trust-badges{
 display:flex;flex-wrap:wrap;justify-content:center;
 gap:14px;margin-top:22px
@@ -86,7 +96,7 @@ padding:10px 18px;border-radius:999px;
 font-size:13px;backdrop-filter:blur(6px)
 }
 
-/* ================= TICKER ================= */
+/* TICKER */
 .ticker{
 border-top:1px solid rgba(255,255,255,.1);
 border-bottom:1px solid rgba(255,255,255,.1);
@@ -95,16 +105,12 @@ overflow:hidden;white-space:nowrap
 .ticker-track{display:inline-block;padding:14px 0;animation:ticker 40s linear infinite}
 @keyframes ticker{to{transform:translateX(-100%)}}
 
-/* ================= SHIP SECTION ================= */
+/* SHIP SECTION */
 .ship-fill{
-position:relative;
-min-height:120vh;
-overflow:hidden;
+position:relative;min-height:120vh;overflow:hidden
 }
-
-/* ocean */
 .ocean-parallax{
-position:absolute;inset:0;z-index:0;
+position:absolute;inset:0;
 background:url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=60");
 background-size:120% 120%;
 animation:ocean 45s linear infinite;
@@ -112,89 +118,15 @@ opacity:.35
 }
 @keyframes ocean{to{background-position:100% 50%}}
 
-/* heatmap */
-.ai-heatmap{
-position:absolute;inset:0;z-index:1;
-background:
-radial-gradient(circle at 30% 55%, rgba(34,211,238,.35), transparent 18%),
-radial-gradient(circle at 60% 50%, rgba(251,191,36,.35), transparent 20%);
-animation:heat 6s infinite;opacity:.6
-}
-@keyframes heat{50%{opacity:1}}
-
-.ship-fill::after{
-content:"";position:absolute;bottom:0;left:0;right:0;height:35%;
-background:url("https://svgshare.com/i/14kM.svg") repeat-x;
-opacity:.35;z-index:2
-}
-
 .ship-content{
-position:relative;z-index:4;
+position:relative;z-index:3;
 min-height:120vh;
 display:flex;flex-direction:column;
 align-items:center;justify-content:center;
 text-align:center;padding:40px
 }
 
-/* ======== NEW SAFE SIDE PANELS ======== */
-.ship-panels{
-position:absolute;
-left:0;right:0;bottom:120px;
-z-index:3;
-display:flex;
-justify-content:space-between;
-padding:0 40px;
-pointer-events:none;
-}
-.ship-panel{
-width:300px;
-background:rgba(11,29,54,.55);
-border:1px solid rgba(255,255,255,.15);
-backdrop-filter:blur(10px);
-border-radius:18px;
-padding:22px;
-box-shadow:0 20px 40px rgba(0,0,0,.45);
-pointer-events:auto;
-}
-.ship-panel h4{
-margin:0 0 12px;
-color:var(--gold);
-font-size:14px;
-}
-.activity{
-font-size:13px;line-height:1.6;color:#e5e7eb
-}
-.trust-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-font-size:13px;
-}
-.trust-item{
-background:rgba(255,255,255,.06);
-border-radius:999px;
-padding:8px 10px;
-text-align:center
-}
-
-/* hide on mobile */
-@media(max-width:900px){
-.ship-panels{display:none}
-}
-
-/* ================= TESTIMONIALS ================= */
-.testimonials{padding:100px 20px}
-.testimonial-grid{
-max-width:1200px;margin:auto;
-display:grid;gap:30px;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr))
-}
-.testimonial{
-background:linear-gradient(180deg,#0b1d36,#020617);
-border-radius:18px;padding:30px
-}
-
-/* ================= FOOTER ================= */
+/* FOOTER */
 footer{text-align:center;padding:40px 20px;color:#9ca3af}
 footer a{color:var(--gold)}
 
@@ -217,17 +149,15 @@ a[href*="wa.me"],a[href*="download"]{position:fixed;z-index:999999}
 </nav>
 </header>
 
+<!-- HERO -->
 <section class="hero">
-<div class="trade-map">
-<svg viewBox="0 0 1000 500">
-<path class="route" d="M300,300 C420,160 600,160 740,220"/>
-<circle class="dot" cx="300" cy="300" r="4"/>
-<circle class="dot" cx="740" cy="220" r="4"/>
-</svg>
+<div class="hero-overlay">
+<div class="earth-wrap">
+<div class="earth"></div>
+<img src="cargo-left.png" class="freight left">
+<img src="cargo-right.png" class="freight right">
 </div>
 
-<div class="hero-overlay">
-<div class="earth-wrap"><div class="earth"></div></div>
 <h1>Where Verified Buyers Meet Serious Suppliers</h1>
 <p>High-intent global RFQs. Zero fake leads.</p>
 
@@ -253,32 +183,9 @@ a[href*="wa.me"],a[href*="download"]{position:fixed;z-index:999999}
 </div>
 </div>
 
+<!-- SEA SECTION -->
 <section class="ship-fill">
 <div class="ocean-parallax"></div>
-<div class="ai-heatmap"></div>
-
-<!-- PANELS -->
-<div class="ship-panels">
-<div class="ship-panel">
-<h4>🌍 Live Global Activity</h4>
-<div class="activity">
-🇮🇳 India → 🇦🇪 UAE<br>Rice · 5,000 MT<br><br>
-🇻🇳 Vietnam → 🇪🇺 EU<br>Textiles · Contract Signed
-</div>
-</div>
-
-<div class="ship-panel">
-<h4>🔐 Trust Signals</h4>
-<div class="trust-grid">
-<div class="trust-item">Verified Buyers</div>
-<div class="trust-item">100+ Countries</div>
-<div class="trust-item">KYC Checked</div>
-<div class="trust-item">Deals Closed</div>
-<div class="trust-item">No Brokers</div>
-<div class="trust-item">Real RFQs</div>
-</div>
-</div>
-</div>
 
 <div class="ship-content">
 <h2>Global Trade Never Stops</h2>
@@ -288,15 +195,6 @@ a[href*="wa.me"],a[href*="download"]{position:fixed;z-index:999999}
 ☎ +1 (202) 780-1366<br>
 💬 WhatsApp: +91 92664 18868
 </div>
-</div>
-</section>
-
-<section class="testimonials">
-<h2 style="text-align:center">Trusted by Global Traders</h2>
-<div class="testimonial-grid">
-<div class="testimonial">“Closed $1.2M export deal in 30 days.” — India</div>
-<div class="testimonial">“Only real buyers. No brokers.” — UAE</div>
-<div class="testimonial">“Long-term European contracts.” — Vietnam</div>
 </div>
 </section>
 
