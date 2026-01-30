@@ -113,6 +113,8 @@ header nav a:hover{color:var(--gold-soft)}
   font-weight:600;
   margin:6px;
   display:inline-block;
+  position:relative;
+  z-index:5;
 }
 .badges{
   display:flex;
@@ -168,19 +170,6 @@ header nav a:hover{color:var(--gold-soft)}
   text-align:center;
   box-shadow:0 30px 60px rgba(0,0,0,.6);
 }
-.contact-card h2{
-  font-family:'Playfair Display',serif;
-  font-size:2.2rem;
-  margin-bottom:10px;
-}
-.contact-card p{
-  color:#cbd5f5;
-  margin-bottom:22px;
-}
-.contact-card div{
-  line-height:1.9;
-  font-size:15px;
-}
 
 /* ================= FOOTER ================= */
 footer{
@@ -224,7 +213,7 @@ footer a{
   text-decoration:none;
 }
 
-/* ================= MOBILE FIX ================= */
+/* ================= MOBILE ================= */
 @media(max-width:900px){
   .hero{
     grid-template-columns:1fr;
@@ -255,7 +244,6 @@ footer a{
 </header>
 
 <section class="hero">
-
   <div class="earth-wrap"><div class="earth"></div></div>
 
   <div class="center">
@@ -278,11 +266,9 @@ footer a{
   </div>
 
   <div class="earth-wrap"><div class="earth night"></div></div>
-
 </section>
 
 <section class="sea">
-
   <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=900&q=60">
 
   <div class="contact-card">
@@ -296,7 +282,6 @@ footer a{
   </div>
 
   <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=900&q=60">
-
 </section>
 
 <footer>
