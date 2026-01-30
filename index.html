@@ -28,7 +28,7 @@ header{
   justify-content:center;
   position:sticky;
   top:0;
-  z-index:999;
+  z-index:1000;
 }
 header .logo{
   position:absolute;
@@ -63,6 +63,7 @@ header nav a:hover{color:var(--gold-soft)}
   inset:0;
   background:url("https://www.transparenttextures.com/patterns/stardust.png");
   opacity:.15;
+  pointer-events:none;
 }
 
 /* ================= EARTH ================= */
@@ -70,6 +71,8 @@ header nav a:hover{color:var(--gold-soft)}
   width:260px;
   height:260px;
   margin:auto;
+  z-index:1;
+  pointer-events:none;
 }
 .earth{
   width:100%;
@@ -137,7 +140,7 @@ header nav a:hover{color:var(--gold-soft)}
   50%{text-shadow:0 0 35px rgba(201,164,74,.7)}
 }
 
-/* ================= SEA SECTION ================= */
+/* ================= SEA ================= */
 .sea{
   min-height:100vh;
   background:
@@ -156,7 +159,7 @@ header nav a:hover{color:var(--gold-soft)}
   opacity:.9;
 }
 
-/* CONTACT CARD */
+/* ================= CONTACT ================= */
 .contact-card{
   background:rgba(11,29,54,.85);
   backdrop-filter:blur(10px);
@@ -192,7 +195,7 @@ footer a{
   text-decoration:none;
 }
 
-/* FLOATING */
+/* ================= FLOAT ================= */
 .float{
   position:fixed;
   right:20px;
@@ -219,6 +222,21 @@ footer a{
   border-radius:999px;
   font-weight:600;
   text-decoration:none;
+}
+
+/* ================= MOBILE FIX ================= */
+@media(max-width:900px){
+  .hero{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+  .earth-wrap{
+    display:none;
+  }
+  .sea{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
 }
 </style>
 </head>
@@ -263,7 +281,6 @@ footer a{
 
 </section>
 
-<!-- SEA WITH CONTACT IN BETWEEN -->
 <section class="sea">
 
   <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=900&q=60">
