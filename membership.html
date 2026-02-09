@@ -5,9 +5,6 @@
 <title>Supplier Membership | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- PayPal SDK (LIVE) -->
-<script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD&intent=capture"></script>
-
 <style>
 body{
   margin:0;
@@ -216,6 +213,20 @@ z-index:9999;">
   </div>
 </div>
 
+<!-- ================= PAYPAL SDK LOADER ================= -->
+
+<script>
+(function loadPayPal(){
+  if(window.paypal) return;
+  var s = document.createElement("script");
+  s.src = "https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD";
+  s.onload = function(){ console.log("PayPal SDK loaded"); };
+  document.body.appendChild(s);
+})();
+</script>
+
+<!-- ================= PAYMENT LOGIC ================= -->
+
 <script>
 function payNow(planName, usdAmount){
 
@@ -223,40 +234,43 @@ function payNow(planName, usdAmount){
   document.getElementById("paypalButtons").innerHTML =
     "<p style='font-size:14px;color:#555'>Loading secure PayPal payment…</p>";
 
-  setTimeout(function(){
+  var wait = setInterval(function(){
 
-    document.getElementById("paypalButtons").innerHTML = "";
+    if(window.paypal){
+      clearInterval(wait);
+      document.getElementById("paypalButtons").innerHTML = "";
 
-    paypal.Buttons({
-      style:{
-        layout:'vertical',
-        color:'gold',
-        shape:'pill',
-        label:'pay'
-      },
-      createOrder:function(data, actions){
-        return actions.order.create({
-          purchase_units:[{
-            description: planName + " Membership Application Fee – APD Global Trade",
-            amount:{
-              currency_code:"USD",
-              value: usdAmount.toFixed(2)
-            }
-          }]
-        });
-      },
-      onApprove:function(data, actions){
-        return actions.order.capture().then(function(){
-          window.location.href = "/document-upload.html";
-        });
-      },
-      onError:function(err){
-        alert("Payment could not be initiated. Please try again.");
-        console.error(err);
-      }
-    }).render("#paypalButtons");
+      paypal.Buttons({
+        style:{
+          layout:'vertical',
+          color:'gold',
+          shape:'pill',
+          label:'pay'
+        },
+        createOrder:function(data, actions){
+          return actions.order.create({
+            purchase_units:[{
+              description: planName + " Membership Application Fee – APD Global Trade",
+              amount:{
+                currency_code:"USD",
+                value: usdAmount.toFixed(2)
+              }
+            }]
+          });
+        },
+        onApprove:function(data, actions){
+          return actions.order.capture().then(function(){
+            window.location.href = "/document-upload.html";
+          });
+        },
+        onError:function(err){
+          console.error(err);
+          alert("Payment could not be initiated. Please try again.");
+        }
+      }).render("#paypalButtons");
+    }
 
-  }, 300);
+  },200);
 }
 
 function closeModal(){
