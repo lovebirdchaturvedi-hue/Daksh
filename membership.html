@@ -71,12 +71,6 @@ h1{
   font-weight:600;
   cursor:pointer;
 }
-.note{
-  text-align:center;
-  font-size:14px;
-  color:#475569;
-  margin-top:15px;
-}
 footer{
   text-align:center;
   padding:40px 20px;
@@ -110,7 +104,7 @@ footer a{
       <li>✖ Buyer contact locked</li>
       <li>✔ Email support</li>
     </ul>
-    <button class="btn" onclick="payNow('Domestic Basic',24999)">Apply for Basic</button>
+    <button class="btn" onclick="payNow('Domestic Basic',299)">Apply for Basic</button>
   </div>
 
   <div class="plan highlight">
@@ -123,7 +117,7 @@ footer a{
       <li>✔ Priority RFQ alerts</li>
       <li>✔ WhatsApp support</li>
     </ul>
-    <button class="btn" onclick="payNow('Domestic Gold',49999)">Apply for Gold</button>
+    <button class="btn" onclick="payNow('Domestic Gold',599)">Apply for Gold</button>
   </div>
 
   <div class="plan">
@@ -136,7 +130,7 @@ footer a{
       <li>✔ Priority listing</li>
       <li>✔ Dedicated support</li>
     </ul>
-    <button class="btn" onclick="payNow('Domestic Platinum',99999)">Apply for Platinum</button>
+    <button class="btn" onclick="payNow('Domestic Platinum',1199)">Apply for Platinum</button>
   </div>
 
 </div>
@@ -223,37 +217,46 @@ z-index:9999;">
 </div>
 
 <script>
-function payNow(plan, amount){
-  document.getElementById("paypalButtons").innerHTML = "";
-  document.getElementById("paypalModal").style.display = "flex";
+function payNow(planName, usdAmount){
 
-  paypal.Buttons({
-    style:{
-      layout:'vertical',
-      color:'gold',
-      shape:'pill',
-      label:'pay'
-    },
-    createOrder:function(data, actions){
-      return actions.order.create({
-        purchase_units:[{
-          description: plan + " Membership Application Fee – APD Global Trade",
-          amount:{
-            currency_code:"USD",
-            value: amount
-          }
-        }]
-      });
-    },
-    onApprove:function(data, actions){
-      return actions.order.capture().then(function(){
-        window.location.href = "/payment-received.html";
-      });
-    },
-    onError:function(){
-      alert("Payment failed. Please try again.");
-    }
-  }).render("#paypalButtons");
+  document.getElementById("paypalModal").style.display = "flex";
+  document.getElementById("paypalButtons").innerHTML =
+    "<p style='font-size:14px;color:#555'>Loading secure PayPal payment…</p>";
+
+  setTimeout(function(){
+
+    document.getElementById("paypalButtons").innerHTML = "";
+
+    paypal.Buttons({
+      style:{
+        layout:'vertical',
+        color:'gold',
+        shape:'pill',
+        label:'pay'
+      },
+      createOrder:function(data, actions){
+        return actions.order.create({
+          purchase_units:[{
+            description: planName + " Membership Application Fee – APD Global Trade",
+            amount:{
+              currency_code:"USD",
+              value: usdAmount.toFixed(2)
+            }
+          }]
+        });
+      },
+      onApprove:function(data, actions){
+        return actions.order.capture().then(function(){
+          window.location.href = "/document-upload.html";
+        });
+      },
+      onError:function(err){
+        alert("Payment could not be initiated. Please try again.");
+        console.error(err);
+      }
+    }).render("#paypalButtons");
+
+  }, 300);
 }
 
 function closeModal(){
