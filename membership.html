@@ -209,29 +209,22 @@ z-index:9999;">
   </div>
 </div>
 
-<!-- PAYPAL SDK -->
-<script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script>
+<!-- PAYPAL SDK (CLIENT ID ONLY) -->
+<script src="https://www.paypal.com/sdk/js?client-id=BAAldzZ21dj_YYD4j04pNHoiWzy4qWo5kfDt50n18qdQPFqeh6CaeI3sw7t7irYftnmVKlL4C4wLhmr7OA&currency=USD"></script>
 
-<!-- PAYMENT LOGIC -->
 <script>
 function payNow(planName, usdAmount){
-
-  document.getElementById("paypalModal").style.display = "flex";
-  document.getElementById("paypalButtons").innerHTML =
-    "<p style='font-size:14px;color:#555'>Loading PayPal…</p>";
+  document.getElementById("paypalModal").style.display="flex";
+  document.getElementById("paypalButtons").innerHTML="Loading PayPal…";
 
   setTimeout(function(){
-
     if(!window.paypal){
-      document.getElementById("paypalButtons").innerHTML =
-        "<p style='color:red;font-size:14px'>PayPal blocked by browser. Disable ad-blocker or open in another browser.</p>";
+      document.getElementById("paypalButtons").innerHTML=
+        "<p style='color:red'>PayPal blocked. Please open in another browser.</p>";
       return;
     }
 
-    document.getElementById("paypalButtons").innerHTML = "";
-
     paypal.Buttons({
-      style:{ layout:'vertical', color:'gold', shape:'pill', label:'pay' },
       createOrder:function(data, actions){
         return actions.order.create({
           purchase_units:[{
@@ -246,12 +239,11 @@ function payNow(planName, usdAmount){
         });
       }
     }).render("#paypalButtons");
-
-  }, 700);
+  },600);
 }
 
 function closeModal(){
-  document.getElementById("paypalModal").style.display = "none";
+  document.getElementById("paypalModal").style.display="none";
 }
 </script>
 
