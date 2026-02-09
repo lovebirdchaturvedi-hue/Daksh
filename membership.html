@@ -2,220 +2,264 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Supplier Membership Plans | APD Global Trade</title>
+<title>Supplier Membership | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- PayPal SDK (LIVE) -->
+<script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD&intent=capture"></script>
 
 <style>
 body{
   margin:0;
-  font-family:Inter,Arial,sans-serif;
-  background:#f6f7f9;
-  color:#222;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#f5f7fb;
+  color:#0f172a;
 }
-.section{
+.container{
   max-width:1200px;
-  margin:auto;
-  padding:60px 20px;
+  margin:60px auto;
+  padding:0 20px;
 }
 h1{
   text-align:center;
-  font-size:32px;
-  margin-bottom:8px;
 }
-.sub{
+.subtitle{
   text-align:center;
-  color:#555;
+  color:#475569;
   margin-bottom:40px;
 }
-
+.section{
+  margin-bottom:80px;
+}
 .plans{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:24px;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
 }
-
 .plan{
   background:#fff;
-  border-radius:14px;
-  padding:28px;
-  box-shadow:0 12px 30px rgba(0,0,0,.08);
+  border-radius:18px;
+  padding:30px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
-
-.plan h2{
-  margin:0 0 6px;
+.plan.highlight{
+  border:2px solid #d4af37;
 }
-
+.plan h3{
+  margin-top:0;
+}
 .price{
-  font-size:28px;
+  font-size:26px;
   font-weight:700;
-  margin:12px 0;
+  margin:15px 0;
 }
-
-.duration{
-  font-size:13px;
-  color:#777;
-}
-
 .plan ul{
   list-style:none;
   padding:0;
-  margin:20px 0;
 }
-
-.plan li{
-  margin-bottom:10px;
-  font-size:14px;
+.plan ul li{
+  margin:10px 0;
 }
-
-.plan a{
-  display:block;
-  text-align:center;
-  margin-top:18px;
-  background:#d6b25e;
+.btn{
+  margin-top:20px;
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:999px;
+  background:#d4af37;
   color:#000;
-  padding:12px;
-  border-radius:30px;
   font-weight:600;
-  text-decoration:none;
+  cursor:pointer;
 }
-
-.highlight{
-  border:2px solid #d6b25e;
+.note{
+  text-align:center;
+  font-size:14px;
+  color:#475569;
+  margin-top:15px;
+}
+footer{
+  text-align:center;
+  padding:40px 20px;
+  color:#64748b;
+}
+footer a{
+  color:#d4af37;
+  text-decoration:none;
 }
 </style>
 </head>
 
 <body>
 
+<div class="container">
+
 <!-- ================= DOMESTIC ================= -->
-<section class="section">
+<div class="section">
 <h1>Domestic Supplier Membership (India)</h1>
-<p class="sub">For Indian suppliers targeting domestic & international buyers</p>
+<p class="subtitle">For Indian suppliers targeting domestic & international buyers</p>
 
 <div class="plans">
 
-<div class="plan">
-<h2>Domestic Basic</h2>
-<div class="price">₹24,999</div>
-<div class="duration">3 Months</div>
-<ul>
-<li>✔ View domestic buyer RFQs</li>
-<li>✔ Limited RFQ visibility</li>
-<li>✖ Buyer contact locked</li>
-<li>✔ Email support</li>
-</ul>
-<a href="https://wa.me/919266418868">Apply for Basic</a>
-</div>
+  <div class="plan">
+    <h3>Domestic Basic</h3>
+    <div class="price">₹24,999</div>
+    <p>3 Months</p>
+    <ul>
+      <li>✔ View domestic buyer RFQs</li>
+      <li>✔ Limited RFQ visibility</li>
+      <li>✖ Buyer contact locked</li>
+      <li>✔ Email support</li>
+    </ul>
+    <button class="btn" onclick="payNow('Domestic Basic',24999)">Apply for Basic</button>
+  </div>
 
-<div class="plan highlight">
-<h2>Domestic Gold</h2>
-<div class="price">₹49,999</div>
-<div class="duration">6 Months</div>
-<ul>
-<li>✔ Domestic + International RFQs</li>
-<li>✔ Buyer phone & email</li>
-<li>✔ Priority RFQ alerts</li>
-<li>✔ WhatsApp support</li>
-</ul>
-<a href="https://wa.me/919266418868">Apply for Gold</a>
-</div>
+  <div class="plan highlight">
+    <h3>Domestic Gold</h3>
+    <div class="price">₹49,999</div>
+    <p>6 Months</p>
+    <ul>
+      <li>✔ Domestic + International RFQs</li>
+      <li>✔ Buyer phone & email</li>
+      <li>✔ Priority RFQ alerts</li>
+      <li>✔ WhatsApp support</li>
+    </ul>
+    <button class="btn" onclick="payNow('Domestic Gold',49999)">Apply for Gold</button>
+  </div>
 
-<div class="plan">
-<h2>Domestic Platinum</h2>
-<div class="price">₹99,999</div>
-<div class="duration">12 Months</div>
-<ul>
-<li>✔ All RFQs unlocked</li>
-<li>✔ Verified buyers only</li>
-<li>✔ Priority listing</li>
-<li>✔ Dedicated support</li>
-</ul>
-<a href="https://wa.me/919266418868">Apply for Platinum</a>
-</div>
+  <div class="plan">
+    <h3>Domestic Platinum</h3>
+    <div class="price">₹99,999</div>
+    <p>12 Months</p>
+    <ul>
+      <li>✔ All RFQs unlocked</li>
+      <li>✔ Verified buyers only</li>
+      <li>✔ Priority listing</li>
+      <li>✔ Dedicated support</li>
+    </ul>
+    <button class="btn" onclick="payNow('Domestic Platinum',99999)">Apply for Platinum</button>
+  </div>
 
 </div>
-</section>
+</div>
 
 <!-- ================= INTERNATIONAL ================= -->
-<section class="section">
+<div class="section">
 <h1>International Supplier Membership</h1>
-<p class="sub">For exporters & manufacturers outside India</p>
+<p class="subtitle">For exporters & manufacturers outside India</p>
 
 <div class="plans">
 
-<div class="plan">
-<h2>International Basic</h2>
-<div class="price">USD 499</div>
-<div class="duration">3 Months</div>
-<ul>
-<li>✔ International buyer RFQs</li>
-<li>✔ Limited access</li>
-<li>✖ Buyer contact locked</li>
-<li>✔ Email support</li>
-</ul>
-<a href="https://wa.me/919266418868">Apply for Basic</a>
+  <div class="plan">
+    <h3>International Basic</h3>
+    <div class="price">USD 499</div>
+    <p>3 Months</p>
+    <ul>
+      <li>✔ International buyer RFQs</li>
+      <li>✔ Limited access</li>
+      <li>✖ Buyer contact locked</li>
+      <li>✔ Email support</li>
+    </ul>
+    <button class="btn" onclick="payNow('International Basic',499)">Apply for Basic</button>
+  </div>
+
+  <div class="plan highlight">
+    <h3>International Gold</h3>
+    <div class="price">USD 899</div>
+    <p>6 Months</p>
+    <ul>
+      <li>✔ All global RFQs</li>
+      <li>✔ Buyer contacts unlocked</li>
+      <li>✔ Priority RFQs</li>
+      <li>✔ WhatsApp support</li>
+    </ul>
+    <button class="btn" onclick="payNow('International Gold',899)">Apply for Gold</button>
+  </div>
+
+  <div class="plan">
+    <h3>International Platinum</h3>
+    <div class="price">USD 1,499</div>
+    <p>12 Months</p>
+    <ul>
+      <li>✔ Verified global buyers</li>
+      <li>✔ Priority handling</li>
+      <li>✔ Dedicated account manager</li>
+    </ul>
+    <button class="btn" onclick="payNow('International Platinum',1499)">Apply for Platinum</button>
+  </div>
+
+</div>
 </div>
 
-<div class="plan highlight">
-<h2>International Gold</h2>
-<div class="price">USD 899</div>
-<div class="duration">6 Months</div>
-<ul>
-<li>✔ All global RFQs</li>
-<li>✔ Buyer contacts unlocked</li>
-<li>✔ Priority RFQs</li>
-<li>✔ WhatsApp support</li>
-</ul>
-<a href="https://wa.me/919266418868">Apply for Gold</a>
 </div>
 
-<div class="plan">
-<h2>International Platinum</h2>
-<div class="price">USD 1,499</div>
-<div class="duration">12 Months</div>
-<ul>
-<li>✔ Verified global buyers</li>
-<li>✔ Priority handling</li>
-<li>✔ Dedicated account manager</li>
-</ul>
-<a href="https://wa.me/919266418868">Apply for Platinum</a>
-</div>
-
-</div>
-</section>
-
-<!-- ================= FOOTER ================= -->
-<footer style="
-  background:#020617;
-  color:#9ca3af;
-  text-align:center;
-  padding:40px 20px;
-  font-size:14px;
-">
-  <p style="color:#c9a44a;font-weight:600;margin-bottom:6px;">
-    APD Global Trade
-  </p>
-  <p>Elite B2B Trade Facilitation Platform</p>
-
-  <p style="margin:10px 0;">
-    <a href="/terms.html" style="color:#c9a44a;text-decoration:none;">Terms</a> |
-    <a href="/privacy.html" style="color:#c9a44a;text-decoration:none;">Privacy</a> |
-    <a href="/disclaimer.html" style="color:#c9a44a;text-decoration:none;">Disclaimer</a>
-  </p>
-
-  <p>
-    📧 info@apdglobaltradehub.com <br>
-    ☎ +1 (202) 780-1366 <br>
-    💬 WhatsApp: +91 92664 18868
-  </p>
+<footer>
+<p>APD Global Trade</p>
+<p>
+<a href="/terms.html">Terms</a> |
+<a href="/privacy.html">Privacy</a> |
+<a href="/shipping-policy.html">Delivery Policy</a>
+</p>
 </footer>
 
-<a href="https://wa.me/919266418868" target="_blank"
-style="position:fixed;bottom:20px;right:20px;width:56px;height:56px;
-background:#25D366;color:#fff;border-radius:50%;
-display:flex;align-items:center;justify-content:center;
-font-size:28px;box-shadow:0 10px 25px rgba(0,0,0,.25);
-z-index:9999;text-decoration:none;">💬</a>
+<!-- ================= PAYPAL MODAL ================= -->
+
+<div id="paypalModal" style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.7);
+align-items:center;
+justify-content:center;
+z-index:9999;">
+  <div style="background:#fff;padding:30px;border-radius:16px;width:90%;max-width:420px">
+    <h3>Complete Payment</h3>
+    <p style="font-size:14px">
+      Payment will be reviewed and approved after documentation verification.
+    </p>
+    <div id="paypalButtons"></div>
+    <br>
+    <button onclick="closeModal()">Cancel</button>
+  </div>
+</div>
+
+<script>
+function payNow(plan, amount){
+  document.getElementById("paypalButtons").innerHTML = "";
+  document.getElementById("paypalModal").style.display = "flex";
+
+  paypal.Buttons({
+    style:{
+      layout:'vertical',
+      color:'gold',
+      shape:'pill',
+      label:'pay'
+    },
+    createOrder:function(data, actions){
+      return actions.order.create({
+        purchase_units:[{
+          description: plan + " Membership Application Fee – APD Global Trade",
+          amount:{
+            currency_code:"USD",
+            value: amount
+          }
+        }]
+      });
+    },
+    onApprove:function(data, actions){
+      return actions.order.capture().then(function(){
+        window.location.href = "/payment-received.html";
+      });
+    },
+    onError:function(){
+      alert("Payment failed. Please try again.");
+    }
+  }).render("#paypalButtons");
+}
+
+function closeModal(){
+  document.getElementById("paypalModal").style.display = "none";
+}
+</script>
 
 </body>
 </html>
