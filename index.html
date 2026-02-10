@@ -159,7 +159,7 @@ header nav a:hover{color:var(--gold-soft)}
   to{transform:translateX(-100%)}
 }
 
-/* SEA (FIXED) */
+/* SEA */
 .sea{
   min-height:100vh;
   background:
@@ -168,7 +168,7 @@ header nav a:hover{color:var(--gold-soft)}
   background-size:cover;
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
-  align-items:center; /* FIX */
+  align-items:center;
   padding:80px 40px;
   gap:40px;
 }
@@ -248,7 +248,6 @@ footer a{color:var(--gold);text-decoration:none;margin:0 6px}
   <div class="earth-wrap"><div class="earth night"></div></div>
 </section>
 
-<!-- LIVE RFQ -->
 <section class="live-rfq">
   <div class="live-rfq-label">🔴 Live RFQ Update</div>
   <div class="live-rfq-track" id="rfqTicker">
@@ -283,15 +282,17 @@ footer a{color:var(--gold);text-decoration:none;margin:0 6px}
 <a class="float whatsapp" href="https://wa.me/919266418868">💬</a>
 <a class="float download" href="/download-app.html">📲 Download App</a>
 
-<!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT"
+  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+  authDomain: "apd-globaltrade-prod.firebaseapp.com",
+  projectId: "apd-globaltrade-prod",
+  storageBucket: "apd-globaltrade-prod.firebasestorage.app",
+  messagingSenderId: "226407312435",
+  appId: "1:226407312435:web:f8a54b1132af3899170746"
 };
 
 const app = initializeApp(firebaseConfig);
