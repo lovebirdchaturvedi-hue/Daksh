@@ -33,8 +33,18 @@ header{
 header .logo{
   position:absolute;
   left:30px;
-  color:var(--gold);
-  font-weight:600;
+  font-weight:700;
+}
+.premium-logo{
+  background:linear-gradient(90deg,#c9a44a,#fff,#c9a44a);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:premiumGlow 3s ease-in-out infinite;
+}
+@keyframes premiumGlow{
+  0%{text-shadow:0 0 6px rgba(201,164,74,.4)}
+  50%{text-shadow:0 0 28px rgba(201,164,74,.9)}
+  100%{text-shadow:0 0 6px rgba(201,164,74,.4)}
 }
 header nav a{
   color:#e5e7eb;
@@ -71,7 +81,6 @@ header nav a:hover{color:var(--gold-soft)}
   width:260px;
   height:260px;
   margin:auto;
-  z-index:1;
   pointer-events:none;
 }
 .earth{
@@ -106,7 +115,6 @@ header nav a:hover{color:var(--gold-soft)}
   font-weight:600;
   margin:6px;
   display:inline-block;
-  z-index:5;
 }
 .badges{
   display:flex;
@@ -152,8 +160,15 @@ header nav a:hover{color:var(--gold-soft)}
   white-space:nowrap;
   animation:rfqScroll 35s linear infinite;
 }
-.live-rfq-track span{font-size:15px;color:#e5e7eb}
-.live-rfq-track b{color:#f5e7c6}
+.live-rfq-track span{
+  font-size:15px;
+  color:#e5e7eb;
+  cursor:pointer;
+}
+.live-rfq-track span:hover{
+  color:#f5e7c6;
+  text-decoration:underline;
+}
 @keyframes rfqScroll{
   from{transform:translateX(100%)}
   to{transform:translateX(-100%)}
@@ -174,7 +189,6 @@ header nav a:hover{color:var(--gold-soft)}
 }
 .sea img{width:100%;max-width:480px;opacity:.9}
 
-/* CONTACT */
 .contact-card{
   background:rgba(11,29,54,.85);
   backdrop-filter:blur(10px);
@@ -191,7 +205,7 @@ footer{
   padding:40px 20px;
   color:#9ca3af;
 }
-footer a{color:var(--gold);text-decoration:none;margin:0 6px}
+footer a{color:var(--gold);margin:0 6px;text-decoration:none}
 
 /* FLOAT */
 .float{position:fixed;right:20px;z-index:9999}
@@ -218,7 +232,7 @@ footer a{color:var(--gold);text-decoration:none;margin:0 6px}
 <body>
 
 <header>
-  <div class="logo">APD Global Trade</div>
+  <div class="logo premium-logo">APD Global Trade</div>
   <nav>
     <a href="/">Home</a>
     <a href="/buyer-rfqs.html">Buyer RFQs</a>
@@ -299,6 +313,10 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const ticker = document.getElementById("rfqTicker");
 
+function aiSummary(r){
+  return `Buyer seeking ${r.product} (${r.quantity}) for ${r.country || "global"} market`;
+}
+
 async function loadRFQs(){
   const q = query(collection(db,"rfqs"), orderBy("createdAt","desc"), limit(10));
   const snap = await getDocs(q);
@@ -306,17 +324,23 @@ async function loadRFQs(){
 
   if(snap.empty){
     ticker.innerHTML = `
-      <span>Buyer posted to import <b>500 MT ICUMSA Sugar</b> from Brazil</span>
-      <span>Buyer requirement for <b>Palm Oil – CIF India</b></span>
-      <span>Buyer RFQ for <b>Basmati Rice – 1000 MT – UAE</b></span>
-      <span>Importer seeking <b>Yellow Maize – Africa</b></span>
+      <span onclick="location.href='/membership.html'">🌍 Buyer seeking ICUMSA Sugar (500 MT) for global market</span>
+      <span onclick="location.href='/membership.html'">🇮🇳 Import requirement: Turmeric Powder (686 MT) – India</span>
+      <span onclick="location.href='/membership.html'">🇦🇪 Buyer seeking Basmati Rice (996 MT) for UAE market</span>
     `;
     return;
   }
 
   snap.forEach(doc=>{
     const r = doc.data();
-    ticker.innerHTML += `<span>Buyer RFQ for <b>${r.product}</b> – ${r.quantity} – ${r.destination}</span>`;
+    const country = r.destination || r.country || "Global";
+    const code = (r.countryCode || "").toLowerCase();
+    const flag = code ? `<img src="https://flagcdn.com/16x12/${code}.png" style="vertical-align:middle;margin-right:6px">` : "🌍";
+
+    ticker.innerHTML += `
+      <span onclick="location.href='/membership.html'">
+        ${flag} ${aiSummary({ ...r, country })}
+      </span>`;
   });
 }
 loadRFQs();
