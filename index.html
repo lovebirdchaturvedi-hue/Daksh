@@ -142,6 +142,43 @@ header nav a:hover{color:var(--gold-soft)}
   50%{text-shadow:0 0 35px rgba(201,164,74,.7)}
 }
 
+/* ================= LIVE RFQ ================= */
+.live-rfq{
+  background:linear-gradient(90deg,#020617,#071427);
+  padding:18px 0;
+  border-top:1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  overflow:hidden;
+}
+.live-rfq-label{
+  text-align:center;
+  font-weight:700;
+  color:#c9a44a;
+  margin-bottom:10px;
+  letter-spacing:1px;
+}
+.live-rfq-marquee{
+  width:100%;
+  overflow:hidden;
+}
+.live-rfq-track{
+  display:flex;
+  gap:60px;
+  white-space:nowrap;
+  animation:rfqScroll 35s linear infinite;
+}
+.live-rfq-track span{
+  color:#e5e7eb;
+  font-size:15px;
+}
+.live-rfq-track b{
+  color:#f5e7c6;
+}
+@keyframes rfqScroll{
+  from{transform:translateX(100%)}
+  to{transform:translateX(-100%)}
+}
+
 /* ================= SEA ================= */
 .sea{
   min-height:100vh;
@@ -155,77 +192,12 @@ header nav a:hover{color:var(--gold-soft)}
   padding:80px 40px;
   gap:40px;
 }
-.sea img{
-  width:100%;
-  max-width:480px;
-  opacity:.9;
-}
-
-/* ================= CONTACT ================= */
-.contact-card{
-  background:rgba(11,29,54,.85);
-  backdrop-filter:blur(10px);
-  border-radius:22px;
-  padding:40px 30px;
-  text-align:center;
-  box-shadow:0 30px 60px rgba(0,0,0,.6);
-}
-
-/* ================= FOOTER ================= */
-footer{
-  background:#020617;
-  text-align:center;
-  padding:40px 20px;
-  color:#9ca3af;
-}
-footer a{
-  color:var(--gold);
-  margin:0 6px;
-  text-decoration:none;
-}
-
-/* ================= FLOAT ================= */
-.float{
-  position:fixed;
-  right:20px;
-  z-index:9999;
-}
-.whatsapp{
-  bottom:80px;
-  width:56px;
-  height:56px;
-  background:#25D366;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:28px;
-  color:#fff;
-  text-decoration:none;
-}
-.download{
-  bottom:20px;
-  padding:14px 22px;
-  background:linear-gradient(135deg,var(--gold),var(--gold-soft));
-  color:#000;
-  border-radius:999px;
-  font-weight:600;
-  text-decoration:none;
-}
 
 /* ================= MOBILE ================= */
 @media(max-width:900px){
-  .hero{
-    grid-template-columns:1fr;
-    text-align:center;
-  }
-  .earth-wrap{
-    display:none;
-  }
-  .sea{
-    grid-template-columns:1fr;
-    text-align:center;
-  }
+  .hero{grid-template-columns:1fr}
+  .earth-wrap{display:none}
+  .sea{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -268,40 +240,69 @@ footer a{
   <div class="earth-wrap"><div class="earth night"></div></div>
 </section>
 
+<!-- 🔴 LIVE RFQ AUTO FROM DATABASE -->
+<section class="live-rfq">
+  <div class="live-rfq-label">🔴 Live RFQ Update</div>
+  <div class="live-rfq-marquee">
+    <div class="live-rfq-track" id="rfqTicker">
+      <span>Loading live RFQs...</span>
+    </div>
+  </div>
+</section>
+
 <section class="sea">
   <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=900&q=60">
-
   <div class="contact-card">
     <h2>Global Trade Never Stops</h2>
     <p>Verified buyers. Real demand. Global logistics.</p>
     <div>
-      📧 info@apdglobaltradehub.com<br>
+      📧 info@apdglobaltrade.com<br>
       ☎ +1 (202) 780-1366<br>
       💬 WhatsApp: +91 92664 18868
     </div>
   </div>
-
   <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=900&q=60">
 </section>
 
 <footer>
   <p style="color:var(--gold);font-weight:600">APD Global Trade</p>
   <p>
-<a href="/terms.html">Terms</a> |
-<a href="/privacy.html">Privacy</a> |
-<a href="/disclaimer.html">Disclaimer</a> |
-<a href="/shipping-policy.html">Shipping Policy</a>
-
+    <a href="/terms.html">Terms</a> |
+    <a href="/privacy.html">Privacy</a> |
+    <a href="/disclaimer.html">Disclaimer</a> |
+    <a href="/shipping-policy.html">Shipping Policy</a>
   </p>
 </footer>
 
 <a class="float whatsapp" href="https://wa.me/919266418868">💬</a>
 <a class="float download" href="/download-app.html">📲 Download App</a>
 
+<!-- FIREBASE LIVE RFQ -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, query, orderBy, limit, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const ticker = document.getElementById("rfqTicker");
+
+async function loadRFQs(){
+  const q = query(collection(db,"rfqs"), orderBy("createdAt","desc"), limit(10));
+  const snap = await getDocs(q);
+  ticker.innerHTML = "";
+  snap.forEach(doc=>{
+    const r = doc.data();
+    ticker.innerHTML += `<span>Buyer posted RFQ for <b>${r.product}</b> – ${r.quantity} – ${r.destination}</span>`;
+  });
+}
+loadRFQs();
+</script>
+
 </body>
 </html>
-
-
-
-
-
