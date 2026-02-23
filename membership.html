@@ -2,76 +2,119 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Supplier Membership | APD Global Trade</title>
+<title>Elite Supplier Membership | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
   margin:0;
-  font-family:Arial, Helvetica, sans-serif;
-  background:#f5f7fb;
-  color:#0f172a;
+  font-family: 'Segoe UI', sans-serif;
+  background:#070c18;
+  color:#e5e7eb;
 }
-.container{
+.hero{
+  background:radial-gradient(circle at top,#1f2937,#070c18);
+  text-align:center;
+  padding:100px 20px;
+}
+.hero h1{
+  font-size:48px;
+  background:linear-gradient(90deg,#d4af37,#facc15);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+.hero p{
+  max-width:700px;
+  margin:20px auto;
+  color:#9ca3af;
+}
+.section{
   max-width:1200px;
-  margin:60px auto;
+  margin:100px auto;
   padding:0 20px;
 }
-h1{
+.section h2{
   text-align:center;
+  margin-bottom:10px;
 }
 .subtitle{
   text-align:center;
-  color:#475569;
-  margin-bottom:40px;
-}
-.section{
-  margin-bottom:80px;
+  color:#9ca3af;
+  margin-bottom:60px;
 }
 .plans{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:30px;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:40px;
 }
 .plan{
-  background:#fff;
-  border-radius:18px;
-  padding:30px;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  background:linear-gradient(145deg,#111827,#0f172a);
+  border-radius:24px;
+  padding:40px;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+  transition:.4s ease;
+  border:1px solid rgba(212,175,55,.15);
 }
-.plan.highlight{
+.plan:hover{
+  transform:translateY(-10px);
+  border:1px solid #d4af37;
+}
+.highlight{
   border:2px solid #d4af37;
+  box-shadow:0 25px 70px rgba(212,175,55,.3);
 }
-.plan h3{
-  margin-top:0;
-}
-.price{
-  font-size:26px;
-  font-weight:700;
-  margin:15px 0;
-}
-.plan ul{
-  list-style:none;
-  padding:0;
-}
-.plan ul li{
-  margin:10px 0;
-}
-.btn{
-  margin-top:20px;
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:999px;
+.badge{
   background:#d4af37;
   color:#000;
-  font-weight:600;
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+  display:inline-block;
+  margin-bottom:15px;
+}
+.price{
+  font-size:32px;
+  font-weight:800;
+}
+.old-price{
+  text-decoration:line-through;
+  color:#6b7280;
+  font-size:16px;
+}
+ul{
+  list-style:none;
+  padding:0;
+  margin:25px 0;
+}
+ul li{
+  margin:12px 0;
+  color:#cbd5e1;
+}
+.btn{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:999px;
+  font-weight:700;
+  font-size:15px;
   cursor:pointer;
+  background:linear-gradient(90deg,#d4af37,#facc15);
+  color:#000;
+}
+.btn:hover{
+  opacity:.9;
+}
+.trust{
+  text-align:center;
+  margin-top:120px;
+  padding:80px 20px;
+  background:#0f172a;
 }
 footer{
   text-align:center;
   padding:40px 20px;
-  color:#64748b;
+  color:#6b7280;
 }
 footer a{
   color:#d4af37;
@@ -82,80 +125,89 @@ footer a{
 
 <body>
 
-<div class="container">
+<section class="hero">
+  <h1>Founding Supplier Membership</h1>
+  <p>Join APD Global Trade as an early verified supplier. Limited launch pricing for selected partners only.</p>
+</section>
 
 <!-- DOMESTIC -->
-<div class="section">
-<h1>Domestic Supplier Membership (India)</h1>
-<p class="subtitle">For Indian suppliers targeting domestic & international buyers</p>
+<section class="section">
+<h2>Domestic Supplier Membership</h2>
+<p class="subtitle">For Indian manufacturers & exporters</p>
 
 <div class="plans">
 
 <div class="plan">
-  <h3>Domestic Basic</h3>
-  <div class="price">₹24,999</div>
+  <h3>Basic</h3>
+  <div class="old-price">₹24,999</div>
+  <div class="price">₹14,999</div>
   <p>3 Months</p>
   <ul>
-    <li>✔ View domestic buyer RFQs</li>
-    <li>✔ Limited RFQ visibility</li>
+    <li>✔ View domestic RFQs</li>
+    <li>✔ Limited visibility</li>
     <li>✖ Buyer contact locked</li>
     <li>✔ Email support</li>
   </ul>
-  <button class="btn" onclick="payNow('Domestic Basic',299)">Apply for Basic</button>
+  <button class="btn" onclick="payNow('Domestic Basic',199)">Apply Now</button>
 </div>
 
 <div class="plan highlight">
-  <h3>Domestic Gold</h3>
-  <div class="price">₹49,999</div>
+  <div class="badge">MOST POPULAR</div>
+  <h3>Gold</h3>
+  <div class="old-price">₹49,999</div>
+  <div class="price">₹29,999</div>
   <p>6 Months</p>
   <ul>
     <li>✔ Domestic + International RFQs</li>
-    <li>✔ Buyer phone & email</li>
-    <li>✔ Priority RFQ alerts</li>
+    <li>✔ Buyer contacts unlocked</li>
+    <li>✔ Priority alerts</li>
     <li>✔ WhatsApp support</li>
   </ul>
-  <button class="btn" onclick="payNow('Domestic Gold',599)">Apply for Gold</button>
+  <button class="btn" onclick="payNow('Domestic Gold',399)">Apply Now</button>
 </div>
 
 <div class="plan">
-  <h3>Domestic Platinum</h3>
-  <div class="price">₹99,999</div>
+  <h3>Platinum</h3>
+  <div class="old-price">₹99,999</div>
+  <div class="price">₹59,999</div>
   <p>12 Months</p>
   <ul>
     <li>✔ All RFQs unlocked</li>
     <li>✔ Verified buyers only</li>
     <li>✔ Priority listing</li>
-    <li>✔ Dedicated support</li>
+    <li>✔ Dedicated manager</li>
   </ul>
-  <button class="btn" onclick="payNow('Domestic Platinum',1199)">Apply for Platinum</button>
+  <button class="btn" onclick="payNow('Domestic Platinum',799)">Apply Now</button>
 </div>
 
 </div>
-</div>
+</section>
 
 <!-- INTERNATIONAL -->
-<div class="section">
-<h1>International Supplier Membership</h1>
-<p class="subtitle">For exporters & manufacturers outside India</p>
+<section class="section">
+<h2>International Supplier Membership</h2>
+<p class="subtitle">For exporters outside India</p>
 
 <div class="plans">
 
 <div class="plan">
-  <h3>International Basic</h3>
-  <div class="price">USD 499</div>
+  <h3>Basic</h3>
+  <div class="old-price">$499</div>
+  <div class="price">$299</div>
   <p>3 Months</p>
   <ul>
-    <li>✔ International buyer RFQs</li>
+    <li>✔ International RFQs</li>
     <li>✔ Limited access</li>
-    <li>✖ Buyer contact locked</li>
     <li>✔ Email support</li>
   </ul>
-  <button class="btn" onclick="payNow('International Basic',499)">Apply for Basic</button>
+  <button class="btn" onclick="payNow('International Basic',299)">Apply Now</button>
 </div>
 
 <div class="plan highlight">
-  <h3>International Gold</h3>
-  <div class="price">USD 899</div>
+  <div class="badge">MOST POPULAR</div>
+  <h3>Gold</h3>
+  <div class="old-price">$899</div>
+  <div class="price">$599</div>
   <p>6 Months</p>
   <ul>
     <li>✔ All global RFQs</li>
@@ -163,87 +215,50 @@ footer a{
     <li>✔ Priority RFQs</li>
     <li>✔ WhatsApp support</li>
   </ul>
-  <button class="btn" onclick="payNow('International Gold',899)">Apply for Gold</button>
+  <button class="btn" onclick="payNow('International Gold',599)">Apply Now</button>
 </div>
 
 <div class="plan">
-  <h3>International Platinum</h3>
-  <div class="price">USD 1,499</div>
+  <h3>Platinum</h3>
+  <div class="old-price">$1,499</div>
+  <div class="price">$999</div>
   <p>12 Months</p>
   <ul>
     <li>✔ Verified global buyers</li>
     <li>✔ Priority handling</li>
     <li>✔ Dedicated account manager</li>
   </ul>
-  <button class="btn" onclick="payNow('International Platinum',1499)">Apply for Platinum</button>
+  <button class="btn" onclick="payNow('International Platinum',999)">Apply Now</button>
 </div>
 
 </div>
-</div>
-
-</div>
+</section>
 
 <footer>
-<p>APD Global Trade</p>
-<p>
-<a href="/terms.html">Terms</a> |
-<a href="/privacy.html">Privacy</a> |
-<a href="/shipping-policy.html">Delivery Policy</a>
-</p>
+© 2026 APD Global Trade | 
+<a href="#">Terms</a> | 
+<a href="#">Privacy</a>
 </footer>
 
-<!-- PAYPAL MODAL -->
-<div id="paypalModal" style="
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.7);
-align-items:center;
-justify-content:center;
-z-index:9999;">
-  <div style="background:#fff;padding:30px;border-radius:16px;width:90%;max-width:420px">
-    <h3>Complete Payment</h3>
-    <div id="paypalButtons"></div>
-    <br>
-    <button onclick="closeModal()">Cancel</button>
-  </div>
-</div>
-
-<!-- PAYPAL SDK (CLIENT ID ONLY) -->
-<script src="https://www.paypal.com/sdk/js?client-id=BAAldzZ21dj_YYD4j04pNHoiWzy4qWo5kfDt50n18qdQPFqeh6CaeI3sw7t7irYftnmVKlL4C4wLhmr7OA&currency=USD"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
 
 <script>
 function payNow(planName, usdAmount){
-  document.getElementById("paypalModal").style.display="flex";
-  document.getElementById("paypalButtons").innerHTML="Loading PayPal…";
-
-  setTimeout(function(){
-    if(!window.paypal){
-      document.getElementById("paypalButtons").innerHTML=
-        "<p style='color:red'>PayPal blocked. Please open in another browser.</p>";
-      return;
+  paypal.Buttons({
+    createOrder:function(data, actions){
+      return actions.order.create({
+        purchase_units:[{
+          description: planName + " – APD Global Trade",
+          amount:{ currency_code:"USD", value: usdAmount.toFixed(2) }
+        }]
+      });
+    },
+    onApprove:function(data, actions){
+      return actions.order.capture().then(function(){
+        window.location.href="/document-upload.html";
+      });
     }
-
-    paypal.Buttons({
-      createOrder:function(data, actions){
-        return actions.order.create({
-          purchase_units:[{
-            description: planName + " Membership – APD Global Trade",
-            amount:{ currency_code:"USD", value: usdAmount.toFixed(2) }
-          }]
-        });
-      },
-      onApprove:function(data, actions){
-        return actions.order.capture().then(function(){
-          window.location.href="/document-upload.html";
-        });
-      }
-    }).render("#paypalButtons");
-  },600);
-}
-
-function closeModal(){
-  document.getElementById("paypalModal").style.display="none";
+  }).render('body');
 }
 </script>
 
