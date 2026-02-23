@@ -43,6 +43,16 @@ h1{
   border:2px solid #d4af37;
   box-shadow:0 20px 50px rgba(212,175,55,.3);
 }
+.badge{
+  background:#d4af37;
+  color:#000;
+  padding:5px 10px;
+  font-size:12px;
+  font-weight:700;
+  border-radius:999px;
+  display:inline-block;
+  margin-bottom:10px;
+}
 .old-price{
   text-decoration:line-through;
   color:#6b7280;
@@ -59,16 +69,6 @@ h1{
 }
 .plan ul li{
   margin:10px 0;
-}
-.badge{
-  background:#d4af37;
-  color:#000;
-  padding:5px 10px;
-  font-size:12px;
-  font-weight:700;
-  border-radius:999px;
-  display:inline-block;
-  margin-bottom:10px;
 }
 .btn{
   margin-top:20px;
@@ -109,11 +109,6 @@ footer a{
   <div class="old-price">₹24,999</div>
   <div class="price">₹14,999</div>
   <p>3 Months</p>
-  <ul>
-    <li>✔ View domestic RFQs</li>
-    <li>✔ Limited visibility</li>
-    <li>✖ Buyer contact locked</li>
-  </ul>
   <button class="btn" onclick="payNow('Domestic Basic',199)">Apply Now</button>
 </div>
 
@@ -123,11 +118,6 @@ footer a{
   <div class="old-price">₹49,999</div>
   <div class="price">₹29,999</div>
   <p>6 Months</p>
-  <ul>
-    <li>✔ Domestic + International RFQs</li>
-    <li>✔ Buyer contacts unlocked</li>
-    <li>✔ Priority alerts</li>
-  </ul>
   <button class="btn" onclick="payNow('Domestic Gold',399)">Apply Now</button>
 </div>
 
@@ -136,12 +126,42 @@ footer a{
   <div class="old-price">₹99,999</div>
   <div class="price">₹59,999</div>
   <p>12 Months</p>
-  <ul>
-    <li>✔ All RFQs unlocked</li>
-    <li>✔ Verified buyers</li>
-    <li>✔ Dedicated manager</li>
-  </ul>
   <button class="btn" onclick="payNow('Domestic Platinum',799)">Apply Now</button>
+</div>
+
+</div>
+</div>
+
+<!-- INTERNATIONAL -->
+<div class="section">
+<h1>International Supplier Membership</h1>
+<p class="subtitle">Special Global Launch Pricing</p>
+
+<div class="plans">
+
+<div class="plan">
+  <h3>Basic</h3>
+  <div class="old-price">$499</div>
+  <div class="price">$299</div>
+  <p>3 Months</p>
+  <button class="btn" onclick="payNow('International Basic',299)">Apply Now</button>
+</div>
+
+<div class="plan highlight">
+  <div class="badge">MOST POPULAR</div>
+  <h3>Gold</h3>
+  <div class="old-price">$899</div>
+  <div class="price">$599</div>
+  <p>6 Months</p>
+  <button class="btn" onclick="payNow('International Gold',599)">Apply Now</button>
+</div>
+
+<div class="plan">
+  <h3>Platinum</h3>
+  <div class="old-price">$1,499</div>
+  <div class="price">$999</div>
+  <p>12 Months</p>
+  <button class="btn" onclick="payNow('International Platinum',999)">Apply Now</button>
 </div>
 
 </div>
@@ -150,7 +170,9 @@ footer a{
 </div>
 
 <footer>
-<p>© 2026 APD Global Trade</p>
+© 2026 APD Global Trade |
+<a href="/terms.html">Terms</a> |
+<a href="/privacy.html">Privacy</a>
 </footer>
 
 <!-- PAYPAL MODAL -->
