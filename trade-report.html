@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Annual Trade Report | APD Global Trade</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Inter;background:#020617;color:#fff;text-align:center}
+h1{font-family:'Playfair Display',serif;color:#e7cf88;margin-top:100px}
+.counter-section{display:flex;justify-content:center;gap:80px;flex-wrap:wrap;margin:120px 0}
+.counter{font-size:48px;color:#c9a44a}
+.label{color:#cbd5f5}
+</style>
+</head>
+<body>
+
+<h1>Annual Trade Activity Overview</h1>
+
+<div class="counter-section">
+  <div>
+    <div class="counter" data-target="250">0</div>
+    <div class="label">Million USD Volume</div>
+  </div>
+  <div>
+    <div class="counter" data-target="100">0</div>
+    <div class="label">Active Countries</div>
+  </div>
+  <div>
+    <div class="counter" data-target="5000">0</div>
+    <div class="label">Verified RFQs</div>
+  </div>
+</div>
+
+<script>
+const counters=document.querySelectorAll('.counter');
+counters.forEach(counter=>{
+  const update=()=>{
+    const target=+counter.getAttribute('data-target');
+    const count=+counter.innerText;
+    const inc=target/100;
+    if(count<target){
+      counter.innerText=Math.ceil(count+inc);
+      setTimeout(update,20);
+    }else{
+      counter.innerText=target;
+    }
+  }
+  update();
+});
+</script>
+
+</body>
+</html>
