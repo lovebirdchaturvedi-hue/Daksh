@@ -15,29 +15,55 @@ body{
   color:#e5e7eb;
 }
 
-.hero{
-  padding:120px 20px;
-  text-align:center;
-  background:linear-gradient(180deg,#0a0f1c,#0f172a);
+/* HEADER NAV */
+header{
+  background:#071427;
+  padding:18px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid rgba(212,175,55,.15);
 }
+.logo{
+  font-family:'Playfair Display',serif;
+  color:#d4af37;
+  font-size:20px;
+}
+nav a{
+  color:#cbd5e1;
+  text-decoration:none;
+  margin-left:25px;
+  font-size:14px;
+}
+nav a:hover{color:#d4af37}
 
+/* GOLD HERO */
+.hero{
+  padding:140px 20px;
+  text-align:center;
+  background:linear-gradient(180deg,#071427,#0a0f1c);
+  border-bottom:1px solid rgba(212,175,55,.15);
+}
 .hero h1{
   font-family:'Playfair Display',serif;
-  font-size:52px;
-  color:#d4af37;
-  margin-bottom:20px;
+  font-size:56px;
+  background:linear-gradient(90deg,#d4af37,#facc15,#d4af37);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:30px;
 }
-
 .hero p{
-  max-width:750px;
+  max-width:800px;
   margin:auto;
-  font-size:18px;
+  font-size:20px;
   color:#9ca3af;
+  line-height:1.7;
 }
 
+/* CONTENT */
 .container{
   max-width:1200px;
-  margin:100px auto;
+  margin:120px auto;
   padding:0 20px;
 }
 
@@ -90,33 +116,12 @@ body{
   margin-bottom:20px;
 }
 
-.plan h3{
-  font-size:24px;
-  margin-bottom:10px;
-}
+.plan h3{font-size:24px;margin-bottom:10px}
+.old-price{text-decoration:line-through;color:#6b7280}
+.price{font-size:36px;font-weight:700;margin:10px 0 20px 0}
 
-.old-price{
-  text-decoration:line-through;
-  color:#6b7280;
-}
-
-.price{
-  font-size:36px;
-  font-weight:700;
-  margin:10px 0 20px 0;
-}
-
-ul{
-  list-style:none;
-  padding:0;
-  margin:0 0 30px 0;
-}
-
-ul li{
-  margin:14px 0;
-  font-size:15px;
-  color:#cbd5e1;
-}
+ul{list-style:none;padding:0;margin:0 0 30px 0}
+ul li{margin:14px 0;font-size:15px;color:#cbd5e1}
 
 .btn{
   width:100%;
@@ -130,31 +135,34 @@ ul li{
   color:#000;
 }
 
-.btn:hover{
-  opacity:.9;
-}
-
 footer{
   text-align:center;
   padding:80px 20px;
   color:#6b7280;
   border-top:1px solid rgba(255,255,255,0.05);
 }
-
-footer a{
-  color:#d4af37;
-  text-decoration:none;
-}
+footer a{color:#d4af37;text-decoration:none}
 </style>
 </head>
 
 <body>
 
+<header>
+  <div class="logo">APD Global Trade</div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/buyer-rfqs.html">Buyer RFQs</a>
+    <a href="/membership.html">Membership</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+</header>
+
 <section class="hero">
-  <h1>Elite Verified Supplier Network</h1>
+  <h1>Take Verified Membership & Expand Your Global Trade Reach</h1>
   <p>
-    Position your company inside a curated global trade ecosystem. 
-    Access verified RFQs, serious international buyers, and priority trade visibility.
+    Join APD Global Trade’s structured international supplier network.
+    Access verified RFQs, connect with serious buyers,
+    and position your company inside a disciplined global trade ecosystem.
   </p>
 </section>
 
@@ -326,3 +334,4 @@ function closeModal(){
 
 </body>
 </html>
+
