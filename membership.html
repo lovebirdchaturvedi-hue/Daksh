@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Verified Supplier Membership | APD Global Trade</title>
+<title>Elite Trade Membership | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -15,7 +15,6 @@ body{
   color:#e5e7eb;
 }
 
-/* HEADER NAV */
 header{
   background:#071427;
   padding:18px 40px;
@@ -24,43 +23,46 @@ header{
   align-items:center;
   border-bottom:1px solid rgba(212,175,55,.15);
 }
+
 .logo{
   font-family:'Playfair Display',serif;
   color:#d4af37;
   font-size:20px;
 }
+
 nav a{
   color:#cbd5e1;
   text-decoration:none;
   margin-left:25px;
   font-size:14px;
 }
+
 nav a:hover{color:#d4af37}
 
-/* GOLD HERO */
 .hero{
   padding:140px 20px;
   text-align:center;
   background:linear-gradient(180deg,#071427,#0a0f1c);
   border-bottom:1px solid rgba(212,175,55,.15);
 }
+
 .hero h1{
   font-family:'Playfair Display',serif;
-  font-size:56px;
+  font-size:52px;
   background:linear-gradient(90deg,#d4af37,#facc15,#d4af37);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   margin-bottom:30px;
 }
+
 .hero p{
-  max-width:800px;
+  max-width:850px;
   margin:auto;
   font-size:20px;
   color:#9ca3af;
-  line-height:1.7;
+  line-height:1.8;
 }
 
-/* CONTENT */
 .container{
   max-width:1200px;
   margin:120px auto;
@@ -82,27 +84,26 @@ nav a:hover{color:#d4af37}
 
 .plans{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
   gap:40px;
 }
 
 .plan{
   background:#111827;
-  padding:50px 40px;
-  border-radius:28px;
+  padding:60px 45px;
+  border-radius:30px;
   border:1px solid rgba(212,175,55,0.15);
   transition:.4s ease;
 }
 
 .plan:hover{
-  transform:translateY(-10px);
+  transform:translateY(-12px);
   border:1px solid #d4af37;
-  box-shadow:0 30px 80px rgba(212,175,55,0.15);
+  box-shadow:0 30px 80px rgba(212,175,55,0.25);
 }
 
 .highlight{
   border:2px solid #d4af37;
-  box-shadow:0 30px 80px rgba(212,175,55,0.25);
 }
 
 .badge{
@@ -116,20 +117,20 @@ nav a:hover{color:#d4af37}
   margin-bottom:20px;
 }
 
-.plan h3{font-size:24px;margin-bottom:10px}
+.plan h3{font-size:26px;margin-bottom:15px}
 .old-price{text-decoration:line-through;color:#6b7280}
-.price{font-size:36px;font-weight:700;margin:10px 0 20px 0}
+.price{font-size:42px;font-weight:700;margin:15px 0}
 
-ul{list-style:none;padding:0;margin:0 0 30px 0}
-ul li{margin:14px 0;font-size:15px;color:#cbd5e1}
+ul{list-style:none;padding:0;margin:30px 0}
+ul li{margin:16px 0;font-size:15px;color:#cbd5e1}
 
 .btn{
   width:100%;
-  padding:16px;
+  padding:18px;
   border-radius:999px;
   border:none;
-  font-weight:600;
-  font-size:15px;
+  font-weight:700;
+  font-size:16px;
   cursor:pointer;
   background:linear-gradient(90deg,#d4af37,#facc15);
   color:#000;
@@ -141,6 +142,7 @@ footer{
   color:#6b7280;
   border-top:1px solid rgba(255,255,255,0.05);
 }
+
 footer a{color:#d4af37;text-decoration:none}
 </style>
 </head>
@@ -152,126 +154,65 @@ footer a{color:#d4af37;text-decoration:none}
   <nav>
     <a href="/">Home</a>
     <a href="/buyer-rfqs.html">Buyer RFQs</a>
-    <a href="/membership.html">Membership</a>
     <a href="/contact.html">Contact</a>
   </nav>
 </header>
 
 <section class="hero">
-  <h1>Take Verified Membership & Expand Your Global Trade Reach</h1>
+  <h1>Elite Global Trade Intelligence Access</h1>
   <p>
-    Join APD Global Trade’s structured international supplier network.
-    Access verified RFQs, connect with serious buyers,
-    and position your company inside a disciplined global trade ecosystem.
+    Access verified international agro buyers, live government tenders,
+    structured country demand intelligence, and direct buyer introductions.
+    Built exclusively for serious exporters ready to scale globally.
   </p>
 </section>
 
 <div class="container">
 
-<h2 class="section-title">Domestic Supplier Membership</h2>
-<p class="subtitle">Founding Partner Launch Access</p>
+<h2 class="section-title">International Membership Plans</h2>
+<p class="subtitle">High-Level Access For Verified Exporters</p>
 
 <div class="plans">
 
-<div class="plan">
-  <h3>Domestic Basic</h3>
-  <div class="old-price">₹24,999</div>
-  <div class="price">₹14,999</div>
-  <p>3 Months</p>
-  <ul>
-    <li>✔ Verified Domestic RFQs</li>
-    <li>✔ Secure Supplier Dashboard</li>
-    <li>✔ Email Notifications</li>
-    <li>✔ Standard Support</li>
-  </ul>
-  <button class="btn" onclick="payNow('Domestic Basic',199)">Apply Now</button>
-</div>
-
+<!-- 6 MONTH PLAN -->
 <div class="plan highlight">
-  <div class="badge">MOST POPULAR</div>
-  <h3>Domestic Gold</h3>
-  <div class="old-price">₹49,999</div>
-  <div class="price">₹29,999</div>
-  <p>6 Months</p>
+  <div class="badge">FOUNDERS ACCESS</div>
+  <h3>Global Professional – 6 Months</h3>
+  <div class="old-price">$3,500</div>
+  <div class="price">$2,000</div>
   <ul>
-    <li>✔ Domestic + International RFQs</li>
-    <li>✔ Buyer Contact Access</li>
-    <li>✔ Priority RFQ Alerts</li>
-    <li>✔ WhatsApp Support</li>
-    <li>✔ Enhanced Profile Visibility</li>
+    <li>✔ Verified Global Buyer Database Access</li>
+    <li>✔ Direct Buyer Contact Unlock</li>
+    <li>✔ Weekly Live RFQ Alerts</li>
+    <li>✔ International Government Tender Alerts</li>
+    <li>✔ Country-Wise Demand Analysis Reports</li>
+    <li>✔ Buyer Volume & Payment Verification</li>
+    <li>✔ WhatsApp Priority Trade Alerts</li>
+    <li>✔ Featured Supplier Rotation</li>
+    <li>✔ Email & Phone Support</li>
   </ul>
-  <button class="btn" onclick="payNow('Domestic Gold',399)">Apply Now</button>
+  <button class="btn" onclick="payNow('Global Professional – 6 Months',2000)">Apply Now</button>
 </div>
 
+<!-- 12 MONTH PLAN -->
 <div class="plan">
-  <h3>Domestic Platinum</h3>
-  <div class="old-price">₹99,999</div>
-  <div class="price">₹59,999</div>
-  <p>12 Months</p>
+  <div class="badge">ELITE LEVEL</div>
+  <h3>Global Elite – 12 Months</h3>
+  <div class="old-price">$6,500</div>
+  <div class="price">$3,500</div>
   <ul>
-    <li>✔ All RFQs Unlocked</li>
-    <li>✔ Dedicated Account Manager</li>
-    <li>✔ Featured Supplier Placement</li>
-    <li>✔ Direct Buyer Introduction</li>
-    <li>✔ Verified Premium Badge</li>
-    <li>✔ Priority Dispute Assistance</li>
+    <li>✔ Everything in Professional Plan</li>
+    <li>✔ Dedicated Trade Intelligence Manager</li>
+    <li>✔ Personalized Buyer Matchmaking</li>
+    <li>✔ Warm Direct Buyer Introductions</li>
+    <li>✔ Monthly Premium Grain Market Report</li>
+    <li>✔ Government Procurement Notifications</li>
+    <li>✔ Private Exporter Network Access</li>
+    <li>✔ Strategic Trade Consultation (Quarterly)</li>
+    <li>✔ Premium Verified Supplier Badge</li>
+    <li>✔ Priority Dispute Handling</li>
   </ul>
-  <button class="btn" onclick="payNow('Domestic Platinum',799)">Apply Now</button>
-</div>
-
-</div>
-
-<br><br><br>
-
-<h2 class="section-title">International Supplier Membership</h2>
-<p class="subtitle">Global Export Access</p>
-
-<div class="plans">
-
-<div class="plan">
-  <h3>International Basic</h3>
-  <div class="old-price">$499</div>
-  <div class="price">$299</div>
-  <p>3 Months</p>
-  <ul>
-    <li>✔ Global RFQs Access</li>
-    <li>✔ Secure Platform Dashboard</li>
-    <li>✔ Email Notifications</li>
-    <li>✔ Standard Support</li>
-  </ul>
-  <button class="btn" onclick="payNow('International Basic',299)">Apply Now</button>
-</div>
-
-<div class="plan highlight">
-  <div class="badge">MOST POPULAR</div>
-  <h3>International Gold</h3>
-  <div class="old-price">$899</div>
-  <div class="price">$599</div>
-  <p>6 Months</p>
-  <ul>
-    <li>✔ All Global RFQs</li>
-    <li>✔ Buyer Contact Unlock</li>
-    <li>✔ Priority RFQ Alerts</li>
-    <li>✔ WhatsApp Support</li>
-    <li>✔ Enhanced Visibility</li>
-  </ul>
-  <button class="btn" onclick="payNow('International Gold',599)">Apply Now</button>
-</div>
-
-<div class="plan">
-  <h3>International Platinum</h3>
-  <div class="old-price">$1,499</div>
-  <div class="price">$999</div>
-  <p>12 Months</p>
-  <ul>
-    <li>✔ Verified Global Buyers</li>
-    <li>✔ Dedicated Trade Manager</li>
-    <li>✔ Featured Supplier Promotion</li>
-    <li>✔ Direct Buyer Introductions</li>
-    <li>✔ Premium Verified Badge</li>
-    <li>✔ Priority Conflict Handling</li>
-  </ul>
-  <button class="btn" onclick="payNow('International Platinum',999)">Apply Now</button>
+  <button class="btn" onclick="payNow('Global Elite – 12 Months',3500)">Apply Now</button>
 </div>
 
 </div>
@@ -279,9 +220,7 @@ footer a{color:#d4af37;text-decoration:none}
 </div>
 
 <footer>
-© 2026 APD Global Trade |
-<a href="#">Terms</a> |
-<a href="#">Privacy</a>
+© 2026 APD Global Trade | <a href="#">Terms</a> | <a href="#">Privacy</a>
 </footer>
 
 <!-- PAYPAL MODAL -->
@@ -313,7 +252,7 @@ function payNow(planName, usdAmount){
       createOrder:function(data, actions){
         return actions.order.create({
           purchase_units:[{
-            description: planName + " Membership – APD Global Trade",
+            description: planName + " – APD Global Trade",
             amount:{ currency_code:"USD", value: usdAmount.toFixed(2) }
           }]
         });
@@ -334,4 +273,3 @@ function closeModal(){
 
 </body>
 </html>
-
