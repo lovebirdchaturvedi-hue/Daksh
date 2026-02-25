@@ -8,13 +8,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-body{margin:0;font-family:Inter,sans-serif;background:#f5f7fb;color:#0f172a}
+body{
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:#f5f7fb;
+  color:#0f172a
+}
 
 /* HEADER */
 header{
   background:#071427;
   color:#c9a44a;
-  padding:16px 20px;
+  padding:18px 20px;
 }
 .header-inner{
   max-width:1100px;
@@ -38,44 +43,102 @@ header{
 
 /* CONTENT */
 .container{
-  max-width:900px;
-  margin:40px auto;
+  max-width:950px;
+  margin:50px auto;
   padding:0 16px
 }
-.search-box{
-  margin:20px 0;
+
+h1{
+  font-size:28px;
+  margin-bottom:6px;
+}
+
+.subtitle{
+  color:#475569;
+  margin-bottom:30px;
+}
+
+/* AUTHORITY BAR */
+.authority-bar{
+  background:linear-gradient(90deg,#071427,#020617);
+  color:#fff;
+  padding:18px 24px;
+  border-radius:14px;
+  margin-bottom:30px;
   display:flex;
-  gap:12px;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  font-size:14px;
+  gap:10px;
+}
+
+/* SEARCH */
+.search-box{
+  margin:25px 0 35px;
+  display:flex;
 }
 .search-box input{
   flex:1;
-  padding:12px 16px;
+  padding:14px 18px;
   border-radius:999px;
   border:1px solid #cbd5e1;
   font-size:14px;
 }
+
+/* CARD DESIGN */
 .card{
-  background:#fff;
-  border-radius:16px;
-  padding:22px;
-  margin-bottom:18px;
-  box-shadow:0 2px 10px rgba(0,0,0,.06)
+  background:linear-gradient(145deg,#ffffff,#f1f5f9);
+  border-radius:18px;
+  padding:28px;
+  margin-bottom:24px;
+  border:1px solid rgba(201,164,74,.35);
+  box-shadow:0 15px 35px rgba(0,0,0,.08);
+  transition:all .3s ease;
+}
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 25px 50px rgba(0,0,0,.12);
+}
+.card h3{
+  font-size:20px;
+  margin-bottom:14px;
+  color:#071427;
+}
+.rfq-meta{
+  font-size:14px;
+  color:#475569;
+  margin:8px 0;
+}
+.rfq-badge{
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:600;
+  margin-bottom:12px;
+  background:rgba(201,164,74,.15);
+  color:#a16207;
 }
 .locked{
   color:#991b1b;
   font-weight:600;
-  margin-top:8px
+  margin-top:14px;
 }
 .cta{
   display:inline-block;
-  margin-top:14px;
-  background:#020617;
+  margin-top:18px;
+  background:linear-gradient(135deg,#020617,#071427);
   color:#fff;
-  padding:10px 20px;
+  padding:12px 28px;
   border-radius:999px;
   text-decoration:none;
   font-size:14px;
-  font-weight:600
+  font-weight:600;
+  transition:.3s;
+}
+.cta:hover{
+  background:linear-gradient(135deg,#c9a44a,#e7cf88);
+  color:#000;
 }
 
 /* FOOTER */
@@ -83,8 +146,9 @@ footer{
   background:#020617;
   color:#9ca3af;
   text-align:center;
-  padding:40px 20px;
-  font-size:14px
+  padding:50px 20px;
+  font-size:14px;
+  margin-top:60px;
 }
 footer a{color:#c9a44a;text-decoration:none}
 
@@ -108,14 +172,22 @@ footer a{color:#c9a44a;text-decoration:none}
 </header>
 
 <div class="container">
-  <h1>Live Buyer RFQs</h1>
-  <p>Verified buying requirements from global buyers.</p>
+  <h1>Live Verified Buyer RFQs</h1>
+  <p class="subtitle">Institutional international buying requirements.</p>
 
-  <div class="search-box">
-    <input id="searchInput" placeholder="Search by product, country, destination…">
+  <div class="authority-bar">
+    <div>🌍 100+ Active Trade Corridors</div>
+    <div>📊 Structured RFQ Framework</div>
+    <div>🔐 Controlled Supplier Access</div>
   </div>
 
-  <div id="rfqList">Loading RFQs…</div>
+  <div class="search-box">
+    <input id="searchInput" placeholder="Search by product, country, port, quantity…">
+  </div>
+
+  <div id="rfqList" style="font-weight:500;color:#475569;">
+    🔄 Fetching Verified Global Buyer RFQs...
+  </div>
 </div>
 
 <footer>
@@ -126,19 +198,7 @@ footer a{color:#c9a44a;text-decoration:none}
     <a href="/privacy.html">Privacy</a> |
     <a href="/disclaimer.html">Disclaimer</a>
   </p>
-  <p>
-    📧 info@apdglobaltradehub.com<br>
-    ☎ +1 (202) 780-1366<br>
-    💬 WhatsApp: +91 92664 18868
-  </p>
 </footer>
-
-<a href="https://wa.me/919266418868" target="_blank"
-style="position:fixed;bottom:20px;right:20px;width:56px;height:56px;
-background:#25D366;color:#fff;border-radius:50%;
-display:flex;align-items:center;justify-content:center;
-font-size:28px;box-shadow:0 10px 25px rgba(0,0,0,.25);
-z-index:9999;text-decoration:none">💬</a>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -146,7 +206,7 @@ import { getFirestore, collection, getDocs } from
 "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const app = initializeApp({
-  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+  apiKey: "YOUR_API_KEY",
   authDomain: "apd-globaltrade-prod.firebaseapp.com",
   projectId: "apd-globaltrade-prod"
 });
@@ -167,16 +227,20 @@ function renderRFQs(list){
   list.forEach(r=>{
     rfqList.innerHTML += `
       <div class="card">
+        <div class="rfq-badge">VERIFIED INTERNATIONAL BUYER</div>
         <h3>${r.product || "-"}</h3>
-        <p><b>Quantity:</b> ${r.quantity || "-"}</p>
-        <p><b>Destination:</b> ${r.deliveryPort || "-"}</p>
-        <div class="locked">🔒 Buyer contact locked</div>
+        <div class="rfq-meta"><b>Quantity:</b> ${r.quantity || "-"}</div>
+        <div class="rfq-meta"><b>Destination Port:</b> ${r.deliveryPort || "-"}</div>
+        <div class="locked">🔒 Buyer Contact & Company Details Locked</div>
         <a class="cta" href="/supplier-login.html">
-          Login / Register to Unlock
+          Apply for Verified Supplier Access
         </a>
       </div>
     `;
   });
+
+  document.querySelector("h1").innerText =
+    "Live Verified Buyer RFQs (" + list.length + " Active)";
 }
 
 async function loadRFQs(){
