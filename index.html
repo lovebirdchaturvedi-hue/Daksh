@@ -2,29 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>APD Global Trade | Elite B2B Trade Platform</title>
+    <title>APD Global Trade | Elite B2B Trade Authority</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <style>
         /* ==========================================================================
-   PREMIUM B2B BASE STYLES
+   ULTRA-PREMIUM B2B BASE STYLES & VARIABLES
    ========================================================================== */
         :root {
-            --bg-dark: #050914;
-            /* Deep elite navy/black */
-            --bg-darker: #02040a;
-            --bg-card: rgba(10, 15, 30, 0.6);
-            --border-subtle: rgba(212, 175, 55, 0.15);
-            --gold: #D4AF37;
-            --gold-soft: #F9F1D8;
-            --gold-glow: rgba(212, 175, 55, 0.4);
-            --text-main: #ffffff;
-            --text-muted: #94A3B8;
-            --glass-bg: rgba(5, 9, 20, 0.65);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-blur: blur(16px);
+            --bg-abyss: #030610;
+            /* Deep void */
+            --bg-obsidian: #010205;
+            /* Pure darkness */
+            --bg-card: rgba(8, 12, 24, 0.7);
+            --border-gold: rgba(212, 175, 55, 0.25);
+            --gold-primary: #D4AF37;
+            --gold-intense: #FFD700;
+            --gold-soft: #FDF6E3;
+            --gold-glow: rgba(212, 175, 55, 0.5);
+            --text-pure: #ffffff;
+            --text-muted: #A0AEC0;
+            --glass-panel: rgba(8, 12, 24, 0.45);
+            --glass-border: rgba(212, 175, 55, 0.1);
+            --glass-fx: blur(24px) saturate(150%);
         }
         * {
             box-sizing: border-box;
@@ -34,41 +36,107 @@
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-darker);
-            color: var(--text-main);
+            background-color: var(--bg-obsidian);
+            color: var(--text-pure);
             overflow-x: hidden;
             scroll-behavior: smooth;
+            font-size: 16px;
         }
         h1,
         h2,
         h3,
-        .premium-font {
+        .elite-font {
             font-family: 'Playfair Display', serif;
             margin: 0;
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
-        /* Scrollbar */
+        /* Scrollbar Engineering */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: var(--bg-darker);
+            background: var(--bg-obsidian);
         }
         ::-webkit-scrollbar-thumb {
-            background: rgba(212, 175, 55, 0.3);
-            border-radius: 4px;
+            background: rgba(212, 175, 55, 0.2);
+            border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--gold);
+            background: var(--gold-primary);
         }
         /* ==========================================================================
-   HEADER & NAVIGATION
+   DOMINANT ANIMATIONS
+   ========================================================================== */
+        @keyframes ambientGlow {
+            0%,
+            100% {
+                box-shadow: 0 0 40px rgba(212, 175, 55, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 60px rgba(212, 175, 55, 0.25);
+            }
+        }
+        @keyframes floatElement {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        @keyframes pulseGold {
+            0%,
+            100% {
+                text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+            }
+        }
+        /* Scroll Reveal Classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .animate-scale {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .animate-fade {
+            opacity: 0;
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal,
+        .reveal.animate-scale,
+        .reveal.animate-fade {
+            opacity: 1;
+            transform: translate(0) scale(1);
+        }
+        /* Delay modifiers for staggered reveals */
+        .delay-100 {
+            transition-delay: 100ms;
+        }
+        .delay-200 {
+            transition-delay: 200ms;
+        }
+        .delay-300 {
+            transition-delay: 300ms;
+        }
+        .delay-400 {
+            transition-delay: 400ms;
+        }
+        /* ==========================================================================
+   NAVIGATION INFRASTRUCTURE
    ========================================================================== */
         header {
-            height: 85px;
-            background: var(--glass-bg);
-            backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
+            height: 90px;
+            background: var(--glass-panel);
+            backdrop-filter: var(--glass-fx);
+            -webkit-backdrop-filter: var(--glass-fx);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -76,258 +144,361 @@
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid var(--glass-border);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease;
+            transition: background 0.4s ease, border-bottom 0.4s ease;
+        }
+        header.scrolled {
+            background: rgba(1, 2, 5, 0.9);
+            border-bottom: 1px solid var(--border-gold);
         }
         header .logo {
             position: absolute;
             left: 40px;
-            font-size: 1.25rem;
-            font-weight: 700;
-            letter-spacing: 1px;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
-        .premium-logo {
-            background: linear-gradient(135deg, var(--gold-soft) 0%, var(--gold) 50%, #fff 100%);
+        .elite-logo {
+            background: linear-gradient(to right, var(--gold-soft), var(--gold-primary), #fff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            animation: pulseGold 4s infinite;
         }
         header nav {
             display: flex;
-            gap: 30px;
+            gap: 35px;
         }
         header nav a {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             position: relative;
             transition: color 0.3s ease;
+            padding-bottom: 6px;
         }
-        header nav a::after {
+        header nav a::before {
             content: '';
             position: absolute;
             width: 0%;
-            height: 1px;
-            bottom: -4px;
-            left: 0;
-            background-color: var(--gold);
-            transition: width 0.3s ease;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform: translateX(-50%);
         }
         header nav a:hover {
-            color: var(--text-main);
+            color: var(--text-pure);
         }
-        header nav a:hover::after {
+        header nav a:hover::before {
             width: 100%;
         }
         /* ==========================================================================
-   HERO SECTION
+   AUTHORITY HERO SECTION
    ========================================================================== */
         .hero {
-            min-height: calc(100vh - 85px);
+            min-height: calc(100vh - 90px);
             display: grid;
-            grid-template-columns: 1fr 1.2fr 1fr;
+            grid-template-columns: 1fr 1.3fr 1fr;
             align-items: center;
-            padding: 40px 60px;
+            padding: 40px 80px;
             background:
-                radial-gradient(circle at 50% 40%, rgba(212, 175, 55, 0.08), transparent 60%),
-                url("https://www.transparenttextures.com/patterns/stardust.png") repeat,
-                linear-gradient(180deg, var(--bg-dark), var(--bg-darker));
+                radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.12), transparent 50%),
+                linear-gradient(180deg, var(--bg-abyss), var(--bg-obsidian));
             position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("https://www.transparenttextures.com/patterns/stardust.png");
+            opacity: 0.2;
+            mix-blend-mode: overlay;
+            pointer-events: none;
         }
         .earth-wrap {
-            width: 320px;
-            height: 320px;
+            width: 360px;
+            height: 360px;
             margin: auto;
             pointer-events: none;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
+            animation: ambientGlow 6s infinite alternate;
         }
-        .earth-wrap::before {
+        .earth-orbit {
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            border-radius: 50%;
+            border: 1px dashed rgba(212, 175, 55, 0.2);
+            animation: spin 90s linear infinite reverse;
+        }
+        .earth-orbit::before {
             content: '';
             position: absolute;
-            width: 140%;
-            height: 140%;
+            top: -4px;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            background: var(--gold-primary);
             border-radius: 50%;
-            border: 1px dashed rgba(212, 175, 55, 0.15);
-            animation: spin 60s linear infinite reverse;
+            box-shadow: 0 0 15px var(--gold-primary);
         }
         .earth {
             width: 100%;
             height: 100%;
             border-radius: 50%;
             background: url("https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg") repeat-x;
-            background-size: cover;
-            animation: spin 35s linear infinite;
+            background-size: auto 100%;
+            animation: spin 45s linear infinite;
             box-shadow:
-                inset -40px 0 80px rgba(0, 0, 0, 0.9),
-                inset 10px 0 30px rgba(255, 255, 255, 0.2),
-                0 0 50px rgba(212, 175, 55, 0.15);
+                inset -50px 0 100px rgba(0, 0, 0, 0.95),
+                inset 20px 0 40px rgba(255, 255, 255, 0.15),
+                0 0 60px rgba(212, 175, 55, 0.15);
         }
         .night {
-            filter: brightness(0.5) saturate(1.1) contrast(1.2);
+            filter: brightness(0.4) saturate(1.2) contrast(1.3);
         }
         @keyframes spin {
+            from {
+                background-position: 0 0;
+                transform: rotate(0deg);
+            }
             to {
-                background-position: -1400px;
+                background-position: -2000px 0;
                 transform: rotate(360deg);
             }
         }
         .center {
             text-align: center;
-            z-index: 2;
-            animation: fadeUp 1s ease-out forwards;
-        }
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            z-index: 10;
         }
         .center h1 {
-            font-size: clamp(3rem, 4.5vw, 4.5rem);
-            line-height: 1.1;
-            background: linear-gradient(to right, #fff, var(--gold-soft));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: clamp(3.2rem, 5vw, 5.5rem);
+            line-height: 1.05;
+            color: var(--text-pure);
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
             margin-bottom: 24px;
         }
+        .center h1 .highlight {
+            background: linear-gradient(135deg, var(--gold-soft) 0%, var(--gold-primary) 50%, var(--gold-intense) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /* text shadow strategy for gradient text */
+            filter: drop-shadow(0px 4px 12px rgba(212, 175, 55, 0.3));
+        }
         .center p {
-            max-width: 680px;
-            margin: 0 auto 40px auto;
+            max-width: 720px;
+            margin: 0 auto 45px auto;
             color: var(--text-muted);
-            font-size: 1.1rem;
-            line-height: 1.6;
+            font-size: 1.25rem;
+            line-height: 1.7;
             font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
         .btn {
-            background: linear-gradient(135deg, var(--gold), #b8912d);
-            color: #000;
-            padding: 16px 42px;
-            border-radius: 4px;
+            position: relative;
+            background: transparent;
+            color: var(--gold-primary);
+            padding: 18px 48px;
+            border-radius: 2px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            letter-spacing: 1px;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            margin: 8px;
-            display: inline-block;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 1px solid var(--gold-primary);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--gold-primary), #8B7322);
+            z-index: -1;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scaleX(0);
+            transform-origin: right;
         }
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
-            background: linear-gradient(135deg, #eadd8c, var(--gold));
+            color: #000;
+            border-color: transparent;
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+        }
+        .btn:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        .btn-solid {
+            background: linear-gradient(45deg, var(--gold-primary), #8B7322);
+            color: #000;
+            border: none;
+        }
+        .btn-solid::before {
+            background: #fff;
         }
         .badges {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 16px;
-            margin-top: 40px;
+            margin-top: 50px;
         }
         .badge {
-            background: var(--glass-bg);
-            backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--border-subtle);
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--glass-border);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
             color: var(--gold-soft);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             text-transform: uppercase;
+            transition: all 0.3s;
         }
-        .premium {
-            margin-top: 60px;
-            font-size: 1.2rem;
-            letter-spacing: 6px;
-            color: var(--gold);
+        .badge:hover {
+            border-color: var(--gold-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+        }
+        .premium-label {
+            margin-top: 70px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: 8px;
+            color: var(--gold-primary);
             text-transform: uppercase;
-            opacity: 0.8;
-            border-top: 1px solid var(--border-subtle);
-            border-bottom: 1px solid var(--border-subtle);
-            padding: 15px 0;
+            position: relative;
             display: inline-block;
         }
+        .premium-label::before,
+        .premium-label::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 1px;
+            background: var(--gold-primary);
+            opacity: 0.5;
+        }
+        .premium-label::before {
+            left: -60px;
+        }
+        .premium-label::after {
+            right: -60px;
+        }
         /* ==========================================================================
-   LIVE RFQ TICKER
+   LIVE RFQ COMMAND CENTER
    ========================================================================== */
         .live-rfq {
-            background: #02040a;
-            padding: 16px 0;
-            border-top: 1px solid var(--glass-border);
-            border-bottom: 1px solid var(--glass-border);
+            background: linear-gradient(90deg, #010205 0%, #050811 50%, #010205 100%);
+            padding: 0;
+            border-top: 1px solid var(--border-gold);
+            border-bottom: 1px solid var(--border-gold);
             display: flex;
-            align-items: center;
             position: relative;
             overflow: hidden;
+            height: 54px;
         }
         .live-rfq-label {
-            font-weight: 600;
-            color: #fff;
-            background: var(--gold);
+            font-weight: 700;
+            background: var(--gold-primary);
             color: #000;
-            padding: 8px 24px;
-            font-size: 12px;
+            padding: 0 30px;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             position: relative;
             z-index: 10;
-            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            box-shadow: 10px 0 30px rgba(0, 0, 0, 0.9);
         }
         .live-rfq-label::after {
             content: '';
             position: absolute;
             top: 0;
-            right: -15px;
-            border-top: 17px solid transparent;
-            border-bottom: 17px solid transparent;
-            border-left: 15px solid var(--gold);
+            right: -27px;
+            border-top: 27px solid transparent;
+            border-bottom: 27px solid transparent;
+            border-left: 27px solid var(--gold-primary);
+        }
+        .live-rfq-label span {
+            animation: blink 1.5s infinite;
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+        @keyframes blink {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
         }
         .live-rfq-track-container {
             overflow: hidden;
             flex-grow: 1;
-            padding-left: 30px;
-        }
-        .live-rfq-track {
-            display: flex;
-            gap: 80px;
-            white-space: nowrap;
-            animation: rfqScroll 45s linear infinite;
-        }
-        .live-rfq-track span {
-            font-size: 14px;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: color 0.3s;
             display: flex;
             align-items: center;
         }
+        .live-rfq-track {
+            display: flex;
+            gap: 100px;
+            white-space: nowrap;
+            animation: rfqScroll 40s linear infinite;
+            padding-left: 50px;
+        }
+        .live-rfq-track:hover {
+            animation-play-state: paused;
+        }
+        .live-rfq-track span {
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: var(--text-pure);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+        }
         .live-rfq-track span:hover {
-            color: var(--gold-soft);
+            color: var(--gold-intense);
         }
         @keyframes rfqScroll {
             from {
-                transform: translateX(100%);
+                transform: translateX(0);
             }
             to {
                 transform: translateX(-100%);
             }
         }
         /* ==========================================================================
-   GLOBAL TRADE DUAL-IMAGE SECTION
+   GLOBAL OPERATIONS - DUAL VISUALS
    ========================================================================== */
         .sea {
             min-height: 100vh;
@@ -335,281 +506,345 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             align-items: center;
-            padding: 100px 60px;
-            gap: 40px;
-            background: var(--bg-darker);
+            padding: 120px 80px;
+            gap: 50px;
+            background: var(--bg-obsidian);
         }
         .sea::before {
             content: '';
             position: absolute;
             inset: 0;
             background:
-                linear-gradient(to right, rgba(2, 4, 10, 0.95) 0%, rgba(2, 4, 10, 0.7) 50%, rgba(2, 4, 10, 0.95) 100%),
+                linear-gradient(to right, rgba(1, 2, 5, 0.98) 0%, rgba(1, 2, 5, 0.75) 50%, rgba(1, 2, 5, 0.98) 100%),
                 url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80") center/cover fixed;
             z-index: 0;
         }
         .sea>* {
             z-index: 1;
         }
+        .img-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            border: 1px solid var(--border-gold);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+        }
+        .img-container::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+        }
         .sea img {
             width: 100%;
-            max-width: 480px;
-            height: 600px;
+            height: 650px;
             object-fit: cover;
-            border-radius: 4px;
-            border: 1px solid var(--border-subtle);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-            filter: grayscale(40%) contrast(1.1);
-            transition: filter 0.5s ease;
+            filter: grayscale(80%) contrast(1.2) brightness(0.8);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            display: block;
         }
-        .sea img:hover {
-            filter: grayscale(0%) contrast(1.1);
+        .img-container:hover img {
+            filter: grayscale(0%) contrast(1.1) brightness(1);
+            transform: scale(1.05);
         }
         .contact-card {
-            background: rgba(5, 9, 20, 0.85);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-subtle);
+            background: rgba(3, 6, 16, 0.9);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border-gold);
             border-radius: 4px;
-            padding: 60px 50px;
+            padding: 80px 60px;
             text-align: center;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
+            position: relative;
+        }
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
         }
         .contact-card h2 {
-            font-size: 2.5rem;
+            font-size: 3.2rem;
             color: #fff;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            line-height: 1.1;
         }
         .contact-card p {
             color: var(--text-muted);
-            margin-bottom: 40px;
-            font-size: 1.1rem;
+            margin-bottom: 50px;
+            font-size: 1.15rem;
+            font-weight: 300;
+            line-height: 1.6;
         }
         .contact-details {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 30px;
-            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            border-radius: 2px;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            line-height: 2;
+            line-height: 2.2;
             color: var(--gold-soft);
-            font-size: 15px;
+            font-size: 16px;
+            font-weight: 500;
             text-align: left;
         }
-        /* ==========================================================================
-   GENERIC SECTION STYLING (For institutional sections)
-   ========================================================================== */
-        .expert-section {
-            padding: 140px 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
-        }
-        .expert-section.alt-bg {
-            background: linear-gradient(180deg, var(--bg-dark), var(--bg-darker));
-        }
-        .expert-section.solid-bg {
-            background: var(--bg-darker);
-        }
-        .section-header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-        .section-header h2 {
-            font-size: clamp(2.5rem, 3.5vw, 3.5rem);
-            color: #fff;
-            margin-bottom: 24px;
-        }
-        .section-header h2 span {
-            color: var(--gold);
-            display: block;
-        }
-        .section-header p {
-            max-width: 700px;
-            margin: 0 auto;
+        .contact-details span {
             color: var(--text-muted);
-            font-size: 1.15rem;
-            line-height: 1.8;
+            display: inline-block;
+            width: 100px;
+            font-weight: 400;
         }
         /* ==========================================================================
-   GRID LAYOUTS
+   ELITE INSTITUTIONAL SECTIONS
    ========================================================================== */
-        .premium-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: auto;
-        }
-        .premium-card {
-            background: var(--bg-card);
-            border: 1px solid var(--glass-border);
-            padding: 50px 40px;
-            border-radius: 4px;
-            transition: all 0.4s ease;
+        .elite-section {
+            padding: 160px 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
             position: relative;
             overflow: hidden;
         }
-        .premium-card::before {
+        .elite-section.alt {
+            background: linear-gradient(180deg, var(--bg-abyss), var(--bg-obsidian));
+        }
+        .section-head {
+            text-align: center;
+            margin-bottom: 100px;
+            position: relative;
+            z-index: 2;
+        }
+        .section-head h2 {
+            font-size: clamp(3rem, 4vw, 4.5rem);
+            color: #fff;
+            margin-bottom: 30px;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        .section-head h2 .gold-text {
+            color: var(--gold-primary);
+            display: block;
+        }
+        .section-head p {
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        /* ==========================================================================
+   AUTHORITY GRID CARDS
+   ========================================================================== */
+        .authority-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1280px;
+            margin: auto;
+            position: relative;
+            z-index: 2;
+        }
+        .auth-card {
+            background: var(--glass-panel);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 60px 50px;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .auth-card::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
+            height: 100%;
+            background: radial-gradient(circle at 100% 100%, rgba(212, 175, 55, 0.1) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
-        .premium-card:hover {
-            background: rgba(15, 23, 42, 0.8);
-            border-color: var(--border-subtle);
-            transform: translateY(-5px);
+        .auth-card:hover {
+            background: rgba(12, 18, 32, 0.9);
+            border-color: var(--border-gold);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
         }
-        .premium-card:hover::before {
-            transform: translateX(100%);
+        .auth-card:hover::after {
+            opacity: 1;
         }
-        .premium-card h3 {
-            color: var(--gold-soft);
-            font-size: 1.4rem;
-            margin-bottom: 20px;
+        .auth-card h3 {
+            color: var(--gold-primary);
+            font-size: 1.5rem;
+            margin-bottom: 24px;
             font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            letter-spacing: 0.5px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            position: relative;
+            z-index: 1;
         }
-        .premium-card p {
+        .auth-card p {
             color: var(--text-muted);
-            line-height: 1.7;
-            font-size: 0.95rem;
+            line-height: 1.8;
+            font-size: 1rem;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
         }
         /* ==========================================================================
-   METRICS SECTION
+   METRICS OF DOMINANCE
    ========================================================================== */
-        .metrics-wrapper {
+        .metrics-wrap {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 80px;
-            max-width: 1200px;
+            gap: 100px;
+            max-width: 1280px;
             margin: auto;
         }
-        .metric-item {
+        .metric-box {
             text-align: center;
             position: relative;
-            padding: 0 40px;
         }
-        .metric-item:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            right: -40px;
-            top: 20%;
-            height: 60%;
-            width: 1px;
-            background: var(--glass-border);
-        }
-        .metric-value {
-            color: var(--gold);
-            font-size: 4rem;
-            font-weight: 600;
+        .metric-number {
+            color: #fff;
+            font-size: 5rem;
+            font-weight: 400;
             font-family: 'Playfair Display', serif;
             margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+            background: linear-gradient(180deg, #fff 0%, var(--gold-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .metric-label {
+        .metric-title {
             color: var(--text-muted);
-            font-size: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
         }
         /* ==========================================================================
-   GLOBAL NETWORK
+   GLOBAL REACH
    ========================================================================== */
-        .network-tags {
+        .reach-network {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 20px;
-            max-width: 900px;
+            gap: 24px;
+            max-width: 1000px;
             margin: auto;
         }
-        .network-tag {
-            background: transparent;
-            border: 1px solid var(--border-subtle);
-            color: var(--gold-soft);
-            padding: 12px 30px;
-            border-radius: 50px;
+        .reach-tag {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-pure);
+            padding: 16px 40px;
+            border-radius: 100px;
             font-size: 15px;
-            letter-spacing: 1px;
-            transition: all 0.3s;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
         }
-        .network-tag:hover {
-            background: var(--gold);
+        .reach-tag:hover {
+            background: var(--gold-primary);
             color: #000;
+            border-color: var(--gold-primary);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+            transform: translateY(-4px);
         }
         /* ==========================================================================
-   FOOTER & FLOATING
+   FOOTER
    ========================================================================== */
         footer {
-            background: #010205;
+            background: #000;
             text-align: center;
-            padding: 60px 20px;
+            padding: 80px 40px;
             color: var(--text-muted);
-            border-top: 1px solid var(--border-subtle);
+            border-top: 1px solid var(--border-gold);
+            position: relative;
+            overflow: hidden;
         }
-        footer p {
-            margin-bottom: 20px;
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gold-primary);
+            margin-bottom: 30px;
+            display: inline-block;
+            letter-spacing: 2px;
         }
-        footer a {
-            color: var(--gold);
-            margin: 0 10px;
+        .footer-links {
+            margin-bottom: 30px;
+        }
+        .footer-links a {
+            color: var(--text-pure);
+            margin: 0 16px;
             text-decoration: none;
-            font-size: 13px;
+            font-size: 12px;
+            font-weight: 600;
             text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: var(--gold-primary);
+        }
+        .copyright {
+            font-size: 12px;
+            opacity: 0.4;
             letter-spacing: 1px;
         }
-        footer a:hover {
-            text-decoration: underline;
-        }
-        .float {
-            font-family: 'Inter', sans-serif;
+        /* Floating Actions */
+        .fab-container {
             position: fixed;
             right: 30px;
+            bottom: 30px;
             z-index: 9999;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
-        .float:hover {
-            transform: translateY(-3px);
-        }
-        .whatsapp {
-            bottom: 90px;
-            width: 60px;
-            height: 60px;
-            background: #25D366;
-            border-radius: 50%;
+        .fab {
+            font-family: 'Inter', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
-            color: #fff;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             text-decoration: none;
+            border-radius: 50px;
         }
-        .download {
-            bottom: 30px;
-            padding: 14px 28px;
-            background: linear-gradient(135deg, var(--gold), #b8912d);
+        .fab:hover {
+            transform: translateY(-5px);
+        }
+        .fab-wa {
+            width: 65px;
+            height: 65px;
+            background: #25D366;
+            font-size: 34px;
+            color: #fff;
+            align-self: flex-end;
+        }
+        .fab-app {
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--gold-primary), #9e811c);
             color: #000;
-            border-radius: 4px;
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 14px;
-            letter-spacing: 0.5px;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
         /* ==========================================================================
    RESPONSIVE DESIGN
    ========================================================================== */
-        @media(max-width: 1100px) {
+        @media(max-width: 1200px) {
             .hero {
                 grid-template-columns: 1fr;
                 text-align: center;
-                padding-top: 80px;
+                padding-top: 100px;
             }
             .earth-wrap {
                 display: none;
@@ -619,213 +854,266 @@
             }
             .sea {
                 grid-template-columns: 1fr;
-                padding: 60px 20px;
+                padding: 80px 30px;
+                gap: 40px;
             }
-            .sea img {
-                max-width: 100%;
-                height: auto;
+            .img-container {
+                display: none;
             }
+            /* Focus on the message on smaller screens */
             header nav {
                 display: none;
             }
-            /* Hide heavy nav on mobile for aesthetic focus, implement burger menu if needed */
-            .metric-item:not(:last-child)::after {
-                display: none;
+        }
+        @media(max-width: 768px) {
+            .section-head h2 {
+                font-size: 2.5rem;
+            }
+            .metrics-wrap {
+                gap: 50px;
+                flex-direction: column;
+            }
+            .metric-number {
+                font-size: 4rem;
+            }
+            header {
+                justify-content: flex-start;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo premium-logo">APD Global Trade</div>
+    <header id="site-header">
+        <div class="logo elite-logo">APD Global Trade</div>
         <nav>
-            <a href="/">Home</a>
-            <a href="/buyer-rfqs.html">Buyer RFQs</a>
-            <a href="/suppliers.html">Suppliers</a>
-            <a href="/standards.html">Standards</a>
-            <a href="/leadership.html">Leadership</a>
-            <a href="/trade-report.html">Trade Report</a>
-            <a href="/brochure.html">Brochure</a>
-            <a href="/membership.html">Membership</a>
-            <a href="/contact.html">Contact</a>
+            <a href="/">HQ</a>
+            <a href="/buyer-rfqs.html">Buyer Order Flow</a>
+            <a href="/suppliers.html">Elite Suppliers</a>
+            <a href="/standards.html">Compliance</a>
+            <a href="/leadership.html">Syndicate</a>
+            <a href="/trade-report.html">Intelligence</a>
+            <a href="/membership.html">Access</a>
         </nav>
     </header>
     <section class="hero">
-        <div class="earth-wrap">
+        <div class="earth-wrap animate-scale delay-200">
+            <div class="earth-orbit"></div>
             <div class="earth"></div>
         </div>
-        <div class="center">
-            <h1>Where Verified Buyers<br>Meet Serious Suppliers</h1>
-            <p>High-intent global RFQs. Protected buyer contacts. Zero fake leads.</p>
-            <a href="/create-rfq.html" class="btn">Post Buyer RFQ</a>
-            <a href="/buyer-rfqs.html" class="btn">View Buyer RFQs</a>
-            <div class="badges">
-                <div class="badge">🔐 Verified Buyers</div>
-                <div class="badge">🌍 100+ Countries</div>
-                <div class="badge">🧾 KYC & IEC</div>
-                <div class="badge">🤝 Deals Closed</div>
-                <div class="badge">🚫 No Brokers</div>
-                <div class="badge">⚡ Real RFQs</div>
+        <div class="center animate-on-scroll delay-100">
+            <h1>Where The Elite 1%<br><span class="highlight">Command Global Supply</span></h1>
+            <p>High-Volume Global RFQs. Ironclad Contact Protection. Zero Tolerance for Fake Leads. Absolute Trading
+                Dominance.</p>
+            <div class="btn-group">
+                <a href="/create-rfq.html" class="btn btn-solid">Execute Buyer Order</a>
+                <a href="/buyer-rfqs.html" class="btn">Monitor Order Flow</a>
             </div>
-            <div class="premium">INTERNATIONAL TRADE AUTHORITY</div>
+            <div class="badges animate-fade delay-300">
+                <div class="badge">🔐 Ruthless Vetting</div>
+                <div class="badge">🌍 100+ Sovereign Markets</div>
+                <div class="badge">🧾 Military-Grade KYC</div>
+                <div class="badge">🤝 Institutional Capital</div>
+                <div class="badge">🚫 Zero Brokers</div>
+                <div class="badge">⚡ Surgical Execution</div>
+            </div>
+            <div class="premium-label animate-fade delay-400">International Trade Syndicate</div>
         </div>
-        <div class="earth-wrap">
+        <div class="earth-wrap animate-scale delay-200">
+            <div class="earth-orbit"></div>
             <div class="earth night"></div>
         </div>
     </section>
-    <section class="live-rfq">
-        <div class="live-rfq-label">Live RFQ Update</div>
+    <section class="live-rfq animate-fade">
+        <div class="live-rfq-label"><span>🔴</span> Live Trading Floor</div>
         <div class="live-rfq-track-container">
             <div class="live-rfq-track" id="rfqTicker">
-                <span>Loading live RFQs...</span>
+                <!-- Injected by scripts -->
+                <span>Intercepting Global Order Flow...</span>
             </div>
         </div>
     </section>
     <section class="sea">
-        <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=900&q=80"
-            alt="Shipping Containers">
-        <div class="contact-card">
-            <h2 class="premium-font">Global Trade Never Stops</h2>
-            <p>Verified buyers. Real demand. Structured execution.</p>
+        <div class="img-container animate-scale reveal"><img
+                src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=900&q=80"
+                alt="Heavy Shipping"></div>
+        <div class="contact-card animate-on-scroll">
+            <h2 class="elite-font">Relentless Global Commerce.</h2>
+            <p>We do not facilitate browsing. We command institutional execution across borders. Verified capital meets
+                verified supply.</p>
             <div class="contact-details">
-                <div>📧 info@apdglobaltrade.com</div>
-                <div>☎ +1 (202) 780-1366</div>
-                <div>💬 WhatsApp: +91 92664 18868</div>
+                <div><span>Dispatch:</span> info@apdglobaltrade.com</div>
+                <div><span>Direct:</span> +1 (202) 780-1366</div>
+                <div><span>Encrypted:</span> WhatsApp +91 92664 18868</div>
             </div>
         </div>
-        <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=900&q=80"
-            alt="Global Trade">
+        <div class="img-container animate-scale delay-200"><img
+                src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=900&q=80"
+                alt="Global Ports"></div>
     </section>
     <!-- TRADE AUTHORITY SECTION -->
-    <section class="expert-section alt-bg">
-        <div class="section-header">
-            <h2 class="premium-font">International Trade <span>Authority Framework</span></h2>
+    <section class="elite-section alt">
+        <div class="section-head animate-on-scroll">
+            <h2 class="elite-font">Uncompromising International <span class="gold-text">Trade Authority</span></h2>
             <p>
-                APD Global Trade operates under a structured international trade model,
-                ensuring verified participation, controlled supplier access,
-                and professional B2B execution standards across global markets.
+                APD Global Trade enforces a dominant international trade hierarchy, ensuring verified capital
+                deployment, exclusive supplier access, and surgical B2B execution across premium global markets.
             </p>
         </div>
-        <div class="premium-grid">
-            <div class="premium-card">
-                <h3>Verified Buyer Screening</h3>
-                <p>All RFQs are reviewed to eliminate spam and maintain serious commercial intent.</p>
+        <div class="authority-grid">
+            <div class="auth-card animate-on-scroll">
+                <h3>Ruthless Buyer Vetting</h3>
+                <p>Every RFQ undergoes forensic screening to annihilate spam and isolate only institutional commercial
+                    intent.</p>
             </div>
-            <div class="premium-card">
-                <h3>Controlled Supplier Membership</h3>
-                <p>Membership-based access ensures professional trade engagement.</p>
+            <div class="auth-card animate-on-scroll delay-100">
+                <h3>Exclusive Supplier Syndicate</h3>
+                <p>Strictly gated access guarantees engagement exclusively with elite, tier-one trading entities.</p>
             </div>
-            <div class="premium-card">
-                <h3>Structured RFQ Execution</h3>
-                <p>Standardized quotation framework for cross-border trade readiness.</p>
+            <div class="auth-card animate-on-scroll delay-200">
+                <h3>Surgical RFQ Execution</h3>
+                <p>A heavily standardized quotation protocol designed for aggressive, friction-free cross-border
+                    commerce.</p>
             </div>
-            <div class="premium-card">
-                <h3>Institutional Positioning</h3>
-                <p>APD Global Trade is a curated trade authority, not a public directory.</p>
+            <div class="auth-card animate-on-scroll delay-300">
+                <h3>Uncontested Market Authority</h3>
+                <p>We are a curated, invitation-grade trade authority—not an open directory for the masses.</p>
             </div>
         </div>
-        <div style="text-align:center; margin-top: 80px;">
-            <a href="/membership.html" class="btn">Apply for Verified Supplier Membership</a>
+        <div style="text-align:center; margin-top: 80px;" class="animate-on-scroll delay-400">
+            <a href="/membership.html" class="btn btn-solid">Request Syndicate Access</a>
         </div>
     </section>
     <!-- TRADE STANDARDS & COMPLIANCE -->
-    <section class="expert-section solid-bg">
-        <div class="section-header">
-            <h2 class="premium-font">Trade Standards & <span>Compliance Framework</span></h2>
+    <section class="elite-section">
+        <div class="section-head animate-on-scroll">
+            <h2 class="elite-font">Ironclad Standards & <span class="gold-text">Compliance Protocol</span></h2>
             <p>
-                APD Global Trade operates under a structured compliance philosophy
-                designed to promote transparent cross-border trade and professional engagement.
+                We operate a draconian compliance philosophy designed to fiercely protect cross-border capital and
+                enforce professional dominance.
             </p>
         </div>
-        <div class="premium-grid">
-            <div class="premium-card">
-                <h3>KYC & IEC Verification</h3>
-                <p>Supplier identity screening to maintain trade integrity.</p>
+        <div class="authority-grid">
+            <div class="auth-card animate-on-scroll delay-100">
+                <h3>Military-Grade Identity Auth</h3>
+                <p>Forensic KYB/IEC screening to permanently safeguard the integrity of the trading floor.</p>
             </div>
-            <div class="premium-card">
-                <h3>RFQ Screening</h3>
-                <p>Manual filtering to reduce non-serious trade inquiries.</p>
+            <div class="auth-card animate-on-scroll delay-200">
+                <h3>Zero-Tolerance RFQ Filtration</h3>
+                <p>A relentless manual filtration process engineered to eliminate non-serious trade noise entirely.</p>
             </div>
-            <div class="premium-card">
-                <h3>Dispute Escalation Support</h3>
-                <p>Priority assistance for premium members during trade conflicts.</p>
+            <div class="auth-card animate-on-scroll delay-300">
+                <h3>Aggressive Dispute Resolution</h3>
+                <p>Priority legal and tactical escalation support exclusive to our premium syndicate members.</p>
             </div>
-            <div class="premium-card">
-                <h3>Structured Documentation Flow</h3>
-                <p>Quotation and communication standardization.</p>
+            <div class="auth-card animate-on-scroll delay-400">
+                <h3>Bulletproof Document Flow</h3>
+                <p>Rigidly enforced quotation and operational communication standardization.</p>
             </div>
         </div>
     </section>
     <!-- ADVISORY PANEL -->
-    <section class="expert-section alt-bg">
-        <div class="section-header">
-            <h2 class="premium-font">Advisory & Strategic <span>Oversight Panel</span></h2>
+    <section class="elite-section alt">
+        <div class="section-head animate-on-scroll">
+            <h2 class="elite-font">Elite Strategic <span class="gold-text">Oversight Syndicate</span></h2>
         </div>
-        <div class="premium-grid">
-            <div class="premium-card">
-                <h3>Trade Compliance Advisory</h3>
-                <p>Oversight on supplier verification and global trade standards.</p>
+        <div class="authority-grid">
+            <div class="auth-card animate-on-scroll">
+                <h3>Compliance & Security Command</h3>
+                <p>Authoritative oversight on universal supplier verification and the enforcement of global trade law.
+                </p>
             </div>
-            <div class="premium-card">
-                <h3>International Market Strategy</h3>
-                <p>Advisory input on emerging global trade corridors.</p>
+            <div class="auth-card animate-on-scroll delay-100">
+                <h3>Tactical Market Domination</h3>
+                <p>High-level strategic advisory aggressively targeting emerging and highly lucrative global trade
+                    corridors.</p>
             </div>
-            <div class="premium-card">
-                <h3>Structured Growth Framework</h3>
-                <p>Ensuring sustainable expansion of supplier network.</p>
+            <div class="auth-card animate-on-scroll delay-200">
+                <h3>Sustainable Expansion Control</h3>
+                <p>Calculating the exact velocity of our network growth to maintain absolute quality and exclusivity.
+                </p>
             </div>
         </div>
     </section>
     <!-- ANNUAL TRADE METRICS -->
-    <section class="expert-section solid-bg">
-        <div class="section-header">
-            <h2 class="premium-font">Annual Trade <span>Activity Overview</span></h2>
+    <section class="elite-section">
+        <div class="section-head animate-on-scroll">
+            <h2 class="elite-font">Commanding Annual <span class="gold-text">Trade Influence</span></h2>
         </div>
-        <div class="metrics-wrapper">
-            <div class="metric-item">
-                <div class="metric-value">$250M+</div>
-                <div class="metric-label">Projected Trade Volume</div>
+        <div class="metrics-wrap">
+            <div class="metric-box animate-scale">
+                <div class="metric-number">$250M+</div>
+                <div class="metric-title">Secured Capital Volume</div>
             </div>
-            <div class="metric-item">
-                <div class="metric-value">100+</div>
-                <div class="metric-label">Active Countries</div>
+            <div class="metric-box animate-scale delay-100">
+                <div class="metric-number">100+</div>
+                <div class="metric-title">Sovereign Markets Penetrated</div>
             </div>
-            <div class="metric-item">
-                <div class="metric-value">5,000+</div>
-                <div class="metric-label">Verified RFQs</div>
+            <div class="metric-box animate-scale delay-200">
+                <div class="metric-number">5,000+</div>
+                <div class="metric-title">Institutional RFQs Executed</div>
             </div>
         </div>
     </section>
     <!-- GLOBAL PARTNER STRIP -->
-    <section class="expert-section alt-bg">
-        <div class="section-header">
-            <h2 class="premium-font">Global Trade <span>Network Presence</span></h2>
+    <section class="elite-section alt">
+        <div class="section-head animate-on-scroll">
+            <h2 class="elite-font">Unrivaled Global <span class="gold-text">Network Dominance</span></h2>
         </div>
-        <div class="network-tags">
-            <div class="network-tag">🇺🇸 North America</div>
-            <div class="network-tag">🇪🇺 Europe</div>
-            <div class="network-tag">🇦🇪 Middle East</div>
-            <div class="network-tag">🇮🇳 South Asia</div>
-            <div class="network-tag">🇸🇬 Southeast Asia</div>
-            <div class="network-tag">🇦🇺 Oceania</div>
+        <div class="reach-network">
+            <div class="reach-tag animate-on-scroll">🇺🇸 North America</div>
+            <div class="reach-tag animate-on-scroll delay-100">🇪🇺 Europe</div>
+            <div class="reach-tag animate-on-scroll delay-200">🇦🇪 Middle East</div>
+            <div class="reach-tag animate-on-scroll delay-300">🇮🇳 South Asia</div>
+            <div class="reach-tag animate-on-scroll delay-400">🇸🇬 Southeast Asia</div>
+            <div class="reach-tag animate-on-scroll delay-100">🇦🇺 Oceania</div>
         </div>
     </section>
     <footer>
-        <p
-            style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 20px; display: inline-block;">
-            APD Global Trade</p>
-        <p style="margin-top: 20px;">
-            <a href="/terms.html">Terms</a> |
-            <a href="/privacy.html">Privacy</a> |
-            <a href="/disclaimer.html">Disclaimer</a> |
-            <a href="/shipping-policy.html">Shipping Policy</a>
-        </p>
-        <p style="font-size: 12px; margin-top: 30px; opacity: 0.5;">© 2026 APD Global Trade. All rights reserved.</p>
+        <div class="footer-logo animate-on-scroll">APD Global Trade</div>
+        <div class="footer-links animate-on-scroll delay-100">
+            <a href="/terms.html">Master Terms</a>
+            <a href="/privacy.html">Data Security</a>
+            <a href="/disclaimer.html">Legal Disclaimer</a>
+            <a href="/shipping-policy.html">Global Logistics</a>
+        </div>
+        <div class="copyright animate-fade delay-300">© 2026 APD Global Trade Syndicate. Absolute Rights Reserved.</div>
     </footer>
+    <!-- FLOATING ACTIONS -->
+    <div class="fab-container">
+        <a class="fab fab-wa" href="https://wa.me/919266418868">💬</a>
+        <a class="fab fab-app" href="/download-app.html">Deploy Mobile Protocol</a>
+    </div>
+    <!-- ==========================================================================
+     BEHAVIORAL SCRIPTS & FIREBASE
+     ========================================================================== -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, getDocs, query, orderBy, limit }
             from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        /* UI Animations Logic */
+        document.addEventListener("DOMContentLoaded", () => {
+            // Navigation Scroll Effect
+            const header = document.getElementById("site-header");
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 50) header.classList.add("scrolled");
+                else header.classList.remove("scrolled");
+            });
+            // Intersection Observer for Scroll Reveals
+            const observerOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("reveal");
+                        // Optional: stop observing once revealed
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            document.querySelectorAll(".animate-on-scroll, .animate-scale, .animate-fade").forEach(el => {
+                observer.observe(el);
+            });
+        });
+        /* Firebase Logic */
         const firebaseConfig = {
             apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
             authDomain: "apd-globaltrade-prod.firebaseapp.com",
@@ -838,7 +1126,7 @@
         const db = getFirestore(app);
         const ticker = document.getElementById("rfqTicker");
         function aiSummary(r) {
-            return `Buyer seeking ${r.product} (${r.quantity}) for ${r.country || "global"} market`;
+            return `Target Acquired: ${r.product} (${r.quantity}) for ${r.country || "Global"} Protocol`;
         }
         async function loadRFQs() {
             try {
@@ -846,7 +1134,7 @@
                 const snap = await getDocs(q);
                 ticker.innerHTML = "";
                 if (snap.empty) {
-                    ticker.innerHTML = `<span>No Live RFQs Available</span>`;
+                    ticker.innerHTML = `<span>Awaiting Global Command Inputs...</span>`;
                     return;
                 }
                 snap.forEach(doc => {
@@ -854,21 +1142,20 @@
                     const country = r.destination || r.country || "Global";
                     const code = (r.countryCode || "").toLowerCase();
                     const flag = code
-                        ? `<img src="https://flagcdn.com/16x12/${code}.png" style="vertical-align:middle;margin-right:6px">`
-                        : "🌍";
+                        ? `<img src="https://flagcdn.com/16x12/${code}.png" style="vertical-align:middle;margin-right:8px;box-shadow:0 0 5px rgba(255,255,255,0.2);">`
+                        : "⚡";
                     ticker.innerHTML += `
         <span onclick="location.href='/membership.html'">
           ${flag} ${aiSummary({ ...r, country })}
         </span>`;
                 });
             } catch (error) {
-                ticker.innerHTML = `<span>Error loading live RFQs</span>`;
+                ticker.innerHTML = `<span>[SECURE LINK OFFLINE] Encrypted RFQs hidden.</span>`;
                 console.error(error);
             }
         }
-        loadRFQs();
+        // Stagger RFQ load slightly for effect
+        setTimeout(loadRFQs, 1500);
     </script>
-    <a class="float whatsapp" href="https://wa.me/919266418868">💬</a>
-    <a class="float download" href="/download-app.html">📲 Download App</a>
 </body>
 </html>
