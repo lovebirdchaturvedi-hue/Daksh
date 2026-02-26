@@ -1,31 +1,326 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Leadership | APD Global Trade</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<style>
-body{margin:0;font-family:Inter;background:#020617;color:#fff}
-section{max-width:1000px;margin:120px auto;padding:0 20px}
-h1{font-family:'Playfair Display',serif;color:#e7cf88;text-align:center}
-h2{color:#c9a44a;margin-top:60px}
-p{color:#cbd5f5;line-height:1.8}
-.card{background:rgba(11,29,54,.7);padding:40px;border-radius:24px;margin-top:40px;border:1px solid rgba(201,164,74,.25)}
-</style>
+    <meta charset="UTF-8">
+    <title>Leadership Syndicate | APD Global Trade</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ==========================================================================
+   PREMIUM B2B BASE STYLES
+   ========================================================================== */
+        :root {
+            --bg-dark: #050914;
+            --bg-darker: #02040a;
+            --bg-card: rgba(10, 15, 30, 0.6);
+            --border-subtle: rgba(212, 175, 55, 0.15);
+            --gold: #D4AF37;
+            --gold-soft: #F9F1D8;
+            --text-main: #ffffff;
+            --text-muted: #94A3B8;
+            --glass-bg: rgba(5, 9, 20, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-blur: blur(16px);
+        }
+        * {
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-darker);
+            color: var(--text-main);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        h1,
+        h2,
+        h3,
+        .premium-font {
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            font-weight: 600;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-darker);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.3);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold);
+        }
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal {
+            opacity: 1;
+            transform: translate(0);
+        }
+        .delay-100 {
+            transition-delay: 100ms;
+        }
+        .delay-200 {
+            transition-delay: 200ms;
+        }
+        /* Navigation */
+        header {
+            height: 85px;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+        header.scrolled {
+            background: rgba(2, 4, 10, 0.95);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        header .logo {
+            position: absolute;
+            left: 40px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .premium-logo {
+            background: linear-gradient(135deg, var(--gold-soft) 0%, var(--gold) 50%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        header nav {
+            display: flex;
+            gap: 30px;
+        }
+        header nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        header nav a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 1px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--gold);
+            transition: width 0.3s ease;
+        }
+        header nav a:hover {
+            color: var(--text-main);
+        }
+        header nav a:hover::after {
+            width: 100%;
+        }
+        /* Page Header */
+        .page-header {
+            padding: 120px 20px 80px;
+            text-align: center;
+            background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1), transparent 70%), var(--bg-darker);
+            position: relative;
+        }
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: var(--gold);
+        }
+        .page-header h1 {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        .page-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            line-height: 1.8;
+        }
+        /* Content Section */
+        .content-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        .leader-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 4px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .leader-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+            border-color: var(--border-subtle);
+        }
+        .leader-image {
+            width: 100%;
+            height: 300px;
+            background-color: #111;
+            background-size: cover;
+            background-position: center;
+            border-bottom: 2px solid var(--gold);
+        }
+        .leader-info {
+            padding: 30px;
+        }
+        .leader-info h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            font-family: 'Playfair Display', serif;
+        }
+        .leader-info h4 {
+            color: var(--gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        .leader-info p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        /* Footer */
+        footer {
+            background: #010205;
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-subtle);
+        }
+        footer p {
+            margin-bottom: 20px;
+        }
+        footer a {
+            color: var(--gold);
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        @media(max-width: 900px) {
+            header nav {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
-<section>
-<h1>Leadership & Strategic Oversight</h1>
-
-<div class="card">
-<h2>Chairman’s Statement</h2>
-<p>Our vision is to establish APD Global Trade as a structured international trade authority connecting serious suppliers with verified global buyers under disciplined execution standards.</p>
-</div>
-
-<div class="card">
-<h2>Advisory Oversight</h2>
-<p>Trade Compliance Advisory • Market Strategy Advisory • Structured Growth Governance</p>
-</div>
-</section>
+    <header id="site-header">
+        <div class="logo premium-logo">APD Global Trade</div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/buyer-rfqs.html">Buyer RFQs</a>
+            <a href="/suppliers.html">Suppliers</a>
+            <a href="/standards.html">Standards</a>
+            <a href="/leadership.html">Leadership</a>
+            <a href="/contact.html">Contact</a>
+        </nav>
+    </header>
+    <section class="page-header">
+        <h1 class="premium-font animate-on-scroll">The Syndicate Architects</h1>
+        <p class="animate-on-scroll delay-100">Our platform is governed by veterans in international shipping, corporate
+            finance, and global supply chain security. Meet the advisory board securing your trades.</p>
+    </section>
+    <section class="content-section">
+        <div class="leadership-grid">
+            <!-- Leader 1 -->
+            <div class="leader-card animate-on-scroll">
+                <!-- Placeholder Image: Replace with real photo -->
+                <div class="leader-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=500&q=80'); filter: grayscale(100%);">
+                </div>
+                <div class="leader-info">
+                    <h3>Michael T. Sterling</h3>
+                    <h4>Director of Global Procurement</h4>
+                    <p>Former head of commodities at a major international trading house. Michael oversees the
+                        verification of all incoming institutional capital and major buyer RFQs.</p>
+                </div>
+            </div>
+            <!-- Leader 2 -->
+            <div class="leader-card animate-on-scroll delay-100">
+                <!-- Placeholder Image: Replace with real photo -->
+                <div class="leader-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=80'); filter: grayscale(100%);">
+                </div>
+                <div class="leader-info">
+                    <h3>Elena Rostova</h3>
+                    <h4>Head of Intelligence & Compliance</h4>
+                    <p>15 years in global trade compliance and customs risk mitigation. Elena commands the forensic
+                        vetting protocols that keep the APD syndicate free of bad actors.</p>
+                </div>
+            </div>
+            <!-- Leader 3 -->
+            <div class="leader-card animate-on-scroll delay-200">
+                <!-- Placeholder Image: Replace with real photo -->
+                <div class="leader-image"
+                    style="background-image: url('https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=500&q=80'); filter: grayscale(100%);">
+                </div>
+                <div class="leader-info">
+                    <h3>Rajiv Mehta</h3>
+                    <h4>VP of Supplier Ecosystem Strategy</h4>
+                    <p>With deep roots in South Asian and Middle Eastern supply chains, Rajiv manages the vetting and
+                        onboarding of our elite agricultural and commodity exporters.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p
+            style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 20px; display: inline-block;">
+            APD Global Trade</p>
+        <p style="margin-top: 20px;">
+            <a href="/terms.html">Terms</a> | <a href="/privacy.html">Privacy</a> | <a
+                href="/standards.html">Standards</a>
+        </p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const header = document.getElementById("site-header");
+            window.addEventListener("scroll", () => { if (window.scrollY > 50) header.classList.add("scrolled"); else header.classList.remove("scrolled"); });
+            const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("reveal"); observer.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+            document.querySelectorAll(".animate-on-scroll").forEach(el => observer.observe(el));
+        });
+    </script>
 </body>
 </html>
