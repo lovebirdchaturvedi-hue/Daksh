@@ -1,36 +1,307 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Trade Standards | APD Global Trade</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<style>
-body{margin:0;font-family:Inter;background:#020617;color:#fff}
-header{padding:20px;text-align:center;border-bottom:1px solid rgba(201,164,74,.2)}
-h1{font-family:'Playfair Display',serif;color:#e7cf88}
-section{max-width:1000px;margin:120px auto;padding:0 20px}
-h2{color:#c9a44a;margin-top:60px}
-p{color:#cbd5f5;line-height:1.7}
-.download{display:inline-block;margin-top:40px;padding:16px 40px;
-background:linear-gradient(135deg,#c9a44a,#e7cf88);
-color:#000;border-radius:999px;text-decoration:none;font-weight:600}
-</style>
+    <meta charset="UTF-8">
+    <title>Compliance Protocol | APD Global Trade</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ==========================================================================
+   PREMIUM B2B BASE STYLES
+   ========================================================================== */
+        :root {
+            --bg-dark: #050914;
+            --bg-darker: #02040a;
+            --bg-card: rgba(10, 15, 30, 0.6);
+            --border-subtle: rgba(212, 175, 55, 0.15);
+            --gold: #D4AF37;
+            --gold-soft: #F9F1D8;
+            --text-main: #ffffff;
+            --text-muted: #94A3B8;
+            --glass-bg: rgba(5, 9, 20, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-blur: blur(16px);
+        }
+        * {
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-darker);
+            color: var(--text-main);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        h1,
+        h2,
+        h3,
+        .premium-font {
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            font-weight: 600;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-darker);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.3);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold);
+        }
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal {
+            opacity: 1;
+            transform: translate(0);
+        }
+        .delay-100 {
+            transition-delay: 100ms;
+        }
+        .delay-200 {
+            transition-delay: 200ms;
+        }
+        /* Navigation */
+        header {
+            height: 85px;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+        header.scrolled {
+            background: rgba(2, 4, 10, 0.95);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        header .logo {
+            position: absolute;
+            left: 40px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .premium-logo {
+            background: linear-gradient(135deg, var(--gold-soft) 0%, var(--gold) 50%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        header nav {
+            display: flex;
+            gap: 30px;
+        }
+        header nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        header nav a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 1px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--gold);
+            transition: width 0.3s ease;
+        }
+        header nav a:hover {
+            color: var(--text-main);
+        }
+        header nav a:hover::after {
+            width: 100%;
+        }
+        /* Page Header */
+        .page-header {
+            padding: 120px 20px 80px;
+            text-align: center;
+            background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1), transparent 70%), var(--bg-darker);
+            position: relative;
+        }
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: var(--gold);
+        }
+        .page-header h1 {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        .page-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            line-height: 1.8;
+        }
+        /* Content Section */
+        .content-section {
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+        .protocol-block {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-left: 4px solid var(--gold);
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            transition: transform 0.3s;
+        }
+        .protocol-block:hover {
+            transform: translateX(10px);
+            background: rgba(15, 23, 42, 0.8);
+            border-color: var(--border-subtle);
+        }
+        .protocol-block h3 {
+            color: var(--gold-soft);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+        .protocol-block p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+        .protocol-block ul {
+            color: var(--text-muted);
+            padding-left: 20px;
+            line-height: 1.8;
+        }
+        .protocol-block li {
+            margin-bottom: 10px;
+        }
+        /* Footer */
+        footer {
+            background: #010205;
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-subtle);
+        }
+        footer p {
+            margin-bottom: 20px;
+        }
+        footer a {
+            color: var(--gold);
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        @media(max-width: 900px) {
+            header nav {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
-<header><h1>Trade Standards & Compliance</h1></header>
-<section>
-<p>APD Global Trade maintains structured compliance procedures to ensure transparent and professional cross-border trade participation.</p>
-
-<h2>KYC & Verification</h2>
-<p>Supplier identity screening to maintain integrity.</p>
-
-<h2>RFQ Screening</h2>
-<p>Manual filtering to ensure serious trade engagement.</p>
-
-<h2>Structured Execution Framework</h2>
-<p>Standardized quotation and documentation flow.</p>
-
-<a href="/trade-policy.pdf" class="download">Download Official Trade Policy</a>
-</section>
+    <header id="site-header">
+        <div class="logo premium-logo">APD Global Trade</div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/buyer-rfqs.html">Buyer RFQs</a>
+            <a href="/suppliers.html">Suppliers</a>
+            <a href="/standards.html">Standards</a>
+            <a href="/leadership.html">Leadership</a>
+            <a href="/contact.html">Contact</a>
+        </nav>
+    </header>
+    <section class="page-header">
+        <h1 class="premium-font animate-on-scroll">Compliance & Validation Protocol</h1>
+        <p class="animate-on-scroll delay-100">Absolute integrity in cross-border commerce. We do not tolerate
+            fraudulent inquiries, unverified capital, or phantom supply.</p>
+    </section>
+    <section class="content-section">
+        <div class="protocol-block animate-on-scroll">
+            <h3>Phase 1: Buyer Institutional Verification (KYB)</h3>
+            <p>Before any Buyer RFQ is published to our Syndicate, the procuring entity must pass a stringent
+                multi-point verification protocol. This ensures our suppliers only dedicate resources to capitalized,
+                legitimate buyers.</p>
+            <ul>
+                <li><strong>Corporate Registry Cross-Check:</strong> Verification of business registration in the
+                    buyer's local jurisdiction.</li>
+                <li><strong>Financial Capability Scan:</strong> Verification of history or capacity to handle the
+                    requested volume (Letters of Credit / Escrow capacity).</li>
+                <li><strong>Identity Authentication:</strong> Direct verification of the procurement officer or director
+                    placing the global order.</li>
+            </ul>
+        </div>
+        <div class="protocol-block animate-on-scroll delay-100">
+            <h3>Phase 2: Elite Supplier Vetting</h3>
+            <p>We do not operate an open directory. APD Global Trade strictly controls supplier admission to maintain
+                the absolute highest standard of product delivery.</p>
+            <ul>
+                <li><strong>Export License (IEC) Verification:</strong> Mandatory verification of active export
+                    authority.</li>
+                <li><strong>Production Capacity Audit:</strong> Documentary proof of supply chain capability
+                    (warehousing, manufacturing, or direct farming collectives).</li>
+                <li><strong>Quality Certification Check:</strong> Verification of global standards (ISO, HACCP, SGS
+                    Inspection reports) where applicable.</li>
+            </ul>
+        </div>
+        <div class="protocol-block animate-on-scroll delay-200">
+            <h3>Phase 3: The Zero-Tolerance Mandate</h3>
+            <p>APD Global Trade enforces a lethal operational standard against bad actors. Any member found engaging in
+                bait-and-switch pricing, providing forged shipping documents, or demonstrating systemic failure to
+                execute contracts is permanently blacklisted globally.</p>
+            <p>Our syndicate protects our verified participants at all costs.</p>
+        </div>
+    </section>
+    <footer>
+        <p
+            style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 20px; display: inline-block;">
+            APD Global Trade</p>
+        <p style="margin-top: 20px;">
+            <a href="/terms.html">Terms</a> | <a href="/privacy.html">Privacy</a> | <a
+                href="/standards.html">Standards</a>
+        </p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const header = document.getElementById("site-header");
+            window.addEventListener("scroll", () => { if (window.scrollY > 50) header.classList.add("scrolled"); else header.classList.remove("scrolled"); });
+            const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("reveal"); observer.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+            document.querySelectorAll(".animate-on-scroll").forEach(el => observer.observe(el));
+        });
+    </script>
 </body>
 </html>
