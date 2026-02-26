@@ -62,6 +62,61 @@
             background: var(--gold);
         }
         /* ==========================================================================
+   DOMINANT ANIMATIONS
+   ========================================================================== */
+        @keyframes ambientGlow {
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
+            }
+        }
+        @keyframes pulseGold {
+            0%,
+            100% {
+                text-shadow: 0 0 10px rgba(212, 175, 55, 0.1);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            }
+        }
+        /* Scroll Reveal Classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .animate-scale {
+            opacity: 0;
+            transform: scale(0.97);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .animate-fade {
+            opacity: 0;
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal,
+        .reveal.animate-scale,
+        .reveal.animate-fade {
+            opacity: 1;
+            transform: translate(0) scale(1);
+        }
+        /* Delay modifiers for staggered reveals */
+        .delay-100 {
+            transition-delay: 100ms;
+        }
+        .delay-200 {
+            transition-delay: 200ms;
+        }
+        .delay-300 {
+            transition-delay: 300ms;
+        }
+        .delay-400 {
+            transition-delay: 400ms;
+        }
+        /* ==========================================================================
    HEADER & NAVIGATION
    ========================================================================== */
         header {
@@ -79,18 +134,23 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
             transition: all 0.3s ease;
         }
+        header.scrolled {
+            background: rgba(2, 4, 10, 0.95);
+            border-bottom: 1px solid var(--border-subtle);
+        }
         header .logo {
             position: absolute;
             left: 40px;
             font-size: 1.25rem;
             font-weight: 700;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
         .premium-logo {
             background: linear-gradient(135deg, var(--gold-soft) 0%, var(--gold) 50%, #fff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            animation: pulseGold 4s infinite;
         }
         header nav {
             display: flex;
@@ -146,6 +206,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            animation: ambientGlow 6s infinite alternate;
         }
         .earth-wrap::before {
             content: '';
@@ -180,17 +241,6 @@
         .center {
             text-align: center;
             z-index: 2;
-            animation: fadeUp 1s ease-out forwards;
-        }
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
         .center h1 {
             font-size: clamp(3rem, 4.5vw, 4.5rem);
@@ -248,6 +298,11 @@
             color: var(--gold-soft);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             text-transform: uppercase;
+            transition: transform 0.3s ease;
+        }
+        .badge:hover {
+            transform: translateY(-2px);
+            border-color: var(--gold);
         }
         .premium {
             margin-top: 60px;
@@ -307,6 +362,9 @@
             white-space: nowrap;
             animation: rfqScroll 45s linear infinite;
         }
+        .live-rfq-track:hover {
+            animation-play-state: paused;
+        }
         .live-rfq-track span {
             font-size: 14px;
             color: var(--text-muted);
@@ -360,10 +418,11 @@
             border: 1px solid var(--border-subtle);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
             filter: grayscale(40%) contrast(1.1);
-            transition: filter 0.5s ease;
+            transition: filter 0.5s ease, transform 0.5s ease;
         }
         .sea img:hover {
             filter: grayscale(0%) contrast(1.1);
+            transform: scale(1.02);
         }
         .contact-card {
             background: rgba(5, 9, 20, 0.85);
@@ -462,6 +521,7 @@
             background: rgba(15, 23, 42, 0.8);
             border-color: var(--border-subtle);
             transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
         .premium-card:hover::before {
             transform: translateX(100%);
@@ -542,6 +602,7 @@
         .network-tag:hover {
             background: var(--gold);
             color: #000;
+            transform: translateY(-2px);
         }
         /* ==========================================================================
    FOOTER & FLOATING
@@ -628,7 +689,6 @@
             header nav {
                 display: none;
             }
-            /* Hide heavy nav on mobile for aesthetic focus, implement burger menu if needed */
             .metric-item:not(:last-child)::after {
                 display: none;
             }
@@ -636,7 +696,7 @@
     </style>
 </head>
 <body>
-    <header>
+    <header id="site-header">
         <div class="logo premium-logo">APD Global Trade</div>
         <nav>
             <a href="/">Home</a>
@@ -651,15 +711,15 @@
         </nav>
     </header>
     <section class="hero">
-        <div class="earth-wrap">
+        <div class="earth-wrap animate-scale delay-200">
             <div class="earth"></div>
         </div>
-        <div class="center">
+        <div class="center animate-on-scroll delay-100">
             <h1>Where Verified Buyers<br>Meet Serious Suppliers</h1>
             <p>High-intent global RFQs. Protected buyer contacts. Zero fake leads.</p>
             <a href="/create-rfq.html" class="btn">Post Buyer RFQ</a>
             <a href="/buyer-rfqs.html" class="btn">View Buyer RFQs</a>
-            <div class="badges">
+            <div class="badges animate-fade delay-300">
                 <div class="badge">🔐 Verified Buyers</div>
                 <div class="badge">🌍 100+ Countries</div>
                 <div class="badge">🧾 KYC & IEC</div>
@@ -667,13 +727,13 @@
                 <div class="badge">🚫 No Brokers</div>
                 <div class="badge">⚡ Real RFQs</div>
             </div>
-            <div class="premium">INTERNATIONAL TRADE AUTHORITY</div>
+            <div class="premium animate-fade delay-400">INTERNATIONAL TRADE AUTHORITY</div>
         </div>
-        <div class="earth-wrap">
+        <div class="earth-wrap animate-scale delay-200">
             <div class="earth night"></div>
         </div>
     </section>
-    <section class="live-rfq">
+    <section class="live-rfq animate-fade">
         <div class="live-rfq-label">Live RFQ Update</div>
         <div class="live-rfq-track-container">
             <div class="live-rfq-track" id="rfqTicker">
@@ -683,8 +743,8 @@
     </section>
     <section class="sea">
         <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=900&q=80"
-            alt="Shipping Containers">
-        <div class="contact-card">
+            alt="Shipping Containers" class="animate-scale reveal">
+        <div class="contact-card animate-on-scroll">
             <h2 class="premium-font">Global Trade Never Stops</h2>
             <p>Verified buyers. Real demand. Structured execution.</p>
             <div class="contact-details">
@@ -694,11 +754,11 @@
             </div>
         </div>
         <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=900&q=80"
-            alt="Global Trade">
+            alt="Global Trade" class="animate-scale delay-200">
     </section>
     <!-- TRADE AUTHORITY SECTION -->
     <section class="expert-section alt-bg">
-        <div class="section-header">
+        <div class="section-header animate-on-scroll">
             <h2 class="premium-font">International Trade <span>Authority Framework</span></h2>
             <p>
                 APD Global Trade operates under a structured international trade model,
@@ -707,30 +767,30 @@
             </p>
         </div>
         <div class="premium-grid">
-            <div class="premium-card">
+            <div class="premium-card animate-on-scroll">
                 <h3>Verified Buyer Screening</h3>
                 <p>All RFQs are reviewed to eliminate spam and maintain serious commercial intent.</p>
             </div>
-            <div class="premium-card">
+            <div class="premium-card animate-on-scroll delay-100">
                 <h3>Controlled Supplier Membership</h3>
                 <p>Membership-based access ensures professional trade engagement.</p>
             </div>
-            <div class="premium-card">
+            <div class="premium-card animate-on-scroll delay-200">
                 <h3>Structured RFQ Execution</h3>
                 <p>Standardized quotation framework for cross-border trade readiness.</p>
             </div>
-            <div class="premium-card">
+            <div class="premium-card animate-on-scroll delay-300">
                 <h3>Institutional Positioning</h3>
                 <p>APD Global Trade is a curated trade authority, not a public directory.</p>
             </div>
         </div>
-        <div style="text-align:center; margin-top: 80px;">
+        <div style="text-align:center; margin-top: 80px;" class="animate-on-scroll delay-400">
             <a href="/membership.html" class="btn">Apply for Verified Supplier Membership</a>
         </div>
     </section>
     <!-- TRADE STANDARDS & COMPLIANCE -->
     <section class="expert-section solid-bg">
-        <div class="section-header">
+        <div class="section-header animate-on-scroll">
             <h2 class="premium-font">Trade Standards & <span>Compliance Framework</span></h2>
             <p>
                 APD Global Trade operates under a structured compliance philosophy
@@ -738,19 +798,19 @@
             </p>
         </div>
         <div class="premium-grid">
-            <div class="premium-card">
+            <div class="premium-card animate-on-scroll">
                 <h3>KYC & IEC Verification</h3>
                 <p>Supplier identity screening to maintain trade integrity.</p>
             </div>
-            <div class="premium-card">
+            <div class="premium-card animate-on-scroll delay-100">
                 <h3>RFQ Screening</h3>
                 <p>Manual filtering to reduce non-serious trade inquiries.</p>
             </div>
-            <div class="premium-card">
+            <div class="premium-card animate-on-scroll delay-200">
                 <h3>Dispute Escalation Support</h3>
                 <p>Priority assistance for premium members during trade conflicts.</p>
             </div>
-            <div class="premium-card">
+            <div class="premium-card animate-on-scroll delay-300">
                 <h3>Structured Documentation Flow</h3>
                 <p>Quotation and communication standardization.</p>
             </div>
@@ -758,19 +818,19 @@
     </section>
     <!-- ADVISORY PANEL -->
     <section class="expert-section alt-bg">
-        <div class="section-header">
+        <div class="section-header animate-on-scroll">
             <h2 class="premium-font">Advisory & Strategic <span>Oversight Panel</span></h2>
         </div>
         <div class="premium-grid">
-            <div class="premium-card">
+            <div class="premium-card animate-on-scroll">
                 <h3>Trade Compliance Advisory</h3>
                 <p>Oversight on supplier verification and global trade standards.</p>
             </div>
-            <div class="premium-card">
+            <div class="premium-card animate-on-scroll delay-100">
                 <h3>International Market Strategy</h3>
                 <p>Advisory input on emerging global trade corridors.</p>
             </div>
-            <div class="premium-card">
+            <div class="premium-card animate-on-scroll delay-200">
                 <h3>Structured Growth Framework</h3>
                 <p>Ensuring sustainable expansion of supplier network.</p>
             </div>
@@ -778,19 +838,19 @@
     </section>
     <!-- ANNUAL TRADE METRICS -->
     <section class="expert-section solid-bg">
-        <div class="section-header">
+        <div class="section-header animate-on-scroll">
             <h2 class="premium-font">Annual Trade <span>Activity Overview</span></h2>
         </div>
         <div class="metrics-wrapper">
-            <div class="metric-item">
+            <div class="metric-item animate-scale">
                 <div class="metric-value">$250M+</div>
                 <div class="metric-label">Projected Trade Volume</div>
             </div>
-            <div class="metric-item">
+            <div class="metric-item animate-scale delay-100">
                 <div class="metric-value">100+</div>
                 <div class="metric-label">Active Countries</div>
             </div>
-            <div class="metric-item">
+            <div class="metric-item animate-scale delay-200">
                 <div class="metric-value">5,000+</div>
                 <div class="metric-label">Verified RFQs</div>
             </div>
@@ -798,34 +858,58 @@
     </section>
     <!-- GLOBAL PARTNER STRIP -->
     <section class="expert-section alt-bg">
-        <div class="section-header">
+        <div class="section-header animate-on-scroll">
             <h2 class="premium-font">Global Trade <span>Network Presence</span></h2>
         </div>
         <div class="network-tags">
-            <div class="network-tag">🇺🇸 North America</div>
-            <div class="network-tag">🇪🇺 Europe</div>
-            <div class="network-tag">🇦🇪 Middle East</div>
-            <div class="network-tag">🇮🇳 South Asia</div>
-            <div class="network-tag">🇸🇬 Southeast Asia</div>
-            <div class="network-tag">🇦🇺 Oceania</div>
+            <div class="network-tag animate-on-scroll">🇺🇸 North America</div>
+            <div class="network-tag animate-on-scroll delay-100">🇪🇺 Europe</div>
+            <div class="network-tag animate-on-scroll delay-200">🇦🇪 Middle East</div>
+            <div class="network-tag animate-on-scroll delay-300">🇮🇳 South Asia</div>
+            <div class="network-tag animate-on-scroll delay-400">🇸🇬 Southeast Asia</div>
+            <div class="network-tag animate-on-scroll delay-100">🇦🇺 Oceania</div>
         </div>
     </section>
     <footer>
-        <p
+        <p class="animate-on-scroll"
             style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 20px; display: inline-block;">
             APD Global Trade</p>
-        <p style="margin-top: 20px;">
+        <p class="animate-on-scroll delay-100" style="margin-top: 20px;">
             <a href="/terms.html">Terms</a> |
             <a href="/privacy.html">Privacy</a> |
             <a href="/disclaimer.html">Disclaimer</a> |
             <a href="/shipping-policy.html">Shipping Policy</a>
         </p>
-        <p style="font-size: 12px; margin-top: 30px; opacity: 0.5;">© 2026 APD Global Trade. All rights reserved.</p>
+        <p class="animate-fade delay-300" style="font-size: 12px; margin-top: 30px; opacity: 0.5;">© 2026 APD Global
+            Trade. All rights reserved.</p>
     </footer>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, getDocs, query, orderBy, limit }
             from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        /* UI Animations Logic */
+        document.addEventListener("DOMContentLoaded", () => {
+            // Navigation Scroll Effect
+            const header = document.getElementById("site-header");
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 50) header.classList.add("scrolled");
+                else header.classList.remove("scrolled");
+            });
+            // Intersection Observer for Scroll Reveals
+            const observerOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("reveal");
+                        // Optional: stop observing once revealed
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            document.querySelectorAll(".animate-on-scroll, .animate-scale, .animate-fade").forEach(el => {
+                observer.observe(el);
+            });
+        });
         const firebaseConfig = {
             apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
             authDomain: "apd-globaltrade-prod.firebaseapp.com",
@@ -866,10 +950,10 @@
                 console.error(error);
             }
         }
-        loadRFQs();
+        // Slight delay to allow animations to start
+        setTimeout(loadRFQs, 800);
     </script>
     <a class="float whatsapp" href="https://wa.me/919266418868">💬</a>
     <a class="float download" href="/download-app.html">📲 Download App</a>
 </body>
-
 </html>
