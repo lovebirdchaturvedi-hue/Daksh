@@ -2,312 +2,901 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>APD Global Trade | Elite B2B Trade Facilitation Platform</title>
+  <title>APD Global Trade | Elite B2B Trade Platform</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Luxury Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <!-- Main CSS -->
-  <link rel="stylesheet" href="/assets/css/style.css">
-  <!-- ELITE UI SYSTEM -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
   <style>
-    :root {
-      --navy: #0b1d36;
-      --navy-dark: #071427;
-      --gold: #c9a44a;
-      --gold-soft: #e7cf88;
-      --text-light: #e5e7eb;
-      --text-muted: #9ca3af;
-    }
+    html,
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: #f5f7fb;
-      color: #0f172a;
-      letter-spacing: 0.15px;
+      font-family: Inter, sans-serif;
+      background: #020617;
+      color: #fff;
+      scroll-behavior: smooth;
     }
-    h1, h2, h3 {
-      font-family: 'Playfair Display', serif;
-      letter-spacing: 0.4px;
+    :root {
+      --gold: #c9a44a;
+      --gold-soft: #e7cf88;
+      --whatsapp-gradient: linear-gradient(135deg, #25D366, #128C7E);
     }
     /* HEADER */
     header {
-      background: linear-gradient(180deg, var(--navy), var(--navy-dark));
-      padding: 20px;
-      text-align: center;
-    }
-    header .logo {
-      color: var(--gold);
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-    header nav a {
-      color: var(--text-light);
-      margin: 0 14px;
-      text-decoration: none;
-      font-size: 14px;
-      opacity: 0.85;
-    }
-    header nav a:hover {
-      opacity: 1;
-      color: var(--gold-soft);
-    }
-    /* CINEMATIC HERO */
-    .hero {
-      height: 85vh;
-      background-image:
-        linear-gradient(180deg, rgba(11,29,54,0.75), rgba(7,20,39,0.9)),
-        url("https://images.unsplash.com/photo-1519452575417-564c1401ecc0");
-      background-size: cover;
-      background-position: center;
+      height: 80px;
+      background: linear-gradient(180deg, #0b1d36, #071427);
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      color: var(--text-light);
-      padding: 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
-    .hero h1 {
-      font-size: clamp(2.6rem, 4vw, 3.6rem);
-      margin-bottom: 16px;
-      color: #fff;
+    header .logo {
+      position: absolute;
+      left: 30px;
+      font-weight: 700;
     }
-    .hero p {
-      max-width: 720px;
+    .premium-logo {
+      background: linear-gradient(90deg, #c9a44a, #fff, #c9a44a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: premiumGlow 3s ease-in-out infinite;
+    }
+    @keyframes premiumGlow {
+      0% {
+        text-shadow: 0 0 6px rgba(201, 164, 74, .4)
+      }
+      50% {
+        text-shadow: 0 0 28px rgba(201, 164, 74, .9)
+      }
+      100% {
+        text-shadow: 0 0 6px rgba(201, 164, 74, .4)
+      }
+    }
+    header nav a {
+      color: #e5e7eb;
+      margin: 0 14px;
+      text-decoration: none;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    header nav a:hover {
+      color: var(--gold-soft)
+    }
+    /* HERO */
+    .hero {
+      min-height: calc(100vh - 80px);
+      display: grid;
+      grid-template-columns: 1fr 1.2fr 1fr;
+      align-items: center;
+      padding: 40px;
+      background:
+        radial-gradient(circle at center, rgba(201, 164, 74, .18), transparent 65%),
+        linear-gradient(180deg, #0b1d36, #020617);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("https://www.transparenttextures.com/patterns/stardust.png");
+      opacity: .15;
+      pointer-events: none;
+    }
+    .earth-wrap {
+      width: 260px;
+      height: 260px;
       margin: auto;
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      margin-bottom: 30px;
+      pointer-events: none;
+      position: relative;
     }
-    .btn-primary {
-      display: inline-block;
+    .earth {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: url("https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg") repeat-x;
+      background-size: cover;
+      animation: spin 28s linear infinite;
+      box-shadow: inset -40px 0 80px rgba(0, 0, 0, .85), 0 0 60px rgba(201, 164, 74, .5);
+    }
+    .night {
+      filter: brightness(.6) saturate(1.2)
+    }
+    @keyframes spin {
+      to {
+        background-position: -1400px
+      }
+    }
+    .center {
+      text-align: center;
+      z-index: 2
+    }
+    .center h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 4vw, 3.8rem);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .center p {
+      max-width: 720px;
+      margin: 16px auto 28px;
+      color: #cbd5f5;
+      font-size: 1.1rem;
+    }
+    .btn {
       background: linear-gradient(135deg, var(--gold), var(--gold-soft));
       color: #000;
-      padding: 14px 38px;
+      padding: 14px 36px;
+      border-radius: 999px;
       text-decoration: none;
       font-weight: 600;
+      margin: 6px;
+      display: inline-block;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(201, 164, 74, 0.4);
+    }
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .badge {
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .14);
+      padding: 10px 18px;
       border-radius: 999px;
-      letter-spacing: 0.8px;
-      transition: all 0.3s ease;
+      font-size: 13px;
+      backdrop-filter: blur(5px);
     }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+    .premium {
+      margin-top: 40px;
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      letter-spacing: 2px;
+      color: #f5e7c6;
+      animation: glow 4s ease-in-out infinite;
     }
-    /* SECTIONS */
-    .container {
+    @keyframes glow {
+      50% {
+        text-shadow: 0 0 35px rgba(201, 164, 74, .7)
+      }
+    }
+    /* LIVE RFQ */
+    .live-rfq {
+      background: linear-gradient(90deg, #020617, #071427);
+      padding: 18px 0;
+      border-top: 1px solid rgba(255, 255, 255, .08);
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .live-rfq-label {
+      font-weight: 700;
+      color: #c9a44a;
+      background: rgba(201, 164, 74, 0.1);
+      padding: 8px 20px;
+      border-radius: 0 50px 50px 0;
+      margin-right: 20px;
+      white-space: nowrap;
+    }
+    .live-rfq-track {
+      display: flex;
+      gap: 60px;
+      white-space: nowrap;
+      animation: rfqScroll 35s linear infinite;
+    }
+    .live-rfq-track span {
+      font-size: 15px;
+      color: #e5e7eb;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+    .live-rfq-track span:hover {
+      color: #f5e7c6;
+      text-decoration: underline;
+    }
+    @keyframes rfqScroll {
+      from {
+        transform: translateX(100%)
+      }
+      to {
+        transform: translateX(-100%)
+      }
+    }
+    /* SEA */
+    .sea {
+      min-height: 100vh;
+      background:
+        linear-gradient(to top, rgba(2, 6, 23, .95), rgba(2, 6, 23, .4)),
+        url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=60");
+      background-size: cover;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: center;
+      padding: 100px 60px;
+      gap: 60px;
+    }
+    .sea img {
+      width: 100%;
+      max-width: 480px;
+      opacity: .9;
+      border-radius: 15px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(201, 164, 74, 0.2);
+    }
+    .contact-card {
+      background: rgba(11, 29, 54, .85);
+      backdrop-filter: blur(10px);
+      border-radius: 28px;
+      padding: 50px 40px;
+      text-align: center;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, .6);
+      border: 1px solid rgba(201, 164, 74, .2);
+    }
+    /* AUTHORITY SECTION */
+    .trade-authority {
+      padding: 160px 20px;
+      background: linear-gradient(180deg, #071427, #020617);
+      border-top: 1px solid rgba(201, 164, 74, .15);
+    }
+    .trade-authority h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 46px;
+      text-align: center;
+      color: var(--gold-soft);
+      margin-bottom: 40px;
+    }
+    .trade-authority p {
+      max-width: 850px;
+      margin: 0 auto 100px auto;
+      text-align: center;
+      line-height: 1.8;
+      font-size: 18px;
+      color: #cbd5f5;
+    }
+    .authority-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 60px;
       max-width: 1100px;
       margin: auto;
-      padding: 100px 20px;
     }
-    /* RFQ PREVIEW */
-    .rfq-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
-      gap: 28px;
-      margin-top: 40px;
+    .authority-card {
+      background: rgba(11, 29, 54, .7);
+      padding: 45px;
+      border-radius: 28px;
+      border: 1px solid rgba(201, 164, 74, .25);
+      transition: transform 0.3s ease;
     }
-    .rfq-card {
-      background: #fff;
-      padding: 26px;
-      border-radius: 16px;
-      border: 1px solid #e5e7eb;
-      transition: all 0.3s ease;
+    .authority-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--gold);
     }
-    .rfq-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 25px 60px rgba(0,0,0,0.08);
-    }
-    .locked {
-      filter: blur(2px);
-    }
-    .lock {
-      color: #991b1b;
-      font-size: 13px;
-      font-weight: 600;
-    }
-    /* BUYER / SUPPLIER */
-    .two-col {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
-      gap: 50px;
-    }
-    /* TESTIMONIALS */
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
-      gap: 40px;
-      margin-top: 40px;
-    }
-    .testimonial {
-      background: #fff;
-      padding: 28px;
-      border-radius: 18px;
-      border-left: 5px solid var(--gold);
-      font-style: italic;
-      line-height: 1.8;
-    }
-    /* STATS */
-    .stats {
-      background: linear-gradient(180deg, var(--navy), var(--navy-dark));
-      color: #fff;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
-      text-align: center;
-      padding: 60px 20px;
-    }
-    .stats h3 {
+    .authority-card h3 {
       color: var(--gold);
-      font-size: 2.2rem;
+      margin-bottom: 18px;
     }
-    /* CTA */
-    .cta {
-      background: linear-gradient(180deg, #020617, #000);
-      color: #fff;
+    .authority-card p {
+      color: #cbd5f5;
+      text-align: left;
+      margin: 0;
+      font-size: 15px;
+    }
+    .authority-cta {
       text-align: center;
-      padding: 100px 20px;
+      margin-top: 120px;
     }
-    .cta p {
-      color: var(--text-muted);
-      margin-bottom: 30px;
+    .authority-cta a {
+      padding: 20px 60px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+      color: #000;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      transition: box-shadow 0.3s ease;
     }
+    .authority-cta a:hover {
+      box-shadow: 0 0 30px rgba(201, 164, 74, 0.4);
+    }
+    /* FOOTER */
     footer {
       background: #020617;
-      color: var(--text-muted);
       text-align: center;
-      padding: 40px 20px;
-      font-size: 14px;
+      padding: 60px 20px;
+      color: #9ca3af;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
     footer a {
       color: var(--gold);
-      text-decoration: none;
+      margin: 0 6px;
+      text-decoration: none
     }
-    @media (max-width: 768px) {
-      .hero {
-        height: 70vh;
+    footer a:hover {
+      text-decoration: underline;
+    }
+    /* FLOAT PREMIUM STUFF */
+    .float {
+      position: fixed;
+      right: 30px;
+      z-index: 9999;
+      transition: transform 0.3s ease;
+    }
+    .float:hover {
+      transform: scale(1.1);
+    }
+    .whatsapp {
+      bottom: 30px;
+      width: 65px;
+      height: 65px;
+      background: var(--whatsapp-gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+      animation: floatMotion 6s infinite ease-in-out;
+    }
+    .download {
+      bottom: 110px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+      color: #000;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    @keyframes floatMotion {
+      0% {
+        transform: translateY(0px);
       }
-      .container {
-        padding: 70px 20px;
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+    /* ==========================================================================
+   SUHANA AI BOT (PREMIUM STUFF)
+   ========================================================================== */
+    #suhana-bot {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      z-index: 10000;
+    }
+    .suhana-trigger {
+      width: 75px;
+      height: 75px;
+      background: linear-gradient(135deg, var(--gold), #b8912d);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: floatMotion 6s infinite ease-in-out reverse;
+      position: relative;
+    }
+    .suhana-trigger:hover {
+      transform: scale(1.1) rotate(5deg);
+      background: #fff;
+    }
+    .suhana-trigger svg {
+      stroke: #000;
+      transition: 0.3s;
+    }
+    .suhana-trigger:hover svg {
+      stroke: #b8912d;
+    }
+    .suhana-badge {
+      position: absolute;
+      top: -5px;
+      right: 0;
+      background: #ff3b30;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 2px solid #020617;
+      box-shadow: 0 4px 10px rgba(255, 59, 48, 0.4);
+      animation: pulse-red 2s infinite;
+    }
+    @keyframes pulse-red {
+      0% {
+        box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(255, 59, 48, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 59, 48, 0);
+      }
+    }
+    .suhana-bubble {
+      background: rgba(11, 29, 54, 0.98);
+      backdrop-filter: blur(25px);
+      border: 1px solid rgba(201, 164, 74, 0.3);
+      width: 350px;
+      border-radius: 20px;
+      padding: 30px;
+      display: none;
+      position: absolute;
+      bottom: 95px;
+      left: 0;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95);
+      border-bottom: 4px solid var(--gold);
+    }
+    .suhana-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .suhana-avatar {
+      width: 45px;
+      height: 45px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #000;
+      font-size: 20px;
+      border: 2px solid var(--gold-soft);
+    }
+    .suhana-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .suhana-name {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 18px;
+      margin: 0;
+    }
+    .suhana-status {
+      font-size: 10px;
+      color: #25D366;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .suhana-text {
+      color: #fff;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+    .bot-options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .bot-btn {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(201, 164, 74, 0.2);
+      background: rgba(201, 164, 74, 0.08);
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .bot-btn:hover {
+      background: var(--gold);
+      color: #000;
+      font-weight: 700;
+      transform: translateX(8px);
+    }
+    /* MOBILE */
+    @media(max-width:900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 100px 20px;
+      }
+      .earth-wrap {
+        display: none
+      }
+      .sea {
+        grid-template-columns: 1fr;
+        padding: 60px 20px;
+      }
+      header nav {
+        display: none;
+      }
+      #suhana-bot {
+        left: 20px;
+        bottom: 20px;
+      }
+      .whatsapp {
+        right: 20px;
+        bottom: 20px;
+      }
+      .download {
+        right: 20px;
+        bottom: 100px;
       }
     }
   </style>
 </head>
 <body>
-<header>
-  <div class="logo">APD Global Trade</div>
-  <nav>
-    <a href="/index.html">Home</a>
-    <a href="/rfq.html">Buyer RFQs</a>
-    <a href="/membership.html">Membership</a>
-    <a href="/suppliers.html">Suppliers</a>
-    <a href="/contact.html">Contact</a>
-  </nav>
-</header>
-<!-- HERO -->
-<section class="hero">
-  <div>
-    <h1>Where Verified Buyers Meet Serious Suppliers</h1>
+  <!-- SUHANA AI BOT (ADDED) -->
+  <div id="suhana-bot">
+    <div class="suhana-bubble" id="suhana-window">
+      <div class="suhana-header">
+        <div class="suhana-avatar">S</div>
+        <div class="suhana-info">
+          <p class="suhana-name">Suhana AI</p>
+          <span class="suhana-status">● Live Trade Assistant</span>
+        </div>
+      </div>
+      <div class="suhana-text" id="suhana-msg">
+        Welcome to the APD Syndicate. I am the lead vetting officer.<br><br>
+        <b>How can I assist your global trade execution today?</b>
+      </div>
+      <div class="bot-options" id="suhana-actions">
+        <button class="bot-btn" onclick="suhanaHandle('exporter')">I am an Exporter (Access Floor)</button>
+        <button class="bot-btn" onclick="suhanaHandle('importer')">I am an Importer (Post RFQ)</button>
+        <button class="bot-btn" onclick="suhanaHandle('help')">Talk to Global Dispatch</button>
+      </div>
+    </div>
+    <div class="suhana-trigger" onclick="toggleSuhana()">
+      <div class="suhana-badge">New</div>
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M12 8V4H8"></path>
+        <rect width="16" height="12" x="4" y="8" rx="2"></rect>
+        <path d="M2 14h2"></path>
+        <path d="M20 14h2"></path>
+        <path d="M15 13v2"></path>
+        <path d="M9 13v2"></path>
+      </svg>
+    </div>
+  </div>
+  <header>
+    <div class="logo premium-logo">APD Global Trade</div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/buyer-rfqs.html">Buyer RFQs</a>
+      <a href="/suppliers.html">Suppliers</a>
+      <!-- Institutional Pages -->
+      <a href="/standards.html">Standards</a>
+      <a href="/leadership.html">Leadership</a>
+      <a href="/trade-report.html">Trade Report</a>
+      <a href="/brochure.html">Brochure</a>
+      <a href="/membership.html">Membership</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </header>
+  <section class="hero">
+    <div class="earth-wrap">
+      <div class="earth"></div>
+    </div>
+    <div class="center">
+      <h1>Where Verified Buyers Meet Serious Suppliers</h1>
+      <p>High-intent global RFQs. Protected buyer contacts. Zero fake leads.</p>
+      <a href="/create-rfq.html" class="btn">Post Buyer RFQ</a>
+      <a href="/buyer-rfqs.html" class="btn">View Buyer RFQs</a>
+      <div class="badges">
+        <div class="badge">🔐 Verified Buyers</div>
+        <div class="badge">🌍 100+ Countries</div>
+        <div class="badge">🧾 KYC & IEC</div>
+        <div class="badge">🤝 Deals Closed</div>
+        <div class="badge">🚫 No Brokers</div>
+        <div class="badge">⚡ Real RFQs</div>
+      </div>
+      <div class="premium">INTERNATIONAL TRADE AUTHORITY</div>
+    </div>
+    <div class="earth-wrap">
+      <div class="earth night"></div>
+    </div>
+  </section>
+  <section class="live-rfq">
+    <div class="live-rfq-label">🔴 Live RFQ Update</div>
+    <div class="live-rfq-track" id="rfqTicker">
+      <span>Loading live RFQs...</span>
+    </div>
+  </section>
+  <section class="sea">
+    <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=900&q=60">
+    <div class="contact-card">
+      <h2 style="font-family:'Playfair Display',serif; color:#fff; margin-bottom:20px;">Global Trade Never Stops</h2>
+      <p>Verified buyers. Real demand. Structured execution.</p>
+      <div style="color:var(--gold-soft); line-height:2;">
+        📧 info@apdglobaltrade.com<br>
+        ☎ +1 (202) 780-1366<br>
+        💬 WhatsApp: +91 92664 18868
+      </div>
+    </div>
+    <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=900&q=60">
+  </section>
+  <!-- TRADE AUTHORITY SECTION -->
+  <section class="trade-authority">
+    <h2>International Trade Authority Framework</h2>
     <p>
-      APD Global Trade is an elite B2B trade facilitation platform.
-      Access genuine buyer RFQs, protected contacts, and controlled global opportunities.
+      APD Global Trade operates under a structured international trade model,
+      ensuring verified participation, controlled supplier access,
+      and professional B2B execution standards across global markets.
     </p>
-    <a href="/rfq.html" class="btn-primary">Access Live Buyer RFQs</a>
-  </div>
-</section>
-<!-- RFQ PREVIEW -->
-<section class="container">
-  <h2>Live Buyer RFQs (Preview)</h2>
-  <p>Real buyer requirements. Contact details are visible only to approved members.</p>
-  <div class="rfq-grid">
-    <div class="rfq-card">
-      <h4>Basmati Rice (1121)</h4>
-      <p>Quantity: 500 MT</p>
-      <p>Destination: UAE</p>
-      <span class="lock">🔒 Buyer Contact Locked</span>
+    <div class="authority-grid">
+      <div class="authority-card">
+        <h3>Verified Buyer Screening</h3>
+        <p>All RFQs are reviewed to eliminate spam and maintain serious commercial intent.</p>
+      </div>
+      <div class="authority-card">
+        <h3>Controlled Supplier Membership</h3>
+        <p>Membership-based access ensures professional trade engagement.</p>
+      </div>
+      <div class="authority-card">
+        <h3>Structured RFQ Execution</h3>
+        <p>Standardized quotation framework for cross-border trade readiness.</p>
+      </div>
+      <div class="authority-card">
+        <h3>Institutional Positioning</h3>
+        <p>APD Global Trade is a curated trade authority, not a public directory.</p>
+      </div>
     </div>
-    <div class="rfq-card">
-      <h4>Red Chilli Powder</h4>
-      <p>Quantity: 20 MT</p>
-      <p>Destination: USA</p>
-      <span class="lock">🔒 Buyer Contact Locked</span>
+    <div class="authority-cta">
+      <a href="/membership.html">Apply for Verified Supplier Membership</a>
     </div>
-    <div class="rfq-card locked">
-      <h4>International Agro RFQ</h4>
-      <p>Members Only</p>
+  </section>
+  <!-- TRADE STANDARDS & COMPLIANCE -->
+  <section style="
+padding:150px 20px;
+background:#020617;
+border-top:1px solid rgba(201,164,74,.15);
+">
+    <div style="max-width:1100px;margin:auto;text-align:center">
+      <h2 style="
+      font-family:'Playfair Display',serif;
+      font-size:44px;
+      color:#e7cf88;
+      margin-bottom:40px;">
+        Trade Standards & Compliance Framework
+      </h2>
+      <p style="
+      max-width:850px;
+      margin:0 auto 100px auto;
+      color:#cbd5f5;
+      font-size:18px;
+      line-height:1.8;">
+        APD Global Trade operates under a structured compliance philosophy
+        designed to promote transparent cross-border trade and professional engagement.
+      </p>
+      <div style="
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:50px;
+      text-align:left;">
+        <div>
+          <h3 style="color:#c9a44a;">KYC & IEC Verification</h3>
+          <p style="color:#cbd5f5;">Supplier identity screening to maintain trade integrity.</p>
+        </div>
+        <div>
+          <h3 style="color:#c9a44a;">RFQ Screening</h3>
+          <p style="color:#cbd5f5;">Manual filtering to reduce non-serious trade inquiries.</p>
+        </div>
+        <div>
+          <h3 style="color:#c9a44a;">Dispute Escalation Support</h3>
+          <p style="color:#cbd5f5;">Priority assistance for premium members during trade conflicts.</p>
+        </div>
+        <div>
+          <h3 style="color:#c9a44a;">Structured Documentation Flow</h3>
+          <p style="color:#cbd5f5;">Quotation and communication standardization.</p>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
-<!-- BUYERS / SUPPLIERS -->
-<section class="container two-col">
-  <div>
-    <h3>For Buyers</h3>
-    <p>
-      Post verified RFQs and connect only with serious,
-      pre-screened suppliers across global markets.
+  </section>
+  <!-- ADVISORY PANEL -->
+  <section style="
+padding:150px 20px;
+background:linear-gradient(180deg,#071427,#020617);
+border-top:1px solid rgba(201,164,74,.15);
+">
+    <div style="max-width:1100px;margin:auto;text-align:center">
+      <h2 style="
+      font-family:'Playfair Display',serif;
+      font-size:44px;
+      color:#e7cf88;
+      margin-bottom:80px;">
+        Advisory & Strategic Oversight Panel
+      </h2>
+      <div style="
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:60px;">
+        <div style="background:rgba(11,29,54,.7);
+      padding:40px;border-radius:28px;
+      border:1px solid rgba(201,164,74,.25);">
+          <h3 style="color:#c9a44a;">Trade Compliance Advisory</h3>
+          <p style="color:#cbd5f5;">Oversight on supplier verification and global trade standards.</p>
+        </div>
+        <div style="background:rgba(11,29,54,.7);
+      padding:40px;border-radius:28px;
+      border:1px solid rgba(201,164,74,.25);">
+          <h3 style="color:#c9a44a;">International Market Strategy</h3>
+          <p style="color:#cbd5f5;">Advisory input on emerging global trade corridors.</p>
+        </div>
+        <div style="background:rgba(11,29,54,.7);
+      padding:40px;border-radius:28px;
+      border:1px solid rgba(201,164,74,.25);">
+          <h3 style="color:#c9a44a;">Structured Growth Framework</h3>
+          <p style="color:#cbd5f5;">Ensuring sustainable expansion of supplier network.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ANNUAL TRADE METRICS -->
+  <section style="
+padding:150px 20px;
+background:#020617;
+border-top:1px solid rgba(201,164,74,.15);
+text-align:center;
+">
+    <h2 style="
+    font-family:'Playfair Display',serif;
+    font-size:44px;
+    color:#e7cf88;
+    margin-bottom:80px;">
+      Annual Trade Activity Overview
+    </h2>
+    <div style="
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:80px;
+    font-size:28px;
+    font-weight:600;
+  ">
+      <div>
+        <div style="color:#c9a44a;font-size:48px;">$250M+</div>
+        <div style="color:#cbd5f5;">Projected Trade Volume</div>
+      </div>
+      <div>
+        <div style="color:#c9a44a;font-size:48px;">100+</div>
+        <div style="color:#cbd5f5;">Active Countries</div>
+      </div>
+      <div>
+        <div style="color:#c9a44a;font-size:48px;">5,000+</div>
+        <div style="color:#cbd5f5;">Verified RFQs</div>
+      </div>
+    </div>
+  </section>
+  <!-- GLOBAL PARTNER STRIP -->
+  <section style="
+padding:120px 20px;
+background:linear-gradient(180deg,#071427,#020617);
+border-top:1px solid rgba(201,164,74,.15);
+text-align:center;
+">
+    <h2 style="
+    font-family:'Playfair Display',serif;
+    font-size:40px;
+    color:#e7cf88;
+    margin-bottom:60px;">
+      Global Trade Network Presence
+    </h2>
+    <div style="
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:60px;
+    font-size:18px;
+    color:#cbd5f5;
+  ">
+      <div>🇺🇸 North America</div>
+      <div>🇪🇺 Europe</div>
+      <div>🇦🇪 Middle East</div>
+      <div>🇮🇳 South Asia</div>
+      <div>🇸🇬 Southeast Asia</div>
+      <div>🇦🇺 Oceania</div>
+    </div>
+  </section>
+  <footer>
+    <p style="color:var(--gold);font-weight:600; font-family:'Playfair Display', serif; font-size:1.5rem;">APD Global
+      Trade</p>
+    <p style="margin-top:20px;">
+      <a href="/terms.html">Terms</a> |
+      <a href="/privacy.html">Privacy</a> |
+      <a href="/disclaimer.html">Disclaimer</a> |
+      <a href="/shipping-policy.html">Shipping Policy</a>
     </p>
-  </div>
-  <div>
-    <h3>For Suppliers</h3>
-    <p>
-      Access live buyer requirements, unlock protected contact details,
-      and expand your business with verified trade leads.
-    </p>
-  </div>
-</section>
-<!-- TESTIMONIALS -->
-<section class="container">
-  <h2>Trusted by Global Trade Professionals</h2>
-  <div class="testimonial-grid">
-    <div class="testimonial">
-      “The RFQs are genuine and filtered.
-      APD Global Trade saved us months of lead generation.”
-      <strong>— Exporter, India</strong>
-    </div>
-    <div class="testimonial">
-      “Serious buyers and controlled access.
-      This platform respects professional trade.”
-      <strong>— Importer, UAE</strong>
-    </div>
-  </div>
-</section>
-<!-- STATS -->
-<section class="stats">
-  <div>
-    <h3>500+</h3>
-    <p>Verified RFQs</p>
-  </div>
-  <div>
-    <h3>20+</h3>
-    <p>Countries Served</p>
-  </div>
-  <div>
-    <h3>100%</h3>
-    <p>Manual Verification</p>
-  </div>
-</section>
-<!-- CTA -->
-<section class="cta">
-  <h2>Serious About Global Trade?</h2>
-  <p>
-    Membership unlocks verified buyer RFQs,
-    protected contact details, and premium access.
-  </p>
-  <a href="/membership.html" class="btn-primary">View Membership Plans</a>
-</section>
-<footer>
-  <p><strong>APD Global Trade</strong></p>
-  <p>Elite B2B Trade Facilitation Platform</p>
-  <p>
-    <a href="/terms.html">Terms</a> |
-    <a href="/privacy.html">Privacy</a> |
-    <a href="/disclaimer.html">Disclaimer</a>
-  </p>
-  <p>
-    📧 info@apdglobaltradehub.com<br>
-    ☎ +1 (202) 780-1366<br>
-    💬 WhatsApp: +91 92664 18868
-  </p>
-</footer>
+    <p style="font-size: 12px; margin-top: 30px; opacity: 0.5;">© 2026 APD Global Trade. All rights reserved.</p>
+  </footer>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, orderBy, limit }
+      from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    const firebaseConfig = {
+      apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+      authDomain: "apd-globaltrade-prod.firebaseapp.com",
+      projectId: "apd-globaltrade-prod",
+      storageBucket: "apd-globaltrade-prod.firebasestorage.app",
+      messagingSenderId: "226407312435",
+      appId: "1:226407312435:web:f8a54b1132af3899170746"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const ticker = document.getElementById("rfqTicker");
+    function aiSummary(r) {
+      return `Buyer seeking ${r.product} (${r.quantity}) for ${r.country || "global"} market`;
+    }
+    async function loadRFQs() {
+      try {
+        const q = query(collection(db, "rfqs"), orderBy("createdAt", "desc"), limit(12));
+        const snap = await getDocs(q);
+        ticker.innerHTML = "";
+        if (snap.empty) {
+          ticker.innerHTML = `<span>No Live RFQs Available</span>`;
+          return;
+        }
+        snap.forEach(doc => {
+          const r = doc.data();
+          const country = r.destination || r.country || "Global";
+          const code = (r.countryCode || "").toLowerCase();
+          const flag = code
+            ? `<img src="https://flagcdn.com/16x12/${code}.png" style="vertical-align:middle;margin-right:6px">`
+            : "🌍";
+          ticker.innerHTML += `
+        <span onclick="location.href='/membership.html'">
+          ${flag} ${aiSummary({ ...r, country })}
+        </span>`;
+        });
+      } catch (error) {
+        ticker.innerHTML = `<span>Error loading RFQs</span>`;
+        console.error(error);
+      }
+    }
+    /* SUHANA HANDLERS (PREMIUM STUFF) */
+    window.toggleSuhana = function () {
+      const win = document.getElementById('suhana-window');
+      win.style.display = (win.style.display === 'block') ? 'none' : 'block';
+    }
+    window.suhanaHandle = function (type) {
+      const msg = document.getElementById('suhana-msg');
+      const actions = document.getElementById('suhana-actions');
+      actions.style.display = 'none';
+      if (type === 'exporter') {
+        msg.innerHTML = "<b>Security Clearance Granted.</b> Redirecting to the Trading Floor...";
+        setTimeout(() => { window.location.href = "/buyer-rfqs.html"; }, 2000);
+      } else if (type === 'importer') {
+        msg.innerHTML = "<b>Post-port portal initialized.</b> Automatically publishing to verified suppliers... <b>Redirecting...</b>";
+        setTimeout(() => { window.location.href = "/create-rfq.html"; }, 2000);
+      } else if (type === 'help') {
+        msg.innerHTML = "Opening direct encrypted line to Dispatch via WhatsApp...";
+        setTimeout(() => { window.location.href = "https://wa.me/919266418868"; }, 1500);
+      }
+    }
+    loadRFQs();
+  </script>
+  <a class="float whatsapp" href="https://wa.me/919266418868">💬</a>
+  <a class="float download" href="/download-app.html">📲 Deploy App</a>
 </body>
 </html>
