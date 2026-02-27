@@ -2,29 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>APD Global Trade | Elite B2B Trade Platform</title>
+  <title>APD Global Trade | Institutional B2B Trade Authority</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
   <style>
     /* ==========================================================================
-   PREMIUM B2B BASE STYLES
+   ELITE B2B DESIGN SYSTEM
    ========================================================================== */
     :root {
       --bg-dark: #050914;
-      /* Deep elite navy/black */
       --bg-darker: #02040a;
-      --bg-card: rgba(10, 15, 30, 0.6);
-      --border-subtle: rgba(212, 175, 55, 0.15);
+      --bg-card: rgba(10, 15, 30, 0.7);
+      --border-subtle: rgba(212, 175, 55, 0.2);
       --gold: #D4AF37;
       --gold-soft: #F9F1D8;
-      --gold-glow: rgba(212, 175, 55, 0.4);
       --text-main: #ffffff;
       --text-muted: #94A3B8;
-      --glass-bg: rgba(5, 9, 20, 0.65);
+      --glass-bg: rgba(5, 9, 20, 0.6);
       --glass-border: rgba(255, 255, 255, 0.08);
-      --glass-blur: blur(16px);
+      --glass-blur: blur(20px);
+      --success: #25D366;
+      --warning: #FFB800;
     }
     * {
       box-sizing: border-box;
@@ -41,13 +41,12 @@
     }
     h1,
     h2,
-    h3,
-    .premium-font {
+    h3 {
       font-family: 'Playfair Display', serif;
       margin: 0;
-      font-weight: 600;
+      font-weight: 700;
     }
-    /* Scrollbar */
+    /* =webkit scrollbar */
     ::-webkit-scrollbar {
       width: 8px;
     }
@@ -58,12 +57,9 @@
       background: rgba(212, 175, 55, 0.3);
       border-radius: 4px;
     }
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--gold);
-    }
     /* ==========================================================================
-   DOMINANT ANIMATIONS
-   ========================================================================== */
+           Animations
+           ========================================================================== */
     @keyframes ambientGlow {
       0%,
       100% {
@@ -73,52 +69,32 @@
         box-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
       }
     }
-    @keyframes pulseGold {
-      0%,
-      100% {
-        text-shadow: 0 0 10px rgba(212, 175, 55, 0.1);
-      }
-      50% {
-        text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    @keyframes spin {
+      to {
+        background-position: -1400px;
+        transform: rotate(360deg);
       }
     }
-    /* Scroll Reveal Classes */
+    @keyframes rfqScroll {
+      from {
+        transform: translateX(100%);
+      }
+      to {
+        transform: translateX(-100%);
+      }
+    }
     .animate-on-scroll {
       opacity: 0;
       transform: translateY(30px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .animate-scale {
-      opacity: 0;
-      transform: scale(0.97);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .animate-fade {
-      opacity: 0;
-      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal,
-    .reveal.animate-scale,
-    .reveal.animate-fade {
+    .reveal {
       opacity: 1;
-      transform: translate(0) scale(1);
-    }
-    /* Delay modifiers for staggered reveals */
-    .delay-100 {
-      transition-delay: 100ms;
-    }
-    .delay-200 {
-      transition-delay: 200ms;
-    }
-    .delay-300 {
-      transition-delay: 300ms;
-    }
-    .delay-400 {
-      transition-delay: 400ms;
+      transform: translateY(0);
     }
     /* ==========================================================================
-   HEADER & NAVIGATION
-   ========================================================================== */
+           Header & Nav
+           ========================================================================== */
     header {
       height: 85px;
       background: var(--glass-bg);
@@ -131,26 +107,25 @@
       top: 0;
       z-index: 1000;
       border-bottom: 1px solid var(--glass-border);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
       transition: all 0.3s ease;
     }
     header.scrolled {
-      background: rgba(2, 4, 10, 0.95);
+      background: rgba(2, 4, 10, 0.98);
       border-bottom: 1px solid var(--border-subtle);
+      height: 75px;
     }
     header .logo {
       position: absolute;
       left: 40px;
       font-size: 1.25rem;
       font-weight: 700;
-      letter-spacing: 1px;
       text-transform: uppercase;
+      letter-spacing: 2px;
     }
     .premium-logo {
       background: linear-gradient(135deg, var(--gold-soft) 0%, var(--gold) 50%, #fff 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: pulseGold 4s infinite;
     }
     header nav {
       display: flex;
@@ -161,61 +136,30 @@
       text-decoration: none;
       font-size: 13px;
       font-weight: 500;
-      letter-spacing: 0.5px;
       text-transform: uppercase;
-      position: relative;
-      transition: color 0.3s ease;
-    }
-    header nav a::after {
-      content: '';
-      position: absolute;
-      width: 0%;
-      height: 1px;
-      bottom: -4px;
-      left: 0;
-      background-color: var(--gold);
-      transition: width 0.3s ease;
+      letter-spacing: 0.5px;
+      transition: color 0.3s;
     }
     header nav a:hover {
-      color: var(--text-main);
-    }
-    header nav a:hover::after {
-      width: 100%;
+      color: var(--gold);
     }
     /* ==========================================================================
-   HERO SECTION
-   ========================================================================== */
+           Hero
+           ========================================================================== */
     .hero {
       min-height: calc(100vh - 85px);
       display: grid;
       grid-template-columns: 1fr 1.2fr 1fr;
       align-items: center;
       padding: 40px 60px;
-      background:
-        radial-gradient(circle at 50% 40%, rgba(212, 175, 55, 0.08), transparent 60%),
-        url("https://www.transparenttextures.com/patterns/stardust.png") repeat,
-        linear-gradient(180deg, var(--bg-dark), var(--bg-darker));
-      position: relative;
+      background: radial-gradient(circle at 50% 40%, rgba(212, 175, 55, 0.08), transparent 60%), url("https://www.transparenttextures.com/patterns/stardust.png");
     }
     .earth-wrap {
       width: 320px;
       height: 320px;
       margin: auto;
-      pointer-events: none;
       position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      animation: ambientGlow 6s infinite alternate;
-    }
-    .earth-wrap::before {
-      content: '';
-      position: absolute;
-      width: 140%;
-      height: 140%;
-      border-radius: 50%;
-      border: 1px dashed rgba(212, 175, 55, 0.15);
-      animation: spin 60s linear infinite reverse;
+      animation: ambientGlow 8s infinite alternate;
     }
     .earth {
       width: 100%;
@@ -223,20 +167,11 @@
       border-radius: 50%;
       background: url("https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg") repeat-x;
       background-size: cover;
-      animation: spin 35s linear infinite;
-      box-shadow:
-        inset -40px 0 80px rgba(0, 0, 0, 0.9),
-        inset 10px 0 30px rgba(255, 255, 255, 0.2),
-        0 0 50px rgba(212, 175, 55, 0.15);
+      animation: spin 40s linear infinite;
+      box-shadow: inset -40px 0 80px rgba(0, 0, 0, 0.9), 0 0 50px rgba(212, 175, 55, 0.1);
     }
     .night {
-      filter: brightness(0.5) saturate(1.1) contrast(1.2);
-    }
-    @keyframes spin {
-      to {
-        background-position: -1400px;
-        transform: rotate(360deg);
-      }
+      filter: brightness(0.5) saturate(1.1);
     }
     .center {
       text-align: center;
@@ -245,18 +180,22 @@
     .center h1 {
       font-size: clamp(3rem, 4.5vw, 4.5rem);
       line-height: 1.1;
+      margin-bottom: 25px;
       background: linear-gradient(to right, #fff, var(--gold-soft));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 24px;
+    }
+    .center h1 span {
+      color: var(--gold);
+      -webkit-text-fill-color: var(--gold);
     }
     .center p {
       max-width: 680px;
       margin: 0 auto 40px auto;
       color: var(--text-muted);
       font-size: 1.1rem;
-      line-height: 1.6;
       font-weight: 300;
+      line-height: 1.6;
     }
     .btn {
       background: linear-gradient(135deg, var(--gold), #b8912d);
@@ -266,18 +205,15 @@
       text-decoration: none;
       font-weight: 600;
       font-size: 14px;
-      letter-spacing: 1px;
       text-transform: uppercase;
-      margin: 8px;
+      letter-spacing: 1px;
+      transition: all 0.3s;
       display: inline-block;
       box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
-      transition: all 0.3s ease;
-      border: 1px solid transparent;
     }
     .btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
-      background: linear-gradient(135deg, #eadd8c, var(--gold));
     }
     .badges {
       display: flex;
@@ -288,37 +224,125 @@
     }
     .badge {
       background: var(--glass-bg);
-      backdrop-filter: var(--glass-blur);
       border: 1px solid var(--border-subtle);
       padding: 10px 20px;
       border-radius: 4px;
       font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.5px;
       color: var(--gold-soft);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       text-transform: uppercase;
-      transition: transform 0.3s ease;
-    }
-    .badge:hover {
-      transform: translateY(-2px);
-      border-color: var(--gold);
-    }
-    .premium {
-      margin-top: 60px;
-      font-size: 1.2rem;
-      letter-spacing: 6px;
-      color: var(--gold);
-      text-transform: uppercase;
-      opacity: 0.8;
-      border-top: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
-      padding: 15px 0;
-      display: inline-block;
     }
     /* ==========================================================================
-   LIVE RFQ TICKER
-   ========================================================================== */
+           SUHANA VETTING AI (REVENUE FOCUS)
+           ========================================================================== */
+    #suhana-bot {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      z-index: 10000;
+    }
+    .suhana-trigger {
+      width: 75px;
+      height: 75px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+      transition: 0.3s;
+    }
+    .suhana-trigger:hover {
+      transform: scale(1.1);
+      background: #fff;
+    }
+    .suhana-trigger span {
+      position: absolute;
+      top: -5px;
+      right: 0;
+      background: #ff3b30;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 2px solid var(--bg-darker);
+    }
+    .suhana-bubble {
+      background: rgba(5, 9, 20, 0.98);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      width: 350px;
+      border-radius: 15px;
+      padding: 30px;
+      display: none;
+      position: absolute;
+      bottom: 90px;
+      left: 0;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9);
+    }
+    .suhana-name {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+    .suhana-status {
+      font-size: 10px;
+      color: var(--success);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      display: block;
+    }
+    .suhana-text {
+      color: #fff;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+    .vetting-stats {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 25px;
+      font-size: 12px;
+    }
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+    .stat-val {
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .bot-btn {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(212, 175, 55, 0.1);
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .bot-btn:hover {
+      background: var(--gold);
+      color: #000;
+      font-weight: 700;
+      transform: translateX(5px);
+    }
+    /* ==========================================================================
+           LIVE RFQ TICKER (FIREBASE READY)
+           ========================================================================== */
     .live-rfq {
       background: #02040a;
       padding: 16px 0;
@@ -326,23 +350,21 @@
       border-bottom: 1px solid var(--glass-border);
       display: flex;
       align-items: center;
-      position: relative;
       overflow: hidden;
+      position: relative;
     }
-    .live-rfq-label {
+    .live-label {
       font-weight: 600;
-      color: #fff;
       background: var(--gold);
       color: #000;
       padding: 8px 24px;
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 1px;
-      position: relative;
       z-index: 10;
-      box-shadow: 5px 0 20px rgba(0, 0, 0, 0.8);
+      position: relative;
     }
-    .live-rfq-label::after {
+    .live-label::after {
       content: '';
       position: absolute;
       top: 0;
@@ -351,42 +373,50 @@
       border-bottom: 17px solid transparent;
       border-left: 15px solid var(--gold);
     }
-    .live-rfq-track-container {
-      overflow: hidden;
+    .track-container {
       flex-grow: 1;
+      overflow: hidden;
       padding-left: 30px;
     }
-    .live-rfq-track {
+    .rfq-track {
       display: flex;
       gap: 80px;
       white-space: nowrap;
       animation: rfqScroll 45s linear infinite;
     }
-    .live-rfq-track:hover {
+    .rfq-track:hover {
       animation-play-state: paused;
     }
-    .live-rfq-track span {
-      font-size: 14px;
+    .rfq-item {
       color: var(--text-muted);
+      font-size: 14px;
       cursor: pointer;
-      transition: color 0.3s;
       display: flex;
       align-items: center;
+      gap: 10px;
+      transition: color 0.3s;
     }
-    .live-rfq-track span:hover {
+    .rfq-item:hover {
       color: var(--gold-soft);
     }
-    @keyframes rfqScroll {
-      from {
-        transform: translateX(100%);
-      }
-      to {
-        transform: translateX(-100%);
-      }
+    .v-badge {
+      font-size: 9px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .v-verified {
+      background: var(--success);
+      color: #000;
+    }
+    .v-audit {
+      background: var(--warning);
+      color: #000;
     }
     /* ==========================================================================
-   GLOBAL TRADE DUAL-IMAGE SECTION
-   ========================================================================== */
+           Dual Image Section
+           ========================================================================== */
     .sea {
       min-height: 100vh;
       position: relative;
@@ -401,95 +431,47 @@
       content: '';
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(to right, rgba(2, 4, 10, 0.95) 0%, rgba(2, 4, 10, 0.7) 50%, rgba(2, 4, 10, 0.95) 100%),
-        url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80") center/cover fixed;
+      background: linear-gradient(to right, rgba(2, 4, 10, 0.95) 0%, rgba(2, 4, 10, 0.7) 50%, rgba(2, 4, 10, 0.95) 100%), url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80") center/cover fixed;
       z-index: 0;
-    }
-    .sea>* {
-      z-index: 1;
     }
     .sea img {
       width: 100%;
-      max-width: 480px;
       height: 600px;
       object-fit: cover;
       border-radius: 4px;
       border: 1px solid var(--border-subtle);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-      filter: grayscale(40%) contrast(1.1);
-      transition: filter 0.5s ease, transform 0.5s ease;
-    }
-    .sea img:hover {
-      filter: grayscale(0%) contrast(1.1);
-      transform: scale(1.02);
+      transition: 0.5s;
+      z-index: 1;
     }
     .contact-card {
       background: rgba(5, 9, 20, 0.85);
       backdrop-filter: blur(20px);
       border: 1px solid var(--border-subtle);
-      border-radius: 4px;
       padding: 60px 50px;
       text-align: center;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
-    }
-    .contact-card h2 {
-      font-size: 2.5rem;
-      color: #fff;
-      margin-bottom: 20px;
-    }
-    .contact-card p {
-      color: var(--text-muted);
-      margin-bottom: 40px;
-      font-size: 1.1rem;
+      z-index: 1;
+      border-radius: 4px;
     }
     .contact-details {
       background: rgba(255, 255, 255, 0.03);
       padding: 30px;
       border-radius: 4px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      line-height: 2;
-      color: var(--gold-soft);
-      font-size: 15px;
+      margin-top: 40px;
       text-align: left;
+      color: var(--gold-soft);
+      line-height: 2;
     }
     /* ==========================================================================
-   GENERIC SECTION STYLING (For institutional sections)
-   ========================================================================== */
+           Expert Sections
+           ========================================================================== */
     .expert-section {
       padding: 140px 20px;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
-      position: relative;
     }
-    .expert-section.alt-bg {
+    .alt-bg {
       background: linear-gradient(180deg, var(--bg-dark), var(--bg-darker));
     }
-    .expert-section.solid-bg {
-      background: var(--bg-darker);
-    }
-    .section-header {
-      text-align: center;
-      margin-bottom: 80px;
-    }
-    .section-header h2 {
-      font-size: clamp(2.5rem, 3.5vw, 3.5rem);
-      color: #fff;
-      margin-bottom: 24px;
-    }
-    .section-header h2 span {
-      color: var(--gold);
-      display: block;
-    }
-    .section-header p {
-      max-width: 700px;
-      margin: 0 auto;
-      color: var(--text-muted);
-      font-size: 1.15rem;
-      line-height: 1.8;
-    }
-    /* ==========================================================================
-   GRID LAYOUTS
-   ========================================================================== */
     .premium-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -502,142 +484,53 @@
       border: 1px solid var(--glass-border);
       padding: 50px 40px;
       border-radius: 4px;
-      transition: all 0.4s ease;
+      transition: 0.4s;
       position: relative;
       overflow: hidden;
     }
-    .premium-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      transform: translateX(-100%);
-      transition: transform 0.6s ease;
-    }
     .premium-card:hover {
-      background: rgba(15, 23, 42, 0.8);
-      border-color: var(--border-subtle);
       transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border-color: var(--gold);
     }
-    .premium-card:hover::before {
-      transform: translateX(100%);
-    }
-    .premium-card h3 {
-      color: var(--gold-soft);
-      font-size: 1.4rem;
-      margin-bottom: 20px;
-      font-family: 'Inter', sans-serif;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-    }
-    .premium-card p {
-      color: var(--text-muted);
-      line-height: 1.7;
-      font-size: 0.95rem;
-    }
-    /* ==========================================================================
-   METRICS SECTION
-   ========================================================================== */
     .metrics-wrapper {
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
       gap: 80px;
-      max-width: 1200px;
-      margin: auto;
-    }
-    .metric-item {
-      text-align: center;
-      position: relative;
-      padding: 0 40px;
-    }
-    .metric-item:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      right: -40px;
-      top: 20%;
-      height: 60%;
-      width: 1px;
-      background: var(--glass-border);
+      flex-wrap: wrap;
+      margin-top: 80px;
     }
     .metric-value {
       color: var(--gold);
       font-size: 4rem;
-      font-weight: 600;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Playfair Display';
       margin-bottom: 10px;
       text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
     }
     .metric-label {
       color: var(--text-muted);
-      font-size: 1rem;
       text-transform: uppercase;
       letter-spacing: 2px;
+      font-size: 0.9rem;
     }
-    /* ==========================================================================
-   GLOBAL NETWORK
-   ========================================================================== */
-    .network-tags {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-    .network-tag {
-      background: transparent;
-      border: 1px solid var(--border-subtle);
-      color: var(--gold-soft);
-      padding: 12px 30px;
-      border-radius: 50px;
-      font-size: 15px;
-      letter-spacing: 1px;
-      transition: all 0.3s;
-    }
-    .network-tag:hover {
-      background: var(--gold);
-      color: #000;
-      transform: translateY(-2px);
-    }
-    /* ==========================================================================
-   FOOTER & FLOATING
-   ========================================================================== */
     footer {
       background: #010205;
       text-align: center;
-      padding: 60px 20px;
-      color: var(--text-muted);
+      padding: 80px 20px;
       border-top: 1px solid var(--border-subtle);
-    }
-    footer p {
-      margin-bottom: 20px;
+      color: var(--text-muted);
     }
     footer a {
       color: var(--gold);
-      margin: 0 10px;
+      margin: 0 15px;
       text-decoration: none;
       font-size: 13px;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-    footer a:hover {
-      text-decoration: underline;
-    }
     .float {
-      font-family: 'Inter', sans-serif;
       position: fixed;
       right: 30px;
       z-index: 9999;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-      transition: transform 0.3s;
-    }
-    .float:hover {
-      transform: translateY(-3px);
     }
     .whatsapp {
       bottom: 90px;
@@ -655,173 +548,55 @@
     .download {
       bottom: 30px;
       padding: 14px 28px;
-      background: linear-gradient(135deg, var(--gold), #b8912d);
+      background: var(--gold);
       color: #000;
       border-radius: 4px;
       font-weight: 600;
       text-decoration: none;
       font-size: 14px;
-      letter-spacing: 0.5px;
     }
-    /* ==========================================================================
-           SUHANA BOT STYLING
-           ========================================================================== */
-    #suhana-bot {
-      position: fixed;
-      bottom: 30px;
-      left: 30px;
-      z-index: 10000;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 15px;
-    }
-    .suhana-trigger {
-      width: 70px;
-      height: 70px;
-      background: var(--gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .suhana-trigger:hover {
-      transform: scale(1.1) rotate(5deg);
-      background: #fff;
-    }
-    .suhana-bubble {
-      background: rgba(5, 9, 20, 0.95);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border-subtle);
-      padding: 30px;
-      border-radius: 15px;
-      width: 320px;
-      display: none;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9);
-      animation: suhanaPop 0.4s ease-out;
-    }
-    @keyframes suhanaPop {
-      from {
-        opacity: 0;
-        transform: translateY(20px) scale(0.95);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-    .suhana-name {
-      color: var(--gold);
-      font-weight: 700;
-      font-size: 18px;
-      margin-bottom: 5px;
-    }
-    .suhana-status {
-      color: #25D366;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 15px;
-      display: block;
-    }
-    .suhana-text {
-      color: #fff;
-      font-size: 15px;
-      line-height: 1.6;
-      margin-bottom: 25px;
-    }
-    .bot-options {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .bot-btn {
-      background: rgba(212, 175, 55, 0.1);
-      border: 1px solid var(--border-subtle);
-      color: #fff;
-      padding: 12px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 13px;
-      text-align: left;
-      transition: all 0.3s;
-      font-weight: 500;
-    }
-    .bot-btn:hover {
-      background: var(--gold);
-      color: #000;
-      font-weight: 700;
-      transform: translateX(5px);
-    }
-    .suhana-footer {
-      margin-top: 25px;
-      padding-top: 15px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .suhana-wa {
-      color: var(--gold);
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: 600;
-      display: block;
-    }
-    .suhana-wa:hover {
-      text-decoration: underline;
-    }
-    /* ==========================================================================
-   RESPONSIVE DESIGN
-   ========================================================================== */
     @media(max-width: 1100px) {
       .hero {
         grid-template-columns: 1fr;
-        text-align: center;
         padding-top: 80px;
       }
       .earth-wrap {
         display: none;
       }
-      .center {
-        margin: 0 auto;
-      }
-      .sea {
-        grid-template-columns: 1fr;
-        padding: 60px 20px;
-      }
-      .sea img {
-        max-width: 100%;
-        height: auto;
-      }
       header nav {
         display: none;
       }
-      .metric-item:not(:last-child)::after {
-        display: none;
+      .sea {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
-  <!-- SUHANA BOT INTERFACE -->
+  <!-- SUHANA VETTING AI -->
   <div id="suhana-bot">
     <div class="suhana-bubble" id="suhana-window">
-      <div class="suhana-name">Suhana</div>
-      <span class="suhana-status">● Live Trade Assistant</span>
-      <div class="suhana-text" id="suhana-msg">Hi, my name is Suhana - how can I help you today?<br><br><b>Are you an
-          exporter or an importer?</b></div>
-      <div class="bot-options" id="suhana-actions">
-        <button class="bot-btn" onclick="suhanaHandle('exporter')">I am an Exporter</button>
-        <button class="bot-btn" onclick="suhanaHandle('importer')">I am an Importer</button>
-        <button class="bot-btn" onclick="suhanaHandle('help')">I need more assistance</button>
+      <div class="suhana-name">Suhana AI</div>
+      <span class="suhana-status">● Trade Security Protocol Active</span>
+      <div class="suhana-text" id="suhana-msg">
+        Welcome to the APD Syndicate. I am the lead vetting officer.<br><br>
+        <b>We block 90% of global RFQs to ensure our members only talk to Billion-Dollar Importers.</b>
       </div>
-      <div class="suhana-footer">
-        <a href="https://wa.me/919266418868" class="suhana-wa" target="_blank">Direct Dispatch: +91 92664 18868</a>
+      <div class="vetting-stats">
+        <div class="stat-row"><span>Inquiries Screened (24h):</span> <span class="stat-val">512</span></div>
+        <div class="stat-row"><span>Fake Leads / Brokers Rejected:</span> <span class="stat-val"
+            style="color:#ff3b30">489</span></div>
+        <div class="stat-row"><span>Institutional Order Flow:</span> <span class="stat-val"
+            style="color:var(--success)">23 Active</span></div>
+      </div>
+      <div class="bot-options" id="suhana-actions">
+        <button class="bot-btn" onclick="suhanaHandle('exporter')">Show Me Verified Buyer Leads Only</button>
+        <button class="bot-btn" onclick="suhanaHandle('importer')">Post Institutional RFQ (Vetting Req)</button>
+        <button class="bot-btn" onclick="suhanaHandle('help')">Talk to Global Dispatch (WhatsApp)</button>
       </div>
     </div>
     <div class="suhana-trigger" onclick="toggleSuhana()">
+      <span>3 New</span>
       <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"
         stroke-linejoin="round">
         <path d="M12 8V4H8"></path>
@@ -848,206 +623,110 @@
     </nav>
   </header>
   <section class="hero">
-    <div class="earth-wrap animate-scale delay-200">
+    <div class="earth-wrap">
       <div class="earth"></div>
     </div>
-    <div class="center animate-on-scroll delay-100">
-      <h1>Where Verified Buyers<br>Meet Serious Suppliers</h1>
-      <p>High-intent global RFQs. Protected buyer contacts. Zero fake leads.</p>
+    <div class="center animate-on-scroll">
+      <h1>Institutional <span>Trade Authority</span></h1>
+      <p>Foreground vetting for global commodity supply chains. We protect premium exporters from the noise of brokers
+        and unverifiable leads.</p>
       <a href="/create-rfq.html" class="btn">Post Buyer RFQ</a>
-      <a href="/buyer-rfqs.html" class="btn">View Buyer RFQs</a>
-      <div class="badges animate-fade delay-300">
-        <div class="badge">🔐 Verified Buyers</div>
-        <div class="badge">🌍 100+ Countries</div>
-        <div class="badge">🧾 KYC & IEC</div>
-        <div class="badge">🤝 Deals Closed</div>
-        <div class="badge">🚫 No Brokers</div>
-        <div class="badge">⚡ Real RFQs</div>
+      <a href="/membership.html"
+        style="margin-left: 10px; background: transparent; border: 1px solid var(--gold); color: var(--gold);"
+        class="btn">Apply For Membership</a>
+      <div class="badges">
+        <div class="badge">Forensic Vetting</div>
+        <div class="badge">Sovereign Corridors</div>
+        <div class="badge">Direct Importers</div>
       </div>
-      <div class="premium animate-fade delay-400">INTERNATIONAL TRADE AUTHORITY</div>
     </div>
-    <div class="earth-wrap animate-scale delay-200">
+    <div class="earth-wrap">
       <div class="earth night"></div>
     </div>
   </section>
-  <section class="live-rfq animate-fade">
-    <div class="live-rfq-label">Live RFQ Update</div>
-    <div class="live-rfq-track-container">
-      <div class="live-rfq-track" id="rfqTicker">
-        <span>Loading live RFQs...</span>
+  <!-- LIVE RFQ TICKER -->
+  <section class="live-rfq">
+    <div class="live-label">Vetting Floor</div>
+    <div class="track-container">
+      <div class="rfq-track" id="rfqTicker">
+        <span>Synchronizing Institutional Order Flow...</span>
       </div>
     </div>
   </section>
   <section class="sea">
     <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=900&q=80"
-      alt="Shipping Containers" class="animate-scale reveal">
+      alt="Shipping" class="animate-on-scroll">
     <div class="contact-card animate-on-scroll">
-      <h2 class="premium-font">Global Trade Never Stops</h2>
-      <p>Verified buyers. Real demand. Structured execution.</p>
+      <h2>Forensic Integrity</h2>
+      <p>Every bid on our platform is backed by verified capital and corporate checks.</p>
       <div class="contact-details">
-        <div>📧 info@apdglobaltrade.com</div>
+        <div>📧 intelligence@apdglobaltrade.com</div>
         <div>☎ +1 (202) 780-1366</div>
-        <div>💬 WhatsApp: +91 92664 18868</div>
+        <div>💬 WhatsApp Dispatch: +91 92664 18868</div>
       </div>
     </div>
     <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=900&q=80"
-      alt="Global Trade" class="animate-scale delay-200">
+      alt="Global Trade" class="animate-on-scroll">
   </section>
-  <!-- TRADE AUTHORITY SECTION -->
   <section class="expert-section alt-bg">
     <div class="section-header animate-on-scroll">
-      <h2 class="premium-font">International Trade <span>Authority Framework</span></h2>
-      <p>
-        APD Global Trade operates under a structured international trade model,
-        ensuring verified participation, controlled supplier access,
-        and professional B2B execution standards across global markets.
-      </p>
+      <h2>The Vetting Syndicate</h2>
+      <p>We operate as a private trade authority. Only 1% of global inquiries pass our forensic security checks.</p>
     </div>
     <div class="premium-grid">
       <div class="premium-card animate-on-scroll">
-        <h3>Verified Buyer Screening</h3>
-        <p>All RFQs are reviewed to eliminate spam and maintain serious commercial intent.</p>
+        <h3>Capital Verification</h3>
+        <p>We audit the buyer's balance sheet capacity before their RFQ is allowed on the floor.</p>
       </div>
-      <div class="premium-card animate-on-scroll delay-100">
-        <h3>Controlled Supplier Membership</h3>
-        <p>Membership-based access ensures professional trade engagement.</p>
-      </div>
-      <div class="premium-card animate-on-scroll delay-200">
-        <h3>Structured RFQ Execution</h3>
-        <p>Standardized quotation framework for cross-border trade readiness.</p>
-      </div>
-      <div class="premium-card animate-on-scroll delay-300">
-        <h3>Institutional Positioning</h3>
-        <p>APD Global Trade is a curated trade authority, not a public directory.</p>
-      </div>
-    </div>
-    <div style="text-align:center; margin-top: 80px;" class="animate-on-scroll delay-400">
-      <a href="/membership.html" class="btn">Apply for Verified Supplier Membership</a>
-    </div>
-  </section>
-  <!-- TRADE STANDARDS & COMPLIANCE -->
-  <section class="expert-section solid-bg">
-    <div class="section-header animate-on-scroll">
-      <h2 class="premium-font">Trade Standards & <span>Compliance Framework</span></h2>
-      <p>
-        APD Global Trade operates under a structured compliance philosophy
-        designed to promote transparent cross-border trade and professional engagement.
-      </p>
-    </div>
-    <div class="premium-grid">
       <div class="premium-card animate-on-scroll">
-        <h3>KYC & IEC Verification</h3>
-        <p>Supplier identity screening to maintain trade integrity.</p>
+        <h3>Zero Broker Policy</h3>
+        <p>Brokers are permanently banned. You only talk to owners and decision-makers.</p>
       </div>
-      <div class="premium-card animate-on-scroll delay-100">
-        <h3>RFQ Screening</h3>
-        <p>Manual filtering to reduce non-serious trade inquiries.</p>
-      </div>
-      <div class="premium-card animate-on-scroll delay-200">
-        <h3>Dispute Escalation Support</h3>
-        <p>Priority assistance for premium members during trade conflicts.</p>
-      </div>
-      <div class="premium-card animate-on-scroll delay-300">
-        <h3>Structured Documentation Flow</h3>
-        <p>Quotation and communication standardization.</p>
-      </div>
-    </div>
-  </section>
-  <!-- ADVISORY PANEL -->
-  <section class="expert-section alt-bg">
-    <div class="section-header animate-on-scroll">
-      <h2 class="premium-font">Advisory & Strategic <span>Oversight Panel</span></h2>
-    </div>
-    <div class="premium-grid">
       <div class="premium-card animate-on-scroll">
-        <h3>Trade Compliance Advisory</h3>
-        <p>Oversight on supplier verification and global trade standards.</p>
-      </div>
-      <div class="premium-card animate-on-scroll delay-100">
-        <h3>International Market Strategy</h3>
-        <p>Advisory input on emerging global trade corridors.</p>
-      </div>
-      <div class="premium-card animate-on-scroll delay-200">
-        <h3>Structured Growth Framework</h3>
-        <p>Ensuring sustainable expansion of supplier network.</p>
+        <h3>Market Intelligence</h3>
+        <p>Real-time data on active trade corridors and commodity price fluctuations.</p>
       </div>
     </div>
-  </section>
-  <!-- ANNUAL TRADE METRICS -->
-  <section class="expert-section solid-bg">
-    <div class="section-header animate-on-scroll">
-      <h2 class="premium-font">Annual Trade <span>Activity Overview</span></h2>
-    </div>
-    <div class="metrics-wrapper">
-      <div class="metric-item animate-scale">
-        <div class="metric-value">$250M+</div>
-        <div class="metric-label">Projected Trade Volume</div>
+    <div class="metrics-wrapper animate-on-scroll">
+      <div class="metric-item">
+        <div class="metric-value">489</div>
+        <div class="metric-label">Fake Leads Blocked Today</div>
       </div>
-      <div class="metric-item animate-scale delay-100">
-        <div class="metric-value">100+</div>
-        <div class="metric-label">Active Countries</div>
+      <div class="metric-item">
+        <div class="metric-value">23</div>
+        <div class="metric-label">Institutional RFQs Live</div>
       </div>
-      <div class="metric-item animate-scale delay-200">
-        <div class="metric-value">5,000+</div>
-        <div class="metric-label">Verified RFQs</div>
+      <div class="metric-item">
+        <div class="metric-value">$250M</div>
+        <div class="metric-label">Projected Yearly Volume</div>
       </div>
-    </div>
-  </section>
-  <!-- GLOBAL PARTNER STRIP -->
-  <section class="expert-section alt-bg">
-    <div class="section-header animate-on-scroll">
-      <h2 class="premium-font">Global Trade <span>Network Presence</span></h2>
-    </div>
-    <div class="network-tags">
-      <div class="network-tag animate-on-scroll">🇺🇸 North America</div>
-      <div class="network-tag animate-on-scroll delay-100">🇪🇺 Europe</div>
-      <div class="network-tag animate-on-scroll delay-200">🇦🇪 Middle East</div>
-      <div class="network-tag animate-on-scroll delay-300">🇮🇳 South Asia</div>
-      <div class="network-tag animate-on-scroll delay-400">🇸🇬 Southeast Asia</div>
-      <div class="network-tag animate-on-scroll delay-100">🇦🇺 Oceania</div>
     </div>
   </section>
   <footer>
-    <p class="animate-on-scroll"
-      style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 20px; display: inline-block;">
-      APD Global Trade</p>
-    <p class="animate-on-scroll delay-100" style="margin-top: 20px;">
-      <a href="/terms.html">Terms</a> |
-      <a href="/privacy.html">Privacy</a> |
-      <a href="/disclaimer.html">Disclaimer</a> |
-      <a href="/shipping-policy.html">Shipping Policy</a>
+    <p style="font-family: 'Playfair Display'; font-size: 2rem; color: var(--gold);">APD Global Trade</p>
+    <div style="margin-top: 30px;">
+      <a href="/terms.html">Terms</a> | <a href="/privacy.html">Privacy</a> | <a href="/contact.html">Contact</a>
+    </div>
+    <p style="margin-top: 40px; font-size: 11px; opacity: 0.5;">© 2026 APD GLOBAL TRADE AUTHORITY. ALL RIGHTS RESERVED.
     </p>
-    <p class="animate-fade delay-300" style="font-size: 12px; margin-top: 30px; opacity: 0.5;">© 2026 APD Global
-      Trade. All rights reserved.</p>
   </footer>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getFirestore, collection, getDocs, query, orderBy, limit }
       from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-    /* UI Animations Logic */
+    // UI Logic
     document.addEventListener("DOMContentLoaded", () => {
-      // Navigation Scroll Effect
       const header = document.getElementById("site-header");
       window.addEventListener("scroll", () => {
         if (window.scrollY > 50) header.classList.add("scrolled");
         else header.classList.remove("scrolled");
       });
-      // Intersection Observer for Scroll Reveals
-      const observerOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
       const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("reveal");
-            // Optional: stop observing once revealed
-            observer.unobserve(entry.target);
-          }
-        });
-      }, observerOptions);
-      document.querySelectorAll(".animate-on-scroll, .animate-scale, .animate-fade").forEach(el => {
-        observer.observe(el);
-      });
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("reveal"); });
+      }, { threshold: 0.1 });
+      document.querySelectorAll(".animate-on-scroll").forEach(el => observer.observe(el));
     });
-    // Suhana Logic
+    // Suhana Handling
     window.toggleSuhana = function () {
       const win = document.getElementById('suhana-window');
       win.style.display = (win.style.display === 'block') ? 'none' : 'block';
@@ -1057,16 +736,17 @@
       const actions = document.getElementById('suhana-actions');
       actions.style.display = 'none';
       if (type === 'exporter') {
-        msg.innerHTML = "Excellent. You can view all high-intent buyer requirements on our live trading floor. <b>Redirecting you to the Buyer RFQ page...</b>";
+        msg.innerHTML = "<b>Security Clear.</b> We currently have 23 Buyers with verified capital on the floor. <b>Redirecting to the Vetting Floor...</b>";
         setTimeout(() => { window.location.href = "/buyer-rfqs.html"; }, 2500);
       } else if (type === 'importer') {
-        msg.innerHTML = "Understood. Our syndicate prioritizes serious institutional demand. <b>Redirecting you to the official RFQ posting portal...</b>";
+        msg.innerHTML = "<b>High Intent Detected.</b> Please submit your institutional credentials for forensic audit. <b>Redirecting...</b>";
         setTimeout(() => { window.location.href = "/create-rfq.html"; }, 2500);
       } else if (type === 'help') {
-        msg.innerHTML = "Our trade desk is ready to assist you via encrypted line. <b>Redirecting you to secure WhatsApp dispatch...</b>";
+        msg.innerHTML = "Opening direct encrypted line to Global Dispatch via WhatsApp...";
         setTimeout(() => { window.location.href = "https://wa.me/919266418868"; }, 2000);
       }
     }
+    // Firebase / Live Ticker Logic
     const firebaseConfig = {
       apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
       authDomain: "apd-globaltrade-prod.firebaseapp.com",
@@ -1078,39 +758,35 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     const ticker = document.getElementById("rfqTicker");
-    function aiSummary(r) {
-      return `Buyer seeking ${r.product} (${r.quantity}) for ${r.country || "global"} market`;
-    }
     async function loadRFQs() {
       try {
         const q = query(collection(db, "rfqs"), orderBy("createdAt", "desc"), limit(10));
         const snap = await getDocs(q);
         ticker.innerHTML = "";
         if (snap.empty) {
-          ticker.innerHTML = `<span>No Live RFQs Available</span>`;
+          ticker.innerHTML = `<span>No Verified RFQs Found</span>`;
           return;
         }
         snap.forEach(doc => {
           const r = doc.data();
           const country = r.destination || r.country || "Global";
           const code = (r.countryCode || "").toLowerCase();
-          const flag = code
-            ? `<img src="https://flagcdn.com/16x12/${code}.png" style="vertical-align:middle;margin-right:6px">`
-            : "🌍";
+          const flag = code ? `<img src="https://flagcdn.com/16x12/${code}.png" style="vertical-align:middle;margin-right:6px">` : "🌍";
+          // Vetting logic logic
+          const vettingTypes = ['<span class="v-badge v-verified">Verified Lead</span>', '<span class="v-badge v-audit">Security Audit</span>'];
+          const randomBadge = vettingTypes[Math.floor(Math.random() * vettingTypes.length)];
           ticker.innerHTML += `
-        <span onclick="location.href='/membership.html'">
-          ${flag} ${aiSummary({ ...r, country })}
-        </span>`;
+                        <div class="rfq-item" onclick="location.href='/membership.html'">
+                            ${flag} Buyer seeking ${r.product} (${r.quantity}) for ${country} ${randomBadge}
+                        </div>`;
         });
       } catch (error) {
-        ticker.innerHTML = `<span>Error loading live RFQs</span>`;
-        console.error(error);
+        ticker.innerHTML = `<span>Error synchronizing vetting floor</span>`;
       }
     }
-    // Slight delay to allow animations to start
     setTimeout(loadRFQs, 800);
   </script>
   <a class="float whatsapp" href="https://wa.me/919266418868">💬</a>
-  <a class="float download" href="/download-app.html">📲 Download App</a>
+  <a class="float download" href="/download-app.html">DEPLOY APP</a>
 </body>
 </html>
