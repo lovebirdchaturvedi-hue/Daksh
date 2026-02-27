@@ -696,6 +696,28 @@
     </style>
 </head>
 <body>
+    <div id="suhana-bot">
+    <div class="suhana-bubble" id="suhana-window">
+      <div class="suhana-name">Suhana AI</div>
+      <div class="suhana-text" id="suhana-msg">Hi, my name is Suhana - how can I help you?</div>
+      <div class="bot-options" id="suhana-options">
+        <button class="bot-btn" onclick="suhanaChoice('exporter')">I am an Exporter</button>
+        <button class="bot-btn" onclick="suhanaChoice('importer')">I am an Importer</button>
+      </div>
+    </div>
+    <div class="suhana-trigger" onclick="toggleSuhana()">
+      <!-- SVG Bot Icon -->
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M12 8V4H8"></path>
+        <rect width="16" height="12" x="4" y="8" rx="2"></rect>
+        <path d="M2 14h2"></path>
+        <path d="M20 14h2"></path>
+        <path d="M15 13v2"></path>
+        <path d="M9 13v2"></path>
+      </svg>
+    </div>
+  </div>
     <header id="site-header">
         <div class="logo premium-logo">APD Global Trade</div>
         <nav>
@@ -994,141 +1016,3 @@
       </div>
     </div>
   </section>
-
-  /* ==========================================================================
-           REST OF DESIGN (METRICS, CARDS, FOOTER)
-           ========================================================================== */
-    .expert-section {
-      padding: 150px 40px;
-    }
-    .alt-bg {
-      background: linear-gradient(180deg, var(--bg-dark), var(--bg-darker));
-    }
-    .section-header {
-      text-align: center;
-      margin-bottom: 100px;
-    }
-    .section-header h2 {
-      font-size: 3.5rem;
-      color: #fff;
-      margin-bottom: 20px;
-    }
-    .premium-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 40px;
-      max-width: 1400px;
-      margin: auto;
-    }
-    .premium-card {
-      background: var(--bg-card);
-      border: 1px solid var(--glass-border);
-      padding: 60px 45px;
-      transition: all 0.5s;
-      border-radius: 4px;
-    }
-    .premium-card:hover {
-      transform: translateY(-10px);
-      border-color: var(--gold);
-      background: rgba(15, 23, 42, 0.8);
-    }
-    .metrics-wrapper {
-      display: flex;
-      justify-content: center;
-      gap: 100px;
-      flex-wrap: wrap;
-      margin-top: 100px;
-    }
-    .metric-item {
-      text-align: center;
-    }
-    .metric-value {
-      font-size: 5rem;
-      color: var(--gold);
-      font-family: 'Playfair Display';
-    }
-    .metric-label {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 4px;
-      color: var(--text-muted);
-    }
-    footer {
-      background: #000;
-      text-align: center;
-      padding: 100px 40px;
-      border-top: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-    }
-    footer a {
-      color: var(--gold);
-      margin: 0 15px;
-      text-decoration: none;
-      font-size: 12px;
-      text-transform: uppercase;
-    }
-    .float {
-      position: fixed;
-      right: 30px;
-      z-index: 9999;
-    }
-    .whatsapp {
-      bottom: 110px;
-      width: 60px;
-      height: 60px;
-      background: #25D366;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-      color: #fff;
-      text-decoration: none;
-    }
-    .download {
-      bottom: 30px;
-      padding: 15px 30px;
-      background: var(--gold);
-      color: #000;
-      border-radius: 2px;
-      font-weight: 700;
-      text-decoration: none;
-      font-size: 13px;
-    }
-    @media(max-width: 1100px) {
-      .hero {
-        grid-template-columns: 1fr;
-        padding-top: 80px;
-      }
-      .earth-wrap {
-        display: none;
-      }
-      header nav {
-        display: none;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div id="suhana-bot">
-    <div class="suhana-bubble" id="suhana-window">
-      <div class="suhana-name">Suhana AI</div>
-      <div class="suhana-text" id="suhana-msg">Hi, my name is Suhana - how can I help you?</div>
-      <div class="bot-options" id="suhana-options">
-        <button class="bot-btn" onclick="suhanaChoice('exporter')">I am an Exporter</button>
-        <button class="bot-btn" onclick="suhanaChoice('importer')">I am an Importer</button>
-      </div>
-    </div>
-    <div class="suhana-trigger" onclick="toggleSuhana()">
-      <!-- SVG Bot Icon -->
-      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"
-        stroke-linejoin="round">
-        <path d="M12 8V4H8"></path>
-        <rect width="16" height="12" x="4" y="8" rx="2"></rect>
-        <path d="M2 14h2"></path>
-        <path d="M20 14h2"></path>
-        <path d="M15 13v2"></path>
-        <path d="M9 13v2"></path>
-      </svg>
-    </div>
-  </div>
