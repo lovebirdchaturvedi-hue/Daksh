@@ -251,7 +251,7 @@
         <div class="rfq-badge">VERIFIED INTERNATIONAL BUYER</div>
         <h3>${r.product || "-"}</h3>
         <div class="rfq-meta"><b>Quantity:</b> ${r.quantity || "-"}</div>
-        <div class="rfq-meta"><b>Destination Port:</b> ${r.deliveryPort || r.destination || "-"}</div>
+        <div class="rfq-meta"><b>Destination Port:</b> ${r.deliveryPort || r.destination || r.country || "-"}</div>
         <div class="locked">🔒 Buyer Contact & Company Details Locked</div>
         <a class="cta" href="/supplier-login.html">
           Apply for Verified Supplier Access
