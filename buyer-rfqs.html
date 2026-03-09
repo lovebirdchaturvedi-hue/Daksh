@@ -1,232 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Live Buyer RFQs | APD Global Trade</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Live Buyer RFQs | APD Global Trade</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-<style>
-body{
-  margin:0;
-  font-family:Inter,sans-serif;
-  background:#f5f7fb;
-  color:#0f172a
-}
+  <style>
+    body {
+      margin: 0;
+      font-family: Inter, sans-serif;
+      background: #f5f7fb;
+      color: #0f172a
+    }
 
-/* HEADER */
-header{
-  background:#071427;
-  color:#c9a44a;
-  padding:18px 20px;
-}
-.header-inner{
-  max-width:1100px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-.logo{
-  font-weight:600;
-  font-size:18px;
-}
-.nav a{
-  color:#e5e7eb;
-  text-decoration:none;
-  margin-left:20px;
-  font-size:14px;
-  font-weight:500;
-}
-.nav a:hover{color:#c9a44a}
+    /* HEADER */
+    header {
+      background: #071427;
+      color: #c9a44a;
+      padding: 18px 20px;
+    }
 
-/* CONTENT */
-.container{
-  max-width:950px;
-  margin:50px auto;
-  padding:0 16px
-}
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-h1{
-  font-size:28px;
-  margin-bottom:6px;
-}
+    .logo {
+      font-weight: 600;
+      font-size: 18px;
+    }
 
-.subtitle{
-  color:#475569;
-  margin-bottom:30px;
-}
+    .nav a {
+      color: #e5e7eb;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+      font-weight: 500;
+    }
 
-/* AUTHORITY BAR */
-.authority-bar{
-  background:linear-gradient(90deg,#071427,#020617);
-  color:#fff;
-  padding:18px 24px;
-  border-radius:14px;
-  margin-bottom:30px;
-  display:flex;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  font-size:14px;
-  gap:10px;
-}
+    .nav a:hover {
+      color: #c9a44a
+    }
 
-/* SEARCH */
-.search-box{
-  margin:25px 0 35px;
-  display:flex;
-}
-.search-box input{
-  flex:1;
-  padding:14px 18px;
-  border-radius:999px;
-  border:1px solid #cbd5e1;
-  font-size:14px;
-}
+    /* CONTENT */
+    .container {
+      max-width: 950px;
+      margin: 50px auto;
+      padding: 0 16px
+    }
 
-/* CARD DESIGN */
-.card{
-  background:linear-gradient(145deg,#ffffff,#f1f5f9);
-  border-radius:18px;
-  padding:28px;
-  margin-bottom:24px;
-  border:1px solid rgba(201,164,74,.35);
-  box-shadow:0 15px 35px rgba(0,0,0,.08);
-  transition:all .3s ease;
-}
-.card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 25px 50px rgba(0,0,0,.12);
-}
-.card h3{
-  font-size:20px;
-  margin-bottom:14px;
-  color:#071427;
-}
-.rfq-meta{
-  font-size:14px;
-  color:#475569;
-  margin:8px 0;
-}
-.rfq-badge{
-  display:inline-block;
-  padding:6px 12px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:600;
-  margin-bottom:12px;
-  background:rgba(201,164,74,.15);
-  color:#a16207;
-}
-.locked{
-  color:#991b1b;
-  font-weight:600;
-  margin-top:14px;
-}
-.cta{
-  display:inline-block;
-  margin-top:18px;
-  background:linear-gradient(135deg,#020617,#071427);
-  color:#fff;
-  padding:12px 28px;
-  border-radius:999px;
-  text-decoration:none;
-  font-size:14px;
-  font-weight:600;
-  transition:.3s;
-}
-.cta:hover{
-  background:linear-gradient(135deg,#c9a44a,#e7cf88);
-  color:#000;
-}
+    h1 {
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
 
-/* FOOTER */
-footer{
-  background:#020617;
-  color:#9ca3af;
-  text-align:center;
-  padding:50px 20px;
-  font-size:14px;
-  margin-top:60px;
-}
-footer a{color:#c9a44a;text-decoration:none}
+    .subtitle {
+      color: #475569;
+      margin-bottom: 30px;
+    }
 
-/* MOBILE */
-@media(max-width:600px){
-  .nav a{margin-left:14px;font-size:13px}
-}
-</style>
+    /* AUTHORITY BAR */
+    .authority-bar {
+      background: linear-gradient(90deg, #071427, #020617);
+      color: #fff;
+      padding: 18px 24px;
+      border-radius: 14px;
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      font-size: 14px;
+      gap: 10px;
+    }
+
+    /* SEARCH */
+    .search-box {
+      margin: 25px 0 35px;
+      display: flex;
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 14px 18px;
+      border-radius: 999px;
+      border: 1px solid #cbd5e1;
+      font-size: 14px;
+    }
+
+    /* CARD DESIGN */
+    .card {
+      background: linear-gradient(145deg, #ffffff, #f1f5f9);
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(201, 164, 74, .35);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, .08);
+      transition: all .3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, .12);
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 14px;
+      color: #071427;
+    }
+
+    .rfq-meta {
+      font-size: 14px;
+      color: #475569;
+      margin: 8px 0;
+    }
+
+    .rfq-badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      background: rgba(201, 164, 74, .15);
+      color: #a16207;
+    }
+
+    .locked {
+      color: #991b1b;
+      font-weight: 600;
+      margin-top: 14px;
+    }
+
+    .cta {
+      display: inline-block;
+      margin-top: 18px;
+      background: linear-gradient(135deg, #020617, #071427);
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: .3s;
+    }
+
+    .cta:hover {
+      background: linear-gradient(135deg, #c9a44a, #e7cf88);
+      color: #000;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #020617;
+      color: #9ca3af;
+      text-align: center;
+      padding: 50px 20px;
+      font-size: 14px;
+      margin-top: 60px;
+    }
+
+    footer a {
+      color: #c9a44a;
+      text-decoration: none
+    }
+
+    /* MOBILE */
+    @media(max-width:600px) {
+      .nav a {
+        margin-left: 14px;
+        font-size: 13px
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <div class="header-inner">
-    <div class="logo">APD Global Trade</div>
-    <nav class="nav">
-      <a href="/index.html">HOME</a>
-      <a href="/create-rfq.html">SUBMIT RFQ</a>
-    </nav>
+  <header>
+    <div class="header-inner">
+      <div class="logo">APD Global Trade</div>
+      <nav class="nav">
+        <a href="/index.html">HOME</a>
+        <a href="/create-rfq.html">SUBMIT RFQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Live Verified Buyer RFQs</h1>
+    <p class="subtitle">Institutional international buying requirements.</p>
+
+    <div class="authority-bar">
+      <div>🌍 100+ Active Trade Corridors</div>
+      <div>📊 Structured RFQ Framework</div>
+      <div>🔐 Controlled Supplier Access</div>
+    </div>
+
+    <div class="search-box">
+      <input id="searchInput" placeholder="Search by product, country, port, quantity…">
+    </div>
+
+    <div id="rfqList" style="font-weight:500;color:#475569;">
+      🔄 Fetching Verified Global Buyer RFQs...
+    </div>
   </div>
-</header>
 
-<div class="container">
-  <h1>Live Verified Buyer RFQs</h1>
-  <p class="subtitle">Institutional international buying requirements.</p>
+  <footer>
+    <p style="color:#c9a44a;font-weight:600;">APD Global Trade</p>
+    <p>Elite B2B Trade Facilitation Platform</p>
+    <p>
+      <a href="/terms.html">Terms</a> |
+      <a href="/privacy.html">Privacy</a> |
+      <a href="/disclaimer.html">Disclaimer</a>
+    </p>
+  </footer>
 
-  <div class="authority-bar">
-    <div>🌍 100+ Active Trade Corridors</div>
-    <div>📊 Structured RFQ Framework</div>
-    <div>🔐 Controlled Supplier Access</div>
-  </div>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, orderBy, limit, startAfter } from
+      "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-  <div class="search-box">
-    <input id="searchInput" placeholder="Search by product, country, port, quantity…">
-  </div>
+    const app = initializeApp({
+      apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+      authDomain: "apd-globaltrade-prod.firebaseapp.com",
+      projectId: "apd-globaltrade-prod"
+    });
 
-  <div id="rfqList" style="font-weight:500;color:#475569;">
-    🔄 Fetching Verified Global Buyer RFQs...
-  </div>
-</div>
+    const db = getFirestore(app);
+    const rfqList = document.getElementById("rfqList");
+    const searchInput = document.getElementById("searchInput");
 
-<footer>
-  <p style="color:#c9a44a;font-weight:600;">APD Global Trade</p>
-  <p>Elite B2B Trade Facilitation Platform</p>
-  <p>
-    <a href="/terms.html">Terms</a> |
-    <a href="/privacy.html">Privacy</a> |
-    <a href="/disclaimer.html">Disclaimer</a>
-  </p>
-</footer>
+    let allRFQs = [];
+    let lastVisible = null;
+    const PAGE_SIZE = 20;
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, getDocs } from
-"https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    function renderCards(docs, isMore = false) {
+      const fragment = document.createDocumentFragment();
 
-const app = initializeApp({
-  apiKey: "YOUR_API_KEY",
-  authDomain: "apd-globaltrade-prod.firebaseapp.com",
-  projectId: "apd-globaltrade-prod"
-});
-
-const db = getFirestore(app);
-const rfqList = document.getElementById("rfqList");
-const searchInput = document.getElementById("searchInput");
-
-let allRFQs = [];
-
-function renderRFQs(list){
-  if(list.length === 0){
-    rfqList.innerHTML = "<p>No matching RFQs found.</p>";
-    return;
-  }
-
-  rfqList.innerHTML = "";
-  list.forEach(r=>{
-    rfqList.innerHTML += `
-      <div class="card">
+      docs.forEach(r => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
         <div class="rfq-badge">VERIFIED INTERNATIONAL BUYER</div>
         <h3>${r.product || "-"}</h3>
         <div class="rfq-meta"><b>Quantity:</b> ${r.quantity || "-"}</div>
@@ -235,40 +256,86 @@ function renderRFQs(list){
         <a class="cta" href="/supplier-login.html">
           Apply for Verified Supplier Access
         </a>
-      </div>
     `;
-  });
+        fragment.appendChild(card);
+      });
 
-  document.querySelector("h1").innerText =
-    "Live Verified Buyer RFQs (" + list.length + " Active)";
-}
+      if (!isMore) rfqList.innerHTML = "";
 
-async function loadRFQs(){
-  try{
-    const snap = await getDocs(collection(db,"rfqs"));
-    if(snap.empty){
-      rfqList.innerHTML = "<p>No RFQs available yet.</p>";
-      return;
+      // Remove any existing Load More button before appending new cards
+      const oldBtn = document.getElementById("loadMoreBtn");
+      if (oldBtn) oldBtn.remove();
+
+      rfqList.appendChild(fragment);
+
+      // Add Load More button if we might have more data
+      if (docs.length === PAGE_SIZE) {
+        const loadMoreBtn = document.createElement('button');
+        loadMoreBtn.id = "loadMoreBtn";
+        loadMoreBtn.innerText = "Load More RFQs";
+        loadMoreBtn.className = "cta";
+        loadMoreBtn.style.display = "block";
+        loadMoreBtn.style.margin = "30px auto";
+        loadMoreBtn.style.cursor = "pointer";
+        loadMoreBtn.style.border = "none";
+        loadMoreBtn.onclick = () => loadRFQs(true);
+        rfqList.appendChild(loadMoreBtn);
+      }
     }
-    allRFQs = snap.docs.map(d => d.data());
-    renderRFQs(allRFQs);
-  }catch(err){
-    rfqList.innerHTML = "<p>Error loading RFQs.</p>";
-  }
-}
 
-searchInput.addEventListener("input", ()=>{
-  const q = searchInput.value.toLowerCase();
-  const filtered = allRFQs.filter(r =>
-    (r.product || "").toLowerCase().includes(q) ||
-    (r.deliveryPort || "").toLowerCase().includes(q) ||
-    (r.quantity || "").toLowerCase().includes(q)
-  );
-  renderRFQs(filtered);
-});
+    async function loadRFQs(isMore = false) {
+      try {
+        let q;
+        if (isMore && lastVisible) {
+          q = query(collection(db, "rfqs"), orderBy("product"), startAfter(lastVisible), limit(PAGE_SIZE));
+        } else {
+          rfqList.innerHTML = "🔄 Fetching Verified Global Buyer RFQs...";
+          q = query(collection(db, "rfqs"), orderBy("product"), limit(PAGE_SIZE));
+        }
 
-loadRFQs();
-</script>
+        const snap = await getDocs(q);
+        if (snap.empty && !isMore) {
+          rfqList.innerHTML = "<p>No RFQs available yet.</p>";
+          return;
+        }
+
+        lastVisible = snap.docs[snap.docs.length - 1];
+        const newRFQs = snap.docs.map(d => d.data());
+        allRFQs = isMore ? [...allRFQs, ...newRFQs] : newRFQs;
+
+        renderCards(newRFQs, isMore);
+
+        document.querySelector("h1").innerText = "Live Verified Buyer RFQs (Global Access)";
+      } catch (err) {
+        rfqList.innerHTML = "<p>Error loading RFQs. Please check your connection.</p>";
+        console.error(err);
+      }
+    }
+
+    // Search functionality (Local for loaded docs)
+    let searchTimeout;
+    searchInput.addEventListener("input", () => {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        const q = searchInput.value.toLowerCase();
+        if (!q) {
+          // If search is cleared, we might want to reload or just show what we have
+          // For simplicity, showing all loaded
+          renderCards(allRFQs, false);
+          return;
+        }
+        const filtered = allRFQs.filter(r =>
+          (r.product || "").toLowerCase().includes(q) ||
+          (r.deliveryPort || "").toLowerCase().includes(q) ||
+          (r.quantity || "").toLowerCase().includes(q)
+        );
+        renderCards(filtered, false);
+      }, 300);
+    });
+
+    loadRFQs();
+  </script>
 
 </body>
+
 </html>
