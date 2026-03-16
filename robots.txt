@@ -1,2 +1,6 @@
 User-agent: *
 Disallow: /admin/
+Disallow: /account-rejected.html
+Disallow: /pending-approval.html
+
+Sitemap: https://www.apdglobaltrade.com/sitemap.xml
