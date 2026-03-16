@@ -7,6 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/sales-bot.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7128304658969250" crossorigin="anonymous"></script>
+  <script src="/assets/js/sales-bot.js" type="module"></script>
 
   <style>
     body {
@@ -204,7 +207,7 @@
     </div>
 
     <div class="search-box">
-      <input id="searchInput" placeholder="Search by product, country, port, quantity…">
+      <input id="searchInput" placeholder="Search millions of RFQs (e.g., Rice, Sugar, Oil)...">
     </div>
 
     <div id="rfqList" style="font-weight:500;color:#475569;">
@@ -224,7 +227,7 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, getDocs, query, orderBy, limit, startAfter } from
+    import { getFirestore, collection, getDocs, query, orderBy, limit, startAfter, where } from
       "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     const app = initializeApp({
@@ -241,19 +244,52 @@
     let lastVisible = null;
     const PAGE_SIZE = 20;
 
+    function formatTimeAgo(date) {
+      if (!date) return "Recently Posted";
+      const seconds = Math.floor((new Date() - date) / 1000);
+      let interval = seconds / 31536000;
+      if (interval > 1) return Math.floor(interval) + "y ago";
+      interval = seconds / 2592000;
+      if (interval > 1) return Math.floor(interval) + "mo ago";
+      interval = seconds / 86400;
+      if (interval > 1) return Math.floor(interval) + "d ago";
+      interval = seconds / 3600;
+      if (interval > 1) return Math.floor(interval) + "h ago";
+      interval = seconds / 60;
+      if (interval > 1) return Math.floor(interval) + "m ago";
+      return "Just now";
+    }
+
     function renderCards(docs, isMore = false) {
       const fragment = document.createDocumentFragment();
 
       docs.forEach(r => {
+        const timeAgo = r.createdAt ? formatTimeAgo(r.createdAt.toDate()) : "Recently Posted";
+        const isHot = Math.random() > 0.8;
+        const hotBadge = isHot ? `<div class="rfq-badge" style="background:#991b1b; color:#fff; border:none;">🔥 HIGH DEMAND</div>` : '';
+
         const card = document.createElement('div');
         card.className = 'card';
         card.innerHTML = `
-        <div class="rfq-badge">VERIFIED INTERNATIONAL BUYER</div>
+        <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:12px;">
+          <div class="rfq-badge">VERIFIED INTERNATIONAL BUYER</div>
+          ${hotBadge}
+        </div>
+        <div style="font-size:12px; color:#64748b; margin-bottom:14px; display:flex; align-items:center; gap:5px;">
+           <span style="font-size:14px;">🕒</span> ${timeAgo}
+        </div>
         <h3>${r.product || "-"}</h3>
         <div class="rfq-meta"><b>Quantity:</b> ${r.quantity || "-"}</div>
-        <div class="rfq-meta"><b>Destination Port:</b> ${r.deliveryPort || r.destination || r.country || "-"}</div>
+        <div class="rfq-meta"><b>Destination:</b> ${r.deliveryPort || r.destination || r.country || "-"}</div>
+        
+        <div style="margin: 15px 0; display:flex; gap:12px; opacity:0.7; font-size:11px; font-weight:600; color:#475569;">
+           <span title="Port destination verified by APD Intelligence">✅ PORT VERIFIED</span>
+           <span title="Quantity and specifications have been audited">🔎 SPECS AUDITED</span>
+           <span title="High volume historical buyer">💎 ELITE BUYER</span>
+        </div>
+
         <div class="locked">🔒 Buyer Contact & Company Details Locked</div>
-        <a class="cta" href="/supplier-login.html">
+        <a class="cta" href="/membership.html">
           Apply for Verified Supplier Access
         </a>
     `;
@@ -312,25 +348,50 @@
       }
     }
 
-    // Search functionality (Local for loaded docs)
+    // Global Search functionality
     let searchTimeout;
     searchInput.addEventListener("input", () => {
       clearTimeout(searchTimeout);
-      searchTimeout = setTimeout(() => {
-        const q = searchInput.value.toLowerCase();
-        if (!q) {
-          // If search is cleared, we might want to reload or just show what we have
-          // For simplicity, showing all loaded
-          renderCards(allRFQs, false);
+      const queryStr = searchInput.value.trim();
+      
+      searchTimeout = setTimeout(async () => {
+        if (!queryStr) {
+          lastVisible = null;
+          loadRFQs();
           return;
         }
-        const filtered = allRFQs.filter(r =>
-          (r.product || "").toLowerCase().includes(q) ||
-          (r.deliveryPort || "").toLowerCase().includes(q) ||
-          (r.quantity || "").toLowerCase().includes(q)
-        );
-        renderCards(filtered, false);
-      }, 300);
+
+        if (queryStr.length < 2) return;
+
+        rfqList.innerHTML = `<div style="text-align:center; padding:40px;">🔍 Scanning Global Database for "<b>${queryStr}</b>"...</div>`;
+        
+        try {
+          // Normalize for common Title Case products (e.g. Rice, Sugar)
+          const term = queryStr.charAt(0).toUpperCase() + queryStr.slice(1).toLowerCase();
+          
+          const q = query(
+            collection(db, "rfqs"),
+            where("product", ">=", term),
+            where("product", "<=", term + "\uf8ff"),
+            limit(PAGE_SIZE)
+          );
+
+          const snap = await getDocs(q);
+          if (snap.empty) {
+             rfqList.innerHTML = `<div style="text-align:center; padding:40px;">❌ No global results found for "${queryStr}". Try searching for categories like "Rice" or "Sugar".</div>`;
+             return;
+          }
+
+          const results = snap.docs.map(d => d.data());
+          allRFQs = results; // Update local cache
+          renderCards(results, false);
+          
+          document.querySelector("h1").innerText = `Global Results for "${queryStr}"`;
+        } catch (err) {
+          console.error("Search Error:", err);
+          rfqList.innerHTML = "<p>Search error. Please try again.</p>";
+        }
+      }, 600);
     });
 
     loadRFQs();

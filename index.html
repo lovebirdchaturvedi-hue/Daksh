@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>APD Global Trade | Elite B2B Trade Platform</title>
@@ -7,6 +8,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/sales-bot.css?v=1.4">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7128304658969250" crossorigin="anonymous"></script>
+  <script src="/assets/js/sales-bot.js?v=1.4" type="module"></script>
   <style>
     html,
     body {
@@ -16,11 +20,13 @@
       color: #fff;
       scroll-behavior: smooth;
     }
+
     :root {
       --gold: #c9a44a;
       --gold-soft: #e7cf88;
       --whatsapp-gradient: linear-gradient(135deg, #25D366, #128C7E);
     }
+
     /* HEADER */
     header {
       height: 80px;
@@ -32,28 +38,34 @@
       top: 0;
       z-index: 1000;
     }
+
     header .logo {
       position: absolute;
       left: 30px;
       font-weight: 700;
     }
+
     .premium-logo {
       background: linear-gradient(90deg, #c9a44a, #fff, #c9a44a);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: premiumGlow 3s ease-in-out infinite;
     }
+
     @keyframes premiumGlow {
       0% {
         text-shadow: 0 0 6px rgba(201, 164, 74, .4)
       }
+
       50% {
         text-shadow: 0 0 28px rgba(201, 164, 74, .9)
       }
+
       100% {
         text-shadow: 0 0 6px rgba(201, 164, 74, .4)
       }
     }
+
     header nav a {
       color: #e5e7eb;
       margin: 0 14px;
@@ -62,9 +74,11 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
+
     header nav a:hover {
       color: var(--gold-soft)
     }
+
     /* HERO */
     .hero {
       min-height: calc(100vh - 80px);
@@ -78,6 +92,7 @@
       position: relative;
       overflow: hidden;
     }
+
     .hero::after {
       content: "";
       position: absolute;
@@ -86,6 +101,7 @@
       opacity: .15;
       pointer-events: none;
     }
+
     .earth-wrap {
       width: 260px;
       height: 260px;
@@ -93,6 +109,7 @@
       pointer-events: none;
       position: relative;
     }
+
     .earth {
       width: 100%;
       height: 100%;
@@ -102,30 +119,104 @@
       animation: spin 28s linear infinite;
       box-shadow: inset -40px 0 80px rgba(0, 0, 0, .85), 0 0 60px rgba(201, 164, 74, .5);
     }
+
     .night {
       filter: brightness(.6) saturate(1.2)
     }
+
     @keyframes spin {
       to {
         background-position: -1400px
       }
     }
+
+    /* TRUST STRIP */
+    .trust-strip {
+      background: rgba(255,255,255,0.02);
+      padding: 30px 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .trust-track {
+      display: flex;
+      gap: 100px;
+      white-space: nowrap;
+      animation: trustScroll 40s linear infinite;
+    }
+    .trust-item {
+      color: #94a3b8;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 2px;
+      opacity: 0.6;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    @keyframes trustScroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* HOW IT WORKS */
+    .how-it-works {
+      padding: 120px 20px;
+      background: #020617;
+      text-align: center;
+    }
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      max-width: 1100px;
+      margin: 60px auto 0;
+    }
+    .how-step {
+      background: rgba(11,29,54,0.4);
+      padding: 40px;
+      border-radius: 24px;
+      border: 1px solid rgba(201,164,74,0.1);
+      position: relative;
+    }
+    .step-num {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 45px;
+      height: 45px;
+      background: var(--gold);
+      color: #000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      box-shadow: 0 0 20px rgba(201,164,74,0.4);
+    }
+
     .center {
       text-align: center;
       z-index: 2
     }
+
     .center h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(2.6rem, 4vw, 3.8rem);
       line-height: 1.1;
       margin-bottom: 20px;
     }
+
     .center p {
       max-width: 720px;
       margin: 16px auto 28px;
       color: #cbd5f5;
       font-size: 1.1rem;
     }
+
     .btn {
       background: linear-gradient(135deg, var(--gold), var(--gold-soft));
       color: #000;
@@ -137,10 +228,12 @@
       display: inline-block;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
     .btn:hover {
       transform: translateY(-3px);
       box-shadow: 0 10px 25px rgba(201, 164, 74, 0.4);
     }
+
     .badges {
       display: flex;
       flex-wrap: wrap;
@@ -148,6 +241,7 @@
       gap: 12px;
       margin-top: 22px;
     }
+
     .badge {
       background: rgba(255, 255, 255, .06);
       border: 1px solid rgba(255, 255, 255, .14);
@@ -156,6 +250,7 @@
       font-size: 13px;
       backdrop-filter: blur(5px);
     }
+
     .premium {
       margin-top: 40px;
       font-family: 'Playfair Display', serif;
@@ -164,11 +259,13 @@
       color: #f5e7c6;
       animation: glow 4s ease-in-out infinite;
     }
+
     @keyframes glow {
       50% {
         text-shadow: 0 0 35px rgba(201, 164, 74, .7)
       }
     }
+
     /* LIVE RFQ */
     .live-rfq {
       background: linear-gradient(90deg, #020617, #071427);
@@ -179,6 +276,7 @@
       display: flex;
       align-items: center;
     }
+
     .live-rfq-label {
       font-weight: 700;
       color: #c9a44a;
@@ -188,12 +286,14 @@
       margin-right: 20px;
       white-space: nowrap;
     }
+
     .live-rfq-track {
       display: flex;
       gap: 60px;
       white-space: nowrap;
       animation: rfqScroll 35s linear infinite;
     }
+
     .live-rfq-track span {
       font-size: 15px;
       color: #e5e7eb;
@@ -201,18 +301,22 @@
       display: flex;
       align-items: center;
     }
+
     .live-rfq-track span:hover {
       color: #f5e7c6;
       text-decoration: underline;
     }
+
     @keyframes rfqScroll {
       from {
         transform: translateX(100%)
       }
+
       to {
         transform: translateX(-100%)
       }
     }
+
     /* SEA */
     .sea {
       min-height: 100vh;
@@ -226,6 +330,7 @@
       padding: 100px 60px;
       gap: 60px;
     }
+
     .sea img {
       width: 100%;
       max-width: 480px;
@@ -234,6 +339,7 @@
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
       border: 1px solid rgba(201, 164, 74, 0.2);
     }
+
     .contact-card {
       background: rgba(11, 29, 54, .85);
       backdrop-filter: blur(10px);
@@ -243,12 +349,14 @@
       box-shadow: 0 30px 60px rgba(0, 0, 0, .6);
       border: 1px solid rgba(201, 164, 74, .2);
     }
+
     /* AUTHORITY SECTION */
     .trade-authority {
       padding: 160px 20px;
       background: linear-gradient(180deg, #071427, #020617);
       border-top: 1px solid rgba(201, 164, 74, .15);
     }
+
     .trade-authority h2 {
       font-family: 'Playfair Display', serif;
       font-size: 46px;
@@ -256,6 +364,7 @@
       color: var(--gold-soft);
       margin-bottom: 40px;
     }
+
     .trade-authority p {
       max-width: 850px;
       margin: 0 auto 100px auto;
@@ -264,6 +373,7 @@
       font-size: 18px;
       color: #cbd5f5;
     }
+
     .authority-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -271,6 +381,7 @@
       max-width: 1100px;
       margin: auto;
     }
+
     .authority-card {
       background: rgba(11, 29, 54, .7);
       padding: 45px;
@@ -278,24 +389,29 @@
       border: 1px solid rgba(201, 164, 74, .25);
       transition: transform 0.3s ease;
     }
+
     .authority-card:hover {
       transform: translateY(-10px);
       border-color: var(--gold);
     }
+
     .authority-card h3 {
       color: var(--gold);
       margin-bottom: 18px;
     }
+
     .authority-card p {
       color: #cbd5f5;
       text-align: left;
       margin: 0;
       font-size: 15px;
     }
+
     .authority-cta {
       text-align: center;
       margin-top: 120px;
     }
+
     .authority-cta a {
       padding: 20px 60px;
       border-radius: 999px;
@@ -306,9 +422,11 @@
       font-size: 16px;
       transition: box-shadow 0.3s ease;
     }
+
     .authority-cta a:hover {
       box-shadow: 0 0 30px rgba(201, 164, 74, 0.4);
     }
+
     /* FOOTER */
     footer {
       background: #020617;
@@ -317,14 +435,17 @@
       color: #9ca3af;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
+
     footer a {
       color: var(--gold);
       margin: 0 6px;
       text-decoration: none
     }
+
     footer a:hover {
       text-decoration: underline;
     }
+
     /* FLOAT PREMIUM STUFF */
     .float {
       position: fixed;
@@ -332,9 +453,11 @@
       z-index: 9999;
       transition: transform 0.3s ease;
     }
+
     .float:hover {
       transform: scale(1.1);
     }
+
     .whatsapp {
       bottom: 30px;
       width: 65px;
@@ -350,6 +473,7 @@
       box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
       animation: floatMotion 6s infinite ease-in-out;
     }
+
     .download {
       bottom: 110px;
       padding: 14px 28px;
@@ -363,157 +487,21 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
+
     @keyframes floatMotion {
       0% {
         transform: translateY(0px);
       }
+
       50% {
         transform: translateY(-10px);
       }
+
       100% {
         transform: translateY(0px);
       }
     }
-    /* ==========================================================================
-   SUHANA AI BOT (PREMIUM STUFF)
-   ========================================================================== */
-    #suhana-bot {
-      position: fixed;
-      bottom: 30px;
-      left: 30px;
-      z-index: 10000;
-    }
-    .suhana-trigger {
-      width: 75px;
-      height: 75px;
-      background: linear-gradient(135deg, var(--gold), #b8912d);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      border: 3px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
-      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      animation: floatMotion 6s infinite ease-in-out reverse;
-      position: relative;
-    }
-    .suhana-trigger:hover {
-      transform: scale(1.1) rotate(5deg);
-      background: #fff;
-    }
-    .suhana-trigger svg {
-      stroke: #000;
-      transition: 0.3s;
-    }
-    .suhana-trigger:hover svg {
-      stroke: #b8912d;
-    }
-    .suhana-badge {
-      position: absolute;
-      top: -5px;
-      right: 0;
-      background: #ff3b30;
-      color: #fff;
-      font-size: 11px;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 20px;
-      border: 2px solid #020617;
-      box-shadow: 0 4px 10px rgba(255, 59, 48, 0.4);
-      animation: pulse-red 2s infinite;
-    }
-    @keyframes pulse-red {
-      0% {
-        box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.7);
-      }
-      70% {
-        box-shadow: 0 0 0 10px rgba(255, 59, 48, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(255, 59, 48, 0);
-      }
-    }
-    .suhana-bubble {
-      background: rgba(11, 29, 54, 0.98);
-      backdrop-filter: blur(25px);
-      border: 1px solid rgba(201, 164, 74, 0.3);
-      width: 350px;
-      border-radius: 20px;
-      padding: 30px;
-      display: none;
-      position: absolute;
-      bottom: 95px;
-      left: 0;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95);
-      border-bottom: 4px solid var(--gold);
-    }
-    .suhana-header {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-    .suhana-avatar {
-      width: 45px;
-      height: 45px;
-      background: var(--gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      color: #000;
-      font-size: 20px;
-      border: 2px solid var(--gold-soft);
-    }
-    .suhana-info {
-      display: flex;
-      flex-direction: column;
-    }
-    .suhana-name {
-      color: var(--gold);
-      font-weight: 700;
-      font-size: 18px;
-      margin: 0;
-    }
-    .suhana-status {
-      font-size: 10px;
-      color: #25D366;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-    .suhana-text {
-      color: #fff;
-      font-size: 15px;
-      line-height: 1.6;
-      margin-bottom: 25px;
-    }
-    .bot-options {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .bot-btn {
-      width: 100%;
-      padding: 14px 20px;
-      border-radius: 10px;
-      border: 1px solid rgba(201, 164, 74, 0.2);
-      background: rgba(201, 164, 74, 0.08);
-      color: #fff;
-      cursor: pointer;
-      transition: all 0.3s;
-      text-align: left;
-      font-size: 13px;
-      font-weight: 500;
-    }
-    .bot-btn:hover {
-      background: var(--gold);
-      color: #000;
-      font-weight: 700;
-      transform: translateX(8px);
-    }
+
     /* MOBILE */
     @media(max-width:900px) {
       .hero {
@@ -521,24 +509,25 @@
         text-align: center;
         padding: 100px 20px;
       }
+
       .earth-wrap {
         display: none
       }
+
       .sea {
         grid-template-columns: 1fr;
         padding: 60px 20px;
       }
+
       header nav {
         display: none;
       }
-      #suhana-bot {
-        left: 20px;
-        bottom: 20px;
-      }
+
       .whatsapp {
         right: 20px;
         bottom: 20px;
       }
+
       .download {
         right: 20px;
         bottom: 100px;
@@ -546,42 +535,37 @@
     }
   </style>
 </head>
-<body>
-  <!-- SUHANA AI BOT (ADDED) -->
-  <div id="suhana-bot">
-    <div class="suhana-bubble" id="suhana-window">
-      <div class="suhana-header">
-        <div class="suhana-avatar">S</div>
-        <div class="suhana-info">
-          <p class="suhana-name">Suhana AI</p>
-          <span class="suhana-status">● Live Trade Assistant</span>
-        </div>
-      </div>
-      <div class="suhana-text" id="suhana-msg">
-        Welcome to the APD Syndicate. I am the lead vetting officer.<br><br>
-        <b>How can I assist your global trade execution today?</b>
-      </div>
-      <div class="bot-options" id="suhana-actions">
-        <button class="bot-btn" onclick="suhanaHandle('exporter')">I am an Exporter (Access Floor)</button>
-        <button class="bot-btn" onclick="suhanaHandle('importer')">I am an Importer (Post RFQ)</button>
-        <button class="bot-btn" onclick="suhanaHandle('help')">Talk to Global Dispatch</button>
-      </div>
-    </div>
-    <div class="suhana-trigger" onclick="toggleSuhana()">
-      <div class="suhana-badge">New</div>
-      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"
-        stroke-linejoin="round">
-        <path d="M12 8V4H8"></path>
-        <rect width="16" height="12" x="4" y="8" rx="2"></rect>
-        <path d="M2 14h2"></path>
-        <path d="M20 14h2"></path>
-        <path d="M15 13v2"></path>
-        <path d="M9 13v2"></path>
-      </svg>
-    </div>
+
+<body style="padding-top: 40px;"> <!-- Added padding for fixed top bar -->
+  <!-- PREMIUM ANNOUNCEMENT BAR -->
+  <div style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #0b1d36;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 13px;
+    font-weight: 600;
+    z-index: 10001;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    border-bottom: 1px solid rgba(201,164,74,0.4);
+  ">
+    🔐 <span style="color: var(--gold);">Institutional Data Access:</span> Secure Bulk Lead Programs for Verified Professional Exporters. 
+    <a href="https://wa.me/919266418868?text=I%20am%20interested%20in%20Institutional%20Bulk%20Lead%20Programs" 
+       style="color: var(--gold); text-decoration: underline; margin-left: 10px; font-weight: 800;">
+       Commence Inquiry
+    </a>
   </div>
   <header>
-    <div class="logo premium-logo">APD Global Trade</div>
+    <div class="logo premium-logo" style="display: flex; flex-direction: column; line-height: 1;">
+      <span style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 22px; letter-spacing: 1px;">APD <span style="color: var(--gold);">Global</span> Trade</span>
+      <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-top: 5px; font-weight: 700;">Trade Smart. Scale Fast.</span>
+    </div>
     <nav>
       <a href="/">Home</a>
       <a href="/buyer-rfqs.html">Buyer RFQs</a>
@@ -592,6 +576,7 @@
       <a href="/trade-report.html">Trade Report</a>
       <a href="/brochure.html">Brochure</a>
       <a href="/membership.html">Membership</a>
+      <a href="/verification-process.html" style="color:var(--gold);">Verification</a>
       <a href="/contact.html">Contact</a>
     </nav>
   </header>
@@ -600,10 +585,10 @@
       <div class="earth"></div>
     </div>
     <div class="center">
-      <h1>Where Verified Buyers Meet Serious Suppliers</h1>
-      <p>High-intent global RFQs. Protected buyer contacts. Zero fake leads.</p>
-      <a href="/create-rfq.html" class="btn">Post Buyer RFQ</a>
-      <a href="/buyer-rfqs.html" class="btn">View Buyer RFQs</a>
+      <h1>Direct Access to Verified Global Buyers</h1>
+      <p>Stop wasting time with middlemen. Access high-intent global RFQs, protected buyer contacts, and professional B2B trade execution.</p>
+      <a href="/membership.html" class="btn">Start Your Trial ($250)</a>
+      <a href="/buyer-rfqs.html" class="btn">View Live RFQs</a>
       <div class="badges">
         <div class="badge">🔐 Verified Buyers</div>
         <div class="badge">🌍 100+ Countries</div>
@@ -616,6 +601,46 @@
     </div>
     <div class="earth-wrap">
       <div class="earth night"></div>
+    </div>
+  </section>
+
+  <!-- INSTITUTIONAL TRUST STRIP -->
+  <div class="trust-strip" style="background: rgba(0,0,0,0.8); border-top: 1px solid rgba(201,164,74,0.3); border-bottom: 1px solid rgba(201,164,74,0.3);">
+    <div class="trust-track">
+      <div class="trust-item">📜 ICC Incoterms® 2026 Compliant</div>
+      <div class="trust-item">🛡️ WCO Security Framework</div>
+      <div class="trust-item">🏦 SWIFT Standard Communication</div>
+      <div class="trust-item">🔒 256-bit AES Data Protection</div>
+      <div class="trust-item">✅ KYC / AML Audited Network</div>
+      <div class="trust-item">⚖️ UCP 600 Banking Standards</div>
+      <!-- Duplicate for scroll -->
+      <div class="trust-item">📜 ICC Incoterms® 2026 Compliant</div>
+      <div class="trust-item">🛡️ WCO Security Framework</div>
+      <div class="trust-item">🏦 SWIFT Standard Communication</div>
+      <div class="trust-item">🔒 256-bit AES Data Protection</div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works">
+    <h2 style="font-family:'Playfair Display',serif; font-size:42px; color:var(--gold-soft);">The Elite Trading Framework</h2>
+    <p style="color:#cbd5f5; max-width:700px; margin:auto;">Built for institutional exporters. From verification to deal closure in 3 steps.</p>
+    <div class="how-grid">
+      <div class="how-step">
+        <div class="step-num">1</div>
+        <h3 style="color:var(--gold);">Apply & Verify</h3>
+        <p style="font-size:14px; color:#94a3b8;">Create your profile and clear our internal KYC/IEC compliance check.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-num">2</div>
+        <h3 style="color:var(--gold);">Unlock Intelligence</h3>
+        <p style="font-size:14px; color:#94a3b8;">Access protected buyer data, destination port requirements, and payment records.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-num">3</div>
+        <h3 style="color:var(--gold);">Direct Execution</h3>
+        <p style="font-size:14px; color:#94a3b8;">Bypass brokers. Negotiate and close deals directly via our encrypted data-lines.</p>
+      </div>
     </div>
   </section>
   <section class="live-rfq">
@@ -631,7 +656,6 @@
       <p>Verified buyers. Real demand. Structured execution.</p>
       <div style="color:var(--gold-soft); line-height:2;">
         📧 info@apdglobaltrade.com<br>
-        ☎ +1 (202) 780-1366<br>
         💬 WhatsApp: +91 92664 18868
       </div>
     </div>
@@ -776,16 +800,16 @@ text-align:center;
     font-weight:600;
   ">
       <div>
-        <div style="color:#c9a44a;font-size:48px;">$250M+</div>
-        <div style="color:#cbd5f5;">Projected Trade Volume</div>
+        <div style="color:#c9a44a;font-size:48px;">$10B+</div>
+        <div style="color:#cbd5f5;">Projected Annual Trade Volume</div>
       </div>
       <div>
         <div style="color:#c9a44a;font-size:48px;">100+</div>
         <div style="color:#cbd5f5;">Active Countries</div>
       </div>
       <div>
-        <div style="color:#c9a44a;font-size:48px;">5,000+</div>
-        <div style="color:#cbd5f5;">Verified RFQs</div>
+        <div style="color:#c9a44a;font-size:48px;">1 Million+</div>
+        <div style="color:#cbd5f5;">Verified Buyers & RFQs</div>
       </div>
     </div>
   </section>
@@ -819,16 +843,59 @@ text-align:center;
       <div>🇦🇺 Oceania</div>
     </div>
   </section>
+  <!-- BOTHUB CROSS-SELL -->
+  <section style="
+    padding: 100px 20px;
+    background: radial-gradient(circle at center, #0b1d36 0%, #020617 100%);
+    text-align: center;
+    border-top: 1px solid rgba(201, 164, 74, 0.15);
+  ">
+    <div style="max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 60px;">
+      <div style="flex: 1; min-width: 320px; text-align: left;">
+        <div style="color: var(--gold); font-weight: 800; letter-spacing: 2px; margin-bottom: 20px; font-size: 14px;">SALES AUTOMATION PARTNER</div>
+        <h3 style="color: #fff; font-family: 'Playfair Display', serif; font-size: 42px; line-height: 1.2; margin-bottom: 20px;">Hire a 24/7 Silicon Salesman</h3>
+        <p style="color: #cbd5f5; font-size: 18px; line-height: 1.8; margin-bottom: 35px;">
+            Scale your global outreach without increasing your headcount. Meet **BotHub** — the AI-powered salesman that qualifies leads and closes deals while you sleep.
+        </p>
+        <a href="https://wa-bothub.online/" target="_blank" style="
+            display: inline-block;
+            background: linear-gradient(135deg, #c9a44a, #e7cf88);
+            color: #000;
+            padding: 18px 45px;
+            border-radius: 5px;
+            font-weight: 800;
+            text-decoration: none;
+            transition: 0.3s transform;
+            box-shadow: 0 15px 35px rgba(201, 164, 74, 0.2);
+        ">Launch BotHub Platform</a>
+      </div>
+      <div style="flex: 1; min-width: 320px; background: rgba(255,255,255,0.03); padding: 50px; border-radius: 30px; border: 1px solid rgba(201, 164, 74, 0.1); text-align: center;">
+         <div style="font-size: 80px; margin-bottom: 20px;">🤖</div>
+         <div style="font-family: 'Playfair Display', serif; font-size: 32px; color: #fff; font-weight: 700; letter-spacing: 1px;">WA B️OT HUB</div>
+         <p style="color: var(--gold); margin-top: 10px; font-weight: 600;">The Original AI Sales Force</p>
+      </div>
+    </div>
+  </section>
+
   <footer>
     <p style="color:var(--gold);font-weight:600; font-family:'Playfair Display', serif; font-size:1.5rem;">APD Global
       Trade</p>
+    <p style="color:#94a3b8; font-size:13px; margin-top:10px; letter-spacing:1px; text-transform:uppercase;">
+       Global Offices: New York • London • Dubai • Singapore
+    </p>
+    <p style="margin-top:20px;">
+      <a href="/verification-process.html" style="color: var(--gold); border: 1px solid var(--gold); padding: 5px 12px; border-radius: 5px; font-weight: 600;">How We Verify</a>
+    </p>
     <p style="margin-top:20px;">
       <a href="/terms.html">Terms</a> |
       <a href="/privacy.html">Privacy</a> |
       <a href="/disclaimer.html">Disclaimer</a> |
       <a href="/shipping-policy.html">Shipping Policy</a>
     </p>
-    <p style="font-size: 12px; margin-top: 30px; opacity: 0.5;">© 2026 APD Global Trade. All rights reserved.</p>
+    <p style="font-size: 11px; margin-top: 30px; opacity: 0.4; letter-spacing: 1px;">
+      🔒 SECURE DATA LINE • 256-BIT AES ENCRYPTION • INSTITUTIONAL OVERSIGHT
+    </p>
+    <p style="font-size: 12px; margin-top: 10px; opacity: 0.5;">© 2026 APD Global Trade. All rights reserved.</p>
   </footer>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -865,8 +932,9 @@ text-align:center;
             ? `<img src="https://flagcdn.com/16x12/${code}.png" style="vertical-align:middle;margin-right:6px">`
             : "🌍";
           ticker.innerHTML += `
-        <span onclick="location.href='/membership.html'">
+        <span onclick="location.href='/membership.html'" style="display:flex; align-items:center; gap:8px;">
           ${flag} ${aiSummary({ ...r, country })}
+          <span style="background: rgba(34, 197, 94, 0.1); color: #4ade80; font-size: 10px; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(74, 222, 128, 0.2); font-weight: 800; text-transform: uppercase;">✅ Bank Verified</span>
         </span>`;
         });
       } catch (error) {
@@ -899,4 +967,5 @@ text-align:center;
   <a class="float whatsapp" href="https://wa.me/919266418868">💬</a>
   <a class="float download" href="/download-app.html">📲 Deploy App</a>
 </body>
+
 </html>

@@ -1,287 +1,486 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>For Suppliers | APD Global Trade</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>For Suppliers | APD Global Trade</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/sales-bot.css?v=1.4">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7128304658969250" crossorigin="anonymous"></script>
+    <script src="/assets/js/sales-bot.js?v=1.4" type="module"></script>
 
-<style>
-html,body{margin:0;font-family:Inter,sans-serif;background:#020617;color:#fff}
-:root{
---navy:#0b1d36;
---navy-dark:#071427;
---gold:#c9a44a;
---gold-soft:#e7cf88;
---muted:#9ca3af;
-}
+    <style>
+        html,
+        body {
+            margin: 0;
+            font-family: Inter, sans-serif;
+            background: #020617;
+            color: #fff
+        }
 
-/* HEADER */
-header{
-height:80px;
-background:linear-gradient(180deg,var(--navy),var(--navy-dark));
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-position:sticky;
-top:0;
-z-index:999;
-}
-header .logo{color:var(--gold);font-weight:600}
-header nav a{
-color:#e5e7eb;
-margin:0 12px;
-text-decoration:none;
-font-size:13px
-}
-header nav a:hover{color:var(--gold-soft)}
+        :root {
+            --navy: #0b1d36;
+            --navy-dark: #071427;
+            --gold: #c9a44a;
+            --gold-soft: #e7cf88;
+            --muted: #9ca3af;
+        }
 
-/* HERO */
-.hero{
-position:relative;
-min-height:100vh;
-overflow:hidden;
-}
-.hero video{
-position:absolute;
-inset:0;
-width:100%;
-height:100%;
-object-fit:cover;
-}
-.hero-overlay{
-position:relative;
-z-index:2;
-min-height:100vh;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:40px 20px;
-background:linear-gradient(180deg,rgba(2,6,23,.55),rgba(2,6,23,.95));
-}
-.hero h1{
-font-family:'Playfair Display',serif;
-font-size:clamp(2.8rem,5vw,4rem);
-margin-bottom:16px;
-}
-.hero p{
-max-width:820px;
-font-size:18px;
-color:#cbd5f5;
-line-height:1.6;
-margin-bottom:32px;
-}
+        /* HEADER */
+        header {
+            height: 80px;
+            background: linear-gradient(180deg, var(--navy), var(--navy-dark));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
 
-/* BUTTONS */
-.btn{
-display:inline-block;
-margin:8px;
-padding:14px 36px;
-border-radius:999px;
-font-weight:600;
-text-decoration:none;
-}
-.btn-primary{
-background:linear-gradient(135deg,var(--gold),var(--gold-soft));
-color:#000;
-}
-.btn-outline{
-border:2px solid var(--gold);
-color:var(--gold);
-}
+        header .logo {
+            color: var(--gold);
+            font-weight: 600
+        }
 
-/* SECTION */
-.section{
-max-width:1200px;
-margin:auto;
-padding:100px 20px;
-}
-.center{text-align:center}
+        header nav a {
+            color: #e5e7eb;
+            margin: 0 12px;
+            text-decoration: none;
+            font-size: 13px
+        }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:30px;
-margin-top:50px;
-}
-.card{
-background:#020617;
-border:1px solid rgba(255,255,255,.1);
-border-radius:18px;
-padding:30px;
-box-shadow:0 20px 40px rgba(0,0,0,.4);
-}
-.card h3{
-color:var(--gold);
-margin-bottom:12px;
-}
-.card p{
-color:#cbd5f5;
-line-height:1.6;
-}
+        header nav a:hover {
+            color: var(--gold-soft)
+        }
 
-/* MID SHIP */
-.ship-mid{
-position:relative;
-min-height:80vh;
-overflow:hidden;
-}
-.ship-mid video{
-position:absolute;
-inset:0;
-width:100%;
-height:100%;
-object-fit:cover;
-}
-.ship-mid .overlay{
-position:relative;
-z-index:2;
-min-height:80vh;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:40px;
-background:linear-gradient(180deg,rgba(2,6,23,.65),rgba(2,6,23,.95));
-}
+        /* HERO */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+        }
 
-/* FOOTER */
-footer{
-background:#020617;
-text-align:center;
-padding:50px 20px;
-color:#9ca3af;
-}
+        .hero video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-/* MOBILE */
-@media(max-width:768px){
-.hero p{font-size:16px}
-header{height:auto;padding:14px 0}
-header nav{display:flex;flex-wrap:wrap;justify-content:center}
-}
-</style>
+        .hero-overlay {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(180deg, rgba(2, 6, 23, .55), rgba(2, 6, 23, .95));
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 5vw, 4rem);
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            max-width: 820px;
+            font-size: 18px;
+            color: #cbd5f5;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-block;
+            margin: 8px;
+            padding: 14px 36px;
+            border-radius: 999px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+            color: #000;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--gold);
+            color: var(--gold);
+        }
+
+        /* SECTION */
+        .section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 100px 20px;
+        }
+
+        .center {
+            text-align: center
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background: #020617;
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, .4);
+        }
+
+        .card h3 {
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #cbd5f5;
+            line-height: 1.6;
+        }
+
+        /* MID SHIP */
+        .ship-mid {
+            position: relative;
+            min-height: 80vh;
+            overflow: hidden;
+        }
+
+        .ship-mid video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ship-mid .overlay {
+            position: relative;
+            z-index: 2;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(180deg, rgba(2, 6, 23, .65), rgba(2, 6, 23, .95));
+        }
+
+        /* FOOTER */
+        footer {
+            background: #020617;
+            text-align: center;
+            padding: 50px 20px;
+            color: #9ca3af;
+        }
+
+        /* MOBILE */
+        @media(max-width:768px) {
+            .hero p {
+                font-size: 16px
+            }
+
+            header {
+                height: auto;
+                padding: 14px 0
+            }
+
+            header nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
-<header>
-<div class="logo">APD Global Trade</div>
-<nav>
-<a href="/">Home</a>
-<a href="/buyer-rfqs.html">Buyer RFQs</a>
-<a href="/membership.html">Membership</a>
-<a href="/suppliers.html">Suppliers</a>
-<a href="/supplier-login.html">Supplier Login</a>
-<a href="/register-supplier.html">Register</a>
-<a href="/contact.html">Contact</a>
-</nav>
-</header>
+    <!-- INSTITUTIONAL ANNOUNCEMENT BAR -->
+    <div style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #0b1d36;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 13px;
+        font-weight: 600;
+        z-index: 10001;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        border-bottom: 1px solid rgba(201,164,74,0.4);
+    ">
+        🔐 <span style="color: var(--gold);">Institutional Data Access:</span> Secure Bulk Lead Programs for Verified Professional Exporters. 
+        <a href="https://wa.me/919266418868?text=I%20am%20interested%20in%20Institutional%20Bulk%20Lead%20Programs" 
+           style="color: var(--gold); text-decoration: underline; margin-left: 10px; font-weight: 800;">
+           Commence Inquiry
+        </a>
+    </div>
 
-<!-- ================= HERO SHIP ================= -->
-<section class="hero">
-<video autoplay muted loop playsinline>
-<source src="https://cdn.coverr.co/videos/coverr-cargo-ship-1560/1080p.mp4">
-</video>
+    <!-- INSTITUTIONAL TRUST STRIP -->
+    <div style="background: rgba(0,0,0,0.8); border-top: 1px solid rgba(201,164,74,0.3); border-bottom: 1px solid rgba(201,164,74,0.3); padding: 15px 0;">
+        <div style="display: flex; gap: 40px; justify-content: center; align-items: center; overflow: hidden; white-space: nowrap;">
+            <div style="color: var(--gold); font-size: 13px; font-weight: 600; letter-spacing: 1px;">📜 ICC INCOTERMS® 2026 COMPLIANT</div>
+            <div style="color: var(--gold); font-size: 13px; font-weight: 600; letter-spacing: 1px;">🛡️ WCO SECURITY FRAMEWORK</div>
+            <div style="color: var(--gold); font-size: 13px; font-weight: 600; letter-spacing: 1px;">🏦 SWIFT STANDARD COMMS</div>
+            <div style="color: var(--gold); font-size: 13px; font-weight: 600; letter-spacing: 1px;">🔒 256-BIT AES PROTECTION</div>
+        </div>
+    </div>
+        <div class="logo" style="display: flex; flex-direction: column; line-height: 1; text-align: left;">
+            <span style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 22px; letter-spacing: 1px;">APD <span style="color: var(--gold);">Global</span> Trade</span>
+            <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-top: 5px; font-weight: 700;">Trade Smart. Scale Fast.</span>
+        </div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/buyer-rfqs.html">Buyer RFQs</a>
+            <a href="/membership.html">Membership</a>
+            <a href="/verification-process.html" style="color:var(--gold);">Verification</a>
+            <a href="/contact.html">Contact</a>
+            <a href="/supplier-login.html">Supplier Login</a>
+            <a href="/register-supplier.html">Register</a>
+            <a href="/contact.html">Contact</a>
+        </nav>
+    </header>
 
-<div class="hero-overlay">
-<h1>A Growth Engine for Serious Suppliers</h1>
-<p>
-Verified buyer demand. Real RFQs. Direct buyers.  
-No fake leads. No time waste. Only deals that convert.
-</p>
+    <!-- ================= HERO SHIP ================= -->
+    <section class="hero">
+        <video autoplay muted loop playsinline>
+            <source src="https://cdn.coverr.co/videos/coverr-cargo-ship-1560/1080p.mp4">
+        </video>
 
-<div>
-<a href="/register-supplier.html" class="btn btn-primary">
-Become a Verified Supplier
-</a>
-<a href="/download-app.html" class="btn btn-outline">
-Download Supplier App
-</a>
-</div>
-</div>
-</section>
+        <div class="hero-overlay">
+            <h1>Elite Infrastructure for Global Exporters</h1>
+            <p>
+                Direct access to **1 Million+ Verified Buyers** and **$10B+ in Annual Trade Demand**.
+                Bypass the middlemen. Access the leads. Direct Execution.
+            </p>
 
-<!-- ================= WHY SUPPLIERS WIN ================= -->
-<section class="section center">
-<h2 style="font-family:'Playfair Display',serif;font-size:2.8rem">
-Why Top Exporters Choose APD Global Trade
-</h2>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-bottom: 30px;">
+                <div style="background: rgba(255,255,255,0.1); padding: 12px 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);">
+                    <div style="font-size: 24px; font-weight: 700; color: var(--gold);">$10B+</div>
+                    <div style="font-size: 11px; text-transform: uppercase;">Trade Volume</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 12px 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);">
+                    <div style="font-size: 24px; font-weight: 700; color: var(--gold);">1M+</div>
+                    <div style="font-size: 11px; text-transform: uppercase;">Verified Buyers</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 12px 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);">
+                    <div style="font-size: 24px; font-weight: 700; color: var(--gold);">100+</div>
+                    <div style="font-size: 11px; text-transform: uppercase;">Trade Corridors</div>
+                </div>
+            </div>
 
-<div class="grid">
-<div class="card">
-<h3>Only Real Buyers</h3>
-<p>Every RFQ is screened. No brokers, no fake inquiries.</p>
-</div>
+            <!-- QUICK INQUIRY (LOW FRICTION) -->
+            <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 25px; max-width: 500px; margin: 30px auto 0; backdrop-filter: blur(10px);">
+                <h4 style="color: var(--gold-soft); margin-bottom: 15px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Request Buyer Quote (Free)</h4>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <input type="text" placeholder="Product (e.g. Soybeans)" style="flex: 1; padding: 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5); color: #fff; font-size: 14px;">
+                    <button style="background: var(--gold); color: #000; border: none; padding: 12px 25px; border-radius: 6px; font-weight: 700; cursor: pointer;">Check Stock Demand</button>
+                </div>
+                <p style="font-size: 10px; color: var(--muted); margin-top: 10px; opacity: 0.8;">No credit card required. Our AI scans 1M+ RFQs for matching buyer interest.</p>
+            </div>
+        </div>
+    </section>
 
-<div class="card">
-<h3>High-Value Deals</h3>
-<p>Bulk quantities. International demand. Million-dollar potential.</p>
-</div>
+    <!-- ================= LIVE MONITOR: TRUST INFRASTRUCTURE ================= -->
+    <section style="background: #020617; padding: 60px 20px; border-top: 1px solid rgba(255,255,255,0.05);">
+        <div style="max-width: 1100px; margin: auto;">
+            <div style="display: flex; gap: 40px; flex-wrap: wrap; align-items: flex-start;">
+                
+                <!-- Trade Gap Analysis (Left) -->
+                <div style="flex: 1; min-width: 320px;">
+                    <h2 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #fff; margin-bottom: 20px;">Live Buyer Verification Monitor</h2>
+                    <p style="color: var(--muted); margin-bottom: 30px; font-size: 15px; line-height: 1.6;">
+                        High-value trade requires **Financial Proof**. Our system monitors millions of RFQs and filters for buyers with active **Bank Letters of Credit (L/C)** already on file.
+                    </p>
+                    
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px;">
+                        <h4 style="color: var(--gold); font-size: 12px; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px;">Active Trade Gaps (Unfilled Demand)</h4>
+                        <div id="gap-list">
+                            <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <span style="font-size: 14px;">🌽 Yellow Corn (MT)</span>
+                                <span style="color: #22c55e; font-weight: 600;">Shortfall: 50k MT</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <span style="font-size: 14px;">🌾 Hard Red Winter Wheat</span>
+                                <span style="color: #22c55e; font-weight: 600;">Shortfall: 12k MT</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 10px 0;">
+                                <span style="font-size: 14px;">🫘 Soybeans (Non-GMO)</span>
+                                <span style="color: #22c55e; font-weight: 600;">Shortfall: 25k MT</span>
+                            </div>
+                        </div>
+                        <a href="/buyer-rfqs.html" style="display: block; text-align: center; margin-top: 20px; color: var(--gold); text-decoration: none; font-size: 13px; font-weight: 600;">View Full Global Heatmap →</a>
+                    </div>
+                </div>
 
-<div class="card">
-<h3>Direct Access</h3>
-<p>No middlemen. Unlock verified buyer contacts directly.</p>
-</div>
+                <!-- L/C Proof Visual (Right) -->
+                <div style="flex: 1; min-width: 320px; position: relative;">
+                    <div style="background: white; border-radius: 8px; padding: 30px; color: #000; box-shadow: 0 30px 60px rgba(0,0,0,0.5); transform: rotate(1deg);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <span style="font-family: serif; font-weight: 900; font-size: 20px;">DOCUMENTARY LETTER OF CREDIT</span>
+                            <div style="text-align: right; line-height: 1;">
+                                <div style="font-weight: 900; font-size: 14px; color: #004b91;">HSBC</div>
+                                <div style="font-size: 8px;">GLOBAL BANKING</div>
+                            </div>
+                        </div>
+                        <div style="border-top: 2px solid #000; padding: 10px 0; font-family: monospace; font-size: 11px;">
+                            <div style="margin-bottom: 8px;">(50A) APPLICANT: [BLURRED CORPORATE ENTITY]</div>
+                            <div style="margin-bottom: 8px;">(32B) CURRENCY/AMOUNT: USD 1,250,500.00</div>
+                            <div style="background: #f1f5f9; height: 100px; border-radius: 4px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                                <div style="filter: blur(4px); font-size: 10px; width: 80%; text-align: justify;">
+                                    This credit is subject to UCP 600... beneficiary is advised that funds are secured... shipment of Soft Wheat from Port of Houston... inspection by SGS required...
+                                </div>
+                                <div style="position: absolute; background: var(--navy); color: var(--gold); padding: 5px 15px; border-radius: 4px; font-size: 10px; font-weight: 600; border: 1px solid var(--gold);">VERIFIED BY APD TRADE</div>
+                            </div>
+                        </div>
+                        <p style="margin-top: 15px; font-size: 10px; color: #64748b; text-align: center;">Sample L/C from our active Buyer network. Verified Mar 12, 2026.</p>
+                    </div>
+                </div>
 
-<div class="card">
-<h3>Global Visibility</h3>
-<p>Buyers from Asia, Middle East, Europe, USA & Africa.</p>
-</div>
-</div>
-</section>
+            </div>
+        </div>
+    </section>
 
-<!-- ================= MID SHIP ================= -->
-<section class="ship-mid">
-<video autoplay muted loop playsinline>
-<source src="https://cdn.coverr.co/videos/coverr-container-ship-transport-5170/1080p.mp4">
-</video>
+    <!-- TRUST STRIP -->
+    <div style="background: #0b1d36; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 25px 0;">
+      <div style="display: flex; justify-content: center; align-items: center; gap: 50px; flex-wrap: wrap; opacity: 0.6; filter: grayscale(1);">
+         <span style="font-weight: 800; color: #fff; font-size: 18px;">MAERSK</span>
+         <span style="font-weight: 800; color: #fff; font-size: 18px;">DHL</span>
+         <span style="font-weight: 800; color: #fff; font-size: 18px;">COSC0</span>
+         <span style="font-weight: 800; color: #fff; font-size: 18px;">HSBC</span>
+         <span style="font-weight: 800; color: #fff; font-size: 18px;">CMA CGM</span>
+      </div>
+    </div>
 
-<div class="overlay">
-<div>
-<h2 style="font-family:'Playfair Display',serif;font-size:3rem">
-Trade Without Limits
-</h2>
-<p style="max-width:760px;margin:20px auto;color:#cbd5f5;font-size:18px">
-From factory floor to global ports — APD Global Trade powers your export growth.
-</p>
-</div>
-</div>
-</section>
+    <!-- ================= HOW IT WORKS FOR EXPORTERS ================= -->
+    <section class="section" style="background:#071427;">
+      <div class="center">
+        <h2 style="font-family:'Playfair Display',serif;font-size:2.8rem; margin-bottom: 10px;">The Elite Exporter Framework</h2>
+        <p style="color:var(--muted); margin-bottom: 60px;">Scale your exports with institutional data precision.</p>
+      </div>
+      
+      <div style="display: flex; gap: 40px; flex-wrap: wrap; justify-content: center;">
+        <div style="flex: 1; min-width: 300px; background: #020617; padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);">
+          <div style="font-size: 40px; color: var(--gold); margin-bottom: 20px;">01</div>
+          <h3 style="color: #fff; margin-bottom: 15px;">Compliance & Audit</h3>
+          <p style="color: var(--muted); font-size: 14px; line-height: 1.6;">Register and undergo APD Trade verification. We only connect premium suppliers with serious international buyers to maintain trade integrity.</p>
+        </div>
+        <div style="flex: 1; min-width: 300px; background: #020617; padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);">
+          <div style="font-size: 40px; color: var(--gold); margin-bottom: 20px;">02</div>
+          <h3 style="color: #fff; margin-bottom: 15px;">Unlock Verified Leads</h3>
+          <p style="color: var(--muted); font-size: 14px; line-height: 1.6;">Access our database of 1M+ Buyers. Every RFQ includes audited specifications, target ports, and historical payment verification status.</p>
+        </div>
+        <div style="flex: 1; min-width: 300px; background: #020617; padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);">
+          <div style="font-size: 40px; color: var(--gold); margin-bottom: 20px;">03</div>
+          <h3 style="color: #fff; margin-bottom: 15px;">Direct Trade Execution</h3>
+          <p style="color: var(--muted); font-size: 14px; line-height: 1.6;">Engage directly with buyers via WhatsApp and Email. No commissions, no middleman friction. Just direct B2B global trade.</p>
+        </div>
+      </div>
+    </section>
 
-<!-- ================= FINAL CTA ================= -->
-<section class="section center">
-<h2 style="font-family:'Playfair Display',serif;font-size:2.8rem">
-Start Closing Export Deals Faster
-</h2>
-<p style="max-width:720px;margin:20px auto;color:#cbd5f5">
-Join suppliers already converting RFQs into real trade.
-</p>
+    <!-- ================= MID SHIP ================= -->
+    <section class="ship-mid">
+        <video autoplay muted loop playsinline>
+            <source src="https://cdn.coverr.co/videos/coverr-container-ship-transport-5170/1080p.mp4">
+        </video>
 
-<div>
-<a href="/register-supplier.html" class="btn btn-primary">Register as Supplier</a>
-<a href="/buyer-rfqs.html" class="btn btn-outline">View Live Buyer Demand</a>
-</div>
-</section>
+        <div class="overlay">
+            <div>
+                <h2 style="font-family:'Playfair Display',serif;font-size:3rem">
+                    Trade Without Limits
+                </h2>
+                <p style="max-width:760px;margin:20px auto;color:#cbd5f5;font-size:18px">
+                    From factory floor to global ports — APD Global Trade powers your export growth.
+                </p>
+            </div>
+        </div>
+    </section>
 
-<!-- ================= FOOTER ================= -->
-<footer>
-<p style="color:var(--gold);font-weight:600">APD Global Trade</p>
-<p>Elite B2B Trade Facilitation Platform</p>
-<p>
-📧 info@apdglobaltradehub.com<br>
-☎ +1 (202) 780-1366<br>
-💬 WhatsApp: +91 92664 18868
-</p>
-</footer>
+    <!-- ================= FINAL CTA ================= -->
+    <section class="section center">
+        <h2 style="font-family:'Playfair Display',serif;font-size:2.8rem">
+            Start Closing Export Deals Faster
+        </h2>
+        <p style="max-width:720px;margin:20px auto;color:#cbd5f5">
+            Join suppliers already converting RFQs into real trade.
+        </p>
 
-<!-- ================= DOWNLOAD APP FLOAT ================= -->
-<a href="/download-app.html" target="_blank"
-style="
+        <div>
+            <a href="/register-supplier.html" class="btn btn-primary">Register as Supplier</a>
+            <a href="/buyer-rfqs.html" class="btn btn-outline">View Live Buyer Demand</a>
+        </div>
+    </section>
+
+    <!-- BOTHUB CROSS-SELL -->
+    <section style="
+        padding: 80px 20px;
+        background: #071427;
+        text-align: center;
+        border-top: 1px solid rgba(201, 164, 74, 0.15);
+    ">
+        <div style="max-width: 900px; margin: 0 auto;">
+            <div style="color: var(--gold); font-weight: 800; letter-spacing: 2px; margin-bottom: 15px; font-size: 13px;">AUTOMATE YOUR EXPORT OUTREACH</div>
+            <h3 style="color: #fff; font-family: 'Playfair Display', serif; font-size: 36px; margin-bottom: 20px;">Need a 24/7 Sales Person?</h3>
+            <p style="color: #cbd5f5; font-size: 17px; line-height: 1.7; margin-bottom: 30px; max-width: 700px; margin-left: auto; margin-right: auto;">
+                Don't let time zones stop your growth. Use **BotHub AI** to engage with global buyers instantly. Professional, scalable, and always online.
+            </p>
+            <a href="https://wa-bothub.online/" target="_blank" style="
+                display: inline-block;
+                background: linear-gradient(135deg, #c9a44a, #e7cf88);
+                color: #000;
+                padding: 16px 40px;
+                border-radius: 5px;
+                font-weight: 800;
+                text-decoration: none;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            ">Visit BotHub Online</a>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <p style="color:var(--gold);font-weight:600">APD Global Trade</p>
+        <p>Elite B2B Trade Facilitation Platform</p>
+        <p style="color:#94a3b8; font-size:13px; margin:10px 0; letter-spacing:1px; text-transform:uppercase;">
+           Global Offices: New York • London • Dubai • Singapore
+        </p>
+        <p style="margin: 15px 0;">
+            <a href="/verification-process.html" style="color: var(--gold); text-decoration: none; font-size: 12px; border: 1px solid var(--gold); padding: 4px 10px; border-radius: 4px;">View Verification Standards</a>
+        </p>
+        <p>
+            📧 info@apdglobaltradehub.com<br>
+            💬 WhatsApp: +91 92664 18868
+        </p>
+        <div style="margin-top: 20px; opacity: 0.6; font-size: 11px;">
+            🔒 Security & Compliance: ISO 27001 Standard • GDPR Compliant • SOC2 Alignment
+        </div>
+    </footer>
+
+    <!-- ================= DOWNLOAD APP FLOAT ================= -->
+    <a href="/download-app.html" target="_blank" style="
 position:fixed;
 bottom:20px;
 right:20px;
@@ -293,8 +492,9 @@ font-weight:600;
 text-decoration:none;
 box-shadow:0 12px 30px rgba(0,0,0,.35);
 z-index:99999">
-📲 Download App
-</a>
+        📲 Download App
+    </a>
 
 </body>
+
 </html>
