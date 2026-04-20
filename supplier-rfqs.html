@@ -41,62 +41,214 @@ a{color:#e5e7eb;text-decoration:none;margin-left:16px}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth,onAuthStateChanged,signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import {
-  getFirestore,collection,query,where,orderBy,getDocs
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { 
+  getFirestore, collection, query, where, getDocs, getDoc, doc, updateDoc, arrayUnion, increment, orderBy, limit, onSnapshot 
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const app = initializeApp({
-  apiKey:"AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-  authDomain:"apd-globaltrade-prod.firebaseapp.com",
-  projectId:"apd-globaltrade-prod"
+  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+  authDomain: "apd-globaltrade-prod.firebaseapp.com",
+  projectId: "apd-globaltrade-prod",
+  storageBucket: "apd-globaltrade-prod.firebasestorage.app",
+  messagingSenderId: "226407312435",
+  appId: "1:226407312435:web:f8a54b1132af3899170746"
 });
 
 const auth = getAuth(app);
 const db = getFirestore(app);
 const rfqList = document.getElementById("rfqList");
 
-onAuthStateChanged(auth, async user=>{
-  if(!user){
-    location.href="/supplier-login.html";
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    location.href = "/supplier-login.html";
     return;
   }
 
-  try{
-    const snap = await getDocs(
-      query(
-        collection(db,"rfqs"),
-        where("status","==","open"),
-        orderBy("createdAt","desc")
-      )
-    );
+  console.log("RFQ Page - Starting data fetch for UID:", user.uid);
+  rfqList.innerHTML = "🔄 Fetching Verified Global Buyer RFQs... <span id='rfqTimer'>(0s)</span>";
+  
+  let startTime = Date.now();
+  let timerInterval = setInterval(() => {
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    const timerSpan = document.getElementById('rfqTimer');
+    if (timerSpan) timerSpan.innerText = `(${elapsed}s)`;
+  }, 1000);
 
-    if(snap.empty){
-      rfqList.innerHTML="<p>No RFQs available yet.</p>";
+  console.log("RFQ Page - Initializing real-time listener...");
+  rfqList.innerHTML = "🔄 Initializing Buyer Lead Stream...";
+  
+  // DIAGNOSTIC CONSOLE
+  const diag = document.createElement("div");
+  diag.style = "position:fixed; bottom:0; left:0; right:0; background:#000; color:#0f0; font-family:monospace; font-size:10px; padding:5px; height:60px; overflow-y:auto; opacity:0.8; pointer-events:none; z-index:9999;";
+  diag.id = "diagConsole";
+  document.body.appendChild(diag);
+  
+  const log = (msg) => {
+    console.log(msg);
+    const p = document.createElement("div");
+    p.innerText = `[${new Date().toLocaleTimeString()}] ${msg}`;
+    diag.prepend(p);
+  };
+
+  log("Starting auth sync...");
+
+  try {
+    // 1. Get Supplier Data (UID Based)
+    const sRef = doc(db, "suppliers", user.uid);
+    const snap = await getDoc(sRef);
+    
+    if (!snap.exists()) {
+      log("Error: Profile not found for UID " + user.uid);
+      rfqList.innerHTML = "<p>Your profile is missing. Please contact admin with ID: " + user.uid + "</p>";
       return;
     }
 
-    rfqList.innerHTML="";
-    snap.forEach(d=>{
-      const r=d.data();
-      rfqList.innerHTML+=`
-        <div class="card">
-          <h3>${r.product || "-"}</h3>
-          <p><b>Quantity:</b> ${r.quantity || "-"}</p>
-          <p><b>Destination:</b> ${r.deliveryPort || "-"}</p>
-          <p class="locked">🔒 Buyer contact locked. Upgrade to view.</p>
-        </div>`;
+    const s = snap.data();
+    const sId = user.uid;
+    const plan = s.plan || "free";
+    log(`Profile loaded. Plan: ${plan}, Status: ${s.status}`);
+
+    if (s.status !== "approved") {
+       rfqList.innerHTML = `<p>Your account status is: <b>${s.status || "pending"}</b>. Institutional verification is required for RFQ access.</p>`;
+       return;
+    }
+    
+    // 2. Real-time RFQ Listener
+    log("Connecting to RFQ stream...");
+    const q = query(collection(db, "rfqs"), limit(100)); // Limit to prevent 400 errors on large collections
+    
+    onSnapshot(q, (rfqSnap) => {
+      log(`Stream Update: ${rfqSnap.size} RFQs received.`);
+      
+      if (rfqSnap.empty) {
+        rfqList.innerHTML = "<p>No Buyer RFQs available recently.</p>";
+        return;
+      }
+
+      // 3. Sorting & Rendering
+      let rfqs = rfqSnap.docs.map(d => ({id: d.id, ...d.data()}));
+      rfqs.sort((a,b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+
+      rfqList.innerHTML = "";
+      
+      // CREDIT HEADER for Power Pass
+      if (plan === '7_day_pass') {
+        const rem = 7 - (s.unlocksUsed || 0);
+        rfqList.innerHTML += `<div style="background:#fffbeb; border:1px solid #fde68a; padding:12px; border-radius:10px; margin-bottom:20px; font-size:14px;">⚡ <b>Power Pass active:</b> ${rem} credits remaining. You can unlock 1 lead per day.</div>`;
+      }
+
+      rfqs.forEach(r => {
+        const rId = r.id;
+        const isUnlocked = s.unlockedLeads && s.unlockedLeads.includes(rId);
+        
+        const UNLIMITED_PLANS = ["trial_3m", "pro_6m", "elite_12m", "platinum", "premium", "premium_trial"];
+        const hasFullAccess = UNLIMITED_PLANS.includes(plan);
+        const isSevenDayPass = plan === "7_day_pass";
+        
+        const shouldBlur = isSevenDayPass && !isUnlocked;
+        const blurStyle = shouldBlur ? "filter: blur(5.5px); user-select: none;" : "";
+        const displayProduct = shouldBlur ? "Institutional Trade Opportunity" : (r.product || "Global RFQ");
+        const displayQty = shouldBlur ? "---" : (r.quantity || "-");
+        const displayDest = shouldBlur ? "Blurred Region" : (r.deliveryPort || r.destination || "-");
+
+        let contactHtml = "";
+        if (isUnlocked || hasFullAccess) {
+          contactHtml = `
+            <div style="background:#f0f9ff; padding:15px; border-radius:10px; border:1px solid #bae6fd; margin-top:10px;">
+              <p><b>Buyer Name:</b> ${r.company || r.buyerName || "Verified Buyer"}</p>
+              <p><b>WhatsApp:</b> <a href="https://wa.me/${(r.phone || r.whatsapp || "0").replace(/\D/g,'')}" target="_blank" style="color:#16a34a; font-weight:bold;">${r.phone || r.whatsapp || "No number"}</a></p>
+              ${r.email ? `<p><b>Email:</b> <a href="mailto:${r.email}" style="color:#2563eb; font-weight:bold;">${r.email}</a></p>` : ''}
+            </div>
+          `;
+        } else {
+          contactHtml = `
+            <div style="margin-top:15px;">
+               <p class="locked">🔒 Institutional access required to view contact.</p>
+               <button onclick="unlockRfq('${rId}', '${sId}')" style="background:#071427; color:#c9a44a; border:1px solid #c9a44a; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer; width:100%;">
+                  Unlock Contact (1 Credit)
+               </button>
+            </div>
+          `;
+        }
+
+        const dateText = r.createdAt ? new Date(r.createdAt.seconds * 1000).toLocaleDateString() : "Live Now";
+
+        const card = document.createElement("div");
+        card.className = "card";
+        card.style.border = isUnlocked ? "2px solid #16a34a" : "1px solid #e2e8f0";
+        card.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:start;">
+             <h3 style="${blurStyle} font-size:18px; margin:0;">${displayProduct}</h3>
+             <span style="font-size:11px; color:#94a3b8; background:#f1f5f9; padding:4px 8px; border-radius:4px;">${dateText}</span>
+          </div>
+          <div style="margin:12px 0;">
+            <p style="margin:4px 0; font-size:14px;"><b>Quantity:</b> <span style="${blurStyle}">${displayQty}</span></p>
+            <p style="margin:4px 0; font-size:14px;"><b>Destination:</b> <span style="${blurStyle}">${displayDest}</span></p>
+          </div>
+          ${contactHtml}
+        `;
+        rfqList.appendChild(card);
+      });
+    }, (err) => {
+      log("Stream Error: " + err.message);
+      rfqList.innerHTML = `<div style="padding:20px; color:red; border:1px solid red; border-radius:12px;"><b>Stream Interrupted:</b><br>${err.message}<br><br><small>If this is a "Missing or insufficient permissions" error, please check the Admin Panel to ensure your UID has been approved correctly.</small></div>`;
     });
 
-  }catch(e){
-    console.error(e);
-    rfqList.innerHTML="<p>Error loading RFQs.</p>";
+  } catch (e) {
+    log("Fatal Error: " + e.message);
+    rfqList.innerHTML = "<p>Critical Logic Error. Please refresh.</p>";
   }
 });
 
-document.getElementById("logout").onclick=async()=>{
+// Unlock Logic
+window.unlockRfq = async (rfqId, supplierId) => {
+  try {
+    const sRef = doc(db, "suppliers", supplierId);
+    const sSnap = await getDoc(sRef);
+    const s = sSnap.data();
+
+    // 1-Credit-Per-Day Logic for 7_day_pass
+    if (s.plan === "7_day_pass") {
+      const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+      
+      if ((s.unlocksUsed || 0) >= 7) {
+        alert("You have used all 7 credits of your Power Pass. Please upgrade for more access.");
+        return;
+      }
+      
+      if (s.lastUnlockDate === today) {
+        alert("Daily Limit Reached! You have already used 1 credit today. You can unlock another lead tomorrow.");
+        return;
+      }
+      
+      if (!confirm("Unlock this buyer contact using 1 credit? (1 used per day)")) return;
+      
+      await updateDoc(sRef, {
+        unlockedLeads: arrayUnion(rfqId),
+        unlocksUsed: increment(1),
+        lastUnlockDate: today
+      });
+    } else {
+      // Standard local credit logic (if any) or shared credits
+      if (!confirm("Unlock this buyer contact using 1 credit?")) return;
+      await updateDoc(sRef, {
+        unlockedLeads: arrayUnion(rfqId),
+        unlocksUsed: increment(1)
+      });
+    }
+
+    alert("Buyer Contact Unlocked! ✅");
+    location.reload();
+  } catch (e) {
+    console.error(e);
+    alert("Error unlocking contact. Please try again.");
+  }
+};
+
+document.getElementById("logout").onclick = async () => {
   await signOut(auth);
-  location.href="/supplier-login.html";
+  location.href = "/supplier-login.html";
 };
 </script>
 

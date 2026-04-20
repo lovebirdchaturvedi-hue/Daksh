@@ -1,275 +1,816 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Elite Trade Membership | APD Global Trade</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Elite Trade Membership | APD Global Trade</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/sales-bot.css">
+  <script src="/assets/js/sales-bot.js" type="module"></script>
 
-<style>
-body{
-  margin:0;
-  font-family:'Inter',sans-serif;
-  background:#0a0f1c;
-  color:#e5e7eb;
-}
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #0a0f1c;
+      color: #e5e7eb;
+    }
 
-header{
-  background:#071427;
-  padding:18px 40px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid rgba(212,175,55,.15);
-}
+    header {
+      background: #071427;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(212, 175, 55, .15);
+    }
 
-.logo{
-  font-family:'Playfair Display',serif;
-  color:#d4af37;
-  font-size:20px;
-}
+    .logo {
+      font-family: 'Playfair Display', serif;
+      color: #d4af37;
+      font-size: 20px;
+    }
 
-nav a{
-  color:#cbd5e1;
-  text-decoration:none;
-  margin-left:25px;
-  font-size:14px;
-}
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 14px;
+    }
 
-nav a:hover{color:#d4af37}
+    nav a:hover {
+      color: #d4af37
+    }
 
-.hero{
-  padding:140px 20px;
-  text-align:center;
-  background:linear-gradient(180deg,#071427,#0a0f1c);
-  border-bottom:1px solid rgba(212,175,55,.15);
-}
+    .hero {
+      padding: 140px 20px;
+      text-align: center;
+      background: linear-gradient(180deg, #071427, #0a0f1c);
+      border-bottom: 1px solid rgba(212, 175, 55, .15);
+    }
 
-.hero h1{
-  font-family:'Playfair Display',serif;
-  font-size:52px;
-  background:linear-gradient(90deg,#d4af37,#facc15,#d4af37);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  margin-bottom:30px;
-}
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px;
+      background: linear-gradient(90deg, #d4af37, #facc15, #d4af37);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 30px;
+    }
 
-.hero p{
-  max-width:850px;
-  margin:auto;
-  font-size:20px;
-  color:#9ca3af;
-  line-height:1.8;
-}
+    .hero p {
+      max-width: 850px;
+      margin: auto;
+      font-size: 20px;
+      color: #9ca3af;
+      line-height: 1.8;
+    }
 
-.container{
-  max-width:1200px;
-  margin:120px auto;
-  padding:0 20px;
-}
+    .container {
+      max-width: 1200px;
+      margin: 120px auto;
+      padding: 0 20px;
+    }
 
-.section-title{
-  text-align:center;
-  font-size:34px;
-  margin-bottom:10px;
-  font-weight:600;
-}
+    .section-title {
+      text-align: center;
+      font-size: 34px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
 
-.subtitle{
-  text-align:center;
-  color:#9ca3af;
-  margin-bottom:70px;
-}
+    .subtitle {
+      text-align: center;
+      color: #9ca3af;
+      margin-bottom: 70px;
+    }
 
-.plans{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
-  gap:40px;
-}
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+    }
 
-.plan{
-  background:#111827;
-  padding:60px 45px;
-  border-radius:30px;
-  border:1px solid rgba(212,175,55,0.15);
-  transition:.4s ease;
-}
+    .plan {
+      background: #111827;
+      padding: 60px 45px;
+      border-radius: 30px;
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      transition: .4s ease;
+    }
 
-.plan:hover{
-  transform:translateY(-12px);
-  border:1px solid #d4af37;
-  box-shadow:0 30px 80px rgba(212,175,55,0.25);
-}
+    .plan:hover {
+      transform: translateY(-12px);
+      border: 1px solid #d4af37;
+      box-shadow: 0 30px 80px rgba(212, 175, 55, 0.25);
+    }
 
-.highlight{
-  border:2px solid #d4af37;
-}
+    .highlight {
+      border: 2px solid #d4af37;
+    }
 
-.badge{
-  display:inline-block;
-  background:#d4af37;
-  color:#000;
-  padding:6px 16px;
-  font-size:12px;
-  border-radius:999px;
-  font-weight:700;
-  margin-bottom:20px;
-}
+    .badge {
+      display: inline-block;
+      background: #d4af37;
+      color: #000;
+      padding: 6px 16px;
+      font-size: 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
 
-.plan h3{font-size:26px;margin-bottom:15px}
-.old-price{text-decoration:line-through;color:#6b7280}
-.price{font-size:42px;font-weight:700;margin:15px 0}
+    .plan h3 {
+      font-size: 26px;
+      margin-bottom: 15px
+    }
 
-ul{list-style:none;padding:0;margin:30px 0}
-ul li{margin:16px 0;font-size:15px;color:#cbd5e1}
+    .old-price {
+      text-decoration: line-through;
+      color: #6b7280
+    }
 
-.btn{
-  width:100%;
-  padding:18px;
-  border-radius:999px;
-  border:none;
-  font-weight:700;
-  font-size:16px;
-  cursor:pointer;
-  background:linear-gradient(90deg,#d4af37,#facc15);
-  color:#000;
-}
+    .price {
+      font-size: 42px;
+      font-weight: 700;
+      margin: 15px 0
+    }
 
-footer{
-  text-align:center;
-  padding:80px 20px;
-  color:#6b7280;
-  border-top:1px solid rgba(255,255,255,0.05);
-}
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 30px 0
+    }
 
-footer a{color:#d4af37;text-decoration:none}
-</style>
+    ul li {
+      margin: 16px 0;
+      font-size: 15px;
+      color: #cbd5e1
+    }
+
+    .btn {
+      width: 100%;
+      padding: 18px;
+      border-radius: 999px;
+      border: none;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      background: linear-gradient(90deg, #d4af37, #facc15);
+      color: #000;
+    }
+
+    footer {
+      text-align: center;
+      padding: 80px 20px;
+      color: #6b7280;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    footer a {
+      color: #d4af37;
+      text-decoration: none
+    }
+
+    /* FLASH SALE STYLES */
+    .flash-sale-bar {
+        background: linear-gradient(90deg, #ef4444, #f59e0b, #ef4444);
+        background-size: 200% auto;
+        animation: shimmer 3s linear infinite;
+        color: white;
+        text-align: center;
+        padding: 12px;
+        font-weight: 800;
+        font-size: 14px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        position: sticky;
+        top: 0;
+        z-index: 10002;
+    }
+
+    .countdown-box {
+        display: inline-flex;
+        gap: 10px;
+        margin-left: 15px;
+        font-family: monospace;
+        font-size: 18px;
+    }
+
+    @keyframes shimmer {
+        to { background-position: 200% center; }
+    }
+
+    .guide-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin-bottom: 80px;
+    }
+
+    .guide-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 30px;
+        border-radius: 20px;
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    .guide-card:hover {
+        background: rgba(212, 175, 55, 0.05);
+        border-color: #d4af37;
+        transform: translateY(-5px);
+    }
+
+    .guide-icon {
+        font-size: 32px;
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    .guide-card h4 {
+        color: #d4af37;
+        margin-bottom: 10px;
+        font-size: 18px;
+    }
+
+    .guide-card p {
+        font-size: 14px;
+        color: #94a3b8;
+        line-height: 1.5;
+    }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EXRC4SWZ71"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-EXRC4SWZ71');
+  </script>
 </head>
 
 <body>
-
-<header>
-  <div class="logo">APD Global Trade</div>
-  <nav>
-    <a href="/">Home</a>
-    <a href="/buyer-rfqs.html">Buyer RFQs</a>
-    <a href="/contact.html">Contact</a>
-  </nav>
-</header>
-
-<section class="hero">
-  <h1>Elite Global Trade Intelligence Access</h1>
-  <p>
-    Access verified international agro buyers, live government tenders,
-    structured country demand intelligence, and direct buyer introductions.
-    Built exclusively for serious exporters ready to scale globally.
-  </p>
-</section>
-
-<div class="container">
-
-<h2 class="section-title">International Membership Plans</h2>
-<p class="subtitle">High-Level Access For Verified Exporters</p>
-
-<div class="plans">
-
-<!-- 6 MONTH PLAN -->
-<div class="plan highlight">
-  <div class="badge">FOUNDERS ACCESS</div>
-  <h3>Global Professional – 6 Months</h3>
-  <div class="old-price">$3,500</div>
-  <div class="price">$2,000</div>
-  <ul>
-    <li>✔ Verified Global Buyer Database Access</li>
-    <li>✔ Direct Buyer Contact Unlock</li>
-    <li>✔ Weekly Live RFQ Alerts</li>
-    <li>✔ International Government Tender Alerts</li>
-    <li>✔ Country-Wise Demand Analysis Reports</li>
-    <li>✔ Buyer Volume & Payment Verification</li>
-    <li>✔ WhatsApp Priority Trade Alerts</li>
-    <li>✔ Featured Supplier Rotation</li>
-    <li>✔ Email & Phone Support</li>
-  </ul>
-  <button class="btn" onclick="payNow('Global Professional – 6 Months',2000)">Apply Now</button>
-</div>
-
-<!-- 12 MONTH PLAN -->
-<div class="plan">
-  <div class="badge">ELITE LEVEL</div>
-  <h3>Global Elite – 12 Months</h3>
-  <div class="old-price">$6,500</div>
-  <div class="price">$3,500</div>
-  <ul>
-    <li>✔ Everything in Professional Plan</li>
-    <li>✔ Dedicated Trade Intelligence Manager</li>
-    <li>✔ Personalized Buyer Matchmaking</li>
-    <li>✔ Warm Direct Buyer Introductions</li>
-    <li>✔ Monthly Premium Grain Market Report</li>
-    <li>✔ Government Procurement Notifications</li>
-    <li>✔ Private Exporter Network Access</li>
-    <li>✔ Strategic Trade Consultation (Quarterly)</li>
-    <li>✔ Premium Verified Supplier Badge</li>
-    <li>✔ Priority Dispute Handling</li>
-  </ul>
-  <button class="btn" onclick="payNow('Global Elite – 12 Months',3500)">Apply Now</button>
-</div>
-
-</div>
-
-</div>
-
-<footer>
-© 2026 APD Global Trade | <a href="#">Terms</a> | <a href="#">Privacy</a>
-</footer>
-
-<!-- PAYPAL MODAL -->
-<div id="paypalModal" style="
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.85);
-align-items:center;
-justify-content:center;
-z-index:9999;">
-  <div style="background:#111827;color:#fff;padding:40px;border-radius:20px;width:90%;max-width:420px">
-    <h3>Complete Payment</h3>
-    <div id="paypalButtons"></div>
-    <br>
-    <button onclick="closeModal()">Cancel</button>
+  <div style="background: #020617; border-bottom: 1px solid rgba(212,175,55,0.4); padding: 8px 0; overflow: hidden; position: sticky; top: 0; z-index: 200000; height: 32px; display: flex; align-items: center;">
+    <div class="ticker-wrap" style="width: 100%; white-space: nowrap;">
+      <div style="display: inline-block; padding-right: 100%; animation: tickerScroll 180s linear infinite; color: var(--gold); font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;">
+        <span style="margin-right: 50px;">🌍 REACH: 541+ New Verified Buyers added in the last 24h</span>
+        <span style="margin-right: 50px;">🇮🇳 RAJASTHAN: S.K. EXPORTS just finalized 5,000 MT ICUMSA Sugar contract via APD Hub</span>
+        <span style="margin-right: 50px;">🇹🇭 THAILAND: Strategic Govt Tender secured for 20,000 MT Refined Oil</span>
+        <span style="margin-right: 50px;">🇦🇪 DUBAI: Institutional Buyer #8291 just matched with verified Indian Spices exporter</span>
+        <span style="margin-right: 50px;">🇻🇳 VIETNAM: Bulk RFQ for 2,000 MT Sunflower Oil matched 3 suppliers</span>
+        <span style="margin-right: 50px;">🇮🇳 GUJARAT: Patidar Trading Co. cleared verification for 10 Container Cumin order</span>
+        <span style="margin-right: 50px;">🇪🇬 EGYPT: Sourcing 15,000 MT Non-Basmati Rice - 4 Suppliers shortlisted</span>
+        <span style="margin-right: 50px;">🇮🇳 PUNJAB: Gill Agro-Industry secured $140,000 Wheat Export Contract</span>
+        <span style="margin-right: 50px;">🇸🇦 SAUDI: Govt Food Security Program matching with Indian Pulses exporters</span>
+        <span style="margin-right: 50px;">🇮🇳 TAMIL NADU: Coconut Carbonized Coal bulk order cleared for South Korea</span>
+        <span style="margin-right: 50px;">🌍 UPDATE: 12,892+ Verified Monthly Trade Connections facilitate daily</span>
+        <span style="margin-right: 50px;">🇮🇳 MAHARASHTRA: Onion Grade A export permit cleared for Colombo market</span>
+        <span style="margin-right: 50px;">🇲🇾 MALAYSIA: Govt agency sourcing 1,000MT Refined Palm Oil via APD Platform</span>
+        <span style="margin-right: 50px;">🇮🇳 HARYANA: Jindal Seeds secured exclusive distribution for Kenya market</span>
+        <span style="margin-right: 50px;">🇴🇲 OMAN: Construction conglomerate sourcing Bulk Food Grain for labor camps</span>
+        <span style="margin-right: 50px;">🇮🇳 ANDHRA PRADESH: Red Chillies bulk order (50MT) finalized for US Buyer</span>
+        <span style="margin-right: 50px;">🇰🇼 KUWAIT: Supermarket chain matched with 12 Small-batch Spices suppliers</span>
+        <span style="margin-right: 50px;">🇮🇳 KARNATAKA: Maize export contract (2000 MT) cleared for Vietnam port</span>
+        <span style="margin-right: 50px;">🇧🇩 BANGLADESH: Sourcing Bulk Soy Meal - 5 Indian exporters currently bidding</span>
+        <span style="margin-right: 50px;">🇮🇳 UTTAR PRADESH: Frozen Buffalo Meat export audit cleared for Vietnam market</span>
+        <span style="margin-right: 50px;">🇶🇦 QATAR: Logistics group matching with Indian construction material suppliers</span>
+        <span style="margin-right: 50px;">🇮🇳 MADHYA PRADESH: Soybean Meal bulk booking released for SEA markets</span>
+        <span style="margin-right: 50px;">🇮🇩 INDONESIA: Buyer sourcing Bulk Cassava Chips - Finalizing with Kerala supplier</span>
+        <span style="margin-right: 50px;">🇮🇳 KERALA: Sourcing Spices for Berlin-based Gourmet distributor</span>
+        <span style="margin-right: 50px;">🇸🇬 SINGAPORE: Port authority matching with APD Verified Bunker suppliers</span>
+        <span style="margin-right: 50px;">🇮🇳 BIHAR: Fox Nuts (Makhana) export potential verified for Japanese market</span>
+        <span style="margin-right: 50px;">🇿🇦 SOUTH AFRICA: Canned food Importer matching with APD processing units</span>
+        <span style="margin-right: 50px;">🇮🇳 ODISHA: Cashew Nut bulk export (Container load) cleared for Europe</span>
+        <span style="margin-right: 50px;">🇳🇬 NIGERIA: Govt matching with Indian Farm Machinery manufacturers</span>
+        <span style="margin-right: 50px;">🇮🇳 TELANGANA: Cotton Ginning unit matched with Bangladesh Spinning mill</span>
+        <span style="margin-right: 50px;">🇵🇭 PHILIPPINES: Sourcing Bulk Yellow Maize for poultry feed sector</span>
+        <span style="margin-right: 50px;">🇮🇳 WEST BENGAL: Jute Bag contract finalized for Italian Sustainable brand</span>
+        <span style="margin-right: 50px;">🇦🇿 AZERBAIJAN: Construction wing matching with Indian Steel exporters</span>
+        <span style="margin-right: 50px;">🇮🇳 ASSAM: Tea Estate matched with Moroccan Mint Tea distributor</span>
+        <span style="margin-right: 50px;">🇸🇮 SLOVENIA: Wood logging firm matching with Indian furniture manufacturers</span>
+        <span style="margin-right: 50px;">🇮🇳 HIMACHAL: Apple Concentrate production matched with UK juice brand</span>
+        <span style="margin-right: 50px;">🇰🇪 KENYA: Agro-chemical agency matching with APD verified manufacturers</span>
+        <span style="margin-right: 50px;">🇮🇳 CHANDIGARH: Pharma distribution unit matched with CIS buyer network</span>
+        <span style="margin-right: 50px;">🇺🇿 UZBEKISTAN: Govt trade mission matching with Indian Textile exporters</span>
+        <span style="margin-right: 50px;">🇮🇳 JAMMU: Saffron export authentication cleared for Premium Qatar market</span>
+        <span style="margin-right: 50px;">🇬🇭 GHANA: Gold mineral group matching with Indian refining partners</span>
+        <span style="margin-right: 50px;">🇮🇳 GOA: Frozen Seafood export container cleared for Barcelona port</span>
+        <span style="margin-right: 50px;">🇲🇽 MEXICO: Auto-parts group matching with Indian casting foundries</span>
+        <span style="margin-right: 50px;">🇮🇳 NAGALAND: Organic Ginger export potential verified for North American market</span>
+        <span style="margin-right: 50px;">🇷🇴 ROMANIA: IT Hardware chain matching with Indian component exporters</span>
+        <span style="margin-right: 50px;">🇮🇳 SIKKIM: Cardamom bulk auction matched with global luxury spice brands</span>
+        <span style="margin-right: 50px;">🇪🇹 ETHIOPIA: Coffee co-op matching with Indian roasting machinery</span>
+        <span style="margin-right: 50px;">🇮🇳 TRIPURA: Bamboo board contract finalized for Eco-friendly Housing project</span>
+        <span style="margin-right: 50px;">🇳🇱 NETHERLANDS: Logistics hub matching with Indian Freight forwarders</span>
+        <span style="margin-right: 50px;">🇮🇳 MANIPUR: Exotic Fruit processing unit matched with Asian snack brand</span>
+        <span style="margin-right: 50px;">✅ APD SUCCESS: Over 2,400+ Test Drive accounts activated this month!</span>
+      </div>
+    </div>
   </div>
-</div>
+  <style>
+    @keyframes tickerScroll {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
 
-<script src="https://www.paypal.com/sdk/js?client-id=BAAldzZ21dj_YYD4j04pNHoiWzy4qWo5kfDt50n18qdQPFqeh6CaeI3sw7t7irYftnmVKlL4C4wLhmr7OA&currency=USD"></script>
+  <header>
+    <div class="logo" style="display: flex; flex-direction: column; line-height: 1; text-align: left;">
+      <span style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 22px; letter-spacing: 1px;">APD <span style="color: var(--gold);">Global</span> Trade</span>
+      <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-top: 5px; font-weight: 700;">Trade Smart. Scale Fast.</span>
+    </div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/membership.html">Membership</a>
+      <a href="/verification-process.html" style="color:var(--gold);">Verification</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </header>
 
-<script>
-function payNow(planName, usdAmount){
-  document.getElementById("paypalModal").style.display="flex";
-  document.getElementById("paypalButtons").innerHTML="Loading PayPal…";
+  <section class="hero">
+    <h1>Elite Global Trade Intelligence Access</h1>
+    <p>
+      Access verified international agro buyers, live government tenders,
+      structured country demand intelligence, and direct buyer introductions.
+      Built exclusively for serious exporters ready to scale globally.
+    </p>
+  </section>
 
-  setTimeout(function(){
-    paypal.Buttons({
-      createOrder:function(data, actions){
-        return actions.order.create({
-          purchase_units:[{
-            description: planName + " – APD Global Trade",
-            amount:{ currency_code:"USD", value: usdAmount.toFixed(2) }
-          }]
-        });
-      },
-      onApprove:function(data, actions){
-        return actions.order.capture().then(function(){
-          window.location.href="/document-upload.html";
-        });
-      }
-    }).render("#paypalButtons");
-  },400);
-}
+  <div class="container">
 
-function closeModal(){
-  document.getElementById("paypalModal").style.display="none";
-}
-</script>
+    <h2 class="section-title">Institutional Membership Plans</h2>
+    <p class="subtitle">Secure your export corridor with verified global intelligence.</p>
+
+    <!-- LIVE TRADE FLOOR (CONVERSION BOOSTER) -->
+    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.3); border-radius: 24px; padding: 40px; margin-bottom: 80px; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: -10px; right: 20px; background: #ef4444; color: white; padding: 5px 15px; border-radius: 5px; font-size: 11px; font-weight: 800; letter-spacing: 1px; animation: pingPulse 2s infinite;">● LIVE TRADE ENGINE ACTIVE</div>
+        
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 28px; color: var(--gold); margin-bottom: 10px; text-align: left;">Inside the Marketplace Today</h3>
+        <p style="color: #94a3b8; font-size: 15px; margin-bottom: 30px; text-align: left;">Showing recently verified RFQs from our 5M+ Buyer Database (Contact info blurred for security).</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <!-- TRIAL LEAD -->
+            <div style="background: rgba(15, 23, 42, 0.8); padding: 25px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05); position: relative;">
+                <div style="position: absolute; top: 15px; right: 15px; background: rgba(201, 164, 74, 0.1); border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 800;">TEST DRIVE LEVEL</div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <span style="font-size: 12px; color: #facc15; font-weight: 700;">🇻🇳 VIETNAM BUYER</span>
+                </div>
+                <div style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">500 MT Refined Soybean Oil</div>
+                <div style="font-size: 13px; color: #94a3b8; margin-bottom: 15px;">Spot requirement. Payment: LC. Port: Haiphong.</div>
+                <div style="filter: blur(4px); opacity: 0.3; pointer-events: none; user-select: none; font-family: monospace; font-size: 14px;">+84 28 38XX XXXX / trade@corp-vn.com</div>
+            </div>
+            <!-- PREMIUM LEAD -->
+            <div style="background: rgba(15, 23, 42, 0.8); padding: 25px; border-radius: 15px; border: 1px solid var(--gold); position: relative; box-shadow: 0 0 20px rgba(201, 164, 74, 0.1);">
+                <div style="position: absolute; top: 15px; right: 15px; background: var(--gold); color: black; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 800;">PREMIUM LEVEL</div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <span style="font-size: 12px; color: #facc15; font-weight: 700;">🇦🇪 UAE GOVT TENDER</span>
+                </div>
+                <div style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">10,000 MT Basmati Rice (1121)</div>
+                <div style="font-size: 13px; color: #94a3b8; margin-bottom: 15px;">Long-term monthly supply. Institutional Audit Required.</div>
+                <div style="filter: blur(4px); opacity: 0.3; pointer-events: none; user-select: none; font-family: monospace; font-size: 14px;">+971 4 2XX XXXX / tender@uae-gov.ae</div>
+            </div>
+            <!-- INSTITUTIONAL LEAD -->
+            <div style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(11, 29, 54, 0.9)); padding: 25px; border-radius: 15px; border: 1px solid #facc15; position: relative;">
+                <div style="position: absolute; top: 15px; right: 15px; background: #ef4444; color: white; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 800;">ELITE TENDER</div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <span style="font-size: 12px; color: #facc15; font-weight: 700;">🇲🇾 MALAYSIA GOVT</span>
+                </div>
+                <div style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">50,000 MT Refined Sunflower Oil</div>
+                <div style="font-size: 13px; color: #94a3b8; margin-bottom: 15px;">Annual Strategic Supply Contract. Multi-Port Delivery.</div>
+                <div style="filter: blur(4px); opacity: 0.3; pointer-events: none; user-select: none; font-family: monospace; font-size: 14px;">+60 3 2XX XXXX / logistics@agro-my.gov</div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 30px; text-align: center;">
+            <a href="https://wa.me/919266418868?text=I%20want%20to%20verify%20active%20buyers%20for%20my%20product%20category." target="_blank" style="display: inline-block; padding: 12px 25px; border: 1px solid #d4af37; border-radius: 5px; color: #d4af37; text-decoration: none; font-weight: 700; font-size: 14px;">🔎 CHECK ACTIVE BUYERS FOR MY PRODUCT</a>
+        </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 60px;">
+        <p style="font-size: 0.85rem; color: #facc15; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;">Step 1: Select Your Currency</p>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
+            <span id="label-usd" style="font-weight: 700; color: var(--gold);">USD</span>
+            <div style="
+                width: 60px;
+                height: 30px;
+                background: #1e293b;
+                border-radius: 30px;
+                position: relative;
+                cursor: pointer;
+                border: 2px solid var(--gold);
+                box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            " onclick="toggleCurrency()">
+                <div id="toggle-knob" style="
+                    width: 22px;
+                    height: 22px;
+                    background: var(--gold);
+                    border-radius: 50%;
+                    position: absolute;
+                    top: 2px;
+                    left: 2px;
+                    transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                "></div>
+            </div>
+            <span id="label-inr" style="font-weight: 400; opacity: 0.6;">INR (India)</span>
+        </div>
+    </div>
+
+    <!-- PAYMENT GUIDANCE SECTION -->
+    <div class="guide-container">
+        <div class="guide-card">
+            <span class="guide-icon">💱</span>
+            <h4>1. Toggle to INR</h4>
+            <p>Switch the currency above to <b>INR</b> to unlock the domestic Scan & Pay option.</p>
+        </div>
+        <div class="guide-card">
+            <span class="guide-icon">🤳</span>
+            <h4>2. Scan & Pay</h4>
+            <p>Select your plan, scan the official QR code, and complete payment via any UPI app.</p>
+        </div>
+        <div class="guide-card">
+            <span class="guide-icon">✅</span>
+            <h4>3. Submit Email</h4>
+            <p>Send your screenshot & email on WhatsApp to activate your 5M+ Buyer Access.</p>
+        </div>
+    </div>
+
+    <div class="plans" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+
+      <!-- 7-DAY PASS -->
+      <div class="plan" style="border-style: dashed; opacity: 0.9;">
+        <div class="badge" style="background: #9ca3af; color: #000;">EXPORTER TEST DRIVE</div>
+        <h3>7-Day Power Pass</h3>
+        <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 15px;">Lead Access Verification</p>
+        <div class="price" id="price-pass">$59</div>
+        <p style="margin-top: 15px; color: #9ca3af;">Applying 7 Credits (7 Premium Bulk Buyers for your commodity)</p>
+        <div style="text-align: left; margin: 30px 0; font-size: 15px; color: #cbd5e1;">
+            <p><span style="color:#c9a44a">🔒</span> Unlock 7 Premium Bulk Buyers</p>
+            <p><span style="color:#c9a44a">✨</span> Full Search Capability</p>
+            <p><span style="color:#c9a44a">✨</span> Detailed RFQ Specs</p>
+            <p><span style="color:#c9a44a">✨</span> WhatsApp Support Assistant</p>
+            <p><span style="color:#c9a44a">✨</span> Institutional Data Feed</p>
+            <p><span style="color:#c9a44a">✨</span> Valid for 7 Full Days</p>
+        </div>
+        <button class="btn" style="background: #9ca3af; color: #000;" onclick="initiatePayment('7-Day Power Pass', 59, 4999)">Start Test Drive</button>
+      </div>
+
+      <div class="plan highlight">
+        <div class="badge">INSTITUTIONAL ACCESS</div>
+        <h3>3-Month Premium Trial</h3>
+        <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 15px;">Full Access Gateway</p>
+        <div class="price" id="price-trial">$499</div>
+        <p style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 30px;" id="tax-trial">Inclusive of Export Verification</p>
+        <ul>
+          <li style="color: #facc15; font-weight: 700;">💎 Get Access to 5 Million+ Verified Buyers</li>
+          <li>✨ Unlimited Verified Buyer RFQs</li>
+          <li>✨ Full Buyer Contact Database</li>
+          <li>✨ Daily Verified RFQ Alerts (Direct)</li>
+          <li>✨ Professional KYC Certification Badge</li>
+          <li>✨ Dedicated B2B Relationship Manager</li>
+        </ul>
+        <button class="btn" onclick="initiatePayment('3-Month Premium Trial', 499, 59000)">Apply for Premium Trial</button>
+      </div>
+
+      <!-- 6 MONTH PLAN -->
+      <div class="plan">
+        <div class="badge">ESTABLISHED EXPORTERS</div>
+        <h3>6-Month Elite Professional</h3>
+        <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 15px;">Volume Growth Package</p>
+        <div class="price" id="price-pro">$2,000</div>
+        <p style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 30px;" id="tax-pro">Inclusive of 18% GST</p>
+        <ul>
+          <li>✨ Everything in 3-Month Trial</li>
+          <li>✨ International Government Tender Alerts</li>
+          <li>✨ Country-Wise Demand Analysis Reports</li>
+          <li>✨ Buyer Volume & Payment Verification</li>
+          <li>✨ WhatsApp Priority Trade Alerts</li>
+          <li>✨ Featured Supplier Rotation Service</li>
+        </ul>
+        <button class="btn" onclick="initiatePayment('6-Month Elite Professional', 2000, 169000)">Apply for Elite Professional</button>
+      </div>
+
+      <!-- 12 MONTH PLAN -->
+      <div class="plan" style="background: linear-gradient(135deg, #111827, #1e293b);">
+        <div class="badge">CORPORATE TITAN</div>
+        <h3>12-Month Institutional Elite</h3>
+        <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 15px;">Maximum Authority Package</p>
+        <div class="price" id="price-elite">$3,500</div>
+        <p style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 30px;" id="tax-elite">Inclusive of 18% GST</p>
+        <ul>
+          <li>✨ Everything in Professional Plan</li>
+          <li>✨ Dedicated Trade Intelligence Manager</li>
+          <li>✨ Personalized Buyer Matchmaking</li>
+          <li>✨ Warm Direct Buyer Introductions</li>
+          <li>✨ Strategic Trade Consultation (Quarterly)</li>
+          <li>✨ Premium Verified Supplier Badge</li>
+        </ul>
+        <button class="btn" onclick="initiatePayment('12-Month Institutional Elite', 3500, 299000)">Secure Annual Access</button>
+      </div>
+
+    </div>
+
+    <!-- TRUST SIGNALS -->
+    <div style="margin-top: 80px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px;">
+      <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; opacity: 0.7;">
+        <div style="color: #94a3b8; font-size: 14px; display:flex; align-items:center; gap:8px;">
+          <span style="font-size:20px;">🛡️</span> 100% Verified Data Guarantee
+        </div>
+        <div style="color: #94a3b8; font-size: 14px; display:flex; align-items:center; gap:8px;">
+          <span style="font-size:20px;">🔒</span> SSL Encrypted Payments
+        </div>
+        <div style="color: #94a3b8; font-size: 14px; display:flex; align-items:center; gap:8px;">
+          <span style="font-size:20px;">💳</span> PayPal Verified Business
+        </div>
+      </div>
+      <p style="margin-top: 30px; font-size: 12px; color: #4b5563; max-width: 600px; margin-left: auto; margin-right: auto;">
+        *All memberships are subject to KYC approval. Access is granted immediately upon verification of credentials.
+      </p>
+    </div>
+
+  </div>
+
+  <footer>
+    © 2026 APD Global Trade | <a href="#">Terms</a> | <a href="#">Privacy</a>
+  </footer>
+
+  <!-- PREMIUM PAYMENT MODAL -->
+  <div id="paymentModal" style="
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(2, 6, 23, 0.98);
+    backdrop-filter: blur(20px);
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    padding: 20px;">
+    
+    <div style="background:#111827; color:#fff; padding:50px; border-radius:30px; width:100%; max-width:500px; border: 1px solid var(--gold); position: relative; box-shadow: 0 40px 100px rgba(0,0,0,0.5);">
+      
+      <div onclick="closeModal()" style="position: absolute; top: 25px; right: 25px; cursor: pointer; color: #94a3b8; font-size: 24px;">✕</div>
+      
+      <h3 id="modalPlanName" style="font-family: 'Playfair Display', serif; font-size: 28px; color: var(--gold); margin-bottom: 10px;">Complete Your Investment</h3>
+      <p style="color: #94a3b8; margin-bottom: 40px;">Select your preferred institutional payment channel.</p>
+      
+      <div style="display: flex; background: #1e293b; padding: 5px; border-radius: 12px; margin-bottom: 30px;">
+          <div id="tab-paypal" onclick="switchPayment('paypal')" style="flex: 1; text-align: center; padding: 12px; border-radius: 8px; cursor: pointer; background: var(--gold); color: black; font-weight: 700;">PayPal</div>
+          <div id="tab-qr" onclick="switchPayment('qr')" style="flex: 1; text-align: center; padding: 12px; border-radius: 8px; cursor: pointer; color: #94a3b8; font-weight: 600;">Scan & Pay (UPI)</div>
+      </div>
+
+      <!-- PAYPAL SECTION -->
+      <div id="paypalSection">
+          <div style="font-size: 2rem; font-weight: 800; margin-bottom: 20px;" id="modalPriceUSD">$499</div>
+          <div id="paypalButtons"></div>
+          <p style="font-size: 0.9rem; color: #cbd5e1; margin-top: 20px; border-left: 3px solid var(--gold); padding-left: 15px;">
+            <b>NOTE:</b> For USD, select PayPal and make a quick payment. If you prefer a direct link or have issues, message us on WhatsApp immediately.
+          </p>
+      </div>
+
+      <!-- QR & ALTERNATIVE PAYPAL SECTION -->
+      <div id="qrSection" style="display: none; text-align: center;">
+          <div style="font-size: 2rem; font-weight: 800; margin-bottom: 25px; color: var(--gold);" id="modalPriceINR">₹59,000</div>
+          
+          <div style="background: white; padding: 10px; display: inline-block; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+              <img src="/assets/img/payment_qr.jpg" alt="Institutional QR Code" style="width: 240px; height: auto; display: block; border-radius: 8px;">
+          </div>
+          
+          <p style="font-size: 0.95rem; color: #cbd5e1; margin-bottom: 20px;"><b>Payable to: APD GLOBAL TRADE</b><br>Accepting Google Pay, PhonePe, Paytm & BHIM.</p>
+          
+          <div style="background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; padding: 15px; border-radius: 12px; margin-bottom: 25px; text-align: left;">
+            <p style="font-size: 0.9rem; color: #fff; margin: 0;">
+                <b>🚀 NEXT STEPS:</b><br>
+                1. Select INR & Scan QR Code.<br>
+                2. Make the payment.<br>
+                3. Send your <b>Email & Screenshot</b> on WhatsApp.<br>
+                4. Grab your buyers immediately!
+            </p>
+          </div>
+
+          <button class="btn" style="background: #22c55e; color: white; margin-bottom: 35px;" onclick="window.location.href='https://wa.me/919266418868?text=I%20have%20made%20the%20UPI%20payment.%20My%20email%20is:[YOUR_EMAIL].%20Here%20is%20the%20screenshot.'">Verify & Grab Buyers via WhatsApp</button>
+          
+          <!-- ALTERNATIVE PAYPAL FOR INR PLANS -->
+          <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; margin-top: 10px;">
+              <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px;">Alternative: Pay USD Equivalent via PayPal</p>
+              <div id="paypalButtonsINR"></div>
+              <p style="font-size: 0.75rem; color: #64748b; margin-top: 12px;">Amount: <span id="modalPriceUSDEquiv">$715.00</span> (Includes 18% Institutional GST)</p>
+          </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=ASJK-aoiFIIKpTgmRComyW1w0VYUbexsGzzzQnJqZGcKy_6yE3r-Y0tIRXXHTqHH1AVd5IXzFBNtWte4&currency=USD"></script>
+
+  <script>
+    let currentCurrency = 'USD';
+    let selectedPlan = { name: '', usd: 0, inr: 0 };
+
+    function toggleCurrency() {
+        currentCurrency = currentCurrency === 'USD' ? 'INR' : 'USD';
+        const knob = document.getElementById('toggle-knob');
+        const lUSD = document.getElementById('label-usd');
+        const lINR = document.getElementById('label-inr');
+        
+        if (currentCurrency === 'INR') {
+            knob.style.left = '32px';
+            lINR.style.opacity = '1';
+            lINR.style.fontWeight = '700';
+            lINR.style.color = 'var(--gold)';
+            lUSD.style.opacity = '0.6';
+            lUSD.style.fontWeight = '400';
+            lUSD.style.color = '#fff';
+            
+            // Update Prices
+            document.getElementById('price-pass').innerText = '₹4,999';
+            document.getElementById('price-trial').innerHTML = '₹59,000';
+            document.getElementById('price-pro').innerText = '₹1,69,000';
+            document.getElementById('price-elite').innerText = '₹2,99,000';
+
+            document.getElementById('tax-pass').innerText = '7 Premium Bulk Buyer Leads (1 Per Day)';
+            document.getElementById('tax-trial').innerText = 'Inclusive of 18% GST & Verification';
+            document.getElementById('tax-pro').innerText = 'Inclusive of 18% GST';
+            document.getElementById('tax-elite').innerText = 'Inclusive of 18% GST';
+        } else {
+            knob.style.left = '2px';
+            lUSD.style.opacity = '1';
+            lUSD.style.fontWeight = '700';
+            lUSD.style.color = 'var(--gold)';
+            lINR.style.opacity = '0.6';
+            lINR.style.fontWeight = '400';
+            lINR.style.color = '#fff';
+            
+            // Update Prices
+            document.getElementById('price-pass').innerText = '$59';
+            document.getElementById('price-trial').innerHTML = '$499';
+            document.getElementById('price-pro').innerText = '$2,000';
+            document.getElementById('price-elite').innerText = '$3,500';
+
+            document.getElementById('tax-pass').innerText = 'Lead Access Verification';
+            document.getElementById('tax-trial').innerText = 'Inclusive of Export Verification';
+            document.getElementById('tax-pro').innerText = 'Founders Access Level';
+            document.getElementById('tax-elite').innerText = 'Warm Direct Intros Guaranteed';
+        }
+    }
+
+    function initiatePayment(planName, usd, inr) {
+        selectedPlan = { name: planName, usd, inr };
+        
+        // Calculate USD Equivalent for INR Plans (Approx 82.5 rate + Buffer)
+        // Manual mapping based on user requested standards
+        let usdEquiv = 0;
+        if (inr === 4999) usdEquiv = 75;
+        else if (inr === 29500) usdEquiv = 357;
+        else if (inr === 59000) usdEquiv = 715;
+        else if (inr === 169000) usdEquiv = 2050;
+        else if (inr === 299000) usdEquiv = 3620;
+
+        document.getElementById('modalPlanName').innerText = planName;
+        document.getElementById('modalPriceUSD').innerText = '$' + usd.toLocaleString();
+        document.getElementById('modalPriceINR').innerText = '₹' + inr.toLocaleString();
+        document.getElementById('modalPriceUSDEquiv').innerText = '$' + usdEquiv.toLocaleString() + '.00';
+        
+        document.getElementById("paymentModal").style.display = "flex";
+        
+        // Default to currency preference
+        if (currentCurrency === 'INR') {
+            switchPayment('qr');
+        } else {
+            switchPayment('paypal');
+        }
+        
+        renderPayPal(usd, planName, "paypalButtons");
+        if (usdEquiv > 0) {
+            renderPayPal(usdEquiv, planName + " (INR Base)", "paypalButtonsINR");
+        }
+    }
+
+    function switchPayment(method) {
+        const tPayPal = document.getElementById('tab-paypal');
+        const tQR = document.getElementById('tab-qr');
+        const sPayPal = document.getElementById('paypalSection');
+        const sQR = document.getElementById('qrSection');
+        
+        if (method === 'paypal') {
+            tPayPal.style.background = 'var(--gold)';
+            tPayPal.style.color = 'black';
+            tQR.style.background = 'transparent';
+            tQR.style.color = '#94a3b8';
+            sPayPal.style.display = 'block';
+            sQR.style.display = 'none';
+        } else {
+            tQR.style.background = 'var(--gold)';
+            tQR.style.color = 'black';
+            tPayPal.style.background = 'transparent';
+            tPayPal.style.color = '#94a3b8';
+            sQR.style.display = 'block';
+            sPayPal.style.display = 'none';
+        }
+    }
+
+    function renderPayPal(amount, planName, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = "";
+        setTimeout(function () {
+            paypal.Buttons({
+                createOrder: function (data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            description: planName + " – APD Global Trade",
+                            amount: { currency_code: "USD", value: amount.toFixed(2) }
+                        }]
+                    });
+                },
+                onApprove: function (data, actions) {
+                    return actions.order.capture().then(function () {
+                        window.location.href = "/document-upload.html";
+                    });
+                }
+            }).render("#" + containerId);
+        }, 400);
+    }
+
+    function closeModal() {
+        document.getElementById("paymentModal").style.display = "none";
+    }
+
+    /* FLOATING WHATSAPP BUTTON STYLES (MATCHING INDEX) */
+    const waFloat = document.createElement('a');
+    waFloat.className = 'float-wa';
+    waFloat.href = 'https://wa.me/919266418868?text=I%20need%20help%20with%20Membership%20Payment';
+    waFloat.innerHTML = '<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" style="width:35px; height:35px;">';
+    waFloat.style = "position:fixed; bottom:30px; right:30px; z-index:10003; background:#25d366; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow: 0 10px 25px rgba(37,211,102,0.5); transition: 0.3s transform;";
+    waFloat.onmouseover = function() { this.style.transform = "scale(1.1)"; }
+    waFloat.onmouseout = function() { this.style.transform = "scale(1)"; }
+    document.body.appendChild(waFloat);
+
+    /* SOCIAL PROOF PINGS */
+    const socialProofMessages = [
+        "Exporter from Rajkot just unlocked 7 UAE Grain Leads",
+        "Verification cleared for Maharashtra Spices Exporter",
+        "New 10,000 MT Rice RFQ matched with verified suppliers",
+        "Payment received: 3-Month Premium Trial activated",
+        "Bank Audit complete for active Buyer in Dubai",
+        "Gujarat Exporter unlocked 5 Vietnam Oil Leads",
+        "Tamil Nadu Export Co. just secured a South Korea contract",
+        "Panipat Textile unit matched with European buyer",
+        "Indore Seeds firm cleared 7-Day Power Pass",
+        "Bengaluru Tech firm secured US Govt Logistics project",
+        "Hyderabad Pharma unit activated Annual Elite Plan",
+        "Lucknow Handicrafts matched with UK Home Decor brand",
+        "Ludhiana Cycle unit unlocked 10 African trade leads",
+        "Amritsar Rice mill finalized 5-day verification",
+        "Surat Diamond trader matched with Antwerp buyer network",
+        "Delhi-based Trader cleared for Elite Institutional access",
+        "Jodhpur Furniture unit matched with Australian distributor",
+        "Agra Leather works finalized Middle-East bulk order",
+        "Kanpur Hides exporter cleared annual trade audit",
+        "Coimbatore Engineering unit matched with Malaysia Govt",
+        "Export Test Drive activated for Kochi Spice Merchant",
+        "Vijayawada Tobacco unit matched with China-based buyer",
+        "Guwahati Tea merchant matched with Dubai Royal Family procurement",
+        "Patna Foxnut exporter cleared verification for Tokyo market",
+        "Ranchi mineral group matched with Indian refining partners",
+        "Shimla Fruit processing unit matched with UK juice brand",
+        "Chandigarh Pharma distribution unit matched with CIS buyer network",
+        "Goa Frozen Seafood export container cleared for Barcelona port",
+        "Bhopal Soy-unit unlocked matching Vietnam leads",
+        "Ahmedabad Plastic manufacturer matched with Mexico procurement"
+    ];
+
+    function showSocialProof() {
+        const toast = document.createElement('div');
+        toast.style = "position:fixed; bottom:110px; left:30px; background:rgba(15,23,42,0.95); border:1px solid var(--gold); padding:15px 25px; border-radius:15px; color:white; font-size:13px; box-shadow:0 10px 30px rgba(0,0,0,0.5); z-index:10004; transform:translateY(150px); transition:0.5s transform; display:flex; align-items:center; gap:12px;";
+        const randomMsg = socialProofMessages[Math.floor(Math.random() * socialProofMessages.length)];
+        toast.innerHTML = `<div style="width:10px; height:10px; background:#22c55e; border-radius:50%;"></div> ${randomMsg}`;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => toast.style.transform = "translateY(0px)", 100);
+        setTimeout(() => {
+            toast.style.transform = "translateY(200px)";
+            setTimeout(() => toast.remove(), 500);
+        }, 6000);
+    }
+
+    // High frequency: Every 45-90 seconds
+    setInterval(() => {
+        showSocialProof();
+    }, 45000 + Math.random() * 45000);
+
+    // Show first one after 5 seconds
+    setTimeout(showSocialProof, 5000);
+
+    setInterval(function(){}, 1000);
+  </script>
 
 </body>
+
 </html>

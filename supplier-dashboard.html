@@ -42,52 +42,89 @@ header a{color:#e5e7eb;margin-left:20px;text-decoration:none}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth,onAuthStateChanged,signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore,collection,query,where,getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { 
+  getFirestore, collection, query, where, getDocs, getDoc, doc, updateDoc 
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const app = initializeApp({
-  apiKey:"AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-  authDomain:"apd-globaltrade-prod.firebaseapp.com",
-  projectId:"apd-globaltrade-prod"
+  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+  authDomain: "apd-globaltrade-prod.firebaseapp.com",
+  projectId: "apd-globaltrade-prod",
+  storageBucket: "apd-globaltrade-prod.firebasestorage.app",
+  messagingSenderId: "226407312435",
+  appId: "1:226407312435:web:f8a54b1132af3899170746"
 });
 
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-onAuthStateChanged(auth, async (user)=>{
-  if(!user){
-    location.href="/supplier-login.html";
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    location.href = "/supplier-login.html";
     return;
   }
 
-  if(user.email === "admin@apdglobaltrade.com"){
-    location.href="/admin.html";
+  if (user.email === "admin@apdglobaltrade.com") {
+    location.href = "/admin.html";
     return;
   }
+
+  // Show Sync ID IMMEDIATELY for debugging
+  const syncInfo = document.createElement("p");
+  syncInfo.style.fontSize = "11px";
+  syncInfo.style.color = "#64748b";
+  syncInfo.style.marginTop = "20px";
+  syncInfo.innerHTML = `Your Sync ID: <b style="color:#071427">${user.uid}</b><br><span style="font-size:9px">Provide this to Admin if your status is incorrect.</span>`;
+  document.querySelector(".card").appendChild(syncInfo);
 
   document.getElementById("welcome").innerText = "Welcome, Supplier";
+  console.log("Logged in as UID:", user.uid);
 
-  try{
-    const qs = await getDocs(
-      query(collection(db,"suppliers"), where("email","==",user.email))
-    );
-
-    if(qs.empty){
-      document.getElementById("status").innerText = "pending";
+  try {
+    const snap = await getDoc(doc(db, "suppliers", user.uid));
+    
+    if (!snap.exists()) {
+      document.getElementById("status").innerText = "pending (Profile not found)";
       document.getElementById("plan").innerText = "free";
       return;
     }
 
-    const s = qs.docs[0].data();
+    const s = snap.data();
     document.getElementById("welcome").innerText =
       "Welcome, " + (s.companyName || "Supplier");
-    document.getElementById("status").innerText = s.status || "pending";
-    document.getElementById("plan").innerText = s.plan || "free";
+    
+    // Status color
+    const statusEl = document.getElementById("status");
+    statusEl.innerText = s.status || "pending";
+    statusEl.style.color = (s.status === "approved") ? "#16a34a" : "#dc2626";
 
-  }catch(e){
-    console.error(e);
-    document.getElementById("status").innerText = "pending";
-    document.getElementById("plan").innerText = "free";
+    // Plan with Credits display
+    let planText = s.plan || "free";
+    const planMap = {
+      '7_day_pass': '7-Day Power Pass',
+      'trial_3m': '3-Month Premium Trial',
+      'pro_6m': '6-Month Elite Professional',
+      'elite_12m': '12-Month Institutional Elite',
+      'free': 'Free',
+      'basic': 'Basic',
+      'premium': '3-Mo Premium Trial'
+    };
+
+    if (s.plan === "7_day_pass") {
+      const remaining = 7 - (s.unlocksUsed || 0);
+      const pName = planMap[s.plan] || s.plan;
+      planText = `${pName} (${remaining} credits left)`;
+    } else if (planMap[s.plan]) {
+      planText = planMap[s.plan];
+    }
+    
+    document.getElementById("plan").innerText = planText;
+
+  } catch (e) {
+    console.error("Dashboard Error:", e);
+    document.getElementById("status").innerText = "Error: " + (e.message || "Unknown error");
+    document.getElementById("status").style.color = "red";
   }
 });
 

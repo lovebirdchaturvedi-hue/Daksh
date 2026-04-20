@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+index_node_modules.js
+functions/node_modules/
+
+# Build artifacts
+.vercel
+dist/
+build/
+.cache/
+
+# Local configuration
+.env
+.env.local
+.env.production
+firebase-debug.log*
+.firebase/
+
+# OS files
+.DS_Store
+Thumbs.db

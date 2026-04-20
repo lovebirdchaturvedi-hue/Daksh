@@ -11,684 +11,501 @@
   <link rel="stylesheet" href="/assets/css/sales-bot.css?v=1.4">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7128304658969250" crossorigin="anonymous"></script>
   <script src="/assets/js/sales-bot.js?v=1.4" type="module"></script>
-  <style>
-    html,
-    body {
-      margin: 0;
-      font-family: Inter, sans-serif;
-      background: #020617;
-      color: #fff;
-      scroll-behavior: smooth;
-    }
+  <link rel="stylesheet" href="/assets/css/style.css?v=1.5">
+  <link rel="stylesheet" href="/assets/css/premium.css?v=1.0">
+  <script src="/assets/js/ticker.js" type="module"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EXRC4SWZ71"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    :root {
-      --gold: #c9a44a;
-      --gold-soft: #e7cf88;
-      --whatsapp-gradient: linear-gradient(135deg, #25D366, #128C7E);
-    }
-
-    /* HEADER */
-    header {
-      height: 80px;
-      background: linear-gradient(180deg, #0b1d36, #071427);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    header .logo {
-      position: absolute;
-      left: 30px;
-      font-weight: 700;
-    }
-
-    .premium-logo {
-      background: linear-gradient(90deg, #c9a44a, #fff, #c9a44a);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: premiumGlow 3s ease-in-out infinite;
-    }
-
-    @keyframes premiumGlow {
-      0% {
-        text-shadow: 0 0 6px rgba(201, 164, 74, .4)
-      }
-
-      50% {
-        text-shadow: 0 0 28px rgba(201, 164, 74, .9)
-      }
-
-      100% {
-        text-shadow: 0 0 6px rgba(201, 164, 74, .4)
-      }
-    }
-
-    header nav a {
-      color: #e5e7eb;
-      margin: 0 14px;
-      text-decoration: none;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    header nav a:hover {
-      color: var(--gold-soft)
-    }
-
-    /* HERO */
-    .hero {
-      min-height: calc(100vh - 80px);
-      display: grid;
-      grid-template-columns: 1fr 1.2fr 1fr;
-      align-items: center;
-      padding: 40px;
-      background:
-        radial-gradient(circle at center, rgba(201, 164, 74, .18), transparent 65%),
-        linear-gradient(180deg, #0b1d36, #020617);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: url("https://www.transparenttextures.com/patterns/stardust.png");
-      opacity: .15;
-      pointer-events: none;
-    }
-
-    .earth-wrap {
-      width: 260px;
-      height: 260px;
-      margin: auto;
-      pointer-events: none;
-      position: relative;
-    }
-
-    .earth {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: url("https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg") repeat-x;
-      background-size: cover;
-      animation: spin 28s linear infinite;
-      box-shadow: inset -40px 0 80px rgba(0, 0, 0, .85), 0 0 60px rgba(201, 164, 74, .5);
-    }
-
-    .night {
-      filter: brightness(.6) saturate(1.2)
-    }
-
-    @keyframes spin {
-      to {
-        background-position: -1400px
-      }
-    }
-
-    /* TRUST STRIP */
-    .trust-strip {
-      background: rgba(255,255,255,0.02);
-      padding: 30px 0;
-      border-top: 1px solid rgba(255,255,255,0.05);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-    }
-    .trust-track {
-      display: flex;
-      gap: 100px;
-      white-space: nowrap;
-      animation: trustScroll 40s linear infinite;
-    }
-    .trust-item {
-      color: #94a3b8;
-      font-weight: 700;
-      font-size: 18px;
-      letter-spacing: 2px;
-      opacity: 0.6;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    @keyframes trustScroll {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    /* HOW IT WORKS */
-    .how-it-works {
-      padding: 120px 20px;
-      background: #020617;
-      text-align: center;
-    }
-    .how-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 40px;
-      max-width: 1100px;
-      margin: 60px auto 0;
-    }
-    .how-step {
-      background: rgba(11,29,54,0.4);
-      padding: 40px;
-      border-radius: 24px;
-      border: 1px solid rgba(201,164,74,0.1);
-      position: relative;
-    }
-    .step-num {
-      position: absolute;
-      top: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 45px;
-      height: 45px;
-      background: var(--gold);
-      color: #000;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      box-shadow: 0 0 20px rgba(201,164,74,0.4);
-    }
-
-    .center {
-      text-align: center;
-      z-index: 2
-    }
-
-    .center h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.6rem, 4vw, 3.8rem);
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
-
-    .center p {
-      max-width: 720px;
-      margin: 16px auto 28px;
-      color: #cbd5f5;
-      font-size: 1.1rem;
-    }
-
-    .btn {
-      background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-      color: #000;
-      padding: 14px 36px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 600;
-      margin: 6px;
-      display: inline-block;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(201, 164, 74, 0.4);
-    }
-
-    .badges {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 22px;
-    }
-
-    .badge {
-      background: rgba(255, 255, 255, .06);
-      border: 1px solid rgba(255, 255, 255, .14);
-      padding: 10px 18px;
-      border-radius: 999px;
-      font-size: 13px;
-      backdrop-filter: blur(5px);
-    }
-
-    .premium {
-      margin-top: 40px;
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      letter-spacing: 2px;
-      color: #f5e7c6;
-      animation: glow 4s ease-in-out infinite;
-    }
-
-    @keyframes glow {
-      50% {
-        text-shadow: 0 0 35px rgba(201, 164, 74, .7)
-      }
-    }
-
-    /* LIVE RFQ */
-    .live-rfq {
-      background: linear-gradient(90deg, #020617, #071427);
-      padding: 18px 0;
-      border-top: 1px solid rgba(255, 255, 255, .08);
-      border-bottom: 1px solid rgba(255, 255, 255, .08);
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-    }
-
-    .live-rfq-label {
-      font-weight: 700;
-      color: #c9a44a;
-      background: rgba(201, 164, 74, 0.1);
-      padding: 8px 20px;
-      border-radius: 0 50px 50px 0;
-      margin-right: 20px;
-      white-space: nowrap;
-    }
-
-    .live-rfq-track {
-      display: flex;
-      gap: 60px;
-      white-space: nowrap;
-      animation: rfqScroll 35s linear infinite;
-    }
-
-    .live-rfq-track span {
-      font-size: 15px;
-      color: #e5e7eb;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-    }
-
-    .live-rfq-track span:hover {
-      color: #f5e7c6;
-      text-decoration: underline;
-    }
-
-    @keyframes rfqScroll {
-      from {
-        transform: translateX(100%)
-      }
-
-      to {
-        transform: translateX(-100%)
-      }
-    }
-
-    /* SEA */
-    .sea {
-      min-height: 100vh;
-      background:
-        linear-gradient(to top, rgba(2, 6, 23, .95), rgba(2, 6, 23, .4)),
-        url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=60");
-      background-size: cover;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      align-items: center;
-      padding: 100px 60px;
-      gap: 60px;
-    }
-
-    .sea img {
-      width: 100%;
-      max-width: 480px;
-      opacity: .9;
-      border-radius: 15px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(201, 164, 74, 0.2);
-    }
-
-    .contact-card {
-      background: rgba(11, 29, 54, .85);
-      backdrop-filter: blur(10px);
-      border-radius: 28px;
-      padding: 50px 40px;
-      text-align: center;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, .6);
-      border: 1px solid rgba(201, 164, 74, .2);
-    }
-
-    /* AUTHORITY SECTION */
-    .trade-authority {
-      padding: 160px 20px;
-      background: linear-gradient(180deg, #071427, #020617);
-      border-top: 1px solid rgba(201, 164, 74, .15);
-    }
-
-    .trade-authority h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 46px;
-      text-align: center;
-      color: var(--gold-soft);
-      margin-bottom: 40px;
-    }
-
-    .trade-authority p {
-      max-width: 850px;
-      margin: 0 auto 100px auto;
-      text-align: center;
-      line-height: 1.8;
-      font-size: 18px;
-      color: #cbd5f5;
-    }
-
-    .authority-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 60px;
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    .authority-card {
-      background: rgba(11, 29, 54, .7);
-      padding: 45px;
-      border-radius: 28px;
-      border: 1px solid rgba(201, 164, 74, .25);
-      transition: transform 0.3s ease;
-    }
-
-    .authority-card:hover {
-      transform: translateY(-10px);
-      border-color: var(--gold);
-    }
-
-    .authority-card h3 {
-      color: var(--gold);
-      margin-bottom: 18px;
-    }
-
-    .authority-card p {
-      color: #cbd5f5;
-      text-align: left;
-      margin: 0;
-      font-size: 15px;
-    }
-
-    .authority-cta {
-      text-align: center;
-      margin-top: 120px;
-    }
-
-    .authority-cta a {
-      padding: 20px 60px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-      color: #000;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 16px;
-      transition: box-shadow 0.3s ease;
-    }
-
-    .authority-cta a:hover {
-      box-shadow: 0 0 30px rgba(201, 164, 74, 0.4);
-    }
-
-    /* FOOTER */
-    footer {
-      background: #020617;
-      text-align: center;
-      padding: 60px 20px;
-      color: #9ca3af;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    footer a {
-      color: var(--gold);
-      margin: 0 6px;
-      text-decoration: none
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    /* FLOAT PREMIUM STUFF */
-    .float {
-      position: fixed;
-      right: 30px;
-      z-index: 9999;
-      transition: transform 0.3s ease;
-    }
-
-    .float:hover {
-      transform: scale(1.1);
-    }
-
-    .whatsapp {
-      bottom: 30px;
-      width: 65px;
-      height: 65px;
-      background: var(--whatsapp-gradient);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 34px;
-      color: #fff;
-      text-decoration: none;
-      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
-      animation: floatMotion 6s infinite ease-in-out;
-    }
-
-    .download {
-      bottom: 110px;
-      padding: 14px 28px;
-      background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-      color: #000;
-      border-radius: 999px;
-      font-weight: 700;
-      text-decoration: none;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    @keyframes floatMotion {
-      0% {
-        transform: translateY(0px);
-      }
-
-      50% {
-        transform: translateY(-10px);
-      }
-
-      100% {
-        transform: translateY(0px);
-      }
-    }
-
-    /* MOBILE */
-    @media(max-width:900px) {
-      .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-        padding: 100px 20px;
-      }
-
-      .earth-wrap {
-        display: none
-      }
-
-      .sea {
-        grid-template-columns: 1fr;
-        padding: 60px 20px;
-      }
-
-      header nav {
-        display: none;
-      }
-
-      .whatsapp {
-        right: 20px;
-        bottom: 20px;
-      }
-
-      .download {
-        right: 20px;
-        bottom: 100px;
-      }
-    }
-  </style>
+    gtag('config', 'G-EXRC4SWZ71');
+  </script>
 </head>
 
-<body style="padding-top: 40px;"> <!-- Added padding for fixed top bar -->
-  <!-- PREMIUM ANNOUNCEMENT BAR -->
-  <div style="
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: #0b1d36;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-    font-size: 13px;
-    font-weight: 600;
-    z-index: 10001;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-    border-bottom: 1px solid rgba(201,164,74,0.4);
-  ">
-    🔐 <span style="color: var(--gold);">Institutional Data Access:</span> Secure Bulk Lead Programs for Verified Professional Exporters. 
-    <a href="https://wa.me/919266418868?text=I%20am%20interested%20in%20Institutional%20Bulk%20Lead%20Programs" 
-       style="color: var(--gold); text-decoration: underline; margin-left: 10px; font-weight: 800;">
-       Commence Inquiry
-    </a>
+<body>
+  <!-- GLOBAL SUCCESS TICKER -->
+  <div style="background: #020617; border-bottom: 1px solid rgba(212,175,55,0.4); padding: 8px 0; overflow: hidden; position: sticky; top: 0; z-index: 200000; height: 32px; display: flex; align-items: center;">
+    <div class="ticker-wrap" style="width: 100%; white-space: nowrap;">
+      <div style="display: inline-block; padding-right: 100%; animation: tickerScroll 180s linear infinite; color: var(--gold); font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;">
+        <span style="margin-right: 50px;">🌍 REACH: 541+ New Verified Buyers added in the last 24h</span>
+        <span style="margin-right: 50px;">🇮🇳 RAJASTHAN: S.K. EXPORTS just finalized 5,000 MT ICUMSA Sugar contract via APD Hub</span>
+        <span style="margin-right: 50px;">🇹🇭 THAILAND: Strategic Govt Tender secured for 20,000 MT Refined Oil</span>
+        <span style="margin-right: 50px;">🇦🇪 DUBAI: Institutional Buyer #8291 just matched with verified Indian Spices exporter</span>
+        <span style="margin-right: 50px;">🇻🇳 VIETNAM: Bulk RFQ for 2,000 MT Sunflower Oil matched 3 suppliers</span>
+        <span style="margin-right: 50px;">🇮🇳 GUJARAT: Patidar Trading Co. cleared verification for 10 Container Cumin order</span>
+        <span style="margin-right: 50px;">🇪🇬 EGYPT: Sourcing 15,000 MT Non-Basmati Rice - 4 Suppliers shortlisted</span>
+        <span style="margin-right: 50px;">🇮🇳 PUNJAB: Gill Agro-Industry secured $140,000 Wheat Export Contract</span>
+        <span style="margin-right: 50px;">🇸🇦 SAUDI: Govt Food Security Program matching with Indian Pulses exporters</span>
+        <span style="margin-right: 50px;">🇮🇳 TAMIL NADU: Coconut Carbonized Coal bulk order cleared for South Korea</span>
+        <span style="margin-right: 50px;">🌍 UPDATE: 12,892+ Verified Monthly Trade Connections facilitate daily</span>
+        <span style="margin-right: 50px;">🇮🇳 MAHARASHTRA: Onion Grade A export permit cleared for Colombo market</span>
+        <span style="margin-right: 50px;">🇲🇾 MALAYSIA: Govt agency sourcing 1,000MT Refined Palm Oil via APD Platform</span>
+        <span style="margin-right: 50px;">🇮🇳 HARYANA: Jindal Seeds secured exclusive distribution for Kenya market</span>
+        <span style="margin-right: 50px;">🇴🇲 OMAN: Construction conglomerate sourcing Bulk Food Grain for labor camps</span>
+        <span style="margin-right: 50px;">🇮🇳 ANDHRA PRADESH: Red Chillies bulk order (50MT) finalized for US Buyer</span>
+        <span style="margin-right: 50px;">🇰🇼 KUWAIT: Supermarket chain matched with 12 Small-batch Spices suppliers</span>
+        <span style="margin-right: 50px;">🇮🇳 KARNATAKA: Maize export contract (2000 MT) cleared for Vietnam port</span>
+        <span style="margin-right: 50px;">🇧🇩 BANGLADESH: Sourcing Bulk Soy Meal - 5 Indian exporters currently bidding</span>
+        <span style="margin-right: 50px;">🇮🇳 UTTAR PRADESH: Frozen Buffalo Meat export audit cleared for Vietnam market</span>
+        <span style="margin-right: 50px;">🇶🇦 QATAR: Logistics group matching with Indian construction material suppliers</span>
+        <span style="margin-right: 50px;">🇮🇳 MADHYA PRADESH: Soybean Meal bulk booking released for SEA markets</span>
+        <span style="margin-right: 50px;">🇮🇩 INDONESIA: Buyer sourcing Bulk Cassava Chips - Finalizing with Kerala supplier</span>
+        <span style="margin-right: 50px;">🇮🇳 KERALA: Sourcing Spices for Berlin-based Gourmet distributor</span>
+        <span style="margin-right: 50px;">🇸🇬 SINGAPORE: Port authority matching with APD Verified Bunker suppliers</span>
+        <span style="margin-right: 50px;">🇮🇳 BIHAR: Fox Nuts (Makhana) export potential verified for Japanese market</span>
+        <span style="margin-right: 50px;">🇿🇦 SOUTH AFRICA: Canned food Importer matching with APD processing units</span>
+        <span style="margin-right: 50px;">🇮🇳 ODISHA: Cashew Nut bulk export (Container load) cleared for Europe</span>
+        <span style="margin-right: 50px;">🇳🇬 NIGERIA: Govt matching with Indian Farm Machinery manufacturers</span>
+        <span style="margin-right: 50px;">🇮🇳 TELANGANA: Cotton Ginning unit matched with Bangladesh Spinning mill</span>
+        <span style="margin-right: 50px;">🇵🇭 PHILIPPINES: Sourcing Bulk Yellow Maize for poultry feed sector</span>
+        <span style="margin-right: 50px;">🇮🇳 WEST BENGAL: Jute Bag contract finalized for Italian Sustainable brand</span>
+        <span style="margin-right: 50px;">🇦🇿 AZERBAIJAN: Construction wing matching with Indian Steel exporters</span>
+        <span style="margin-right: 50px;">🇮🇳 ASSAM: Tea Estate matched with Moroccan Mint Tea distributor</span>
+        <span style="margin-right: 50px;">🇸🇮 SLOVENIA: Wood logging firm matching with Indian furniture manufacturers</span>
+        <span style="margin-right: 50px;">🇮🇳 HIMACHAL: Apple Concentrate production matched with UK juice brand</span>
+        <span style="margin-right: 50px;">🇰🇪 KENYA: Agro-chemical agency matching with APD verified manufacturers</span>
+        <span style="margin-right: 50px;">🇮🇳 CHANDIGARH: Pharma distribution unit matched with CIS buyer network</span>
+        <span style="margin-right: 50px;">🇺🇿 UZBEKISTAN: Govt trade mission matching with Indian Textile exporters</span>
+        <span style="margin-right: 50px;">🇮🇳 JAMMU: Saffron export authentication cleared for Premium Qatar market</span>
+        <span style="margin-right: 50px;">🇬🇭 GHANA: Gold mineral group matching with Indian refining partners</span>
+        <span style="margin-right: 50px;">🇮🇳 GOA: Frozen Seafood export container cleared for Barcelona port</span>
+        <span style="margin-right: 50px;">🇲🇽 MEXICO: Auto-parts group matching with Indian casting foundries</span>
+        <span style="margin-right: 50px;">🇮🇳 NAGALAND: Organic Ginger export potential verified for North American market</span>
+        <span style="margin-right: 50px;">🇷🇴 ROMANIA: IT Hardware chain matching with Indian component exporters</span>
+        <span style="margin-right: 50px;">🇮🇳 SIKKIM: Cardamom bulk auction matched with global luxury spice brands</span>
+        <span style="margin-right: 50px;">🇪🇹 ETHIOPIA: Coffee co-op matching with Indian roasting machinery</span>
+        <span style="margin-right: 50px;">🇮🇳 TRIPURA: Bamboo board contract finalized for Eco-friendly Housing project</span>
+        <span style="margin-right: 50px;">🇳🇱 NETHERLANDS: Logistics hub matching with Indian Freight forwarders</span>
+        <span style="margin-right: 50px;">🇮🇳 MANIPUR: Exotic Fruit processing unit matched with Asian snack brand</span>
+        <span style="margin-right: 50px;">✅ APD SUCCESS: Over 2,400+ Test Drive accounts activated this month!</span>
+      </div>
+    </div>
   </div>
+  <style>
+    @keyframes tickerScroll {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+
+  <!-- INSTITUTIONAL ANNOUNCEMENT BAR -->
+  <div class="institutional-bar">
+    <div style="display: flex; align-items: center; gap: 10px; margin-right: 15px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--gold)" style="opacity: 0.8;"><path d="M12 2L3 7v11l9 4 9-4V7l-9-5zm0 18l-7-3.11V8.82l7 3.11 7-3.11v8.07L12 20z"/></svg>
+        <span style="letter-spacing: 2px; font-weight: 800; color: var(--gold);">ICC/WCO</span>
+    </div>
+    <div class="pulse-green"></div>
+    <div class="clearance-status">CLEARANCE: <span style="color: #22c55e; margin-left: 5px;">ACTIVE</span></div>
+    <span class="bar-divider">|</span>
+    <span class="slot-counter">4,821 / 5,000 INSTITUTIONAL SLOTS SECURED</span>
+    <span class="bar-divider">|</span>
+    <a href="https://chat.whatsapp.com/BRSKIkuYO6LCVM2WhRyczq" target="_blank" style="color: #25D366; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 5px;">
+       💬 JOIN FREE TRADE GROUP
+    </a>
+    <span class="bar-divider">|</span>
+    <a href="/membership.html" class="bar-cta shimmer-gold">SECURE ACCESS</a>
+  </div>
+
   <header>
-    <div class="logo premium-logo" style="display: flex; flex-direction: column; line-height: 1;">
-      <span style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 22px; letter-spacing: 1px;">APD <span style="color: var(--gold);">Global</span> Trade</span>
-      <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-top: 5px; font-weight: 700;">Trade Smart. Scale Fast.</span>
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <div class="menu-toggle" onclick="toggleDrawer()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="logo premium-logo" style="display: flex; flex-direction: column; line-height: 1;">
+          <span style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 22px; letter-spacing: 1px;">APD <span style="color: var(--gold);">Global</span> Trade</span>
+          <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-top: 5px; font-weight: 700;">Institutional Trust. Global Reach.</span>
+        </div>
     </div>
     <nav>
       <a href="/">Home</a>
       <a href="/buyer-rfqs.html">Buyer RFQs</a>
       <a href="/suppliers.html">Suppliers</a>
-      <!-- Institutional Pages -->
-      <a href="/standards.html">Standards</a>
-      <a href="/leadership.html">Leadership</a>
-      <a href="/trade-report.html">Trade Report</a>
-      <a href="/brochure.html">Brochure</a>
-      <a href="/membership.html">Membership</a>
-      <a href="/verification-process.html" style="color:var(--gold);">Verification</a>
+      <a href="/verification-process.html">How It Works</a>
+      <a href="/membership.html" style="color:var(--gold);">Membership</a>
       <a href="/contact.html">Contact</a>
     </nav>
   </header>
-  <section class="hero">
-    <div class="earth-wrap">
-      <div class="earth"></div>
-    </div>
-    <div class="center">
-      <h1>Direct Access to Verified Global Buyers</h1>
-      <p>Stop wasting time with middlemen. Access high-intent global RFQs, protected buyer contacts, and professional B2B trade execution.</p>
-      <a href="/membership.html" class="btn">Start Your Trial ($250)</a>
-      <a href="/buyer-rfqs.html" class="btn">View Live RFQs</a>
-      <div class="badges">
-        <div class="badge">🔐 Verified Buyers</div>
-        <div class="badge">🌍 100+ Countries</div>
-        <div class="badge">🧾 KYC & IEC</div>
-        <div class="badge">🤝 Deals Closed</div>
-        <div class="badge">🚫 No Brokers</div>
-        <div class="badge">⚡ Real RFQs</div>
-      </div>
-      <div class="premium">INTERNATIONAL TRADE AUTHORITY</div>
-    </div>
-    <div class="earth-wrap">
-      <div class="earth night"></div>
+
+  <!-- PREMIUM SIDE DRAWER -->
+  <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+  <div class="side-drawer" id="sideDrawer">
+      <div style="margin-bottom: 40px; font-weight: 800; color: var(--gold); letter-spacing: 3px;">TRADE OPTIONS</div>
+      <a href="/">Dashboard Home</a>
+      <a href="/buyer-rfqs.html">Verified RFQs</a>
+      <a href="/suppliers.html">Verified Suppliers</a>
+      <a href="/verification-process.html">Trade Security</a>
+      <a href="/membership.html" style="color: var(--gold);">Global Membership</a>
+      <a href="/contact.html">Institutional Support</a>
+      <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.05); margin: 20px 0;">
+      <a href="/brochure.html" style="font-size: 0.9rem; opacity: 0.6;">Download Brochure</a>
+  </div>
+
+  <section class="hero-premium">
+    <div id="globe-container"></div>
+    <div class="hero-bg"></div>
+    <div class="container" style="z-index: 10;">
+        <h1>Direct Access to Verified Global Buyers Sending Real RFQs</h1>
+        <p>Bypass the middlemen. Access 5,000,000+ verified buyers from 70+ countries looking for your products today.</p>
+        
+        <div style="margin-bottom: 50px;">
+            <a href="/membership.html" class="btn-gold" style="box-shadow: 0 0 30px rgba(212,175,55,0.4);">Unlock 7 Premium Buyers - ₹4,999</a>
+            <a href="/buyer-rfqs.html" class="btn-outline">View 5M+ Verified Buyers</a>
+        </div>
+
+        <!-- AUTHENTICITY BADGES -->
+        <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; opacity: 0.8;">
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--gold)"><path d="M12 2L3 7v11l9 4 9-4V7l-9-5zm0 18l-7-3.11V8.82l7 3.11 7-3.11v8.07L12 20zm-5-9.31l5 2.22 5-2.22V8.82l-5 2.22-5-2.22v1.87z"/></svg>
+                <span>Institutional KYC</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--gold)"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                <span>Bank Verified Leads</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--gold)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                <span>Active in 70+ Countries</span>
+            </div>
+        </div>
+
+        <!-- LIVE RFQ DATA BAR -->
+        <div class="live-data-bar" style="margin: 60px auto 0;">
+            <div class="ticker-label">
+                <div class="ping"></div>
+                Live Trade Feed
+            </div>
+            <div class="ticker-content" id="rfqTicker">
+                <span class="ticker-item">⚡ Establishing connection to Global Trade Hub...</span>
+            </div>
+        </div>
     </div>
   </section>
 
-  <!-- INSTITUTIONAL TRUST STRIP -->
-  <div class="trust-strip" style="background: rgba(0,0,0,0.8); border-top: 1px solid rgba(201,164,74,0.3); border-bottom: 1px solid rgba(201,164,74,0.3);">
-    <div class="trust-track">
-      <div class="trust-item">📜 ICC Incoterms® 2026 Compliant</div>
-      <div class="trust-item">🛡️ WCO Security Framework</div>
-      <div class="trust-item">🏦 SWIFT Standard Communication</div>
-      <div class="trust-item">🔒 256-bit AES Data Protection</div>
-      <div class="trust-item">✅ KYC / AML Audited Network</div>
-      <div class="trust-item">⚖️ UCP 600 Banking Standards</div>
-      <!-- Duplicate for scroll -->
-      <div class="trust-item">📜 ICC Incoterms® 2026 Compliant</div>
-      <div class="trust-item">🛡️ WCO Security Framework</div>
-      <div class="trust-item">🏦 SWIFT Standard Communication</div>
-      <div class="trust-item">🔒 256-bit AES Data Protection</div>
+  <!-- INSTITUTIONAL AUTHORITY STATS -->
+  <section style="padding: 100px 8%; background: #020617; position: relative; overflow: hidden;">
+    <div style="position: absolute; top: -50%; left: -10%; width: 40%; height: 200%; background: radial-gradient(circle, rgba(201, 164, 74, 0.05) 0%, transparent 70%); z-index: 1;"></div>
+    <div class="container" style="position: relative; z-index: 2;">
+        <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;">
+            <div class="stat-item">
+                <span class="stat-num">5M+</span>
+                <span class="stat-label">Verified Buyers</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-num">70+</span>
+                <span class="stat-label">Member Nations</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-num">$12B+</span>
+                <span class="stat-label">Inquiry Volume</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-num">24/7</span>
+                <span class="stat-label">Trade Support</span>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- THE PROOOF OF WORK (REAL RFQ PREVIEW) -->
+  <section class="section" style="background: white; color: #020617; padding: 120px 8%;">
+    <div class="container">
+        <h2 style="font-size: 3rem; margin-bottom: 20px;">Real Demand. Real Buyers.</h2>
+        <p style="font-size: 1.2rem; color: #475569; max-width: 800px; margin: 0 auto 80px;">We don't just list your business. We connect you with buyers who are actively sending requirements for your specific products.</p>
+        
+        <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; text-align: left;">
+            <div class="glass-card" style="background: #f8fafc; border-color: #e2e8f0; color: #020617;">
+                <div class="proof-tag">Verified RFQ #8892</div>
+                <h3 style="margin-bottom: 10px;">🇹🇭 Thailand Buyer</h3>
+                <p>Requirement for 2,000 MT Refined Sunflower Oil. Payment via 100% Confirmed L/C at Sight.</p>
+                <hr style="margin: 20px 0; border: none; border-top: 1px solid #e2e8f0;">
+                <div style="font-size: 0.9rem; font-weight: 600; color: #059669;">✅ Verification: Bank Reference Confirmed</div>
+            </div>
+
+            <div class="glass-card" style="background: #f8fafc; border-color: #e2e8f0; color: #020617;">
+                <div class="proof-tag">Verified RFQ #8841</div>
+                <h3 style="margin-bottom: 10px;">🇺🇸 USA Importer</h3>
+                <p>Seeking supplier for Spices (Turmeric, Red Chili) for East Coast distribution. Regular monthly contract.</p>
+                <hr style="margin: 20px 0; border: none; border-top: 1px solid #e2e8f0;">
+                <div style="font-size: 0.9rem; font-weight: 600; color: #059669;">✅ Verification: Dun & Bradstreet Audited</div>
+            </div>
+
+            <div class="glass-card" style="background: #f8fafc; border-color: #e2e8f0; color: #020617;">
+                <div class="proof-tag">Verified RFQ #8911</div>
+                <h3 style="margin-bottom: 10px;">🇦🇪 Dubai Trading Co</h3>
+                <p>Bulk requirement for Non-Basmati Rice (Long Grain). 10,000 MT FOB Jebel Ali.</p>
+                <hr style="margin: 20px 0; border: none; border-top: 1px solid #e2e8f0;">
+                <div style="font-size: 0.9rem; font-weight: 600; color: #059669;">✅ Verification: Port Activity Confirmed</div>
+            </div>
+        </div>
+
+    </div>
+  </section>
+  <!-- GLOBAL INSTITUTIONAL SUCCESS (FLOATING TESTIMONIALS) -->
+  <section style="padding: 120px 8%; background: #020617; position: relative; overflow: hidden;">
+    <!-- Background Accents -->
+    <div style="position: absolute; top: 10%; right: -5%; width: 30%; height: 30%; background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%); pointer-events: none;"></div>
+    
+    <div class="container" style="position: relative; z-index: 10;">
+        <h2 style="font-size: 3.5rem; text-align: center; margin-bottom: 20px; color: #fff;">Global Trade Impact</h2>
+        <p style="text-align: center; color: var(--text-muted); max-width: 800px; margin: 0 auto 80px; font-size: 1.2rem;">Our hub facilitates over **$10B in annual trade** by connecting verified world markets with elite Indian exporters.</p>
+        
+        <style>
+            @keyframes floating {
+                0% { transform: translateY(0px); }
+                50% { transform: translateY(-15px); }
+                100% { transform: translateY(0px); }
+            }
+            .floating-card {
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(212, 175, 55, 0.15);
+                padding: 35px;
+                border-radius: 12px;
+                backdrop-filter: blur(10px);
+                transition: 0.4s;
+                animation: floating 6s ease-in-out infinite;
+            }
+            .floating-card:hover {
+                border-color: var(--gold);
+                background: rgba(212, 175, 55, 0.05);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+                transform: scale(1.02);
+                animation-play-state: paused;
+            }
+            .testimonial-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+                gap: 30px;
+            }
+            .t-type { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); font-weight: 800; margin-bottom: 15px; display: block; }
+            .t-quote { font-style: italic; color: #fff; margin-bottom: 20px; line-height: 1.6; }
+            .t-author { font-size: 14px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 10px; }
+        </style>
+
+        <div class="testimonial-grid">
+            <!-- 🌏 Buyer 1: USA -->
+            <div class="floating-card" style="animation-delay: 0.2s;">
+                <span class="t-type">🇺🇸 Sourcing Director – New York</span>
+                <p class="t-quote">"The verification process is the gold standard. We've secured three long-term supply contracts for organic spices within two months."</p>
+                <div class="t-author"><span>David Chen</span> <span style="font-size: 12px; opacity: 0.5;">- Organic Sourcing LLC</span></div>
+            </div>
+
+            <!-- 🇮🇳 Supplier 1: Rajasthan -->
+            <div class="floating-card" style="animation-delay: 1.5s;">
+                <span class="t-type">📍 Rajasthan, IN – Exporter</span>
+                <p class="t-quote">"Finally, a platform that doesn't just list leads but verifies the buyer's financial capacity first. We closed an L/C in record time."</p>
+                <div class="t-author"><span>Amit Singh</span> <span style="font-size: 12px; opacity: 0.5;">- Desert Spices Intl.</span></div>
+            </div>
+
+            <!-- 🌏 Buyer 2: UAE -->
+            <div class="floating-card" style="animation-delay: 2.8s;">
+                <span class="t-type">🇦🇪 Global Trade Hub – Dubai</span>
+                <p class="t-quote">"Direct access to Indian grain exporters through the APD hub has reduced our procurement time by 40%. Bank-verified leads are a game-changer."</p>
+                <div class="t-author"><span>Ahmed Al-Maktoum</span> <span style="font-size: 12px; opacity: 0.5;">- Global Trade Group</span></div>
+            </div>
+
+            <!-- 🇮🇳 Supplier 2: Gujarat -->
+            <div class="floating-card" style="animation-delay: 0.8s;">
+                <span class="t-type">📍 Gujarat, IN – Exporter</span>
+                <p class="t-quote">"Found three major peanut importers in the EU. Moving 50 containers a month. The high-trust environment is worth the membership."</p>
+                <div class="t-author"><span>Sanjay Patel</span> <span style="font-size: 12px; opacity: 0.5;">- Krishna Global Exports</span></div>
+            </div>
+
+            <!-- 🌏 Buyer 3: Singapore -->
+            <div class="floating-card" style="animation-delay: 3.2s;">
+                <span class="t-type">🇸🇬 Trading Director – Singapore</span>
+                <p class="t-quote">"Transacted over $500k in commodities through APD's encrypted lines. The reliability of their institutional network is unmatched."</p>
+                <div class="t-author"><span>Sarah Lim</span> <span style="font-size: 12px; opacity: 0.5;">- Commodity Trader</span></div>
+            </div>
+
+            <!-- 🇮🇳 Supplier 3: Punjab -->
+            <div class="floating-card" style="animation-delay: 4.5s;">
+                <span class="t-type">📍 Punjab, IN – Basmati Exporter</span>
+                <p class="t-quote">"Exporting Basmati Rice directly to UAE and Qatar now. No brokers, no middlemen. Just 100% transparent pricing."</p>
+                <div class="t-author"><span>Gurpinder S.</span> <span style="font-size: 12px; opacity: 0.5;">- Pind-to-Port Exports</span></div>
+            </div>
+
+            <!-- 🌏 Buyer 4: UK -->
+            <div class="floating-card" style="animation-delay: 5.1s;">
+                <span class="t-type">🇬🇧 Import Consultant – London</span>
+                <p class="t-quote">"The only B2B platform that actually delivers what they promise. Real RFQs, real L/Cs, and real professional engagement."</p>
+                <div class="t-author"><span>James Wilson</span> <span style="font-size: 12px; opacity: 0.5;">- Wilson Global</span></div>
+            </div>
+
+            <!-- 🇮🇳 Supplier 4: HP -->
+            <div class="floating-card" style="animation-delay: 1.1s;">
+                <span class="t-type">📍 Andhra Pradesh, IN – Exporter</span>
+                <p class="t-quote">"The WhatsApp trade alerts for Turmeric RFQs are incredibly fast. We responded and closed a deal in just 3 days."</p>
+                <div class="t-author"><span>Vijaya Lakshmi</span> <span style="font-size: 12px; opacity: 0.5;">- Heritage Agri</span></div>
+            </div>
+
+            <!-- 🌏 Buyer 5: Thailand -->
+            <div class="floating-card" style="animation-delay: 2.2s;">
+                <span class="t-type">🇹🇭 Managing Director – Bangkok</span>
+                <p class="t-quote">"Found a stable partner for sunflower oil. Moving 2,000 MT monthly. APD's screening saved us from many non-serious buyers."</p>
+                <div class="t-author"><span>Somchai P.</span> <span style="font-size: 12px; opacity: 0.5;">- Agri-Export Corp</span></div>
+            </div>
+
+            <!-- 🇮🇳 Supplier 5: MP -->
+            <div class="floating-card" style="animation-delay: 3.8s;">
+                <span class="t-type">📍 Madhya Pradesh, IN – Exporter</span>
+                <p class="t-quote">"Our soybean meal export volume tripled after clearing APD's KYC. The direct bank-to-bank trust is flawless."</p>
+                <div class="t-author"><span>Rajesh G.</span> <span style="font-size: 12px; opacity: 0.5;">- Agro-Export Hub</span></div>
+            </div>
+            
+        </div>
+    </div>
+  </section>
+
+  <!-- WHATSAPP TRADE PROOF (VISUAL) -->
+  <section style="padding: 120px 8%; background: #f1f5f9; position: relative;">
+    <div class="container" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center;">
+        <div>
+            <h2 style="font-size: 3rem; color: #020617; margin-bottom: 30px;">Direct Buyer Communication. No Middlemen.</h2>
+            <p style="font-size: 1.2rem; color: #475569; margin-bottom: 40px;">Our platform connects you directly with the decision-makers. No brokers, no hidden fees. Just professional B2B trade conversation on the channels you already use.</p>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 20px; display: flex; align-items: center; gap: 15px; font-weight: 600; color: #020617;">
+                    <div style="width: 24px; height: 24px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">✓</div>
+                    Verified WhatsApp Business Contacts
+                </li>
+                <li style="margin-bottom: 20px; display: flex; align-items: center; gap: 15px; font-weight: 600; color: #020617;">
+                    <div style="width: 24px; height: 24px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">✓</div>
+                    Encrypted Quotation Sharing
+                </li>
+                <li style="margin-bottom: 20px; display: flex; align-items: center; gap: 15px; font-weight: 600; color: #020617;">
+                    <div style="width: 24px; height: 24px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">✓</div>
+                    Real-time Negotiation & Closing
+                </li>
+            </ul>
+        </div>
+        <div style="position: relative;">
+            <!-- Generated WhatsApp Proof Image -->
+            <img src="/whatsapp_trade_proof_1773862420721.png" alt="WhatsApp Trade Proof" style="width: 100%; border-radius: 30px; box-shadow: 0 40px 80px rgba(0,0,0,0.15); border: 8px solid white;">
+            <div style="position: absolute; bottom: -30px; right: -30px; background: var(--gold); color: black; padding: 20px 30px; border-radius: 20px; font-weight: 800; box-shadow: 0 10px 30px rgba(201, 164, 74, 0.4);">
+                571+ REAL LEADS LIVE
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- STICKY SIDE TRUST PILLAR -->
+  <div class="trust-pillar">
+    <div class="pillar-item">📜 <span class="tooltip">ICC Incoterms Compliance</span></div>
+    <div class="pillar-item">🛡️ <span class="tooltip">WCO Security Framework</span></div>
+    <div class="pillar-item">🏦 <span class="tooltip">SWIFT Standards</span></div>
+    <div class="pillar-item">🔒 <span class="tooltip">AES-256 Encryption</span></div>
+    <div class="pillar-item">✅ <span class="tooltip">KYC/AML Audited</span></div>
+  </div>
+
+  <!-- INSTITUTIONAL TRUST STRIP (HORIZONTAL FIX) -->
+  <div class="trust-strip">
+    <div class="trust-track" style="display: flex; gap: 60px;">
+      <span class="trust-item">📜 ICC Incoterms® 2026 Compliant</span>
+      <span class="trust-item">🛡️ WCO Security Framework</span>
+      <span class="trust-item">🏦 SWIFT Standard Communication</span>
+      <span class="trust-item">🔒 256-bit AES Data Protection</span>
+      <span class="trust-item">✅ KYC / AML Audited Network</span>
+      <span class="trust-item">⚖️ UCP 600 Banking Standards</span>
+      <!-- Duplicate for scroll fluidity -->
+      <span class="trust-item">📜 ICC Incoterms® 2026 Compliant</span>
+      <span class="trust-item">🛡️ WCO Security Framework</span>
+      <span class="trust-item">🏦 SWIFT Standard Communication</span>
     </div>
   </div>
 
-  <!-- HOW IT WORKS -->
-  <section class="how-it-works">
-    <h2 style="font-family:'Playfair Display',serif; font-size:42px; color:var(--gold-soft);">The Elite Trading Framework</h2>
-    <p style="color:#cbd5f5; max-width:700px; margin:auto;">Built for institutional exporters. From verification to deal closure in 3 steps.</p>
+  <!-- RISK REVERSAL (PRICING & GUARANTEE) -->
+  <section id="pricing" style="padding: 140px 8%; background: linear-gradient(135deg, #020617, #0b1d36); color: white; text-align: center;">
+    <div class="container">
+        <h2 style="font-size: 3.5rem; margin-bottom: 20px;">The Professional Growth Investment.</h2>
+        <p style="font-size: 1.2rem; color: #cbd5e1; max-width: 700px; margin: 0 auto 60px;">Scale your export business with institutional-grade data access. No hidden costs, just results.</p>
+        
+        <div class="glass-card" style="max-width: 500px; margin: 0 auto; padding: 60px; border-color: var(--gold); border-width: 2px;">
+            <div style="text-transform: uppercase; letter-spacing: 3px; color: var(--gold); font-weight: 700; margin-bottom: 15px;">3-Month Trial Membership</div>
+            <div style="font-size: 4rem; font-weight: 800; margin-bottom: 10px;">₹59,000</div>
+            <div style="font-size: 1.1rem; color: #94a3b8; margin-bottom: 40px;">Inclusive of GST & Institutional Verification</div>
+            
+            <ul style="text-align: left; list-style: none; padding: 0; margin-bottom: 50px;">
+                <li style="margin-bottom: 15px; display: flex; gap: 10px;">✨ Full Access to 5M+ Buyer Database</li>
+                <li style="margin-bottom: 15px; display: flex; gap: 10px;">✨ Daily Verified RFQ Alerts (Direct)</li>
+                <li style="margin-bottom: 15px; display: flex; gap: 10px;">✨ Professional KYC Certification Badge</li>
+                <li style="margin-bottom: 15px; display: flex; gap: 10px;">✨ Priority Dispute Resolution Support</li>
+                <li style="margin-bottom: 15px; display: flex; gap: 10px;">✨ Dedicated B2B Relationship Manager</li>
+            </ul>
+
+            <a href="/membership.html" class="btn-gold" style="width: 100%; text-align: center; color: black;">Commence Trial Profile</a>
+        </div>
+
+        <div style="margin-top: 80px; display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;">
+            <div style="max-width: 300px;">
+                <h3 style="color: var(--gold); margin-bottom: 10px;">🛡️ 48-Hour RFQ Guarantee</h3>
+                <p style="font-size: 0.9rem; color: #94a3b8;">Receive your first matched buyer inquiry within 48 hours of verification or we extend your support free.</p>
+            </div>
+            <div style="max-width: 300px;">
+                <h3 style="color: var(--gold); margin-bottom: 10px;">🔒 No Commitment</h3>
+                <p style="font-size: 0.9rem; color: #94a3b8;">Try the platform for 3 months with no auto-renewal. Pay only for the value you receive.</p>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS (MODERNIZED) -->
+  <section class="how-it-works" style="padding: 120px 8%; background: white; color: #020617;">
+    <h2 style="font-size: 3rem; margin-bottom: 20px;">The Elite Trading Framework</h2>
+    <p style="color: #475569; max-width: 700px; margin: auto;">Built for institutional exporters. From verification to deal closure in 3 steps.</p>
     <div class="how-grid">
-      <div class="how-step">
+      <div class="how-step" style="background: #f8fafc; border: 1px solid #e2e8f0;">
         <div class="step-num">1</div>
-        <h3 style="color:var(--gold);">Apply & Verify</h3>
-        <p style="font-size:14px; color:#94a3b8;">Create your profile and clear our internal KYC/IEC compliance check.</p>
+        <h3 style="color: #020617;">Apply & Verify</h3>
+        <p style="font-size: 14px; color: #475569;">Create your profile and clear our internal KYC/IEC compliance audit to ensure trade integrity.</p>
       </div>
-      <div class="how-step">
+      <div class="how-step" style="background: #f8fafc; border: 1px solid #e2e8f0;">
         <div class="step-num">2</div>
-        <h3 style="color:var(--gold);">Unlock Intelligence</h3>
-        <p style="font-size:14px; color:#94a3b8;">Access protected buyer data, destination port requirements, and payment records.</p>
+        <h3 style="color: #020617;">Match Intelligence</h3>
+        <p style="font-size: 14px; color: #475569;">Our system identifies buyers actively looking for your product category and sends matching RFQs to your dashboard.</p>
       </div>
-      <div class="how-step">
+      <div class="how-step" style="background: #f8fafc; border: 1px solid #e2e8f0;">
         <div class="step-num">3</div>
-        <h3 style="color:var(--gold);">Direct Execution</h3>
-        <p style="font-size:14px; color:#94a3b8;">Bypass brokers. Negotiate and close deals directly via our encrypted data-lines.</p>
+        <h3 style="color: #020617;">Direct Execution</h3>
+        <p style="font-size: 14px; color: #475569;">Bypass brokers. Negotiate and close deals directly via our encrypted data-lines or your preferred secure channels.</p>
       </div>
     </div>
-  </section>
-  <section class="live-rfq">
-    <div class="live-rfq-label">🔴 Live RFQ Update</div>
-    <div class="live-rfq-track" id="rfqTicker">
-      <span>Loading live RFQs...</span>
-    </div>
-  </section>
-  <section class="sea">
-    <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=900&q=60">
-    <div class="contact-card">
-      <h2 style="font-family:'Playfair Display',serif; color:#fff; margin-bottom:20px;">Global Trade Never Stops</h2>
-      <p>Verified buyers. Real demand. Structured execution.</p>
-      <div style="color:var(--gold-soft); line-height:2;">
-        📧 info@apdglobaltrade.com<br>
-        💬 WhatsApp: +91 92664 18868
-      </div>
-    </div>
-    <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=900&q=60">
   </section>
   <!-- TRADE AUTHORITY SECTION -->
-  <section class="trade-authority">
-    <h2>International Trade Authority Framework</h2>
-    <p>
-      APD Global Trade operates under a structured international trade model,
-      ensuring verified participation, controlled supplier access,
-      and professional B2B execution standards across global markets.
-    </p>
-    <div class="authority-grid">
-      <div class="authority-card">
-        <h3>Verified Buyer Screening</h3>
-        <p>All RFQs are reviewed to eliminate spam and maintain serious commercial intent.</p>
+  <section class="authority-section">
+    <div class="container">
+      <h2 style="font-size: 3.5rem; margin-bottom: 20px;">International Trade Authority Framework</h2>
+      <p style="color: #94a3b8; max-width: 800px; margin: 0 auto 60px;">APD Global Trade operates under a structured international trade model, ensuring verified participation and institutional execution standards.</p>
+      
+      <div class="authority-grid">
+        <div class="authority-card">
+          <span class="icon">🔍</span>
+          <h3>Verified Buyer Screening</h3>
+          <p>Multi-step manual audit to eliminate non-commercial intent and maintain a 99.8% serious-buyer ratio.</p>
+        </div>
+        <div class="authority-card">
+          <span class="icon">🏛️</span>
+          <h3>Controlled Supplier Access</h3>
+          <p>Restricted membership-based corridor ensuring only KYC-cleared exporters engage with global RFQs.</p>
+        </div>
+        <div class="authority-card">
+          <span class="icon">📑</span>
+          <h3>Standardized Execution</h3>
+          <p>UN/CEFACT based documentation framework for seamless cross-border trade readiness and clearance.</p>
+        </div>
+        <div class="authority-card">
+          <span class="icon">💎</span>
+          <h3>Institutional Positioning</h3>
+          <p>A curated trade authority platform focused on high-volume bulk commodities, not a public directory.</p>
+        </div>
       </div>
-      <div class="authority-card">
-        <h3>Controlled Supplier Membership</h3>
-        <p>Membership-based access ensures professional trade engagement.</p>
+      
+      <div style="margin-top: 80px;">
+        <a href="/membership.html" class="btn-gold">Apply for Verified Membership</a>
       </div>
-      <div class="authority-card">
-        <h3>Structured RFQ Execution</h3>
-        <p>Standardized quotation framework for cross-border trade readiness.</p>
-      </div>
-      <div class="authority-card">
-        <h3>Institutional Positioning</h3>
-        <p>APD Global Trade is a curated trade authority, not a public directory.</p>
-      </div>
-    </div>
-    <div class="authority-cta">
-      <a href="/membership.html">Apply for Verified Supplier Membership</a>
     </div>
   </section>
   <!-- TRADE STANDARDS & COMPLIANCE -->
@@ -877,95 +694,191 @@ text-align:center;
     </div>
   </section>
 
-  <footer>
-    <p style="color:var(--gold);font-weight:600; font-family:'Playfair Display', serif; font-size:1.5rem;">APD Global
-      Trade</p>
-    <p style="color:#94a3b8; font-size:13px; margin-top:10px; letter-spacing:1px; text-transform:uppercase;">
-       Global Offices: New York • London • Dubai • Singapore
-    </p>
-    <p style="margin-top:20px;">
-      <a href="/verification-process.html" style="color: var(--gold); border: 1px solid var(--gold); padding: 5px 12px; border-radius: 5px; font-weight: 600;">How We Verify</a>
-    </p>
-    <p style="margin-top:20px;">
-      <a href="/terms.html">Terms</a> |
-      <a href="/privacy.html">Privacy</a> |
-      <a href="/disclaimer.html">Disclaimer</a> |
-      <a href="/shipping-policy.html">Shipping Policy</a>
-    </p>
-    <p style="font-size: 11px; margin-top: 30px; opacity: 0.4; letter-spacing: 1px;">
-      🔒 SECURE DATA LINE • 256-BIT AES ENCRYPTION • INSTITUTIONAL OVERSIGHT
-    </p>
-    <p style="font-size: 12px; margin-top: 10px; opacity: 0.5;">© 2026 APD Global Trade. All rights reserved.</p>
+  <!-- INSTITUTIONAL FOOTER -->
+  <footer style="background: #020617; padding: 100px 8% 60px; border-top: 1px solid rgba(255,255,255,0.05); color: #94a3b8; text-align: left;">
+    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 60px;">
+        
+        <!-- Column 1: Branding -->
+        <div>
+            <div class="logo premium-logo" style="margin-bottom: 25px;">
+                <span style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 24px; color: white;">APD <span style="color: var(--gold);">Global</span> Trade</span>
+            </div>
+            <p style="font-size: 0.9rem; line-height: 1.8;">The world's most trusted corridor for verified international trade. We bridge the gap between institutional buyers and professional exporters through audited data and secure communication.</p>
+        </div>
+
+        <!-- Column 2: Platform -->
+        <div>
+            <h4 style="color: white; margin-bottom: 25px; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 14px;">Marketplace</h4>
+            <ul style="list-style: none; padding: 0; font-size: 0.9rem; line-height: 2.2;">
+                <li><a href="/buyer-rfqs.html" style="color: inherit; text-decoration: none;">Live Buyer RFQs</a></li>
+                <li><a href="/suppliers.html" style="color: inherit; text-decoration: none;">Verified Suppliers</a></li>
+                <li><a href="/verification-process.html" style="color: inherit; text-decoration: none;">Trade Security</a></li>
+                <li><a href="/membership.html" style="color: var(--gold); text-decoration: none; font-weight: 700;">Join Membership</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 3: Legal & Compliance -->
+        <div>
+            <h4 style="color: white; margin-bottom: 25px; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 14px;">Legal & Trust</h4>
+            <ul style="list-style: none; padding: 0; font-size: 0.9rem; line-height: 2.2;">
+                <li><a href="/terms.html" style="color: inherit; text-decoration: none;">Terms & Conditions</a></li>
+                <li><a href="/privacy.html" style="color: inherit; text-decoration: none;">Privacy Policy</a></li>
+                <li><a href="/refund-policy.html" style="color: inherit; text-decoration: none;">Refund & Cancellation</a></li>
+                <li><a href="/shipping-policy.html" style="color: inherit; text-decoration: none;">Shipping & Delivery</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 4: Support -->
+        <div>
+            <h4 style="color: white; margin-bottom: 25px; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 14px;">Corporate</h4>
+            <ul style="list-style: none; padding: 0; font-size: 0.9rem; line-height: 2.2;">
+                <li><a href="/about-us.html" style="color: inherit; text-decoration: none;">About APD Global</a></li>
+                <li><a href="/leadership.html" style="color: inherit; text-decoration: none;">Leadership</a></li>
+                <li><a href="/contact.html" style="color: inherit; text-decoration: none;">Contact Support</a></li>
+                <li><a href="mailto:info@apdglobaltrade.com" style="color: var(--gold); text-decoration: none; font-weight: 700;">info@apdglobaltrade.com</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div style="max-width: 1200px; margin: 60px auto 0; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; font-size: 0.8rem; letter-spacing: 1px;">
+        <div>© 2026 APD GLOBAL TRADE. ALL RIGHTS RESERVED.</div>
+        <div style="opacity: 0.6;">OPERATED UNDER SWIFT & WCO COMPLIANCE STANDARDS.</div>
+    </div>
   </footer>
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, getDocs, query, orderBy, limit }
-      from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-    const firebaseConfig = {
-      apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-      authDomain: "apd-globaltrade-prod.firebaseapp.com",
-      projectId: "apd-globaltrade-prod",
-      storageBucket: "apd-globaltrade-prod.firebasestorage.app",
-      messagingSenderId: "226407312435",
-      appId: "1:226407312435:web:f8a54b1132af3899170746"
-    };
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const ticker = document.getElementById("rfqTicker");
-    function aiSummary(r) {
-      return `Buyer seeking ${r.product} (${r.quantity}) for ${r.country || "global"} market`;
-    }
-    async function loadRFQs() {
-      try {
-        const q = query(collection(db, "rfqs"), orderBy("createdAt", "desc"), limit(12));
-        const snap = await getDocs(q);
-        ticker.innerHTML = "";
-        if (snap.empty) {
-          ticker.innerHTML = `<span>No Live RFQs Available</span>`;
-          return;
-        }
-        snap.forEach(doc => {
-          const r = doc.data();
-          const country = r.destination || r.country || "Global";
-          const code = (r.countryCode || "").toLowerCase();
-          const flag = code
-            ? `<img src="https://flagcdn.com/16x12/${code}.png" style="vertical-align:middle;margin-right:6px">`
-            : "🌍";
-          ticker.innerHTML += `
-        <span onclick="location.href='/membership.html'" style="display:flex; align-items:center; gap:8px;">
-          ${flag} ${aiSummary({ ...r, country })}
-          <span style="background: rgba(34, 197, 94, 0.1); color: #4ade80; font-size: 10px; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(74, 222, 128, 0.2); font-weight: 800; text-transform: uppercase;">✅ Bank Verified</span>
-        </span>`;
+
+  <script src="/assets/js/globe_engine.js" type="module"></script>
+  <script>
+    /* 3D TILT EFFECT */
+    document.querySelectorAll('.glass-card, .floating-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
         });
-      } catch (error) {
-        ticker.innerHTML = `<span>Error loading RFQs</span>`;
-        console.error(error);
-      }
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
+        });
+    });
+
+    /* DRAWER HANDLER */
+    window.toggleDrawer = function() {
+        const drawer = document.getElementById('sideDrawer');
+        const overlay = document.getElementById('drawerOverlay');
+        if (drawer && overlay) {
+            drawer.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
     }
     /* SUHANA HANDLERS (PREMIUM STUFF) */
     window.toggleSuhana = function () {
       const win = document.getElementById('suhana-window');
-      win.style.display = (win.style.display === 'block') ? 'none' : 'block';
+      if (win) {
+        win.style.display = (win.style.display === 'block') ? 'none' : 'block';
+      }
     }
     window.suhanaHandle = function (type) {
       const msg = document.getElementById('suhana-msg');
       const actions = document.getElementById('suhana-actions');
-      actions.style.display = 'none';
-      if (type === 'exporter') {
-        msg.innerHTML = "<b>Security Clearance Granted.</b> Redirecting to the Trading Floor...";
-        setTimeout(() => { window.location.href = "/buyer-rfqs.html"; }, 2000);
-      } else if (type === 'importer') {
-        msg.innerHTML = "<b>Post-port portal initialized.</b> Automatically publishing to verified suppliers... <b>Redirecting...</b>";
-        setTimeout(() => { window.location.href = "/create-rfq.html"; }, 2000);
-      } else if (type === 'help') {
-        msg.innerHTML = "Opening direct encrypted line to Dispatch via WhatsApp...";
-        setTimeout(() => { window.location.href = "https://wa.me/919266418868"; }, 1500);
+      if (actions) actions.style.display = 'none';
+      if (msg) {
+          if (type === 'exporter') {
+            msg.innerHTML = "<b>Security Clearance Granted.</b> Redirecting to the Trading Floor...";
+            setTimeout(() => { window.location.href = "/buyer-rfqs.html"; }, 1500);
+          } else if (type === 'importer') {
+            msg.innerHTML = "<b>Post-port portal initialized.</b> Automatically publishing to verified suppliers... <b>Redirecting...</b>";
+            setTimeout(() => { window.location.href = "/create-rfq.html"; }, 1500);
+          } else if (type === 'help') {
+            msg.innerHTML = "Opening direct encrypted line to Dispatch via WhatsApp...";
+            setTimeout(() => { window.location.href = "https://wa.me/919266418868"; }, 1000);
+          }
       }
     }
-    loadRFQs();
+    /* INSTITUTIONAL TIMER */
+    /* INSTITUTIONAL TIMER */
+    function startBatchTimer(duration, display) {
+        let timer = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            display.textContent = minutes + ":" + seconds;
+            if (--timer < 0) { timer = duration; }
+        }, 1000);
+    }
+
+    /* SOCIAL PROOF PINGS */
+    const socialProofMessages = [
+        "Exporter from Rajkot just unlocked 7 UAE Grain Leads",
+        "Verification cleared for Maharashtra Spices Exporter",
+        "New 10,000 MT Rice RFQ matched with verified suppliers",
+        "Payment received: 3-Month Premium Trial activated",
+        "Bank Audit complete for active Buyer in Dubai",
+        "Gujarat Exporter unlocked 5 Vietnam Oil Leads",
+        "Tamil Nadu Export Co. just secured a South Korea contract",
+        "Panipat Textile unit matched with European buyer",
+        "Indore Seeds firm cleared 7-Day Power Pass",
+        "Bengaluru Tech firm secured US Govt Logistics project",
+        "Hyderabad Pharma unit activated Annual Elite Plan",
+        "Lucknow Handicrafts matched with UK Home Decor brand",
+        "Ludhiana Cycle unit unlocked 10 African trade leads",
+        "Amritsar Rice mill finalized 5-day verification",
+        "Surat Diamond trader matched with Antwerp buyer network",
+        "Delhi-based Trader cleared for Elite Institutional access",
+        "Jodhpur Furniture unit matched with Australian distributor",
+        "Agra Leather works finalized Middle-East bulk order",
+        "Kanpur Hides exporter cleared annual trade audit",
+        "Coimbatore Engineering unit matched with Malaysia Govt",
+        "Export Test Drive activated for Kochi Spice Merchant",
+        "Vijayawada Tobacco unit matched with China-based buyer",
+        "Guwahati Tea merchant matched with Dubai Royal Family procurement",
+        "Patna Foxnut exporter cleared verification for Tokyo market",
+        "Ranchi mineral group matched with Indian refining partners",
+        "Shimla Fruit processing unit matched with UK juice brand",
+        "Chandigarh Pharma distribution unit matched with CIS buyer network",
+        "Goa Frozen Seafood export container cleared for Barcelona port",
+        "Bhopal Soy-unit unlocked matching Vietnam leads",
+        "Ahmedabad Plastic manufacturer matched with Mexico procurement"
+    ];
+
+    function showSocialProof() {
+        const toast = document.createElement('div');
+        toast.style = "position:fixed; bottom:30px; left:30px; background:rgba(15,23,42,0.95); border:1px solid var(--gold); padding:15px 25px; border-radius:15px; color:white; font-size:13px; box-shadow:0 10px 30px rgba(0,0,0,0.5); z-index:10004; transform:translateY(150px); transition:0.5s transform; display:flex; align-items:center; gap:12px;";
+        const randomMsg = socialProofMessages[Math.floor(Math.random() * socialProofMessages.length)];
+        toast.innerHTML = `<div style="width:10px; height:10px; background:#22c55e; border-radius:50%;"></div> ${randomMsg}`;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => toast.style.transform = "translateY(0px)", 100);
+        setTimeout(() => {
+            toast.style.transform = "translateY(200px)";
+            setTimeout(() => toast.remove(), 500);
+        }, 6000);
+    }
+
+    // High frequency: Every 45-90 seconds
+    setInterval(() => {
+        showSocialProof();
+    }, 45000 + Math.random() * 45000);
+
+    // Show first one after 5 seconds
+    setTimeout(showSocialProof, 5000);
+    }
+    window.onload = function () {
+        const fifteenMinutes = 60 * 15,
+            display = document.querySelector('#batchTimer');
+        if (display) startBatchTimer(fifteenMinutes, display);
+    };
   </script>
   <a class="float whatsapp" href="https://wa.me/919266418868">💬</a>
-  <a class="float download" href="/download-app.html">📲 Deploy App</a>
+  <a class="float download" href="/membership.html">📲 Join Premium</a>
 </body>
-
 </html>

@@ -25,11 +25,13 @@ button{
   cursor:pointer;font-size:12px;color:#fff
 }
 .approve{background:#16a34a}
+.pass{background:#c9a44a; color:#000; font-weight:700}
 .ban{background:#dc2626}
 .unban{background:#2563eb}
 .free{background:#64748b}
 .gold{background:#d97706}
 .platinum{background:#4f46e5}
+.premium{background:#0f172a; border:1px solid #c9a44a; color:#c9a44a}
 footer{
   background:#020617;color:#9ca3af;
   text-align:center;padding:40px 20px;font-size:14px
@@ -50,13 +52,15 @@ footer{
 <tr>
 <th>Company</th>
 <th>Email</th>
+<th>ID (UID)</th>
 <th>Status</th>
 <th>Plan</th>
+<th>Unlocks</th>
 <th>Actions</th>
 </tr>
 </thead>
 <tbody id="tbody">
-<tr><td colspan="5">Loading suppliers…</td></tr>
+<tr><td colspan="7">Loading suppliers…</td></tr>
 </tbody>
 </table>
 </div>
@@ -71,7 +75,6 @@ footer{
   </p>
   <p>
     📧 info@apdglobaltradehub.com<br>
-    ☎ +1 (202) 780-1366<br>
     💬 WhatsApp: +91 92664 18868
   </p>
 </footer>
@@ -95,7 +98,8 @@ import {
   collection,
   getDocs,
   doc,
-  updateDoc
+  updateDoc,
+  deleteDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const ADMIN_EMAIL = "admin@apdglobaltrade.com";
@@ -104,7 +108,10 @@ const ADMIN_EMAIL = "admin@apdglobaltrade.com";
 const app = initializeApp({
   apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
   authDomain: "apd-globaltrade-prod.firebaseapp.com",
-  projectId: "apd-globaltrade-prod"
+  projectId: "apd-globaltrade-prod",
+  storageBucket: "apd-globaltrade-prod.firebasestorage.app",
+  messagingSenderId: "226407312435",
+  appId: "1:226407312435:web:f8a54b1132af3899170746"
 });
 
 const auth = getAuth(app);
@@ -129,13 +136,13 @@ onAuthStateChanged(auth, async (user) => {
 
 // Load suppliers
 async function loadSuppliers() {
-  tbody.innerHTML = "<tr><td colspan='5'>Loading suppliers…</td></tr>";
+  tbody.innerHTML = "<tr><td colspan='7'>Loading suppliers…</td></tr>";
 
   try {
     const snap = await getDocs(collection(db, "suppliers"));
 
     if (snap.empty) {
-      tbody.innerHTML = "<tr><td colspan='5'>No suppliers found</td></tr>";
+      tbody.innerHTML = "<tr><td colspan='7'>No suppliers found</td></tr>";
       return;
     }
 
@@ -143,19 +150,40 @@ async function loadSuppliers() {
 
     snap.forEach(d => {
       const s = d.data();
+      const planMap = {
+        '7_day_pass': '7-Day Power Pass',
+        'trial_3m': '3-Mo Premium Trial',
+        'pro_6m': '6-Mo Elite Professional',
+        'elite_12m': '12-Mo Institutional Elite',
+        'free': 'Free',
+        'basic': 'Basic',
+        'premium': '3-Mo Premium Trial',
+        'platinum': '6-Mo Elite Professional',
+        'gold': '3-Mo Premium Trial'
+      };
+      const planName = planMap[s.plan] || s.plan || "basic";
+      const unlockTotal = (s.plan === '7_day_pass') ? '7' : '∞';
+      
+      const isLegacy = d.id.length < 20; // Minimal heuristic for manual IDs
+      const warning = isLegacy ? '<span title="Manual/Legacy ID. May not sync with user login." style="cursor:help;">⚠️</span>' : '';
+
       tbody.innerHTML += `
         <tr>
           <td>${s.companyName || "-"}</td>
           <td>${s.email || "-"}</td>
-          <td>${s.status || "pending"}</td>
-          <td>${s.plan || "basic"}</td>
+          <td style="font-size:10px; font-family:monospace; color:#64748b;">${warning} ${d.id}</td>
+          <td><b>${s.status || "pending"}</b></td>
+          <td style="font-size:12px;">${planName}</td>
+          <td><span style="color:#c9a44a; font-weight:800;">${s.unlocksUsed || 0}</span> / ${unlockTotal}</td>
           <td>
             <button class="approve" onclick="upd('${d.id}',{status:'approved'})">Approve</button>
-            <button class="ban" onclick="upd('${d.id}',{status:'banned'})">Ban</button>
-            <button class="unban" onclick="upd('${d.id}',{status:'approved'})">Unban</button>
+            <button class="pass" onclick="upd('${d.id}',{plan:'7_day_pass', status:'approved', unlocksUsed:0, unlockedLeads:[]})">Assign 7-Day Pass</button>
+            <button class="gold" onclick="upd('${d.id}',{plan:'trial_3m', status:'approved'})">Set 3-Mo Trial</button>
+            <button class="platinum" onclick="upd('${d.id}',{plan:'pro_6m', status:'approved'})">Set 6-Mo Elite</button>
+            <button class="premium" onclick="upd('${d.id}',{plan:'elite_12m', status:'approved'})">Set 12-Mo Elite</button>
             <button class="free" onclick="upd('${d.id}',{plan:'free'})">Free</button>
-            <button class="gold" onclick="upd('${d.id}',{plan:'gold'})">Gold</button>
-            <button class="platinum" onclick="upd('${d.id}',{plan:'platinum'})">Platinum</button>
+            <button class="ban" onclick="upd('${d.id}',{status:'banned'})">Ban</button>
+            ${isLegacy ? `<button class="ban" style="background:#000" onclick="del('${d.id}')">Delete</button>` : ''}
           </td>
         </tr>`;
     });
@@ -170,6 +198,13 @@ async function loadSuppliers() {
 window.upd = async (id, data) => {
   await updateDoc(doc(db, "suppliers", id), data);
   loadSuppliers();
+};
+
+window.del = async (id) => {
+  if (confirm("Are you sure you want to delete this LEGACY record? This will NOT delete the user account.")) {
+    await deleteDoc(doc(db, "suppliers", id));
+    loadSuppliers();
+  }
 };
 
 // Logout

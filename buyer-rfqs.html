@@ -182,6 +182,15 @@
       }
     }
   </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EXRC4SWZ71"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-EXRC4SWZ71');
+  </script>
 </head>
 
 <body>
@@ -203,7 +212,21 @@
     <div class="authority-bar">
       <div>🌍 100+ Active Trade Corridors</div>
       <div>📊 Structured RFQ Framework</div>
-      <div>🔐 Controlled Supplier Access</div>
+      <a href="https://chat.whatsapp.com/BRSKIkuYO6LCVM2WhRyczq" target="_blank" style="color: #4ade80; font-weight: 700; text-decoration: none;">💬 JOIN FREE TRADE HUB</a>
+    </div>
+
+    <!-- CREDIT DASHBOARD (HIDDEN BY DEFAULT) -->
+    <div id="creditDashboard" style="display:none; background:#fff; padding:20px; border-radius:12px; margin-bottom:25px; border:1px solid #cbd5e1; box-shadow:0 10px 30px rgba(0,0,0,0.05);">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+             <div>
+                <span id="welcomeSupplier" style="font-weight:700; color:#071427;">Welcome, Supplier</span>
+                <div style="font-size:12px; color:#64748b; margin-top:2px;">Plan: <span id="currentPlan">Trial</span></div>
+             </div>
+             <div style="text-align:right;">
+                <div style="font-size:11px; color:#64748b; text-transform:uppercase; letter-spacing:1px;">Unlocks Remaining</div>
+                <div id="unlockCredits" style="font-size:24px; font-weight:800; color:#c9a44a;">0 / 7</div>
+             </div>
+        </div>
     </div>
 
     <div class="search-box">
@@ -227,22 +250,137 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, getDocs, query, orderBy, limit, startAfter, where } from
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getFirestore, collection, getDocs, getDoc, doc, query, orderBy, limit, startAfter, where, updateDoc, arrayUnion, increment } from
       "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     const app = initializeApp({
       apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
       authDomain: "apd-globaltrade-prod.firebaseapp.com",
-      projectId: "apd-globaltrade-prod"
+      projectId: "apd-globaltrade-prod",
+      storageBucket: "apd-globaltrade-prod.firebasestorage.app",
+      messagingSenderId: "226407312435",
+      appId: "1:226407312435:web:f8a54b1132af3899170746"
     });
 
     const db = getFirestore(app);
+    const auth = getAuth(app);
     const rfqList = document.getElementById("rfqList");
     const searchInput = document.getElementById("searchInput");
 
+    let currentUser = null;
+    let supplierData = null;
     let allRFQs = [];
     let lastVisible = null;
     const PAGE_SIZE = 20;
+
+    // ----- AUTH & CREDIT LOGIC -----
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        currentUser = user;
+        const { getDoc, doc } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
+        
+        console.log("Buyer RFQ Page - UID:", user.uid);
+        
+        let snap = await getDoc(doc(db, "suppliers", user.uid));
+        
+        if (snap.exists()) {
+          supplierData = { id: user.uid, ...snap.data() };
+          renderCredits();
+        }
+      }
+      loadRFQs(); 
+    });
+
+    function renderCredits() {
+      if (!supplierData || supplierData.plan !== '7_day_pass') return;
+      document.getElementById("creditDashboard").style.display = "block";
+      document.getElementById("welcomeSupplier").innerText = `Welcome, ${supplierData.companyName || 'Supplier'}`;
+      document.getElementById("currentPlan").innerText = "7-Day Power Pass";
+      const used = supplierData.unlocksUsed || 0;
+      document.getElementById("unlockCredits").innerText = `${7 - used} / 7`;
+    }
+
+    window.unlockLead = async (leadID, productName, destination) => {
+      if (!currentUser) {
+        alert("Please Login as a Supplier to unlock credits.");
+        window.location.href = "/supplier-login.html";
+        return;
+      }
+
+      const UNLIMITED_PLANS = ["trial_3m", "pro_6m", "elite_12m", "platinum", "premium"];
+      const HAS_ACCESS = UNLIMITED_PLANS.includes(supplierData.plan) || supplierData.plan === '7_day_pass';
+
+      if (!HAS_ACCESS) {
+        alert("Institutional Verification Required. Please upgrade your plan.");
+        window.location.href = "/membership.html";
+        return;
+      }
+
+      // If already unlocked
+      if (supplierData.unlockedLeads && supplierData.unlockedLeads.includes(leadID)) {
+        alert("Lead already unlocked.");
+        return;
+      }
+
+      // 1-Credit-Per-Day Logic for 7_day_pass
+      if (supplierData.plan === "7_day_pass") {
+        const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+        
+        if ((supplierData.unlocksUsed || 0) >= 7) {
+          alert("You have used all 7 trial credits. Upgrade to the 3-Month Premium for unlimited access.");
+          window.location.href = "/membership.html";
+          return;
+        }
+
+        if (supplierData.lastUnlockDate === today) {
+          alert("Daily Limit Reached! You have already used 1 credit today. You can unlock another lead tomorrow.");
+          return;
+        }
+
+        if (confirm(`Unlock lead for ${productName}? This will use 1 Institutional Credit. (1 used per day)`)) {
+          try {
+            const sRef = doc(db, "suppliers", supplierData.id);
+            await updateDoc(sRef, {
+              unlocksUsed: increment(1),
+              unlockedLeads: arrayUnion(leadID),
+              lastUnlockDate: today
+            });
+            
+            // Refresh local state
+            supplierData.unlocksUsed = (supplierData.unlocksUsed || 0) + 1;
+            supplierData.lastUnlockDate = today;
+            if (!supplierData.unlockedLeads) supplierData.unlockedLeads = [];
+            supplierData.unlockedLeads.push(leadID);
+            
+            renderCredits();
+            loadRFQs(); // Re-render to show data
+            alert("Lead Unlocked! ✅");
+          } catch (err) {
+            console.error(err);
+            alert("Error unlocking lead. Please try again.");
+          }
+        }
+      } else {
+        // Unlimited Plans or Standard Credit (if any)
+        if (confirm(`Unlock lead for ${productName}?`)) {
+          try {
+            await updateDoc(doc(db, "suppliers", supplierData.id), {
+              unlockedLeads: arrayUnion(leadID)
+            });
+            
+            if (!supplierData.unlockedLeads) supplierData.unlockedLeads = [];
+            supplierData.unlockedLeads.push(leadID);
+            
+            loadRFQs();
+            alert("Lead Unlocked! ✅");
+          } catch (err) {
+            console.error(err);
+            alert("Error unlocking lead. Please try again.");
+          }
+        }
+      }
+    };
 
     function formatTimeAgo(date) {
       if (!date) return "Recently Posted";
@@ -260,13 +398,29 @@
       return "Just now";
     }
 
-    function renderCards(docs, isMore = false) {
+    function renderCards(snapDocs, isMore = false) {
       const fragment = document.createDocumentFragment();
 
-      docs.forEach(r => {
+      snapDocs.forEach((d) => {
+        const r = d.data();
+        const id = d.id;
+        const isUnlocked = supplierData && (supplierData.unlockedLeads || []).includes(id);
+        const isAdmin = currentUser && currentUser.email === "admin@apdglobaltrade.com";
+        const isSevenDayPass = supplierData && supplierData.plan === '7_day_pass';
+        const UNLIMITED_PLANS = ["trial_3m", "pro_6m", "elite_12m", "platinum", "premium"];
+        const canAutomaticallyUnlock = isAdmin || (supplierData && UNLIMITED_PLANS.includes(supplierData.plan));
+        
         const timeAgo = r.createdAt ? formatTimeAgo(r.createdAt.toDate()) : "Recently Posted";
         const isHot = Math.random() > 0.8;
         const hotBadge = isHot ? `<div class="rfq-badge" style="background:#991b1b; color:#fff; border:none;">🔥 HIGH DEMAND</div>` : '';
+        
+        // 7-Day Pass: Blur initial view, only show clear after unlock
+        const shouldBlur = isSevenDayPass && !isUnlocked;
+        const blurStyle = (shouldBlur || (!isUnlocked && !canAutomaticallyUnlock)) ? "filter: blur(5px); user-select: none;" : "";
+        
+        const productName = (shouldBlur) ? "Member-Only RFQ" : (r.product || "-");
+        const companyName = (isUnlocked || canAutomaticallyUnlock) ? (r.company || r.companyName || r.buyer || "Verified Buyer") : "Blurred Company Name";
+        const contactInfo = (isUnlocked || canAutomaticallyUnlock) ? (r.phone || r.whatsapp || r.contact || r.email || "Member Access Only") : "+971 50 *******";
 
         const card = document.createElement('div');
         card.className = 'card';
@@ -278,34 +432,48 @@
         <div style="font-size:12px; color:#64748b; margin-bottom:14px; display:flex; align-items:center; gap:5px;">
            <span style="font-size:14px;">🕒</span> ${timeAgo}
         </div>
-        <h3>${r.product || "-"}</h3>
-        <div class="rfq-meta"><b>Quantity:</b> ${r.quantity || "-"}</div>
-        <div class="rfq-meta"><b>Destination:</b> ${r.deliveryPort || r.destination || r.country || "-"}</div>
+        <h3 style="color:#071427; font-size:20px; font-weight:700; margin-bottom:14px; ${shouldBlur ? blurStyle : ''}">${productName}</h3>
+        <div class="rfq-meta" style="font-size:14px; margin-bottom:5px;"><b>Quantity:</b> <span style="${shouldBlur ? blurStyle : ''}">${r.quantity || "-"}</span></div>
+        <div class="rfq-meta" style="font-size:14px; margin-bottom:15px;"><b>Destination:</b> <span style="${shouldBlur ? blurStyle : ''}">${r.deliveryPort || r.destination || r.country || "-"}</span></div>
         
+        <div style="margin: 15px 0; padding: 15px; background: rgba(0,0,0,0.03); border-radius: 12px; border: 1px dashed #cbd5e1;">
+           <div style="font-size: 13px; color: #475569; margin-bottom: 8px;">
+             🏢 <b>Company:</b> <span style="${blurStyle}">${companyName}</span>
+           </div>
+           <div style="font-size: 13px; color: #475569;">
+             📱 <b>Contact:</b> <span style="${blurStyle}">${contactInfo}</span>
+           </div>
+        </div>
+
         <div style="margin: 15px 0; display:flex; gap:12px; opacity:0.7; font-size:11px; font-weight:600; color:#475569;">
            <span title="Port destination verified by APD Intelligence">✅ PORT VERIFIED</span>
            <span title="Quantity and specifications have been audited">🔎 SPECS AUDITED</span>
            <span title="High volume historical buyer">💎 ELITE BUYER</span>
         </div>
 
-        <div class="locked">🔒 Buyer Contact & Company Details Locked</div>
-        <a class="cta" href="/membership.html">
-          Apply for Verified Supplier Access
-        </a>
+        ${isUnlocked ? `
+          <div style="color:#16a34a; font-weight:700; font-size:14px; margin:10px 0;">✅ UNLOCKED</div>
+          <a class="cta" style="background:#16a34a;" href="https://wa.me/919266418868?text=I%20have%20unlocked%20Lead%20${id}.%20Please%20verify%20my%20order%20status.">
+            Contact Buyer on WhatsApp
+          </a>
+        ` : `
+          <div class="locked">🔒 Institutional Verification Required to Unlock</div>
+          <button class="cta" onclick="unlockLead('${id}', '${r.product}', '${r.destination}')">
+            Unlock Lead (1 Institutional Credit)
+          </button>
+        `}
     `;
         fragment.appendChild(card);
       });
 
       if (!isMore) rfqList.innerHTML = "";
 
-      // Remove any existing Load More button before appending new cards
       const oldBtn = document.getElementById("loadMoreBtn");
       if (oldBtn) oldBtn.remove();
 
       rfqList.appendChild(fragment);
 
-      // Add Load More button if we might have more data
-      if (docs.length === PAGE_SIZE) {
+      if (snapDocs.length === PAGE_SIZE) {
         const loadMoreBtn = document.createElement('button');
         loadMoreBtn.id = "loadMoreBtn";
         loadMoreBtn.innerText = "Load More RFQs";
@@ -319,36 +487,55 @@
       }
     }
 
+    // DIAGNOSTIC CONSOLE
+    const diag = document.createElement("div");
+    diag.style = "position:fixed; bottom:0; left:0; right:0; background:#000; color:#0f0; font-family:monospace; font-size:10px; padding:5px; height:60px; overflow-y:auto; opacity:0.8; pointer-events:none; z-index:9999;";
+    diag.id = "diagConsole";
+    document.body.appendChild(diag);
+    
+    const log = (msg) => {
+      console.log(msg);
+      const p = document.createElement("div");
+      p.innerText = `[${new Date().toLocaleTimeString()}] ${msg}`;
+      diag.prepend(p);
+    };
+
     async function loadRFQs(isMore = false) {
+      if (isMore) {
+        log("Pagination fetch not implemented for snapshot mode yet.");
+        return;
+      }
+      
+      log("Initializing Buyer Lead Stream...");
+      rfqList.innerHTML = "🔄 Opening Verified Global Buyer Channel...";
+      
       try {
-        let q;
-        if (isMore && lastVisible) {
-          q = query(collection(db, "rfqs"), orderBy("product"), startAfter(lastVisible), limit(PAGE_SIZE));
-        } else {
-          rfqList.innerHTML = "🔄 Fetching Verified Global Buyer RFQs...";
-          q = query(collection(db, "rfqs"), orderBy("product"), limit(PAGE_SIZE));
-        }
+        const q = query(collection(db, "rfqs"), limit(PAGE_SIZE));
+        
+        onSnapshot(q, (snap) => {
+          log(`Stream Update: ${snap.size} RFQs received.`);
+          
+          if (snap.empty) {
+            rfqList.innerHTML = "<p>No Verified Global Buyer RFQs available recently.</p>";
+            return;
+          }
 
-        const snap = await getDocs(q);
-        if (snap.empty && !isMore) {
-          rfqList.innerHTML = "<p>No RFQs available yet.</p>";
-          return;
-        }
-
-        lastVisible = snap.docs[snap.docs.length - 1];
-        const newRFQs = snap.docs.map(d => d.data());
-        allRFQs = isMore ? [...allRFQs, ...newRFQs] : newRFQs;
-
-        renderCards(newRFQs, isMore);
-
-        document.querySelector("h1").innerText = "Live Verified Buyer RFQs (Global Access)";
+          // Manual Sort for reliability
+          const docs = [...snap.docs];
+          docs.sort((a,b) => (b.data().createdAt?.seconds || 0) - (a.data().createdAt?.seconds || 0));
+          
+          renderCards(docs, false);
+          document.querySelector("h1").innerText = "Live Verified Buyer RFQs (Global Access)";
+        }, (err) => {
+          log("Stream Error: " + err.message);
+          rfqList.innerHTML = `<div style="padding:20px; color:red; border:1px solid red; border-radius:12px;"><b>Stream Interrupted:</b><br>${err.message}</div>`;
+        });
       } catch (err) {
-        rfqList.innerHTML = "<p>Error loading RFQs. Please check your connection.</p>";
-        console.error(err);
+        log("Fatal Error: " + err.message);
+        rfqList.innerHTML = "<p>Error loading RFQs. Please check connection.</p>";
       }
     }
 
-    // Global Search functionality
     let searchTimeout;
     searchInput.addEventListener("input", () => {
       clearTimeout(searchTimeout);
@@ -366,7 +553,6 @@
         rfqList.innerHTML = `<div style="text-align:center; padding:40px;">🔍 Scanning Global Database for "<b>${queryStr}</b>"...</div>`;
         
         try {
-          // Normalize for common Title Case products (e.g. Rice, Sugar)
           const term = queryStr.charAt(0).toUpperCase() + queryStr.slice(1).toLowerCase();
           
           const q = query(
@@ -382,10 +568,7 @@
              return;
           }
 
-          const results = snap.docs.map(d => d.data());
-          allRFQs = results; // Update local cache
-          renderCards(results, false);
-          
+          renderCards(snap.docs, false);
           document.querySelector("h1").innerText = `Global Results for "${queryStr}"`;
         } catch (err) {
           console.error("Search Error:", err);
@@ -393,8 +576,6 @@
         }
       }, 600);
     });
-
-    loadRFQs();
   </script>
 
 </body>

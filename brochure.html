@@ -1,25 +1,263 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Corporate Brochure | APD Global Trade</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<style>
-body{margin:0;font-family:Inter;background:#020617;color:#fff}
-section{max-width:1000px;margin:120px auto;padding:0 20px;text-align:center}
-h1{font-family:'Playfair Display',serif;color:#e7cf88}
-p{color:#cbd5f5;line-height:1.8}
-</style>
+    <meta charset="UTF-8">
+    <title>Digital Brochure | APD Global Trade</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a44a;
+            --navy: #0b1d36;
+            --bg: #020617;
+            --text: #cbd5e1;
+            --glass: rgba(15, 23, 42, 0.8);
+        }
+        
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* PREMIUM HEADER */
+        header {
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo span:first-child {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        .logo .tagline {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-top: 5px;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: radial-gradient(circle at 50% 50%, rgba(201, 164, 74, 0.1) 0%, transparent 70%);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: var(--text);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        /* PILLARS */
+        .pillars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        .pillar {
+            background: var(--glass);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(201, 164, 74, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .pillar:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+        }
+
+        .pillar h3 {
+            color: var(--gold);
+            font-size: 20px;
+            margin-top: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pillar p {
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        /* STATS */
+        .stats-strip {
+            background: var(--navy);
+            padding: 40px 0;
+            margin: 80px 0;
+            border-top: 1px solid rgba(201, 164, 74, 0.3);
+            border-bottom: 1px solid rgba(201, 164, 74, 0.3);
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-val {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--gold);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.7;
+        }
+
+        /* CTA */
+        .cta-box {
+            background: linear-gradient(rgba(11, 29, 54, 0.9), rgba(11, 29, 54, 0.9)), url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80');
+            background-size: cover;
+            padding: 80px 40px;
+            border-radius: 30px;
+            text-align: center;
+            border: 1px solid var(--gold);
+            margin-top: 100px;
+        }
+
+        .btn {
+            background: var(--gold);
+            color: #000;
+            padding: 18px 45px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover { background: #e7cf88; }
+
+        footer {
+            padding: 80px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--text);
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 36px; }
+            header { flex-direction: column; gap: 20px; }
+        }
+    </style>
 </head>
 <body>
-<section>
-<h1>APD Global Trade</h1>
-<p>International Trade Authority connecting structured supplier membership with verified global buyer demand.</p>
 
-<p>• Curated Network<br>
-• Compliance Driven<br>
-• Structured RFQ Flow<br>
-• Institutional Positioning</p>
-</section>
+    <header>
+        <div class="logo">
+            <span>APD <span style="color: var(--gold);">Global</span> Trade</span>
+            <span class="tagline">Trade Smart. Scale Fast.</span>
+        </div>
+        <a href="/" style="color:var(--text); text-decoration:none; font-size:14px;">← Mission Control</a>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <h1>Institutional Trade Authority</h1>
+            <p class="subtitle">Connecting structured supplier membership with verified global buyer demand through audited security and elite facilitation.</p>
+            
+            <div class="pillars">
+                <div class="pillar">
+                    <h3>Curated Network</h3>
+                    <p>Exclusive access to a vetted ecosystem of high-volume buyers and professional global exporters.</p>
+                </div>
+                <div class="pillar">
+                    <h3>Compliance Driven</h3>
+                    <p>Operating under ICC and WCO standards, ensuring every transaction meets global regulatory frameworks.</p>
+                </div>
+                <div class="pillar">
+                    <h3>Structured RFQ Flow</h3>
+                    <p>Real-time demand signals from institutional buyers, processed through our bank-grade verification engine.</p>
+                </div>
+                <div class="pillar">
+                    <h3>Market Dominance</h3>
+                    <p>Direct bridge to emerging and established markets with protected margins and zero broker noise.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-strip">
+            <div class="stat-item">
+                <span class="stat-val">$10B+</span>
+                <span class="stat-label">Annual Volume</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-val">5M+</span>
+                <span class="stat-label">Verified Buyers</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-val">100+</span>
+                <span class="stat-label">Trade Hubs</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-val">24/7</span>
+                <span class="stat-label">Intelligence</span>
+            </div>
+        </section>
+
+        <section style="text-align:center;">
+            <p style="font-size:18px; max-width:800px; margin:0 auto; color:var(--text);">
+                APD Global Trade is the definitive platform for exporters who demand more than a directory. We provide the <strong>infrastructure</strong> for growth, the <strong>security</strong> for execution, and the <strong>leads</strong> that drive massive volume.
+            </p>
+            
+            <div class="cta-box">
+                <h2 style="color:#fff; font-family:'Playfair Display', serif; font-size:32px; margin-bottom:10px;">Ready to Scale Your Trade Ops?</h2>
+                <p style="color:var(--text); margin-bottom:30px;">Apply for institutional membership today and bypass the competition.</p>
+                <a href="/membership.html" class="btn">Apply for Membership</a>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 APD Global Trade. Global Offices: New York • London • Dubai • Singapore</p>
+            <p style="opacity:0.5; font-size:11px; margin-top:10px;">🔒 SECURE DATA LINE • 256-BIT AES ENCRYPTION • ISO 27001 ALIGNED</p>
+        </footer>
+    </div>
+
 </body>
 </html>

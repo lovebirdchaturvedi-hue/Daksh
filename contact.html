@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Command Headquarters | APD Global Trade</title>
@@ -7,6 +8,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/sales-bot.css">
+    <script src="/assets/js/sales-bot.js" type="module"></script>
     <style>
         /* ==========================================================================
    PREMIUM B2B BASE STYLES
@@ -24,9 +27,11 @@
             --glass-border: rgba(255, 255, 255, 0.08);
             --glass-blur: blur(16px);
         }
+
         * {
             box-sizing: border-box;
         }
+
         html,
         body {
             margin: 0;
@@ -37,6 +42,7 @@
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
+
         h1,
         h2,
         h3,
@@ -45,35 +51,44 @@
             margin: 0;
             font-weight: 600;
         }
+
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: var(--bg-darker);
         }
+
         ::-webkit-scrollbar-thumb {
             background: rgba(212, 175, 55, 0.3);
             border-radius: 4px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: var(--gold);
         }
+
         /* Animations */
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
+
         .reveal {
             opacity: 1;
             transform: translate(0);
         }
+
         .delay-100 {
             transition-delay: 100ms;
         }
+
         .delay-200 {
             transition-delay: 200ms;
         }
+
         /* Navigation */
         header {
             height: 85px;
@@ -89,10 +104,12 @@
             border-bottom: 1px solid var(--glass-border);
             transition: all 0.3s ease;
         }
+
         header.scrolled {
             background: rgba(2, 4, 10, 0.95);
             border-bottom: 1px solid var(--border-subtle);
         }
+
         header .logo {
             position: absolute;
             left: 40px;
@@ -101,15 +118,18 @@
             letter-spacing: 1px;
             text-transform: uppercase;
         }
+
         .premium-logo {
             background: linear-gradient(135deg, var(--gold-soft) 0%, var(--gold) 50%, #fff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
         header nav {
             display: flex;
             gap: 30px;
         }
+
         header nav a {
             color: var(--text-muted);
             text-decoration: none;
@@ -120,6 +140,7 @@
             position: relative;
             transition: color 0.3s ease;
         }
+
         header nav a::after {
             content: '';
             position: absolute;
@@ -130,12 +151,15 @@
             background-color: var(--gold);
             transition: width 0.3s ease;
         }
+
         header nav a:hover {
             color: var(--text-main);
         }
+
         header nav a:hover::after {
             width: 100%;
         }
+
         /* Page Header */
         .page-header {
             padding: 120px 20px 80px;
@@ -143,6 +167,7 @@
             background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1), transparent 70%), var(--bg-darker);
             position: relative;
         }
+
         .page-header::after {
             content: '';
             position: absolute;
@@ -153,11 +178,13 @@
             height: 2px;
             background: var(--gold);
         }
+
         .page-header h1 {
             font-size: clamp(2.5rem, 4vw, 4rem);
             margin-bottom: 20px;
             color: #fff;
         }
+
         .page-header p {
             max-width: 700px;
             margin: 0 auto;
@@ -165,6 +192,7 @@
             font-size: 1.15rem;
             line-height: 1.8;
         }
+
         /* Contact Section */
         .contact-container {
             display: grid;
@@ -174,33 +202,40 @@
             margin: 80px auto;
             padding: 0 40px;
         }
+
         @media(max-width: 900px) {
             .contact-container {
                 grid-template-columns: 1fr;
             }
+
             header nav {
                 display: none;
             }
         }
+
         .contact-info {
             background: var(--bg-card);
             padding: 50px;
             border: 1px solid var(--border-subtle);
             border-radius: 4px;
         }
+
         .contact-info h3 {
             color: var(--gold);
             margin-bottom: 30px;
             font-size: 1.5rem;
         }
+
         .info-block {
             margin-bottom: 30px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             padding-bottom: 20px;
         }
+
         .info-block:last-child {
             border: none;
         }
+
         .info-label {
             color: var(--text-muted);
             text-transform: uppercase;
@@ -209,31 +244,37 @@
             margin-bottom: 8px;
             display: block;
         }
+
         .info-value {
             color: #fff;
             font-size: 1.1rem;
             line-height: 1.6;
         }
+
         .contact-form {
             background: rgba(5, 9, 20, 0.8);
             padding: 50px;
             border: 1px solid var(--glass-border);
             border-radius: 4px;
         }
+
         .contact-form h3 {
             color: #fff;
             margin-bottom: 30px;
             font-size: 1.5rem;
         }
+
         .form-group {
             margin-bottom: 20px;
         }
+
         .form-group label {
             display: block;
             color: var(--text-muted);
             margin-bottom: 8px;
             font-size: 0.9rem;
         }
+
         .form-group input,
         .form-group textarea {
             width: 100%;
@@ -245,11 +286,13 @@
             font-family: 'Inter', sans-serif;
             transition: border 0.3s;
         }
+
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: var(--gold);
         }
+
         .submit-btn {
             background: linear-gradient(135deg, var(--gold), #b8912d);
             color: #000;
@@ -263,10 +306,12 @@
             border-radius: 4px;
             transition: transform 0.3s;
         }
+
         .submit-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
         }
+
         /* Map Placeholder */
         .map-container {
             width: 100%;
@@ -279,6 +324,7 @@
             justify-content: center;
             color: var(--text-muted);
         }
+
         /* Footer */
         footer {
             background: #010205;
@@ -286,6 +332,7 @@
             padding: 60px 20px;
             color: var(--text-muted);
         }
+
         footer a {
             color: var(--gold);
             margin: 0 10px;
@@ -295,7 +342,17 @@
             letter-spacing: 1px;
         }
     </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EXRC4SWZ71"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-EXRC4SWZ71');
+    </script>
 </head>
+
 <body>
     <header id="site-header">
         <div class="logo premium-logo">APD Global Trade</div>
@@ -317,10 +374,32 @@
         <div class="contact-info animate-on-scroll">
             <h3 class="premium-font">Operational Headquarters</h3>
             <div class="info-block">
-                <span class="info-label">Global Address</span>
+                <span class="info-label">Americas (HQ)</span>
                 <span class="info-value">
                     APD Global Trade LLC<br>
-        
+                    One World Trade Center, Suite 8500<br>
+                    New York, NY 10007, USA
+                </span>
+            </div>
+            <div class="info-block">
+                <span class="info-label">EMEA Hub</span>
+                <span class="info-value">
+                    30 St Mary Axe<br>
+                    London EC3A 8EP, United Kingdom
+                </span>
+            </div>
+            <div class="info-block">
+                <span class="info-label">APAC Hub</span>
+                <span class="info-value">
+                    Marina Bay Financial Centre Tower 1<br>
+                    8 Marina Blvd, Singapore 018981
+                </span>
+            </div>
+            <div class="info-block">
+                <span class="info-label">MENA Hub</span>
+                <span class="info-value">
+                    Dubai World Trade Centre<br>
+                    Sheikh Zayed Road, Dubai, UAE
                 </span>
             </div>
             <div class="info-block">
@@ -330,7 +409,6 @@
             <div class="info-block">
                 <span class="info-label">Direct Lines</span>
                 <span class="info-value">
-                    US Direct: +1 (202) 780-1366<br>
                     Encrypted WhatsApp: +91 92664 18868
                 </span>
             </div>
@@ -344,45 +422,102 @@
         </div>
         <div class="contact-form animate-on-scroll delay-100">
             <h3 class="premium-font">Secure Inquiry Transmission</h3>
-            <form action="#" method="POST">
+            <form id="contactForm">
                 <div class="form-group">
                     <label>Corporate Entity Name *</label>
-                    <input type="text" required>
+                    <input type="text" id="form-name" required placeholder="e.g. APD Global Trade LLC">
                 </div>
                 <div class="form-group">
                     <label>Official Business Email *</label>
-                    <input type="email" required>
+                    <input type="email" id="form-email" required placeholder="admin@company.com">
                 </div>
                 <div class="form-group">
                     <label>Nature of Inquiry *</label>
-                    <input type="text" required placeholder="e.g. Buyer Verification / Supply Registration">
+                    <input type="text" id="form-subject" required placeholder="e.g. Buyer Verification / Supply Registration">
                 </div>
                 <div class="form-group">
                     <label>Encrypted Message</label>
-                    <textarea rows="5" required></textarea>
+                    <textarea id="form-message" rows="5" required placeholder="Describe your institutional requirement..."></textarea>
                 </div>
-                <button type="submit" class="submit-btn">Transmit Securely</button>
+                <button type="submit" id="submitBtn" class="submit-btn" style="cursor: pointer;">Transmit Securely</button>
             </form>
+            <div id="formStatus" style="margin-top: 20px; padding: 15px; border-radius: 4px; display: none; font-size: 0.9rem; font-weight: 600; text-align: center;"></div>
         </div>
-   
+
         <footer>
-        <p
-            style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 20px; display: inline-block;">
-            APD Global Trade</p>
-        <p style="margin-top: 20px;">
-            <a href="/terms.html">Terms</a> | <a href="/privacy.html">Privacy</a> | <a
-                href="/standards.html">Standards</a>
-        </p>
-    </footer>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const header = document.getElementById("site-header");
-            window.addEventListener("scroll", () => { if (window.scrollY > 50) header.classList.add("scrolled"); else header.classList.remove("scrolled"); });
-            const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("reveal"); observer.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-            document.querySelectorAll(".animate-on-scroll").forEach(el => observer.observe(el));
-        });
-    </script>
+            <p style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 20px; display: inline-block;">
+                APD Global Trade</p>
+            <p style="margin-top: 20px;">
+                <a href="/terms.html">Terms</a> | <a href="/privacy.html">Privacy</a> | <a href="/refund-policy.html">Refund</a> | <a href="/shipping-policy.html">Shipping</a> | <a href="/about-us.html">About</a> | <a href="/contact.html">Contact</a>
+            </p>
+        </footer>
+
+        <!-- FIREBASE INTEGRATION -->
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+            import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-functions.js";
+
+            const firebaseConfig = {
+                apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+                authDomain: "apd-globaltrade-prod.firebaseapp.com",
+                projectId: "apd-globaltrade-prod",
+                storageBucket: "apd-globaltrade-prod.firebasestorage.app",
+                messagingSenderId: "226407312435",
+                appId: "1:226407312435:web:f8a54b1132af3899170746"
+            };
+
+            const app = initializeApp(firebaseConfig);
+            const functions = getFunctions(app, "us-central1");
+            const sendContactEmail = httpsCallable(functions, 'sendContactEmail');
+
+            document.getElementById('contactForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('submitBtn');
+                const status = document.getElementById('formStatus');
+                
+                const data = {
+                    name: document.getElementById('form-name').value,
+                    email: document.getElementById('form-email').value,
+                    subject: document.getElementById('form-subject').value,
+                    message: document.getElementById('form-message').value
+                };
+
+                btn.disabled = true;
+                btn.textContent = 'TRANSMITTING...';
+                status.style.display = 'block';
+                status.style.background = 'rgba(212, 175, 55, 0.1)';
+                status.style.color = 'var(--gold)';
+                status.textContent = 'Initiating secure transmission sequence...';
+
+                try {
+                    const result = await sendContactEmail(data);
+                    if (result.data.success) {
+                        status.style.background = 'rgba(34, 197, 94, 0.1)';
+                        status.style.color = '#22c55e';
+                        status.textContent = '✅ ' + result.data.message;
+                        document.getElementById('contactForm').reset();
+                    } else {
+                        throw new Error(result.data.error || 'Transmission failed');
+                    }
+                } catch (err) {
+                    status.style.background = 'rgba(239, 68, 68, 0.1)';
+                    status.style.color = '#ef4444';
+                    status.textContent = '❌ Error: ' + err.message;
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = 'Transmit Securely';
+                }
+            });
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const header = document.getElementById("site-header");
+                window.addEventListener("scroll", () => { if (window.scrollY > 50) header.classList.add("scrolled"); else header.classList.remove("scrolled"); });
+                const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("reveal"); observer.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+                document.querySelectorAll(".animate-on-scroll").forEach(el => observer.observe(el));
+            });
+        </script>
 </body>
+
 </html>
-
-
