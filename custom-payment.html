@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institutional Custom Payment | APD Global Trade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --gold: #d4af37; 
+            --dark: #020617; 
+            --glow: rgba(212, 175, 55, 0.4);
+        }
+        
+        * { box-sizing: border-box; }
+        
+        body { 
+            margin: 0; 
+            font-family: 'Inter', sans-serif; 
+            background: linear-gradient(135deg, #020617 0%, #0f172a 100%); 
+            color: white; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            overflow-x: hidden; 
+            position: relative;
+        }
+
+        /* Animated Background Particles */
+        .bg-particles {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
+            animation: pulse-bg 10s infinite alternate;
+        }
+
+        @keyframes pulse-bg {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .payment-card {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 50px 40px;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: float-in 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .payment-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.9), 0 0 40px rgba(212,175,55,0.1);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        @keyframes float-in {
+            0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .logo-icon {
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #020617, #1a1a1a);
+            border: 2px solid var(--gold);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+        .logo-icon span {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px; font-weight: 900; color: var(--gold);
+        }
+
+        h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 2rem; 
+            margin: 0 0 10px 0; 
+            background: linear-gradient(90deg, #fff, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        p.subtitle { color: #94a3b8; font-size: 0.95rem; margin-bottom: 30px; line-height: 1.5; }
+
+        .discount-badge {
+            background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(6,95,70,0.4));
+            border: 1px solid #22c55e;
+            color: #4ade80;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 25px;
+            box-shadow: 0 0 15px rgba(34,197,94,0.2);
+            animation: pulse-badge 2s infinite;
+        }
+
+        @keyframes pulse-badge {
+            0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(34,197,94,0); }
+            100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+        }
+
+        .input-group { text-align: left; margin-bottom: 25px; position: relative; }
+        
+        label { 
+            display: block; font-size: 11px; text-transform: uppercase; 
+            letter-spacing: 1.5px; color: #94a3b8; margin-bottom: 8px; font-weight: 800; 
+        }
+        
+        input {
+            width: 100%;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 16px 20px;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        input:focus { 
+            border-color: var(--gold); 
+            background: rgba(212, 175, 55, 0.05); 
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .currency-tag { 
+            position: absolute; right: 20px; top: 40px; 
+            color: var(--gold); font-weight: 800; font-size: 0.9rem; 
+        }
+
+        .btn {
+            width: 100%;
+            padding: 18px;
+            border-radius: 50px;
+            border: none;
+            font-weight: 800;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-phonepe { 
+            background: linear-gradient(135deg, var(--gold), #8B6508); 
+            color: #000; 
+            box-shadow: 0 10px 25px rgba(212,175,55,0.3), inset 0 2px 5px rgba(255,255,255,0.4);
+        }
+        
+        .btn-phonepe:hover { 
+            transform: translateY(-3px) scale(1.02); 
+            box-shadow: 0 15px 35px rgba(212,175,55,0.5), inset 0 2px 5px rgba(255,255,255,0.4); 
+        }
+
+        /* Shine effect on button */
+        .btn-phonepe::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -60%;
+            width: 20%; height: 200%;
+            background: rgba(255,255,255,0.4);
+            transform: rotate(30deg);
+            transition: 0.5s;
+            opacity: 0;
+        }
+        .btn-phonepe:hover::after {
+            left: 120%;
+            opacity: 1;
+            transition: left 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .trust-badges {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            font-size: 10px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .trust-badges div {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .payment-methods {
+            margin-top: 30px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 30px; 
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+        .payment-card:hover .payment-methods { opacity: 1; }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg-particles"></div>
+
+    <div class="payment-card">
+        
+        <div class="logo-icon"><span>APD</span></div>
+
+        <div class="discount-badge">✓ Corporate Discount Applied</div>
+        
+        <h1>Elite Settlement</h1>
+        <p class="subtitle">Secure processing for institutional memberships and discounted bulk packages.</p>
+
+        <div class="input-group">
+            <label>Registered Entity Name</label>
+            <input type="text" id="refName" placeholder="e.g. Reliance Global Imports">
+        </div>
+
+        <div class="input-group">
+            <label>Negotiated Amount</label>
+            <input type="number" id="payAmount" placeholder="0.00">
+            <div class="currency-tag">INR</div>
+        </div>
+
+        <button class="btn btn-phonepe" id="payBtn" onclick="initiateCustomPayment()">Authorize Payment</button>
+        
+        <div id="statusMsg" style="font-size: 12px; color: #ef4444; margin-top: 15px; display: none; font-weight: 600;"></div>
+
+        <div class="trust-badges">
+            <div>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#22c55e"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                256-Bit SSL
+            </div>
+            <div>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#d4af37"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45 7.77 18l1.12-4.81-3.73-3.23 4.92-.42L12 5l1.92 4.53 4.92.42-3.73 3.23L16.23 18z"/></svg>
+                Verified Escrow
+            </div>
+        </div>
+
+        <div class="payment-methods">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg" alt="PhonePe" height="22" style="filter: grayscale(100%) brightness(200%);">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" height="18" style="filter: grayscale(100%) brightness(200%);">
+        </div>
+    </div>
+
+    <script>
+        async function initiateCustomPayment() {
+            const amount = document.getElementById('payAmount').value;
+            const refName = document.getElementById('refName').value;
+            const btn = document.getElementById('payBtn');
+            const status = document.getElementById('statusMsg');
+
+            if (!amount || amount <= 0) {
+                status.innerText = "Error: Please enter a valid negotiated amount.";
+                status.style.display = "block";
+                return;
+            }
+
+            if (!refName) {
+                status.innerText = "Error: Please enter your Registered Entity Name.";
+                status.style.display = "block";
+                return;
+            }
+
+            btn.innerText = "Securing Channel...";
+            btn.disabled = true;
+            status.style.display = "none";
+
+            try {
+                const response = await fetch('/api/phonepe-init', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        amount: parseInt(amount),
+                        planName: "Elite Custom: " + refName
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.url) {
+                    window.location.href = data.url;
+                } else {
+                    throw new Error(data.error || "Gateway Initialization Failed");
+                }
+            } catch (err) {
+                console.error(err);
+                btn.innerText = "Authorize Payment";
+                btn.disabled = false;
+                status.innerText = err.message;
+                status.style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "apd-global-trade",
+  "version": "1.0.0",
+  "description": "APD Global Trade platform",
+  "main": "index.js",
+  "dependencies": {
+    "@phonepe-pg/pg-sdk-node": "^2.0.6",
+    "firebase": "^12.15.0"
+  }
+}

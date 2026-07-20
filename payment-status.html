@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Payment Status | APD Global Trade</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body { font-family: 'Inter', sans-serif; background: #020617; color: #fff; text-align: center; padding: 60px 20px; }
+  .card { background: #111827; padding: 40px; border-radius: 24px; border: 1px solid #d4af37; max-width: 500px; margin: auto; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+  h1 { color: #d4af37; font-size: 28px; margin-bottom: 20px; }
+  p { color: #94a3b8; line-height: 1.6; }
+  .btn { display: inline-block; background: #d4af37; color: #000; padding: 12px 30px; border-radius: 99px; text-decoration: none; font-weight: 700; margin-top: 30px; }
+</style>
+</head>
+<body>
+
+<div class="card" id="statusCard">
+    <!-- Dynamic Content -->
+</div>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    const card = document.getElementById('statusCard');
+
+    if (code && (code === 'PAYMENT_ERROR' || code === 'PAYMENT_DECLINED' || code === 'TRANSACTION_NOT_FOUND')) {
+        card.innerHTML = `
+            <h1 style="color: #ef4444;">Payment Cancelled ⚠️</h1>
+            <p>Your transaction was not completed. No charges were made to your account.</p>
+            <a href="/membership.html" class="btn" style="background: #ef4444; color: white;">Return to Checkout</a>
+        `;
+    } else {
+        card.innerHTML = `
+            <h1>Verification in Progress ⏳</h1>
+            
+            <p>
+                Your transaction has been recorded. For security reasons, our institutional trade desk must manually verify every transaction before unlocking access to the 5M+ Buyer Database.
+            </p>
+
+            <div style="background: rgba(212, 175, 55, 0.1); padding: 25px; border-radius: 15px; margin-top: 30px; text-align: left; border: 1px dashed #d4af37;">
+                <h2 style="color: #fff; font-size: 18px; margin-bottom: 15px;">📥 Action Required: Institutional Onboarding</h2>
+                <p style="font-size: 14px; color: #cbd5e1; margin-bottom: 15px;">To activate your elite supplier access, please download and sign the following forms:</p>
+                
+                <ul style="list-style: none; padding: 0; margin-bottom: 20px;">
+                    <li style="margin-bottom: 10px;"><a href="/supplier-agreement.html" target="_blank" style="color: #d4af37; text-decoration: underline;">1. Suppliers: Download Supplier Agreement</a></li>
+                    <li style="margin-bottom: 10px;"><a href="/supplier-consent.html" target="_blank" style="color: #d4af37; text-decoration: underline;">2. Suppliers: Download Consent Declaration</a></li>
+                    <li style="margin-bottom: 10px;"><a href="/assets/docs/Franchise_Application_Form.pdf" target="_blank" style="color: #4ade80; text-decoration: underline; font-weight: bold;">3. Franchise Applicants: Download Official PDF Form</a></li>
+                </ul>
+
+                <p style="font-size: 14px; color: #cbd5e1; margin-bottom: 10px;"><b>Please send the following via WhatsApp:</b></p>
+                <ul style="font-size: 13px; color: #94a3b8; padding-left: 20px;">
+                    <li>Signed & Stamped copies of both forms</li>
+                    <li>Company PAN Card</li>
+                    <li>Aadhaar Card (Authorized Signatory)</li>
+                    <li>GST Registration Certificate</li>
+                    <li>Importer-Exporter Code (IEC)</li>
+                </ul>
+            </div>
+
+            <a href="https://wa.me/919266418868?text=I%20have%20completed%20the%20payment.%20Here%20are%20my%20KYC%20documents." class="btn">Submit Documents via WhatsApp</a>
+            <br>
+            <a href="/membership.html" style="color: #64748b; font-size: 14px; display: inline-block; margin-top: 20px;">Back to Membership</a>
+        `;
+    }
+</script>
+
+</body>
+</html>
