@@ -325,8 +325,8 @@ window.unlockRfq = async (rfqId, supplierId) => {
     } else {
       // Standard local credit logic (if any) or shared credits
       if ((s.unlocksUsed || 0) >= (s.totalCredits || 0)) {
-         if(confirm("You do not have enough credits to unlock this buyer. Upgrade now to get instant credits. View Plans?")) {
-             window.location.href = '/membership.html';
+         if(confirm("You do not have enough credits. Buy 3 Premium Leads for ₹4,999 to unlock this buyer immediately?")) {
+             window.location.href = '/membership.html?buy=3';
          }
          return;
       }

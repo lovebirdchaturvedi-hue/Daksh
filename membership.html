@@ -690,7 +690,7 @@
         <div class="badge">CASUAL HOBBYIST</div>
         <h3>1 Verified Buyer</h3>
         <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 15px;">Unlock Any 1 Premium Lead</p>
-        <div class="price" id="price-plan1"><span class="show-inr"><s style="font-size: 1rem; color: #64748b; font-weight: 500;">₹2,999</s> ₹1,499</span><span class="show-usd"><s style="font-size: 1rem; color: #64748b; font-weight: 500;">$50</s> $19</span></div>
+        <div class="price" id="price-plan1"><span class="show-inr"><s style="font-size: 1rem; color: #64748b; font-weight: 500;">₹2,999</s> ₹1,999</span><span class="show-usd"><s style="font-size: 1rem; color: #64748b; font-weight: 500;">$50</s> $25</span></div>
         <p style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 30px;"><span class="show-inr">Inclusive of GST</span><span class="show-usd">No tax on export services</span></p>
         <ul class="features" style="flex-grow: 1;">
           <li>✅ Access 1 Verified Buyer Immediately</li>
@@ -698,14 +698,14 @@
           <li>⚠️ 48-Hour Delay on Live RFQs</li>
           <li>✅ Perfect for Testing the Platform</li>
         </ul>
-        <button class="btn" style="margin-top: auto;" onclick="initiatePayment('1 Verified Buyer', 19, 1499)">Buy 1 Unlock Now</button>
+        <button class="btn" style="margin-top: auto;" onclick="initiatePayment('1 Verified Buyer', 25, 1999)">Buy 1 Unlock Now</button>
       </div>
             <!-- 3 UNLOCKS PLAN -->
             <div class="plan highlight" style="display: flex; flex-direction: column;">
         <div class="badge" style="background: #dc2626; color: white;">EMERGENCY UNLOCK</div>
         <h3 style="color: #d4af37; margin-bottom: 5px;">3 Verified Buyers</h3>
         <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 15px;">Unlock Any 3 Premium Leads</p>
-        <div class="price" id="price-plan2"><span class="show-inr"><s style="font-size: 1rem; color: #64748b; font-weight: 500;">₹8,997</s> ₹3,499</span><span class="show-usd"><s style="font-size: 1rem; color: #64748b; font-weight: 500;">$150</s> $49</span></div>
+        <div class="price" id="price-plan2"><span class="show-inr"><s style="font-size: 1rem; color: #64748b; font-weight: 500;">₹8,997</s> ₹4,999</span><span class="show-usd"><s style="font-size: 1rem; color: #64748b; font-weight: 500;">$150</s> $59</span></div>
         <p style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 30px;"><span class="show-inr">Inclusive of GST</span><span class="show-usd">No tax on export services</span></p>
         <ul style="flex-grow: 1;">
           <li style="color: #4ade80; font-weight: 700;">✅ Access 3 Verified Buyers Immediately</li>
@@ -713,7 +713,7 @@
           <li>⚠️ 48-Hour Delay on Live RFQs</li>
           <li>✨ Discount vs Single Unlock</li>
         </ul>
-        <button class="btn" style="margin-top: auto; background: #d4af37; color: black; font-weight: 800; margin-bottom: 15px;" onclick="initiatePayment('3 Verified Buyers', 49, 3499)">Buy 3 Unlocks Now</button>
+        <button class="btn" style="margin-top: auto; background: #d4af37; color: black; font-weight: 800; margin-bottom: 15px;" onclick="initiatePayment('3 Verified Buyers', 59, 4999)">Buy 3 Unlocks Now</button>
       </div>
         </div>
     </div>
@@ -1424,6 +1424,15 @@
             document.getElementById('exitIntentModal').style.display = 'flex';
             hasShownExitIntent = true;
             sessionStorage.setItem('exitIntentShown', 'true');
+        }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('buy') === '3') {
+            setTimeout(() => {
+                initiatePayment('3 Verified Buyers', 59, 4999);
+            }, 500);
         }
     });
   </script>
