@@ -1,18 +1,14 @@
 {
-  "name": "APD Global Trade – Supplier App",
+  "name": "APD Global Trade",
   "short_name": "APD Trade",
+  "description": "Institutional B2B Bidding Portal for Global Commodities.",
   "start_url": "/supplier-login.html",
   "display": "standalone",
-  "background_color": "#020617",
-  "theme_color": "#020617",
+  "background_color": "#010409",
+  "theme_color": "#071427",
   "icons": [
     {
-      "src": "/assets/icons/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/assets/icons/icon-512.png",
+      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Globe_icon_2.svg/512px-Globe_icon_2.svg.png",
       "sizes": "512x512",
       "type": "image/png"
     }

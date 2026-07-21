@@ -236,6 +236,7 @@ footer {
 }
 
 </style>
+<link rel="manifest" href="/manifest.json">
 </head>
 
 <body>
@@ -390,5 +391,15 @@ z-index:9999;text-decoration:none;transition:0.3s;"
 onmouseover="this.style.transform='scale(1.1)'"
 onmouseout="this.style.transform='scale(1)'">💬</a>
 
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').then(reg => {
+        console.log('SW registered!', reg);
+      }).catch(err => console.log('SW reg failed', err));
+    });
+  }
+</script>
 </body>
 </html>
