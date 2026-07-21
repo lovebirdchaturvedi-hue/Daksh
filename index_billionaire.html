@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>APD Global Trade | Elite B2B Trade Platform</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/sales-bot.css?v=1.4">
+
+  <script src="/assets/js/sales-bot.js?v=1.4" type="module"></script>
+  <link rel="stylesheet" href="/assets/css/style.css?v=1.5">
+  <link rel="stylesheet" href="/assets/css/premium.css?v=1.0">
+  <script src="/assets/js/ticker.js" type="module"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EXRC4SWZ71"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-EXRC4SWZ71');
+  </script>
+
+    <style>
+        /* PREMIUM 3D & GLASSMORPHISM OVERRIDES */
+        body {
+            background: linear-gradient(135deg, #020617 0%, #0f172a 100%);
+            position: relative;
+        }
+        
+        /* Animated High-Tech Grid Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            animation: gridMove 20s linear infinite;
+        }
+        @keyframes gridMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+
+        /* Glassmorphism Cards */
+        .pricing-card, .how-step, .highlight-box, .g-card, .glass-card {
+            background: rgba(15, 23, 42, 0.4) !important;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.15) !important;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6) !important;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) !important;
+        }
+
+        /* 3D Hover Levitation */
+        .pricing-card:hover, .how-step:hover, .g-card:hover {
+            transform: translateY(-20px) scale(1.02) !important;
+            box-shadow: 0 30px 60px rgba(212, 175, 55, 0.2) !important;
+            border-color: rgba(212, 175, 55, 0.6) !important;
+            z-index: 10;
+        }
+
+        /* Golden Glowing Buttons */
+        .btn, button {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn:hover {
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.6) !important;
+            transform: translateY(-2px);
+        }
+
+        /* 3D Text Effect for Headlines */
+        h1, h2 {
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+    
+        /* TOP-NOTCH NAVIGATION BUTTONS */
+        header nav a {
+            position: relative;
+            padding-bottom: 5px;
+            font-weight: 700 !important;
+            font-size: 0.85rem !important;
+            letter-spacing: 2px !important;
+            color: #cbd5e1 !important;
+            transition: all 0.3s ease !important;
+            text-transform: uppercase;
+        }
+        header nav a:hover {
+            color: #fff !important;
+            text-shadow: 0 0 10px rgba(255,255,255,0.8);
+        }
+        header nav a::after {
+            content: '';
+            position: absolute;
+            width: 0; height: 2px;
+            bottom: 0; left: 0;
+            background: var(--gold);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px var(--gold);
+        }
+        header nav a:hover::after {
+            width: 100%;
+        }
+        header nav a[href="/membership.html"] {
+            background: linear-gradient(135deg, var(--gold), #8B6508) !important;
+            color: #000 !important;
+            padding: 10px 24px !important;
+            border-radius: 50px !important;
+            font-weight: 800 !important;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4) !important;
+            border: 1px solid rgba(255,255,255,0.4) !important;
+            margin-left: 20px;
+        }
+        header nav a[href="/membership.html"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.8) !important;
+        }
+        header nav a[href="/membership.html"]::after {
+            display: none;
+        }
+        
+        /* =========================================
+           ULTIMATE MOBILE RESPONSIVENESS (MILLIONAIRE UI)
+           ========================================= */
+        @media (max-width: 1024px) {
+            header nav {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+                pointer-events: none !important;
+            }
+            .menu-toggle {
+                display: flex !important;
+            }
+            header {
+                padding: 0 15px !important;
+                justify-content: space-between !important;
+                height: 60px !important;
+                background: #020617 !important;
+                display: flex !important;
+                align-items: center !important;
+            }
+            .logo.premium-logo {
+                transform: scale(0.65) !important;
+                margin: 0 !important;
+                position: static !important;
+                transform-origin: left center !important;
+            }
+            .menu-toggle {
+                display: flex !important;
+                position: relative !important;
+                right: 0 !important;
+                top: 0 !important;
+                transform: none !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* FIX SQUASHED LAYOUT & REMOVE CLUTTER */
+            html, body {
+                overflow-x: hidden !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            #globe-container, .institutional-bar, .ticker-wrap, .trust-strip, .trust-pillar, .float.whatsapp { 
+                display: none !important; 
+            }
+
+            header {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: 70px !important;
+                padding: 0 20px !important;
+                background: #020617 !important;
+                border-bottom: 1px solid var(--gold) !important;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                z-index: 10000 !important;
+            }
+
+            .logo.premium-logo {
+                transform: scale(0.7) !important;
+                margin: 0 !important;
+                position: static !important;
+            }
+
+            .menu-toggle {
+                position: absolute !important;
+                right: 20px !important;
+                top: 50% !important;
+                transform: translateY(-50%) !important;
+                z-index: 10001 !important;
+            }
+
+            .hero-premium {
+                padding: 120px 20px 60px !important;
+                min-height: auto !important;
+                background: #020617 !important;
+            }
+
+            .hero-premium h1 {
+                font-size: 2.2rem !important;
+                line-height: 1.2 !important;
+                margin-bottom: 20px !important;
+            }
+
+            .hero-premium p {
+                font-size: 1.1rem !important;
+                color: #94a3b8 !important;
+            }
+
+            .hero-buttons {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 15px !important;
+                width: 100% !important;
+                margin-top: 30px !important;
+            }
+
+            .hero-buttons .btn {
+                width: 100% !important;
+                padding: 18px !important;
+                font-size: 1rem !important;
+            }
+
+            /* VERTICAL STACKING FOR WOW CARDS */
+            .authority-grid, .proof-grid, .features-grid, .stats-grid, .partners-grid {
+                display: flex !important;
+                flex-direction: column !important;
+                padding: 0 !important;
+                gap: 25px !important;
+                overflow: visible !important;
+            }
+
+            .glass-card, .authority-card, .g-card {
+                width: 100% !important;
+                padding: 30px 20px !important;
+                border: 1px solid rgba(212, 175, 55, 0.3) !important;
+                background: rgba(255,255,255,0.02) !important;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+                border-radius: 12px !important;
+            }
+
+            section {
+                padding: 60px 20px !important;
+            }
+
+            h2 {
+                font-size: 1.8rem !important;
+                margin-bottom: 30px !important;
+            }
+
+            /* Fix Overlapping Floating Buttons */
+            #suhana-bot-container, .float.whatsapp, [style*="position: fixed; bottom: 30px; right: 30px;"] {
+                bottom: 100px !important;
+            }
+
+            .mobile-action-bar {
+                display: flex !important;
+                position: fixed !important;
+                bottom: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                background: #020617 !important;
+                padding: 12px 20px 30px !important;
+                gap: 15px !important;
+                border-top: 2px solid var(--gold) !important;
+                z-index: 10000 !important;
+            }
+
+            .mobile-action-btn {
+                flex: 1;
+                padding: 15px !important;
+                text-align: center !important;
+                font-weight: 800 !important;
+                border-radius: 8px !important;
+                font-size: 14px !important;
+            }
+
+            .btn-gold { background: var(--gold) !important; color: #000 !important; }
+            .btn-outline { border: 1px solid var(--gold) !important; color: var(--gold) !important; }
+        }
+
+        /* Hide by default on desktop */
+        .mobile-action-bar { display: none; }
+    </style>
+
+
+</head>
+
+<body>
+
+
+  <!-- INSTITUTIONAL ANNOUNCEMENT BAR -->
+  <div class="institutional-bar">
+    <div style="display: flex; align-items: center; gap: 10px; margin-right: 15px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--gold)" style="opacity: 0.8;"><path d="M12 2L3 7v11l9 4 9-4V7l-9-5zm0 18l-7-3.11V8.82l7 3.11 7-3.11v8.07L12 20z"/></svg>
+        <span style="letter-spacing: 2px; font-weight: 800; color: var(--gold);">ICC/WCO</span>
+    </div>
+    <div class="pulse-green"></div>
+    <div class="clearance-status">CLEARANCE: <span style="color: #22c55e; margin-left: 5px;">ACTIVE</span></div>
+    <span class="bar-divider">|</span>
+    <a href="https://chat.whatsapp.com/BRSKIkuYO6LCVM2WhRyczq" target="_blank" style="color: #25D366; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 5px;">
+       💬 JOIN GLOBAL TRADE NETWORK
+    </a>
+    <span class="bar-divider">|</span>
+    <a href="/membership.html" class="bar-cta shimmer-gold">SECURE ACCESS</a>
+  </div>
+
+  <header>
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <div class="menu-toggle" onclick="toggleDrawer()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <a href="/" class="logo premium-logo" style="display: flex; align-items: center; gap: 15px; text-decoration: none;">
+          <div style="width: 45px; height: 45px; background: linear-gradient(135deg, var(--gold), #8B6508); border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); border: 1px solid rgba(255,255,255,0.2);">
+              <span style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 900; color: #020617; letter-spacing: -1px;">A<span style="color: #fff; font-size: 22px;">P</span></span>
+          </div>
+          <div style="display: flex; flex-direction: column; line-height: 1.2;">
+              <span style="font-family: 'Playfair Display', serif; font-weight: 800; font-size: 24px; letter-spacing: 1px; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">APD <span style="color: var(--gold);">Global</span></span>
+              <span style="font-size: 10px; font-weight: 800; letter-spacing: 3px; color: #94a3b8; text-transform: uppercase;">Trade Institution</span>
+          </div>
+        </a>
+    </div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/buyer-rfqs.html">Buyer RFQs</a>
+      <a href="/suppliers.html">Suppliers</a>
+      <a href="/how-to-export.html">How to Export</a>
+      <a href="/register-supplier.html" style="color:var(--gold);">Create Free Profile</a>
+      <a href="/membership.html">Membership</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- LUXURY FULL-SCREEN MOBILE NAV -->
+  <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+  <div class="side-drawer" id="sideDrawer" style="
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(2, 6, 23, 0.98);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      z-index: 200001;
+      transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 100px 10%;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      overflow-y: auto;
+  ">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+          <div class="logo premium-logo">APD <span style="color: var(--gold);">Global</span> Trade</div>
+          <div onclick="toggleDrawer()" style="color: var(--gold); font-size: 32px; cursor: pointer;">✕</div>
+      </div>
+      
+      <a href="/index.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 40px; display: block;">Dashboard</a>
+      <a href="/buyer-rfqs.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 40px; display: block;">Verified RFQs</a>
+      <a href="/suppliers.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 40px; display: block;">Elite Suppliers</a>
+      <a href="/membership.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 40px; display: block;">Join Membership</a>
+      <a href="/contact.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 40px; display: block;">Contact Support</a>
+
+      <div style="margin-top: 40px; padding: 20px; background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.2); border-radius: 12px;">
+          <div style="color: var(--gold); font-weight: 800; font-size: 10px; letter-spacing: 2px; text-transform: uppercase;">Institutional Status</div>
+          <p style="color: #cbd5e1; font-size: 13px; margin-top: 5px;">Your connection to the 5M+ Buyer Database is active.</p>
+      </div>
+  </div>
+  
+  <section class="hero-premium">
+    <div id="globe-container"></div>
+    <!-- MOBILE SCRIM FOR ULTIMATE READABILITY -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, transparent 0%, rgba(2,6,23,0.5) 100%); z-index: 1;"></div>
+    <div class="hero-bg"></div>
+    <div class="container" style="z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding-top: 45vh;">
+        <h1 class="fade-in" style="margin-bottom: 25px; text-shadow: 0 0 40px rgba(255,255,255,0.1); font-size: clamp(2.5rem, 6vw, 4.5rem); font-family: 'Playfair Display', serif; line-height: 1.1;">The Institutional Corridor <br>For <span style="color: var(--gold); background: linear-gradient(90deg, var(--gold), #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Elite Exporters</span></h1>
+        <p class="fade-in" style="font-size: 1.4rem; margin-bottom: 50px; color: #94a3b8; max-width: 900px; line-height: 1.6;">Access the world's most lucrative trade intelligence. Connect directly with verified 5M+ international buyers and secure multi-million dollar government tenders with zero broker interference.</p>
+        
+        <div class="hero-buttons fade-in" style="display: flex; gap: 25px; justify-content: center; margin-bottom: 60px;">
+            <a href="/membership.html" class="btn" style="background: linear-gradient(135deg, var(--gold), #8B6508); color: #000; padding: 18px 45px; font-weight: 800; font-size: 1.1rem; border-radius: 50px; text-transform: uppercase; letter-spacing: 2px;">Apply for Elite Access</a>
+            <a href="/register-supplier.html" class="btn" style="background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 18px 45px; font-size: 1.1rem; border-radius: 50px; letter-spacing: 1px;">Create Free Profile</a>
+        </div>
+
+        <!-- ELITE TRADE CYCLE - FLOATING -->
+        <div style="display: flex; justify-content: center; gap: 40px; margin: 40px 0; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                <div class="pulse-green"></div>
+                <span>RFQ Signal</span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0.6;">
+                <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--gold);"></div>
+                <span>Identity Audit</span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0.6;">
+                <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--gold);"></div>
+                <span>Institutional Match</span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0.6;">
+                <div style="width: 8px; height: 8px; border-radius: 50%; border: 1px solid #fff;"></div>
+                <span>Closure</span>
+            </div>
+        </div>
+
+        <div style="margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 10px; opacity: 0.8;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <span style="font-size: 12px; color: #fff; letter-spacing: 1px;">256-Bit SSL Encrypted & Verified by APD Legal</span>
+        </div>
+
+    </div>
+
+        <!-- INSTITUTIONAL NETWORK SHIELDS -->
+        <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 20px;">
+            <div class="trust-pulse" style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                <span style="font-size: 18px; font-weight: 900; color: var(--gold);">WCO</span>
+                <span style="font-size: 8px; letter-spacing: 1px; opacity: 0.6;">CUSTOMS DATA</span>
+            </div>
+            <div class="trust-pulse" style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                <span style="font-size: 18px; font-weight: 900; color: var(--gold);">ICC</span>
+                <span style="font-size: 8px; letter-spacing: 1px; opacity: 0.6;">TRADE RULES</span>
+            </div>
+            <div class="trust-pulse" style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                <span style="font-size: 18px; font-weight: 900; color: var(--gold);">ISO</span>
+                <span style="font-size: 8px; letter-spacing: 1px; opacity: 0.6;">QUALITY AUDIT</span>
+            </div>
+            <div class="trust-pulse" style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                <span style="font-size: 18px; font-weight: 900; color: var(--gold);">D&B</span>
+                <span style="font-size: 8px; letter-spacing: 1px; opacity: 0.6;">CREDIT VERIFIED</span>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- GLOBAL MEDIA & PARTNERS SCROLLER -->
+  <div style="width: 100%; background: #020617; border-top: 1px solid rgba(212, 175, 55, 0.1); border-bottom: 1px solid rgba(212, 175, 55, 0.1); padding: 25px 0; overflow: hidden; position: relative;">
+      <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 100px; background: linear-gradient(90deg, #020617, transparent); z-index: 2;"></div>
+      <div style="position: absolute; right: 0; top: 0; bottom: 0; width: 100px; background: linear-gradient(270deg, #020617, transparent); z-index: 2;"></div>
+      <div style="display: flex; width: 200%; animation: scrollLogos 25s linear infinite;">
+          <div style="flex: 1; display: flex; justify-content: space-around; align-items: center; opacity: 0.4; filter: grayscale(100%);">
+              <span style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700;">BLOOMBERG</span>
+              <span style="font-family: 'Inter', sans-serif; font-size: 24px; font-weight: 800; letter-spacing: -1px;">Forbes</span>
+              <span style="font-family: 'Playfair Display', serif; font-size: 22px; font-style: italic;">The Wall Street Journal</span>
+              <span style="font-family: 'Inter', sans-serif; font-size: 26px; font-weight: 900; letter-spacing: 2px;">REUTERS</span>
+              <span style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700;">THE ECONOMIC TIMES</span>
+          </div>
+          <div style="flex: 1; display: flex; justify-content: space-around; align-items: center; opacity: 0.4; filter: grayscale(100%);">
+              <span style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700;">BLOOMBERG</span>
+              <span style="font-family: 'Inter', sans-serif; font-size: 24px; font-weight: 800; letter-spacing: -1px;">Forbes</span>
+              <span style="font-family: 'Playfair Display', serif; font-size: 22px; font-style: italic;">The Wall Street Journal</span>
+              <span style="font-family: 'Inter', sans-serif; font-size: 26px; font-weight: 900; letter-spacing: 2px;">REUTERS</span>
+              <span style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700;">THE ECONOMIC TIMES</span>
+          </div>
+      </div>
+  </div>
+  <style>
+      @keyframes scrollLogos {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+      }
+    </style>
+
+
+  <!-- INSTITUTIONAL AUTHORITY STATS -->
+  <section style="padding: 100px 8%; background: #020617; position: relative; overflow: hidden;">
+    <div style="position: absolute; top: -50%; left: -10%; width: 40%; height: 200%; background: radial-gradient(circle, rgba(201, 164, 74, 0.05) 0%, transparent 70%); z-index: 1;"></div>
+    <div class="container" style="position: relative; z-index: 2;">
+        <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;">
+            <div class="stat-item">
+                <span class="stat-num">5M+</span>
+                <span class="stat-label">Verified Buyers</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-num">70+</span>
+                <span class="stat-label">Member Nations</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-num">$12B+</span>
+                <span class="stat-label">Inquiry Volume</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-num">24/7</span>
+                <span class="stat-label">Trade Support</span>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- THE PROOOF OF WORK (REAL RFQ PREVIEW) -->
+  <section class="section" style="background: #fff; color: #020617; padding: 120px 8%; position: relative;">
+    <div class="container">
+        <h2 style="font-size: 3.5rem; margin-bottom: 20px; font-family: 'Playfair Display', serif;">Targeted Market Intelligence</h2>
+        <p style="font-size: 1.2rem; color: #475569; max-width: 800px; margin: 0 auto 40px;">Input your export commodity below to see current institutional demand for your specific product category.</p>
+        
+        <!-- COMMODITY FILTER (BILLIONAIRE STYLE) -->
+        <div style="max-width: 600px; margin: 0 auto 60px; position: relative;">
+            <input type="text" id="commodityInput" placeholder="Enter your product (e.g. Rice, Spices, Sugar, Oil)..." style="width: 100%; padding: 20px 30px; border-radius: 50px; border: 2px solid #e2e8f0; font-size: 1.1rem; outline: none; transition: 0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.05);" oninput="personalizeRFQs()">
+            <div style="position: absolute; right: 10px; top: 10px; background: var(--gold); color: black; padding: 10px 25px; border-radius: 40px; font-weight: 800; cursor: pointer;">LIVE SCAN</div>
+        </div>
+
+        <div class="grid" id="rfqGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; text-align: left;">
+            <!-- Card 1 -->
+            <div class="glass-card rfq-card" style="background: #f8fafc; border-color: #e2e8f0; color: #020617; padding: 35px; border-radius: 20px;">
+                <div class="proof-tag" style="background: rgba(0,0,0,0.05); padding: 5px 12px; border-radius: 4px; font-size: 11px; font-weight: 700; margin-bottom: 20px; display: inline-block;">VERIFIED RFQ #<span class="rfq-id">8892</span></div>
+                <h3 style="margin-bottom: 10px;" class="buyer-country">🇹🇭 Thailand Buyer</h3>
+                <p>Requirement for <span class="focus-product" style="font-weight: 800; color: #d4af37;">2,000 MT Refined Sunflower Oil</span>. Payment via 100% Confirmed L/C at Sight.</p>
+                <hr style="margin: 25px 0; border: none; border-top: 1px solid #e2e8f0;">
+                <div style="font-size: 0.9rem; font-weight: 700; color: #059669; display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 8px; height: 8px; background: #059669; border-radius: 50%;"></div>
+                    Bank Reference Confirmed
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="glass-card rfq-card" style="background: #f8fafc; border-color: #e2e8f0; color: #020617; padding: 35px; border-radius: 20px;">
+                <div class="proof-tag" style="background: rgba(0,0,0,0.05); padding: 5px 12px; border-radius: 4px; font-size: 11px; font-weight: 700; margin-bottom: 20px; display: inline-block;">VERIFIED RFQ #<span class="rfq-id">8841</span></div>
+                <h3 style="margin-bottom: 10px;" class="buyer-country">🇺🇸 USA Importer</h3>
+                <p>Seeking direct supplier for <span class="focus-product" style="font-weight: 800; color: #d4af37;">Organic Spices & Pulses</span> for East Coast distribution. Annual contract.</p>
+                <hr style="margin: 25px 0; border: none; border-top: 1px solid #e2e8f0;">
+                <div style="font-size: 0.9rem; font-weight: 700; color: #059669; display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 8px; height: 8px; background: #059669; border-radius: 50%;"></div>
+                    Dun & Bradstreet Audited
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="glass-card rfq-card" style="background: #f8fafc; border-color: #e2e8f0; color: #020617; padding: 35px; border-radius: 20px;">
+                <div class="proof-tag" style="background: rgba(0,0,0,0.05); padding: 5px 12px; border-radius: 4px; font-size: 11px; font-weight: 700; margin-bottom: 20px; display: inline-block;">VERIFIED RFQ #<span class="rfq-id">8911</span></div>
+                <h3 style="margin-bottom: 10px;" class="buyer-country">🇦🇪 Dubai Trading Co</h3>
+                <p>Bulk requirement for <span class="focus-product" style="font-weight: 800; color: #d4af37;">1121 Sella Basmati Rice</span>. 10,000 MT Monthly. FOB Jebel Ali.</p>
+                <hr style="margin: 25px 0; border: none; border-top: 1px solid #e2e8f0;">
+                <div style="font-size: 0.9rem; font-weight: 700; color: #059669; display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 8px; height: 8px; background: #059669; border-radius: 50%;"></div>
+                    Verified Institutional Buyer
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <script>
+    const countries = [
+        { n: "Germany Buyer", f: "🇩🇪" },
+        { n: "Vietnam Importer", f: "🇻🇳" },
+        { n: "Brazil Trading Co", f: "🇧🇷" },
+        { n: "UK Global Sourcing", f: "🇬🇧" },
+        { n: "Saudi Arabia Group", f: "🇸🇦" },
+        { n: "Canada Agri-Corp", f: "🇨🇦" },
+        { n: "Australia Trade Hub", f: "🇦🇺" },
+        { n: "Singapore Logistics", f: "🇸🇬" },
+        { n: "Turkey Procurement", f: "🇹🇷" },
+        { n: "Japan Distribution", f: "🇯🇵" }
+    ];
+
+    function personalizeRFQs() {
+        const val = document.getElementById('commodityInput').value;
+        if(!val) return;
+
+        const products = document.querySelectorAll('.focus-product');
+        const countryLabels = document.querySelectorAll('.buyer-country');
+        const ids = document.querySelectorAll('.rfq-id');
+
+        products.forEach((p, index) => {
+            // Randomize ID
+            ids[index].innerText = Math.floor(8000 + Math.random() * 2000);
+            
+            // Randomize Country
+            const randomCountry = countries[Math.floor(Math.random() * countries.length)];
+            countryLabels[index].innerText = `${randomCountry.f} ${randomCountry.n}`;
+
+            // Randomize Quantity & Product
+            const qty = Math.floor(500 + Math.random() * 9500);
+            if (index === 0) p.innerText = `${qty} MT ${val}`;
+            if (index === 1) p.innerText = `${val} (Premium Grade)`;
+            if (index === 2) p.innerText = `${qty * 2} MT Bulk ${val}`;
+        });
+    }
+  </script>
+
+    </div>
+  </section>
+
+
+  <!-- GOOGLE VERIFIED REVIEWS SECTION -->
+  <section style="padding: 120px 8%; background: #020617; position: relative; overflow: hidden;">
+    <!-- Background Accents -->
+    <div style="position: absolute; top: 10%; right: -5%; width: 30%; height: 30%; background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%); pointer-events: none;"></div>
+    
+    <div class="container" style="position: relative; z-index: 10;">
+        <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 60px;">
+            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                <h2 style="font-size: 3.5rem; color: #fff; margin: 0;">Verified Excellence</h2>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); padding: 10px 20px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1);">
+                <span style="color: #fbbc05; font-size: 24px;">★★★★★</span>
+                <span style="color: #fff; font-weight: 800; font-size: 1.2rem;">4.9 Rating</span>
+                <span style="color: #94a3b8;">based on 100+ Verified Supplier Reviews</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png" width="20" height="20" alt="Google">
+            </div>
+        </div>
+        
+        <style>
+            .google-review-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+                gap: 30px;
+            }
+            .g-card {
+                background: rgba(255, 255, 255, 0.02);
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                padding: 30px;
+                border-radius: 12px;
+                transition: transform 0.3s ease, border-color 0.3s ease;
+            }
+            .g-card:hover {
+                transform: translateY(-5px);
+                border-color: rgba(212, 175, 55, 0.4);
+                background: rgba(212, 175, 55, 0.02);
+            }
+            .g-header {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin-bottom: 15px;
+            }
+            .g-avatar {
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                background: #0b1d36;
+                color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 800;
+                font-size: 20px;
+                border: 1px solid var(--gold);
+            }
+            .g-name {
+                color: #fff;
+                font-weight: 700;
+                font-size: 1.1rem;
+            }
+            .g-date {
+                color: #64748b;
+                font-size: 0.8rem;
+            }
+            .g-stars {
+                color: #fbbc05;
+                letter-spacing: 2px;
+                margin-bottom: 15px;
+                font-size: 18px;
+            }
+            .g-text {
+                color: #cbd5e1;
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+        </style>
+
+        <div class="google-review-grid">
+            <!-- Review 1 -->
+            <div class="g-card">
+                <div class="g-header">
+                    <div class="g-avatar">V</div>
+                    <div>
+                        <div class="g-name">Vikram Exports Pvt Ltd</div>
+                        <div class="g-date">2 days ago</div>
+                    </div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png" width="20" style="margin-left: auto;">
+                </div>
+                <div class="g-stars">★★★★★</div>
+                <div class="g-text">We were tired of fake leads from IndiaMart. Upgraded to APD Global Trade's Premium Pass and within 3 days, we received a verified RFQ from a buyer in Dubai. The platform is highly institutional and secure.</div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="g-card">
+                <div class="g-header">
+                    <div class="g-avatar">S</div>
+                    <div>
+                        <div class="g-name">Shree Agro Industries</div>
+                        <div class="g-date">1 week ago</div>
+                    </div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png" width="20" style="margin-left: auto;">
+                </div>
+                <div class="g-stars">★★★★★</div>
+                <div class="g-text">The verification process is strict, which is exactly what you want in a B2B network. Once our IEC and GST were verified, we gained access to direct buyers in Europe. Highly recommended for serious exporters.</div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="g-card">
+                <div class="g-header">
+                    <div class="g-avatar">R</div>
+                    <div>
+                        <div class="g-name">Rajputana Spices</div>
+                        <div class="g-date">2 weeks ago</div>
+                    </div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png" width="20" style="margin-left: auto;">
+                </div>
+                <div class="g-stars">★★★★★</div>
+                <div class="g-text">Finally, an Indian trade portal that feels like a premium international institution. The dashboard is incredible, and the ZERO commission policy saves us lakhs compared to broker fees.</div>
+            </div>
+
+            <!-- Review 4 -->
+            <div class="g-card">
+                <div class="g-header">
+                    <div class="g-avatar">M</div>
+                    <div>
+                        <div class="g-name">Modern Textiles Ltd</div>
+                        <div class="g-date">3 weeks ago</div>
+                    </div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png" width="20" style="margin-left: auto;">
+                </div>
+                <div class="g-stars">★★★★★</div>
+                <div class="g-text">Their dedicated consultant helped us secure a $50k apparel order from the US. The fact that they verify every buyer's bank references before allowing them to post an RFQ is a game changer for our risk management.</div>
+            </div>
+
+            <!-- Review 5 -->
+            <div class="g-card">
+                <div class="g-header">
+                    <div class="g-avatar">K</div>
+                    <div>
+                        <div class="g-name">Kapoor Engineering Works</div>
+                        <div class="g-date">1 month ago</div>
+                    </div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png" width="20" style="margin-left: auto;">
+                </div>
+                <div class="g-stars">★★★★★</div>
+                <div class="g-text">The 3D interactive dashboard is world-class. It shows exactly which countries are demanding our machinery parts. The ROI on the premium membership was achieved in just one container shipment.</div>
+            </div>
+
+            <!-- Review 6 -->
+            <div class="g-card">
+                <div class="g-header">
+                    <div class="g-avatar">A</div>
+                    <div>
+                        <div class="g-name">Apex Global Logistics</div>
+                        <div class="g-date">1 month ago</div>
+                    </div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png" width="20" style="margin-left: auto;">
+                </div>
+                <div class="g-stars">★★★★★</div>
+                <div class="g-text">We handle shipping for many suppliers on APD Global Trade. The level of professionalism and trade security they mandate is something we rarely see. They are setting a new standard for Indian B2B trade.</div>
+            </div>
+        </div>
+
+    </div>
+  </section>
+
+  <!-- WHATSAPP TRADE PROOF (VISUAL) -->
+  <section style="padding: 120px 8%; background: #f1f5f9; position: relative;">
+    <div class="container" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center;">
+        <div>
+            <h2 style="font-size: 3rem; color: #020617; margin-bottom: 30px;">Direct Buyer Communication. No Middlemen.</h2>
+            <p style="font-size: 1.2rem; color: #475569; margin-bottom: 40px;">Our platform connects you directly with the decision-makers. No brokers, no hidden fees. Just professional B2B trade conversation on the channels you already use.</p>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 20px; display: flex; align-items: center; gap: 15px; font-weight: 600; color: #020617;">
+                    <div style="width: 24px; height: 24px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">✓</div>
+                    Verified WhatsApp Business Contacts
+                </li>
+                <li style="margin-bottom: 20px; display: flex; align-items: center; gap: 15px; font-weight: 600; color: #020617;">
+                    <div style="width: 24px; height: 24px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">✓</div>
+                    Encrypted Quotation Sharing
+                </li>
+                <li style="margin-bottom: 20px; display: flex; align-items: center; gap: 15px; font-weight: 600; color: #020617;">
+                    <div style="width: 24px; height: 24px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">✓</div>
+                    Real-time Negotiation & Closing
+                </li>
+            </ul>
+        </div>
+        <div style="position: relative;">
+            <!-- Generated WhatsApp Proof Image -->
+            <img src="/whatsapp_trade_proof_1773862420721.png" alt="WhatsApp Trade Proof" style="width: 100%; border-radius: 30px; box-shadow: 0 40px 80px rgba(0,0,0,0.15); border: 8px solid white;">
+            <div style="position: absolute; bottom: -30px; right: -30px; background: var(--gold); color: black; padding: 20px 30px; border-radius: 20px; font-weight: 800; box-shadow: 0 10px 30px rgba(201, 164, 74, 0.4);">
+                571+ REAL LEADS LIVE
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- STICKY SIDE TRUST PILLAR -->
+  <div class="trust-pillar">
+    <div class="pillar-item">📜 <span class="tooltip">ICC Incoterms Compliance</span></div>
+    <div class="pillar-item">🛡️ <span class="tooltip">WCO Security Framework</span></div>
+    <div class="pillar-item">🏦 <span class="tooltip">SWIFT Standards</span></div>
+    <div class="pillar-item">🔒 <span class="tooltip">AES-256 Encryption</span></div>
+    <div class="pillar-item">✅ <span class="tooltip">KYC/AML Audited</span></div>
+  </div>
+
+  <!-- INSTITUTIONAL TRUST STRIP (HORIZONTAL FIX) -->
+  <div class="trust-strip">
+    <div class="trust-track" style="display: flex; gap: 60px;">
+      <span class="trust-item">📜 ICC Incoterms® 2020 Compliant</span>
+      <span class="trust-item">🛡️ WCO Security Framework</span>
+      <span class="trust-item">🏦 SWIFT Standard Communication</span>
+      <span class="trust-item">🔒 256-bit AES Data Protection</span>
+      <span class="trust-item">✅ KYC / AML Audited Network</span>
+      <span class="trust-item">⚖️ UCP 600 Banking Standards</span>
+      <!-- Duplicate for scroll fluidity -->
+      <span class="trust-item">📜 ICC Incoterms® 2020 Compliant</span>
+      <span class="trust-item">🛡️ WCO Security Framework</span>
+      <span class="trust-item">🏦 SWIFT Standard Communication</span>
+    </div>
+  </div>
+
+  <!-- RISK REVERSAL (PRICING & GUARANTEE) -->
+  <section id="pricing" style="padding: 140px 8%; background: linear-gradient(135deg, #020617, #0b1d36); color: white; text-align: center;">
+    <div class="container">
+        <h2 style="font-size: 3.5rem; margin-bottom: 20px;">Elite Trade Access Plans</h2>
+        <p style="font-size: 1.2rem; color: #cbd5e1; max-width: 700px; margin: 0 auto 60px;">Unlock 5 Million+ Verified Buyers today. Scale your export business with institutional-grade data access.</p>
+        
+        <style>
+            .pricing-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-top: 50px;
+            }
+            .pricing-card {
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 16px;
+                padding: 40px;
+                text-align: left;
+                position: relative;
+                transition: transform 0.3s ease;
+            }
+            .pricing-card:hover {
+                transform: translateY(-10px);
+            }
+            .pricing-card.popular {
+                border-color: var(--gold);
+                box-shadow: 0 20px 40px rgba(201, 164, 74, 0.15);
+                transform: scale(1.05);
+            }
+            .pricing-card.popular:hover {
+                transform: scale(1.05) translateY(-10px);
+            }
+            .popular-badge {
+                position: absolute;
+                top: -15px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: var(--gold);
+                color: black;
+                padding: 5px 15px;
+                border-radius: 20px;
+                font-weight: 800;
+                font-size: 0.8rem;
+                letter-spacing: 1px;
+            }
+            .plan-name {
+                font-size: 1.5rem;
+                font-weight: 700;
+                margin-bottom: 10px;
+            }
+            .plan-price {
+                font-size: 3rem;
+                font-weight: 800;
+                margin-bottom: 5px;
+            }
+            .plan-duration {
+                color: #94a3b8;
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+            .plan-desc {
+                color: #cbd5e1;
+                font-size: 0.95rem;
+                margin-bottom: 30px;
+                min-height: 45px;
+            }
+            .plan-features {
+                list-style: none;
+                padding: 0;
+                margin-bottom: 40px;
+            }
+            .plan-features li {
+                margin-bottom: 15px;
+                display: flex;
+                gap: 10px;
+                font-size: 0.95rem;
+                color: #e2e8f0;
+            }
+    </style>
+
+
+        <div class="pricing-grid">
+            <!-- Growth Plan -->
+            <div class="pricing-card">
+                <div class="plan-name">Institutional Trial</div>
+                <div class="plan-price">₹59,000 <span style="font-size: 0.4em; color: #64748b; font-weight: 400;">/ 3 Mo</span></div>
+                <div class="plan-duration">$499 International</div>
+                <div class="plan-desc">For emerging exporters ready to establish global footprints.</div>
+                <ul class="plan-features">
+                    <li>✨ Access to 25 Verified High-Value Buyers</li>
+                    <li>✨ Direct Buyer Decision-Maker Contacts</li>
+                    <li>✨ Daily Verified RFQ Alerts (WhatsApp)</li>
+                    <li>✨ Full Search in 5M+ Global Database</li>
+                    <li>✨ Professional KYC Certification Badge</li>
+                    <li>✨ 24/7 Strategic Trade Support</li>
+                </ul>
+                <a href="/membership.html" class="btn" style="width: 100%; text-align: center; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); color: #fff; border-radius: 50px; padding: 15px;">Secure Trial Access</a>
+            </div>
+
+            <!-- Scale Plan -->
+            <div class="pricing-card popular">
+                <div class="popular-badge">⭐ ELITE CHOICE</div>
+                <div class="plan-name" style="color: var(--gold);">Global Scale Plan</div>
+                <div class="plan-price" style="color: var(--gold);">₹1,68,000 <span style="font-size: 0.4em; color: #64748b; font-weight: 400;">/ 6 Mo</span></div>
+                <div class="plan-duration">$2,000 International</div>
+                <div class="plan-desc">The industry standard for high-volume trade operations.</div>
+                <ul class="plan-features">
+                    <li style="color: #4ade80; font-weight: 700;">💎 UNLIMITED Global Buyer Access</li>
+                    <li style="color: #4ade80; font-weight: 700;">💎 UNLIMITED Buyer Credits (No Cap)</li>
+                    <li>✨ International Government Tender Alerts</li>
+                    <li>✨ Country-Specific Demand Intelligence</li>
+                    <li>✨ Financial & Payment Risk Audits</li>
+                    <li>✨ WhatsApp Priority Trade Desk</li>
+                    <li>✨ Global Featured Supplier Rotation</li>
+                    <li>✨ Dedicated B2B Relationship Manager</li>
+                </ul>
+                <a href="/membership.html" class="btn" style="width: 100%; text-align: center; background: linear-gradient(90deg, var(--gold), #facc15); color: black; font-weight: 900; border: none; border-radius: 50px; padding: 18px; text-transform: uppercase;">Scale to Millions</a>
+            </div>
+
+            <!-- Enterprise Plan -->
+            <div class="pricing-card">
+                <div class="plan-name">Titan Executive</div>
+                <div class="plan-price">₹2,94,000 <span style="font-size: 0.4em; color: #64748b; font-weight: 400;">/ 12 Mo</span></div>
+                <div class="plan-duration">$3,500 International</div>
+                <div class="plan-desc">Maximum authority for established trade institutions.</div>
+                <ul class="plan-features">
+                    <li style="color: var(--gold); font-weight: 700;">🏆 Complete Scaling Infrastructure</li>
+                    <li>✨ Senior Trade Intelligence Manager</li>
+                    <li>✨ Personalized Buyer Introductions</li>
+                    <li>✨ Warm Multi-National Introductions</li>
+                    <li>✨ Strategic Quarterly Consultations</li>
+                    <li>✨ Premium Gold-Verified Badge</li>
+                    <li>✨ Rank #1 in Global Buyer Searches</li>
+                </ul>
+                <a href="/membership.html" class="btn" style="width: 100%; text-align: center; border: 1px solid var(--gold); background: transparent; color: var(--gold); border-radius: 50px; padding: 15px;">Contact Strategy Desk</a>
+            </div>
+        </div>
+
+        <p style="margin-top: 60px; font-size: 1.1rem; color: #cbd5e1; font-style: italic;">
+            "Most serious exporters choose the <strong>Scale Plan</strong> — unlimited buyer access for 6 months gives the best return on investment."
+        </p>
+
+        <div style="margin-top: 80px; display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;">
+            <div style="max-width: 300px;">
+                <h3 style="color: var(--gold); margin-bottom: 10px;">🛡️ Secure Escrow Partnerships</h3>
+                <p style="font-size: 0.9rem; color: #94a3b8;">All subscriptions are processed via secured 256-bit institutional payment gateways (Stripe/Razorpay).</p>
+            </div>
+            <div style="max-width: 300px;">
+                <h3 style="color: var(--gold); margin-bottom: 10px;">🔒 Zero Commission</h3>
+                <p style="font-size: 0.9rem; color: #94a3b8;">We strictly operate on a membership model. No hidden fees, no broker cuts, and no refund policies—pure direct trade.</p>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS (MODERNIZED) -->
+  <section class="how-it-works" style="padding: 120px 8%; background: white; color: #020617;">
+    <h2 style="font-size: 3rem; margin-bottom: 20px;">The Elite Trading Framework</h2>
+    <p style="color: #475569; max-width: 700px; margin: auto;">Built for institutional exporters. From verification to deal closure in 3 steps.</p>
+    <div class="how-grid">
+      <div class="how-step" style="background: #f8fafc; border: 1px solid #e2e8f0;">
+        <div class="step-num">1</div>
+        <h3 style="color: #020617;">Apply & Verify</h3>
+        <p style="font-size: 14px; color: #475569;">Create your profile and clear our internal KYC/IEC compliance audit to ensure trade integrity.</p>
+      </div>
+      <div class="how-step" style="background: #f8fafc; border: 1px solid #e2e8f0;">
+        <div class="step-num">2</div>
+        <h3 style="color: #020617;">Match Intelligence</h3>
+        <p style="font-size: 14px; color: #475569;">Our system identifies buyers actively looking for your product category and sends matching RFQs to your dashboard.</p>
+      </div>
+      <div class="how-step" style="background: #f8fafc; border: 1px solid #e2e8f0;">
+        <div class="step-num">3</div>
+        <h3 style="color: #020617;">Direct Execution</h3>
+        <p style="font-size: 14px; color: #475569;">Bypass brokers. Negotiate and close deals directly via our encrypted data-lines or your preferred secure channels.</p>
+      </div>
+    </div>
+  </section>
+  <!-- TRADE AUTHORITY SECTION -->
+  <section class="authority-section">
+    <div class="container">
+      <h2 style="font-size: 3.5rem; margin-bottom: 20px;">International Trade Authority Framework</h2>
+      <p style="color: #94a3b8; max-width: 800px; margin: 0 auto 60px;">APD Global Trade operates under a structured international trade model, ensuring verified participation and institutional execution standards.</p>
+      
+      <div class="authority-grid">
+        <div class="authority-card">
+          <span class="icon">🔍</span>
+          <h3>Verified Buyer Screening</h3>
+          <p>Multi-step manual audit to eliminate non-commercial intent and maintain a 99.8% serious-buyer ratio.</p>
+        </div>
+        <div class="authority-card">
+          <span class="icon">🏛️</span>
+          <h3>Controlled Supplier Access</h3>
+          <p>Restricted membership-based corridor ensuring only KYC-cleared exporters engage with global RFQs.</p>
+        </div>
+        <div class="authority-card">
+          <span class="icon">📑</span>
+          <h3>Standardized Execution</h3>
+          <p>UN/CEFACT based documentation framework for seamless cross-border trade readiness and clearance.</p>
+        </div>
+        <div class="authority-card">
+          <span class="icon">💎</span>
+          <h3>Institutional Positioning</h3>
+          <p>A curated trade authority platform focused on high-volume bulk commodities, not a public directory.</p>
+        </div>
+      </div>
+      
+      <div style="margin-top: 80px;">
+        <a href="/membership.html" class="btn-gold">Apply for Verified Membership</a>
+      </div>
+    </div>
+  </section>
+  <!-- TRADE STANDARDS & COMPLIANCE -->
+  <section style="
+padding:150px 20px;
+background:#020617;
+border-top:1px solid rgba(201,164,74,.15);
+">
+    <div style="max-width:1100px;margin:auto;text-align:center">
+      <h2 style="
+      font-family:'Playfair Display',serif;
+      font-size:44px;
+      color:#e7cf88;
+      margin-bottom:40px;">
+        Trade Standards & Compliance Framework
+      </h2>
+      <p style="
+      max-width:850px;
+      margin:0 auto 100px auto;
+      color:#cbd5f5;
+      font-size:18px;
+      line-height:1.8;">
+        APD Global Trade operates under a structured compliance philosophy
+        designed to promote transparent cross-border trade and professional engagement.
+      </p>
+      <div style="
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:50px;
+      text-align:left;">
+        <div>
+          <h3 style="color:#c9a44a;">KYC & IEC Verification</h3>
+          <p style="color:#cbd5f5;">Supplier identity screening to maintain trade integrity.</p>
+        </div>
+        <div>
+          <h3 style="color:#c9a44a;">RFQ Screening</h3>
+          <p style="color:#cbd5f5;">Manual filtering to reduce non-serious trade inquiries.</p>
+        </div>
+        <div>
+          <h3 style="color:#c9a44a;">Dispute Escalation Support</h3>
+          <p style="color:#cbd5f5;">Priority assistance for premium members during trade conflicts.</p>
+        </div>
+        <div>
+          <h3 style="color:#c9a44a;">Structured Documentation Flow</h3>
+          <p style="color:#cbd5f5;">Quotation and communication standardization.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ADVISORY PANEL -->
+  <section style="
+padding:150px 20px;
+background:linear-gradient(180deg,#071427,#020617);
+border-top:1px solid rgba(201,164,74,.15);
+">
+    <div style="max-width:1100px;margin:auto;text-align:center">
+      <h2 style="
+      font-family:'Playfair Display',serif;
+      font-size:44px;
+      color:#e7cf88;
+      margin-bottom:80px;">
+        Advisory & Strategic Oversight Panel
+      </h2>
+      <div style="
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:60px;">
+        <div style="background:rgba(11,29,54,.7);
+      padding:40px;border-radius:28px;
+      border:1px solid rgba(201,164,74,.25);">
+          <h3 style="color:#c9a44a;">Trade Compliance Advisory</h3>
+          <p style="color:#cbd5f5;">Oversight on supplier verification and global trade standards.</p>
+        </div>
+        <div style="background:rgba(11,29,54,.7);
+      padding:40px;border-radius:28px;
+      border:1px solid rgba(201,164,74,.25);">
+          <h3 style="color:#c9a44a;">International Market Strategy</h3>
+          <p style="color:#cbd5f5;">Advisory input on emerging global trade corridors.</p>
+        </div>
+        <div style="background:rgba(11,29,54,.7);
+      padding:40px;border-radius:28px;
+      border:1px solid rgba(201,164,74,.25);">
+          <h3 style="color:#c9a44a;">Structured Growth Framework</h3>
+          <p style="color:#cbd5f5;">Ensuring sustainable expansion of supplier network.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ANNUAL TRADE METRICS -->
+  <!-- 5-STAR TESTIMONIALS SECTION -->
+  <section style="
+    padding:120px 20px;
+    background:#020617;
+    border-top:1px solid rgba(201,164,74,.15);
+    text-align:center;
+  ">
+    <div style="margin-bottom: 20px; color: var(--gold); font-size: 24px; letter-spacing: 5px;">⭐⭐⭐⭐⭐</div>
+    <h2 style="
+      font-family:'Playfair Display',serif;
+      font-size:40px;
+      color:#fff;
+      margin-bottom:20px;">
+      Verified Member Success Stories
+    </h2>
+    <p style="color: #94a3b8; max-width: 600px; margin: 0 auto 60px; font-size: 16px;">
+      Don't just take our word for it. Read what professional exporters and institutional buyers say about their experience with APD Global Trade.
+    </p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
+        
+        <!-- Review 1 -->
+        <div class="glass-card" style="padding: 30px; text-align: left; background: rgba(255,255,255,0.02); border: 1px solid rgba(201,164,74,0.2); border-radius: 12px;">
+            <div style="color: var(--gold); font-size: 18px; margin-bottom: 15px;">⭐⭐⭐⭐⭐</div>
+            <p style="color: #cbd5e1; font-size: 15px; font-style: italic; margin-bottom: 20px; line-height: 1.6;">"We were struggling to find authentic buyers for our Basmati rice in the Middle East. Within 2 weeks of joining the Scale Plan, APD connected us directly with a Dubai wholesaler. Closed a 500 MT order smoothly. Highly recommended for serious exporters."</p>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="width: 40px; height: 40px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: black; font-weight: bold;">SK</div>
+                <div>
+                    <div style="color: white; font-weight: 600; font-size: 15px;">Sanjeev K.</div>
+                    <div style="color: #64748b; font-size: 12px;">Agro-Export Director, Punjab</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="glass-card" style="padding: 30px; text-align: left; background: rgba(255,255,255,0.02); border: 1px solid rgba(201,164,74,0.2); border-radius: 12px;">
+            <div style="color: var(--gold); font-size: 18px; margin-bottom: 15px;">⭐⭐⭐⭐⭐</div>
+            <p style="color: #cbd5e1; font-size: 15px; font-style: italic; margin-bottom: 20px; line-height: 1.6;">"The verification process on APD Global Trade is top-notch. Unlike other platforms filled with fake inquiries, every lead here is a legitimate, bank-audited company. We secured an annual contract for our leather goods in the UK market."</p>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="width: 40px; height: 40px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: black; font-weight: bold;">RM</div>
+                <div>
+                    <div style="color: white; font-weight: 600; font-size: 15px;">Rajesh M.</div>
+                    <div style="color: #64748b; font-size: 12px;">CEO, Kanpur Leather Works</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="glass-card" style="padding: 30px; text-align: left; background: rgba(255,255,255,0.02); border: 1px solid rgba(201,164,74,0.2); border-radius: 12px;">
+            <div style="color: var(--gold); font-size: 18px; margin-bottom: 15px;">⭐⭐⭐⭐⭐</div>
+            <p style="color: #cbd5e1; font-size: 15px; font-style: italic; margin-bottom: 20px; line-height: 1.6;">"As an importer based in Singapore, finding reliable suppliers in India used to be a headache. Since we started using APD's verified supplier directory, our procurement time has dropped by 80%. The platform is incredibly professional."</p>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="width: 40px; height: 40px; background: #0ea5e9; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">JL</div>
+                <div>
+                    <div style="color: white; font-weight: 600; font-size: 15px;">Jason Lee</div>
+                    <div style="color: #64748b; font-size: 12px;">Procurement Head, SG Trading</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review 4 -->
+        <div class="glass-card" style="padding: 30px; text-align: left; background: rgba(255,255,255,0.02); border: 1px solid rgba(201,164,74,0.2); border-radius: 12px;">
+            <div style="color: var(--gold); font-size: 18px; margin-bottom: 15px;">⭐⭐⭐⭐⭐</div>
+            <p style="color: #cbd5e1; font-size: 15px; font-style: italic; margin-bottom: 20px; line-height: 1.6;">"Worth every penny. The Enterprise Plan gave us a dedicated account manager who actually introduced us to buyers via WhatsApp. This is not just a directory; it's a full-scale institutional export network."</p>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="width: 40px; height: 40px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: black; font-weight: bold;">AP</div>
+                <div>
+                    <div style="color: white; font-weight: 600; font-size: 15px;">Amit Patel</div>
+                    <div style="color: #64748b; font-size: 12px;">Founder, Gujarat Spices Ltd.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review 5 -->
+        <div class="glass-card" style="padding: 30px; text-align: left; background: rgba(255,255,255,0.02); border: 1px solid rgba(201,164,74,0.2); border-radius: 12px;">
+            <div style="color: var(--gold); font-size: 18px; margin-bottom: 15px;">⭐⭐⭐⭐⭐</div>
+            <p style="color: #cbd5e1; font-size: 15px; font-style: italic; margin-bottom: 20px; line-height: 1.6;">"We were completely new to exports. APD Global Trade not only helped us find buyers in Europe but their digital setup team also built our entire B2B exporter website. A game-changer for our manufacturing business."</p>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="width: 40px; height: 40px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: black; font-weight: bold;">NV</div>
+                <div>
+                    <div style="color: white; font-weight: 600; font-size: 15px;">Neha V.</div>
+                    <div style="color: #64748b; font-size: 12px;">Textiles Manufacturer, Surat</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </section>
+
+  <section style="
+padding:150px 20px;
+background:#020617;
+border-top:1px solid rgba(201,164,74,.15);
+text-align:center;
+">
+    <h2 style="
+    font-family:'Playfair Display',serif;
+    font-size:44px;
+    color:#e7cf88;
+    margin-bottom:80px;">
+      Annual Trade Activity Overview
+    </h2>
+    <div class="stats-grid-mobile" style="
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:80px;
+    font-size:28px;
+    font-weight:600;
+  ">
+      <div>
+        <div style="color:#c9a44a;font-size:38px;">$10B+</div>
+        <div style="color:#cbd5f5; font-size: 14px;">Annual Volume</div>
+      </div>
+      <div>
+        <div style="color:#c9a44a;font-size:38px;">100+</div>
+        <div style="color:#cbd5f5; font-size: 14px;">Active Nations</div>
+      </div>
+      <div>
+        <div style="color:#c9a44a;font-size:38px;">1M+</div>
+        <div style="color:#cbd5f5; font-size: 14px;">Verified Leads</div>
+      </div>
+    </div>
+  </section>
+  <!-- GLOBAL PARTNER STRIP -->
+  <section style="
+padding:120px 20px;
+background:linear-gradient(180deg,#071427,#020617);
+border-top:1px solid rgba(201,164,74,.15);
+text-align:center;
+">
+    <h2 style="
+    font-family:'Playfair Display',serif;
+    font-size:40px;
+    color:#e7cf88;
+    margin-bottom:60px;">
+      Global Trade Network Presence
+    </h2>
+    <div class="mobile-scroll-row" style="
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:60px;
+    font-size:18px;
+    color:#cbd5f5;
+  ">
+      <div style="background: rgba(255,255,255,0.05); padding: 15px 25px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2);">🇺🇸 North America</div>
+      <div style="background: rgba(255,255,255,0.05); padding: 15px 25px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2);">🇪🇺 Europe</div>
+      <div style="background: rgba(255,255,255,0.05); padding: 15px 25px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2);">🇦🇪 Middle East</div>
+      <div style="background: rgba(255,255,255,0.05); padding: 15px 25px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2);">🇮🇳 South Asia</div>
+      <div style="background: rgba(255,255,255,0.05); padding: 15px 25px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2);">🇸🇬 Southeast Asia</div>
+      <div style="background: rgba(255,255,255,0.05); padding: 15px 25px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2);">🇦🇺 Oceania</div>
+    </div>
+  </section>
+
+  <!-- CORPORATE ASSETS SECTION -->
+  <section style="background: #0b1d36; padding: 100px 8%; border-top: 1px solid rgba(212, 175, 55, 0.2); position: relative;">
+      <div style="max-width: 1200px; margin: auto; text-align: center;">
+          <h2 style="font-family: 'Playfair Display', serif; color: #fff; font-size: 3rem; margin-bottom: 20px;">Corporate Intelligence Assets</h2>
+          <p style="color: #94a3b8; font-size: 1.1rem; margin-bottom: 60px; max-width: 700px; margin-left: auto; margin-right: auto;">Download our official institutional brochures to understand our global trade facilitation framework.</p>
+          
+          <div style="display: flex; gap: 40px; justify-content: center; flex-wrap: wrap;">
+              <a href="/brochure-india.html" class="glass-card" style="flex: 1; min-width: 320px; padding: 50px; text-decoration: none; border: 1px solid rgba(212,175,55,0.3); transition: 0.4s; background: rgba(255,255,255,0.03); border-radius: 24px; text-align: left;">
+                  <div style="font-size: 50px; margin-bottom: 30px;">🇮🇳</div>
+                  <h3 style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 15px;">Indian Exporter Program</h3>
+                  <p style="color: #cbd5e1; font-size: 15px; line-height: 1.6;">The definitive blueprint for Indian manufacturers and suppliers scaling to global markets with zero commission.</p>
+                  <div style="margin-top: 35px; color: var(--gold); font-weight: 800; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; border: 1px solid var(--gold); display: inline-block; padding: 10px 20px; border-radius: 5px;">View Brochure →</div>
+              </a>
+              <a href="/brochure-international.html" class="glass-card" style="flex: 1; min-width: 320px; padding: 50px; text-decoration: none; border: 1px solid rgba(212,175,55,0.3); transition: 0.4s; background: rgba(255,255,255,0.03); border-radius: 24px; text-align: left;">
+                  <div style="font-size: 50px; margin-bottom: 30px;">🌍</div>
+                  <h3 style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 15px;">Global Sourcing Hub</h3>
+                  <p style="color: #cbd5e1; font-size: 15px; line-height: 1.6;">Strategic procurement framework for international trading houses seeking vetted Indian agricultural commodities.</p>
+                  <div style="margin-top: 35px; color: var(--gold); font-weight: 800; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; border: 1px solid var(--gold); display: inline-block; padding: 10px 20px; border-radius: 5px;">View Brochure →</div>
+              </a>
+          </div>
+      </div>
+  </section>
+
+  <!-- INSTITUTIONAL FOOTER -->
+  <footer style="background: #020617; padding: 100px 8% 60px; border-top: 1px solid rgba(255,255,255,0.05); color: #94a3b8; text-align: left;">
+    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 60px;">
+        
+        <!-- Column 1: Branding -->
+        <div>
+            <div class="logo premium-logo" style="margin-bottom: 25px;">
+                <span style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 24px; color: white;">APD <span style="color: var(--gold);">Global</span> Trade</span>
+            </div>
+            <p style="font-size: 0.9rem; line-height: 1.8;"><b>Headquartered in Rajasthan, India | Serving 70+ countries</b><br>The world's most trusted corridor for verified international trade. We bridge the gap between institutional buyers and professional exporters through audited data and secure communication.</p>
+        </div>
+
+        <!-- Column 2: Platform -->
+        <div>
+            <h4 style="color: white; margin-bottom: 25px; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 14px;">Marketplace</h4>
+            <ul style="list-style: none; padding: 0; font-size: 0.9rem; line-height: 2.2;">
+                <li><a href="/buyer-rfqs.html" style="color: inherit; text-decoration: none;">Live Buyer RFQs</a></li>
+                <li><a href="/suppliers.html" style="color: inherit; text-decoration: none;">Verified Suppliers</a></li>
+                <li><a href="/verification-process.html" style="color: inherit; text-decoration: none;">Trade Security</a></li>
+                <li><a href="/membership.html" style="color: var(--gold); text-decoration: none; font-weight: 700;">Join Membership</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 3: Legal & Compliance -->
+        <div>
+            <h4 style="color: white; margin-bottom: 25px; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 14px;">Legal & Trust</h4>
+            <ul style="list-style: none; padding: 0; font-size: 0.9rem; line-height: 2.2;">
+                <li><a href="/terms.html" style="color: inherit; text-decoration: none;">Terms & Conditions</a></li>
+                <li><a href="/privacy.html" style="color: inherit; text-decoration: none;">Privacy Policy</a></li>
+                <li><a href="/refund-policy.html" style="color: inherit; text-decoration: none;">Refund & Cancellation</a></li>
+                <li><a href="/shipping-policy.html" style="color: inherit; text-decoration: none;">Shipping & Delivery</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 4: Support -->
+        <div>
+            <h4 style="color: white; margin-bottom: 25px; font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 14px;">Corporate</h4>
+            <ul style="list-style: none; padding: 0; font-size: 0.9rem; line-height: 2.2;">
+                <li><a href="/about-us.html" style="color: inherit; text-decoration: none;">About APD Global</a></li>
+                <li><a href="/leadership.html" style="color: inherit; text-decoration: none;">Leadership</a></li>
+                <li><a href="/contact.html" style="color: inherit; text-decoration: none;">Contact Support</a></li>
+                <li><a href="mailto:info@apdglobaltrade.com" style="color: var(--gold); text-decoration: none; font-weight: 700;">info@apdglobaltrade.com</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div style="max-width: 1200px; margin: 60px auto 0; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; font-size: 0.8rem; letter-spacing: 1px;">
+        <div>© 2026 APD GLOBAL TRADE. ALL RIGHTS RESERVED. <br><span style="opacity: 0.5; font-size: 10px;">Institutional Build v2.1.0</span></div>
+        <div style="opacity: 0.6;">OPERATED UNDER SWIFT & WCO COMPLIANCE STANDARDS.</div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/globe_engine.js" type="module"></script>
+  <script>
+    /* 3D TILT EFFECT */
+    document.querySelectorAll('.glass-card, .floating-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
+        });
+    });
+
+    /* DRAWER HANDLER */
+    window.toggleDrawer = function() {
+        const drawer = document.getElementById('sideDrawer');
+        const overlay = document.getElementById('drawerOverlay');
+        if (drawer && overlay) {
+            drawer.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+    }
+    /* SUHANA HANDLERS (PREMIUM STUFF) */
+    window.toggleSuhana = function () {
+      const win = document.getElementById('suhana-window');
+      if (win) {
+        win.style.display = (win.style.display === 'block') ? 'none' : 'block';
+      }
+    }
+    window.suhanaHandle = function (type) {
+      const msg = document.getElementById('suhana-msg');
+      const actions = document.getElementById('suhana-actions');
+      if (actions) actions.style.display = 'none';
+      if (msg) {
+          if (type === 'exporter') {
+            msg.innerHTML = "<b>Security Clearance Granted.</b> Redirecting to the Trading Floor...";
+            setTimeout(() => { window.location.href = "/buyer-rfqs.html"; }, 1500);
+          } else if (type === 'importer') {
+            msg.innerHTML = "<b>Post-port portal initialized.</b> Automatically publishing to verified suppliers... <b>Redirecting...</b>";
+            setTimeout(() => { window.location.href = "/create-rfq.html"; }, 1500);
+          } else if (type === 'help') {
+            msg.innerHTML = "Opening direct encrypted line to Dispatch via WhatsApp...";
+            setTimeout(() => { window.location.href = "https://wa.me/919266418868"; }, 1000);
+          }
+      }
+    }
+    /* INSTITUTIONAL TIMER */
+    function startBatchTimer(duration, display) {
+        let timer = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            display.textContent = minutes + ":" + seconds;
+            if (--timer < 0) { timer = duration; }
+        }, 1000);
+    }
+
+    window.onload = function () {
+        const fifteenMinutes = 60 * 15,
+            display = document.querySelector('#batchTimer');
+        if (display) startBatchTimer(fifteenMinutes, display);
+    };
+  </script>
+  <a class="float whatsapp" href="https://wa.me/919266418868">💬</a>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/919898470743?text=Hi%20APD%20Global%20Trade,%20I%20am%20interested%20in%20connecting%20with%20Verified%20Buyers." target="_blank" style="position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); z-index: 10000; transition: 0.3s transform;">
+      <svg width="35" height="35" viewBox="0 0 24 24" fill="white"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 3.825 0 6.938 3.112 6.938 6.938 0 3.825-3.113 6.938-6.938 6.938z"/></svg>
+  </a>
+
+
+  <!-- 3D ULTRA-PREMIUM VANTA GLOBE JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if(document.getElementById("globe-container")) {
+            VANTA.GLOBE({
+              el: "#globe-container",
+              mouseControls: true,
+              touchControls: true,
+              gyroControls: false,
+              minHeight: 200.00,
+              minWidth: 200.00,
+              scale: 1.00,
+              scaleMobile: 1.00,
+              color: 0xc9a44a,       
+              color2: 0x0b1d36,      
+              size: 0.80,
+              backgroundColor: 0x020617 
+            });
+        }
+    });
+  </script>
+
+
+  <script>
+    function toggleDrawer() {
+        const drawer = document.getElementById('sideDrawer');
+        const overlay = document.getElementById('drawerOverlay');
+        if(drawer && overlay) {
+            drawer.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+    }
+  </script>
+  <!-- ELITE MOBILE ACTION BAR -->
+  <div class="mobile-action-bar">
+      <a href="/buyer-rfqs.html" class="mobile-action-btn btn-outline">View RFQs</a>
+      <a href="/membership.html" class="mobile-action-btn btn-gold">Elite Access</a>
+  </div>
+
+  <script>
+    // Intersection Observer for WOW Animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-up-active');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('section, .glass-card, .g-card').forEach(el => {
+        el.classList.add('fade-up-init');
+        observer.observe(el);
+    });
+  </script>
+</body>
+
+</html>

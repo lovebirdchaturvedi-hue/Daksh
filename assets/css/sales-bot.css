@@ -4,7 +4,7 @@
     --bot-gold-light: #e7cf88;
     --bot-navy: #0b1d36;
     --bot-navy-deep: #020617;
-    --bot-glass: rgba(255, 255, 255, 0.95);
+    --bot-glass: rgba(15, 23, 42, 0.9); /* NEW: Institutional Navy Glass */
 }
 
 .sales-bot-widget {
@@ -26,7 +26,6 @@
     box-shadow: 0 10px 30px rgba(201, 164, 74, 0.4);
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    animation: float 4s ease-in-out infinite;
     border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -49,22 +48,23 @@
 .chat-window {
     position: absolute;
     bottom: 85px;
-    left: 0; /* Align to left */
-    width: 400px;
-    height: 600px;
+    left: 0;
+    width: 480px;
+    height: 680px;
     background: var(--bot-glass);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
     border-radius: 24px;
-    box-shadow: 0 25px 80px rgba(0,0,0,0.25);
+    box-shadow: 0 25px 80px rgba(0,0,0,0.4);
     display: none;
     flex-direction: column;
     overflow: hidden;
-    transform-origin: bottom left; /* Origin from left */
+    transform-origin: bottom left;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     opacity: 0;
     transform: scale(0.8) translateY(20px);
     pointer-events: none;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .chat-window.active {
@@ -112,7 +112,7 @@
     display: flex;
     flex-direction: column;
     gap: 18px;
-    background: #fdfdfd;
+    background: rgba(0,0,0,0.1); /* Subtle dark contrast for messages */
 }
 
 .msg {
@@ -136,9 +136,10 @@
 .msg.user {
     background: var(--bot-gold);
     color: #000;
-    font-weight: 600;
+    font-weight: 700;
     align-self: flex-end;
     border-bottom-right-radius: 4px;
+    box-shadow: 0 4px 15px rgba(201, 164, 74, 0.3);
 }
 
 .chat-input-area {
@@ -203,4 +204,50 @@
 .wa-handoff-btn:hover {
     background: #128c7e;
     transform: translateY(-2px);
+}
+
+/* MOBILE CALIBRATION (RESIZING FOR PREMIUM FEEL) */
+@media (max-width: 768px) {
+    .sales-bot-widget {
+        bottom: 100px !important; } .sales-bot-widget {
+        bottom: 20px !important;
+        left: 10px !important;
+    }
+    
+    .bot-bubble {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    .bot-bubble svg {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    .chat-window {
+        width: 92vw !important;
+        height: 75vh !important;
+        left: 4vw !important;
+        bottom: 90px !important;
+        border-radius: 20px !important;
+        box-shadow: 0 10px 50px rgba(0,0,0,0.6) !important;
+    }
+
+    .chat-header {
+        padding: 15px 20px !important;
+    }
+
+    #closeChat {
+        font-size: 2.2rem !important;
+        padding: 5px 15px !important;
+        line-height: 1 !important;
+        opacity: 0.8;
+    }
+
+    .chat-messages {
+        padding: 15px !important;
+    }
+
+    .chat-input-area {
+        padding: 15px !important;
+    }
 }

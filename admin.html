@@ -13,8 +13,8 @@ header{
   display:flex;justify-content:space-between;align-items:center
 }
 .container{
-  max-width:1200px;margin:40px auto;
-  background:#fff;border-radius:12px;overflow:hidden
+  max-width:98%;margin:40px auto;
+  background:#fff;border-radius:12px;overflow-x:auto;
 }
 table{width:100%;border-collapse:collapse}
 th,td{padding:14px;border-bottom:1px solid #e5e7eb;text-align:left}
@@ -32,6 +32,7 @@ button{
 .gold{background:#d97706}
 .platinum{background:#4f46e5}
 .premium{background:#0f172a; border:1px solid #c9a44a; color:#c9a44a}
+.lifetime{background:#9333ea}
 footer{
   background:#020617;color:#9ca3af;
   text-align:center;padding:40px 20px;font-size:14px
@@ -43,7 +44,14 @@ footer{
 
 <header>
   <h2>Admin – Supplier Management</h2>
-  <button id="logoutBtn">Logout</button>
+  <div style="display:flex; gap: 20px; align-items:center;">
+    <label style="cursor:pointer; display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; color:#cbd5e1; background:rgba(255,255,255,0.1); padding:8px 12px; border-radius:8px;">
+      <input type="checkbox" id="hideBulkToggle" checked style="width:16px; height:16px; cursor:pointer;" onchange="loadSuppliers()"> 
+      Hide Bulk CRM Leads
+    </label>
+    <a href="/admin-franchise.html" style="color: #d4af37; text-decoration: none; font-weight: bold; margin-right: 15px;">Franchise Admin</a>
+    <button id="logoutBtn" style="background:#dc2626;">Logout</button>
+  </div>
 </header>
 
 <div class="container">
@@ -51,7 +59,12 @@ footer{
 <thead>
 <tr>
 <th>Company</th>
+<th>Type</th>
 <th>Email</th>
+<th>Products</th>
+<th>Market</th>
+<th>Comments</th>
+<th>Phone</th>
 <th>ID (UID)</th>
 <th>Status</th>
 <th>Plan</th>
@@ -60,7 +73,7 @@ footer{
 </tr>
 </thead>
 <tbody id="tbody">
-<tr><td colspan="7">Loading suppliers…</td></tr>
+<tr><td colspan="12">Loading suppliers…</td></tr>
 </tbody>
 </table>
 </div>
@@ -99,7 +112,9 @@ import {
   getDocs,
   doc,
   updateDoc,
-  deleteDoc
+  deleteDoc,
+  query,
+  limit
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const ADMIN_EMAIL = "admin@apdglobaltrade.com";
@@ -119,6 +134,12 @@ const db = getFirestore(app);
 const tbody = document.getElementById("tbody");
 
 // Auth guard
+setTimeout(() => {
+  if (document.getElementById("tbody").innerHTML.includes("Loading")) {
+      document.getElementById("tbody").innerHTML = `<tr><td colspan="12" style="color:red; font-weight:bold;">AUTH HANGING: Firebase auth is completely frozen and not responding.</td></tr>`;
+  }
+}, 3000);
+
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
     location.href = "/supplier-login.html";
@@ -135,14 +156,19 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 // Load suppliers
+window.loadSuppliers = loadSuppliers;
 async function loadSuppliers() {
-  tbody.innerHTML = "<tr><td colspan='7'>Loading suppliers…</td></tr>";
+  tbody.innerHTML = "<tr><td colspan='12'>Loading suppliers…</td></tr>";
 
   try {
-    const snap = await getDocs(collection(db, "suppliers"));
+    const q = query(collection(db, "suppliers"), limit(3000));
+    const snap = await Promise.race([
+        getDocs(q),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("Firebase Query Timeout - Connection Blocked or Hanging!")), 8000))
+    ]);
 
     if (snap.empty) {
-      tbody.innerHTML = "<tr><td colspan='7'>No suppliers found</td></tr>";
+      tbody.innerHTML = "<tr><td colspan='12'>No suppliers found</td></tr>";
       return;
     }
 
@@ -150,11 +176,19 @@ async function loadSuppliers() {
 
     snap.forEach(d => {
       const s = d.data();
+      
+      const hideBulk = document.getElementById('hideBulkToggle')?.checked;
+      if (hideBulk && (s.isBulkLead || d.id.startsWith("bulk_"))) return;
+      
       const planMap = {
+        'custom_credits': 'Custom Credits',
+        '1_lead_pass': '1 Free Lead',
         '7_day_pass': '7-Day Power Pass',
+        '3_day_trial': '3-Day Premium Trial',
         'trial_3m': '3-Mo Premium Trial',
         'pro_6m': '6-Mo Elite Professional',
         'elite_12m': '12-Mo Institutional Elite',
+        'lifetime': 'Lifetime Access (Buyer)',
         'free': 'Free',
         'basic': 'Basic',
         'premium': '3-Mo Premium Trial',
@@ -162,7 +196,7 @@ async function loadSuppliers() {
         'gold': '3-Mo Premium Trial'
       };
       const planName = planMap[s.plan] || s.plan || "basic";
-      const unlockTotal = (s.plan === '7_day_pass') ? '7' : '∞';
+      const unlockTotal = (s.plan === 'custom_credits') ? (s.totalCredits || 0) : ((s.plan === '1_lead_pass') ? '1' : ((s.plan === '3_day_trial') ? '3' : ((s.plan === '7_day_pass') ? '7' : '∞')));
       
       const isLegacy = d.id.length < 20; // Minimal heuristic for manual IDs
       const warning = isLegacy ? '<span title="Manual/Legacy ID. May not sync with user login." style="cursor:help;">⚠️</span>' : '';
@@ -170,17 +204,27 @@ async function loadSuppliers() {
       tbody.innerHTML += `
         <tr>
           <td>${s.companyName || "-"}</td>
+          <td>${s.role === 'buyer' ? '<span style="color:#9333ea; font-weight:800; font-size:11px;">BUYER</span>' : '<span style="color:#16a34a; font-weight:800; font-size:11px;">SUPPLIER</span>'}</td>
           <td>${s.email || "-"}</td>
+          <td>${(s.productsString || s.product) ? (s.productsString || s.product) : "-"}</td>
+          <td>${(s.targetMarket && Array.isArray(s.targetMarket)) ? s.targetMarket.join(', ') : (s.targetMarket || "-")}</td>
+          <td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${s.comment || ""}">${s.comment || "-"}</td>
+          <td>${s.phone || s.contact || s.whatsapp || "-"}</td>
           <td style="font-size:10px; font-family:monospace; color:#64748b;">${warning} ${d.id}</td>
           <td><b>${s.status || "pending"}</b></td>
           <td style="font-size:12px;">${planName}</td>
           <td><span style="color:#c9a44a; font-weight:800;">${s.unlocksUsed || 0}</span> / ${unlockTotal}</td>
-          <td>
+          <td style="display: flex; flex-wrap: wrap; gap: 4px; max-width: 320px;">
             <button class="approve" onclick="upd('${d.id}',{status:'approved'})">Approve</button>
-            <button class="pass" onclick="upd('${d.id}',{plan:'7_day_pass', status:'approved', unlocksUsed:0, unlockedLeads:[]})">Assign 7-Day Pass</button>
-            <button class="gold" onclick="upd('${d.id}',{plan:'trial_3m', status:'approved'})">Set 3-Mo Trial</button>
-            <button class="platinum" onclick="upd('${d.id}',{plan:'pro_6m', status:'approved'})">Set 6-Mo Elite</button>
-            <button class="premium" onclick="upd('${d.id}',{plan:'elite_12m', status:'approved'})">Set 12-Mo Elite</button>
+            <button class="pass" style="background:#22c55e; color:#fff;" onclick="upd('${d.id}',{plan:'custom_credits', status:'approved', totalCredits:1, unlocksUsed:0, unlockedLeads:[]})">+1 Credit</button>
+            <button class="pass" style="background:#22c55e; color:#fff;" onclick="upd('${d.id}',{plan:'custom_credits', status:'approved', totalCredits:3, unlocksUsed:0, unlockedLeads:[]})">+3 Credits</button>
+            <button class="pass" style="background:#22c55e; color:#fff;" onclick="upd('${d.id}',{plan:'custom_credits', status:'approved', totalCredits:5, unlocksUsed:0, unlockedLeads:[]})">+5 Credits</button>
+            <button class="pass" style="background:#22c55e; color:#fff;" onclick="upd('${d.id}',{plan:'custom_credits', status:'approved', totalCredits:8, unlocksUsed:0, unlockedLeads:[]})">+8 Credits</button>
+            <button class="pass" onclick="upd('${d.id}',{plan:'3_day_trial', status:'approved', unlocksUsed:0, unlockedLeads:[]})">Assign 3-Day Trial</button>
+            <button class="gold" onclick="upd('${d.id}',{plan:'trial_3m', status:'approved', unlocksUsed:0, unlockedLeads:[]})">Set 3-Mo Trial</button>
+            <button class="platinum" onclick="upd('${d.id}',{plan:'pro_6m', status:'approved', unlocksUsed:0, unlockedLeads:[]})">Set 6-Mo Elite</button>
+            <button class="premium" onclick="upd('${d.id}',{plan:'elite_12m', status:'approved', unlocksUsed:0, unlockedLeads:[]})">Set 12-Mo Elite</button>
+            <button class="lifetime" onclick="upd('${d.id}',{plan:'lifetime', status:'approved', role:'buyer'})">Set Lifetime (Buyer)</button>
             <button class="free" onclick="upd('${d.id}',{plan:'free'})">Free</button>
             <button class="ban" onclick="upd('${d.id}',{status:'banned'})">Ban</button>
             ${isLegacy ? `<button class="ban" style="background:#000" onclick="del('${d.id}')">Delete</button>` : ''}
@@ -190,7 +234,7 @@ async function loadSuppliers() {
 
   } catch (err) {
     console.error("Error loading suppliers:", err);
-    tbody.innerHTML = "<tr><td colspan='5'>Error loading suppliers</td></tr>";
+    tbody.innerHTML = "<tr><td colspan='12'>Error loading suppliers</td></tr>";
   }
 }
 

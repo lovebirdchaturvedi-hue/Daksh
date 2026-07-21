@@ -19,38 +19,36 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig, "salesBotApp");
 const functions = getFunctions(app, "us-central1"); // Hardcoded region for reliability
 
-const SalesBot = {
+    const SalesBot = {
     isOpen: false,
     history: [],
-    handoffNumber: '919266418868',
+    handoffNumbers: ['919266418868', '919217114472'],
+    botName: 'APD AI Sales BOT',
+    botStatus: 'ACTIVE SALES AGENT',
+    avatar: '/assets/img/sales-agent.png',
 
     init() {
         this.renderWidget();
         this.addEventListeners();
         
-        // Auto-open disabled per request
-        /*
-        setTimeout(() => {
-            if (!this.isOpen) {
-                this.toggleChat();
-                this.addMessage("Hey, my name is Suhana! How can I help you today?", 'bot');
-            }
-        }, 3000);
-        */
+        // Auto-open disabled per user request
     },
 
     renderWidget() {
         if (document.getElementById('salesBot')) return;
         const widgetHTML = `
             <div class="sales-bot-widget" id="salesBot">
-                <div class="bot-bubble" id="botBubble">
-                    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+                <div class="bot-bubble" id="botBubble" style="background: linear-gradient(135deg, var(--bot-navy) 0%, var(--bot-navy-deep) 100%);">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--bot-gold);"><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path><path d="M12 8V4H8"></path></svg>
                 </div>
                 <div class="chat-window" id="chatWindow">
                     <div class="chat-header">
-                        <div class="bot-info">
-                            <span class="name">Suhana - APD Sales</span>
-                            <span class="status">Online</span>
+                        <div class="bot-info" style="display: flex; align-items: center; gap: 10px;">
+                            <img src="/assets/img/sales-agent.png" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 1px solid var(--gold);">
+                            <div style="display: flex; flex-direction: column;">
+                                <span class="name">APD AI Sales BOT</span>
+                                <span class="status" style="color: #4ade80; font-size: 10px;">• ACTIVE SALES AGENT</span>
+                            </div>
                         </div>
                         <button id="closeChat" style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">&times;</button>
                     </div>
@@ -100,7 +98,8 @@ const SalesBot = {
             this.addMessage(response, 'bot');
 
             if (response.toLowerCase().includes('whatsapp') || response.toLowerCase().includes('proceed') || response.toLowerCase().includes('contact')) {
-                this.addWAHandoffButton("Chat with our Sales Team on WhatsApp");
+                this.addWAHandoffButton("Chat with Executive 1", this.handoffNumbers[0]);
+                this.addWAHandoffButton("Chat with Executive 2", this.handoffNumbers[1]);
             }
 
             this.history.push({ role: 'user', parts: [{ text }] });
@@ -122,10 +121,11 @@ const SalesBot = {
         container.scrollTop = container.scrollHeight;
     },
 
-    addWAHandoffButton(label) {
+    addWAHandoffButton(label, numberOverride) {
         const container = document.getElementById('chatMessages');
+        const number = numberOverride || this.handoffNumbers[0];
         const btn = document.createElement('a');
-        btn.href = `https://wa.me/${this.handoffNumber}?text=Hi, I was chatting with your AI Assistant. I'm interested in the Membership options for APD Global Trade.`;
+        btn.href = `https://wa.me/${number}?text=Hi, I was chatting with your AI Assistant on the APD Global Trade platform. I need executive assistance.`;
         btn.target = "_blank";
         btn.className = "wa-handoff-btn";
         btn.innerText = `💬 ${label}`;
@@ -161,51 +161,36 @@ const SalesBot = {
             // 0. Conversational Flow (Confirmation handlers)
             const isConfirmed = msg === 'yes' || msg.includes('yes ') || msg.includes(' sure') || msg.includes(' ok') || msg === 'yeah' || msg === 'yep';
             if (isConfirmed) {
-                return "Excellent! I'll guide you. To see our Live Buyer RFQs and verify active demand for your product, simply click the **'View Live RFQs'** button on the home page or go to our **'Buyer RFQs'** menu. Should I walk you through how to unlock their contact details next?";
+                return "Excellent! Before I provide you with our verified buyer matching credentials, could you please confirm your current export capacity (MT per month) and your primary rice variety (e.g., Basmati, Long Grain, Parboiled)?";
             }
 
             // 1. Export Inquiries
-            if (msg.includes('export') || msg.includes('sell') || msg.includes('sending')) {
-                return "We specialize in helping high-volume exporters like you reach verified global markets. Whether it's Grains, Agro, or Commodities, we have the buyer network ready. Would you like to start with a $250 trial to see one specific buyer's requirements immediately?";
+            if (msg.includes('export') || msg.includes('sell') || msg.includes('rice') || msg.includes('sending')) {
+                return "We have massive institutional mandates for **Rice (Basmati & Parboiled)** and Agro-Commodities across the GCC and West Africa. We focus on connecting you directly to the importing companies. What is your current warehouse location and target export market?";
             }
 
-            // 2. Durations / Specific Offers
-            if (msg.includes('month') || msg.includes('year') || msg.includes('6') || msg.includes('12')) {
-                return "Our 6-month and Annual Institutional Memberships are the best way to get long-term trade benefits without commissions. For short-term verification, we also have the **$250 Ready-Buyer Trial**. Which one fits your current goal?";
-            }
-
-            // 3. Pricing / Plan Inquiries
+            // 2. Pricing / Plan Inquiries
             if (msg.includes('plan') || msg.includes('price') || msg.includes('cost') || msg.includes('how much') || msg.includes('fee') || msg.includes('trial') || msg.includes('pay')) {
-                return "We have two main options: our **Full Institutional Membership** for high-volume scale (no commission), and a **$250 Ready-Buyer Trial**. The trial gives you immediate access to one verified buyer L/C and their requirements. Ready to see the link?";
+                return "We operate on an Institutional Membership model to ensure only verified exporters enter the corridor. Our **3-Month Premium Trial ($499)** includes 100 bulk buyer credits to get you established immediately. Should I share the direct activation link?";
             }
             
-            // 4. Platform / What you do
+            // 3. Platform / What you do
             if (msg.includes('platform') || msg.includes('hub') || msg.includes('do') || msg.includes('service') || msg.includes('system') || msg.includes('help')) {
-                return "APD Global Trade is an Elite B2B Hub that connects you **directly** to 5 Million+ verified buyers. We eliminate middlemen, protect your profit margins, and provide structured trade tools for professional export execution. Want a quick demo of the RFQ feed?";
+                return "APD Global Trade is an Institutional Data Gateway. We provide you with direct, unmasked access to 5 Million+ verified global buyers, helping you eliminate middlemen and protect your margins. Would you like me to walk you through our matching process?";
             }
 
-            // 5. Getting Started / How it works
+            // 4. Getting Started / How it works
             if (msg.includes('start') || msg.includes('join') || msg.includes('how') || msg.includes('work') || msg.includes('process') || msg.includes('step') || msg.includes('procedure')) {
-                return "The process is simple: 1. Apply for membership. 2. Clear KYC/Identity check. 3. Access the 'Hidden' buyer data and start closing deals. Should I send you the direct signup link?";
+                return "The onboarding process is structured: 1. Institutional Registration. 2. KYC/Identity Clearance. 3. Access to High-Volume Matchmaking. Shall I send you the secure registration link to begin?";
             }
             
-            // 6. Buyer Inquiries
-            if (msg.includes('buyer') || msg.includes('customer') || msg.includes('market') || msg.includes('rfq') || msg.includes('lead') || msg.includes('sale')) {
-                return "Our network handles over **$10B in annual trade volume** with more than **5 Million verified buyers**. We have active, urgent demand in Food, Grains, and Commodities. Are you an exporter looking for new markets?";
-            }
-            
-            // 7. Trust / Legality
-            if (msg.includes('safe') || msg.includes('scam') || msg.includes('verify') || msg.includes('real') || msg.includes('legit') || msg.includes('trust')) {
-                return "Security is our core value. Every buyer must provide an **active L/C** or Bank Comfort Letter before they can post RFQs. We are an institutional-grade platform. You can see real-time verification proof on our Suppliers page.";
-            }
-            
-            // 8. Greetings
-            if (msg.includes('hi') || msg.includes('hello') || msg.includes('hey') || msg.includes('greet') || msg.includes('suhana')) {
-                return "Hello! I'm Suhana, your APD Sales Assistant. I help serious exporters scale by providing direct, protected access to verified global buyers. How can I help you grow your trade volume today?";
+            // 5. Greetings
+            if (msg.includes('hi') || msg.includes('hello') || msg.includes('hey') || msg.includes('greet')) {
+                return "Hello! I'm the APD Senior Sales Assistant. I help serious exporters scale by providing direct, protected access to verified institutional buyers. How can I assist you with your trade volume today?";
             }
 
             // Global Professional Fallback
-            return "As an APD Sales Assistant, my goal is to get you direct access to our **$10B+ volume network**. Would you like me to send you the direct link to our Membership options, or would you prefer a direct WhatsApp chat with our verification team?";
+            return "As your Institutional Trade Assistant, my goal is to guide you into our **$10B+ volume network**. Please tell me more about your product category and export targets so I can provide the correct mandates.";
         }
     }
 };

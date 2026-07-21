@@ -10,7 +10,7 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/sales-bot.css?v=1.4">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7128304658969250" crossorigin="anonymous"></script>
+
     <script src="/assets/js/sales-bot.js?v=1.4" type="module"></script>
 
     <style>
@@ -19,7 +19,8 @@
             margin: 0;
             font-family: Inter, sans-serif;
             background: #020617;
-            color: #fff
+            color: #fff;
+            overflow-x: hidden;
         }
 
         :root {
@@ -48,15 +49,31 @@
             font-weight: 600
         }
 
+        header nav {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
         header nav a {
-            color: #e5e7eb;
-            margin: 0 12px;
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
-            font-size: 13px
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: 0.3s;
         }
 
         header nav a:hover {
-            color: var(--gold-soft)
+            color: var(--gold);
+            transform: translateY(-1px);
+        }
+
+        header nav a.active {
+            color: var(--gold);
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 5px;
         }
 
         /* HERO */
@@ -104,21 +121,42 @@
         /* BUTTONS */
         .btn {
             display: inline-block;
-            margin: 8px;
-            padding: 14px 36px;
-            border-radius: 999px;
-            font-weight: 600;
+            margin: 10px;
+            padding: 16px 42px;
+            border-radius: 50px;
+            font-weight: 800;
             text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 13px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            cursor: pointer;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-            color: #000;
+            background: linear-gradient(135deg, var(--gold), #8B6508);
+            color: black;
+            box-shadow: 0 10px 30px rgba(201, 164, 74, 0.3);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(201, 164, 74, 0.5);
+            background: linear-gradient(135deg, #facc15, var(--gold));
         }
 
         .btn-outline {
-            border: 2px solid var(--gold);
+            border: 2px solid rgba(212, 175, 55, 0.5);
             color: var(--gold);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.1);
+            transform: translateY(-5px);
         }
 
         /* SECTION */
@@ -193,21 +231,56 @@
         }
 
         /* MOBILE */
+        @media(min-width:1025px) {
+            .side-drawer, .drawer-overlay { display: none !important; }
+        }
+
+        @media(max-width:1024px) {
+            header nav { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
+            .menu-toggle { display: flex !important; }
+            header { padding: 15px 5% !important; justify-content: space-between !important; }
+        }
         @media(max-width:768px) {
-            .hero p {
-                font-size: 16px
-            }
+            * { box-sizing: border-box !important; }
+            body, html { max-width: 100vw !important; overflow-x: hidden !important; }
+            .hero h1 { font-size: 1.8rem !important; line-height: 1.2 !important; }
+            .hero p { font-size: 1rem !important; padding: 0 10px; }
+            header { height: auto; padding: 14px 20px !important; }
+            .grid { grid-template-columns: 1fr !important; gap: 20px !important; }
+            .section { padding: 60px 20px !important; }
+            
+            header { top: 38px !important; } /* If trust strip is above it */
+        }
 
-            header {
-                height: auto;
-                padding: 14px 0
-            }
-
-            header nav {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center
-            }
+        /* DRAWER STYLES */
+        .side-drawer.active { right: 0 !important; }
+        .side-drawer a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .drawer-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 200000;
+            display: none;
+        }
+        .drawer-overlay.active { display: block; }
+        .menu-toggle {
+            cursor: pointer;
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .menu-toggle span {
+            width: 30px;
+            height: 2px;
+            background: var(--gold);
+            transition: 0.3s;
         }
     </style>
     <!-- Google tag (gtag.js) -->
@@ -257,21 +330,69 @@
             <div style="color: var(--gold); font-size: 13px; font-weight: 600; letter-spacing: 1px;">🔒 256-BIT AES PROTECTION</div>
         </div>
     </div>
-        <div class="logo" style="display: flex; flex-direction: column; line-height: 1; text-align: left;">
-            <span style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 22px; letter-spacing: 1px;">APD <span style="color: var(--gold);">Global</span> Trade</span>
-            <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-top: 5px; font-weight: 700;">Trade Smart. Scale Fast.</span>
+    <header style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; padding: 15px 8%; background: rgba(2,6,23,0.9); backdrop-filter: blur(15px); position: sticky; top: 40px; z-index: 1000;">
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <div class="menu-toggle" onclick="toggleDrawer()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="logo" style="display: flex; flex-direction: column; line-height: 1; text-align: left;">
+                <span style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 22px; letter-spacing: 1px;">APD <span style="color: var(--gold);">Global</span> Trade</span>
+                <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-top: 5px; font-weight: 700;">Trade Smart. Scale Fast.</span>
+            </div>
         </div>
         <nav>
             <a href="/">Home</a>
             <a href="/buyer-rfqs.html">Buyer RFQs</a>
             <a href="/membership.html">Membership</a>
-            <a href="/verification-process.html" style="color:var(--gold);">Verification</a>
+            <a href="/verification-process.html">Verification</a>
             <a href="/contact.html">Contact</a>
-            <a href="/supplier-login.html">Supplier Login</a>
-            <a href="/register-supplier.html">Register</a>
-            <a href="/contact.html">Contact</a>
+            <div style="display: flex; align-items: center; gap: 20px; border-left: 1px solid rgba(212,175,55,0.2); padding-left: 20px; margin-left: 10px;">
+                <a href="/supplier-login.html" style="color: #fff; text-decoration: none; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;">Login</a>
+                <a href="/supplier-login.html" style="color: rgba(255,255,255,0.5); text-decoration: none; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; border: 1px solid rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 4px;">Forgot Password?</a>
+                <a href="/register-supplier.html" style="background: linear-gradient(135deg, var(--gold), #8B6508); color: #000; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3); transition: transform 0.3s, box-shadow 0.3s;">Sign Up Free</a>
+            </div>
         </nav>
     </header>
+
+  <!-- LUXURY FULL-SCREEN MOBILE NAV -->
+  <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+  <div class="side-drawer" id="sideDrawer" style="
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(2, 6, 23, 0.98);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      z-index: 200001;
+      transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 100px 10%;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      overflow-y: auto;
+  ">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+          <div class="logo premium-logo">APD <span style="color: var(--gold);">Global</span> Trade</div>
+          <div onclick="toggleDrawer()" style="color: var(--gold); font-size: 32px; cursor: pointer;">✕</div>
+      </div>
+      
+      <a href="/index.html" style="font-size: 1.8rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px;">Dashboard</a>
+      <a href="/buyer-rfqs.html" style="font-size: 1.8rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px;">Verified RFQs</a>
+      <a href="/suppliers.html" style="font-size: 1.8rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px;">Elite Suppliers</a>
+      <a href="/membership.html" style="font-size: 1.8rem; font-family: 'Playfair Display', serif; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px;">Join Membership</a>
+      <a href="/contact.html" style="font-size: 1.8rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px;">Contact Support</a>
+
+      <!-- ACCOUNT ACTIONS -->
+      <div style="padding-top: 10px;">
+          <a href="/supplier-login.html" style="font-size: 1.5rem; font-family: 'Playfair Display', serif; color: var(--gold); text-decoration: none; display: block; margin-bottom: 15px;">Supplier Login</a>
+          <a href="/register-supplier.html" style="font-size: 1.5rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; display: block; margin-bottom: 15px;">Sign Up Free</a>
+          <a href="/supplier-login.html" style="font-size: 1rem; color: #94a3b8; text-decoration: none; display: block;">Forgot Password?</a>
+      </div>
+  </div>
 
     <!-- ================= HERO SHIP ================= -->
     <section class="hero">
@@ -303,10 +424,10 @@
 
             <!-- QUICK INQUIRY & LOW FRICTION CTA -->
             <div style="margin-top: 30px;">
-                <a href="/membership.html" class="btn btn-primary" style="padding: 18px 45px; font-size: 18px; box-shadow: 0 0 30px rgba(212,175,55,0.4);">Start 7-Day Power Pass - ₹4,999</a>
-                <a href="/buyer-rfqs.html" class="btn btn-outline">Preview 1M+ Buyers</a>
+                <a href="/membership.html" class="btn btn-primary" style="padding: 18px 45px; font-size: 18px; box-shadow: 0 0 30px rgba(212,175,55,0.4);">Institutional Membership Access</a>
+                <a href="/buyer-rfqs.html" class="btn btn-outline">Preview Verified Buyers</a>
             </div>
-            <p style="font-size: 12px; color: var(--muted); margin-top: 20px; opacity: 0.8;">No long-term commitment. Unlock 7 premium leads instantly for just ₹4,999.</p>
+            <p style="font-size: 12px; color: var(--muted); margin-top: 20px; opacity: 0.8;">Institutional-grade access for professional exporters. Starting from $499.</p>
         </div>
     </section>
 
@@ -435,49 +556,112 @@
         </p>
 
         <div>
-            <a href="/membership.html" class="btn btn-primary">Start 7-Day Power Pass</a>
+            <a href="/membership.html" class="btn btn-primary">Start Institutional Access</a>
             <a href="/buyer-rfqs.html" class="btn btn-outline">View Buyer Demand (Blurred)</a>
         </div>
     </section>
 
-    <!-- BOTHUB CROSS-SELL -->
-    <section style="
-        padding: 80px 20px;
-        background: #071427;
-        text-align: center;
-        border-top: 1px solid rgba(201, 164, 74, 0.15);
-    ">
-        <div style="max-width: 900px; margin: 0 auto;">
-            <div style="color: var(--gold); font-weight: 800; letter-spacing: 2px; margin-bottom: 15px; font-size: 13px;">AUTOMATE YOUR EXPORT OUTREACH</div>
-            <h3 style="color: #fff; font-family: 'Playfair Display', serif; font-size: 36px; margin-bottom: 20px;">Need a 24/7 Sales Person?</h3>
-            <p style="color: #cbd5f5; font-size: 17px; line-height: 1.7; margin-bottom: 30px; max-width: 700px; margin-left: auto; margin-right: auto;">
-                Don't let time zones stop your growth. Use **BotHub AI** to engage with global buyers instantly. Professional, scalable, and always online.
-            </p>
-            <a href="https://wa-bothub.online/" target="_blank" style="
-                display: inline-block;
-                background: linear-gradient(135deg, #c9a44a, #e7cf88);
-                color: #000;
-                padding: 16px 40px;
-                border-radius: 5px;
-                font-weight: 800;
-                text-decoration: none;
-                box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            ">Visit BotHub Online</a>
+
+
+    <!-- ============================================================ -->
+    <!-- APD MANIFESTO SECTION FOR SUPPLIERS — UNMISSABLE -->
+    <!-- ============================================================ -->
+    <section id="apd-manifesto-sup" style="padding: 80px 20px; background: linear-gradient(180deg, #020617 0%, #0b1224 50%, #020617 100%); position: relative; overflow: hidden; text-align: center;">
+
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(201,164,74,0.06) 0%,transparent 70%);pointer-events:none;"></div>
+
+      <style>
+        .sup-reveal { opacity:0; transform:translateY(40px); transition:opacity 0.8s ease,transform 0.8s ease; }
+        .sup-reveal.visible { opacity:1; transform:translateY(0); }
+        @keyframes sup-pulse { 0%,100%{text-shadow:0 0 30px rgba(212,175,55,0.4),0 0 60px rgba(212,175,55,0.2);} 50%{text-shadow:0 0 60px rgba(212,175,55,0.8),0 0 100px rgba(212,175,55,0.4);} }
+      </style>
+
+      <div class="sup-reveal" style="margin-bottom:40px;">
+        <p style="font-size:13px;font-weight:800;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;">🚀 Why Exporters, Manufacturers &amp; Suppliers Choose APD GLOBAL TRADE</p>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,6vw,3.8rem);color:#fff;line-height:1.15;font-weight:900;margin-bottom:20px;">
+          Because products don't grow businesses...
+        </h2>
+        <div style="font-size:clamp(2.5rem,10vw,5rem);font-weight:900;color:var(--gold);line-height:1;letter-spacing:-1px;animation:sup-pulse 3s infinite;margin-bottom:20px;">🌍 BUYERS DO.</div>
+        <p style="font-size:clamp(1rem,2.5vw,1.25rem);color:#94a3b8;line-height:1.8;max-width:700px;margin:0 auto;">
+          With APD GLOBAL TRADE, your objective is not just listing products —<br>
+          <strong style="color:#fff;">it is connecting with serious international business opportunities.</strong>
+        </p>
+      </div>
+
+      <div style="width:80px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 50px;"></div>
+
+      <div class="sup-reveal" style="max-width:900px;margin:0 auto 50px;transition-delay:0.2s;">
+        <p style="font-size:13px;font-weight:800;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:24px;">Benefits</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;text-align:left;">
+          <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 18px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(212,175,55,0.1);"><span style="color:#22c55e;font-size:18px;flex-shrink:0;">✅</span><span style="color:#e2e8f0;font-weight:600;">International Buyer Expansion Support</span></div>
+          <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 18px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(212,175,55,0.1);"><span style="color:#22c55e;font-size:18px;flex-shrink:0;">✅</span><span style="color:#e2e8f0;font-weight:600;">Importers, Distributors &amp; Procurement Networks</span></div>
+          <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 18px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(212,175,55,0.1);"><span style="color:#22c55e;font-size:18px;flex-shrink:0;">✅</span><span style="color:#e2e8f0;font-weight:600;">Dedicated Trade Manager</span></div>
+          <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 18px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(212,175,55,0.1);"><span style="color:#22c55e;font-size:18px;flex-shrink:0;">✅</span><span style="color:#e2e8f0;font-weight:600;">Multi-Country Market Access</span></div>
+          <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 18px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(212,175,55,0.1);"><span style="color:#22c55e;font-size:18px;flex-shrink:0;">✅</span><span style="color:#e2e8f0;font-weight:600;">International RFQ Opportunities</span></div>
+          <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 18px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(212,175,55,0.1);"><span style="color:#22c55e;font-size:18px;flex-shrink:0;">✅</span><span style="color:#e2e8f0;font-weight:600;">Export Growth Guidance</span></div>
+          <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 18px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(212,175,55,0.1);"><span style="color:#22c55e;font-size:18px;flex-shrink:0;">✅</span><span style="color:#e2e8f0;font-weight:600;">Direct Buyer-Seller Connectivity</span></div>
+          <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 18px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(212,175,55,0.1);"><span style="color:#22c55e;font-size:18px;flex-shrink:0;">✅</span><span style="color:#e2e8f0;font-weight:600;">Long-Term Market Expansion Strategy</span></div>
         </div>
+      </div>
+
+      <div class="sup-reveal" style="max-width:900px;margin:0 auto 50px;transition-delay:0.3s;">
+        <p style="font-size:13px;font-weight:800;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;">Suitable For</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
+          <span style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:50px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.25);font-size:14px;font-weight:700;color:#fff;">🍚 Rice</span>
+          <span style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:50px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.25);font-size:14px;font-weight:700;color:#fff;">🌶 Spices</span>
+          <span style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:50px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.25);font-size:14px;font-weight:700;color:#fff;">🥭 Fruits &amp; Vegetables</span>
+          <span style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:50px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.25);font-size:14px;font-weight:700;color:#fff;">💊 Pharmaceuticals</span>
+          <span style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:50px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.25);font-size:14px;font-weight:700;color:#fff;">🧵 Textiles</span>
+          <span style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:50px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.25);font-size:14px;font-weight:700;color:#fff;">🏗 Construction Materials</span>
+          <span style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:50px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.25);font-size:14px;font-weight:700;color:#fff;">🛒 FMCG Products</span>
+          <span style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:50px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.25);font-size:14px;font-weight:700;color:#fff;">🏭 Industrial Products</span>
+        </div>
+      </div>
+
+      <div style="width:80px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 50px;"></div>
+
+      <div class="sup-reveal" style="max-width:700px;margin:0 auto;transition-delay:0.4s;">
+        <p style="font-size:clamp(1rem,2.5vw,1.2rem);color:#94a3b8;margin-bottom:24px;line-height:1.8;">Whether you are a startup exporter or an established manufacturer, the goal remains the same:</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:40px;">
+          <div style="padding:18px;background:rgba(212,175,55,0.05);border:1px solid rgba(212,175,55,0.2);border-radius:12px;"><div style="font-size:26px;margin-bottom:6px;">📈</div><div style="font-weight:800;color:#fff;font-size:13px;">More Buyer Opportunities</div></div>
+          <div style="padding:18px;background:rgba(212,175,55,0.05);border:1px solid rgba(212,175,55,0.2);border-radius:12px;"><div style="font-size:26px;margin-bottom:6px;">🤝</div><div style="font-weight:800;color:#fff;font-size:13px;">More Distributor Connections</div></div>
+          <div style="padding:18px;background:rgba(212,175,55,0.05);border:1px solid rgba(212,175,55,0.2);border-radius:12px;"><div style="font-size:26px;margin-bottom:6px;">🌍</div><div style="font-weight:800;color:#fff;font-size:13px;">More International Market Reach</div></div>
+          <div style="padding:18px;background:rgba(212,175,55,0.05);border:1px solid rgba(212,175,55,0.2);border-radius:12px;"><div style="font-size:26px;margin-bottom:6px;">🚢</div><div style="font-weight:800;color:#fff;font-size:13px;">More Export Business</div></div>
+        </div>
+        <div style="background:linear-gradient(135deg,rgba(201,164,74,0.12),rgba(15,23,42,0.8));border:1px solid rgba(212,175,55,0.4);border-radius:20px;padding:40px 30px;">
+          <p style="font-size:clamp(1.1rem,3vw,1.4rem);font-weight:700;color:#fff;margin-bottom:10px;">Don't wait for buyers to find you.</p>
+          <p style="font-size:clamp(1rem,2.5vw,1.1rem);color:#94a3b8;margin-bottom:24px;">Position your business where international opportunities can find you.</p>
+          <div style="font-size:clamp(1.2rem,3vw,1.6rem);font-weight:900;color:var(--gold);margin-bottom:8px;letter-spacing:1px;">🌍 APD GLOBAL TRADE</div>
+          <p style="color:#94a3b8;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:28px;">Global Buyers &nbsp;•&nbsp; Global Opportunities &nbsp;•&nbsp; Global Growth</p>
+          <a href="/membership.html" style="display:inline-block;background:linear-gradient(180deg,#facc15,#8B6508);color:#000;padding:16px 44px;border-radius:50px;font-weight:900;font-size:15px;text-decoration:none;letter-spacing:1px;box-shadow:0 15px 40px rgba(212,175,55,0.4);text-transform:uppercase;">Position My Business Now →</a>
+        </div>
+      </div>
+
+      <script>
+        (function(){
+          var items = document.querySelectorAll('#apd-manifesto-sup .sup-reveal');
+          if(!items.length) return;
+          var obs = new IntersectionObserver(function(entries){
+            entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+          },{threshold:0.15});
+          items.forEach(function(el){ obs.observe(el); });
+        })();
+      </script>
     </section>
 
     <!-- ================= FOOTER ================= -->
+
     <footer>
         <p style="color:var(--gold);font-weight:600">APD Global Trade</p>
         <p>Elite B2B Trade Facilitation Platform</p>
         <p style="color:#94a3b8; font-size:13px; margin:10px 0; letter-spacing:1px; text-transform:uppercase;">
-           Global Offices: New York • London • Dubai • Singapore
+           Headquartered in Rajasthan, India | Serving 70+ countries
         </p>
         <p style="margin: 15px 0;">
             <a href="/verification-process.html" style="color: var(--gold); text-decoration: none; font-size: 12px; border: 1px solid var(--gold); padding: 4px 10px; border-radius: 4px;">View Verification Standards</a>
         </p>
         <p>
-            📧 info@apdglobaltradehub.com<br>
+            📧 info@apdglobaltrade.com<br>
             💬 WhatsApp: +91 92664 18868
         </p>
         <div style="margin-top: 20px; opacity: 0.6; font-size: 11px;">
@@ -501,6 +685,12 @@ z-index:99999">
         📲 Download App
     </a>
 
+    <script>
+        function toggleDrawer() {
+            document.getElementById('sideDrawer').classList.toggle('active');
+            document.getElementById('drawerOverlay').classList.toggle('active');
+        }
+    </script>
+  <script src="/assets/js/ai-chatbot.js"></script>
 </body>
-
 </html>

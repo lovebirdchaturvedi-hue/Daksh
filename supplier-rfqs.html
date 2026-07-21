@@ -20,6 +20,22 @@ a{color:#e5e7eb;text-decoration:none;margin-left:16px}
   box-shadow:0 2px 8px rgba(0,0,0,.06)
 }
 .locked{color:#dc2626;font-weight:600}
+
+/* Modal Styles */
+.modal-overlay {
+  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;
+}
+.modal-content {
+  background: #fff; padding: 25px; border-radius: 12px; width: 90%; max-width: 400px;
+}
+.modal-content input, .modal-content select, .modal-content textarea {
+  width: 100%; padding: 10px; margin: 8px 0 15px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box;
+}
+.modal-content button {
+  background: #071427; color: #c9a44a; border: none; padding: 12px; width: 100%; border-radius: 6px; font-weight: bold; cursor: pointer;
+}
+.close-modal { float: right; cursor: pointer; font-size: 20px; font-weight: bold; color: #666; }
 </style>
 </head>
 
@@ -39,11 +55,39 @@ a{color:#e5e7eb;text-decoration:none;margin-left:16px}
   <div id="rfqList">Loading RFQs…</div>
 </div>
 
+<!-- Bidding Modal -->
+<div class="modal-overlay" id="bidModal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeBidModal()">&times;</span>
+    <h3 style="margin-top:0;">Submit Live Quote</h3>
+    <p style="font-size:12px; color:#666; margin-top:-10px;">Submit your best price. The buyer will be notified instantly.</p>
+    
+    <label>Price per MT (USD)</label>
+    <input type="number" id="bidPrice" placeholder="e.g. 450" required>
+    
+    <label>Incoterms</label>
+    <select id="bidIncoterms">
+      <option value="CIF">CIF (Cost, Insurance & Freight)</option>
+      <option value="FOB">FOB (Free on Board)</option>
+      <option value="CFR">CFR (Cost & Freight)</option>
+      <option value="EXW">EXW (Ex Works)</option>
+    </select>
+    
+    <label>Delivery Timeline (Days)</label>
+    <input type="number" id="bidDelivery" placeholder="e.g. 15" required>
+    
+    <label>Additional Notes (Optional)</label>
+    <textarea id="bidNotes" rows="3" placeholder="Any specific terms or quality guarantees..."></textarea>
+    
+    <button onclick="submitBid()">Submit Official Quote</button>
+  </div>
+</div>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import { 
-  getFirestore, collection, query, where, getDocs, getDoc, doc, updateDoc, arrayUnion, increment, orderBy, limit, onSnapshot 
+  getFirestore, collection, query, where, getDocs, getDoc, doc, updateDoc, arrayUnion, increment, orderBy, limit, onSnapshot, addDoc, serverTimestamp 
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const app = initializeApp({
@@ -110,7 +154,20 @@ onAuthStateChanged(auth, async (user) => {
     log(`Profile loaded. Plan: ${plan}, Status: ${s.status}`);
 
     if (s.status !== "approved") {
-       rfqList.innerHTML = `<p>Your account status is: <b>${s.status || "pending"}</b>. Institutional verification is required for RFQ access.</p>`;
+       rfqList.innerHTML = `
+        <div style="background: rgba(212, 175, 55, 0.05); border: 1px solid #c9a44a; padding: 40px; border-radius: 20px; text-align: center; margin-top: 40px;">
+            <div style="font-size: 40px; margin-bottom: 20px;">🔒</div>
+            <h3 style="color: #071427; font-size: 22px; margin-bottom: 10px;">Institutional Access Required</h3>
+            <p style="color: #475569; font-size: 15px; margin-bottom: 30px; max-width: 500px; margin-left: auto; margin-right: auto;">
+                Your account is currently <b>${s.status || "pending"}</b>. To view live buyer requirements and unlock direct contact details, you must complete your institutional verification and upgrade to a premium plan.
+            </p>
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <a href="/membership.html" style="background: #071427; color: #c9a44a; padding: 15px 35px; border-radius: 50px; font-weight: 800; text-decoration: none; border: 2px solid #c9a44a; display: inline-block;">View Premium Plans</a>
+                <a href="/supplier-dashboard.html" style="background: #fff; color: #071427; padding: 15px 35px; border-radius: 50px; font-weight: 700; text-decoration: none; border: 1px solid #e2e8f0; display: inline-block;">Upload Documents</a>
+            </div>
+            <p style="font-size: 11px; color: #94a3b8; margin-top: 25px;">Verified exporters get instant access to 5M+ Global Buyer database.</p>
+        </div>
+       `;
        return;
     }
     
@@ -133,22 +190,26 @@ onAuthStateChanged(auth, async (user) => {
       rfqList.innerHTML = "";
       
       // CREDIT HEADER for Power Pass
-      if (plan === '7_day_pass') {
-        const rem = 7 - (s.unlocksUsed || 0);
-        rfqList.innerHTML += `<div style="background:#fffbeb; border:1px solid #fde68a; padding:12px; border-radius:10px; margin-bottom:20px; font-size:14px;">⚡ <b>Power Pass active:</b> ${rem} credits remaining. You can unlock 1 lead per day.</div>`;
+      if (plan === '3_day_trial') {
+        const rem = 3 - (s.unlocksUsed || 0);
+        rfqList.innerHTML += `<div style="background:#fffbeb; border:1px solid #fde68a; padding:12px; border-radius:10px; margin-bottom:20px; font-size:14px;">⚡ <b>3-Day Trial Pass active:</b> ${rem} credits remaining. You can unlock 1 lead per day.</div>`;
+      } else if (["trial_3m", "premium", "gold"].includes(plan)) {
+        const rem = 25 - (s.unlocksUsed || 0);
+        rfqList.innerHTML += `<div style="background:#fffbeb; border:1px solid #fde68a; padding:12px; border-radius:10px; margin-bottom:20px; font-size:14px;">⭐ <b>Professional Pass active:</b> ${rem} credits remaining.</div>`;
       }
 
       rfqs.forEach(r => {
         const rId = r.id;
         const isUnlocked = s.unlockedLeads && s.unlockedLeads.includes(rId);
         
-        const UNLIMITED_PLANS = ["trial_3m", "pro_6m", "elite_12m", "platinum", "premium", "premium_trial"];
+        const UNLIMITED_PLANS = ["pro_6m", "elite_12m", "platinum", "premium_trial"];
         const hasFullAccess = UNLIMITED_PLANS.includes(plan);
-        const isSevenDayPass = plan === "7_day_pass";
+        const isSevenDayPass = plan === "3_day_trial";
+        const isProfessionalPass = ["trial_3m", "premium", "gold"].includes(plan);
         
-        const shouldBlur = isSevenDayPass && !isUnlocked;
+        const shouldBlur = (isSevenDayPass || isProfessionalPass) && !isUnlocked;
         const blurStyle = shouldBlur ? "filter: blur(5.5px); user-select: none;" : "";
-        const displayProduct = shouldBlur ? "Institutional Trade Opportunity" : (r.product || "Global RFQ");
+        const displayProduct = r.product || "Global RFQ";
         const displayQty = shouldBlur ? "---" : (r.quantity || "-");
         const displayDest = shouldBlur ? "Blurred Region" : (r.deliveryPort || r.destination || "-");
 
@@ -163,11 +224,16 @@ onAuthStateChanged(auth, async (user) => {
           `;
         } else {
           contactHtml = `
-            <div style="margin-top:15px;">
-               <p class="locked">🔒 Institutional access required to view contact.</p>
-               <button onclick="unlockRfq('${rId}', '${sId}')" style="background:#071427; color:#c9a44a; border:1px solid #c9a44a; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer; width:100%;">
-                  Unlock Contact (1 Credit)
-               </button>
+            <div style="margin-top:15px; display:flex; gap:10px; flex-direction:column;">
+               <p class="locked" style="margin-bottom:0;">🔒 Institutional access required to view contact.</p>
+               <div style="display:flex; gap:10px;">
+                 <button onclick="openBidModal('${rId}', '${displayProduct}')" style="background:#2563eb; color:#fff; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer; flex:1;">
+                    Submit Quote / Bid
+                 </button>
+                 <button onclick="unlockRfq('${rId}', '${sId}')" style="background:#071427; color:#c9a44a; border:1px solid #c9a44a; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer; flex:1;">
+                    Unlock Contact
+                 </button>
+               </div>
             </div>
           `;
         }
@@ -179,12 +245,12 @@ onAuthStateChanged(auth, async (user) => {
         card.style.border = isUnlocked ? "2px solid #16a34a" : "1px solid #e2e8f0";
         card.innerHTML = `
           <div style="display:flex; justify-content:space-between; align-items:start;">
-             <h3 style="${blurStyle} font-size:18px; margin:0;">${displayProduct}</h3>
+             <h3 style="font-size:18px; margin:0;">${displayProduct}</h3>
              <span style="font-size:11px; color:#94a3b8; background:#f1f5f9; padding:4px 8px; border-radius:4px;">${dateText}</span>
           </div>
           <div style="margin:12px 0;">
-            <p style="margin:4px 0; font-size:14px;"><b>Quantity:</b> <span style="${blurStyle}">${displayQty}</span></p>
-            <p style="margin:4px 0; font-size:14px;"><b>Destination:</b> <span style="${blurStyle}">${displayDest}</span></p>
+            <p style="margin:4px 0; font-size:14px;"><b>Quantity:</b> <span>${displayQty}</span></p>
+            <p style="margin:4px 0; font-size:14px;"><b>Destination:</b> <span>${displayDest}</span></p>
           </div>
           ${contactHtml}
         `;
@@ -208,12 +274,14 @@ window.unlockRfq = async (rfqId, supplierId) => {
     const sSnap = await getDoc(sRef);
     const s = sSnap.data();
 
-    // 1-Credit-Per-Day Logic for 7_day_pass
-    if (s.plan === "7_day_pass") {
+    // 1-Credit-Per-Day Logic for 3_day_trial
+    if (s.plan === "3_day_trial") {
       const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
       
-      if ((s.unlocksUsed || 0) >= 7) {
-        alert("You have used all 7 credits of your Power Pass. Please upgrade for more access.");
+      if ((s.unlocksUsed || 0) >= 3) {
+        if(confirm("You have used all 3 credits of your Trial Pass. Please upgrade for more access. View Plans?")) {
+            window.location.href = '/membership.html';
+        }
         return;
       }
       
@@ -229,14 +297,59 @@ window.unlockRfq = async (rfqId, supplierId) => {
         unlocksUsed: increment(1),
         lastUnlockDate: today
       });
+    } else if (s.plan === "custom_credits") {
+      const maxCredits = s.totalCredits || 0;
+      if ((s.unlocksUsed || 0) >= maxCredits) {
+        if(confirm("You don't have enough credits to unlock this buyer. Upgrade now to get instant credits. View Plans?")) {
+            window.location.href = '/membership.html';
+        }
+        return;
+      }
+      if (!confirm(`Unlock this buyer contact? You have used ${s.unlocksUsed || 0} / ${maxCredits} credits.`)) return;
+      await updateDoc(sRef, {
+        unlockedLeads: arrayUnion(rfqId),
+        unlocksUsed: increment(1)
+      });
+    } else if (["trial_3m", "premium", "gold"].includes(s.plan)) {
+      if ((s.unlocksUsed || 0) >= 25) {
+        if(confirm("You have reached your 25 buyer limit for the Professional Pass. Please upgrade to Institutional Elite for unlimited access. Upgrade now?")) {
+            window.location.href = '/membership.html';
+        }
+        return;
+      }
+      if (!confirm(`Unlock this buyer contact? You have used ${s.unlocksUsed || 0} / 25 credits.`)) return;
+      await updateDoc(sRef, {
+        unlockedLeads: arrayUnion(rfqId),
+        unlocksUsed: increment(1)
+      });
     } else {
       // Standard local credit logic (if any) or shared credits
+      if ((s.unlocksUsed || 0) >= (s.totalCredits || 0)) {
+         if(confirm("You do not have enough credits to unlock this buyer. Upgrade now to get instant credits. View Plans?")) {
+             window.location.href = '/membership.html';
+         }
+         return;
+      }
       if (!confirm("Unlock this buyer contact using 1 credit?")) return;
       await updateDoc(sRef, {
         unlockedLeads: arrayUnion(rfqId),
         unlocksUsed: increment(1)
       });
     }
+
+    try {
+        const msg = `🔓 Live RFQ Unlocked!\nSupplier: ${s.companyName || 'Unknown'}\nLead ID: ${rfqId}`;
+        await fetch('/api/send', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                instance: "instance168990",
+                token: "yx9xaxy5k1nbqjat",
+                to: "+919266418868",
+                body: msg
+            })
+        });
+    } catch(e) { console.error('Could not send notification', e); }
 
     alert("Buyer Contact Unlocked! ✅");
     location.reload();
@@ -249,6 +362,66 @@ window.unlockRfq = async (rfqId, supplierId) => {
 document.getElementById("logout").onclick = async () => {
   await signOut(auth);
   location.href = "/supplier-login.html";
+};
+
+// --- Bidding Logic ---
+let currentBidRfqId = null;
+let currentBidSupplierId = null;
+
+window.openBidModal = (rfqId, productName) => {
+  currentBidRfqId = rfqId;
+  currentBidSupplierId = auth.currentUser.uid;
+  document.getElementById('bidModal').style.display = 'flex';
+};
+
+window.closeBidModal = () => {
+  document.getElementById('bidModal').style.display = 'none';
+};
+
+window.submitBid = async () => {
+  const price = document.getElementById('bidPrice').value;
+  const incoterms = document.getElementById('bidIncoterms').value;
+  const delivery = document.getElementById('bidDelivery').value;
+  const notes = document.getElementById('bidNotes').value;
+
+  if(!price || !delivery) {
+    alert("Please enter Price and Delivery Timeline.");
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, "bids"), {
+      rfqId: currentBidRfqId,
+      supplierId: currentBidSupplierId,
+      price: Number(price),
+      incoterms: incoterms,
+      deliveryDays: Number(delivery),
+      notes: notes,
+      status: "pending",
+      createdAt: serverTimestamp()
+    });
+    
+    alert("✅ Official Quote Submitted Successfully! The buyer will review your bid.");
+    closeBidModal();
+    
+    try {
+        const msg = `💰 New Bid Submitted!\nRFQ ID: ${currentBidRfqId}\nSupplier UID: ${currentBidSupplierId}\nPrice: $${price} ${incoterms}`;
+        await fetch('/api/send', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                instance: "instance168990",
+                token: "yx9xaxy5k1nbqjat",
+                to: "+919266418868",
+                body: msg
+            })
+        });
+    } catch(e) {}
+
+  } catch (e) {
+    console.error("Error submitting bid: ", e);
+    alert("Error submitting quote. Please try again.");
+  }
 };
 </script>
 

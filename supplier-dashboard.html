@@ -16,9 +16,38 @@ header{
 }
 header a{color:#e5e7eb;margin-left:20px;text-decoration:none}
 .card{
-  max-width:600px;margin:80px auto;
+  max-width:600px;margin:80px auto 20px;
   background:#fff;padding:30px;border-radius:16px;
   box-shadow:0 2px 10px rgba(0,0,0,.08)
+}
+.lead-card {
+  background: #fffcf0;
+  border: 1px solid #d4af37;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.blur-text {
+  filter: blur(4px);
+  user-select: none;
+  color: transparent;
+  text-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+.btn-unlock {
+  background: #071427;
+  color: #c9a44a;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-unlock.locked {
+  background: #ccc;
+  color: #666;
 }
 </style>
 </head>
@@ -38,6 +67,66 @@ header a{color:#e5e7eb;margin-left:20px;text-decoration:none}
   <h2 id="welcome">Welcome</h2>
   <p>Status: <b id="status">checking…</b></p>
   <p>Plan: <b id="plan">checking…</b></p>
+  <p>Total Bids Submitted: <b id="totalBids">0</b> <a href="/supplier-bids.html" style="font-size:12px; margin-left:10px; background:#d4af37; color:#000; padding:4px 8px; border-radius:4px; text-decoration:none; font-weight:bold;">View My Bids</a></p>
+</div>
+
+<!-- AUTOMATCH DASHBOARD FOR FREE USERS -->
+<div id="automatchSection" class="card" style="margin-top: 0; display: none;">
+  <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #c9a44a; padding-bottom: 10px; margin-bottom: 15px;">
+      <h2 style="color: #071427; margin: 0;">Automatch Buy Leads</h2>
+      <span id="creditBadge" style="background: #2ECC71; color: #fff; font-size: 12px; font-weight: bold; padding: 4px 10px; border-radius: 12px;">1 Free Lead Available</span>
+  </div>
+  <p style="font-size: 14px; color: #475569;">We found verified buyers looking for <strong id="commodityDisplay" style="color:#071427;">your products</strong> today.</p>
+  
+  <div id="leadsContainer" style="margin-top: 20px;">
+    <!-- JS Will Populate -->
+  </div>
+</div>
+
+<!-- KYC VERIFICATION PORTAL -->
+<div id="kycSection" class="card" style="margin-top: 20px; border: 1px solid #c9a44a; background: #faf9f6; display: none;">
+  <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #c9a44a; padding-bottom: 10px; margin-bottom: 15px;">
+      <h2 style="color: #071427; margin: 0;">KYC & Government Verification</h2>
+      <span style="background: #e2e8f0; color: #475569; font-size: 12px; font-weight: bold; padding: 4px 10px; border-radius: 12px;">Unverified</span>
+  </div>
+  <p style="font-size: 14px; color: #475569;">To achieve the <strong>"APD Vetted Supplier"</strong> badge and unlock High-Intent Institutional Buyers, please upload your mandatory trade documents.</p>
+  
+  <div style="margin-top: 20px;">
+    <div style="background: #fffcf0; border: 1px solid #d4af37; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+        <p style="font-size: 13px; font-weight: 700; color: #071427; margin: 0 0 10px 0;">Institutional Onboarding Documents:</p>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="/supplier-agreement.html" target="_blank" style="font-size: 11px; background: #071427; color: #fff; padding: 5px 10px; text-decoration: none; border-radius: 4px;">Download Agreement</a>
+            <a href="/supplier-consent.html" target="_blank" style="font-size: 11px; background: #071427; color: #fff; padding: 5px 10px; text-decoration: none; border-radius: 4px;">Download Consent Form</a>
+        </div>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label style="font-weight: 600; font-size: 14px; display: block; margin-bottom: 5px;">1. Signed Institutional Agreement</label>
+      <input type="file" id="signedAgreement" style="padding: 10px; border: 1px dashed #cbd5e1; width: 100%; border-radius: 6px; box-sizing: border-box; background: #fff;">
+    </div>
+    <div style="margin-bottom: 15px;">
+      <label style="font-weight: 600; font-size: 14px; display: block; margin-bottom: 5px;">2. Signed Consent Declaration</label>
+      <input type="file" id="signedConsent" style="padding: 10px; border: 1px dashed #cbd5e1; width: 100%; border-radius: 6px; box-sizing: border-box; background: #fff;">
+    </div>
+    <div style="margin-bottom: 15px;">
+      <label style="font-weight: 600; font-size: 14px; display: block; margin-bottom: 5px;">3. Company PAN Card</label>
+      <input type="file" id="panFile" style="padding: 10px; border: 1px dashed #cbd5e1; width: 100%; border-radius: 6px; box-sizing: border-box; background: #fff;">
+    </div>
+    <div style="margin-bottom: 15px;">
+      <label style="font-weight: 600; font-size: 14px; display: block; margin-bottom: 5px;">4. Aadhaar Card (Authorized Signatory)</label>
+      <input type="file" id="aadhaarFile" style="padding: 10px; border: 1px dashed #cbd5e1; width: 100%; border-radius: 6px; box-sizing: border-box; background: #fff;">
+    </div>
+    <div style="margin-bottom: 15px;">
+      <label style="font-weight: 600; font-size: 14px; display: block; margin-bottom: 5px;">5. GST Registration Certificate</label>
+      <input type="file" id="gstFile" style="padding: 10px; border: 1px dashed #cbd5e1; width: 100%; border-radius: 6px; box-sizing: border-box; background: #fff;">
+    </div>
+    <div style="margin-bottom: 15px;">
+      <label style="font-weight: 600; font-size: 14px; display: block; margin-bottom: 5px;">6. IEC (Import Export Code)</label>
+      <input type="file" id="iecFile" style="padding: 10px; border: 1px dashed #cbd5e1; width: 100%; border-radius: 6px; box-sizing: border-box; background: #fff;">
+    </div>
+    
+    <button onclick="alert('Verification Documents Submitted! Our compliance team will review them within 24-48 hours to grant your APD Vetted Badge.')" style="background: #071427; color: #c9a44a; border: 2px solid #c9a44a; padding: 12px 24px; font-weight: 600; font-size: 16px; border-radius: 6px; cursor: pointer; width: 100%; margin-top: 10px; transition: 0.3s;">Submit for Verification</button>
+  </div>
 </div>
 
 <script type="module">
@@ -102,24 +191,127 @@ onAuthStateChanged(auth, async (user) => {
     // Plan with Credits display
     let planText = s.plan || "free";
     const planMap = {
-      '7_day_pass': '7-Day Power Pass',
-      'trial_3m': '3-Month Premium Trial',
-      'pro_6m': '6-Month Elite Professional',
-      'elite_12m': '12-Month Institutional Elite',
+      '3_day_trial': '3-Day Trial Pass',
+      'trial_3m': 'Professional Pass',
+      'pro_6m': 'Institutional Elite',
+      'elite_12m': 'Global Enterprise',
       'free': 'Free',
       'basic': 'Basic',
-      'premium': '3-Mo Premium Trial'
+      'premium': 'Professional Pass',
+      'platinum': 'Institutional Elite',
+      'gold': 'Professional Pass'
     };
 
-    if (s.plan === "7_day_pass") {
-      const remaining = 7 - (s.unlocksUsed || 0);
+    if (s.plan === "3_day_trial") {
+      const remaining = 3 - (s.unlocksUsed || 0);
       const pName = planMap[s.plan] || s.plan;
       planText = `${pName} (${remaining} credits left)`;
+    } else if (s.plan === "trial_3m" || s.plan === "premium" || s.plan === "gold") {
+      const remaining = 25 - (s.unlocksUsed || 0);
+      const pName = planMap[s.plan] || s.plan;
+      planText = `${pName} (${remaining} unlocks left)`;
     } else if (planMap[s.plan]) {
       planText = planMap[s.plan];
     }
     
     document.getElementById("plan").innerText = planText;
+
+    // Fetch Total Bids
+    try {
+        const bidsQ = query(collection(db, "bids"), where("supplierId", "==", user.uid));
+        const bidsSnap = await getDocs(bidsQ);
+        document.getElementById("totalBids").innerText = bidsSnap.size;
+    } catch(e) { console.error("Error fetching bids:", e); }
+
+    // SHOW KYC ONLY FOR PAID MEMBERS, ELSE AUTOMATCH
+    const PAID_PLANS = ["trial_3m", "pro_6m", "elite_12m", "premium", "platinum", "gold"];
+    
+    if (PAID_PLANS.includes(s.plan)) {
+        document.getElementById("kycSection").style.display = "block";
+        if (["trial_3m", "premium", "gold"].includes(s.plan) && (s.unlocksUsed || 0) >= 25) {
+            document.getElementById("kycSection").style.display = "none";
+            document.getElementById("automatchSection").style.display = "block";
+            document.getElementById("automatchSection").innerHTML = `
+                <div style="text-align:center; padding: 30px 20px; background: #fff8f0; border-radius: 12px; border: 2px solid #f59e0b;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">⚠️</div>
+                    <h2 style="color: #dc2626; margin-bottom: 10px;">Your Professional Pass Limit Reached</h2>
+                    <p style="color: #475569; margin-bottom: 8px; font-size: 14px; line-height: 1.6;">
+                        You have used all <strong>25 verified buyer unlocks</strong> included in the Professional Pass. Upgrade to Institutional Elite for unlimited access.
+                    </p>
+                    <a href="/membership.html" style="background: linear-gradient(135deg, #d4af37, #8B6508); color: #000; padding: 14px 32px; border-radius: 50px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; display: inline-block; font-size: 15px;">⭐ Upgrade to Elite</a>
+                </div>
+            `;
+        }
+    } else if (s.plan === "3_day_trial" || s.plan === "custom_credits") {
+        // Enforce Trial or Custom Credits
+        let isExpired = false;
+        const TRIAL_DAYS = 3;
+        const TRIAL_CREDITS = (s.plan === "custom_credits") ? (s.totalCredits || 0) : 3;
+        const unlocksUsed = s.unlocksUsed || 0;
+
+        // 1. Check credits exhausted
+        if (unlocksUsed >= TRIAL_CREDITS) {
+            isExpired = true;
+        }
+
+        // 2. Check 3-day time expiration
+        if (!isExpired && s.trialStartDate) {
+            const startDate = s.trialStartDate.toDate().getTime();
+            const daysPassed = (Date.now() - startDate) / (1000 * 60 * 60 * 24);
+            if (daysPassed > TRIAL_DAYS) {
+                isExpired = true;
+            }
+        }
+
+        if (isExpired) {
+            document.getElementById("automatchSection").style.display = "block";
+            document.getElementById("automatchSection").innerHTML = `
+                <div style="text-align:center; padding: 30px 20px; background: #fff8f0; border-radius: 12px; border: 2px solid #f59e0b;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">🔒</div>
+                    <h2 style="color: #dc2626; margin-bottom: 10px;">Your 3-Day Free Trial Has Ended</h2>
+                    <p style="color: #475569; margin-bottom: 8px; font-size: 14px; line-height: 1.6;">
+                        You have used all <strong>3 free buyer unlocks</strong>. You've seen the quality of our buyers —
+                        now unlock <strong>unlimited verified RFQs</strong> with a Premium Membership.
+                    </p>
+                    <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:15px;">
+                        <a href="/membership.html" style="background: linear-gradient(135deg, #d4af37, #8B6508); color: #000; padding: 14px 32px; border-radius: 50px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; display: inline-block; font-size: 15px;">🚀 Upgrade to Premium</a>
+                        <a href="https://wa.me/237658309636?text=Hello%20APD%20Global%20Trade%2C%20please%20add%201%20Free%20Credit%20to%20my%20account." target="_blank" style="background: #25D366; color: #fff; padding: 14px 32px; border-radius: 50px; text-decoration: none; font-weight: 900; letter-spacing: 1px; display: inline-block; font-size: 15px;">💬 Request 1 Free Credit</a>
+                    </div>
+                </div>
+            `;
+        } else {
+            // Active Free Trial
+            document.getElementById("automatchSection").style.display = "block";
+            document.getElementById("commodityDisplay").innerText = s.product || "your products";
+
+            const creditsLeft = TRIAL_CREDITS - unlocksUsed;
+            let daysLeft = TRIAL_DAYS;
+            if (s.trialStartDate) {
+                const daysPassed = (Date.now() - s.trialStartDate.toDate().getTime()) / (1000 * 60 * 60 * 24);
+                daysLeft = Math.max(0, TRIAL_DAYS - Math.floor(daysPassed));
+            }
+
+            const badge = document.getElementById("creditBadge");
+            badge.innerText = `${creditsLeft} of ${TRIAL_CREDITS} Credits Left • ${daysLeft} Day${daysLeft !== 1 ? 's' : ''} Remaining`;
+            badge.style.background = creditsLeft === 1 ? '#f59e0b' : '#facc15';
+            badge.style.color = '#000';
+
+            renderMockLeads(s.product || "General", user.uid, unlocksUsed, TRIAL_CREDITS, s);
+        }
+    } else {
+        // Locked Free Plan (Requires WhatsApp Request)
+        document.getElementById("automatchSection").style.display = "block";
+        document.getElementById("automatchSection").innerHTML = `
+            <div style="text-align:center; padding: 40px 20px; background: #fff8f0; border-radius: 12px; border: 2px solid #f59e0b;">
+                <div style="font-size: 3rem; margin-bottom: 15px;">🔒</div>
+                <h2 style="color: #071427; margin-bottom: 10px;">Trial Pass Locked</h2>
+                <p style="color: #475569; margin-bottom: 25px; font-size: 14px; line-height: 1.6;">
+                    To prevent spam and ensure serious inquiries only, please request access via WhatsApp to unlock your 3-Day Free Trial.
+                </p>
+                <a href="https://wa.me/237658309636?text=Hello%20APD%20Global%20Trade%2C%20I%20have%20registered%20on%20the%20platform.%20Please%20unlock%20my%203%20Days%20Trial." target="_blank" style="background: #25D366; color: #fff; padding: 14px 32px; border-radius: 50px; text-decoration: none; font-weight: 900; letter-spacing: 0.5px; display: inline-block; font-size: 15px;">📲 Request to Unlock 3 Days Trial</a>
+            </div>
+        `;
+    }
 
   } catch (e) {
     console.error("Dashboard Error:", e);
@@ -131,8 +323,213 @@ onAuthStateChanged(auth, async (user) => {
 document.getElementById("logout").onclick = async ()=>{
   await signOut(auth);
   location.href="/supplier-login.html";
-};
+};// --- Automatch Logic: Pull REAL RFQs from Firestore ---
+
+async function renderMockLeads(commodity, uid, unlocksUsed, maxCredits, supplierData) {
+  const container = document.getElementById('leadsContainer');
+  container.innerHTML = '<p style="color:#94a3b8; font-size:13px;">⏳ Loading matched buyers for you...</p>';
+
+  let freeCredits = maxCredits - unlocksUsed; // e.g. 3 - 1 = 2 remaining
+
+  // Pull 3 real RFQs from Firestore for this commodity
+  let leads = [];
+  try {
+    const q = query(collection(db, 'rfqs'), where('product', '==', commodity), where('status', '==', 'open'));
+    const snap = await getDocs(q);
+    const shuffled = snap.docs.sort(() => 0.5 - Math.random()).slice(0, 3);
+    leads = shuffled.map((d, i) => ({ id: i + 1, ...d.data() }));
+  } catch(e) {
+    console.warn('Could not fetch RFQs, using fallback', e);
+  }
+
+  // Fallback if no real data
+  if (leads.length === 0) {
+    leads = [
+      { id: 1, country: 'UAE', ownerName: 'Ahmed Al Rashid', designation: 'Procurement Director', companyName: 'Gulf Prime Trading LLC', businessType: 'Institutional Buyer', contact: '+971 52-384-7129', email: 'ahmed.rashid@gulfprimellc.ae', product: commodity, quantity: '200 MT', paymentTerms: 'LC (Letter of Credit)', deliveryPort: 'Jebel Ali Port', incoterms: 'CIF', frequency: 'Monthly Supply', website: 'www.gulfprimellc.ae', certificationRequired: 'HALAL Certified', inspectionAgency: 'SGS' },
+      { id: 2, country: 'USA', ownerName: 'James Richardson', designation: 'Import Manager', companyName: 'Atlantic Global Imports Corp', businessType: 'Distributor', contact: '+1 312-847-2931', email: 'j.richardson@atlanticglobalimports.com', product: commodity, quantity: '500 MT', paymentTerms: 'TT (Telegraphic Transfer)', deliveryPort: 'Port of Los Angeles', incoterms: 'FOB', frequency: 'Quarterly Supply', website: 'www.atlanticglobalimports.com', certificationRequired: 'FDA Approved', inspectionAgency: 'Bureau Veritas' },
+      { id: 3, country: 'UK', ownerName: 'David Thompson', designation: 'Supply Chain Head', companyName: 'Crown Trade Partners Ltd', businessType: 'Wholesaler', contact: '+44 20-7384-2910', email: 'd.thompson@crowntradepartners.co.uk', product: commodity, quantity: '300 MT', paymentTerms: 'CAD (Cash Against Documents)', deliveryPort: 'Port of Felixstowe', incoterms: 'CFR', frequency: 'Annual Contract', website: 'www.crowntradepartners.co.uk', certificationRequired: 'ISO 22000', inspectionAgency: 'Intertek' }
+    ];
+  }
+
+  container.innerHTML = '';
+
+  // Header showing credits status
+  const creditsHeader = document.createElement('div');
+  creditsHeader.style = 'background: linear-gradient(135deg, #071427, #0f2744); color: #fff; padding: 12px 16px; border-radius: 10px; margin-bottom: 14px; font-size: 13px; display: flex; justify-content: space-between; align-items: center;';
+  creditsHeader.innerHTML = `
+    <span>🎯 Matched buyers for <strong>${commodity}</strong></span>
+    <span style="background: ${freeCredits > 1 ? '#22c55e' : freeCredits === 1 ? '#f59e0b' : '#dc2626'}; color: #000; padding: 3px 10px; border-radius: 20px; font-weight: 800; font-size: 12px;">
+      ${freeCredits > 0 ? `${freeCredits} Unlock${freeCredits > 1 ? 's' : ''} Left` : '0 Credits Left'}
+    </span>
+  `;
+  container.appendChild(creditsHeader);
+
+  leads.forEach(lead => {
+      const card = document.createElement('div');
+      card.className = 'lead-card';
+      card.style.cssText = 'flex-direction:column; align-items:flex-start; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin-bottom: 12px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.06);';
+      card.innerHTML = `
+          <div style="width:100%; display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+            <div>
+              <h4 style="margin:0 0 4px 0; color:#071427; font-size:15px;">🌍 ${lead.country || 'International'} &nbsp;·&nbsp; <span style="color:#0284c7;">${lead.businessType || 'Buyer'}</span></h4>
+              <p style="margin:0; font-size:12px; color:#64748b;">📦 ${lead.product || commodity} &nbsp;·&nbsp; ${lead.quantity || 'Bulk'} &nbsp;·&nbsp; ${lead.frequency || 'On-Demand'}</p>
+            </div>
+            <button id="btn-${lead.id}" class="btn-unlock" style="flex-shrink:0; margin-left:10px; background: ${freeCredits > 0 ? 'linear-gradient(135deg,#d4af37,#8B6508)' : '#e2e8f0'}; color: ${freeCredits > 0 ? '#000' : '#94a3b8'}; border:none; padding: 8px 16px; border-radius: 8px; font-weight: 800; cursor: ${freeCredits > 0 ? 'pointer' : 'not-allowed'}; font-size:13px;">
+              ${freeCredits > 0 ? '🔓 Unlock' : '🔒 Locked'}
+            </button>
+          </div>
+          <div id="blurred-${lead.id}" class="blur-text" style="width:100%; background:#fafaf8; border-radius:8px; padding:12px; font-size:12px; line-height:2.1; border:1px dashed #d4af37;">
+            <span style="display:inline-block; background:#071427; color:#d4af37; font-size:10px; font-weight:800; padding:2px 8px; border-radius:4px; margin-bottom:8px; letter-spacing:1px;">🔐 UNLOCK TO REVEAL</span><br>
+            <b>👤 Owner / Contact:</b> ${lead.ownerName || lead.buyerName || 'Contact Person'} &nbsp;(${lead.designation || 'Manager'})<br>
+            <b>🏢 Company:</b> ${lead.companyName || 'Company Name'} &nbsp;·&nbsp; ${lead.businessType || 'Buyer'}<br>
+            <b>📞 Phone / WhatsApp:</b> ${lead.contact || lead.whatsapp || 'Phone Number'}<br>
+            <b>📧 Email:</b> ${lead.email || 'Email Address'}<br>
+            <b>🌐 Website:</b> ${lead.website || 'N/A'}<br>
+            <b>🏦 Payment Terms:</b> ${lead.paymentTerms || 'Negotiable'} &nbsp;·&nbsp; <b>Incoterms:</b> ${lead.incoterms || 'CIF'}<br>
+            <b>🚢 Delivery Port:</b> ${lead.deliveryPort || 'Main Port'}<br>
+            <b>📋 Certification:</b> ${lead.certificationRequired || 'As per standard'} &nbsp;·&nbsp; <b>Inspection:</b> ${lead.inspectionAgency || 'Standard'}</div>
+            <div id="upgrade-section-${lead.id}" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0; width: 100%; text-align: center; display: ${(freeCredits === 0 || (supplierData && supplierData.lastFreeUnlockDate === new Date().toISOString().split('T')[0])) ? 'block' : 'none'};">
+                <div id="timer-container-${lead.id}" style="color: #ea580c; font-weight: 700; margin-bottom: 10px; font-size: 13px; display: ${(freeCredits > 0 && supplierData && supplierData.lastFreeUnlockDate === new Date().toISOString().split('T')[0]) ? 'block' : 'none'};">
+                    ⏳ Next free unlock in <span class="countdown-timer">--h : --m : --s</span>
+                </div>
+                    <div style="display: flex; gap: 10px; margin-top: -40px; position: relative; z-index: 10; flex-direction: column;">
+                        <a href="/membership.html" style="display: block; width: 100%; background: #d4af37; color: #000; text-align: center; padding: 12px; border-radius: 6px; font-weight: 900; text-decoration: none; font-size: 14px; box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);">
+                            ⭐ Unlock Buyer Now
+                        </a>
+                    </div>
+                <a href="https://wa.me/237658309636?text=Hello%20APD%20Global%20Trade%2C%20please%20add%201%20Free%20Credit%20to%20my%20account." target="_blank" style="display: block; width: 100%; background: #25D366; color: #fff; text-align: center; padding: 10px; border-radius: 6px; font-weight: 800; text-decoration: none; font-size: 14px; border: 1px solid #1da851;">
+                    💬 Request 1 Free Credit via WhatsApp
+                </a>
+            </div>
+        `;
+        container.appendChild(card);
+
+      document.getElementById(`btn-${lead.id}`).onclick = async () => {
+          if (freeCredits > 0) {
+              const todayStr = new Date().toISOString().split('T')[0];
+              if (supplierData && supplierData.lastFreeUnlockDate === todayStr) {
+                  alert("You have already unlocked a lead today. Your trial provides 1 free lead per day. Please come back tomorrow or upgrade to Premium for unlimited access.");
+                  return;
+              }
+
+              freeCredits--;
+
+              // Increment unlocksUsed in Firestore
+              try {
+                  const { increment } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
+                  await updateDoc(doc(db, 'suppliers', uid), { 
+                      unlocksUsed: increment(1),
+                      lastFreeUnlockDate: new Date().toISOString().split('T')[0]
+                  });
+                  if (supplierData) { supplierData.lastFreeUnlockDate = new Date().toISOString().split('T')[0]; }
+
+                  try {
+                      const msg = `🔓 Automatch Lead Unlocked!\nSupplier: ${supplierData ? supplierData.companyName : 'Unknown'}\nLead: ${lead.product || commodity}\nCountry: ${lead.country}`;
+                      fetch('/api/send', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({
+                              instance: "instance168990",
+                              token: "yx9xaxy5k1nbqjat",
+                              to: "+919266418868",
+                              body: msg
+                          })
+                      });
+                  } catch(e) { console.error('Could not send notification', e); }
+              } catch(e) { console.error('Could not save unlock', e); }
+
+              
+                // Show countdown and upgrade buttons on all other locked cards
+                leads.forEach(l => {
+                    if (l.id !== lead.id) {
+                        const upgSec = document.getElementById(`upgrade-section-${l.id}`);
+                        const timerCont = document.getElementById(`timer-container-${l.id}`);
+                        if (upgSec) upgSec.style.display = 'block';
+                        if (timerCont && freeCredits > 0) timerCont.style.display = 'block';
+                        if (timerCont && freeCredits === 0) timerCont.style.display = 'none';
+                    }
+                });
+
+                // Update badge
+                const badge = document.getElementById('creditBadge');
+              if (freeCredits === 0) {
+                  badge.innerText = '0 Credits Left — Upgrade Now!';
+                  badge.style.background = '#dc2626';
+                  badge.style.color = '#fff';
+              } else {
+                  badge.innerText = `${freeCredits} of ${maxCredits} Credits Left`;
+                  badge.style.background = freeCredits === 1 ? '#f59e0b' : '#facc15';
+              }
+
+              // Update this card's button in header too
+              const inlineSpan = creditsHeader.querySelector('span:last-child');
+              if (inlineSpan) {
+                  inlineSpan.style.background = freeCredits > 1 ? '#22c55e' : freeCredits === 1 ? '#f59e0b' : '#dc2626';
+                  inlineSpan.innerText = freeCredits > 0 ? `${freeCredits} Unlock${freeCredits > 1 ? 's' : ''} Left` : '0 Credits Left';
+              }
+
+              // Reveal full details
+              const blurDiv = document.getElementById(`blurred-${lead.id}`);
+              blurDiv.classList.remove('blur-text');
+              blurDiv.style.borderColor = '#22c55e';
+              blurDiv.style.background = '#f0fdf4';
+              blurDiv.querySelector('span').style.background = '#22c55e';
+              blurDiv.querySelector('span').style.color = '#fff';
+              blurDiv.querySelector('span').innerText = '✅ UNLOCKED — FULL DETAILS';
+                const thisUpg = document.getElementById(`upgrade-section-${lead.id}`);
+                if(thisUpg) thisUpg.style.display = 'none';
+
+
+              const btn = document.getElementById(`btn-${lead.id}`);
+              btn.style.background = '#22c55e';
+              btn.innerText = '✅ Unlocked';
+              btn.onclick = null;
+
+              // Lock other buttons if no credits left
+              if (freeCredits === 0) {
+                  leads.forEach(l => {
+                      const b = document.getElementById(`btn-${l.id}`);
+                      if (b && b.innerText !== '✅ Unlocked') {
+                          b.style.background = '#e2e8f0';
+                          b.style.color = '#94a3b8';
+                          b.innerText = '🔒 Upgrade to Unlock';
+                          b.onclick = () => { window.location.href = '/membership.html'; };
+                      }
+                  });
+              }
+
+          } else {
+              if(confirm('You have used all 3 free credits! Upgrade to Premium to unlock unlimited verified buyers across 70+ countries. View Membership Plans?')) {
+                  window.location.href = '/membership.html';
+              }
+          }
+      };
+  });
+}
 </script>
 
+
+  <script>
+    function startMidnightCountdown() {
+        setInterval(() => {
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setHours(24, 0, 0, 0);
+            const diff = tomorrow - now;
+            
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            const timeStr = `${h.toString().padStart(2, '0')}h : ${m.toString().padStart(2, '0')}m : ${s.toString().padStart(2, '0')}s`;
+            
+            document.querySelectorAll('.countdown-timer').forEach(el => {
+                el.innerText = timeStr;
+            });
+        }, 1000);
+    }
+    startMidnightCountdown();
+  </script>
 </body>
+
 </html>

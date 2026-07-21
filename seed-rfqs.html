@@ -64,9 +64,208 @@ textarea {
   <h1>🔐 Admin RFQ Seeder</h1>
   <p class="note">Admin only – generates & uploads RFQs directly to Firestore</p>
 
-  <button id="generateBtn">Generate 100 RFQs</button>
+  <button id="generateBtn">Generate 100 General RFQs</button>
+  <button id="nepalBtn" style="background: #0ea5e9; color: #fff;">Generate Worldwide PepsiCo RFQs</button>
+  <button id="moringaBtn" style="background: #16a34a; color: #fff;">Generate Moringa & Makhana RFQs</button>
+  <button id="cowDungBtn" style="background: #8b4513; color: #fff;">Generate Cow Dung RFQs</button>
   <button id="uploadBtn">Upload RFQs</button>
-
+  <hr style="border:1px solid #e5e7eb; margin: 20px 0;">
+  
+  <h3>🎯 Generate Specific Commodity</h3>
+  <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+    <select id="customCommodity" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc; flex: 1;">
+      <option value="" disabled selected>-- Select a Commodity --</option>
+      <option value="Ajanta">Ajanta</option>
+      <option value="Herbal Products (All Types)">Herbal Products (All Types)</option>
+      <option value="Ginger (All Commodities)">Ginger (All Commodities)</option>
+      <option value="Sesame Seeds & Other Seeds">Sesame Seeds & Other Seeds</option>
+      <option value="Red Lentils & Pulses">Red Lentils & Pulses</option>
+      <option value="Hibiscus">Hibiscus</option>
+      <option value="Grain Of Selim">Grain Of Selim</option>
+      <option value="Dehydrated Products (All Types)">Dehydrated Products (All Types)</option>
+      <option value="Dry Ginger">Dry Ginger</option>
+      <option value="Packaged Rice">Packaged Rice</option>
+      <option value="Cow Dung Cake">Cow Dung Cake</option>
+      <option value="Cow Dung Powder">Cow Dung Powder</option>
+      <option value="Dehydrated Garlic Powder">Dehydrated Garlic Powder</option>
+      <option value="Dehydrated Onion Powder">Dehydrated Onion Powder</option>
+      <option value="Dehydrated Tomato Powder">Dehydrated Tomato Powder</option>
+      <option value="Herbal Extracts">Herbal Extracts</option>
+      <option value="Dry Fruits (All Types)">Dry Fruits (All Types)</option>
+      <option value="Non-basmati Rice">Non-basmati Rice</option>
+      <option value="Creamy Sella Rice">Creamy Sella Rice</option>
+      <option value="Indian Sugar">Indian Sugar</option>
+      <option value="ICUMSA 45 Sugar">ICUMSA 45 Sugar</option>
+      <option value="Spices (All Types)">Spices (All Types)</option>
+      <option value="Amla Powder">Amla Powder</option>
+      <option value="Apple Powder">Apple Powder</option>
+      <option value="Arabica Coffee">Arabica Coffee</option>
+      <option value="Banana Powder">Banana Powder</option>
+      <option value="Barley">Barley</option>
+      <option value="Barley (Forage)">Barley (Forage)</option>
+      <option value="Black Eyed Peas (Cowpeas)">Black Eyed Peas (Cowpeas)</option>
+      <option value="Black Matpe Beans (Black Urad)">Black Matpe Beans (Black Urad)</option>
+      <option value="Black Mustard">Black Mustard</option>
+      <option value="Black Salt">Black Salt</option>
+      <option value="Black Salt/Kala Namak">Black Salt/Kala Namak</option>
+      <option value="Black Sarso">Black Sarso</option>
+      <option value="Black Tea">Black Tea</option>
+      <option value="Blueberry Powder">Blueberry Powder</option>
+      <option value="Buffalo Meat">Buffalo Meat</option>
+      <option value="Butter">Butter</option>
+      <option value="CJ Uniworld">CJ Uniworld</option>
+      <option value="Canola Oil">Canola Oil</option>
+      <option value="Capsicum">Capsicum</option>
+      <option value="Carbonated Drinks">Carbonated Drinks</option>
+      <option value="Carrom Seeds">Carrom Seeds</option>
+      <option value="Cassia">Cassia</option>
+      <option value="Cement">Cement</option>
+      <option value="Cheese">Cheese</option>
+      <option value="Chia Seeds">Chia Seeds</option>
+      <option value="Chickpeas (Desi)">Chickpeas (Desi)</option>
+      <option value="Chickpeas (Kabuli)">Chickpeas (Kabuli)</option>
+      <option value="Coconut Powder">Coconut Powder</option>
+      <option value="Coffee">Coffee</option>
+      <option value="Cookies">Cookies</option>
+      <option value="Cordyceps Militias Mushroom">Cordyceps Militias Mushroom</option>
+      <option value="Corn">Corn</option>
+      <option value="Corn Flakes">Corn Flakes</option>
+      <option value="Cotton Bales">Cotton Bales</option>
+      <option value="Cow Dung">Cow Dung</option>
+      <option value="Cow Ghee">Cow Ghee</option>
+      <option value="Curd">Curd</option>
+      <option value="Curry Powder">Curry Powder</option>
+      <option value="Dalchini Powder">Dalchini Powder</option>
+      <option value="Dent Corn">Dent Corn</option>
+      <option value="Desi Ghee">Desi Ghee</option>
+      <option value="Dry Fruits">Dry Fruits</option>
+      <option value="Dry Mango Powder">Dry Mango Powder</option>
+      <option value="Energy Drinks">Energy Drinks</option>
+      <option value="Excelsa Coffee">Excelsa Coffee</option>
+      <option value="Fastener">Fastener</option>
+      <option value="Finger Millets (Ragi)">Finger Millets (Ragi)</option>
+      <option value="Flaxseed Oil">Flaxseed Oil</option>
+      <option value="Flint Corn">Flint Corn</option>
+      <option value="Flour Corn">Flour Corn</option>
+      <option value="Fortune">Fortune</option>
+      <option value="Fox Nuts (Makhana)">Fox Nuts (Makhana)</option>
+      <option value="Foxtail Millets">Foxtail Millets</option>
+      <option value="Fruit Juice">Fruit Juice</option>
+      <option value="Garlic Flakes">Garlic Flakes</option>
+      <option value="Gond Katira">Gond Katira</option>
+      <option value="Grape Powder">Grape Powder</option>
+      <option value="Green Mung">Green Mung</option>
+      <option value="Green Tea">Green Tea</option>
+      <option value="Groundnut Oil">Groundnut Oil</option>
+      <option value="Hald Amrit">Hald Amrit</option>
+      <option value="Himalyan Rock Salt">Himalyan Rock Salt</option>
+      <option value="Imli Powder">Imli Powder</option>
+      <option value="India Gate">India Gate</option>
+      <option value="Italian Herbs Mix">Italian Herbs Mix</option>
+      <option value="Jam">Jam</option>
+      <option value="Jowar (Sorghum)">Jowar (Sorghum)</option>
+      <option value="Kasoori Methi">Kasoori Methi</option>
+      <option value="Kasuri Methi">Kasuri Methi</option>
+      <option value="Khas Khas">Khas Khas</option>
+      <option value="Khus Khus Seeds">Khus Khus Seeds</option>
+      <option value="Kohinoor Traditional">Kohinoor Traditional</option>
+      <option value="Kulfi Powder">Kulfi Powder</option>
+      <option value="Lal Qila">Lal Qila</option>
+      <option value="Lassi">Lassi</option>
+      <option value="Lemon Powder">Lemon Powder</option>
+      <option value="Lentils">Lentils</option>
+      <option value="Liberica Coffee">Liberica Coffee</option>
+      <option value="Light Speckled Kidney Beans">Light Speckled Kidney Beans</option>
+      <option value="Lima Beans (Butter Beans)">Lima Beans (Butter Beans)</option>
+      <option value="Lupine Beans">Lupine Beans</option>
+      <option value="Makhana">Makhana</option>
+      <option value="Methi Dana">Methi Dana</option>
+      <option value="Methi Powder">Methi Powder</option>
+      <option value="Methi Whole">Methi Whole</option>
+      <option value="Milk">Milk</option>
+      <option value="Milk Powder">Milk Powder</option>
+      <option value="Mint Powder">Mint Powder</option>
+      <option value="Moringa">Moringa</option>
+      <option value="Moringa Powder">Moringa Powder</option>
+      <option value="Muesli">Muesli</option>
+      <option value="Mustard">Mustard</option>
+      <option value="Mustard Oil">Mustard Oil</option>
+      <option value="Natural Black Salt">Natural Black Salt</option>
+      <option value="Natural Pink Salt">Natural Pink Salt</option>
+      <option value="Olive Oil">Olive Oil</option>
+      <option value="Onion">Onion</option>
+      <option value="Onion Flakes">Onion Flakes</option>
+      <option value="Onion Paste">Onion Paste</option>
+      <option value="Onion Powder">Onion Powder</option>
+      <option value="Oolong (Wulong) Tea">Oolong (Wulong) Tea</option>
+      <option value="Organic Black Mustard">Organic Black Mustard</option>
+      <option value="Organic Brown Mustard">Organic Brown Mustard</option>
+      <option value="Organic Brown Sesame Seeds">Organic Brown Sesame Seeds</option>
+      <option value="Organic Flax Seeds">Organic Flax Seeds</option>
+      <option value="Organic Methi Seeds">Organic Methi Seeds</option>
+      <option value="Organic Muskmelon Seeds">Organic Muskmelon Seeds</option>
+      <option value="Organic Soul">Organic Soul</option>
+      <option value="Organic Sunflower Seeds">Organic Sunflower Seeds</option>
+      <option value="Organic Watermelon Seeds">Organic Watermelon Seeds</option>
+      <option value="Organic White Sesame Seems">Organic White Sesame Seems</option>
+      <option value="Organic Yellow Mustard">Organic Yellow Mustard</option>
+      <option value="Palm Oil">Palm Oil</option>
+      <option value="Paneer">Paneer</option>
+      <option value="Pansari">Pansari</option>
+      <option value="Paprika Powder">Paprika Powder</option>
+      <option value="Peanuts">Peanuts</option>
+      <option value="Pearl Millets (Bajra)">Pearl Millets (Bajra)</option>
+      <option value="Pigeon Pea (Toor Dal)">Pigeon Pea (Toor Dal)</option>
+      <option value="Pineapple Powder">Pineapple Powder</option>
+      <option value="Pink Rock Salt">Pink Rock Salt</option>
+      <option value="Pink Salt">Pink Salt</option>
+      <option value="Pod Corn">Pod Corn</option>
+      <option value="Popcorn">Popcorn</option>
+      <option value="Post Fermented Tea">Post Fermented Tea</option>
+      <option value="Potato">Potato</option>
+      <option value="Poultry Meat">Poultry Meat</option>
+      <option value="Processed Meat">Processed Meat</option>
+      <option value="Proso Millet">Proso Millet</option>
+      <option value="Red Chilly Powder">Red Chilly Powder</option>
+      <option value="Red Kidney Beans">Red Kidney Beans</option>
+      <option value="Red Sarso">Red Sarso</option>
+      <option value="Rice">Rice</option>
+      <option value="Ripe Mango Powder">Ripe Mango Powder</option>
+      <option value="Roasted Flax Seeds">Roasted Flax Seeds</option>
+      <option value="Roasted Jeera Powder">Roasted Jeera Powder</option>
+      <option value="Robusta Coffee">Robusta Coffee</option>
+      <option value="SDS">SDS</option>
+      <option value="Sada Bahar Chutney">Sada Bahar Chutney</option>
+      <option value="Salt & Salt Substitutes">Salt & Salt Substitutes</option>
+      <option value="Sesame Oil">Sesame Oil</option>
+      <option value="Sesame Seeds">Sesame Seeds</option>
+      <option value="Shah Jeera">Shah Jeera</option>
+      <option value="Sheep & Goat Meat">Sheep & Goat Meat</option>
+      <option value="Shuttering MR Grade">Shuttering MR Grade</option>
+      <option value="Soybean Oil">Soybean Oil</option>
+      <option value="Spices">Spices</option>
+      <option value="Strawberry Powder">Strawberry Powder</option>
+      <option value="Sugar">Sugar</option>
+      <option value="Sunflower Oil">Sunflower Oil</option>
+      <option value="Sunflower Seeds">Sunflower Seeds</option>
+      <option value="Sweet Corn">Sweet Corn</option>
+      <option value="TMT Bars & Steel">TMT Bars & Steel</option>
+      <option value="Tamarind">Tamarind</option>
+      <option value="Tamarind Paste">Tamarind Paste</option>
+      <option value="Tamarind Pods">Tamarind Pods</option>
+      <option value="Tamarind Powder">Tamarind Powder</option>
+      <option value="Tea">Tea</option>
+      <option value="Tirupati Pulses">Tirupati Pulses</option>
+      <option value="V Belt">V Belt</option>
+      <option value="Water">Water</option>
+      <option value="Wheat">Wheat</option>
+      <option value="Wheat Durum">Wheat Durum</option>
+      <option value="White Rock Salt">White Rock Salt</option>
+      <option value="Yellow Sarso">Yellow Sarso</option>
+      <option value="Yellow Tea">Yellow Tea</option>
+    </select>
+    <button id="customGenerateBtn" style="background: #9333ea; color: #fff;">Generate 100 For Selected</button>
+  </div>
   <textarea id="rfqOutput" placeholder="RFQs JSON will appear here..."></textarea>
 </div>
 
@@ -76,6 +275,10 @@ import {
   getFirestore,
   collection,
   addDoc,
+  getDocs,
+  updateDoc,
+  deleteDoc,
+  doc,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
@@ -91,8 +294,22 @@ const db = getFirestore(app);
 
 /* ELEMENTS */
 const generateBtn = document.getElementById("generateBtn");
+const nepalBtn = document.getElementById("nepalBtn");
+const moringaBtn = document.getElementById("moringaBtn");
+const cowDungBtn = document.getElementById("cowDungBtn");
+const customGenerateBtn = document.getElementById("customGenerateBtn");
+const customCommodity = document.getElementById("customCommodity");
 const uploadBtn = document.getElementById("uploadBtn");
 const output = document.getElementById("rfqOutput");
+
+const fakeNames = ["Mohammed Al-Fayed", "James Smith", "Li Wei", "Fatima Zahra", "John Doe", "Sarah Connor", "Ahmed Hassan", "Chen Wu", "David Miller", "Elena Rossi", "Omar Al-Khatib", "Lucas Silva", "Isabella Fernandez", "Rajesh Kumar", "Anna Muller"];
+const fakeDomains = ["gmail.com", "import-trading.com", "global-sourcing.ae", "eu-foods.net", "supply-chain.co.uk", "agri-ventures.com"];
+function generateContactInfo(name) {
+  const emailName = name.toLowerCase().replace(/ /g, ".");
+  const domain = fakeDomains[Math.floor(Math.random() * fakeDomains.length)];
+  const phone = "+" + Math.floor(Math.random() * 90 + 10) + " " + Math.floor(Math.random() * 9000000000 + 1000000000);
+  return { email: `${emailName}@${domain}`, phone: phone };
+}
 
 /* DATA */
 const PRODUCTS = [
@@ -105,12 +322,40 @@ const PRODUCTS = [
   "Palm Oil",
   "Sunflower Oil",
   "Wheat Flour",
-  "Cashew Nuts"
+  "Cashew Nuts",
+  "Atlantic Potatoes (PepsiCo Grade)",
+  "Industrial Sugar S-30",
+  "Extrusion Corn (Maize)",
+  "Refined Sunflower Oil (Bulk)",
+  "Potato Flakes"
+];
+
+const WORLDWIDE_PEPSICO_BUYERS = [
+  { name: "PepsiCo Global Procurement (USA)", email: "procurement@pepsico.com", phone: "+1 914-253-2000", product: "Industrial Sugar S-30", qty: "50,000 MT", port: "New York", size: 12500000 },
+  { name: "PepsiCo Mexico (Sabritas)", email: "compras@sabritas.com.mx", phone: "+52 55-5201-1400", product: "Atlantic Potatoes (PepsiCo Grade)", qty: "20,000 MT", port: "Veracruz", size: 5500000 },
+  { name: "PepsiCo UK (Walkers)", email: "supply@walkers.co.uk", phone: "+44 116-234-2000", product: "Potato Flakes", qty: "5,000 MT", port: "Liverpool", size: 1200000 },
+  { name: "Varun Beverages Nepal (Pepsi Bottler)", email: "import@varunbeverages.com.np", phone: "+977 1-424-3456", product: "Industrial Sugar S-30", qty: "1,000 MT", port: "Birgunj", size: 850000 },
+  { name: "CG Corp Global (Wai Wai/Kwik's)", email: "procurement@cgcorpglobal.com", phone: "+977 1-552-2256", product: "Atlantic Potatoes (PepsiCo Grade)", qty: "500 MT", port: "Biratnagar", size: 450000 },
+  { name: "PepsiCo India (Gurgaon Hub)", email: "sourcing.india@pepsico.com", phone: "+91 124-469-6969", product: "Extrusion Corn (Maize)", qty: "10,000 MT", port: "Kandla", size: 2800000 },
+  { name: "Yashoda Foods (Current)", email: "purchase@yashodafoods.com", phone: "+977 71-520-222", product: "Refined Sunflower Oil (Bulk)", qty: "200 MT", port: "Bhairahawa", size: 320000 }
 ];
 
 const COUNTRIES = [
   "UAE","USA","Indonesia","Vietnam","Bangladesh",
-  "Saudi Arabia","Egypt","Nigeria","Brazil","Philippines"
+  "Saudi Arabia","Egypt","Nigeria","Brazil","Philippines","Nepal"
+];
+
+const MORINGA_MAKHANA_BUYERS = [
+  { name: "Organica Superfoods LLC", email: "john.davis@organicasuperfoods.com", phone: "+1 415-555-0198", product: "Organic Moringa Powder", qty: "25 MT", port: "Los Angeles, USA", size: 125000 },
+  { name: "Holland & Barrett Procurement", email: "procurement.eu@hollandbarrett.com", phone: "+44 20-7946-0921", product: "Moringa Leaf Powder", qty: "50 MT", port: "London, UK", size: 240000 },
+  { name: "Green Origins Trading", email: "sourcing@greenorigins.de", phone: "+49 30-1928-3746", product: "Organic Moringa Powder", qty: "10 MT", port: "Hamburg, Germany", size: 55000 },
+  { name: "Nature's Way Inc", email: "vendor.management@naturesway.com", phone: "+1 801-555-0234", product: "Moringa Extract Powder", qty: "100 MT", port: "New York, USA", size: 600000 },
+  { name: "Zenith Snack Brands", email: "import@zenithsnacks.ca", phone: "+1 416-555-0891", product: "Raw Fox Nuts (Makhana)", qty: "40 MT", port: "Toronto, Canada", size: 320000 },
+  { name: "Emirates Vegan Foods", email: "purchasing@emiratesvegan.ae", phone: "+971 4-223-9981", product: "Roasted Makhana (Bulk)", qty: "20 MT", port: "Jebel Ali, UAE", size: 180000 },
+  { name: "Lotus Bites UK", email: "supply@lotusbites.co.uk", phone: "+44 161-496-0391", product: "Raw Fox Nuts (Makhana) - Size 5+", qty: "60 MT", port: "Felixstowe, UK", size: 480000 },
+  { name: "Aussie Health Co.", email: "imports@aussiehealth.com.au", phone: "+61 2-9876-5432", product: "Organic Moringa Powder", qty: "15 MT", port: "Sydney, Australia", size: 75000 },
+  { name: "SpiceJet Imports LLC", email: "trade@spicejetusa.com", phone: "+1 312-555-0762", product: "Raw Fox Nuts (Makhana)", qty: "100 MT", port: "Chicago, USA", size: 850000 },
+  { name: "NutriLife Supplements", email: "buyer@nutrilife.sg", phone: "+65 6789-0123", product: "Moringa Powder", qty: "30 MT", port: "Singapore", size: 145000 }
 ];
 
 let rfqs = [];
@@ -120,20 +365,156 @@ generateBtn.onclick = () => {
   rfqs = [];
 
   for (let i = 0; i < 100; i++) {
+    const fakeName = fakeNames[Math.floor(Math.random() * fakeNames.length)] + " " + Math.floor(Math.random()*1000);
+    const generatedContact = generateContactInfo(fakeName);
     rfqs.push({
       product: PRODUCTS[Math.floor(Math.random() * PRODUCTS.length)],
       quantity: `${Math.floor(Math.random() * 900 + 100)} MT`,
       deliveryPort: COUNTRIES[Math.floor(Math.random() * COUNTRIES.length)],
       dealSizeUSD: Math.floor(Math.random() * 4000000 + 500000),
       status: "open",
-      source: "admin-seed"
+      source: "admin-seed",
+      buyerName: fakeName,
+      email: generatedContact.email,
+      contact: generatedContact.phone
     });
   }
 
   output.value = JSON.stringify(rfqs, null, 2);
 };
 
-/* ✅ UPLOAD TO FIRESTORE */
+/* ✅ GENERATE WORLDWIDE PEPSICO RFQs */
+nepalBtn.onclick = () => {
+  rfqs = WORLDWIDE_PEPSICO_BUYERS.map(b => ({
+    product: b.product,
+    quantity: b.qty,
+    deliveryPort: b.port,
+    dealSizeUSD: b.size,
+    status: "open",
+    source: "admin-seed",
+    buyerName: b.name,
+    email: b.email,
+    contact: b.phone
+  }));
+
+  output.value = JSON.stringify(rfqs, null, 2);
+};
+
+/* ✅ GENERATE MORINGA & MAKHANA RFQs (500 TOTAL) */
+document.getElementById("moringaBtn").onclick = () => {
+  rfqs = [];
+  
+  const moringaBuyers = MORINGA_MAKHANA_BUYERS.filter(b => b.product.includes("Moringa"));
+  const makhanaBuyers = MORINGA_MAKHANA_BUYERS.filter(b => b.product.includes("Makhana"));
+
+  // Generate 250 Moringa RFQs
+  for (let i = 0; i < 250; i++) {
+    const baseBuyer = moringaBuyers[Math.floor(Math.random() * moringaBuyers.length)];
+    const multiplier = 1 + (Math.random() * 0.5);
+    const newSize = Math.floor(baseBuyer.size * multiplier);
+    const baseQtyNum = parseInt(baseBuyer.qty);
+    const newQty = Math.floor(baseQtyNum * multiplier) + " MT";
+
+    rfqs.push({
+      product: baseBuyer.product,
+      quantity: newQty,
+      deliveryPort: baseBuyer.port,
+      dealSizeUSD: newSize,
+      status: "open",
+      source: "admin-seed",
+      buyerName: baseBuyer.name,
+      email: baseBuyer.email,
+      contact: baseBuyer.phone
+    });
+  }
+
+  // Generate 250 Makhana RFQs
+  for (let i = 0; i < 250; i++) {
+    const baseBuyer = makhanaBuyers[Math.floor(Math.random() * makhanaBuyers.length)];
+    const multiplier = 1 + (Math.random() * 0.5);
+    const newSize = Math.floor(baseBuyer.size * multiplier);
+    const baseQtyNum = parseInt(baseBuyer.qty);
+    const newQty = Math.floor(baseQtyNum * multiplier) + " MT";
+
+    rfqs.push({
+      product: baseBuyer.product,
+      quantity: newQty,
+      deliveryPort: baseBuyer.port,
+      dealSizeUSD: newSize,
+      status: "open",
+      source: "admin-seed",
+      buyerName: baseBuyer.name,
+      email: baseBuyer.email,
+      contact: baseBuyer.phone
+    });
+  }
+
+  output.value = JSON.stringify(rfqs, null, 2);
+};
+
+/* ✅ GENERATE COW DUNG RFQs */
+const COW_DUNG_BUYERS = [
+  { name: "Al Barakah Agro Fertilizers", email: "procurement@albarakah-agro.ae", phone: "+971 4-332-9011", product: "Dry Cow Dung (Organic Fertilizer)", qty: "1,500 MT", port: "Jebel Ali, UAE", size: 45000 },
+  { name: "Dubai Green Energy Co.", email: "biomass@dubaienergy.ae", phone: "+971 50-888-2345", product: "Cow Dung Briquettes", qty: "500 MT", port: "Dubai, UAE", size: 25000 },
+  { name: "EcoFarms Middle East", email: "sourcing@ecofarms.me", phone: "+974 44-55-2233", product: "Organic Cow Dung Compost", qty: "2,000 MT", port: "Doha, Qatar", size: 60000 },
+  { name: "Oman Agricultural Resources", email: "import@omanagro.om", phone: "+968 24-555-123", product: "Dry Cow Dung (Organic Fertilizer)", qty: "800 MT", port: "Sohar, Oman", size: 30000 },
+  { name: "Saudi Organic Cultivation Ltd", email: "purchase@saudiorganic.sa", phone: "+966 11-456-7890", product: "Cow Dung Compost", qty: "3,000 MT", port: "Jeddah, Saudi Arabia", size: 85000 },
+  { name: "Global BioMass Trading", email: "trade@biomasstrading.uk", phone: "+44 20-3333-4444", product: "Cow Dung Briquettes", qty: "1,000 MT", port: "Rotterdam, Netherlands", size: 40000 }
+];
+
+cowDungBtn.onclick = () => {
+  rfqs = [];
+  
+  for (let i = 0; i < 200; i++) {
+    const baseBuyer = COW_DUNG_BUYERS[Math.floor(Math.random() * COW_DUNG_BUYERS.length)];
+    const multiplier = 1 + (Math.random() * 0.4);
+    const newSize = Math.floor(baseBuyer.size * multiplier);
+    const baseQtyNum = parseInt(baseBuyer.qty.replace(/,/g, ''));
+    const newQty = Math.floor(baseQtyNum * multiplier).toLocaleString() + " MT";
+
+    rfqs.push({
+      product: baseBuyer.product,
+      quantity: newQty,
+      deliveryPort: baseBuyer.port,
+      dealSizeUSD: newSize,
+      status: "open",
+      source: "admin-seed",
+      buyerName: baseBuyer.name,
+      email: baseBuyer.email,
+      contact: baseBuyer.phone
+    });
+  }
+
+  output.value = JSON.stringify(rfqs, null, 2);
+};
+
+/* ✅ GENERATE CUSTOM COMMODITY RFQS */
+customGenerateBtn.onclick = () => {
+  rfqs = [];
+  const selectedProduct = customCommodity.value;
+  
+  for (let i = 0; i < 100; i++) {
+    const fakeName = fakeNames[Math.floor(Math.random() * fakeNames.length)] + " " + Math.floor(Math.random()*1000);
+    const generatedContact = generateContactInfo(fakeName);
+    const qty = Math.floor(Math.random() * 900 + 100);
+    
+    rfqs.push({
+      product: selectedProduct,
+      quantity: `${qty} MT`,
+      deliveryPort: COUNTRIES[Math.floor(Math.random() * COUNTRIES.length)],
+      dealSizeUSD: Math.floor(Math.random() * 4000000 + 500000),
+      status: "open",
+      source: "admin-seed",
+      buyerName: fakeName,
+      email: generatedContact.email,
+      contact: generatedContact.phone
+    });
+  }
+
+  output.value = JSON.stringify(rfqs, null, 2);
+};
+
+/* ✅ UPLOAD ALL CURRENT RFQS IN THE TEXTAREA TO FIRESTORE */
 uploadBtn.onclick = async () => {
   if (!rfqs.length) {
     alert("Generate RFQs first");
@@ -162,6 +543,7 @@ uploadBtn.onclick = async () => {
   uploadBtn.disabled = false;
   uploadBtn.innerText = "Upload RFQs";
 };
+
 </script>
 
 </body>

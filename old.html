@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Elite Trade Membership | APD Global Trade</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:#0a0f1c;
+  color:#e5e7eb;
+}
+
+header{
+  background:#071427;
+  padding:18px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid rgba(212,175,55,.15);
+}
+
+.logo{
+  font-family:'Playfair Display',serif;
+  color:#d4af37;
+  font-size:20px;
+}
+
+nav a{
+  color:#cbd5e1;
+  text-decoration:none;
+  margin-left:25px;
+  font-size:14px;
+}
+
+nav a:hover{color:#d4af37}
+
+.hero{
+  padding:140px 20px;
+  text-align:center;
+  background:linear-gradient(180deg,#071427,#0a0f1c);
+  border-bottom:1px solid rgba(212,175,55,.15);
+}
+
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:52px;
+  background:linear-gradient(90deg,#d4af37,#facc15,#d4af37);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:30px;
+}
+
+.hero p{
+  max-width:850px;
+  margin:auto;
+  font-size:20px;
+  color:#9ca3af;
+  line-height:1.8;
+}
+
+.container{
+  max-width:1200px;
+  margin:120px auto;
+  padding:0 20px;
+}
+
+.section-title{
+  text-align:center;
+  font-size:34px;
+  margin-bottom:10px;
+  font-weight:600;
+}
+
+.subtitle{
+  text-align:center;
+  color:#9ca3af;
+  margin-bottom:70px;
+}
+
+.plans{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+  gap:40px;
+}
+
+.plan{
+  background:#111827;
+  padding:60px 45px;
+  border-radius:30px;
+  border:1px solid rgba(212,175,55,0.15);
+  transition:.4s ease;
+}
+
+.plan:hover{
+  transform:translateY(-12px);
+  border:1px solid #d4af37;
+  box-shadow:0 30px 80px rgba(212,175,55,0.25);
+}
+
+.highlight{
+  border:2px solid #d4af37;
+}
+
+.badge{
+  display:inline-block;
+  background:#d4af37;
+  color:#000;
+  padding:6px 16px;
+  font-size:12px;
+  border-radius:999px;
+  font-weight:700;
+  margin-bottom:20px;
+}
+
+.plan h3{font-size:26px;margin-bottom:15px}
+.old-price{text-decoration:line-through;color:#6b7280}
+.price{font-size:42px;font-weight:700;margin:15px 0}
+
+ul{list-style:none;padding:0;margin:30px 0}
+ul li{margin:16px 0;font-size:15px;color:#cbd5e1}
+
+.btn{
+  width:100%;
+  padding:18px;
+  border-radius:999px;
+  border:none;
+  font-weight:700;
+  font-size:16px;
+  cursor:pointer;
+  background:linear-gradient(90deg,#d4af37,#facc15);
+  color:#000;
+}
+
+footer{
+  text-align:center;
+  padding:80px 20px;
+  color:#6b7280;
+  border-top:1px solid rgba(255,255,255,0.05);
+}
+
+footer a{color:#d4af37;text-decoration:none}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">APD Global Trade</div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/buyer-rfqs.html">Buyer RFQs</a>
+    <a href="/contact.html">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Elite Global Trade Intelligence Access</h1>
+  <p>
+    Access verified international agro buyers, live government tenders,
+    structured country demand intelligence, and direct buyer introductions.
+    Built exclusively for serious exporters ready to scale globally.
+  </p>
+</section>
+
+<div class="container">
+
+<h2 class="section-title">International Membership Plans</h2>
+<p class="subtitle">High-Level Access For Verified Exporters</p>
+
+<div class="plans">
+
+<!-- 6 MONTH PLAN -->
+<div class="plan highlight">
+  <div class="badge">FOUNDERS ACCESS</div>
+  <h3>Global Professional ΓÇô 6 Months</h3>
+  <div class="old-price">$3,500</div>
+  <div class="price">$2,000</div>
+  <ul>
+    <li>Γ£ö Verified Global Buyer Database Access</li>
+    <li>Γ£ö Direct Buyer Contact Unlock</li>
+    <li>Γ£ö Weekly Live RFQ Alerts</li>
+    <li>Γ£ö International Government Tender Alerts</li>
+    <li>Γ£ö Country-Wise Demand Analysis Reports</li>
+    <li>Γ£ö Buyer Volume & Payment Verification</li>
+    <li>Γ£ö WhatsApp Priority Trade Alerts</li>
+    <li>Γ£ö Featured Supplier Rotation</li>
+    <li>Γ£ö Email & Phone Support</li>
+  </ul>
+  <button class="btn" onclick="payNow('Global Professional ΓÇô 6 Months',2000)">Apply Now</button>
+</div>
+
+<!-- 12 MONTH PLAN -->
+<div class="plan">
+  <div class="badge">ELITE LEVEL</div>
+  <h3>Global Elite ΓÇô 12 Months</h3>
+  <div class="old-price">$6,500</div>
+  <div class="price">$3,500</div>
+  <ul>
+    <li>Γ£ö Everything in Professional Plan</li>
+    <li>Γ£ö Dedicated Trade Intelligence Manager</li>
+    <li>Γ£ö Personalized Buyer Matchmaking</li>
+    <li>Γ£ö Warm Direct Buyer Introductions</li>
+    <li>Γ£ö Monthly Premium Grain Market Report</li>
+    <li>Γ£ö Government Procurement Notifications</li>
+    <li>Γ£ö Private Exporter Network Access</li>
+    <li>Γ£ö Strategic Trade Consultation (Quarterly)</li>
+    <li>Γ£ö Premium Verified Supplier Badge</li>
+    <li>Γ£ö Priority Dispute Handling</li>
+  </ul>
+  <button class="btn" onclick="payNow('Global Elite ΓÇô 12 Months',3500)">Apply Now</button>
+</div>
+
+</div>
+
+</div>
+
+<footer>
+┬⌐ 2026 APD Global Trade | <a href="#">Terms</a> | <a href="#">Privacy</a>
+</footer>
+
+<!-- PAYPAL MODAL -->
+<div id="paypalModal" style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.85);
+align-items:center;
+justify-content:center;
+z-index:9999;">
+  <div style="background:#111827;color:#fff;padding:40px;border-radius:20px;width:90%;max-width:420px">
+    <h3>Complete Payment</h3>
+    <div id="paypalButtons"></div>
+    <br>
+    <button onclick="closeModal()">Cancel</button>
+  </div>
+</div>
+
+<script src="https://www.paypal.com/sdk/js?client-id=BAAldzZ21dj_YYD4j04pNHoiWzy4qWo5kfDt50n18qdQPFqeh6CaeI3sw7t7irYftnmVKlL4C4wLhmr7OA&currency=USD"></script>
+
+<script>
+function payNow(planName, usdAmount){
+  document.getElementById("paypalModal").style.display="flex";
+  document.getElementById("paypalButtons").innerHTML="Loading PayPalΓÇª";
+
+  setTimeout(function(){
+    paypal.Buttons({
+      createOrder:function(data, actions){
+        return actions.order.create({
+          purchase_units:[{
+            description: planName + " ΓÇô APD Global Trade",
+            amount:{ currency_code:"USD", value: usdAmount.toFixed(2) }
+          }]
+        });
+      },
+      onApprove:function(data, actions){
+        return actions.order.capture().then(function(){
+          window.location.href="/document-upload.html";
+        });
+      }
+    }).render("#paypalButtons");
+  },400);
+}
+
+function closeModal(){
+  document.getElementById("paypalModal").style.display="none";
+}
+</script>
+
+</body>
+</html>

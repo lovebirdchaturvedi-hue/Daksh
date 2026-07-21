@@ -373,50 +373,39 @@
     <div class="contact-container">
         <div class="contact-info animate-on-scroll">
             <h3 class="premium-font">Operational Headquarters</h3>
+            
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" alt="APD Global Trade Headquarters" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 25px; border: 1px solid var(--border-subtle);">
+
             <div class="info-block">
-                <span class="info-label">Americas (HQ)</span>
+                <span class="info-label">Global Headquarters (Registered Office)</span>
                 <span class="info-value">
-                    APD Global Trade LLC<br>
-                    One World Trade Center, Suite 8500<br>
-                    New York, NY 10007, USA
+                    APD Global Trade<br>
+                    Jaipur, Rajasthan, India<br>
+                    Serving 70+ Countries Globally
                 </span>
             </div>
             <div class="info-block">
-                <span class="info-label">EMEA Hub</span>
+                <span class="info-label">Corporate Identity & Registration</span>
                 <span class="info-value">
-                    30 St Mary Axe<br>
-                    London EC3A 8EP, United Kingdom
+                    <strong>GSTIN:</strong> 08ATLPC3583G1ZL<br>
+                    <strong>IEC:</strong> ATLPC3583G
                 </span>
             </div>
             <div class="info-block">
-                <span class="info-label">APAC Hub</span>
+                <span class="info-label">Support & SLA</span>
                 <span class="info-value">
-                    Marina Bay Financial Centre Tower 1<br>
-                    8 Marina Blvd, Singapore 018981
+                    <strong>Business Hours:</strong> 24/7 Global Operations<br>
+                    <strong>Response Timeline:</strong> Under 24 Hours
                 </span>
             </div>
             <div class="info-block">
-                <span class="info-label">MENA Hub</span>
+                <span class="info-label">India Office</span>
                 <span class="info-value">
-                    Dubai World Trade Centre<br>
-                    Sheikh Zayed Road, Dubai, UAE
-                </span>
-            </div>
-            <div class="info-block">
-                <span class="info-label">Corporate Registry Number</span>
-                <span class="info-value"># [GSTIN 08ATLPC3583G1ZL]</span>
-            </div>
-            <div class="info-block">
-                <span class="info-label">Direct Lines</span>
-                <span class="info-value">
-                    Encrypted WhatsApp: +91 92664 18868
-                </span>
-            </div>
-            <div class="info-block">
-                <span class="info-label">Secure Dispatch</span>
-                <span class="info-value">
-                    General: info@apdglobaltrade.com<br>
-                    Compliance: admin@apdglobaltrade.com
+                    <strong>APD GLOBAL TRADE</strong><br>
+                    📞 +91 92664 18868<br>
+                    📲 WhatsApp +91 97181 73015<br>
+                    📧 ceo@apdglobaltrade.com<br>
+                    🌐 apdglobaltrade.com
                 </span>
             </div>
         </div>
@@ -443,81 +432,82 @@
             </form>
             <div id="formStatus" style="margin-top: 20px; padding: 15px; border-radius: 4px; display: none; font-size: 0.9rem; font-weight: 600; text-align: center;"></div>
         </div>
+    </div>
 
-        <footer>
-            <p style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 20px; display: inline-block;">
-                APD Global Trade</p>
-            <p style="margin-top: 20px;">
-                <a href="/terms.html">Terms</a> | <a href="/privacy.html">Privacy</a> | <a href="/refund-policy.html">Refund</a> | <a href="/shipping-policy.html">Shipping</a> | <a href="/about-us.html">About</a> | <a href="/contact.html">Contact</a>
-            </p>
-        </footer>
+    <footer>
+        <p style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 20px; display: inline-block;">
+            APD Global Trade</p>
+        <p style="margin-top: 20px;">
+            <a href="/terms.html">Terms</a> | <a href="/privacy.html">Privacy</a> | <a href="/refund-policy.html">Refund</a> | <a href="/shipping-policy.html">Shipping</a> | <a href="/about-us.html">About</a> | <a href="/contact.html">Contact</a>
+        </p>
+    </footer>
 
-        <!-- FIREBASE INTEGRATION -->
-        <script type="module">
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-            import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-functions.js";
+    <!-- FIREBASE INTEGRATION -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-functions.js";
 
-            const firebaseConfig = {
-                apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-                authDomain: "apd-globaltrade-prod.firebaseapp.com",
-                projectId: "apd-globaltrade-prod",
-                storageBucket: "apd-globaltrade-prod.firebasestorage.app",
-                messagingSenderId: "226407312435",
-                appId: "1:226407312435:web:f8a54b1132af3899170746"
+        const firebaseConfig = {
+            apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+            authDomain: "apd-globaltrade-prod.firebaseapp.com",
+            projectId: "apd-globaltrade-prod",
+            storageBucket: "apd-globaltrade-prod.firebasestorage.app",
+            messagingSenderId: "226407312435",
+            appId: "1:226407312435:web:f8a54b1132af3899170746"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const functions = getFunctions(app, "us-central1");
+        const sendContactEmail = httpsCallable(functions, 'sendContactEmail');
+
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const status = document.getElementById('formStatus');
+            
+            const data = {
+                name: document.getElementById('form-name').value,
+                email: document.getElementById('form-email').value,
+                subject: document.getElementById('form-subject').value,
+                message: document.getElementById('form-message').value
             };
 
-            const app = initializeApp(firebaseConfig);
-            const functions = getFunctions(app, "us-central1");
-            const sendContactEmail = httpsCallable(functions, 'sendContactEmail');
+            btn.disabled = true;
+            btn.textContent = 'TRANSMITTING...';
+            status.style.display = 'block';
+            status.style.background = 'rgba(212, 175, 55, 0.1)';
+            status.style.color = 'var(--gold)';
+            status.textContent = 'Initiating secure transmission sequence...';
 
-            document.getElementById('contactForm').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const btn = document.getElementById('submitBtn');
-                const status = document.getElementById('formStatus');
-                
-                const data = {
-                    name: document.getElementById('form-name').value,
-                    email: document.getElementById('form-email').value,
-                    subject: document.getElementById('form-subject').value,
-                    message: document.getElementById('form-message').value
-                };
-
-                btn.disabled = true;
-                btn.textContent = 'TRANSMITTING...';
-                status.style.display = 'block';
-                status.style.background = 'rgba(212, 175, 55, 0.1)';
-                status.style.color = 'var(--gold)';
-                status.textContent = 'Initiating secure transmission sequence...';
-
-                try {
-                    const result = await sendContactEmail(data);
-                    if (result.data.success) {
-                        status.style.background = 'rgba(34, 197, 94, 0.1)';
-                        status.style.color = '#22c55e';
-                        status.textContent = '✅ ' + result.data.message;
-                        document.getElementById('contactForm').reset();
-                    } else {
-                        throw new Error(result.data.error || 'Transmission failed');
-                    }
-                } catch (err) {
-                    status.style.background = 'rgba(239, 68, 68, 0.1)';
-                    status.style.color = '#ef4444';
-                    status.textContent = '❌ Error: ' + err.message;
-                } finally {
-                    btn.disabled = false;
-                    btn.textContent = 'Transmit Securely';
+            try {
+                const result = await sendContactEmail(data);
+                if (result.data.success) {
+                    status.style.background = 'rgba(34, 197, 94, 0.1)';
+                    status.style.color = '#22c55e';
+                    status.textContent = '✅ ' + result.data.message;
+                    document.getElementById('contactForm').reset();
+                } else {
+                    throw new Error(result.data.error || 'Transmission failed');
                 }
-            });
-        </script>
+            } catch (err) {
+                status.style.background = 'rgba(239, 68, 68, 0.1)';
+                status.style.color = '#ef4444';
+                status.textContent = '❌ Error: ' + err.message;
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Transmit Securely';
+            }
+        });
+    </script>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                const header = document.getElementById("site-header");
-                window.addEventListener("scroll", () => { if (window.scrollY > 50) header.classList.add("scrolled"); else header.classList.remove("scrolled"); });
-                const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("reveal"); observer.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-                document.querySelectorAll(".animate-on-scroll").forEach(el => observer.observe(el));
-            });
-        </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const header = document.getElementById("site-header");
+            window.addEventListener("scroll", () => { if (window.scrollY > 50) header.classList.add("scrolled"); else header.classList.remove("scrolled"); });
+            const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("reveal"); observer.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+            document.querySelectorAll(".animate-on-scroll").forEach(el => observer.observe(el));
+        });
+    </script>
 </body>
 
 </html>

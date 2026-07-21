@@ -2,69 +2,547 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Supplier Registration | APD Global Trade</title>
+<title>Elite Supplier Registration | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
-body{
-  margin:0;
-  font-family:Inter,sans-serif;
-  background:#f5f7fb;
+* { box-sizing: border-box; }
+
+:root {
+    --gold: #d4af37;
+    --dark: #020617;
 }
 
-.form{
-  max-width:520px;
-  margin:80px auto;
-  background:#fff;
-  padding:40px;
-  border-radius:18px;
-  box-shadow:0 25px 60px rgba(0,0,0,.1);
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #071427, #020617);
+    color: #fff;
+    min-height: 100vh;
+    display: block; /* Changed from flex to allow header */
+    position: relative;
+    overflow-x: hidden;
 }
 
-h1{text-align:center;margin-bottom:20px}
-
-input{
-  width:100%;
-  padding:14px;
-  margin-bottom:14px;
-  border-radius:10px;
-  border:1px solid #e5e7eb;
+body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 1000px; height: 1000px;
+    background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
 }
 
-button{
-  width:100%;
-  padding:14px;
-  background:#0b1d36;
-  color:#fff;
-  border:none;
-  border-radius:999px;
-  font-weight:600;
-  cursor:pointer;
+/* Header & Drawer Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: rgba(2,6,23,0.8);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+header nav a {
+    color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; margin-left: 25px; transition: 0.3s; font-family: 'Inter', sans-serif;
+}
+header nav a:hover { color: var(--gold); }
+.menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.menu-toggle span { width: 25px; height: 2px; background: #fff; transition: 0.3s; }
+
+.drawer-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); backdrop-filter: blur(5px);
+    z-index: 100000; display: none; opacity: 0; transition: 0.3s;
+}
+.drawer-overlay.active { display: block; opacity: 1; }
+.side-drawer {
+    position: fixed; top: 0; right: -100%; width: 100%; height: 100%;
+    background: rgba(2,6,23,0.98); backdrop-filter: blur(25px);
+    z-index: 100001; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 100px 10%; display: flex; flex-direction: column; gap: 25px; overflow-y: auto;
+}
+.side-drawer.active { right: 0; }
+
+@media(min-width: 1025px) {
+    .side-drawer, .drawer-overlay { display: none !important; }
 }
 
-#error{color:#dc2626;text-align:center;margin-top:10px}
-#success{color:#16a34a;text-align:center;margin-top:10px}
+@media(max-width: 1024px) {
+    header nav { display: none; }
+    .menu-toggle { display: flex; }
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.logo-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #020617, #1a1a1a);
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    margin-bottom: 15px;
+}
+
+.logo-icon span {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: 1px;
+}
+
+.logo-text {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 28px;
+    color: #fff;
+    letter-spacing: 1px;
+    line-height: 1.1;
+}
+
+.logo-sub {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 5px;
+}
+
+.form {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 50px 40px;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 20px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.02);
+    text-align: center;
+    z-index: 2;
+}
+
+.form h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    margin: 0 0 10px 0;
+    color: #fff;
+}
+
+.form p.subtitle {
+    color: #94a3b8;
+    font-size: 14px;
+    margin: 0 0 30px 0;
+}
+
+input, select {
+    width: 100%;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.3);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    box-sizing: border-box;
+    transition: 0.3s;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: rgba(0,0,0,0.5);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+}
+
+select option {
+    background: #020617;
+    color: #fff;
+}
+
+button {
+    width: 100%;
+    padding: 18px;
+    margin-top: 10px;
+    background: linear-gradient(135deg, var(--gold), #8B6508);
+    color: #000;
+    border: none;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+}
+
+.links {
+    margin-top: 25px;
+    font-size: 14px;
+}
+
+.links a {
+    color: var(--gold);
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 600;
+}
+
+.links a:hover {
+    color: #fff;
+}
+
+#error {
+    color: #ef4444;
+    font-size: 14px;
+    margin-top: 15px;
+    font-weight: 600;
+}
+#success {
+    color: #4ade80;
+    font-size: 14px;
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: rgba(255,255,255,0.3);
+    font-size: 12px;
+    padding: 20px;
+    letter-spacing: 1px;
+    z-index: 10;
+    background: linear-gradient(0deg, #020617 50%, transparent);
+}
+footer a { color: rgba(255,255,255,0.5); text-decoration: none; margin: 0 5px; }
+
 </style>
 </head>
 
 <body>
 
+<!-- DESKTOP HEADER -->
+<header>
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <div class="menu-toggle" onclick="toggleDrawer()">
+            <span></span><span></span><span></span>
+        </div>
+        <a href="/" style="display: flex; align-items: center; gap: 15px; text-decoration: none;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #020617, #1a1a1a); border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);">
+                <span style="font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 900; color: var(--gold);">APD</span>
+            </div>
+            <div style="display: flex; flex-direction: column; line-height: 1.1;">
+                <span style="font-family: 'Playfair Display', serif; font-weight: 900; font-size: 20px; color: #fff;">APD <span style="color: var(--gold);">GLOBAL TRADE</span></span>
+            </div>
+        </a>
+    </div>
+    <nav style="display: flex; align-items: center;">
+        <a href="/">Home</a>
+        <a href="/buyer-rfqs.html">Buyer RFQs</a>
+        <a href="/suppliers.html">Suppliers</a>
+        <a href="/learn-exporting.html">Learn Exporting</a>
+        <a href="/membership.html">Membership</a>
+        <a href="/contact.html">Contact</a>
+        <div style="display: flex; align-items: center; gap: 15px; border-left: 1px solid rgba(212,175,55,0.2); padding-left: 20px; margin-left: 20px;">
+            <a href="/register-supplier.html" style="background: linear-gradient(135deg, var(--gold), #8B6508); color: #000; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3); transition: transform 0.3s, box-shadow 0.3s;">Sign Up Free</a>
+        </div>
+    </nav>
+</header>
+
+<!-- MOBILE DRAWER -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+<div class="side-drawer" id="sideDrawer">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #020617, #1a1a1a); border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);">
+                <span style="font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 900; color: var(--gold);">APD</span>
+            </div>
+            <div style="display: flex; flex-direction: column; line-height: 1.1;">
+                <span style="font-family: 'Playfair Display', serif; font-weight: 900; font-size: 18px; color: #fff;">APD <span style="color: var(--gold);">GLOBAL TRADE</span></span>
+            </div>
+        </div>
+        <div onclick="toggleDrawer()" style="color: var(--gold); font-size: 32px; cursor: pointer;">✕</div>
+    </div>
+    <a href="/index.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 10px;">Dashboard</a>
+    <a href="/buyer-rfqs.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 10px;">Verified RFQs</a>
+    <a href="/suppliers.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 10px;">Elite Suppliers</a>
+    <a href="/learn-exporting.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 10px;">Learn Exporting</a>
+    <a href="/membership.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 10px;">Join Membership</a>
+    <div style="padding: 20px 10px 0;">
+        <a href="/register-supplier.html" style="font-size: 1.2rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; display: block; margin-bottom: 15px;">Sign Up Free</a>
+    </div>
+</div>
+
+<script>
+    function toggleDrawer() {
+        document.getElementById('sideDrawer').classList.toggle('active');
+        document.getElementById('drawerOverlay').classList.toggle('active');
+    }
+</script>
+
+<div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 100px 20px 80px; box-sizing: border-box; position: relative; z-index: 1;">
 <div class="form">
+  <div class="logo-container">
+      <div class="logo-icon"><span>APD</span></div>
+      <div class="logo-text">APD <span style="color: var(--gold);">Global</span> Trade</div>
+      <div class="logo-sub">For Elite Exporters</div>
+  </div>
+
   <h1>Supplier Registration</h1>
+  <p class="subtitle">Establish your Institutional Profile to access 5M+ Verified Global Buyers.</p>
+  
+  <div style="background: rgba(212, 175, 55, 0.1); border: 1px dashed var(--gold); border-radius: 12px; padding: 15px; margin-bottom: 25px; text-align: center;">
+      <h3 style="margin: 0 0 5px 0; font-family: 'Playfair Display', serif; color: var(--gold); font-size: 18px; text-shadow: 1px 1px 0 #8B6508, 2px 2px 0 #5c4205;">Unlike others, we don't force memberships upfront.</h3>
+      <p style="margin: 0; font-size: 13px; color: #cbd5e1;">Take a <strong>3-Day Free Trial</strong>, unlock real buyers, see the value, and <em>then</em> decide.</p>
+  </div>
 
   <input id="company" placeholder="Company Name">
-  <input id="contact" placeholder="Contact Number">
-  <input id="product" placeholder="Which Product?">
-  <input id="email" type="email" placeholder="Email">
-  <input id="password" type="password" placeholder="Password">
+  <input id="contact" placeholder="Contact Number (WhatsApp)">
+  <p style="color: #94a3b8; font-size: 13px; margin-bottom: 8px; text-align: left;">Select your commodities:</p>
+  <div style="position: relative; margin-bottom: 20px; text-align: left;">
+      <div id="select-box" style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: #94a3b8;">
+          <span id="select-label">Which Product do you export?</span>
+          <span style="font-size: 12px; color: var(--gold);">▼</span>
+      </div>
+                                          <div id="product-checkboxes" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #0f172a; border: 1px solid var(--gold); border-radius: 8px; padding: 15px; max-height: 300px; overflow-y: auto; z-index: 100; margin-top: 5px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); flex-direction: column; gap: 12px; color: #fff;">
+          <input type="text" id="commodity-search" placeholder="Search your product..." style="padding: 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.3); color: #fff; width: 100%; box-sizing: border-box; margin-bottom: 10px;" onclick="event.stopPropagation();">
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Ajanta" style="width: 18px; height: 18px; accent-color: var(--gold);"> Ajanta</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Amla Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Amla Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Apple Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Apple Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Arabica Coffee" style="width: 18px; height: 18px; accent-color: var(--gold);"> Arabica Coffee</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Banana Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Banana Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Barley" style="width: 18px; height: 18px; accent-color: var(--gold);"> Barley</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Barley (Forage)" style="width: 18px; height: 18px; accent-color: var(--gold);"> Barley (Forage)</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Black Eyed Peas (Cowpeas)" style="width: 18px; height: 18px; accent-color: var(--gold);"> Black Eyed Peas (Cowpeas)</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Black Matpe Beans (Black Urad)" style="width: 18px; height: 18px; accent-color: var(--gold);"> Black Matpe Beans (Black Urad)</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Black Mustard" style="width: 18px; height: 18px; accent-color: var(--gold);"> Black Mustard</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Black Salt" style="width: 18px; height: 18px; accent-color: var(--gold);"> Black Salt</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Black Salt/Kala Namak" style="width: 18px; height: 18px; accent-color: var(--gold);"> Black Salt/Kala Namak</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Black Sarso" style="width: 18px; height: 18px; accent-color: var(--gold);"> Black Sarso</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Black Tea" style="width: 18px; height: 18px; accent-color: var(--gold);"> Black Tea</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Blueberry Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Blueberry Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Buffalo Meat" style="width: 18px; height: 18px; accent-color: var(--gold);"> Buffalo Meat</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Butter" style="width: 18px; height: 18px; accent-color: var(--gold);"> Butter</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="CJ Uniworld" style="width: 18px; height: 18px; accent-color: var(--gold);"> CJ Uniworld</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="CM Husk Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> CM Husk Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Canola Oil" style="width: 18px; height: 18px; accent-color: var(--gold);"> Canola Oil</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Capsicum" style="width: 18px; height: 18px; accent-color: var(--gold);"> Capsicum</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Carbonated Drinks" style="width: 18px; height: 18px; accent-color: var(--gold);"> Carbonated Drinks</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Carrom Seeds" style="width: 18px; height: 18px; accent-color: var(--gold);"> Carrom Seeds</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Cassia" style="width: 18px; height: 18px; accent-color: var(--gold);"> Cassia</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Cement" style="width: 18px; height: 18px; accent-color: var(--gold);"> Cement</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Cheese" style="width: 18px; height: 18px; accent-color: var(--gold);"> Cheese</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Chia Seeds" style="width: 18px; height: 18px; accent-color: var(--gold);"> Chia Seeds</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Chickpeas (Desi)" style="width: 18px; height: 18px; accent-color: var(--gold);"> Chickpeas (Desi)</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Chickpeas (Kabuli)" style="width: 18px; height: 18px; accent-color: var(--gold);"> Chickpeas (Kabuli)</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Coconut Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Coconut Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Coffee" style="width: 18px; height: 18px; accent-color: var(--gold);"> Coffee</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Cookies" style="width: 18px; height: 18px; accent-color: var(--gold);"> Cookies</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Cordyceps Militias Mushroom" style="width: 18px; height: 18px; accent-color: var(--gold);"> Cordyceps Militias Mushroom</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Corn" style="width: 18px; height: 18px; accent-color: var(--gold);"> Corn</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Corn Flakes" style="width: 18px; height: 18px; accent-color: var(--gold);"> Corn Flakes</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Cotton Bales" style="width: 18px; height: 18px; accent-color: var(--gold);"> Cotton Bales</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Cow Dung" style="width: 18px; height: 18px; accent-color: var(--gold);"> Cow Dung</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Cow Ghee" style="width: 18px; height: 18px; accent-color: var(--gold);"> Cow Ghee</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Curd" style="width: 18px; height: 18px; accent-color: var(--gold);"> Curd</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Curry Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Curry Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Dalchini Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Dalchini Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Dent Corn" style="width: 18px; height: 18px; accent-color: var(--gold);"> Dent Corn</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Desi Ghee" style="width: 18px; height: 18px; accent-color: var(--gold);"> Desi Ghee</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Dry Fruits" style="width: 18px; height: 18px; accent-color: var(--gold);"> Dry Fruits</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Dry Mango Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Dry Mango Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Energy Drinks" style="width: 18px; height: 18px; accent-color: var(--gold);"> Energy Drinks</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Excelsa Coffee" style="width: 18px; height: 18px; accent-color: var(--gold);"> Excelsa Coffee</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Fastener" style="width: 18px; height: 18px; accent-color: var(--gold);"> Fastener</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Finger Millets (Ragi)" style="width: 18px; height: 18px; accent-color: var(--gold);"> Finger Millets (Ragi)</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Flaxseed Oil" style="width: 18px; height: 18px; accent-color: var(--gold);"> Flaxseed Oil</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Flint Corn" style="width: 18px; height: 18px; accent-color: var(--gold);"> Flint Corn</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Flour Corn" style="width: 18px; height: 18px; accent-color: var(--gold);"> Flour Corn</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Fortune" style="width: 18px; height: 18px; accent-color: var(--gold);"> Fortune</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Fox Nuts (Makhana)" style="width: 18px; height: 18px; accent-color: var(--gold);"> Fox Nuts (Makhana)</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Foxtail Millets" style="width: 18px; height: 18px; accent-color: var(--gold);"> Foxtail Millets</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Fruit Juice" style="width: 18px; height: 18px; accent-color: var(--gold);"> Fruit Juice</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Garlic Flakes" style="width: 18px; height: 18px; accent-color: var(--gold);"> Garlic Flakes</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Gond Katira" style="width: 18px; height: 18px; accent-color: var(--gold);"> Gond Katira</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Grape Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Grape Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Green Mung" style="width: 18px; height: 18px; accent-color: var(--gold);"> Green Mung</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Green Tea" style="width: 18px; height: 18px; accent-color: var(--gold);"> Green Tea</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Groundnut Oil" style="width: 18px; height: 18px; accent-color: var(--gold);"> Groundnut Oil</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Hald Amrit" style="width: 18px; height: 18px; accent-color: var(--gold);"> Hald Amrit</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Himalyan Rock Salt" style="width: 18px; height: 18px; accent-color: var(--gold);"> Himalyan Rock Salt</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Imli Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Imli Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="India Gate" style="width: 18px; height: 18px; accent-color: var(--gold);"> India Gate</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Italian Herbs Mix" style="width: 18px; height: 18px; accent-color: var(--gold);"> Italian Herbs Mix</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Jam" style="width: 18px; height: 18px; accent-color: var(--gold);"> Jam</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Jowar (Sorghum)" style="width: 18px; height: 18px; accent-color: var(--gold);"> Jowar (Sorghum)</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Kasoori Methi" style="width: 18px; height: 18px; accent-color: var(--gold);"> Kasoori Methi</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Kasuri Methi" style="width: 18px; height: 18px; accent-color: var(--gold);"> Kasuri Methi</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Khas Khas" style="width: 18px; height: 18px; accent-color: var(--gold);"> Khas Khas</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Khus Khus Seeds" style="width: 18px; height: 18px; accent-color: var(--gold);"> Khus Khus Seeds</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Kohinoor Traditional" style="width: 18px; height: 18px; accent-color: var(--gold);"> Kohinoor Traditional</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Kulfi Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Kulfi Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Lal Qila" style="width: 18px; height: 18px; accent-color: var(--gold);"> Lal Qila</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Lassi" style="width: 18px; height: 18px; accent-color: var(--gold);"> Lassi</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Lemon Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Lemon Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Lentils" style="width: 18px; height: 18px; accent-color: var(--gold);"> Lentils</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Liberica Coffee" style="width: 18px; height: 18px; accent-color: var(--gold);"> Liberica Coffee</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Light Speckled Kidney Beans" style="width: 18px; height: 18px; accent-color: var(--gold);"> Light Speckled Kidney Beans</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Lima Beans (Butter Beans)" style="width: 18px; height: 18px; accent-color: var(--gold);"> Lima Beans (Butter Beans)</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Lupine Beans" style="width: 18px; height: 18px; accent-color: var(--gold);"> Lupine Beans</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Makhana" style="width: 18px; height: 18px; accent-color: var(--gold);"> Makhana</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Methi Dana" style="width: 18px; height: 18px; accent-color: var(--gold);"> Methi Dana</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Methi Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Methi Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Methi Whole" style="width: 18px; height: 18px; accent-color: var(--gold);"> Methi Whole</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Milk" style="width: 18px; height: 18px; accent-color: var(--gold);"> Milk</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Milk Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Milk Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Mint Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Mint Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Moringa" style="width: 18px; height: 18px; accent-color: var(--gold);"> Moringa</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Moringa Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Moringa Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Muesli" style="width: 18px; height: 18px; accent-color: var(--gold);"> Muesli</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Mustard" style="width: 18px; height: 18px; accent-color: var(--gold);"> Mustard</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Mustard Oil" style="width: 18px; height: 18px; accent-color: var(--gold);"> Mustard Oil</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Natural Black Salt" style="width: 18px; height: 18px; accent-color: var(--gold);"> Natural Black Salt</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Natural Pink Salt" style="width: 18px; height: 18px; accent-color: var(--gold);"> Natural Pink Salt</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Olive Oil" style="width: 18px; height: 18px; accent-color: var(--gold);"> Olive Oil</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Onion" style="width: 18px; height: 18px; accent-color: var(--gold);"> Onion</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Onion Flakes" style="width: 18px; height: 18px; accent-color: var(--gold);"> Onion Flakes</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Onion Paste" style="width: 18px; height: 18px; accent-color: var(--gold);"> Onion Paste</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Onion Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Onion Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Oolong (Wulong) Tea" style="width: 18px; height: 18px; accent-color: var(--gold);"> Oolong (Wulong) Tea</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Organic Black Mustard" style="width: 18px; height: 18px; accent-color: var(--gold);"> Organic Black Mustard</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Organic Brown Mustard" style="width: 18px; height: 18px; accent-color: var(--gold);"> Organic Brown Mustard</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Organic Brown Sesame Seeds" style="width: 18px; height: 18px; accent-color: var(--gold);"> Organic Brown Sesame Seeds</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Organic Flax Seeds" style="width: 18px; height: 18px; accent-color: var(--gold);"> Organic Flax Seeds</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Organic Methi Seeds" style="width: 18px; height: 18px; accent-color: var(--gold);"> Organic Methi Seeds</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Organic Muskmelon Seeds" style="width: 18px; height: 18px; accent-color: var(--gold);"> Organic Muskmelon Seeds</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Organic Soul" style="width: 18px; height: 18px; accent-color: var(--gold);"> Organic Soul</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Organic Sunflower Seeds" style="width: 18px; height: 18px; accent-color: var(--gold);"> Organic Sunflower Seeds</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Organic Watermelon Seeds" style="width: 18px; height: 18px; accent-color: var(--gold);"> Organic Watermelon Seeds</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Organic White Sesame Seems" style="width: 18px; height: 18px; accent-color: var(--gold);"> Organic White Sesame Seems</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Organic Yellow Mustard" style="width: 18px; height: 18px; accent-color: var(--gold);"> Organic Yellow Mustard</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Palm Oil" style="width: 18px; height: 18px; accent-color: var(--gold);"> Palm Oil</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Paneer" style="width: 18px; height: 18px; accent-color: var(--gold);"> Paneer</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Pansari" style="width: 18px; height: 18px; accent-color: var(--gold);"> Pansari</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Paprika Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Paprika Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Peanuts" style="width: 18px; height: 18px; accent-color: var(--gold);"> Peanuts</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Pearl Millets (Bajra)" style="width: 18px; height: 18px; accent-color: var(--gold);"> Pearl Millets (Bajra)</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Pigeon Pea (Toor Dal)" style="width: 18px; height: 18px; accent-color: var(--gold);"> Pigeon Pea (Toor Dal)</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Pineapple Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Pineapple Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Pink Rock Salt" style="width: 18px; height: 18px; accent-color: var(--gold);"> Pink Rock Salt</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Pink Salt" style="width: 18px; height: 18px; accent-color: var(--gold);"> Pink Salt</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Pod Corn" style="width: 18px; height: 18px; accent-color: var(--gold);"> Pod Corn</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Popcorn" style="width: 18px; height: 18px; accent-color: var(--gold);"> Popcorn</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Post Fermented Tea" style="width: 18px; height: 18px; accent-color: var(--gold);"> Post Fermented Tea</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Potato" style="width: 18px; height: 18px; accent-color: var(--gold);"> Potato</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Poultry Meat" style="width: 18px; height: 18px; accent-color: var(--gold);"> Poultry Meat</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Processed Meat" style="width: 18px; height: 18px; accent-color: var(--gold);"> Processed Meat</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Proso Millet" style="width: 18px; height: 18px; accent-color: var(--gold);"> Proso Millet</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Red Chilly Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Red Chilly Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Red Kidney Beans" style="width: 18px; height: 18px; accent-color: var(--gold);"> Red Kidney Beans</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Red Sarso" style="width: 18px; height: 18px; accent-color: var(--gold);"> Red Sarso</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Rice" style="width: 18px; height: 18px; accent-color: var(--gold);"> Rice</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Ripe Mango Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Ripe Mango Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Roasted Flax Seeds" style="width: 18px; height: 18px; accent-color: var(--gold);"> Roasted Flax Seeds</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Roasted Jeera Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Roasted Jeera Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Robusta Coffee" style="width: 18px; height: 18px; accent-color: var(--gold);"> Robusta Coffee</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="SDS" style="width: 18px; height: 18px; accent-color: var(--gold);"> SDS</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Sada Bahar Chutney" style="width: 18px; height: 18px; accent-color: var(--gold);"> Sada Bahar Chutney</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Salt & Salt Substitutes" style="width: 18px; height: 18px; accent-color: var(--gold);"> Salt & Salt Substitutes</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Sesame Oil" style="width: 18px; height: 18px; accent-color: var(--gold);"> Sesame Oil</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Sesame Seeds" style="width: 18px; height: 18px; accent-color: var(--gold);"> Sesame Seeds</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Shah Jeera" style="width: 18px; height: 18px; accent-color: var(--gold);"> Shah Jeera</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Sheep & Goat Meat" style="width: 18px; height: 18px; accent-color: var(--gold);"> Sheep & Goat Meat</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Shuttering MR Grade" style="width: 18px; height: 18px; accent-color: var(--gold);"> Shuttering MR Grade</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Soybean Oil" style="width: 18px; height: 18px; accent-color: var(--gold);"> Soybean Oil</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Spices" style="width: 18px; height: 18px; accent-color: var(--gold);"> Spices</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Strawberry Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Strawberry Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Sugar" style="width: 18px; height: 18px; accent-color: var(--gold);"> Sugar</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Sunflower Oil" style="width: 18px; height: 18px; accent-color: var(--gold);"> Sunflower Oil</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Sunflower Seeds" style="width: 18px; height: 18px; accent-color: var(--gold);"> Sunflower Seeds</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Sweet Corn" style="width: 18px; height: 18px; accent-color: var(--gold);"> Sweet Corn</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="TMT Bars & Steel" style="width: 18px; height: 18px; accent-color: var(--gold);"> TMT Bars & Steel</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Tamarind" style="width: 18px; height: 18px; accent-color: var(--gold);"> Tamarind</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Tamarind Paste" style="width: 18px; height: 18px; accent-color: var(--gold);"> Tamarind Paste</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Tamarind Pods" style="width: 18px; height: 18px; accent-color: var(--gold);"> Tamarind Pods</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Tamarind Powder" style="width: 18px; height: 18px; accent-color: var(--gold);"> Tamarind Powder</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Tea" style="width: 18px; height: 18px; accent-color: var(--gold);"> Tea</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Tirupati Pulses" style="width: 18px; height: 18px; accent-color: var(--gold);"> Tirupati Pulses</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="V Belt" style="width: 18px; height: 18px; accent-color: var(--gold);"> V Belt</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Water" style="width: 18px; height: 18px; accent-color: var(--gold);"> Water</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Wheat" style="width: 18px; height: 18px; accent-color: var(--gold);"> Wheat</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Wheat Durum" style="width: 18px; height: 18px; accent-color: var(--gold);"> Wheat Durum</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="White Rock Salt" style="width: 18px; height: 18px; accent-color: var(--gold);"> White Rock Salt</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Yellow Sarso" style="width: 18px; height: 18px; accent-color: var(--gold);"> Yellow Sarso</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Yellow Tea" style="width: 18px; height: 18px; accent-color: var(--gold);"> Yellow Tea</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Thai Apple Ber" style="width: 18px; height: 18px; accent-color: var(--gold);"> Thai Apple Ber</label>
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;"><input type="checkbox" value="Sugar-Free Dry Fruit Laddus" style="width: 18px; height: 18px; accent-color: var(--gold);"> Sugar-Free Dry Fruit Laddus</label>
+          
+      </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  <p style="color: #94a3b8; font-size: 13px; margin-bottom: 8px; text-align: left; margin-top: 20px;">Target Export Market:</p>
+  <select id="targetMarket" multiple style="width: 100%; padding: 15px; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff; margin-bottom: 20px; font-family: Inter, sans-serif;">
+      <option value="USA">USA</option>
+      <option value="Canada">Canada</option>
+      <option value="EU">European Union (EU)</option>
+      <option value="UK">United Kingdom</option>
+      <option value="UAE">UAE / Middle East</option>
+      <option value="Australia">Australia</option>
+      <option value="Africa">Africa</option>
+      <option value="Global">Global / Anywhere</option>
+  </select>
+  
+  <p style="color: #94a3b8; font-size: 13px; margin-bottom: 8px; text-align: left;">Comments / Specifications (Optional):</p>
+  <textarea id="comment" placeholder="Any specific requirements or details..." style="width: 100%; padding: 15px; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff; margin-bottom: 20px; font-family: Inter, sans-serif; resize: vertical; min-height: 80px; box-sizing: border-box;"></textarea>
+
+  <input id="email" type="email" placeholder="Institutional Email">
+  <input id="password" type="password" placeholder="Secure Password">
 
   <!-- IMPORTANT: type="button" -->
   <button type="button" id="submitBtn">Submit Application</button>
 
+  <div class="links">
+      <p style="color: #94a3b8; margin: 0;">Already established a profile? <a href="/supplier-login.html">Login Here</a></p>
+  </div>
+
   <div id="error"></div>
   <div id="success"></div>
+</div>
 </div>
 
 <script type="module">
@@ -90,99 +568,184 @@ const db = getFirestore(app);
 
 const companyEl = document.getElementById("company");
 const contactEl = document.getElementById("contact");
-const productEl = document.getElementById("product");
 const emailEl = document.getElementById("email");
 const passwordEl = document.getElementById("password");
 const errorEl = document.getElementById("error");
 const successEl = document.getElementById("success");
+const btn = document.getElementById("submitBtn");
 
-document.getElementById("submitBtn").addEventListener("click", async () => {
+// Custom Dropdown Logic
+const selectBox = document.getElementById("select-box");
+const checkboxesDiv = document.getElementById("product-checkboxes");
+const selectLabel = document.getElementById("select-label");
+const allCheckboxes = document.querySelectorAll('#product-checkboxes input[type="checkbox"]');
+
+selectBox.addEventListener("click", (e) => {
+    e.stopPropagation();
+    checkboxesDiv.style.display = checkboxesDiv.style.display === "none" ? "flex" : "none";
+});
+
+document.addEventListener("click", (e) => {
+    if (!checkboxesDiv.contains(e.target) && !selectBox.contains(e.target)) {
+        checkboxesDiv.style.display = "none";
+    }
+});
+
+
+// Search logic
+const searchInput = document.getElementById("commodity-search");
+if (searchInput) {
+    searchInput.addEventListener("input", function(e) {
+        const filter = e.target.value.toLowerCase();
+        const labels = checkboxesDiv.querySelectorAll("label");
+        labels.forEach(label => {
+            if (label.innerText.toLowerCase().includes(filter)) {
+                label.style.display = "flex";
+            } else {
+                label.style.display = "none";
+            }
+        });
+    });
+}
+
+allCheckboxes.forEach(cb => {
+    cb.addEventListener("change", () => {
+        const otherInput = document.getElementById("other-commodity-input");
+        const otherCheckbox = document.getElementById("other-checkbox");
+        if (otherCheckbox && otherCheckbox.checked) {
+            otherInput.style.display = "block";
+        } else if (otherInput) {
+            otherInput.style.display = "none";
+        }
+
+        const checkedBoxes = Array.from(document.querySelectorAll('#product-checkboxes input[type="checkbox"]:checked'));
+        const selectedCount = checkedBoxes.length;
+        
+        if (selectedCount === 0) {
+            selectLabel.innerText = "Which Product do you export?";
+            selectLabel.style.color = "#94a3b8";
+            btn.innerText = "Submit Application";
+        } else if (selectedCount === 1) {
+            selectLabel.innerText = "1 Commodity Selected";
+            selectLabel.style.color = "#fff";
+            btn.innerText = "Submit for " + checkedBoxes[0].value;
+        } else if (selectedCount <= 2) {
+            selectLabel.innerText = selectedCount + " Commodities Selected";
+            selectLabel.style.color = "#fff";
+            const names = checkedBoxes.map(b => b.value).join(" & ");
+            btn.innerText = "Submit for " + names;
+        } else {
+            selectLabel.innerText = selectedCount + " Commodities Selected";
+            selectLabel.style.color = "#fff";
+            btn.innerText = `Submit for ${selectedCount} Commodities`;
+        }
+    });
+});
+
+btn.addEventListener("click", async () => {
   errorEl.textContent = "";
   successEl.textContent = "";
+  btn.textContent = "PROCESSING...";
 
   const company = companyEl.value.trim();
   const contact = contactEl.value.trim();
-  const product = productEl.value.trim();
+  
+  // Handle multiple selections from checkboxes
+  const otherInput = document.getElementById("other-commodity-input");
+  const selectedProductsRaw = Array.from(document.querySelectorAll('#product-checkboxes input[type="checkbox"]:checked'));
+  
+  const selectedProducts = selectedProductsRaw.map(cb => {
+      if(cb.value === "Others" && otherInput && otherInput.value.trim() !== "") {
+          return otherInput.value.trim();
+      }
+      return cb.value;
+  });
+  const primaryProduct = selectedProducts.length > 0 ? selectedProducts[0] : "";
+  const allProductsString = selectedProducts.join(", ");
+
   const email = emailEl.value.trim();
   const password = passwordEl.value;
+  const targetMarketSelect = document.getElementById('targetMarket');
+  const selectedMarkets = Array.from(targetMarketSelect.selectedOptions).map(opt => opt.value);
+  const comment = document.getElementById('comment').value.trim();
 
-  if(!company || !contact || !product || !email || !password){
-    errorEl.textContent = "Please fill all fields";
+  if(!company || !contact || selectedProducts.length === 0 || !email || !password){
+    errorEl.textContent = "Please fill all fields to establish your profile.";
+    btn.textContent = "SUBMIT APPLICATION";
     return;
   }
 
   try{
+    let userIp = "unknown";
+    try {
+      const ipRes = await fetch('https://api.ipify.org?format=json');
+      const ipData = await ipRes.json();
+      userIp = ipData.ip;
+    } catch(e) { console.warn("Could not fetch IP"); }
+
     const cred = await createUserWithEmailAndPassword(auth,email,password);
     const user = cred.user;
 
     await setDoc(doc(db,"suppliers",user.uid),{
       companyName: company,
-      contact: contact,
-      product: product,
+      phone: contact,
+      product: primaryProduct, // Primary product for dashboard matching
+      allProducts: selectedProducts, // Full list of selections
+      productsString: allProductsString,
       email: email.toLowerCase(),
       status: "pending",
       plan: "free",
       unlockedLeads: [],
       unlocksUsed: 0,
+      targetMarket: selectedMarkets,
+      comment: comment,
+      registrationIp: userIp,
+      trialStartDate: serverTimestamp(),
       createdAt: serverTimestamp()
     });
 
+    try {
+        const adminMsg = `🚨 New Supplier Registered (Free Trial)!\nCompany: ${company}\nPhone: ${contact}\nEmail: ${email.toLowerCase()}\nProducts: ${allProductsString}`;
+        await fetch('/api/send', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                instance: "instance168990",
+                token: "yx9xaxy5k1nbqjat",
+                to: "+919266418868",
+                body: adminMsg
+            })
+        });
+    } catch(e) { console.error("Notify Admin error", e); }
+
     await signOut(auth);
 
-    successEl.textContent = "Application submitted. Await admin approval.";
+    successEl.textContent = "Application submitted securely. Awaiting institutional approval.";
 
     setTimeout(()=>{
       location.href="/supplier-login.html";
-    },1500);
+    },2000);
 
   }catch(err){
     errorEl.textContent = err.message;
+    btn.textContent = "SUBMIT APPLICATION";
   }
 });
 </script>
 
-<!-- ================= FOOTER ================= -->
-<footer style="
-  background:#020617;
-  color:#9ca3af;
-  text-align:center;
-  padding:40px 20px;
-  font-size:14px;
-">
-  <p style="color:#c9a44a;font-weight:600;margin-bottom:6px;">
-    APD Global Trade
-  </p>
-  <p>Elite B2B Trade Facilitation Platform</p>
-
-  <p style="margin:10px 0;">
-    <a href="/terms.html" style="color:#c9a44a;text-decoration:none;">Terms</a> |
-    <a href="/privacy.html" style="color:#c9a44a;text-decoration:none;">Privacy</a> |
-    <a href="/disclaimer.html" style="color:#c9a44a;text-decoration:none;">Disclaimer</a>
-  </p>
-
-  <p style="margin:10px 0;line-height:1.6;">
-    📧 info@apdglobaltradehub.com <br>
-    💬 WhatsApp: +91 92664 18868
-  </p>
+<footer>
+  © 2026 APD GLOBAL TRADE · <a href="/terms.html">TERMS</a> · <a href="/privacy.html">PRIVACY</a>
 </footer>
 
 <a href="https://wa.me/919266418868" target="_blank"
-style="
-position:fixed;
-bottom:20px;
-right:20px;
-width:56px;
-height:56px;
-background:#25D366;
-color:#fff;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:28px;
-box-shadow:0 10px 25px rgba(0,0,0,.25);
-z-index:9999;
-text-decoration:none;">💬</a>
+style="position:fixed;bottom:25px;right:25px;width:60px;height:60px;
+background:#25D366;color:#fff;border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+font-size:30px;box-shadow:0 10px 30px rgba(37, 211, 102, 0.4);
+z-index:9999;text-decoration:none;transition:0.3s;"
+onmouseover="this.style.transform='scale(1.1)'"
+onmouseout="this.style.transform='scale(1)'">💬</a>
 
 </body>
 </html>
+

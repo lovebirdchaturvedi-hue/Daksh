@@ -2,89 +2,326 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Supplier Login | APD Global Trade</title>
+<title>Elite Supplier Login | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
-body{
-  margin:0;
-  font-family:Inter,sans-serif;
-  background:linear-gradient(135deg,#071427,#020617);
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+* { box-sizing: border-box; }
+
+:root {
+    --gold: #d4af37;
+    --dark: #020617;
 }
 
-.card{
-  background:#fff;
-  padding:36px;
-  width:380px;
-  border-radius:16px;
-  text-align:center;
-  z-index:2;
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #071427, #020617);
+    color: #fff;
+    min-height: 100vh;
+    display: block; /* Changed from flex to allow header */
+    position: relative;
+    overflow-x: hidden;
 }
 
-input{
-  width:100%;
-  padding:14px;
-  margin-top:14px;
-  border-radius:10px;
-  border:1px solid #ddd;
+body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
 }
 
-button{
-  width:100%;
-  padding:14px;
-  margin-top:20px;
-  background:#2563eb;
-  color:#fff;
-  border:none;
-  border-radius:999px;
-  font-weight:600;
-  cursor:pointer;
+/* Header & Drawer Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: rgba(2,6,23,0.8);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+header nav a {
+    color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; margin-left: 25px; transition: 0.3s; font-family: 'Inter', sans-serif;
+}
+header nav a:hover { color: var(--gold); }
+.menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.menu-toggle span { width: 25px; height: 2px; background: #fff; transition: 0.3s; }
+
+.drawer-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); backdrop-filter: blur(5px);
+    z-index: 100000; display: none; opacity: 0; transition: 0.3s;
+}
+.drawer-overlay.active { display: block; opacity: 1; }
+.side-drawer {
+    position: fixed; top: 0; right: -100%; width: 100%; height: 100%;
+    background: rgba(2,6,23,0.98); backdrop-filter: blur(25px);
+    z-index: 100001; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 100px 10%; display: flex; flex-direction: column; gap: 25px; overflow-y: auto;
+}
+.side-drawer.active { right: 0; }
+
+@media(min-width: 1025px) {
+    .side-drawer, .drawer-overlay { display: none !important; }
 }
 
-.links{
-  margin-top:16px;
-  font-size:13px;
+@media(max-width: 1024px) {
+    header nav { display: none; }
+    .menu-toggle { display: flex; }
 }
 
-.links a{
-  display:block;
-  margin-top:8px;
-  color:#2563eb;
-  text-decoration:none;
-  cursor:pointer;
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
 }
 
-#error{
-  color:#dc2626;
-  font-size:13px;
-  margin-top:10px;
+.logo-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #020617, #1a1a1a);
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    margin-bottom: 15px;
 }
+
+.logo-icon span {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: 1px;
+}
+
+.logo-text {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 28px;
+    color: #fff;
+    letter-spacing: 1px;
+    line-height: 1.1;
+}
+
+.logo-sub {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 5px;
+}
+
+.card {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 50px 40px;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 20px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.02);
+    text-align: center;
+    z-index: 2;
+}
+
+.card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    margin: 0 0 10px 0;
+    color: #fff;
+}
+
+.card p {
+    color: #94a3b8;
+    font-size: 14px;
+    margin: 0 0 30px 0;
+}
+
+input {
+    width: 100%;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.3);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    box-sizing: border-box;
+    transition: 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: rgba(0,0,0,0.5);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+}
+
+button {
+    width: 100%;
+    padding: 16px;
+    margin-top: 10px;
+    background: linear-gradient(135deg, var(--gold), #8B6508);
+    color: #000;
+    border: none;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+}
+
+.links {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+}
+
+.links a {
+    color: #94a3b8;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+.links a:hover {
+    color: var(--gold);
+}
+
+#error {
+    color: #ef4444;
+    font-size: 14px;
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: rgba(255,255,255,0.3);
+    font-size: 12px;
+    padding: 20px;
+    letter-spacing: 1px;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="card">
-  <h2>Supplier Login</h2>
-  <p>Access verified buyer RFQs</p>
+<!-- DESKTOP HEADER -->
+<header>
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <div class="menu-toggle" onclick="toggleDrawer()">
+            <span></span><span></span><span></span>
+        </div>
+        <a href="/" style="display: flex; align-items: center; gap: 15px; text-decoration: none;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #020617, #1a1a1a); border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);">
+                <span style="font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 900; color: var(--gold);">APD</span>
+            </div>
+            <div style="display: flex; flex-direction: column; line-height: 1.1;">
+                <span style="font-family: 'Playfair Display', serif; font-weight: 900; font-size: 20px; color: #fff;">APD <span style="color: var(--gold);">Global</span></span>
+            </div>
+        </a>
+    </div>
+    <nav style="display: flex; align-items: center;">
+        <a href="/">Home</a>
+        <a href="/buyer-rfqs.html">Buyer RFQs</a>
+        <a href="/suppliers.html">Suppliers</a>
+        <a href="/learn-exporting.html">Learn Exporting</a>
+        <a href="/membership.html">Membership</a>
+        <a href="/contact.html">Contact</a>
+        <div style="display: flex; align-items: center; gap: 15px; border-left: 1px solid rgba(212,175,55,0.2); padding-left: 20px; margin-left: 20px;">
+            <a href="/register-supplier.html" style="background: linear-gradient(135deg, var(--gold), #8B6508); color: #000; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3); transition: transform 0.3s, box-shadow 0.3s;">Sign Up Free</a>
+        </div>
+    </nav>
+</header>
 
-  <input id="email" type="email" placeholder="Email">
+<!-- MOBILE DRAWER -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+<div class="side-drawer" id="sideDrawer">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #020617, #1a1a1a); border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);">
+                <span style="font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 900; color: var(--gold);">APD</span>
+            </div>
+            <div style="display: flex; flex-direction: column; line-height: 1.1;">
+                <span style="font-family: 'Playfair Display', serif; font-weight: 900; font-size: 18px; color: #fff;">APD <span style="color: var(--gold);">Global</span></span>
+            </div>
+        </div>
+        <div onclick="toggleDrawer()" style="color: var(--gold); font-size: 32px; cursor: pointer;">✕</div>
+    </div>
+    <a href="/index.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 10px;">Dashboard</a>
+    <a href="/buyer-rfqs.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 10px;">Verified RFQs</a>
+    <a href="/suppliers.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 10px;">Elite Suppliers</a>
+    <a href="/learn-exporting.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 10px;">Learn Exporting</a>
+    <a href="/membership.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 10px;">Join Membership</a>
+    <div style="padding: 20px 10px 0;">
+        <a href="/register-supplier.html" style="font-size: 1.2rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; display: block; margin-bottom: 15px;">Sign Up Free</a>
+    </div>
+</div>
+
+<script>
+    function toggleDrawer() {
+        document.getElementById('sideDrawer').classList.toggle('active');
+        document.getElementById('drawerOverlay').classList.toggle('active');
+    }
+</script>
+
+<div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 100px 20px 80px; box-sizing: border-box; position: relative; z-index: 1;">
+<div class="card">
+  <div class="logo-container">
+      <div class="logo-icon"><span>APD</span></div>
+      <div class="logo-text">APD <span style="color: var(--gold);">Global</span> Trade</div>
+      <div class="logo-sub">For Elite Exporters</div>
+  </div>
+
+  <h2>Supplier Login</h2>
+  <p>Secure Access to Verified Global RFQs</p>
+
+  <input id="email" type="email" placeholder="Institutional Email">
   <input id="password" type="password" placeholder="Password">
 
-  <button id="loginBtn">Login</button>
+  <button id="loginBtn">Authenticate</button>
 
   <div class="links">
-    <a id="forgotBtn">Forgot password?</a>
-    <a href="/register-supplier.html">New supplier? Register</a>
+    <a id="forgotBtn">Forgot Password?</a>
+    <a href="/register-supplier.html" style="color: var(--gold);">Create Profile</a>
   </div>
 
   <div id="error"></div>
+</div>
 </div>
 
 <script type="module">
@@ -103,9 +340,11 @@ const app = initializeApp({
 
 const auth = getAuth(app);
 const error = document.getElementById("error");
+const btn = document.getElementById("loginBtn");
 
-document.getElementById("loginBtn").onclick = async () => {
+btn.onclick = async () => {
   error.textContent = "";
+  btn.textContent = "AUTHENTICATING...";
   try{
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
@@ -120,7 +359,8 @@ document.getElementById("loginBtn").onclick = async () => {
     }
 
   }catch(e){
-    error.textContent = e.message;
+    error.textContent = "Authentication failed. Please check your credentials.";
+    btn.textContent = "AUTHENTICATE";
   }
 };
 
@@ -128,26 +368,27 @@ document.getElementById("forgotBtn").onclick = async () => {
   error.textContent = "";
   const email = document.getElementById("email").value.trim();
   if(!email){
-    error.textContent = "Enter email first";
+    error.textContent = "Enter your email address first to reset.";
     return;
   }
   await sendPasswordResetEmail(auth,email);
-  error.style.color="green";
-  error.textContent="Password reset email sent";
+  error.style.color="#4ade80";
+  error.textContent="Password reset link dispatched securely.";
 };
 </script>
 
-<!-- FOOTER -->
-<footer style="position:fixed;bottom:0;width:100%;text-align:center;color:#9ca3af;font-size:12px;padding:20px">
-  APD Global Trade · Elite B2B Trade Facilitation Platform
+<footer>
+  © 2026 APD GLOBAL TRADE · INSTITUTIONAL INFRASTRUCTURE
 </footer>
 
 <a href="https://wa.me/919266418868" target="_blank"
-style="position:fixed;bottom:20px;right:20px;width:56px;height:56px;
+style="position:fixed;bottom:25px;right:25px;width:60px;height:60px;
 background:#25D366;color:#fff;border-radius:50%;
 display:flex;align-items:center;justify-content:center;
-font-size:28px;box-shadow:0 10px 25px rgba(0,0,0,.25);
-z-index:9999;text-decoration:none">💬</a>
+font-size:30px;box-shadow:0 10px 30px rgba(37, 211, 102, 0.4);
+z-index:9999;text-decoration:none;transition:0.3s;"
+onmouseover="this.style.transform='scale(1.1)'"
+onmouseout="this.style.transform='scale(1)'">💬</a>
 
 </body>
 </html>

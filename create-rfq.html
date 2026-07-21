@@ -9,8 +9,11 @@
 
 <style>
 body { margin:0; font-family:Inter,sans-serif; background:#f5f7fb; color:#0f172a; }
-header { height:80px; background:#071427; display:flex; align-items:center; justify-content:center; }
-header .logo { color:#c9a44a; font-weight:600; }
+header { height:80px; background:#071427; display:flex; align-items:center; justify-content:space-between; padding: 0 5%; }
+header .logo { color:#c9a44a; font-weight:700; font-size: 1.2rem; text-decoration: none; }
+header nav { display: flex; gap: 20px; }
+header nav a { color: #fff; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: 0.3s; }
+header nav a:hover { color: #c9a44a; }
 .section { max-width:700px; margin:auto; padding:80px 20px; }
 form { background:#fff; padding:40px; border-radius:16px; border:1px solid #e5e7eb; }
 input, textarea {
@@ -29,12 +32,77 @@ button {
 <body>
 
 <header>
-  <div class="logo">APD Global Trade</div>
+  <a href="/" class="logo">APD Global Trade</a>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/buyer-rfqs.html">Live RFQs</a>
+    <a href="/suppliers.html">Suppliers</a>
+    <a href="/membership.html" style="color: #c9a44a;">Membership</a>
+  </nav>
 </header>
 
 <section class="section">
   <h1>Submit Your Buying Requirement</h1>
   <p>Your RFQ will be shared with verified suppliers.</p>
+
+  <!-- FREIGHT COST ESTIMATOR (Mock) -->
+  <div style="background: linear-gradient(135deg, #020617, #0f172a); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; padding: 25px; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+      <h3 style="color: #d4af37; margin-top: 0; margin-bottom: 15px; font-family: 'Playfair Display', serif; display: flex; align-items: center; gap: 10px;">
+          <span>dYZ"</span> Live Freight & Logistics Estimator
+      </h3>
+      <p style="color: #94a3b8; font-size: 14px; margin-bottom: 20px;">Get an instant estimated landing cost before submitting your RFQ.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 15px; align-items: flex-end;">
+          <div style="flex: 1; min-width: 150px;">
+              <label style="color: #cbd5e1; font-size: 12px; font-weight: 600; margin-bottom: 5px; display: block;">Origin Port</label>
+              <select id="freightOrigin" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 6px; outline: none; margin-bottom: 0;">
+                  <option value="in-mun">Mundra (INMUN)</option>
+                  <option value="in-nsa">Nhava Sheva (INNSA)</option>
+                  <option value="in-maa">Chennai (INMAA)</option>
+              </select>
+          </div>
+          <div style="flex: 1; min-width: 150px;">
+              <label style="color: #cbd5e1; font-size: 12px; font-weight: 600; margin-bottom: 5px; display: block;">Destination</label>
+              <select id="freightDest" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 6px; outline: none; margin-bottom: 0;">
+                  <option value="ae-dxb">Middle East (Dubai)</option>
+                  <option value="eu-rtm">Europe (Rotterdam)</option>
+                  <option value="us-ewr">North America (NY)</option>
+                  <option value="sg-sin">SE Asia (Singapore)</option>
+              </select>
+          </div>
+          <div style="flex: 1; min-width: 100px;">
+              <label style="color: #cbd5e1; font-size: 12px; font-weight: 600; margin-bottom: 5px; display: block;">Vol (TEU)</label>
+              <input type="number" id="freightVol" value="1" min="1" style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 6px; outline: none; margin-bottom: 0;">
+          </div>
+          <div>
+              <button type="button" onclick="calculateFreight()" style="background: linear-gradient(90deg, #d4af37, #facc15); color: #000; font-weight: 800; padding: 12px 20px; border: none; border-radius: 6px; cursor: pointer; width: auto; font-size: 14px;">Estimate</button>
+          </div>
+      </div>
+      <div id="freightResult" style="display: none; margin-top: 20px; padding: 15px; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 6px; color: #4ade80;">
+          <div style="font-size: 14px; font-weight: 600; margin-bottom: 5px;">Estimated Ocean Freight: <span id="freightTotal" style="font-size: 20px; font-weight: 900; color: #fff;">$0</span></div>
+          <div style="font-size: 12px; color: #94a3b8;">Est. Transit Time: <span id="freightTime" style="color: #cbd5e1;">--</span> &nbsp;|&nbsp; Route: <span id="freightRoute">--</span></div>
+      </div>
+      <script>
+          function calculateFreight() {
+              const origin = document.getElementById('freightOrigin').value;
+              const dest = document.getElementById('freightDest').value;
+              const vol = parseInt(document.getElementById('freightVol').value) || 1;
+              const rates = {
+                  'ae-dxb': { cost: 450, time: '8-12 days' },
+                  'eu-rtm': { cost: 1800, time: '22-28 days' },
+                  'us-ewr': { cost: 2800, time: '30-40 days' },
+                  'sg-sin': { cost: 350, time: '10-14 days' }
+              };
+              const routeData = rates[dest];
+              const total = routeData.cost * vol;
+              document.getElementById('freightTotal').innerText = `$${total.toLocaleString()}`;
+              document.getElementById('freightTime').innerText = routeData.time;
+              const originText = document.getElementById('freightOrigin').options[document.getElementById('freightOrigin').selectedIndex].text.split('(')[0].trim();
+              const destText = document.getElementById('freightDest').options[document.getElementById('freightDest').selectedIndex].text.split('(')[0].trim();
+              document.getElementById('freightRoute').innerText = `${originText} ➔ ${destText}`;
+              document.getElementById('freightResult').style.display = 'block';
+          }
+      </script>
+  </div>
 
   <form id="rfqForm">
 
@@ -42,7 +110,7 @@ button {
 
     <input id="buyer_name" placeholder="Buyer Full Name" required>
     <input id="buyer_email" type="email" placeholder="Buyer Email" required>
-    <input id="buyer_phone" placeholder="Buyer Phone / WhatsApp" required>
+    <input id="buyer_phone" placeholder="Buyer Phone / WhatsApp (with country code)" required pattern="^\+.*" title="Must start with + and include country code">
     <input id="buyer_company" placeholder="Company Name" required>
     <input id="buyer_country" placeholder="Country" required>
 
@@ -160,5 +228,6 @@ document.getElementById("rfqForm").addEventListener("submit", async (e) => {
   💬
 </a>
 
+  <script src="/assets/js/ai-chatbot.js"></script>
 </body>
 </html>

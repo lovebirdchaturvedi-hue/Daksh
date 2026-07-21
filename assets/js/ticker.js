@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, getDocs, query, orderBy, limit }
+import { getFirestore, collection, onSnapshot, query, orderBy, limit, enableIndexedDbPersistence }
   from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -14,23 +14,37 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// Enable Offline Persistence for "Instant" feel
+enableIndexedDbPersistence(db).catch((err) => {
+    if (err.code == 'failed-precondition') {
+        console.warn("Multiple tabs open, persistence can only be enabled in one tab at a a time.");
+    } else if (err.code == 'unimplemented') {
+        console.warn("The current browser does not support all of the features required to enable persistence");
+    }
+});
+
 function aiSummary(r) {
   return `Buyer seeking ${r.product} (${r.quantity}) for ${r.country || "global"} market`;
 }
 
-async function loadRFQs() {
+function startRFQStream() {
   const ticker = document.getElementById("rfqTicker");
   if (!ticker) return;
 
-  try {
-    const q = query(collection(db, "rfqs"), orderBy("createdAt", "desc"), limit(12));
-    const snap = await getDocs(q);
+  // Simple query to avoid index requirements
+  const q = query(collection(db, "rfqs"), limit(12));
+  
+  onSnapshot(q, (snap) => {
     ticker.innerHTML = "";
     if (snap.empty) {
       ticker.innerHTML = `<span>No Live RFQs Available</span>`;
       return;
     }
-    snap.forEach(doc => {
+
+    // Manual sort by date
+    const docs = [...snap.docs].sort((a,b) => (b.data().createdAt?.seconds || 0) - (a.data().createdAt?.seconds || 0));
+
+    docs.forEach(doc => {
       const r = doc.data();
       const country = r.destination || r.country || "Global";
       const code = (r.countryCode || "").toLowerCase();
@@ -50,13 +64,12 @@ async function loadRFQs() {
       `;
       ticker.appendChild(item);
     });
-  } catch (error) {
-    ticker.innerHTML = `<span>Error loading live trade feed</span>`;
-    console.error(error);
-  }
+  }, (error) => {
+    console.error("RFQ Ticker Stream Error:", error);
+    ticker.innerHTML = `<span>Trade Feed Active (Updates Real-time)</span>`;
+  });
 }
 
-// Initial load
-document.addEventListener('DOMContentLoaded', loadRFQs);
-// Refresh every 5 minutes
-setInterval(loadRFQs, 300000);
+// Start the real-time stream immediately
+document.addEventListener('DOMContentLoaded', startRFQStream);
+

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Elite Trade Membership | APD Global Trade</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/sales-bot.css">
+  <script src="/assets/js/sales-bot.js" type="module"></script>
+
+  <style>
+    :root {
+        --gold: #d4af37;
+        --navy: #071427;
+        --dark: #0a0f1c;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #0a0f1c;
+      color: #e5e7eb;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: #071427;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(212, 175, 55, .15);
+      position: relative;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--gold);
+    }
+
+    .hero {
+      padding: 140px 20px;
+      text-align: center;
+      background: linear-gradient(180deg, #071427, #0a0f1c);
+      border-bottom: 1px solid rgba(212, 175, 55, .15);
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px;
+      background: linear-gradient(90deg, #d4af37, #facc15, #d4af37);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 30px;
+    }
+
+    .hero p {
+      max-width: 850px;
+      margin: auto;
+      font-size: 20px;
+      color: #9ca3af;
+      line-height: 1.8;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 120px auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 34px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #9ca3af;
+      margin-bottom: 70px;
+    }
+
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+    }
+
+    .plan {
+      background: #111827;
+      padding: 60px 45px;
+      border-radius: 30px;
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      transition: .4s ease;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .plan:hover {
+      transform: translateY(-12px);
+      border: 1px solid var(--gold);
+      box-shadow: 0 30px 80px rgba(212, 175, 55, 0.25);
+    }
+
+    .highlight {
+      border: 2px solid var(--gold);
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--gold);
+      color: #000;
+      padding: 6px 16px;
+      font-size: 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .plan h3 {
+      font-size: 26px;
+      margin-bottom: 15px
+    }
+
+    .price {
+      font-size: 42px;
+      font-weight: 700;
+      margin: 15px 0
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 30px 0
+    }
+
+    ul li {
+      margin: 16px 0;
+      font-size: 15px;
+      color: #cbd5e1;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 18px;
+      border-radius: 999px;
+      border: none;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      background: linear-gradient(90deg, var(--gold), #facc15);
+      color: #000;
+      transition: transform 0.3s;
+    }
+    .btn:hover { transform: scale(1.02); }
+
+    /* MOBILE NAVIGATION */
+    .menu-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        z-index: 10001;
+    }
+    .menu-toggle span {
+        width: 25px;
+        height: 2px;
+        background: var(--gold);
+        transition: 0.3s;
+    }
+
+    .side-drawer {
+        position: fixed;
+        top: 0;
+        left: -320px;
+        width: 300px;
+        height: 100%;
+        background: #020617;
+        z-index: 100000;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 80px 40px;
+        box-shadow: 10px 0 50px rgba(0,0,0,0.5);
+    }
+    .side-drawer.active { left: 0; }
+    .side-drawer a {
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        margin-bottom: 25px;
+        font-weight: 600;
+    }
+
+    .drawer-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.7);
+        z-index: 99999;
+        display: none;
+    }
+    .drawer-overlay.active { display: block; }
+
+    /* ULTIMATE RESPONSIVE FIXES */
+    @media (max-width: 1024px) {
+        header nav { display: none !important; }
+        .menu-toggle { display: flex !important; }
+        header { padding: 15px 25px !important; }
+    }
+
+    @media (max-width: 768px) {
+        .hero { padding: 100px 20px !important; }
+        .hero h1 { font-size: 2.2rem !important; }
+        .hero p { font-size: 1rem !important; }
+        .container { margin: 40px auto !important; }
+        
+        .plan { padding: 40px 25px !important; }
+        ul li { 
+            font-size: 13px !important; 
+            line-height: 1.4 !important;
+            margin: 12px 0 !important;
+        }
+        
+        .plans {
+            grid-template-columns: 1fr !important;
+        }
+    }
+
+    /* FLASH SALE STYLES */
+    .flash-sale-bar {
+        background: linear-gradient(90deg, #ef4444, #f59e0b, #ef4444);
+        background-size: 200% auto;
+        animation: shimmer 3s linear infinite;
+        color: white;
+        text-align: center;
+        padding: 12px;
+        font-weight: 800;
+        font-size: 14px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        position: sticky;
+        top: 0;
+        z-index: 10002;
+    }
+    @keyframes shimmer { to { background-position: 200% center; } }
+    .countdown-box { display: inline-flex; gap: 10px; margin-left: 15px; font-family: monospace; font-size: 18px; }
+  </style>

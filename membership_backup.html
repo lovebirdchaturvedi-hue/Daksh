@@ -11,13 +11,20 @@
     rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/sales-bot.css">
   <script src="/assets/js/sales-bot.js" type="module"></script>
+  <script src="/assets/js/social-proof.js"></script>
 
   <style>
+    :root {
+        --gold: #d4af37;
+        --navy: #071427;
+        --dark: #0a0f1c;
+    }
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
       background: #0a0f1c;
       color: #e5e7eb;
+      overflow-x: hidden;
     }
 
     header {
@@ -27,12 +34,15 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid rgba(212, 175, 55, .15);
+      position: relative;
+      z-index: 1000;
     }
 
     .logo {
       font-family: 'Playfair Display', serif;
-      color: #d4af37;
+      color: var(--gold);
       font-size: 20px;
+      font-weight: 700;
     }
 
     nav a {
@@ -40,10 +50,12 @@
       text-decoration: none;
       margin-left: 25px;
       font-size: 14px;
+      font-weight: 500;
+      transition: color 0.3s;
     }
 
     nav a:hover {
-      color: #d4af37
+      color: var(--gold);
     }
 
     .hero {
@@ -101,21 +113,23 @@
       border-radius: 30px;
       border: 1px solid rgba(212, 175, 55, 0.15);
       transition: .4s ease;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
     .plan:hover {
       transform: translateY(-12px);
-      border: 1px solid #d4af37;
+      border: 1px solid var(--gold);
       box-shadow: 0 30px 80px rgba(212, 175, 55, 0.25);
     }
 
     .highlight {
-      border: 2px solid #d4af37;
+      border: 2px solid var(--gold);
     }
 
     .badge {
       display: inline-block;
-      background: #d4af37;
+      background: var(--gold);
       color: #000;
       padding: 6px 16px;
       font-size: 12px;
@@ -127,11 +141,6 @@
     .plan h3 {
       font-size: 26px;
       margin-bottom: 15px
-    }
-
-    .old-price {
-      text-decoration: line-through;
-      color: #6b7280
     }
 
     .price {
@@ -149,7 +158,9 @@
     ul li {
       margin: 16px 0;
       font-size: 15px;
-      color: #cbd5e1
+      color: #cbd5e1;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
     .btn {
@@ -160,20 +171,90 @@
       font-weight: 700;
       font-size: 16px;
       cursor: pointer;
-      background: linear-gradient(90deg, #d4af37, #facc15);
+      background: linear-gradient(90deg, var(--gold), #facc15);
       color: #000;
+      transition: transform 0.3s;
+    }
+    .btn:hover { transform: scale(1.02); }
+
+    /* MOBILE NAVIGATION ELEMENTS (HIDDEN ON DESKTOP) */
+    .menu-toggle {
+        display: none !important;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        z-index: 10001;
+    }
+    .menu-toggle span {
+        width: 25px;
+        height: 2px;
+        background: var(--gold);
+        transition: 0.3s;
     }
 
-    footer {
-      text-align: center;
-      padding: 80px 20px;
-      color: #6b7280;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    .side-drawer {
+        position: fixed;
+        top: 0;
+        left: -100%; /* PULLED COMPLETELY OFF-SCREEN */
+        width: 300px;
+        height: 100%;
+        background: #020617;
+        z-index: 100000;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 80px 40px;
+        border: none !important; /* REMOVED RENDERED BORDER */
+        visibility: hidden;
+        opacity: 0;
+    }
+    .side-drawer.active { 
+        left: 0; 
+        display: block; 
+        visibility: visible; 
+        opacity: 1;
+        box-shadow: 20px 0 80px rgba(0,0,0,0.8); /* SHADOW ONLY WHEN OPEN */
+    }
+    .side-drawer a {
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        margin-bottom: 25px;
+        font-weight: 600;
     }
 
-    footer a {
-      color: #d4af37;
-      text-decoration: none
+    .drawer-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.7);
+        z-index: 99999;
+        display: none;
+    }
+    .drawer-overlay.active { display: block; }
+
+    /* ULTIMATE RESPONSIVE FIXES */
+    @media (max-width: 1024px) {
+        header nav { display: none !important; }
+        .menu-toggle { display: flex !important; }
+        .side-drawer { display: block; } /* Allow drawer on mobile */
+        header { padding: 15px 25px !important; }
+    }
+
+    @media (max-width: 768px) {
+        .hero { padding: 100px 20px !important; }
+        .hero h1 { font-size: 2.2rem !important; }
+        .hero p { font-size: 1rem !important; }
+        .container { margin: 40px auto !important; }
+        
+        .plan { padding: 40px 25px !important; }
+        ul li { 
+            font-size: 13px !important; 
+            line-height: 1.4 !important;
+            margin: 12px 0 !important;
+        }
+        
+        .plans {
+            grid-template-columns: 1fr !important;
+        }
     }
 
     /* FLASH SALE STYLES */
@@ -192,58 +273,8 @@
         top: 0;
         z-index: 10002;
     }
-
-    .countdown-box {
-        display: inline-flex;
-        gap: 10px;
-        margin-left: 15px;
-        font-family: monospace;
-        font-size: 18px;
-    }
-
-    @keyframes shimmer {
-        to { background-position: 200% center; }
-    }
-
-    .guide-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 25px;
-        margin-bottom: 80px;
-    }
-
-    .guide-card {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        padding: 30px;
-        border-radius: 20px;
-        text-align: center;
-        transition: 0.3s;
-    }
-
-    .guide-card:hover {
-        background: rgba(212, 175, 55, 0.05);
-        border-color: #d4af37;
-        transform: translateY(-5px);
-    }
-
-    .guide-icon {
-        font-size: 32px;
-        margin-bottom: 15px;
-        display: block;
-    }
-
-    .guide-card h4 {
-        color: #d4af37;
-        margin-bottom: 10px;
-        font-size: 18px;
-    }
-
-    .guide-card p {
-        font-size: 14px;
-        color: #94a3b8;
-        line-height: 1.5;
-    }
+    @keyframes shimmer { to { background-position: 200% center; } }
+    .countdown-box { display: inline-flex; gap: 10px; margin-left: 15px; font-family: monospace; font-size: 18px; }
   </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-EXRC4SWZ71"></script>
@@ -254,22 +285,48 @@
 
     gtag('config', 'G-EXRC4SWZ71');
   </script>
+
+    <style>
+      .show-inr, .show-inr-block { display: none !important; }
+      .show-usd, .show-usd-block { display: inline !important; }
+      div.show-usd-block, li.show-usd-block { display: block !important; }
+      
+      body.currency-inr .show-inr { display: inline !important; }
+      body.currency-inr .show-inr-block { display: block !important; }
+      body.currency-inr .show-usd, body.currency-inr .show-usd-block { display: none !important; }
+    </style>
 </head>
 
 <body>
 
-  <header>
-    <div class="logo" style="display: flex; flex-direction: column; line-height: 1; text-align: left;">
-      <span style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 22px; letter-spacing: 1px;">APD <span style="color: var(--gold);">Global</span> Trade</span>
-      <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-top: 5px; font-weight: 700;">Trade Smart. Scale Fast.</span>
+    <header>
+      <div style="display: flex; align-items: center; gap: 20px;">
+          <div class="menu-toggle" onclick="toggleDrawer()">
+              <span></span>
+              <span></span>
+              <span></span>
+          </div>
+          <div class="logo">APD <span style="color: #fff;">Global</span> Trade</div>
+      </div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/buyer-rfqs.html">Buyer RFQs</a>
+        <a href="/suppliers.html">Suppliers</a>
+        <a href="/register-supplier.html">Create Profile</a>
+        <a href="/membership.html">Membership</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <!-- PREMIUM SIDE DRAWER -->
+    <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+    <div class="side-drawer" id="sideDrawer">
+      <a href="/index.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 40px; display: block;">Dashboard</a>
+      <a href="/buyer-rfqs.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 40px; display: block;">Verified RFQs</a>
+      <a href="/suppliers.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 40px; display: block;">Elite Suppliers</a>
+      <a href="/membership.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 40px; display: block;">Join Membership</a>
+      <a href="/contact.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 40px; display: block;">Contact Support</a>
     </div>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/membership.html">Membership</a>
-      <a href="/verification-process.html" style="color:var(--gold);">Verification</a>
-      <a href="/contact.html">Contact</a>
-    </nav>
-  </header>
 
   <section class="hero">
     <h1>Elite Global Trade Intelligence Access</h1>
@@ -278,6 +335,54 @@
       structured country demand intelligence, and direct buyer introductions.
       Built exclusively for serious exporters ready to scale globally.
     </p>
+  </section>
+
+  <!-- OFFICIAL BUSINESS IDENTITY SECTION -->
+  <section style="background: #0f172a; border-top: 1px solid rgba(212, 175, 55, 0.2); border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding: 40px 20px;">
+      <div class="container" style="max-width: 1200px; margin: 0 auto;">
+          <h2 style="text-align: center; color: var(--gold); font-family: 'Playfair Display', serif; font-size: 26px; margin-bottom: 30px;">Official Business Identity & Registrations</h2>
+          
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px; background: rgba(2, 6, 23, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+              
+              <!-- Company Info -->
+              <div style="flex: 1 1 300px; padding-right: 20px; border-right: 1px solid rgba(255,255,255,0.1);">
+                  <div style="color: #94a3b8; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Corporate Entity</div>
+                  <div style="color: #fff; font-size: 22px; font-weight: 800; margin-bottom: 25px; font-family: 'Playfair Display', serif; letter-spacing: 1px;">APD GLOBAL TRADE</div>
+                  
+                  <div style="color: #94a3b8; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">Secure Institutional Contact</div>
+                  <div style="color: #fff; font-size: 15px; font-weight: 500; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;"><span>📞</span> +91 92664 18868</div>
+                  <div style="color: #22c55e; font-size: 15px; font-weight: 500; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;"><span>📲</span> WhatsApp: +91 97181 73015</div>
+                  <div style="color: #fff; font-size: 15px; font-weight: 500; display: flex; align-items: center; gap: 10px;"><span>📧</span> info@apdglobaltrade.com</div>
+              </div>
+
+              <!-- Government Registrations -->
+              <div style="flex: 2 1 500px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+                  <div style="background: rgba(255,255,255,0.03); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; justify-content: center;">
+                      <div style="color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px;">IEC Code</div>
+                      <div style="color: #fff; font-weight: 600; font-size: 15px;"><span style="color: #22c55e; margin-right: 5px;">✅</span> ATLPC3583G</div>
+                  </div>
+                  <div style="background: rgba(255,255,255,0.03); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; justify-content: center;">
+                      <div style="color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px;">GST Registration</div>
+                      <div style="color: #fff; font-weight: 600; font-size: 15px;"><span style="color: #22c55e; margin-right: 5px;">✅</span> 08ATLPC3583G1ZL</div>
+                  </div>
+                  <div style="background: rgba(255,255,255,0.03); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; justify-content: center;">
+                      <div style="color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px;">MSME Number</div>
+                      <div style="color: #fff; font-weight: 600; font-size: 15px;"><span style="color: #22c55e; margin-right: 5px;">✅</span> RJ-11-0054169</div>
+                  </div>
+                  <div style="background: rgba(255,255,255,0.03); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; justify-content: center;">
+                      <div style="color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px;">CIN</div>
+                      <div style="color: #fff; font-weight: 600; font-size: 15px;"><span style="color: #22c55e; margin-right: 5px;">✅</span> U72900MH1995PLC095642</div>
+                  </div>
+                  <div style="background: rgba(212,175,55,0.1); padding: 15px; border-radius: 8px; border: 1px solid var(--gold); grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between;">
+                      <div style="display: flex; flex-direction: column;">
+                          <div style="color: var(--gold); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; font-weight: 700;">Government of Rajasthan</div>
+                          <div style="color: #fff; font-weight: 700; font-size: 16px;"><span style="color: #22c55e; margin-right: 5px;">✅</span> SAN: 8004730707000001</div>
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+      </div>
   </section>
 
   <div class="container">
@@ -292,36 +397,37 @@
         <h3 style="font-family: 'Playfair Display', serif; font-size: 28px; color: var(--gold); margin-bottom: 10px; text-align: left;">Inside the Marketplace Today</h3>
         <p style="color: #94a3b8; font-size: 15px; margin-bottom: 30px; text-align: left;">Showing recently verified RFQs from our 5M+ Buyer Database (Contact info blurred for security).</p>
         
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-            <!-- LEAD 1 -->
-            <div style="background: rgba(15, 23, 42, 0.8); padding: 25px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);">
+        <div class="live-leads-mobile" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+    <!-- PARTNER LOGOS -->
+            <!-- TRIAL LEAD -->
+            <div style="background: rgba(15, 23, 42, 0.8); padding: 25px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05); position: relative;">
+                <div style="position: absolute; top: 15px; right: 15px; background: rgba(201, 164, 74, 0.1); border: 1px solid var(--gold); color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 800;">INSTITUTIONAL TRIAL LEVEL</div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
                     <span style="font-size: 12px; color: #facc15; font-weight: 700;">🇻🇳 VIETNAM BUYER</span>
-                    <span style="font-size: 11px; opacity: 0.5;">Verified 2h ago</span>
                 </div>
-                <div style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">2,000 MT Refined Soybean Oil</div>
-                <div style="font-size: 13px; color: #94a3b8; margin-bottom: 15px;">Payment: 100% Irrevocable LC at Sight. Port: Haiphong.</div>
+                <div style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">500 MT Refined Soybean Oil</div>
+                <div style="font-size: 13px; color: #94a3b8; margin-bottom: 15px;">Spot requirement. Payment: LC. Port: Haiphong.</div>
                 <div style="filter: blur(4px); opacity: 0.3; pointer-events: none; user-select: none; font-family: monospace; font-size: 14px;">+84 28 38XX XXXX / trade@corp-vn.com</div>
             </div>
-            <!-- LEAD 2 -->
-            <div style="background: rgba(15, 23, 42, 0.8); padding: 25px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);">
+            <!-- PREMIUM LEAD -->
+            <div style="background: rgba(15, 23, 42, 0.8); padding: 25px; border-radius: 15px; border: 1px solid var(--gold); position: relative; box-shadow: 0 0 20px rgba(201, 164, 74, 0.1);">
+                <div style="position: absolute; top: 15px; right: 15px; background: var(--gold); color: black; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 800;">PREMIUM LEVEL</div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
-                    <span style="font-size: 12px; color: #facc15; font-weight: 700;">🇦🇪 UAE TRADER</span>
-                    <span style="font-size: 11px; opacity: 0.5;">Verified 5h ago</span>
+                    <span style="font-size: 12px; color: #facc15; font-weight: 700;">🇦🇪 UAE GOVT TENDER</span>
                 </div>
-                <div style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">Basmati Rice (Sella 1121)</div>
-                <div style="font-size: 13px; color: #94a3b8; margin-bottom: 15px;">Qty: 10 Containers monthly. Packing: 25kg PP bags.</div>
-                <div style="filter: blur(4px); opacity: 0.3; pointer-events: none; user-select: none; font-family: monospace; font-size: 14px;">+971 4 2XX XXXX / procurement@uae-trade.ae</div>
+                <div style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">10,000 MT Basmati Rice (1121)</div>
+                <div style="font-size: 13px; color: #94a3b8; margin-bottom: 15px;">Long-term monthly supply. Institutional Audit Required.</div>
+                <div style="filter: blur(4px); opacity: 0.3; pointer-events: none; user-select: none; font-family: monospace; font-size: 14px;">+971 4 2XX XXXX / tender@uae-gov.ae</div>
             </div>
-            <!-- LEAD 3 -->
-            <div style="background: rgba(15, 23, 42, 0.8); padding: 25px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);">
+            <!-- INSTITUTIONAL LEAD -->
+            <div style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(11, 29, 54, 0.9)); padding: 25px; border-radius: 15px; border: 1px solid #facc15; position: relative;">
+                <div style="position: absolute; top: 15px; right: 15px; background: #ef4444; color: white; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 800;">ELITE TENDER</div>
                 <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
-                    <span style="font-size: 12px; color: #facc15; font-weight: 700;">🇩🇪 GERMANY IMPORTER</span>
-                    <span style="font-size: 11px; opacity: 0.5;">Verified 1h ago</span>
+                    <span style="font-size: 12px; color: #facc15; font-weight: 700;">🇲🇾 MALAYSIA GOVT</span>
                 </div>
-                <div style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">Organic Turmeric Powder (High Curcumin)</div>
-                <div style="font-size: 13px; color: #94a3b8; margin-bottom: 15px;">Certifications: Euro-Leaf Required. Annual Contract.</div>
-                <div style="filter: blur(4px); opacity: 0.3; pointer-events: none; user-select: none; font-family: monospace; font-size: 14px;">+49 40 3XX XXXX / sourcing@bio-germany.de</div>
+                <div style="font-size: 17px; font-weight: 600; margin-bottom: 10px;">50,000 MT Refined Sunflower Oil</div>
+                <div style="font-size: 13px; color: #94a3b8; margin-bottom: 15px;">Annual Strategic Supply Contract. Multi-Port Delivery.</div>
+                <div style="filter: blur(4px); opacity: 0.3; pointer-events: none; user-select: none; font-family: monospace; font-size: 14px;">+60 3 2XX XXXX / logistics@agro-my.gov</div>
             </div>
         </div>
         
@@ -333,7 +439,7 @@
     <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 60px;">
         <p style="font-size: 0.85rem; color: #facc15; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;">Step 1: Select Your Currency</p>
         <div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
-            <span id="label-usd" style="font-weight: 700; color: var(--gold);">USD</span>
+            <span id="label-usd" style="font-weight: 400; opacity: 0.6;">USD</span>
             <div style="
                 width: 60px;
                 height: 30px;
@@ -351,11 +457,11 @@
                     border-radius: 50%;
                     position: absolute;
                     top: 2px;
-                    left: 2px;
+                    left: 32px;
                     transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
                 "></div>
             </div>
-            <span id="label-inr" style="font-weight: 400; opacity: 0.6;">INR (India)</span>
+            <span id="label-inr" style="font-weight: 700; color: var(--gold);">INR (India)</span>
         </div>
     </div>
 
@@ -378,83 +484,232 @@
         </div>
     </div>
 
-    <div class="plans" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+    <style>
+      /* CSS for Domestic vs International Toggling */
+      .domestic-text, .global-text { display: none; }
+      body.currency-inr .domestic-text { display: inline; }
+      body.currency-usd .global-text { display: inline; }
+      
+      body.currency-inr div.domestic-text, body.currency-inr li.domestic-text { display: block; }
+      body.currency-usd div.global-text, body.currency-usd li.global-text { display: block; }
+    </style>
 
-      <!-- 7-DAY PASS -->
-      <div class="plan" style="border-style: dashed; opacity: 0.9;">
-        <div class="badge" style="background: #9ca3af; color: #000;">EXPORTER TEST DRIVE</div>
-        <h3>7-Day Power Pass</h3>
-        <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 15px;">Lead Access Verification</p>
-        <div class="price" id="price-pass">$59</div>
-        <p style="margin-top: 15px; color: #9ca3af;">Applying 7 Credits (7 Premium Bulk Buyers for your commodity)</p>
-        <div style="text-align: left; margin: 30px 0; font-size: 15px; color: #cbd5e1;">
-            <p><span style="color:#c9a44a">🔒</span> Unlock 7 Premium Bulk Buyers</p>
-            <p><span style="color:#c9a44a">✨</span> Full Search Capability</p>
-            <p><span style="color:#c9a44a">✨</span> Detailed RFQ Specs</p>
-            <p><span style="color:#c9a44a">✨</span> WhatsApp Support Assistant</p>
-            <p><span style="color:#c9a44a">✨</span> Institutional Data Feed</p>
-            <p><span style="color:#c9a44a">✨</span> Valid for 7 Full Days</p>
+    <div class="plans" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+
+        <div style="text-align: center; margin-bottom: 50px; grid-column: 1 / -1;">
+            <a href="#unlimited-plans" class="blinking-link" style="font-size: 22px; font-weight: 800; color: #dc2626; text-decoration: underline; background: #fee2e2; padding: 10px 20px; border-radius: 8px; border: 2px solid #dc2626;">🔥 Get Unlimited Buyers Access in 6/12 Months Plan! 🔥</a>
+            <style>
+                @keyframes blink {
+                    0% { opacity: 1; }
+                    50% { opacity: 0.3; transform: scale(1.05); }
+                    100% { opacity: 1; }
+                }
+                .blinking-link {
+                    display: inline-block;
+                    animation: blink 1.5s infinite;
+                    transition: all 0.3s;
+                }
+                .blinking-link:hover {
+                    color: #991b1b;
+                    border-color: #991b1b;
+                    background: #fecaca;
+                }
+            </style>
         </div>
-        <button class="btn" style="background: #9ca3af; color: #000;" onclick="initiatePayment('7-Day Power Pass', 59, 4999)">Start Test Drive</button>
+
+      <!-- 1 UNLOCK PLAN -->
+      <div class="plan" style="display: flex; flex-direction: column;">
+        <div class="badge">STARTER</div>
+        <h3>1 Verified Buyer</h3>
+        <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 15px;">Unlock Any 1 Premium Lead</p>
+        <div class="price" id="price-plan1"><span class="show-inr"><s style="font-size: 1rem; color: #64748b; font-weight: 500;">₹999</s> ₹399</span><span class="show-usd"><s style="font-size: 1rem; color: #64748b; font-weight: 500;">$50</s> $25</span></div>
+        <p style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 30px;"><span class="show-inr">Inclusive of GST</span><span class="show-usd">No tax on export services</span></p>
+        <ul class="features" style="flex-grow: 1;">
+          <li>✅ Access 1 Verified Buyer Immediately</li>
+          <li>✅ View Complete Contact Details</li>
+          <li>✅ Perfect for Testing the Platform</li>
+        </ul>
+        <button class="btn" style="margin-top: auto;" onclick="initiatePayment('1 Verified Buyer', 25, 399)">Buy 1 Unlock Now</button>
       </div>
 
-      <div class="plan highlight">
-        <div class="badge">INSTITUTIONAL ACCESS</div>
-        <h3>3-Month Premium Trial</h3>
-        <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 15px;">Full Access Gateway</p>
-        <div class="price" id="price-trial">$499</div>
-        <p style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 30px;" id="tax-trial">Inclusive of Export Verification</p>
-        <ul>
-          <li style="color: #facc15; font-weight: 700;">💎 Get Access to 5 Million+ Verified Buyers</li>
-          <li>✨ Unlimited Verified Buyer RFQs</li>
-          <li>✨ Full Buyer Contact Database</li>
-          <li>✨ Daily Verified RFQ Alerts (Direct)</li>
-          <li>✨ Professional KYC Certification Badge</li>
-          <li>✨ Dedicated B2B Relationship Manager</li>
+      <!-- 3 UNLOCKS PLAN -->
+      <div class="plan highlight" style="display: flex; flex-direction: column;">
+        <div class="badge" style="background: #d4af37; color: black;">⭐ MOST POPULAR</div>
+        <h3 style="color: #d4af37; margin-bottom: 5px;">3 Verified Buyers</h3>
+        <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 15px;">Unlock Any 3 Premium Leads</p>
+        <div class="price" id="price-plan2"><span class="show-inr"><s style="font-size: 1rem; color: #64748b; font-weight: 500;">₹2,997</s> ₹999</span><span class="show-usd"><s style="font-size: 1rem; color: #64748b; font-weight: 500;">$150</s> $50</span></div>
+        <p style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 30px;"><span class="show-inr">Inclusive of GST</span><span class="show-usd">No tax on export services</span></p>
+        <ul style="flex-grow: 1;">
+          <li style="color: #4ade80; font-weight: 700;">✅ Access 3 Verified Buyers Immediately</li>
+          <li style="color: #4ade80; font-weight: 700;">✅ View Complete Contact Details</li>
+          <li>✨ 66% Discount vs Single Unlock</li>
         </ul>
-        <button class="btn" onclick="initiatePayment('3-Month Premium Trial', 499, 59000)">Apply for Premium Trial</button>
+        <button class="btn" style="margin-top: auto; background: #d4af37; color: black; font-weight: 800; margin-bottom: 15px;" onclick="initiatePayment('3 Verified Buyers', 50, 999)">Buy 3 Unlocks Now</button>
       </div>
 
-      <!-- 6 MONTH PLAN -->
-      <div class="plan">
-        <div class="badge">ESTABLISHED EXPORTERS</div>
-        <h3>6-Month Elite Professional</h3>
-        <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 15px;">Volume Growth Package</p>
-        <div class="price" id="price-pro">$2,000</div>
-        <p style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 30px;" id="tax-pro">Inclusive of 18% GST</p>
-        <ul>
-          <li>✨ Everything in 3-Month Trial</li>
-          <li>✨ International Government Tender Alerts</li>
-          <li>✨ Country-Wise Demand Analysis Reports</li>
-          <li>✨ Buyer Volume & Payment Verification</li>
-          <li>✨ WhatsApp Priority Trade Alerts</li>
-          <li>✨ Featured Supplier Rotation Service</li>
+      <!-- 5 UNLOCKS PLAN -->
+      <div class="plan" style="display: flex; flex-direction: column; background: linear-gradient(135deg, #111827, #1e293b);">
+        <div class="badge">VALUE PACK</div>
+        <h3>5 Verified Buyers</h3>
+        <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 15px;">Unlock Any 5 Premium Leads</p>
+        <div class="price" id="price-plan3"><span class="show-inr"><s style="font-size: 1rem; color: #64748b; font-weight: 500;">₹4,995</s> ₹1,499</span><span class="show-usd"><s style="font-size: 1rem; color: #64748b; font-weight: 500;">$225</s> $75</span></div>
+        <p style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 30px;"><span class="show-inr">Inclusive of GST</span><span class="show-usd">No tax on export services</span></p>
+        <ul style="flex-grow: 1;">
+          <li style="color: #d4af37; font-weight: 700;">✅ Access 5 Verified Buyers Immediately</li>
+          <li>✨ View Complete Contact Details</li>
+          <li>✨ Best Value For Active Exporters</li>
         </ul>
-        <button class="btn" onclick="initiatePayment('6-Month Elite Professional', 2000, 169000)">Apply for Elite Professional</button>
+        <button class="btn" style="margin-top: auto; background: transparent; border: 2px solid #d4af37; color: #d4af37; margin-bottom: 15px;" onclick="initiatePayment('5 Verified Buyers', 75, 1499)">Buy 5 Unlocks Now</button>
       </div>
 
-      <!-- 12 MONTH PLAN -->
-      <div class="plan" style="background: linear-gradient(135deg, #111827, #1e293b);">
-        <div class="badge">CORPORATE TITAN</div>
-        <h3>12-Month Institutional Elite</h3>
-        <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 15px;">Maximum Authority Package</p>
-        <div class="price" id="price-elite">$3,500</div>
-        <p style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 30px;" id="tax-elite">Inclusive of 18% GST</p>
-        <ul>
-          <li>✨ Everything in Professional Plan</li>
-          <li>✨ Dedicated Trade Intelligence Manager</li>
-          <li>✨ Personalized Buyer Matchmaking</li>
-          <li>✨ Warm Direct Buyer Introductions</li>
-          <li>✨ Strategic Trade Consultation (Quarterly)</li>
-          <li>✨ Premium Verified Supplier Badge</li>
+      <!-- 8 UNLOCKS PLAN -->
+      <div class="plan" style="display: flex; flex-direction: column; background: linear-gradient(135deg, #111827, #1e293b);">
+        <div class="badge">PRO TRADER</div>
+        <h3>8 Verified Buyers</h3>
+        <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 15px;">Unlock Any 8 Premium Leads</p>
+        <div class="price" id="price-plan4"><span class="show-inr"><s style="font-size: 1rem; color: #64748b; font-weight: 500;">₹7,992</s> ₹1,999</span><span class="show-usd"><s style="font-size: 1rem; color: #64748b; font-weight: 500;">$300</s> $100</span></div>
+        <p style="font-size: 0.8rem; opacity: 0.6; margin-bottom: 30px;"><span class="show-inr">Inclusive of GST</span><span class="show-usd">No tax on export services</span></p>
+        <ul style="flex-grow: 1;">
+          <li style="color: #d4af37; font-weight: 700;">✅ Access 8 Verified Buyers Immediately</li>
+          <li>✨ Ultimate Flexibility and Access</li>
+          <li>✨ Lowest Cost Per Lead (Just ₹249/each)</li>
         </ul>
-        <button class="btn" onclick="initiatePayment('12-Month Institutional Elite', 3500, 299000)">Secure Annual Access</button>
+        <button class="btn" style="margin-top: auto; background: transparent; border: 2px solid #d4af37; color: #d4af37; margin-bottom: 15px;" onclick="initiatePayment('8 Verified Buyers', 100, 1999)">Buy 8 Unlocks Now</button>
       </div>
+        
+        <!-- 3 MONTH PLAN -->
+        <div class="plan" style="display: flex; flex-direction: column; background: #111827; border: 1px solid rgba(255,255,255,0.05); padding: 40px; border-radius: 20px; text-align: left; display: flex; flex-direction: column;">
+            <div class="badge" style="background: #facc15; color: #000; font-weight: 800; font-size: 11px; margin-bottom: 20px; display: inline-block; padding: 4px 12px; border-radius: 50px;">STARTER</div>
+            <h3 style="font-size: 26px; margin-bottom: 10px; color: #fff;">Growth Program</h3>
+            <p style="color: #94a3b8; font-size: 14px; margin-bottom: 20px;">3 Months Access</p>
+            <div class="price" style="font-size: 42px; color: #fff; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                <span class="show-usd"><s style="font-size: 18px; color: #64748b; font-weight: 500;">$599</s> $249</span>
+                <span class="show-inr"><s style="font-size: 18px; color: #64748b; font-weight: 500;">₹51,000</s> ₹19,999</span>
+            </div>
+            <p style="color: #94a3b8; font-size: 13px; margin-bottom: 30px;">For exporters ready to explore</p>
+            
+            <ul style="list-style: none; padding: 0; margin: 0; margin-bottom: 30px; flex-grow: 1; color: #cbd5e1; font-size: 14px; line-height: 1.8;">
+                <li style="margin-bottom: 15px;">100% Verified Global Buyers <span style="background: #facc15; color: #000; font-size: 11px; padding: 2px 6px; border-radius: 4px; font-weight: 700; margin-left: 5px;">25 Limit</span></li>
+                <li style="margin-bottom: 15px;">Direct Contact Details Unlocked</li>
+                <li style="margin-bottom: 15px;">Full Product Trend Analysis</li>
+                <li style="margin-bottom: 15px;">Secure Payment Gateway Support</li>
+            </ul>
+            
+            <button class="btn" style="margin-top: auto; background: #facc15; color: #000; font-weight: 800; padding: 15px; width: 100%; border-radius: 50px; border: none; cursor: pointer; transition: 0.3s;" onclick="initiatePayment('Growth Program (3 Months)', 249, 19999)">Get 3 Months Growth Access</button>
+        </div>
+    </div>
+
+    <!-- UNLIMITED PLANS SECTION -->
+    <h2 id="unlimited-plans" class="section-title" style="margin-top: 100px; color: var(--gold);">Unlimited Access Plans</h2>
+    <p class="subtitle" style="margin-bottom: 50px;">Unlock unlimited buyers for your entire organization</p>
+    
+    <div class="plans" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+        <!-- 6 MONTH PLAN -->
+        <div class="plan highlight" style="display: flex; flex-direction: column; background: #111827; border: 1px solid var(--gold); padding: 40px; border-radius: 20px; text-align: left; display: flex; flex-direction: column; position: relative; box-shadow: 0 0 20px rgba(212,175,55,0.1);">
+            <div class="badge" style="background: #facc15; color: #000; font-weight: 800; font-size: 11px; margin-bottom: 20px; display: inline-block; padding: 4px 12px; border-radius: 50px; align-self: flex-start;">⭐ MOST POPULAR - SCALING</div>
+            <h3 style="font-size: 26px; margin-bottom: 5px; color: var(--gold);">Institutional Elite</h3>
+            <p style="color: #94a3b8; font-size: 13px; margin-bottom: 10px;">(The Scale Plan)</p>
+            <p style="color: #94a3b8; font-size: 14px; margin-bottom: 20px;">6 Months Access</p>
+            <div class="price" style="font-size: 42px; color: #fff; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                <span class="show-usd"><s style="font-size: 18px; color: #64748b; font-weight: 500;">$1,199</s> $599</span>
+                <span class="show-inr"><s style="font-size: 18px; color: #64748b; font-weight: 500;">₹1,19,000</s> ₹51,000</span>
+            </div>
+            <p style="color: #94a3b8; font-size: 13px; margin-bottom: 30px;">For serious exporters ready to scale</p>
+            
+            <ul style="list-style: none; padding: 0; margin: 0; margin-bottom: 20px; flex-grow: 1; color: #cbd5e1; font-size: 14px; line-height: 1.8;">
+                <li style="margin-bottom: 15px; color: #4ade80; font-weight: 600;">✅ Unlimited Access to Verified Buyers</li>
+                <li style="margin-bottom: 15px; color: #4ade80; font-weight: 600;">✅ Priority Routing for High-Intent Global RFQs</li>
+                <li style="margin-bottom: 15px; color: #4ade80; font-weight: 600;">✅ Official 'APD Verified' Gold Trust Seal</li>
+                <li style="margin-bottom: 15px;">✨ International Government Tender Alerts</li>
+                <li style="margin-bottom: 15px;">✨ Country-Wise Demand Analysis Reports</li>
+                <li style="margin-bottom: 15px;">✨ WhatsApp Priority Trade Alerts</li>
+                <li style="margin-bottom: 15px;">✨ Dedicated B2B Relationship Manager</li>
+            </ul>
+
+            <div style="color: var(--gold); font-weight: 700; font-size: 14px; margin-bottom: 15px;">Target ROI: ~3.5x ROI in 6 Months</div>
+            
+            <div style="background: rgba(34, 197, 94, 0.1); border-left: 3px solid #22c55e; padding: 15px; font-size: 13px; color: #4ade80; margin-bottom: 30px;">
+                <strong>ROI Highlight:</strong> Close just 1 deal averaging $50,000 and this membership pays for itself 50x over.
+            </div>
+            
+            <button class="btn" style="margin-top: auto; background: #facc15; color: #000; font-weight: 800; padding: 15px; width: 100%; border-radius: 50px; border: none; cursor: pointer; transition: 0.3s; margin-bottom: 15px;" onclick="initiatePayment('Institutional Elite (6 Months)', 599, 51000)">Get 6 Months Elite Access</button>
+            <div style="text-align: center;"><a href="https://wa.me/919266418868" style="color: #94a3b8; font-size: 13px; text-decoration: underline;">Or Request Consultation First</a></div>
+        </div>
+
+        <!-- 12 MONTH PLAN -->
+        <div class="plan" style="display: flex; flex-direction: column; background: #111827; border: 1px solid rgba(255,255,255,0.05); padding: 40px; border-radius: 20px; text-align: left; display: flex; flex-direction: column;">
+            <div class="badge" style="background: #f59e0b; color: #000; font-weight: 800; font-size: 11px; margin-bottom: 20px; display: inline-block; padding: 4px 12px; border-radius: 50px;">DOMINATING</div>
+            <h3 style="font-size: 26px; margin-bottom: 10px; color: #fff;">Global Enterprise</h3>
+            <p style="color: #94a3b8; font-size: 14px; margin-bottom: 20px;">12 Months Access</p>
+            <div class="price" style="font-size: 42px; color: #fff; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                <span class="show-usd"><s style="font-size: 18px; color: #64748b; font-weight: 500;">$1,999</s> $999</span>
+                <span class="show-inr"><s style="font-size: 18px; color: #64748b; font-weight: 500;">₹2,50,000</s> ₹1,19,000</span>
+            </div>
+            <p style="color: #94a3b8; font-size: 13px; margin-bottom: 30px;">Maximum authority package</p>
+            
+            <ul style="list-style: none; padding: 0; margin: 0; margin-bottom: 20px; flex-grow: 1; color: #cbd5e1; font-size: 14px; line-height: 1.8;">
+                <li style="margin-bottom: 15px; color: #facc15; font-weight: 600;">✅ Unlimited Access to Verified Buyers</li>
+                <li style="margin-bottom: 15px; color: #facc15; font-weight: 600;">✅ Dedicated Institutional Sourcing Pass</li>
+                <li style="margin-bottom: 15px;">✨ 1-on-1 Dedicated Trade Account Manager via WhatsApp</li>
+                <li style="margin-bottom: 15px;">✨ Personalized Buyer Matchmaking</li>
+                <li style="margin-bottom: 15px;">✨ Warm Direct Buyer Introductions</li>
+                <li style="margin-bottom: 15px; opacity: 0.8;">✔ Premium Verified Supplier Badge</li>
+                <li style="margin-bottom: 15px; color: #4ade80; font-weight: 600;">✔ Export Compliance & Setup Support (Worth $1,000)</li>
+            </ul>
+
+            <div style="background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.2); padding: 15px; font-size: 13px; color: #4ade80; margin-bottom: 30px; border-radius: 8px;">
+                <strong>ROI Highlight:</strong> Perfect for high-volume traders targeting multi-million dollar institutional contracts.
+            </div>
+            
+            <button class="btn" style="margin-top: auto; background: transparent; color: var(--gold); font-weight: 800; padding: 15px; width: 100%; border-radius: 50px; border: 2px solid var(--gold); cursor: pointer; transition: 0.3s; margin-bottom: 15px;" onclick="initiatePayment('Global Enterprise (12 Months)', 999, 119000)">Get 12 Months Enterprise Access</button>
+            <div style="text-align: center;"><a href="https://wa.me/919266418868" style="color: #94a3b8; font-size: 13px; text-decoration: underline;">Talk to Trade Advisor First</a></div>
+        </div>
+
+    </div>
+
+    <!-- PAYMENT PARTNERS SECTION -->
+    <div style="margin-top: 80px; text-align: center;">
+        <p style="font-size: 12px; color: #64748b; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px;">Official Strategic Payment Partners</p>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 50px; flex-wrap: wrap; opacity: 0.8;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/PhonePe_Logo.svg" alt="PhonePe Partner" style="height: 40px; filter: grayscale(100%) brightness(200%); transition: 0.3s;" onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(100%) brightness(200%)'">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal Partner" style="height: 35px; filter: grayscale(100%) brightness(200%); transition: 0.3s;" onmouseover="this.style.filter='none'" onmouseout="this.style.filter='grayscale(100%) brightness(200%)'">
+        </div>
+    </div>
+    
+    <p style="text-align: center; margin-top: 40px; font-size: 1.1rem; color: #cbd5e1; font-style: italic;">
+        "Most domestic manufacturers start with the <strong style="color: #d4af37;">Growth Program</strong>, while heavy exporters choose the <strong style="color: #d4af37;">Institutional Elite</strong> plan for the best ROI."
+    </p>
+
+    <!-- EXPORT COMPLIANCE & DIGITAL SETUP SERVICES -->
+    <h2 class="section-title" style="margin-top: 100px; font-size: 28px;">Export Compliance & Digital Setup</h2>
+    <p class="subtitle" style="margin-bottom: 50px;">90% of international buyers demand strict compliance and a professional digital presence. We build it for you.</p>
+
+    <div class="guide-container" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); margin-bottom: 100px;">
+        
+        <div class="guide-card" style="text-align: left; padding: 40px; display: flex; flex-direction: column;">
+            <div style="background: rgba(212, 175, 55, 0.1); width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 20px; border: 1px solid var(--gold);">
+                📑
+            </div>
+            <h3 style="font-size: 22px; color: #fff; margin-bottom: 10px;">IEC, GST, APEDA Registration</h3>
+            <p style="color: #94a3b8; font-size: 14px; margin-bottom: 20px; flex-grow: 1;">You cannot export legally without an Importer-Exporter Code (IEC) and proper GST setup. Our chartered professionals handle the entire government process for you in 3-5 days.</p>
+            <div style="font-size: 24px; font-weight: 700; color: var(--gold); margin-bottom: 20px;">₹14,999 <span style="font-size: 14px; color: #64748b; font-weight: 400;">(One-Time Setup)</span></div>
+            <button class="btn" style="margin-top: auto; background: transparent; border: 2px solid var(--gold); color: var(--gold); font-size: 14px; padding: 12px;" onclick="window.open('https://wa.me/919266418868?text=I%20want%20to%20apply%20for%20IEC%2C%20GST%20%26%20APEDA%20Registration%20Setup%20-%20Price%20%E2%82%B914%2C999', '_blank')">Request Compliance Setup</button>
+        </div>
+
+        <div class="guide-card" style="text-align: left; padding: 40px; display: flex; flex-direction: column;">
+            <div style="background: rgba(212, 175, 55, 0.1); width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 20px; border: 1px solid var(--gold);">
+                🌐
+            </div>
+            <h3 style="font-size: 22px; color: #fff; margin-bottom: 10px;">B2B Exporter Website</h3>
+            <p style="color: #94a3b8; font-size: 14px; margin-bottom: 20px; flex-grow: 1;">Buyers will Google your company before sending you $50,000. If you don't have a premium website showcasing your products, they will ghost you. We build institutional-grade sites.</p>
+            <div style="font-size: 24px; font-weight: 700; color: var(--gold); margin-bottom: 20px;">₹24,999 <span style="font-size: 14px; color: #64748b; font-weight: 400;">(Complete Build & Hosting)</span></div>
+            <button class="btn" style="margin-top: auto; background: transparent; border: 2px solid var(--gold); color: var(--gold); font-size: 14px; padding: 12px;" onclick="window.open('https://wa.me/919266418868?text=I%20want%20to%20build%20a%20Premium%20B2B%20Exporter%20Website', '_blank')">Start Website Project</button>
+        </div>
 
     </div>
 
     <!-- TRUST SIGNALS -->
-    <div style="margin-top: 80px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px;">
+    <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px;">
       <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; opacity: 0.7;">
         <div style="color: #94a3b8; font-size: 14px; display:flex; align-items:center; gap:8px;">
           <span style="font-size:20px;">🛡️</span> 100% Verified Data Guarantee
@@ -467,14 +722,122 @@
         </div>
       </div>
       <p style="margin-top: 30px; font-size: 12px; color: #4b5563; max-width: 600px; margin-left: auto; margin-right: auto;">
-        *All memberships are subject to KYC approval. Access is granted immediately upon verification of credentials.
+        *All memberships are subject to KYC approval. Access is granted immediately upon verification of credentials. <strong style="color: #64748b;">Strict No-Refund Policy applies post-verification due to the instantaneous nature of digital data transmission.</strong>
       </p>
     </div>
 
   </div>
 
-  <footer>
-    © 2026 APD Global Trade | <a href="#">Terms</a> | <a href="#">Privacy</a>
+    <!-- SPECIAL ARRANGEMENTS SECTION -->
+    <div style="margin-top: 80px; padding: 60px 20px; background: rgba(15, 23, 42, 0.4); border-top: 1px solid rgba(212, 175, 55, 0.2); text-align: center; border-radius: 30px 30px 0 0;">
+        <h3 style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 15px;">Negotiated a Special Deal?</h3>
+        <p style="color: #94a3b8; font-size: 1rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+            If you have discussed a custom institutional package or a negotiated discount with our trade desk, please use our secure flexible settlement portal.
+        </p>
+        <a href="/custom-payment.html" style="display: inline-block; background: transparent; border: 2px solid var(--gold); color: var(--gold); padding: 15px 40px; border-radius: 50px; font-weight: 800; text-decoration: none; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;">
+            Access Custom Payment Portal →
+        </a>
+    </div>
+
+  <!-- FREQUENTLY ASKED QUESTIONS (FAQ) -->
+  <div class="container" style="margin-top: 100px; margin-bottom: 100px;">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="subtitle">Important details about your membership and our policies.</p>
+      
+      <div style="max-width: 800px; margin: 0 auto; background: rgba(15, 23, 42, 0.4); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 20px; overflow: hidden;">
+          
+          <details style="padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer;">
+              <summary style="font-size: 18px; font-weight: 600; color: #fff; display: flex; justify-content: space-between; align-items: center; list-style: none;">
+                  Will all contacts respond or buy?
+                  <span style="color: var(--gold);">+</span>
+              </summary>
+              <div style="margin-top: 15px; color: #94a3b8; font-size: 15px; line-height: 1.6;">
+                  We do not guarantee that every buyer will respond or place an order. Business conditions change—a business could be closed, they might have temporarily stopped importing, or they may find the pricing unviable. Once your account is activated, we will align you with verified buyers, but we do not guarantee a sale.
+              </div>
+          </details>
+
+          <details style="padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer;">
+              <summary style="font-size: 18px; font-weight: 600; color: #fff; display: flex; justify-content: space-between; align-items: center; list-style: none;">
+                  How much profit can I expect?
+                  <span style="color: var(--gold);">+</span>
+              </summary>
+              <div style="margin-top: 15px; color: #94a3b8; font-size: 15px; line-height: 1.6;">
+                  Profit margins totally depend on your negotiation skills, your product quality, and the buyer's budget. We provide the connections, but the final commercial terms are entirely between you and the buyer.
+              </div>
+          </details>
+
+          <details style="padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer;">
+              <summary style="font-size: 18px; font-weight: 600; color: #fff; display: flex; justify-content: space-between; align-items: center; list-style: none;">
+                  Can I upgrade my plan mid-cycle?
+                  <span style="color: var(--gold);">+</span>
+              </summary>
+              <div style="margin-top: 15px; color: #94a3b8; font-size: 15px; line-height: 1.6;">
+                  Yes, absolutely. You can upgrade to a higher tier at any point during your active subscription. You only pay the difference for the remaining duration.
+              </div>
+          </details>
+          
+          <details style="padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer;">
+              <summary style="font-size: 18px; font-weight: 600; color: #fff; display: flex; justify-content: space-between; align-items: center; list-style: none;">
+                  What is your refund policy?
+                  <span style="color: var(--gold);">+</span>
+              </summary>
+              <div style="margin-top: 15px; color: #94a3b8; font-size: 15px; line-height: 1.6;">
+                  We enforce a strict <strong>No-Refund Policy</strong>. Because our service provides immediate access to digital intelligence and verified contact data, the value is transferred instantly upon account activation.
+              </div>
+          </details>
+
+          <details style="padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer;">
+              <summary style="font-size: 18px; font-weight: 600; color: #fff; display: flex; justify-content: space-between; align-items: center; list-style: none;">
+                  How do you verify buyers?
+                  <span style="color: var(--gold);">+</span>
+              </summary>
+              <div style="margin-top: 15px; color: #94a3b8; font-size: 15px; line-height: 1.6;">
+                  Every buyer profile undergoes a strict multi-layer verification process before entering our database. We verify local domestic businesses via GSTIN, PAN, and OTP mobile checks. International buyers are vetted through Import Export Codes (IEC), verified company domains, or direct phone verification.
+              </div>
+          </details>
+
+          <details style="padding: 20px; cursor: pointer;">
+              <summary style="font-size: 18px; font-weight: 600; color: #fff; display: flex; justify-content: space-between; align-items: center; list-style: none;">
+                  Is there a recurring auto-debit charge?
+                  <span style="color: var(--gold);">+</span>
+              </summary>
+              <div style="margin-top: 15px; color: #94a3b8; font-size: 15px; line-height: 1.6;">
+                  No. All APD Global Trade memberships are fixed-term, one-time payments. We will never automatically charge your card or account when your plan expires. You will receive an expiration alert allowing you to manually renew.
+              </div>
+          </details>
+
+      </div>
+  </div>
+
+  <footer style="background: #020617; padding: 60px 8% 40px; border-top: 1px solid rgba(255,255,255,0.05); color: #94a3b8; text-align: left;">
+    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;">
+        
+        <div>
+            <h4 style="color: white; margin-bottom: 20px; font-size: 13px; text-transform: uppercase;">Business Identity</h4>
+            <ul style="list-style: none; padding: 0; font-size: 0.8rem; line-height: 2.0; color: #cbd5e1;">
+<div style="flex-grow: 1;"></div>
+                <li><strong>Entity:</strong> APD GLOBAL TRADE</li>
+                <li><strong>GSTIN:</strong> 08ATLPC3583G1ZL</li>
+                <li><strong>IEC Code:</strong> ATLPC3583G</li>
+                <li><strong>Reg. Office:</strong> Jaipur, Rajasthan, India</li>
+            </ul>
+        </div>
+
+        <div>
+            <h4 style="color: white; margin-bottom: 20px; font-size: 13px; text-transform: uppercase;">Legal</h4>
+            <ul style="list-style: none; padding: 0; font-size: 0.8rem; line-height: 2.0;">
+<div style="flex-grow: 1;"></div>
+                <li><a href="/terms.html" style="color: inherit; text-decoration: none;">Terms & Conditions</a></li>
+                <li><a href="/privacy.html" style="color: inherit; text-decoration: none;">Privacy Policy</a></li>
+                <li><a href="/refund-policy.html" style="color: inherit; text-decoration: none;">Refund Policy</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    
+    <div style="max-width: 1200px; margin: 30px auto 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.7rem; color: #64748b; line-height: 1.5;">
+        <strong>Legal Disclaimer:</strong> APD Global Trade is an informational B2B matchmaking platform. We do not buy, sell, or take possession of goods. All commercial transactions, quality inspections, and payments are strictly between the buyer and the supplier. APD Global Trade is not liable for any fraud, misrepresentation, or financial loss incurred by users. Users are advised to conduct their own due diligence before executing trade deals.
+    </div>
   </footer>
 
   <!-- PREMIUM PAYMENT MODAL -->
@@ -497,8 +860,9 @@
       <p style="color: #94a3b8; margin-bottom: 40px;">Select your preferred institutional payment channel.</p>
       
       <div style="display: flex; background: #1e293b; padding: 5px; border-radius: 12px; margin-bottom: 30px;">
-          <div id="tab-paypal" onclick="switchPayment('paypal')" style="flex: 1; text-align: center; padding: 12px; border-radius: 8px; cursor: pointer; background: var(--gold); color: black; font-weight: 700;">PayPal</div>
-          <div id="tab-qr" onclick="switchPayment('qr')" style="flex: 1; text-align: center; padding: 12px; border-radius: 8px; cursor: pointer; color: #94a3b8; font-weight: 600;">Scan & Pay (UPI)</div>
+          <div id="tab-paypal" onclick="switchPayment('paypal')" style="flex: 1; text-align: center; padding: 10px; border-radius: 8px; cursor: pointer; background: var(--gold); color: black; font-weight: 700; font-size: 13px;">PayPal</div>
+          <div id="tab-qr" onclick="switchPayment('qr')" style="flex: 1; text-align: center; padding: 10px; border-radius: 8px; cursor: pointer; color: #94a3b8; font-weight: 600; font-size: 13px;">PhonePe (Auto)</div>
+          <div id="tab-manual" onclick="switchPayment('manual')" style="flex: 1; text-align: center; padding: 10px; border-radius: 8px; cursor: pointer; color: #94a3b8; font-weight: 600; font-size: 13px;">Manual QR</div>
       </div>
 
       <!-- PAYPAL SECTION -->
@@ -510,44 +874,105 @@
           </p>
       </div>
 
-      <!-- QR & ALTERNATIVE PAYPAL SECTION -->
-      <div id="qrSection" style="display: none; text-align: center;">
-          <div style="font-size: 2rem; font-weight: 800; margin-bottom: 25px; color: var(--gold);" id="modalPriceINR">₹59,000</div>
-          
-          <div style="background: white; padding: 10px; display: inline-block; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-              <img src="/assets/img/payment_qr.jpg" alt="Institutional QR Code" style="width: 240px; height: auto; display: block; border-radius: 8px;">
-          </div>
-          
-          <p style="font-size: 0.95rem; color: #cbd5e1; margin-bottom: 20px;"><b>Payable to: APD GLOBAL TRADE</b><br>Accepting Google Pay, PhonePe, Paytm & BHIM.</p>
-          
-          <div style="background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; padding: 15px; border-radius: 12px; margin-bottom: 25px; text-align: left;">
-            <p style="font-size: 0.9rem; color: #fff; margin: 0;">
-                <b>🚀 NEXT STEPS:</b><br>
-                1. Select INR & Scan QR Code.<br>
-                2. Make the payment.<br>
-                3. Send your <b>Email & Screenshot</b> on WhatsApp.<br>
-                4. Grab your buyers immediately!
-            </p>
-          </div>
+      <!-- QR & ELITE EXPORT POSTER SECTION -->
+      <div id="qrSection" style="display: none; text-align: center; padding: 0;">
+          <div style="background: linear-gradient(135deg, #020617, #0b1d36); padding: 40px; border-radius: 20px; border: 1px solid var(--gold); margin-top: 10px;">
+              
+              <h2 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 24px; margin-bottom: 5px;">Secure Payment Gateway</h2>
+              <p style="color: #cbd5e1; font-size: 14px; margin-bottom: 30px;">100% encrypted checkout via PhonePe.</p>
+              
+              <div style="font-size: 2.2rem; font-weight: 800; margin-bottom: 5px; color: #4ade80;" id="modalPriceINR">₹59,000</div>
+              <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 25px;">(Including 18% GST Compliance)</p>
+              
+              <div style="background: rgba(212, 175, 55, 0.1); border-left: 4px solid var(--gold); padding: 20px; border-radius: 8px; text-align: left; margin-bottom: 30px;">
+                  <p style="font-size: 0.95rem; color: #fff; margin: 0; line-height: 1.6;">
+                      🇮🇳 <b>INDIAN SUPPLIERS:</b><br>
+                      • Pay securely using PhonePe, GPay, or any UPI.<br>
+                      • Instant Access activation upon successful payment.<br>
+                      • Powered by PhonePe Business.
+                  </p>
+              </div>
 
-          <button class="btn" style="background: #22c55e; color: white; margin-bottom: 35px;" onclick="window.location.href='https://wa.me/919266418868?text=I%20have%20made%20the%20UPI%20payment.%20My%20email%20is:[YOUR_EMAIL].%20Here%20is%20the%20screenshot.'">Verify & Grab Buyers via WhatsApp</button>
+              <div id="desktopQR" style="display: none; background: white; padding: 15px; border-radius: 16px; margin: 0 auto 20px auto; width: fit-content; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 4px solid var(--gold);">
+                  <img src="/assets/img/payment_qr.jpg" alt="APD Institutional QR" style="width: 250px; height: auto; display: block; border-radius: 8px;">
+                  <p style="color: black; font-weight: bold; margin-top: 10px; font-size: 14px;">Scan & Pay ₹<span id="qrAmountTxt">59,000</span></p>
+              </div>
+
+              <button id="phonepeBtn" class="btn" style="background: #5f259f; color: white; font-size: 1.1rem; padding: 20px; width: 100%; border: 2px solid white; display: flex; align-items: center; justify-content: center; gap: 10px;" onclick="initiatePhonePe()">
+                  PAY VIA PHONEPE
+              </button>
+              <div id="phonepeError" style="color: #ef4444; margin-top: 15px; font-size: 14px; display: none;"></div>
+          </div>
           
           <!-- ALTERNATIVE PAYPAL FOR INR PLANS -->
-          <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; margin-top: 10px;">
-              <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px;">Alternative: Pay USD Equivalent via PayPal</p>
+          <div style="padding: 30px 0;">
+              <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px;">International? Pay USD Equivalent via PayPal</p>
               <div id="paypalButtonsINR"></div>
-              <p style="font-size: 0.75rem; color: #64748b; margin-top: 12px;">Amount: <span id="modalPriceUSDEquiv">$715.00</span> (Includes 18% Institutional GST)</p>
+              <p style="font-size: 0.75rem; color: #64748b; margin-top: 12px;">Institutional Clearance: <span id="modalPriceUSDEquiv">$499.00</span></p>
           </div>
+      </div>
+
+      <!-- MANUAL QR SECTION -->
+      <div id="manualSection" style="display: none; text-align: center;">
+          <div style="font-size: 2rem; font-weight: 800; margin-bottom: 25px; color: var(--gold);" id="modalPriceINRManual">₹59,000</div>
+          <div style="background: white; padding: 10px; display: inline-block; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+              <img src="/assets/img/payment_qr.jpg" alt="Manual QR Code" style="width: 240px; height: auto; display: block; border-radius: 8px;">
+          </div>
+          <p style="font-size: 0.95rem; color: #cbd5e1; margin-bottom: 20px;"><b>Payable to: APD GLOBAL TRADE</b><br>Accepting Google Pay, PhonePe, Paytm & BHIM.</p>
+          <button class="btn" style="margin-top: auto; background: #22c55e; color: white;" onclick="window.location.href='https://wa.me/919266418868?text=I%20have%20made%20the%20Manual%20UPI%20payment.%20Here%20is%20the%20screenshot.'">Verify & Activate Access</button>
       </div>
 
     </div>
   </div>
 
+  <!-- EXIT INTENT POPUP (WHATSAPP COUPON) -->
+  <div id="exitIntentModal" style="
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(2, 6, 23, 0.95);
+    backdrop-filter: blur(10px);
+    align-items:center;
+    justify-content:center;
+    z-index:100000;
+    padding: 20px;">
+    
+    <div style="background: linear-gradient(135deg, #111827, #0f172a); color:#fff; padding:40px; border-radius:24px; width:100%; max-width:450px; border: 2px solid var(--gold); position: relative; box-shadow: 0 30px 80px rgba(212, 175, 55, 0.3); text-align: center; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+      
+      <div onclick="document.getElementById('exitIntentModal').style.display='none'" style="position: absolute; top: 20px; right: 20px; cursor: pointer; color: #94a3b8; font-size: 24px; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 50%;">✕</div>
+      
+      <div style="font-size: 40px; margin-bottom: 10px;">⏳</div>
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 24px; color: #fff; margin-bottom: 10px;">Before you go... Claim your exclusive discount!</h3>
+      <p style="color: #cbd5e1; font-size: 15px; margin-bottom: 25px; line-height: 1.6;">
+        We noticed you looking at our membership plans. Let's make it easier for you to start trading today.
+      </p>
+      
+      <div style="background: rgba(212, 175, 55, 0.1); border: 2px dashed var(--gold); padding: 15px; border-radius: 12px; margin-bottom: 25px;">
+          <div style="font-size: 22px; font-weight: 800; color: var(--gold); margin-bottom: 5px;">Get an extra ₹5,000 OFF</div>
+          <div style="font-size: 14px; color: #94a3b8;">on any 6 or 12-month plan.</div>
+      </div>
+      
+      <p style="color: #ef4444; font-size: 13px; font-weight: 700; margin-bottom: 20px;">⚠️ This special coupon expires in 15 minutes!</p>
+      
+      <button class="btn" style="margin-top: auto; background: #25D366; color: white; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 15px;" onclick="window.open('https://wa.me/919266418868?text=Hi%20APD%20Team,%20I%20want%20to%20claim%20my%20%E2%82%B95,000%20pricing%20page%20discount%20coupon.', '_blank'); document.getElementById('exitIntentModal').style.display='none';">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 3.825 0 6.938 3.112 6.938 6.938 0 3.825-3.113 6.938-6.938 6.938z"/></svg>
+          Claim My ₹5,000 Coupon
+      </button>
+    </div>
+  </div>
+
+  <style>
+    @keyframes popIn {
+        0% { opacity: 0; transform: scale(0.8); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+  </style>
+
   <script
     src="https://www.paypal.com/sdk/js?client-id=ASJK-aoiFIIKpTgmRComyW1w0VYUbexsGzzzQnJqZGcKy_6yE3r-Y0tIRXXHTqHH1AVd5IXzFBNtWte4&currency=USD"></script>
 
   <script>
-    let currentCurrency = 'USD';
+    let currentCurrency = 'INR';
     let selectedPlan = { name: '', usd: 0, inr: 0 };
 
     function toggleCurrency() {
@@ -556,6 +981,9 @@
         const lUSD = document.getElementById('label-usd');
         const lINR = document.getElementById('label-inr');
         
+        document.body.classList.remove('currency-inr', 'currency-usd');
+        document.body.classList.add(currentCurrency === 'INR' ? 'currency-inr' : 'currency-usd');
+
         if (currentCurrency === 'INR') {
             knob.style.left = '32px';
             lINR.style.opacity = '1';
@@ -564,17 +992,6 @@
             lUSD.style.opacity = '0.6';
             lUSD.style.fontWeight = '400';
             lUSD.style.color = '#fff';
-            
-            // Update Prices
-            document.getElementById('price-pass').innerText = '₹4,999';
-            document.getElementById('price-trial').innerHTML = '₹59,000';
-            document.getElementById('price-pro').innerText = '₹1,69,000';
-            document.getElementById('price-elite').innerText = '₹2,99,000';
-
-            document.getElementById('tax-pass').innerText = '7 Premium Bulk Buyer Leads (1 Per Day)';
-            document.getElementById('tax-trial').innerText = 'Inclusive of 18% GST & Verification';
-            document.getElementById('tax-pro').innerText = 'Inclusive of 18% GST';
-            document.getElementById('tax-elite').innerText = 'Inclusive of 18% GST';
         } else {
             knob.style.left = '2px';
             lUSD.style.opacity = '1';
@@ -583,72 +1000,56 @@
             lINR.style.opacity = '0.6';
             lINR.style.fontWeight = '400';
             lINR.style.color = '#fff';
-            
-            // Update Prices
-            document.getElementById('price-pass').innerText = '$59';
-            document.getElementById('price-trial').innerHTML = '$499';
-            document.getElementById('price-pro').innerText = '$2,000';
-            document.getElementById('price-elite').innerText = '$3,500';
-
-            document.getElementById('tax-pass').innerText = 'Lead Access Verification';
-            document.getElementById('tax-trial').innerText = 'Inclusive of Export Verification';
-            document.getElementById('tax-pro').innerText = 'Founders Access Level';
-            document.getElementById('tax-elite').innerText = 'Warm Direct Intros Guaranteed';
         }
     }
 
     function initiatePayment(planName, usd, inr) {
         selectedPlan = { name: planName, usd, inr };
         
-        // Calculate USD Equivalent for INR Plans (Approx 82.5 rate + Buffer)
-        // Manual mapping based on user requested standards
         let usdEquiv = 0;
-        if (inr === 4999) usdEquiv = 75;
-        else if (inr === 29500) usdEquiv = 357;
-        else if (inr === 59000) usdEquiv = 715;
-        else if (inr === 169000) usdEquiv = 2050;
-        else if (inr === 299000) usdEquiv = 3620;
+        if (inr === 59000) usdEquiv = 499;
+        else if (inr === 168000) usdEquiv = 2000;
+        else if (inr === 294000) usdEquiv = 3500;
+        else usdEquiv = usd;
 
         document.getElementById('modalPlanName').innerText = planName;
         document.getElementById('modalPriceUSD').innerText = '$' + usd.toLocaleString();
         document.getElementById('modalPriceINR').innerText = '₹' + inr.toLocaleString();
+        document.getElementById('modalPriceINRManual').innerText = '₹' + inr.toLocaleString();
         document.getElementById('modalPriceUSDEquiv').innerText = '$' + usdEquiv.toLocaleString() + '.00';
         
         document.getElementById("paymentModal").style.display = "flex";
         
-        // Default to currency preference
-        if (currentCurrency === 'INR') {
-            switchPayment('qr');
-        } else {
-            switchPayment('paypal');
-        }
+        if (currentCurrency === 'INR') { switchPayment('qr'); } else { switchPayment('paypal'); }
         
         renderPayPal(usd, planName, "paypalButtons");
-        if (usdEquiv > 0) {
-            renderPayPal(usdEquiv, planName + " (INR Base)", "paypalButtonsINR");
-        }
+        if (usdEquiv > 0) { renderPayPal(usdEquiv, planName + " (INR Base)", "paypalButtonsINR"); }
     }
 
     function switchPayment(method) {
         const tPayPal = document.getElementById('tab-paypal');
         const tQR = document.getElementById('tab-qr');
+        const tManual = document.getElementById('tab-manual');
         const sPayPal = document.getElementById('paypalSection');
         const sQR = document.getElementById('qrSection');
+        const sManual = document.getElementById('manualSection');
         
+        tPayPal.style.background = 'transparent'; tPayPal.style.color = '#94a3b8';
+        tQR.style.background = 'transparent'; tQR.style.color = '#94a3b8';
+        tManual.style.background = 'transparent'; tManual.style.color = '#94a3b8';
+        sPayPal.style.display = 'none';
+        sQR.style.display = 'none';
+        sManual.style.display = 'none';
+
         if (method === 'paypal') {
-            tPayPal.style.background = 'var(--gold)';
-            tPayPal.style.color = 'black';
-            tQR.style.background = 'transparent';
-            tQR.style.color = '#94a3b8';
+            tPayPal.style.background = 'var(--gold)'; tPayPal.style.color = 'black';
             sPayPal.style.display = 'block';
-            sQR.style.display = 'none';
-        } else {
-            tQR.style.background = 'var(--gold)';
-            tQR.style.color = 'black';
-            tPayPal.style.background = 'transparent';
-            tPayPal.style.color = '#94a3b8';
+        } else if (method === 'qr') {
+            tQR.style.background = 'var(--gold)'; tQR.style.color = 'black';
             sQR.style.display = 'block';
-            sPayPal.style.display = 'none';
+        } else {
+            tManual.style.background = 'var(--gold)'; tManual.style.color = 'black';
+            sManual.style.display = 'block';
         }
     }
 
@@ -668,56 +1069,305 @@
                 },
                 onApprove: function (data, actions) {
                     return actions.order.capture().then(function () {
-                        window.location.href = "/document-upload.html";
+                        window.location.href = "/payment-status.html";
                     });
                 }
             }).render("#" + containerId);
         }, 400);
     }
 
-    function closeModal() {
-        document.getElementById("paymentModal").style.display = "none";
+    async function initiatePhonePe() {
+        const btn = document.getElementById('phonepeBtn');
+        const err = document.getElementById('phonepeError');
+        btn.innerText = 'Initializing...';
+        btn.disabled = true;
+        try {
+            const res = await fetch('/api/phonepe-init', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ amount: selectedPlan.inr, planName: selectedPlan.name })
+            });
+            const data = await res.json();
+            if (data.success && data.url) { window.location.href = data.url; } 
+            else { err.innerText = data.error || 'Failed.'; err.style.display = 'block'; btn.innerText = 'PAY VIA PHONEPE'; btn.disabled = false; }
+        } catch(e) { err.innerText = 'Network error.'; err.style.display = 'block'; btn.innerText = 'PAY VIA PHONEPE'; btn.disabled = false; }
     }
 
-    /* FLOATING WHATSAPP BUTTON STYLES (MATCHING INDEX) */
-    const waFloat = document.createElement('a');
-    waFloat.className = 'float-wa';
-    waFloat.href = 'https://wa.me/919266418868?text=I%20need%20help%20with%20Membership%20Payment';
-    waFloat.innerHTML = '<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" style="width:35px; height:35px;">';
-    waFloat.style = "position:fixed; bottom:30px; right:30px; z-index:10003; background:#25d366; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow: 0 10px 25px rgba(37,211,102,0.5); transition: 0.3s transform;";
-    waFloat.onmouseover = function() { this.style.transform = "scale(1.1)"; }
-    waFloat.onmouseout = function() { this.style.transform = "scale(1)"; }
-    document.body.appendChild(waFloat);
+    function closeModal() { document.getElementById("paymentModal").style.display = "none"; }
+    function toggleDrawer() {
+        document.getElementById('sideDrawer').classList.toggle('active');
+        document.getElementById('drawerOverlay').classList.toggle('active');
+    }
+    
+    // Force render on load
+    setTimeout(() => { currentCurrency = 'USD'; toggleCurrency(); }, 100);
+  </script>
 
-    /* SOCIAL PROOF PINGS */
-    const socialProofMessages = [
-        "Exporter from Rajkot just unlocked 7 UAE Grain Leads",
-        "Verification cleared for Maharashtra Spices Exporter",
-        "New 10,000 MT Rice RFQ just matched with verified suppliers",
-        "Payment received: 3-Month Premium Trial activated",
-        "Bank Audit complete for active Buyer in Dubai"
-    ];
+  <!-- LIVE ACTIVITY TICKER TOAST -->
+  <div id="liveActivityToast" style="
+      position: fixed;
+      bottom: 30px;
+      left: -400px;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(15px);
+      border-left: 4px solid #4ade80;
+      padding: 15px 20px;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 13px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      z-index: 100000;
+      transition: left 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 300px;
+  ">
+      <div style="background: rgba(74, 222, 128, 0.2); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px;">🛍️</div>
+      <div id="toastMessage" style="line-height: 1.4;">
+          <strong>Manufacturer in Gujarat</strong> just closed a $45k deal.
+      </div>
+  </div>
 
-    function showSocialProof() {
-        const toast = document.createElement('div');
-        toast.style = "position:fixed; bottom:110px; left:30px; background:rgba(15,23,42,0.95); border:1px solid var(--gold); padding:15px 25px; border-radius:15px; color:white; font-size:13px; box-shadow:0 10px 30px rgba(0,0,0,0.5); z-index:10004; transform:translateY(100px); transition:0.5s transform; display:flex; align-items:center; gap:12px;";
-        const randomMsg = socialProofMessages[Math.floor(Math.random() * socialProofMessages.length)];
-        toast.innerHTML = `<div style="width:10px; height:10px; background:#22c55e; border-radius:50%;"></div> ${randomMsg}`;
-        document.body.appendChild(toast);
+  <script>
+      const activities = [
+          "<strong>Manufacturer in Gujarat</strong> just closed a $45k deal.",
+          "<strong>Textile Exporter in Surat</strong> just upgraded to Elite.",
+          "<strong>Ceramic Supplier in Morbi</strong> received 3 new RFQs.",
+          "<strong>Agro Trader in MP</strong> verified their IEC profile.",
+          "<strong>Spice Exporter in Kerala</strong> matched with UAE buyer."
+      ];
+      
+      setInterval(() => {
+          const toast = document.getElementById('liveActivityToast');
+          const msg = document.getElementById('toastMessage');
+          // Pick random message
+          msg.innerHTML = activities[Math.floor(Math.random() * activities.length)];
+          // Slide in
+          toast.style.left = '30px';
+          
+          // Slide out after 5s
+          setTimeout(() => {
+              toast.style.left = '-400px';
+          }, 5000);
+      }, 15000); // Every 15 seconds
+  </script>
+
+  <!-- GLOBAL HELPLINE HUB (PREMIUM REGIONAL TOGGLES) -->
+  <div id="waHub" class="wa-hub">
+      <div class="wa-hub-header">
+          <span>SELECT REGIONAL TRADE DESK</span>
+          <span onclick="toggleWaHub()" style="cursor: pointer; opacity: 0.6;">✕</span>
+      </div>
+      <!-- NEW EXPORTERS DESK -->
+      <a href="https://wa.me/919217114472" target="_blank" class="wa-hub-item" style="background: rgba(212,175,55,0.05); border-left: 3px solid var(--gold);">
+          <span class="flag">🚀</span>
+          <div class="desk-info">
+              <div class="desk-name" style="color: var(--gold);">NEW EXPORTERS DESK</div>
+              <div class="desk-status">+91 92171 14472 • Priority Support</div>
+          </div>
+      </a>
+      <a href="https://wa.me/84848469144" target="_blank" class="wa-hub-item">
+          <span class="flag">🌏</span>
+          <div class="desk-info">
+              <div class="desk-name">SOUTHEAST ASIA DESK</div>
+              <div class="desk-status">The Best Region • 24/7 Support</div>
+          </div>
+      </a>
+      <a href="https://wa.me/639510960950" target="_blank" class="wa-hub-item">
+          <span class="flag">🌏</span>
+          <div class="desk-info">
+              <div class="desk-name">ASIA PACIFIC DESK</div>
+              <div class="desk-status">Trade Intelligence Desk</div>
+          </div>
+      </a>
+      <a href="https://wa.me/237658309636" target="_blank" class="wa-hub-item">
+          <span class="flag">🌍</span>
+          <div class="desk-info">
+              <div class="desk-name">AFRICA DESK</div>
+              <div class="desk-status">Africa Sourcing Hub</div>
+          </div>
+      </a>
+      <a href="https://wa.me/919718173015" target="_blank" class="wa-hub-item">
+          <span class="flag">🌍</span>
+          <div class="desk-info">
+              <div class="desk-name">MIDDLE EAST & SA DESK</div>
+              <div class="desk-status">Middle East Corridor Desk</div>
+          </div>
+      </a>
+      <div style="padding: 15px; text-align: center; font-size: 10px; color: #64748b; letter-spacing: 1px;">
+          APD GLOBAL TRADE INSTITUTIONAL NETWORK
+      </div>
+  </div>
+
+  <div class="float-wa" onclick="toggleWaHub()">
+      <svg width="35" height="35" viewBox="0 0 24 24" fill="white"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 3.825 0 6.938 3.112 6.938 6.938 0 3.825-3.113 6.938-6.938 6.938z"/></svg>
+  </div>
+
+  <style>
+    .wa-hub {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        width: 320px;
+        background: rgba(15, 23, 42, 0.98);
+        backdrop-filter: blur(25px);
+        border: 1px solid rgba(212, 175, 55, 0.4);
+        border-radius: 30px;
+        z-index: 100004;
+        box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        animation: hubSlide 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    @keyframes hubSlide {
+        from { opacity: 0; transform: translateY(30px) scale(0.9); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .wa-hub.active { display: flex; }
+    .wa-hub-header {
+        padding: 22px;
+        background: linear-gradient(90deg, rgba(212, 175, 55, 0.2), transparent);
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        font-size: 11px;
+        font-weight: 800;
+        color: var(--gold);
+        letter-spacing: 2px;
+        display: flex;
+        justify-content: space-between;
+        text-transform: uppercase;
+    }
+    .wa-hub-item {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 20px 25px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .wa-hub-item:hover {
+        background: rgba(212, 175, 55, 0.12);
+        padding-left: 35px;
+        border-left: 4px solid var(--gold);
+    }
+    .wa-hub-item .flag { font-size: 28px; filter: drop-shadow(0 0 5px rgba(0,0,0,0.3)); }
+    .wa-hub-item .desk-name {
+        font-size: 14px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 4px;
+        letter-spacing: 0.5px;
+    }
+    .wa-hub-item .desk-status {
+        font-size: 11px;
+        color: #94a3b8;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .wa-hub-item .desk-status::before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        background: #4ade80;
+        border-radius: 50%;
+        display: inline-block;
+        box-shadow: 0 0 10px #4ade80;
+    }
+    .float-wa {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: linear-gradient(135deg, #25D366, #128C7E);
+        color: white;
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 15px 40px rgba(37, 211, 102, 0.4);
+        z-index: 100005;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .float-wa:hover { transform: scale(1.15) rotate(15deg); box-shadow: 0 20px 50px rgba(37, 211, 102, 0.6); }
+    
+    @media (max-width: 768px) {
+        .wa-hub { width: calc(100% - 40px); right: 20px; bottom: 100px; border-radius: 25px; }
+        .float-wa { width: 55px; height: 55px; bottom: 25px; right: 25px; }
+        .wa-hub-item { padding: 18px 20px; }
+    }
+  </style>
+
+  <script>
+    function toggleWaHub() {
+        const hub = document.getElementById('waHub');
+        hub.classList.toggle('active');
+    }
+
+    // Auto-detect GeoIP and switch to USD if outside India
+    document.addEventListener("DOMContentLoaded", () => {
+        fetch('https://ipapi.co/json/')
+            .then(res => res.json())
+            .then(data => {
+                if (data.country_code && data.country_code !== 'IN') {
+                    if (typeof currentCurrency !== 'undefined' && currentCurrency === 'INR' && typeof toggleCurrency === 'function') {
+                        // Switch knob and prices to USD
+                        toggleCurrency();
+                    }
+                }
+            })
+            .catch(err => console.log('GeoIP detection failed'));
+
+        // Exit Intent Popup Logic
+        let hasShownExitIntent = false;
+
+        // Desktop Exit Intent
+        document.addEventListener('mouseleave', (e) => {
+            if (e.clientY < 0 && !hasShownExitIntent) {
+                showExitIntent();
+            }
+        });
+
+        // Mobile Exit Intent (Fast scroll up)
+        let lastScrollTop = window.scrollY || document.documentElement.scrollTop;
+        let lastScrollTime = Date.now();
         
-        setTimeout(() => toast.style.transform = "translateY(0px)", 100);
+        window.addEventListener('scroll', () => {
+            if (hasShownExitIntent) return;
+            let currentScrollTop = window.scrollY || document.documentElement.scrollTop;
+            let currentTime = Date.now();
+            let timeDiff = currentTime - lastScrollTime;
+            let scrollDiff = lastScrollTop - currentScrollTop;
+
+            // If scrolling UP fast (> 100px in < 200ms)
+            if (scrollDiff > 100 && timeDiff < 200) {
+                showExitIntent();
+            }
+            
+            lastScrollTop = currentScrollTop;
+            lastScrollTime = currentTime;
+        }, { passive: true });
+
+        // Timer Fallback (Show after 60s if not shown)
         setTimeout(() => {
-            toast.style.transform = "translateY(150px)";
-            setTimeout(() => toast.remove(), 500);
-        }, 5000);
-    }
+            if (!hasShownExitIntent) {
+                showExitIntent();
+            }
+        }, 60000);
 
-    // Ping every 15-25 seconds
-    setInterval(() => {
-        if(Math.random() > 0.5) showSocialProof();
-    }, 20000);
-
-    setInterval(function(){}, 1000);
+        function showExitIntent() {
+            // Check session storage to not annoy users
+            if (sessionStorage.getItem('exitIntentShown')) return;
+            
+            document.getElementById('exitIntentModal').style.display = 'flex';
+            hasShownExitIntent = true;
+            sessionStorage.setItem('exitIntentShown', 'true');
+        }
+    });
   </script>
 
 </body>

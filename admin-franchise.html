@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin - Franchise Applications</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb}
+header{
+  background:#020617;color:#fff;
+  padding:16px 40px;
+  display:flex;justify-content:space-between;align-items:center
+}
+.container{
+  max-width:98%;margin:40px auto;
+  background:#fff;border-radius:12px;overflow-x:auto;
+}
+table{width:100%;border-collapse:collapse}
+th,td{padding:14px;border-bottom:1px solid #e5e7eb;text-align:left}
+th{background:#020617;color:#fff}
+button{
+  padding:6px 10px;margin:2px;
+  border:none;border-radius:4px;
+  cursor:pointer;font-size:12px;color:#fff
+}
+.nav-link { color: #d4af37; text-decoration: none; font-weight: bold; margin-left: 15px; }
+.approve{background:#16a34a}
+.ban{background:#dc2626}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>Admin – Franchise Applications</h2>
+  <div style="display:flex; gap: 20px; align-items:center;">
+    <a href="/admin.html" class="nav-link">Supplier Admin</a>
+    <button id="logoutBtn" style="background:#dc2626;">Logout</button>
+  </div>
+</header>
+
+<div class="container">
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Applicant Name</th>
+<th>WhatsApp</th>
+<th>Target Franchise</th>
+<th>Type</th>
+<th>Address</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="fBody">
+<tr><td colspan="8" style="text-align:center;">Loading applications...</td></tr>
+</tbody>
+</table>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+  import { getFirestore, collection, getDocs, updateDoc, doc, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
+  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+    authDomain: "apd-globaltrade-prod.firebaseapp.com",
+    projectId: "apd-globaltrade-prod",
+    storageBucket: "apd-globaltrade-prod.firebasestorage.app",
+    messagingSenderId: "226407312435",
+    appId: "1:226407312435:web:f8a54b1132af3899170746"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
+
+  onAuthStateChanged(auth, user => {
+    if(!user || user.email !== "admin@apdglobaltrade.com"){
+      window.location.href = "/admin-login.html";
+    } else {
+      loadApplications();
+    }
+  });
+
+  document.getElementById('logoutBtn').onclick = () => {
+    signOut(auth).then(()=> window.location.href="/admin-login.html");
+  };
+
+  async function loadApplications() {
+    const tbody = document.getElementById("fBody");
+    try {
+      const snap = await getDocs(collection(db, "franchise_applications"));
+      
+      if(snap.empty) {
+          tbody.innerHTML = "<tr><td colspan='8' style='text-align:center;'>No applications found.</td></tr>";
+          return;
+      }
+      
+      tbody.innerHTML = "";
+      
+      // Sort in memory instead of Firestore index
+      const docs = [];
+      snap.forEach(d => docs.push({ id: d.id, ...d.data() }));
+      docs.sort((a, b) => (b.timestamp?.toMillis() || 0) - (a.timestamp?.toMillis() || 0));
+      
+      docs.forEach(s => {
+        const date = s.timestamp ? new Date(s.timestamp.toDate()).toLocaleDateString() : "N/A";
+        
+        tbody.innerHTML += `
+        <tr>
+          <td style="font-size:12px;">${date}</td>
+          <td><b>${s.name}</b></td>
+          <td>${s.whatsapp}</td>
+          <td>${s.company}</td>
+          <td>${s.type}</td>
+          <td style="font-size: 12px; max-width: 200px;">${s.address}</td>
+          <td><b>${s.status || "Pending Review"}</b></td>
+          <td style="display: flex; gap: 4px;">
+            <button class="approve" onclick="upd('${s.id}',{status:'Approved'})">Approve</button>
+            <button class="ban" onclick="upd('${s.id}',{status:'Rejected'})">Reject</button>
+            <button class="ban" style="background:#000" onclick="del('${s.id}')">Delete</button>
+          </td>
+        </tr>`;
+      });
+    } catch (err) {
+      console.error(err);
+      tbody.innerHTML = "<tr><td colspan='8'>Error loading data</td></tr>";
+    }
+  }
+
+  window.upd = async function(id, data) {
+      if(!confirm("Update application?")) return;
+      await updateDoc(doc(db, "franchise_applications", id), data);
+      loadApplications();
+  };
+
+  window.del = async function(id) {
+      if(!confirm("Permanently delete this application?")) return;
+      await deleteDoc(doc(db, "franchise_applications", id));
+      loadApplications();
+  };
+</script>
+</body>
+</html>

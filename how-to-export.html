@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>How to Export - Ultimate Guide | APD Global Trade</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/premium.css?v=1.0">
+  <link rel="stylesheet" href="/assets/css/style.css?v=1.5">
+  
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #020617;
+      color: #e5e7eb;
+    }
+
+    header {
+      background: #071427;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(212, 175, 55, .15);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      color: #d4af37;
+      font-size: 20px;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #d4af37;
+    }
+
+    .hero-export {
+      padding: 120px 20px;
+      text-align: center;
+      background: linear-gradient(180deg, #071427, #020617);
+      border-bottom: 1px solid rgba(212, 175, 55, .15);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-export::before {
+        content: '';
+        position: absolute;
+        top: -50%; left: 50%;
+        transform: translateX(-50%);
+        width: 800px; height: 800px;
+        background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .hero-export h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 5vw, 4.5rem);
+      background: linear-gradient(90deg, #d4af37, #facc15, #d4af37);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+    }
+
+    .hero-export p {
+      max-width: 800px;
+      margin: auto;
+      font-size: 1.2rem;
+      color: #94a3b8;
+      line-height: 1.8;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 80px auto;
+      padding: 0 20px;
+    }
+
+    .step-card {
+        background: #0b1d36;
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        border-radius: 20px;
+        padding: 40px;
+        margin-bottom: 40px;
+        position: relative;
+        transition: 0.4s ease;
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+    }
+
+    .step-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--gold);
+        box-shadow: 0 20px 50px rgba(212, 175, 55, 0.1);
+    }
+
+    .step-number {
+        font-family: 'Playfair Display', serif;
+        font-size: 80px;
+        font-weight: 800;
+        line-height: 0.8;
+        background: linear-gradient(180deg, #d4af37, transparent);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        opacity: 0.5;
+    }
+
+    .step-content h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 28px;
+        color: var(--gold);
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+
+    .step-content p {
+        color: #cbd5e1;
+        line-height: 1.7;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .step-checklist {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .step-checklist li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+        color: #94a3b8;
+        font-size: 15px;
+    }
+
+    .step-checklist li::before {
+        content: '✓';
+        color: #4ade80;
+        font-weight: bold;
+    }
+
+    .trust-banner {
+        background: linear-gradient(90deg, #d4af37, #facc15);
+        color: #000;
+        padding: 60px 20px;
+        text-align: center;
+        border-radius: 20px;
+        margin: 80px 0;
+    }
+
+    .trust-banner h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 32px;
+        margin-bottom: 15px;
+    }
+
+    .trust-banner p {
+        font-size: 18px;
+        max-width: 700px;
+        margin: 0 auto 30px;
+        font-weight: 500;
+    }
+
+    .btn-dark {
+        background: #020617;
+        color: var(--gold);
+        padding: 15px 40px;
+        border-radius: 999px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 16px;
+        border: 2px solid #020617;
+        transition: 0.3s;
+        display: inline-block;
+    }
+
+    .btn-dark:hover {
+        background: transparent;
+        color: #000;
+        border-color: #000;
+    }
+
+    footer {
+        text-align: center;
+        padding: 60px 20px;
+        color: #6b7280;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    footer a { color: var(--gold); text-decoration: none; }
+
+    @media (max-width: 768px) {
+        .step-card { flex-direction: column; gap: 20px; padding: 30px; }
+        .step-number { font-size: 60px; }
+        nav { display: none; } /* Use simple mobile handling for now */
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo premium-logo" style="display: flex; flex-direction: column; line-height: 1;">
+      <a href="/" style="text-decoration: none;">
+        <span style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 22px; letter-spacing: 1px; color: #fff;">APD <span style="color: var(--gold);">Global</span> Trade</span>
+      </a>
+      <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-top: 5px; font-weight: 700;">Institutional Trust. Global Reach.</span>
+    </div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/buyer-rfqs.html">Buyer RFQs</a>
+      <a href="/how-to-export.html" style="color: var(--gold);">How to Export</a>
+      <a href="/membership.html">Membership</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero-export">
+    <h1>The Global Export Masterclass</h1>
+    <p>A step-by-step institutional guide to entering international markets, securing foreign buyers, and safely executing high-volume global trade.</p>
+  </section>
+
+  <div class="container">
+
+    <!-- STEP 1 -->
+    <div class="step-card">
+        <div class="step-number">01</div>
+        <div class="step-content">
+            <h2>Legal Framework & Registration</h2>
+            <p>Before you can engage in international trade, you must legally register your entity as an exporter with your government. This establishes your business credibility globally and legally permits you to clear customs.</p>
+            <ul class="step-checklist">
+                <li>Register a Business Entity (LLC, Pvt Ltd, Proprietorship)</li>
+                <li>Obtain an Importer Exporter Code (IEC) from the DGFT</li>
+                <li>Acquire an RCMC (Registration Cum Membership Certificate) from your Export Promotion Council</li>
+                <li>Open an Authorized Dealer (AD) Code bank account for foreign currency</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step-card">
+        <div class="step-number">02</div>
+        <div class="step-content">
+            <h2>Global Market Intelligence & Buyer Discovery</h2>
+            <p>The biggest hurdle in export is finding genuine, verified buyers. DO NOT send random emails. You must rely on institutional data to find active buyers with verified purchasing history and current demand.</p>
+            <ul class="step-checklist">
+                <li>Analyze which countries have high import demand for your product</li>
+                <li>Avoid B2B spam platforms; use Institutional Databases like <strong>APD Global Trade</strong></li>
+                <li>Access live RFQs (Requests for Quotation) and government tenders</li>
+                <li>Directly contact verified purchase managers via email and WhatsApp</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step-card">
+        <div class="step-number">03</div>
+        <div class="step-content">
+            <h2>International Pricing & Incoterms</h2>
+            <p>Export pricing is vastly different from domestic pricing. You must calculate costs using international standards (Incoterms) so both the buyer and seller understand who pays for shipping, insurance, and duties.</p>
+            <ul class="step-checklist">
+                <li><strong>FOB (Free On Board):</strong> You cover costs only until the goods are loaded on the ship.</li>
+                <li><strong>CIF (Cost, Insurance, Freight):</strong> You cover shipping and insurance to the buyer's port.</li>
+                <li>Provide a professional Proforma Invoice clearly stating product specs, HS Code, and terms.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step-card">
+        <div class="step-number">04</div>
+        <div class="step-content">
+            <h2>Secure Payment Architecture</h2>
+            <p>Never ship goods without payment security. In international trade, protecting your capital is paramount. Utilize internationally recognized banking instruments to eliminate the risk of non-payment.</p>
+            <ul class="step-checklist">
+                <li><strong>Advance Payment (TT):</strong> Safest method; buyer pays 30% to 100% upfront via wire transfer.</li>
+                <li><strong>Letter of Credit (LC):</strong> The buyer's bank guarantees payment upon shipment. Most secure for large deals.</li>
+                <li>Get export credit insurance (like ECGC) to protect against international defaults.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="step-card">
+        <div class="step-number">05</div>
+        <div class="step-content">
+            <h2>Logistics, Shipping & Customs Clearance</h2>
+            <p>Execution is key. Once the payment is secured, you must hire a reliable Customs House Agent (CHA) and Freight Forwarder to handle the physical movement of your cargo across borders.</p>
+            <ul class="step-checklist">
+                <li>Hire a certified Freight Forwarder to book ocean or air freight containers.</li>
+                <li>Generate critical documents: Commercial Invoice, Packing List, Certificate of Origin.</li>
+                <li>Clear customs at your local port.</li>
+                <li>Send the Bill of Lading (BL) to the buyer so they can claim the goods.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- CALL TO ACTION / TRUST INJECTION -->
+    <div class="trust-banner">
+        <h3>Skip the Struggle. Go Straight to the Buyers.</h3>
+        <p>You handle the product. We handle the market. Join APD Global Trade and get instant access to 5 Million+ verified international buyers who are ready to purchase today.</p>
+        <a href="/membership.html" class="btn-dark">Access Verified Buyers Now</a>
+    </div>
+
+  </div>
+
+  <footer>
+    <div style="font-family: 'Playfair Display', serif; font-size: 24px; color: var(--gold); margin-bottom: 10px;">APD Global Trade</div>
+    <p>Institutional Trade Intelligence | Verification & Auditing</p>
+    <div style="margin-top: 20px; font-size: 13px;">
+        © 2026 APD Global Trade | <a href="#">Terms</a> | <a href="#">Privacy</a>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Elite Trade Membership | APD Global Trade</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/sales-bot.css">
+  <script src="/assets/js/sales-bot.js" type="module"></script>
+  <script src="/assets/js/social-proof.js"></script>
+
+  <style>
+    :root {
+        --gold: #d4af37;
+        --navy: #071427;
+        --dark: #0a0f1c;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #0a0f1c;
+      color: #e5e7eb;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: #071427;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(212, 175, 55, .15);
+      position: relative;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--gold);
+    }
+
+    .hero {
+      padding: 140px 20px;
+      text-align: center;
+      background: linear-gradient(180deg, #071427, #0a0f1c);
+      border-bottom: 1px solid rgba(212, 175, 55, .15);
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px;
+      background: linear-gradient(90deg, #d4af37, #facc15, #d4af37);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 30px;
+    }
+
+    .hero p {
+      max-width: 850px;
+      margin: auto;
+      font-size: 20px;
+      color: #9ca3af;
+      line-height: 1.8;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 120px auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 34px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #9ca3af;
+      margin-bottom: 70px;
+    }
+
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+    }
+
+    .plan {
+      background: #111827;
+      padding: 60px 45px;
+      border-radius: 30px;
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      transition: .4s ease;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .plan:hover {
+      transform: translateY(-12px);
+      border: 1px solid var(--gold);
+      box-shadow: 0 30px 80px rgba(212, 175, 55, 0.25);
+    }
+
+    .highlight {
+      border: 2px solid var(--gold);
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--gold);
+      color: #000;
+      padding: 6px 16px;
+      font-size: 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .plan h3 {
+      font-size: 26px;
+      margin-bottom: 15px
+    }
+
+    .price {
+      font-size: 42px;
+      font-weight: 700;
+      margin: 15px 0
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 30px 0
+    }
+
+    ul li {
+      margin: 16px 0;
+      font-size: 15px;
+      color: #cbd5e1;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 18px;
+      border-radius: 999px;
+      border: none;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      background: linear-gradient(90deg, var(--gold), #facc15);
+      color: #000;
+      transition: transform 0.3s;
+    }
+    .btn:hover { transform: scale(1.02); }
+
+    /* MOBILE NAVIGATION ELEMENTS (HIDDEN ON DESKTOP) */
+    .menu-toggle {
+        display: none !important;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        z-index: 10001;
+    }
+    .menu-toggle span {
+        width: 25px;
+        height: 2px;
+        background: var(--gold);
+        transition: 0.3s;
+    }
+
+    .side-drawer {
+        position: fixed;
+        top: 0;
+        left: -100%; /* PULLED COMPLETELY OFF-SCREEN */
+        width: 300px;
+        height: 100%;
+        background: #020617;
+        z-index: 100000;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 80px 40px;
+        border: none !important; /* REMOVED RENDERED BORDER */
+        visibility: hidden;
+        opacity: 0;
+    }
+    .side-drawer.active { 
+        left: 0; 
+        display: block; 
+        visibility: visible; 
+        opacity: 1;
+        box-shadow: 20px 0 80px rgba(0,0,0,0.8); /* SHADOW ONLY WHEN OPEN */
+    }
+    .side-drawer a {
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+        margin-bottom: 25px;
+        font-weight: 600;
+    }
+
+    .drawer-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.7);
+        z-index: 99999;
+        display: none;
+    }
+    .drawer-overlay.active { display: block; }
+
+    /* ULTIMATE RESPONSIVE FIXES */
+    @media (max-width: 1024px) {
+        header nav { display: none !important; }
+        .menu-toggle { display: flex !important; }
+        .side-drawer { display: block; } /* Allow drawer on mobile */
+        header { padding: 15px 25px !important; }
+    }
+
+    @media (max-width: 768px) {
+        .hero { padding: 100px 20px !important; }
+        .hero h1 { font-size: 2.2rem !important; }
+        .hero p { font-size: 1rem !important; }
+        .container { margin: 40px auto !important; }
+        
+        .plan { padding: 40px 25px !important; }
+        ul li { 
+            font-size: 13px !important; 
+            line-height: 1.4 !important;
+            margin: 12px 0 !important;
+        }
+        
+        .plans {
+            grid-template-columns: 1fr !important;
+        }
+    }
+
+    /* FLASH SALE STYLES */
+    .flash-sale-bar {
+        background: linear-gradient(90deg, #ef4444, #f59e0b, #ef4444);
+        background-size: 200% auto;
+        animation: shimmer 3s linear infinite;
+        color: white;
+        text-align: center;
+        padding: 12px;
+        font-weight: 800;
+        font-size: 14px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        position: sticky;
+        top: 0;
+        z-index: 10002;
+    }
+    @keyframes shimmer { to { background-position: 200% center; } }
+    .countdown-box { display: inline-flex; gap: 10px; margin-left: 15px; font-family: monospace; font-size: 18px; }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EXRC4SWZ71"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-EXRC4SWZ71');
+  </script>
+</head>
+
+<body>
+
+    <header>
+      <div style="display: flex; align-items: center; gap: 20px;">
+          <div class="menu-toggle" onclick="toggleDrawer()">
+              <span></span>
+              <span></span>
+              <span></span>
+          </div>
+          <div class="logo">APD <span style="color: #fff;">Global</span> Trade</div>
+      </div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/buyer-rfqs.html">Buyer RFQs</a>
+        <a href="/suppliers.html">Suppliers</a>
+        <a href="/register-supplier.html">Create Profile</a>
+        <a href="/membership.html">Membership</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <!-- PREMIUM SIDE DRAWER -->
+    <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+    <div class="side-drawer" id="sideDrawer">
+      <a href="/index.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 40px; display: block;">Dashboard</a>
+      <a href="/buyer-rfqs.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 40px; display: block;">Verified RFQs</a>
+      <a href="/suppliers.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 40px; display: block;">Elite Suppliers</a>
+      <a href="/membership.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 40px; display: block;">Join Membership</a>
+      <a href="/contact.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 40px; display: block;">Contact Support</a>
+    </div>
+
+  
+  <section class="hero">
+    <h1>Global Franchise & Distributorship</h1>
+    <p>
+      Secure exclusive franchise and distribution rights for top-tier brands like Amul. We provide end-to-end consulting, legal setup, and procurement facilitation to launch your local franchise successfully.
+    </p>
+  </section>
+
+  <div class="container">
+    <h2 class="section-title">Franchise Consulting & Setup</h2>
+    <p class="subtitle">Secure your territory with official brand partnerships.</p>
+
+    <div class="plans" style="display: flex; justify-content: center; margin-bottom: 80px;">
+      <div class="plan highlight" style="max-width: 600px; width: 100%; text-align: left;">
+        <div class="badge" style="background: #d4af37; color: black; margin-bottom: 15px;">⭐ EXCLUSIVE OPPORTUNITY</div>
+        <h3 style="color: #d4af37; font-size: 24px;">Franchise Allocation Consulting</h3>
+        <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 15px;">Complete End-to-End Setup</p>
+        
+        <div class="price" style="margin-top: 5px; margin-bottom: 10px;">₹49,000 <span style="font-size: 14px; font-weight: normal; color: #94a3b8;">Total Consulting Fee</span></div>
+        
+        <div style="background: rgba(239, 68, 68, 0.1); border-left: 3px solid #ef4444; padding: 12px; margin-bottom: 25px; border-radius: 4px;">
+            <p style="font-size: 0.9rem; color: #f87171; margin: 0; line-height: 1.4;"><strong>Booking Amount:</strong> ₹11,000 (Non-Refundable)</p>
+            <p style="font-size: 0.8rem; color: #94a3b8; margin: 5px 0 0 0; line-height: 1.4;">The remaining balance of ₹38,000 is strictly payable ONLY upon successful franchise allocation.</p>
+        </div>
+
+        <h4 style="margin-top: 25px; margin-bottom: 15px; color: #fff; font-size: 16px;">Consultation Includes:</h4>
+        <ul style="margin-bottom: 30px; line-height: 1.8; color: #cbd5e1; font-size: 14px; list-style: none; padding-left: 0;">
+          <li><span style="color: #4ade80;">✅</span> Location Viability & Demand Analysis</li>
+          <li><span style="color: #4ade80;">✅</span> Official Brand Application Processing</li>
+          <li><span style="color: #4ade80;">✅</span> Documentation & Legal Compliance Setup</li>
+          <li><span style="color: var(--gold);">✨</span> End-to-End Liaison with Brand Executives</li>
+          <li><span style="color: var(--gold);">✨</span> Supply Chain & Procurement Setup</li>
+        </ul>
+
+        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 30px 0;">
+
+        <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; color: var(--gold); margin-bottom: 15px;">Application Form</h3>
+        <form id="franchiseForm" onsubmit="submitApplication(event)">
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; color: #cbd5e1; font-size: 13px;">Full Name *</label>
+                <input type="text" id="f_name" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: white; box-sizing: border-box;">
+            </div>
+            
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; color: #cbd5e1; font-size: 13px;">WhatsApp Number (with Country Code) *</label>
+                <input type="text" id="f_whatsapp" required placeholder="+91..." pattern="^\+.*" title="Must start with + and include country code" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: white; box-sizing: border-box;">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; color: #cbd5e1; font-size: 13px;">Target Company / Franchise (e.g., Amul) *</label>
+                <input type="text" id="f_company" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: white; box-sizing: border-box;">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; color: #cbd5e1; font-size: 13px;">Type of Franchise *</label>
+                <select id="f_type" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: white; box-sizing: border-box;">
+                    <option value="">Select Type</option>
+                    <option value="Retail Outlet">Retail Outlet</option>
+                    <option value="Distribution Level">Distribution Level</option>
+                    <option value="Master Franchise">Master Franchise</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <label style="display: block; margin-bottom: 5px; color: #cbd5e1; font-size: 13px;">Full Address for Proposed Franchise *</label>
+                <textarea id="f_address" required rows="3" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: white; box-sizing: border-box;"></textarea>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.02); padding: 15px; border-radius: 8px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05);">
+                <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;">
+                    <input type="checkbox" id="termsAgree" required style="margin-top: 4px; width: 18px; height: 18px; cursor: pointer;">
+                    <span style="font-size: 0.8rem; color: #cbd5e1; line-height: 1.5;">
+                        <strong>I agree to the Terms & Conditions:</strong><br>
+                        1. We do not guarantee a franchise, as it depends strictly on brand policies, your location, and existing area demand.<br>
+                        2. The initial consultation fee of ₹11,000 is strictly non-refundable under any circumstances.<br>
+                        3. I agree to pay the balance of ₹38,000 upon successful franchise allocation.
+                    </span>
+                </label>
+            </div>
+
+            <button type="submit" id="submitBtn" class="btn" style="background: #5f259f; color: white; font-weight: 800; width: 100%; border: 2px solid white;">
+                SUBMIT & PAY ₹11,000
+            </button>
+            <div id="phonepeError" style="color: #ef4444; margin-top: 15px; font-size: 14px; display: none; text-align: center;"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+      authDomain: "apd-globaltrade-prod.firebaseapp.com",
+      projectId: "apd-globaltrade-prod",
+      storageBucket: "apd-globaltrade-prod.firebasestorage.app",
+      messagingSenderId: "226407312435",
+      appId: "1:226407312435:web:f8a54b1132af3899170746"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window.submitApplication = async function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        const err = document.getElementById('phonepeError');
+        
+        if(!document.getElementById('termsAgree').checked) {
+            err.innerText = "Please agree to the Terms & Conditions.";
+            err.style.display = "block";
+            return;
+        }
+
+        btn.innerText = 'Initializing Payment...';
+        btn.disabled = true;
+        err.style.display = "none";
+
+        try {
+            // First save to DB
+            const docRef = await addDoc(collection(db, "franchise_applications"), {
+                name: document.getElementById('f_name').value,
+                whatsapp: document.getElementById('f_whatsapp').value,
+                company: document.getElementById('f_company').value,
+                type: document.getElementById('f_type').value,
+                address: document.getElementById('f_address').value,
+                status: "Pending Payment",
+                timestamp: serverTimestamp()
+            });
+
+            // Then initiate PhonePe
+            const res = await fetch('/api/phonepe-init', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ amount: 11000, planName: 'Franchise Consultation Booking' })
+            });
+            const data = await res.json();
+            
+            if (data.success && data.url) { 
+                window.location.href = data.url; 
+            } else { 
+                err.innerText = data.error || 'Payment gateway failed. Your form is saved. Contact support.';
+                err.style.display = 'block'; 
+                btn.innerText = 'SUBMIT & PAY ₹11,000'; 
+                btn.disabled = false; 
+            }
+        } catch(error) {
+            console.error("Error submitting form: ", error);
+            err.innerText = 'Network Error. Please try again.';
+            err.style.display = 'block';
+            btn.innerText = 'SUBMIT & PAY ₹11,000';
+            btn.disabled = false;
+        }
+    }
+  </script>
+<footer style="background: #020617; padding: 60px 8% 40px; border-top: 1px solid rgba(255,255,255,0.05); color: #94a3b8; text-align: left;">
+    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;">
+        
+        <div>
+            <h4 style="color: white; margin-bottom: 20px; font-size: 13px; text-transform: uppercase;">Business Identity</h4>
+            <ul style="list-style: none; padding: 0; font-size: 0.8rem; line-height: 2.0; color: #cbd5e1;">
+                <li><strong>Entity:</strong> APD GLOBAL TRADE</li>
+                <li><strong>GSTIN:</strong> 08ATLPC3583G1ZL</li>
+                <li><strong>IEC Code:</strong> ATLPC3583G</li>
+                <li><strong>Reg. Office:</strong> Jaipur, Rajasthan, India</li>
+            </ul>
+        </div>
+
+        <div>
+            <h4 style="color: white; margin-bottom: 20px; font-size: 13px; text-transform: uppercase;">Legal</h4>
+            <ul style="list-style: none; padding: 0; font-size: 0.8rem; line-height: 2.0;">
+                <li><a href="/terms.html" style="color: inherit; text-decoration: none;">Terms & Conditions</a></li>
+                <li><a href="/privacy.html" style="color: inherit; text-decoration: none;">Privacy Policy</a></li>
+                <li><a href="/refund-policy.html" style="color: inherit; text-decoration: none;">Refund Policy</a></li>
+            </ul>
+        </div>
+        
+    </div>
+    
+    <div style="max-width: 1200px; margin: 30px auto 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.7rem; color: #64748b; line-height: 1.5;">
+        <strong>Legal Disclaimer:</strong> APD GLOBAL TRADE provides structured business matchmaking and trade facilitation services. Commercial outcomes depend on mutual due diligence.
+    </div>
+  </footer>
+
+  <!-- PREMIUM PAYMENT MODAL -->
+  <div id="paymentModal" style="
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(2, 6, 23, 0.98);
+    backdrop-filter: blur(20px);
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    padding: 20px;">
+    
+    <div style="background:#111827; color:#fff; padding:50px; border-radius:30px; width:100%; max-width:500px; border: 1px solid var(--gold); position: relative; box-shadow: 0 40px 100px rgba(0,0,0,0.5);">
+      
+      <div onclick="closeModal()" style="position: absolute; top: 25px; right: 25px; cursor: pointer; color: #94a3b8; font-size: 24px;">✕</div>
+      
+      <h3 id="modalPlanName" style="font-family: 'Playfair Display', serif; font-size: 28px; color: var(--gold); margin-bottom: 10px;">Complete Your Investment</h3>
+      <p style="color: #94a3b8; margin-bottom: 40px;">Select your preferred institutional payment channel.</p>
+      
+      <div style="display: flex; background: #1e293b; padding: 5px; border-radius: 12px; margin-bottom: 30px;">
+          <div id="tab-paypal" onclick="switchPayment('paypal')" style="flex: 1; text-align: center; padding: 10px; border-radius: 8px; cursor: pointer; background: var(--gold); color: black; font-weight: 700; font-size: 13px;">PayPal</div>
+          <div id="tab-qr" onclick="switchPayment('qr')" style="flex: 1; text-align: center; padding: 10px; border-radius: 8px; cursor: pointer; color: #94a3b8; font-weight: 600; font-size: 13px;">PhonePe (Auto)</div>
+          <div id="tab-manual" onclick="switchPayment('manual')" style="flex: 1; text-align: center; padding: 10px; border-radius: 8px; cursor: pointer; color: #94a3b8; font-weight: 600; font-size: 13px;">Manual QR</div>
+      </div>
+
+      <!-- PAYPAL SECTION -->
+      <div id="paypalSection">
+          <div style="font-size: 2rem; font-weight: 800; margin-bottom: 20px;" id="modalPriceUSD">$499</div>
+          <div id="paypalButtons"></div>
+          <p style="font-size: 0.9rem; color: #cbd5e1; margin-top: 20px; border-left: 3px solid var(--gold); padding-left: 15px;">
+            <b>NOTE:</b> For USD, select PayPal and make a quick payment. If you prefer a direct link or have issues, message us on WhatsApp immediately.
+          </p>
+      </div>
+
+      <!-- QR & ELITE EXPORT POSTER SECTION -->
+      <div id="qrSection" style="display: none; text-align: center; padding: 0;">
+          <div style="background: linear-gradient(135deg, #020617, #0b1d36); padding: 40px; border-radius: 20px; border: 1px solid var(--gold); margin-top: 10px;">
+              
+              <h2 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 24px; margin-bottom: 5px;">Secure Payment Gateway</h2>
+              <p style="color: #cbd5e1; font-size: 14px; margin-bottom: 30px;">100% encrypted checkout via PhonePe.</p>
+              
+              <div style="font-size: 2.2rem; font-weight: 800; margin-bottom: 5px; color: #4ade80;" id="modalPriceINR">₹59,000</div>
+              <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 25px;">(Including 18% GST Compliance)</p>
+              
+              <div style="background: rgba(212, 175, 55, 0.1); border-left: 4px solid var(--gold); padding: 20px; border-radius: 8px; text-align: left; margin-bottom: 30px;">
+                  <p style="font-size: 0.95rem; color: #fff; margin: 0; line-height: 1.6;">
+                      🇮🇳 <b>INDIAN SUPPLIERS:</b><br>
+                      • Pay securely using PhonePe, GPay, or any UPI.<br>
+                      • Instant Access activation upon successful payment.<br>
+                      • Powered by PhonePe Business.
+                  </p>
+              </div>
+
+              <div id="desktopQR" style="display: none; background: white; padding: 15px; border-radius: 16px; margin: 0 auto 20px auto; width: fit-content; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 4px solid var(--gold);">
+                  <img src="/assets/img/payment_qr.jpg" alt="APD Institutional QR" style="width: 250px; height: auto; display: block; border-radius: 8px;">
+                  <p style="color: black; font-weight: bold; margin-top: 10px; font-size: 14px;">Scan & Pay ₹<span id="qrAmountTxt">59,000</span></p>
+              </div>
+
+              <button id="phonepeBtn" class="btn" style="background: #5f259f; color: white; font-size: 1.1rem; padding: 20px; width: 100%; border: 2px solid white; display: flex; align-items: center; justify-content: center; gap: 10px;" onclick="initiatePhonePe()">
+                  PAY VIA PHONEPE
+              </button>
+              <div id="phonepeError" style="color: #ef4444; margin-top: 15px; font-size: 14px; display: none;"></div>
+          </div>
+          
+          <!-- ALTERNATIVE PAYPAL FOR INR PLANS -->
+          <div style="padding: 30px 0;">
+              <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px;">International? Pay USD Equivalent via PayPal</p>
+              <div id="paypalButtonsINR"></div>
+              <p style="font-size: 0.75rem; color: #64748b; margin-top: 12px;">Institutional Clearance: <span id="modalPriceUSDEquiv">$499.00</span></p>
+          </div>
+      </div>
+
+      <!-- MANUAL QR SECTION -->
+      <div id="manualSection" style="display: none; text-align: center;">
+          <div style="font-size: 2rem; font-weight: 800; margin-bottom: 25px; color: var(--gold);" id="modalPriceINRManual">₹59,000</div>
+          <div style="background: white; padding: 10px; display: inline-block; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+              <img src="/assets/img/payment_qr.jpg" alt="Manual QR Code" style="width: 240px; height: auto; display: block; border-radius: 8px;">
+          </div>
+          <p style="font-size: 0.95rem; color: #cbd5e1; margin-bottom: 20px;"><b>Payable to: APD GLOBAL TRADE</b><br>Accepting Google Pay, PhonePe, Paytm & BHIM.</p>
+          <button class="btn" style="background: #22c55e; color: white;" onclick="window.location.href='https://wa.me/919266418868?text=I%20have%20made%20the%20Manual%20UPI%20payment.%20Here%20is%20the%20screenshot.'">Verify & Activate Access</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=ASJK-aoiFIIKpTgmRComyW1w0VYUbexsGzzzQnJqZGcKy_6yE3r-Y0tIRXXHTqHH1AVd5IXzFBNtWte4&currency=USD"></script>
+
+  <script>
+    let currentCurrency = 'INR';
+    let selectedPlan = { name: '', usd: 0, inr: 0 };
+
+    function toggleCurrency() {
+        currentCurrency = currentCurrency === 'USD' ? 'INR' : 'USD';
+        const knob = document.getElementById('toggle-knob');
+        const lUSD = document.getElementById('label-usd');
+        const lINR = document.getElementById('label-inr');
+        
+        if (currentCurrency === 'INR') {
+            knob.style.left = '32px';
+            lINR.style.opacity = '1';
+            lINR.style.fontWeight = '700';
+            lINR.style.color = 'var(--gold)';
+            lUSD.style.opacity = '0.6';
+            lUSD.style.fontWeight = '400';
+            lUSD.style.color = '#fff';
+            
+            // Update Prices
+            document.getElementById('price-trial').innerHTML = '<s style="font-size: 1rem; color: #64748b; font-weight: 500;">₹51,000</s> ₹19,999';
+            document.getElementById('price-pro').innerHTML = '<s style="font-size: 1rem; color: #64748b; font-weight: 500;">₹99,000</s> ₹49,000';
+            document.getElementById('price-elite').innerHTML = '<s style="font-size: 1rem; color: #64748b; font-weight: 500;">₹1,75,000</s> ₹99,000';
+
+            document.getElementById('tax-trial').innerText = 'Inclusive of 18% GST & Verification';
+            document.getElementById('tax-pro').innerText = 'Inclusive of 18% GST';
+            document.getElementById('tax-elite').innerText = 'Inclusive of 18% GST';
+        } else {
+            knob.style.left = '2px';
+            lUSD.style.opacity = '1';
+            lUSD.style.fontWeight = '700';
+            lUSD.style.color = 'var(--gold)';
+            lINR.style.opacity = '0.6';
+            lINR.style.fontWeight = '400';
+            lINR.style.color = '#fff';
+            
+            // Update Prices
+            document.getElementById('price-trial').innerHTML = '<s style="font-size: 1rem; color: #64748b; font-weight: 500;">$599</s> $249';
+            document.getElementById('price-pro').innerHTML = '<s style="font-size: 1rem; color: #64748b; font-weight: 500;">$1,199</s> $599';
+            document.getElementById('price-elite').innerHTML = '<s style="font-size: 1rem; color: #64748b; font-weight: 500;">$1,999</s> $999';
+
+            document.getElementById('tax-trial').innerText = 'For exporters ready to explore';
+            document.getElementById('tax-pro').innerText = 'For serious exporters ready to scale';
+            document.getElementById('tax-elite').innerText = 'Maximum authority package';
+        }
+    }
+
+    function initiatePayment(planName, usd, inr) {
+        selectedPlan = { name: planName, usd, inr };
+        
+        let usdEquiv = 0;
+        if (inr === 59000) usdEquiv = 499;
+        else if (inr === 168000) usdEquiv = 2000;
+        else if (inr === 294000) usdEquiv = 3500;
+        else usdEquiv = usd;
+
+        document.getElementById('modalPlanName').innerText = planName;
+        document.getElementById('modalPriceUSD').innerText = '$' + usd.toLocaleString();
+        document.getElementById('modalPriceINR').innerText = '₹' + inr.toLocaleString();
+        document.getElementById('modalPriceINRManual').innerText = '₹' + inr.toLocaleString();
+        document.getElementById('modalPriceUSDEquiv').innerText = '$' + usdEquiv.toLocaleString() + '.00';
+        
+        document.getElementById("paymentModal").style.display = "flex";
+        
+        if (currentCurrency === 'INR') { switchPayment('qr'); } else { switchPayment('paypal'); }
+        
+        renderPayPal(usd, planName, "paypalButtons");
+        if (usdEquiv > 0) { renderPayPal(usdEquiv, planName + " (INR Base)", "paypalButtonsINR"); }
+    }
+
+    function switchPayment(method) {
+        const tPayPal = document.getElementById('tab-paypal');
+        const tQR = document.getElementById('tab-qr');
+        const tManual = document.getElementById('tab-manual');
+        const sPayPal = document.getElementById('paypalSection');
+        const sQR = document.getElementById('qrSection');
+        const sManual = document.getElementById('manualSection');
+        
+        tPayPal.style.background = 'transparent'; tPayPal.style.color = '#94a3b8';
+        tQR.style.background = 'transparent'; tQR.style.color = '#94a3b8';
+        tManual.style.background = 'transparent'; tManual.style.color = '#94a3b8';
+        sPayPal.style.display = 'none';
+        sQR.style.display = 'none';
+        sManual.style.display = 'none';
+
+        if (method === 'paypal') {
+            tPayPal.style.background = 'var(--gold)'; tPayPal.style.color = 'black';
+            sPayPal.style.display = 'block';
+        } else if (method === 'qr') {
+            tQR.style.background = 'var(--gold)'; tQR.style.color = 'black';
+            sQR.style.display = 'block';
+        } else {
+            tManual.style.background = 'var(--gold)'; tManual.style.color = 'black';
+            sManual.style.display = 'block';
+        }
+    }
+
+    function renderPayPal(amount, planName, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = "";
+        setTimeout(function () {
+            paypal.Buttons({
+                createOrder: function (data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            description: planName + " – APD Global Trade",
+                            amount: { currency_code: "USD", value: amount.toFixed(2) }
+                        }]
+                    });
+                },
+                onApprove: function (data, actions) {
+                    return actions.order.capture().then(function () {
+                        window.location.href = "/payment-status.html";
+                    });
+                }
+            }).render("#" + containerId);
+        }, 400);
+    }
+
+    async function initiatePhonePe() {
+        const btn = document.getElementById('phonepeBtn');
+        const err = document.getElementById('phonepeError');
+        btn.innerText = 'Initializing...';
+        btn.disabled = true;
+        try {
+            const res = await fetch('/api/phonepe-init', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ amount: selectedPlan.inr, planName: selectedPlan.name })
+            });
+            const data = await res.json();
+            if (data.success && data.url) { window.location.href = data.url; } 
+            else { err.innerText = data.error || 'Failed.'; err.style.display = 'block'; btn.innerText = 'PAY VIA PHONEPE'; btn.disabled = false; }
+        } catch(e) { err.innerText = 'Network error.'; err.style.display = 'block'; btn.innerText = 'PAY VIA PHONEPE'; btn.disabled = false; }
+    }
+
+    function closeModal() { document.getElementById("paymentModal").style.display = "none"; }
+    function toggleDrawer() {
+        document.getElementById('sideDrawer').classList.toggle('active');
+        document.getElementById('drawerOverlay').classList.toggle('active');
+    }
+    
+    // Force render on load
+    setTimeout(() => { currentCurrency = 'USD'; toggleCurrency(); }, 100);
+  </script>
+
+  <!-- GLOBAL HELPLINE HUB (PREMIUM REGIONAL TOGGLES) -->
+  <div id="waHub" class="wa-hub">
+      <div class="wa-hub-header">
+          <span>SELECT REGIONAL TRADE DESK</span>
+          <span onclick="toggleWaHub()" style="cursor: pointer; opacity: 0.6;">✕</span>
+      </div>
+      <!-- NEW EXPORTERS DESK -->
+      <a href="https://wa.me/919217114472" target="_blank" class="wa-hub-item" style="background: rgba(212,175,55,0.05); border-left: 3px solid var(--gold);">
+          <span class="flag">🚀</span>
+          <div class="desk-info">
+              <div class="desk-name" style="color: var(--gold);">NEW EXPORTERS DESK</div>
+              <div class="desk-status">+91 92171 14472 • Priority Support</div>
+          </div>
+      </a>
+      <a href="https://wa.me/84848469144" target="_blank" class="wa-hub-item">
+          <span class="flag">🌏</span>
+          <div class="desk-info">
+              <div class="desk-name">SOUTHEAST ASIA DESK</div>
+              <div class="desk-status">The Best Region • 24/7 Support</div>
+          </div>
+      </a>
+      <a href="https://wa.me/639510960950" target="_blank" class="wa-hub-item">
+          <span class="flag">🌏</span>
+          <div class="desk-info">
+              <div class="desk-name">ASIA PACIFIC DESK</div>
+              <div class="desk-status">Trade Intelligence Desk</div>
+          </div>
+      </a>
+      <a href="https://wa.me/237658309636" target="_blank" class="wa-hub-item">
+          <span class="flag">🌍</span>
+          <div class="desk-info">
+              <div class="desk-name">AFRICA DESK</div>
+              <div class="desk-status">Africa Sourcing Hub</div>
+          </div>
+      </a>
+      <a href="https://wa.me/919718173015" target="_blank" class="wa-hub-item">
+          <span class="flag">🌍</span>
+          <div class="desk-info">
+              <div class="desk-name">MIDDLE EAST & SA DESK</div>
+              <div class="desk-status">Middle East Corridor Desk</div>
+          </div>
+      </a>
+      <div style="padding: 15px; text-align: center; font-size: 10px; color: #64748b; letter-spacing: 1px;">
+          APD GLOBAL TRADE INSTITUTIONAL NETWORK
+      </div>
+  </div>
+
+  <div class="float-wa" onclick="toggleWaHub()">
+      <svg width="35" height="35" viewBox="0 0 24 24" fill="white"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 3.825 0 6.938 3.112 6.938 6.938 0 3.825-3.113 6.938-6.938 6.938z"/></svg>
+  </div>
+
+  <style>
+    .wa-hub {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        width: 320px;
+        background: rgba(15, 23, 42, 0.98);
+        backdrop-filter: blur(25px);
+        border: 1px solid rgba(212, 175, 55, 0.4);
+        border-radius: 30px;
+        z-index: 100004;
+        box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        animation: hubSlide 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    @keyframes hubSlide {
+        from { opacity: 0; transform: translateY(30px) scale(0.9); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .wa-hub.active { display: flex; }
+    .wa-hub-header {
+        padding: 22px;
+        background: linear-gradient(90deg, rgba(212, 175, 55, 0.2), transparent);
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        font-size: 11px;
+        font-weight: 800;
+        color: var(--gold);
+        letter-spacing: 2px;
+        display: flex;
+        justify-content: space-between;
+        text-transform: uppercase;
+    }
+    .wa-hub-item {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 20px 25px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255,255,255,0.03);
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .wa-hub-item:hover {
+        background: rgba(212, 175, 55, 0.12);
+        padding-left: 35px;
+        border-left: 4px solid var(--gold);
+    }
+    .wa-hub-item .flag { font-size: 28px; filter: drop-shadow(0 0 5px rgba(0,0,0,0.3)); }
+    .wa-hub-item .desk-name {
+        font-size: 14px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 4px;
+        letter-spacing: 0.5px;
+    }
+    .wa-hub-item .desk-status {
+        font-size: 11px;
+        color: #94a3b8;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .wa-hub-item .desk-status::before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        background: #4ade80;
+        border-radius: 50%;
+        display: inline-block;
+        box-shadow: 0 0 10px #4ade80;
+    }
+    .float-wa {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: linear-gradient(135deg, #25D366, #128C7E);
+        color: white;
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 15px 40px rgba(37, 211, 102, 0.4);
+        z-index: 100005;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .float-wa:hover { transform: scale(1.15) rotate(15deg); box-shadow: 0 20px 50px rgba(37, 211, 102, 0.6); }
+    
+    @media (max-width: 768px) {
+        .wa-hub { width: calc(100% - 40px); right: 20px; bottom: 100px; border-radius: 25px; }
+        .float-wa { width: 55px; height: 55px; bottom: 25px; right: 25px; }
+        .wa-hub-item { padding: 18px 20px; }
+    }
+  </style>
+
+  <script>
+    function toggleWaHub() {
+        const hub = document.getElementById('waHub');
+        hub.classList.toggle('active');
+    }
+
+    // Auto-detect GeoIP and switch to USD if outside India
+    document.addEventListener("DOMContentLoaded", () => {
+        fetch('https://ipapi.co/json/')
+            .then(res => res.json())
+            .then(data => {
+                if (data.country_code && data.country_code !== 'IN') {
+                    if (typeof currentCurrency !== 'undefined' && currentCurrency === 'INR' && typeof toggleCurrency === 'function') {
+                        // Switch knob and prices to USD
+                        toggleCurrency();
+                    }
+                }
+            })
+            .catch(err => console.log('GeoIP detection failed'));
+    });
+  </script>
+
+</body>
+
+</html>
