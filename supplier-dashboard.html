@@ -50,7 +50,6 @@ header a{color:#e5e7eb;margin-left:20px;text-decoration:none}
   color: #666;
 }
 </style>
-<link rel="manifest" href="/manifest.json">
 </head>
 
 <body>
@@ -65,22 +64,10 @@ header a{color:#e5e7eb;margin-left:20px;text-decoration:none}
 </header>
 
 <div class="card">
-  <h2 id="welcome" style="display:flex; align-items:center; gap:10px;">Welcome <span id="premiumBadge" style="display:none; background:linear-gradient(135deg, #d4af37, #facc15); color:#000; font-size:12px; padding:4px 12px; border-radius:50px; font-weight:800; letter-spacing:1px; box-shadow:0 2px 10px rgba(212,175,55,0.4);">👑 PREMIUM VERIFIED</span></h2>
+  <h2 id="welcome">Welcome</h2>
   <p>Status: <b id="status">checking…</b></p>
   <p>Plan: <b id="plan">checking…</b></p>
   <p>Total Bids Submitted: <b id="totalBids">0</b> <a href="/supplier-bids.html" style="font-size:12px; margin-left:10px; background:#d4af37; color:#000; padding:4px 8px; border-radius:4px; text-decoration:none; font-weight:bold;">View My Bids</a></p>
-</div>
-
-<div class="card" id="commoditiesCard" style="margin-top:20px; padding:20px;">
-  <h3 style="color:#071427; margin-top:0; margin-bottom:10px; font-size:18px;">Manage My Commodities</h3>
-  <p style="font-size:13px; color:#64748b; margin-top:0;">Add commodities you supply. This filters the RFQs you see on the platform.</p>
-  <div style="display:flex; gap:10px; margin-bottom:15px;">
-    <input type="text" id="newCommodityInput" placeholder="e.g. Rice, Sugar, Spices" style="flex:1; padding:10px; border-radius:6px; border:1px solid #ccc;">
-    <button onclick="addCommodity()" style="background:#071427; color:#c9a44a; border:none; padding:10px 20px; border-radius:6px; font-weight:bold; cursor:pointer;">Add</button>
-  </div>
-  <div id="commoditiesList" style="display:flex; flex-wrap:wrap; gap:10px;">
-    <!-- Badges here -->
-  </div>
 </div>
 
 <!-- AUTOMATCH DASHBOARD FOR FREE USERS -->
@@ -223,44 +210,11 @@ onAuthStateChanged(auth, async (user) => {
       const remaining = 25 - (s.unlocksUsed || 0);
       const pName = planMap[s.plan] || s.plan;
       planText = `${pName} (${remaining} unlocks left)`;
-    if (planMap[s.plan]) {
+    } else if (planMap[s.plan]) {
       planText = planMap[s.plan];
     }
     
-    if (s.plan === "elite_12m" || s.plan === "platinum") {
-        const pBadge = document.getElementById("premiumBadge");
-        if(pBadge) pBadge.style.display = "inline-block";
-    }
-    
     document.getElementById("plan").innerText = planText;
-
-    // Render current commodities
-    window.supplierCategories = s.allowedCategories || [];
-    window.renderCommodities = () => {
-        const cList = document.getElementById("commoditiesList");
-        if(cList) {
-            cList.innerHTML = "";
-            window.supplierCategories.forEach(cat => {
-                cList.innerHTML += `<span style="background:#f1f5f9; padding:5px 12px; border-radius:20px; font-size:13px; border:1px solid #e2e8f0; display:flex; align-items:center;">${cat} <b style="color:#dc2626;cursor:pointer;margin-left:8px;font-size:16px;" onclick="removeCommodity('${cat}')">&times;</b></span>`;
-            });
-        }
-    };
-    window.renderCommodities();
-    
-    window.addCommodity = async () => {
-        const val = document.getElementById("newCommodityInput").value.trim();
-        if(!val) return;
-        window.supplierCategories.push(val);
-        document.getElementById("newCommodityInput").value = "";
-        window.renderCommodities();
-        await updateDoc(doc(db, "suppliers", user.uid), { allowedCategories: window.supplierCategories });
-    };
-    window.removeCommodity = async (cat) => {
-        if(!confirm(`Remove ${cat}?`)) return;
-        window.supplierCategories = window.supplierCategories.filter(c => c !== cat);
-        window.renderCommodities();
-        await updateDoc(doc(db, "suppliers", user.uid), { allowedCategories: window.supplierCategories });
-    };
 
     // Fetch Total Bids
     try {
@@ -576,16 +530,6 @@ async function renderMockLeads(commodity, uid, unlocksUsed, maxCredits, supplier
     }
     startMidnightCountdown();
   </script>
-
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js').then(reg => {
-        console.log('SW registered!', reg);
-      }).catch(err => console.log('SW reg failed', err));
-    });
-  }
-</script>
 </body>
 
 </html>
