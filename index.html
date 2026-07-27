@@ -95,70 +95,96 @@
             text-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(212, 175, 55, 0.2);
         }
     
-        /* TOP-NOTCH NAVIGATION BUTTONS */
+        /* TOP-NOTCH ULTRA-LUXURY NAVIGATION BAR */
+        header#main-header {
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 12px 30px !important;
+            background: rgba(2, 6, 23, 0.95) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2) !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            box-sizing: border-box !important;
+        }
+
+        .logo.premium-logo {
+            transform: none !important;
+            margin: 0 !important;
+            flex-shrink: 0 !important;
+        }
+
+        header nav {
+            display: flex !important;
+            align-items: center !important;
+            gap: 16px !important;
+            flex-wrap: nowrap !important;
+            margin: 0 !important;
+        }
+
         header nav a {
             position: relative;
-            padding-bottom: 5px;
-            font-weight: 700 !important;
-            font-size: 0.7rem !important;
-            letter-spacing: 2px !important;
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif !important;
+            font-weight: 600 !important;
+            font-size: 13.5px !important;
+            letter-spacing: 0.1px !important;
             color: #cbd5e1 !important;
-            transition: all 0.3s ease !important;
-            text-transform: uppercase;
+            transition: all 0.25s ease !important;
+            text-transform: none !important;
+            white-space: nowrap !important;
+            text-decoration: none !important;
+            padding: 6px 4px !important;
         }
+        
         header nav a:hover {
-            color: #fff !important;
-            text-shadow: 0 0 10px rgba(255,255,255,0.8);
+            color: #facc15 !important;
+            text-shadow: 0 0 12px rgba(250, 204, 21, 0.4);
         }
+
         header nav a::after {
             content: '';
             position: absolute;
             width: 0; height: 2px;
-            bottom: 0; left: 0;
-            background: var(--gold);
-            transition: width 0.3s ease;
-            box-shadow: 0 0 10px var(--gold);
+            bottom: -2px; left: 0;
+            background: #facc15;
+            transition: width 0.25s ease;
+            box-shadow: 0 0 8px #facc15;
         }
         header nav a:hover::after {
             width: 100%;
         }
+
         header nav a[href="/membership.html"] {
-            background: linear-gradient(135deg, var(--gold), #8B6508) !important;
-            color: #000 !important;
-            padding: 10px 24px !important;
+            background: linear-gradient(135deg, #d4af37 0%, #f59e0b 100%) !important;
+            color: #020617 !important;
+            padding: 8px 20px !important;
             border-radius: 50px !important;
-            font-weight: 800 !important;
-            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4) !important;
-            border: 1px solid rgba(255,255,255,0.4) !important;
-            margin-left: 20px;
+            font-weight: 700 !important;
+            font-size: 13px !important;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4) !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            margin-left: 6px !important;
         }
         header nav a[href="/membership.html"]:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.8) !important;
+            transform: translateY(-1px) scale(1.03);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.7) !important;
+            color: #000 !important;
         }
         header nav a[href="/membership.html"]::after {
-            display: none;
+            display: none !important;
         }
-        
-        /* =========================================
-           ULTIMATE RESPONSIVE ARCHITECTURE
-           ========================================= */
-        
-        /* Desktop Defaults (Sanity Check) */
+
+        /* Desktop & Mobile Display Overrides */
         .menu-toggle { display: none !important; }
         .drawer-overlay, .side-drawer { display: none !important; }
         .mobile-only { display: none !important; }
         .desktop-only { display: block !important; }
 
         @media (min-width: 1025px) {
-            header {
-                padding: 20px 8% !important;
-                justify-content: space-between !important;
-                height: auto !important;
-            }
-            .logo.premium-logo {
-                transform: scale(1) !important;
-                position: static !important;
+            header#main-header {
+                padding: 12px 35px !important;
             }
         }
 
