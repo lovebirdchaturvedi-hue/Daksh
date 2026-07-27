@@ -23,8 +23,8 @@ const functions = getFunctions(app, "us-central1"); // Hardcoded region for reli
     isOpen: false,
     history: [],
     handoffNumbers: ['919266418868', '919217114472'],
-    botName: 'APD AI Sales BOT',
-    botStatus: 'ACTIVE SALES AGENT',
+    botName: 'Trade Copilot',
+    botStatus: 'AI INVOICE & TRADE ASSISTANT',
     avatar: '/assets/img/sales-agent.png',
 
     init() {
@@ -46,8 +46,8 @@ const functions = getFunctions(app, "us-central1"); // Hardcoded region for reli
                         <div class="bot-info" style="display: flex; align-items: center; gap: 10px;">
                             <img src="/assets/img/sales-agent.png" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 1px solid var(--gold);">
                             <div style="display: flex; flex-direction: column;">
-                                <span class="name">APD AI Sales BOT</span>
-                                <span class="status" style="color: #4ade80; font-size: 10px;">• ACTIVE SALES AGENT</span>
+                                <span class="name">Trade Copilot</span>
+                                <span class="status" style="color: #4ade80; font-size: 10px;">• AI INVOICE & TRADE ASSISTANT</span>
                             </div>
                         </div>
                         <button id="closeChat" style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">&times;</button>
@@ -186,7 +186,7 @@ const functions = getFunctions(app, "us-central1"); // Hardcoded region for reli
             
             // 5. Greetings
             if (msg.includes('hi') || msg.includes('hello') || msg.includes('hey') || msg.includes('greet')) {
-                return "Hello! I'm the APD Senior Sales Assistant. I help serious exporters scale by providing direct, protected access to verified institutional buyers. How can I assist you with your trade volume today?";
+                return "Hello! I'm the Trade Copilot. I help serious exporters scale by providing direct, protected access to verified institutional buyers. How can I assist you with your trade volume today?";
             }
 
             // Global Professional Fallback

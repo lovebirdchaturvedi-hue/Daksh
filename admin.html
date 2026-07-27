@@ -134,13 +134,14 @@ const db = getFirestore(app);
 const tbody = document.getElementById("tbody");
 
 // Auth guard
-setTimeout(() => {
+let authGuardTimeout = setTimeout(() => {
   if (document.getElementById("tbody").innerHTML.includes("Loading")) {
-      document.getElementById("tbody").innerHTML = `<tr><td colspan="12" style="color:red; font-weight:bold;">AUTH HANGING: Firebase auth is completely frozen and not responding.</td></tr>`;
+      document.getElementById("tbody").innerHTML = `<tr><td colspan="12" style="color:red; font-weight:bold;">AUTH HANGING: Firebase auth is taking a while to respond. Please check your connection or refresh.</td></tr>`;
   }
-}, 3000);
+}, 12000);
 
 onAuthStateChanged(auth, async (user) => {
+  clearTimeout(authGuardTimeout);
   if (!user) {
     location.href = "/supplier-login.html";
     return;
@@ -172,7 +173,7 @@ async function loadSuppliers() {
       return;
     }
 
-    tbody.innerHTML = "";
+    let htmlOutput = "";
 
     snap.forEach(d => {
       const s = d.data();
@@ -201,7 +202,7 @@ async function loadSuppliers() {
       const isLegacy = d.id.length < 20; // Minimal heuristic for manual IDs
       const warning = isLegacy ? '<span title="Manual/Legacy ID. May not sync with user login." style="cursor:help;">⚠️</span>' : '';
 
-      tbody.innerHTML += `
+      htmlOutput += `
         <tr>
           <td>${s.companyName || "-"}</td>
           <td>${s.role === 'buyer' ? '<span style="color:#9333ea; font-weight:800; font-size:11px;">BUYER</span>' : '<span style="color:#16a34a; font-weight:800; font-size:11px;">SUPPLIER</span>'}</td>
@@ -232,9 +233,11 @@ async function loadSuppliers() {
         </tr>`;
     });
 
+    tbody.innerHTML = htmlOutput || "<tr><td colspan='12'>No suppliers match the filter</td></tr>";
+
   } catch (err) {
     console.error("Error loading suppliers:", err);
-    tbody.innerHTML = "<tr><td colspan='12'>Error loading suppliers</td></tr>";
+    tbody.innerHTML = `<tr><td colspan='12' style="color:red;">Error loading suppliers: ${err.message}</td></tr>`;
   }
 }
 

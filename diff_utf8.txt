@@ -1,0 +1,583 @@
+﻿diff --git a/index.html b/index.html
+index 2d3b707..c7a7b68 100644
+--- a/index.html
++++ b/index.html
+@@ -8,9 +8,9 @@
+   <link
+     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap"
+     rel="stylesheet">
+-  <link rel="stylesheet" href="/assets/css/sales-bot.css?v=1.4">
++  
+ 
+-  <script src="/assets/js/sales-bot.js?v=1.4" type="module"></script>
++  
+   <link rel="stylesheet" href="/assets/css/style.css?v=1.5">
+   <link rel="stylesheet" href="/assets/css/premium.css?v=1.0">
+   <script src="/assets/js/ticker.js" type="module"></script>
+@@ -74,7 +74,7 @@
+         .pricing-card:hover, .how-step:hover, .g-card:hover {
+             transform: translateY(-20px) scale(1.02) !important;
+             box-shadow: 0 30px 60px rgba(212, 175, 55, 0.2) !important;
+-            border-color: rgba(212, 175, 55, 0.6) !important;
++            border-col<span style="color: rgba(212, 175, 55, 0.6) !important;
+             z-index: 10;
+         }
+ 
+@@ -507,7 +507,7 @@
+   <div class="institutional-bar" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; overflow-x: auto;">
+     <!-- PREMIUM TRANSLATOR -->
+     <div class="desktop-lang notranslate" style="display: flex; gap: 10px; align-items: center;">
+-        <span style="color: #94a3b8; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; gap: 5px;"><span style="font-size: 14px;">≡ƒîÉ</span> Global</span>
++        <span style="color:#94a3b8; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; gap: 5px;"><span style="font-size: 14px;">≡ƒîÉ</span> Global</span>
+         <button onclick="setLang('en')" style="background:none; border:none; color: #fff; font-size: 11px; font-weight: 700; cursor: pointer; padding: 2px 5px; transition: 0.3s; font-family: 'Inter', sans-serif;" onmouseover="this.style.color='#d4af37'" onmouseout="this.style.color='#fff'">EN</button>
+         <span style="color: rgba(255,255,255,0.2);">|</span>
+         <button onclick="setLang('fr')" style="background:none; border:none; color: #fff; font-size: 11px; font-weight: 700; cursor: pointer; padding: 2px 5px; transition: 0.3s; font-family: 'Inter', sans-serif;" onmouseover="this.style.color='#d4af37'" onmouseout="this.style.color='#fff'">FR</button>
+@@ -550,7 +550,7 @@
+             <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--gold)" style="opacity: 0.8;"><path d="M12 2L3 7v11l9 4 9-4V7l-9-5zm0 18l-7-3.11V8.82l7 3.11 7-3.11v8.07L12 20z"/></svg>
+             <span style="letter-spacing: 2px; font-weight: 800; color: var(--gold);">ICC/WCO</span>
+             <div class="pulse-green"></div>
+-            <div class="clearance-status" style="margin-right: 10px;">CLEARANCE: <span style="color: #22c55e; margin-left: 5px;">ACTIVE</span></div>
++            <div class="clearance-status" style="margin-right: 10px;">CLEARANCE: <span style="color:#22c55e; margin-left: 5px;">ACTIVE</span></div>
+             <span class="bar-divider">|</span>
+         </div>
+         <a href="https://chat.whatsapp.com/BRSKIkuYO6LCVM2WhRyczq" target="_blank" style="color: #25D366; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 5px; white-space: nowrap;">
+@@ -592,7 +592,7 @@
+                 <span style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 900; color: var(--gold); letter-spacing: 1px;">APD</span>
+             </div>
+             <div style="display: flex; flex-direction: column; line-height: 1.1;">
+-                <span style="font-family: 'Playfair Display', serif; font-weight: 900; font-size: 24px; color: #fff; letter-spacing: 1px;">APD <span style="color: var(--gold);">Global</span> Trade</span>
++                <span style="font-family: 'Playfair Display', serif; font-weight: 900; font-size: 24px; color: #fff; letter-spacing: 1px;">APD <span style="color:var(--gold);">Global</span> Trade</span>
+                 <span style="font-size: 10px; font-weight: 800; letter-spacing: 2px; color: var(--gold); text-transform: uppercase;">YOUR ONE-STOP GLOBAL TRADE SOLUTION</span>
+             </div>
+         </a>
+@@ -708,8 +708,8 @@
+     </nav>
+     
+     <div class="header-contact desktop-only" style="display: flex; flex-direction: column; text-align: right; font-size: 13px; font-weight: 700; color: #fff;">
+-        <span style="color: var(--gold);">≡ƒô₧ +91 92664 18868</span>
+-        <span style="color: #25D366; margin-top: 2px;">≡ƒô▓ WhatsApp: +91 97181 73015</span>
++        <span style="color:var(--gold);">≡ƒô₧ +91 92664 18868</span>
++        <span style="color:#25D366; margin-top: 2px;">≡ƒô▓ WhatsApp: +91 97181 73015</span>
+     </div>
+   </header>
+ 
+@@ -737,7 +737,7 @@
+                   <span style="font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 900; color: var(--gold); letter-spacing: 1px;">APD</span>
+               </div>
+               <div style="display: flex; flex-direction: column; line-height: 1.1;">
+-                  <span style="font-family: 'Playfair Display', serif; font-weight: 900; font-size: 18px; color: #fff;">APD <span style="color: var(--gold);">Global</span></span>
++                  <span style="font-family: 'Playfair Display', serif; font-weight: 900; font-size: 18px; color: #fff;">APD <span style="color:var(--gold);">Global</span></span>
+                   <span style="font-size: 8.5px; font-weight: 800; letter-spacing: 2px; color: #94a3b8; text-transform: uppercase;">For Elite Exporters</span>
+               </div>
+           </div>
+@@ -769,24 +769,24 @@
+       <div class="notranslate" style="padding: 20px 0; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.05);">
+           <div style="color: #94a3b8; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;">≡ƒîÉ Select Language</div>
+           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+-              <button onclick="setLang('en')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color:#fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">EN</button>
+-              <button onclick="setLang('fr')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color:#fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">FR</button>
+-              <button onclick="setLang('ar')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color:#fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">AR</button>
+-              <button onclick="setLang('es')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color:#fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">ES</button>
+-              <button onclick="setLang('hi')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color:#fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">HI</button>
+-              <button onclick="setLang('zh-CN')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color:#fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">ZH</button>
+-              <button onclick="setLang('ta')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color:#fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">TA</button>
+-              <button onclick="setLang('gu')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color:#fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">GU</button>
+-              <button onclick="setLang('bn')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color:#fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">BN</button>
+-              <button onclick="setLang('te')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color:#fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">TE</button>
+-              <button onclick="setLang('mr')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color:#fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">MR</button>
+-              <button onclick="setLang('ur')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color:#fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">UR</button>
+-              <button onclick="setLang('kn')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color:#fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">KN</button>
+-              <button onclick="setLang('or')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color:#fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">OR</button>
+-              <button onclick="setLang('ml')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color:#fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">ML</button>
+-              <button onclick="setLang('pa')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color:#fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">PA</button>
+-              <button onclick="setLang('as')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color:#fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">AS</button>
+-              <button onclick="setLang('sa')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color:#fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">SA</button>
++              <button onclick="setLang('en')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color: #fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">EN</button>
++              <button onclick="setLang('fr')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color: #fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">FR</button>
++              <button onclick="setLang('ar')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color: #fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">AR</button>
++              <button onclick="setLang('es')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color: #fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">ES</button>
++              <button onclick="setLang('hi')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color: #fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">HI</button>
++              <button onclick="setLang('zh-CN')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color: #fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">ZH</button>
++              <button onclick="setLang('ta')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color: #fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">TA</button>
++              <button onclick="setLang('gu')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color: #fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">GU</button>
++              <button onclick="setLang('bn')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color: #fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">BN</button>
++              <button onclick="setLang('te')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color: #fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">TE</button>
++              <button onclick="setLang('mr')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color: #fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">MR</button>
++              <button onclick="setLang('ur')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color: #fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">UR</button>
++              <button onclick="setLang('kn')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color: #fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">KN</button>
++              <button onclick="setLang('or')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color: #fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">OR</button>
++              <button onclick="setLang('ml')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color: #fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">ML</button>
++              <button onclick="setLang('pa')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color: #fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">PA</button>
++              <button onclick="setLang('as')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color: #fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">AS</button>
++              <button onclick="setLang('sa')" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); color: #fff; padding:10px 15px; border-radius:8px; font-weight:700; flex: 1 1 30%;">SA</button>
+           </div>
+       </div>
+   </div>
+@@ -842,10 +842,10 @@
+         <!-- NEW BILLIONAIRE ELEMENT FOR MOBILE -->
+         <div class="mobile-trade-ticker" style="display: none; width: 100%; overflow: hidden; white-space: nowrap;">
+             <div style="display: inline-block; animation: scroll-ticker 15s linear infinite;">
+-                <span style="color: #22c55e; margin-right: 20px;">ΓùÅ $4.2M Sugar Order (Brazil)</span>
+-                <span style="color: #22c55e; margin-right: 20px;">ΓùÅ $1.8M Rice Tender (Dubai)</span>
+-                <span style="color: #22c55e; margin-right: 20px;">ΓùÅ $700K Spice Contract (USA)</span>
+-                <span style="color: #22c55e; margin-right: 20px;">ΓùÅ $12M Oil Logistics (Oman)</span>
++                <span style="color:#22c55e; margin-right: 20px;">ΓùÅ $4.2M Sugar Order (Brazil)</span>
++                <span style="color:#22c55e; margin-right: 20px;">ΓùÅ $1.8M Rice Tender (Dubai)</span>
++                <span style="color:#22c55e; margin-right: 20px;">ΓùÅ $700K Spice Contract (USA)</span>
++                <span style="color:#22c55e; margin-right: 20px;">ΓùÅ $12M Oil Logistics (Oman)</span>
+             </div>
+         </div>
+ 
+@@ -884,7 +884,7 @@
+         
+         <h1 id="atomic-h1" class="fade-in" style="margin-bottom: 20px; text-shadow: 0 0 40px rgba(255,255,255,0.1); font-size: clamp(2rem, 5vw, 4rem); font-family: 'Playfair Display', serif; line-height: 1.1;">
+             The Verified Corridor for<br> 
+-            <span style="color: var(--gold); background: linear-gradient(90deg, var(--gold), #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Global Institutional B2B Trade</span>
++            <span style="color:var(--gold); background: linear-gradient(90deg, var(--gold), #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Global Institutional B2B Trade</span>
+         </h1>
+         <p class="fade-in" style="font-size: 1.1rem; margin-bottom: 30px; color: #94a3b8; max-width: 800px; line-height: 1.6;">
+             Connect directly with audited manufacturers, verified suppliers, and multinational buyers. No broker interference. Secure cross-border transactions powered by standardized compliance metrics and live trade data.
+@@ -917,7 +917,7 @@
+                 <button type="submit" style="background: linear-gradient(90deg, var(--gold), #8B6508); border: none; color: #000; font-weight: 900; padding: 0 30px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;">Search</button>
+             </form>
+             <div style="margin-top: 12px; font-size: 0.85rem; color: #94a3b8; text-align: left; padding-left: 20px; position: relative; z-index: 21;">
+-                <span style="color: var(--gold); font-weight: 700;">Trending:</span> 
++                <span style="color:var(--gold); font-weight: 700;">Trending:</span> 
+                 <a href="#" style="color: #cbd5e1; text-decoration: none; margin: 0 5px;">#Sugar Tenders</a> | 
+                 <a href="#" style="color: #cbd5e1; text-decoration: none; margin: 0 5px;">#1121 Rice</a> | 
+                 <a href="#" style="color: #cbd5e1; text-decoration: none; margin: 0 5px;">#Organic Spices</a>
+@@ -927,13 +927,13 @@
+         <!-- FLOATING LIVE METRIC COUNTERS -->
+         <div class="fade-in" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px; margin-top: 20px;">
+             <div style="background: rgba(15,23,42,0.6); padding: 10px 20px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1);">
+-                <span style="color: #22c55e; font-weight: 900;">4,200+</span> <span style="color: #94a3b8; font-size: 0.9rem;">Verified Exporters</span>
++                <span style="color:#22c55e; font-weight: 900;">4,200+</span> <span style="color:#94a3b8; font-size: 0.9rem;">Verified Exporters</span>
+             </div>
+             <div style="background: rgba(15,23,42,0.6); padding: 10px 20px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1);">
+-                <span style="color: #3b82f6; font-weight: 900;">12,800+</span> <span style="color: #94a3b8; font-size: 0.9rem;">Active Global Buyers</span>
++                <span style="color:#3b82f6; font-weight: 900;">12,800+</span> <span style="color:#94a3b8; font-size: 0.9rem;">Active Global Buyers</span>
+             </div>
+             <div style="background: rgba(15,23,42,0.6); padding: 10px 20px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1);">
+-                <span style="color: var(--gold); font-weight: 900;">$1.2B+</span> <span style="color: #94a3b8; font-size: 0.9rem;">Trade Liquidity</span>
++                <span style="color:var(--gold); font-weight: 900;">$1.2B+</span> <span style="color:#94a3b8; font-size: 0.9rem;">Trade Liquidity</span>
+             </div>
+         </div>
+         
+@@ -966,14 +966,14 @@
+         <!-- GLOBAL RFQ DATA TICKER -->
+         <div style="width: 100%; background: #020617; border-top: 1px solid rgba(212,175,55,0.3); border-bottom: 1px solid rgba(212,175,55,0.3); padding: 12px 0; overflow: hidden; white-space: nowrap; position: relative; z-index: 10;">
+             <div style="display: inline-block; animation: scroll-ticker-fast 25s linear infinite; font-family: monospace; font-size: 0.9rem; font-weight: 700; color: #94a3b8;">
+-                <span style="color: #22c55e; margin: 0 15px;">ΓÜí RFQ #8892: 2,000 MT Sunflower Oil (Thailand) ΓÇó L/C at Sight ΓÇó 2 hrs ago</span> | 
+-                <span style="color: #eab308; margin: 0 15px;">ΓÜí RFQ #8841: Organic Spices Annual Contract (USA) ΓÇó D&B Audited ΓÇó 5 hrs ago</span> |
+-                <span style="color: #3b82f6; margin: 0 15px;">ΓÜí RFQ #8911: 10,000 MT Basmati Rice (Dubai) ΓÇó FOB Jebel Ali ΓÇó 12 mins ago</span> |
+-                <span style="color: #22c55e; margin: 0 15px;">ΓÜí RFQ #9021: 500 MT Raw Cotton (Vietnam) ΓÇó TT Payment ΓÇó 1 hr ago</span> |
+-                <span style="color: #22c55e; margin: 0 15px;">ΓÜí RFQ #8892: 2,000 MT Sunflower Oil (Thailand) ΓÇó L/C at Sight ΓÇó 2 hrs ago</span> | 
+-                <span style="color: #eab308; margin: 0 15px;">ΓÜí RFQ #8841: Organic Spices Annual Contract (USA) ΓÇó D&B Audited ΓÇó 5 hrs ago</span> |
+-                <span style="color: #3b82f6; margin: 0 15px;">ΓÜí RFQ #8911: 10,000 MT Basmati Rice (Dubai) ΓÇó FOB Jebel Ali ΓÇó 12 mins ago</span> |
+-                <span style="color: #22c55e; margin: 0 15px;">ΓÜí RFQ #9021: 500 MT Raw Cotton (Vietnam) ΓÇó TT Payment ΓÇó 1 hr ago</span>
++                <span style="color:#22c55e; margin: 0 15px;">ΓÜí RFQ #8892: 2,000 MT Sunflower Oil (Thailand) ΓÇó L/C at Sight ΓÇó 2 hrs ago</span> | 
++                <span style="color:#eab308; margin: 0 15px;">ΓÜí RFQ #8841: Organic Spices Annual Contract (USA) ΓÇó D&B Audited ΓÇó 5 hrs ago</span> |
++                <span style="color:#3b82f6; margin: 0 15px;">ΓÜí RFQ #8911: 10,000 MT Basmati Rice (Dubai) ΓÇó FOB Jebel Ali ΓÇó 12 mins ago</span> |
++                <span style="color:#22c55e; margin: 0 15px;">ΓÜí RFQ #9021: 500 MT Raw Cotton (Vietnam) ΓÇó TT Payment ΓÇó 1 hr ago</span> |
++                <span style="color:#22c55e; margin: 0 15px;">ΓÜí RFQ #8892: 2,000 MT Sunflower Oil (Thailand) ΓÇó L/C at Sight ΓÇó 2 hrs ago</span> | 
++                <span style="color:#eab308; margin: 0 15px;">ΓÜí RFQ #8841: Organic Spices Annual Contract (USA) ΓÇó D&B Audited ΓÇó 5 hrs ago</span> |
++                <span style="color:#3b82f6; margin: 0 15px;">ΓÜí RFQ #8911: 10,000 MT Basmati Rice (Dubai) ΓÇó FOB Jebel Ali ΓÇó 12 mins ago</span> |
++                <span style="color:#22c55e; margin: 0 15px;">ΓÜí RFQ #9021: 500 MT Raw Cotton (Vietnam) ΓÇó TT Payment ΓÇó 1 hr ago</span>
+             </div>
+         </div>
+         <style>
+@@ -1093,7 +1093,7 @@
+ 
+   <!-- VERIFIED SUPPLIER SHOWCASE -->
+   <section style="padding: 80px 8%; background: #020617; position: relative;">
+-      <h2 style="text-align: center; color: #fff; font-family: 'Playfair Display', serif; font-size: 2.8rem; margin-bottom: 50px;">Featured <span style="color: var(--gold);">Verified</span> Suppliers</h2>
++      <h2 style="text-align: center; color: #fff; font-family: 'Playfair Display', serif; font-size: 2.8rem; margin-bottom: 50px;">Featured <span style="color:var(--gold);">Verified</span> Suppliers</h2>
+       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
+           <!-- Supplier 1 -->
+           <div class="glass-card" style="padding: 35px; border-radius: 16px; border-top: 4px solid var(--gold); position: relative;">
+@@ -1102,7 +1102,7 @@
+                   <div style="width: 50px; height: 50px; background: rgba(212,175,55,0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 24px;">≡ƒî╛</div>
+                   <div>
+                       <h3 style="color: #fff; font-size: 1.4rem; margin: 0;">Raj Global Agro</h3>
+-                      <span style="color: #94a3b8; font-size: 0.85rem;">≡ƒôì Mumbai, India</span>
++                      <span style="color:#94a3b8; font-size: 0.85rem;">≡ƒôì Mumbai, India</span>
+                   </div>
+               </div>
+               <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.6;">Top-tier exporter of premium 1121 Basmati Rice and organic spices to the Middle East and Europe.</p>
+@@ -1121,7 +1121,7 @@
+                   <div style="width: 50px; height: 50px; background: rgba(212,175,55,0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 24px;">ΓÜÖ∩╕Å</div>
+                   <div>
+                       <h3 style="color: #fff; font-size: 1.4rem; margin: 0;">Nexus Heavy Machinery</h3>
+-                      <span style="color: #94a3b8; font-size: 0.85rem;">≡ƒôì Frankfurt, Germany</span>
++                      <span style="color:#94a3b8; font-size: 0.85rem;">≡ƒôì Frankfurt, Germany</span>
+                   </div>
+               </div>
+               <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.6;">Leading manufacturer of industrial-grade CNC machines and automated assembly line robots.</p>
+@@ -1139,7 +1139,7 @@
+                   <div style="width: 50px; height: 50px; background: rgba(212,175,55,0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 24px;">≡ƒæù</div>
+                   <div>
+                       <h3 style="color: #fff; font-size: 1.4rem; margin: 0;">Lumina Textiles Ltd</h3>
+-                      <span style="color: #94a3b8; font-size: 0.85rem;">≡ƒôì Dhaka, Bangladesh</span>
++                      <span style="color:#94a3b8; font-size: 0.85rem;">≡ƒôì Dhaka, Bangladesh</span>
+                   </div>
+               </div>
+               <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.6;">Premium garment manufacturer specializing in organic cotton and sustainable fast-fashion apparel.</p>
+@@ -1158,7 +1158,7 @@
+ 
+   <!-- VERIFIED SUPPLIERS SHOWCASE -->
+   <section style="padding: 60px 20px; background: #0b1224; text-align: center; border-bottom: 1px solid rgba(212,175,55,0.2);">
+-      <h2 style="color: #fff; font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 40px;">Featured <span style="color: var(--gold);">Verified</span> Suppliers</h2>
++      <h2 style="color: #fff; font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 40px;">Featured <span style="color:var(--gold);">Verified</span> Suppliers</h2>
+       <div class="container" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+           <div style="background: rgba(15,23,42,0.6); border: 1px solid rgba(212,175,55,0.3); padding: 30px; border-radius: 15px; width: 300px; backdrop-filter: blur(10px);">
+               <h3 style="color: var(--gold); margin-bottom: 10px;">Agro India Pvt Ltd</h3>
+@@ -1243,24 +1243,24 @@
+               <div style="flex: 2 1 500px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+                   <div style="background: rgba(255,255,255,0.03); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; justify-content: center;">
+                       <div style="color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px;">IEC Code</div>
+-                      <div style="color: #fff; font-weight: 600; font-size: 15px;"><span style="color: #22c55e; margin-right: 5px;">Γ£à</span> ATLPC3583G</div>
++                      <div style="color: #fff; font-weight: 600; font-size: 15px;"><span style="color:#22c55e; margin-right: 5px;">Γ£à</span> ATLPC3583G</div>
+                   </div>
+                   <div style="background: rgba(255,255,255,0.03); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; justify-content: center;">
+                       <div style="color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px;">GST Registration</div>
+-                      <div style="color: #fff; font-weight: 600; font-size: 15px;"><span style="color: #22c55e; margin-right: 5px;">Γ£à</span> 08ATLPC3583G1ZL</div>
++                      <div style="color: #fff; font-weight: 600; font-size: 15px;"><span style="color:#22c55e; margin-right: 5px;">Γ£à</span> 08ATLPC3583G1ZL</div>
+                   </div>
+                   <div style="background: rgba(255,255,255,0.03); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; justify-content: center;">
+                       <div style="color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px;">MSME Number</div>
+-                      <div style="color: #fff; font-weight: 600; font-size: 15px;"><span style="color: #22c55e; margin-right: 5px;">Γ£à</span> RJ-11-0054169</div>
++                      <div style="color: #fff; font-weight: 600; font-size: 15px;"><span style="color:#22c55e; margin-right: 5px;">Γ£à</span> RJ-11-0054169</div>
+                   </div>
+                   <div style="background: rgba(255,255,255,0.03); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; justify-content: center;">
+                       <div style="color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px;">CIN</div>
+-                      <div style="color: #fff; font-weight: 600; font-size: 15px;"><span style="color: #22c55e; margin-right: 5px;">Γ£à</span> U72900MH1995PLC095642</div>
++                      <div style="color: #fff; font-weight: 600; font-size: 15px;"><span style="color:#22c55e; margin-right: 5px;">Γ£à</span> U72900MH1995PLC095642</div>
+                   </div>
+                   <div style="background: rgba(212,175,55,0.1); padding: 15px; border-radius: 8px; border: 1px solid var(--gold); grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between;">
+                       <div style="display: flex; flex-direction: column;">
+                           <div style="color: var(--gold); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; font-weight: 700;">Government of Rajasthan</div>
+-                          <div style="color: #fff; font-weight: 700; font-size: 16px;"><span style="color: #22c55e; margin-right: 5px;">Γ£à</span> SAN: 8004730707000001</div>
++                          <div style="color: #fff; font-weight: 700; font-size: 16px;"><span style="color:#22c55e; margin-right: 5px;">Γ£à</span> SAN: 8004730707000001</div>
+                       </div>
+                   </div>
+               </div>
+@@ -1299,7 +1299,7 @@
+         transition: border-color 0.3s, background 0.3s;
+       }
+       .manifesto-benefit-item:hover {
+-        border-color: rgba(212,175,55,0.4);
++        border-col<span style="color: rgba(212,175,55,0.4);
+         background: rgba(212,175,55,0.05);
+       }
+       .manifesto-product-chip {
+@@ -1328,8 +1328,8 @@
+ 
+     <!-- HEADLINE -->
+     <div class="manifesto-reveal" style="margin-bottom: 40px;">
+-      <p style="font-size:13px; font-weight:800; color:var(--gold); letter-spacing:3px; text-transform:uppercase; margin-bottom:16px;">≡ƒÜÇ The Question Every Exporter Must Ask</p>
+-      <h2 style="font-family:'Playfair Display',serif; font-size:clamp(2rem,6vw,3.8rem); color:#fff; line-height:1.15; font-weight:900; margin-bottom:20px;">
++      <p style="font-size:13px; font-weight:800; color: var(--gold); letter-spacing:3px; text-transform:uppercase; margin-bottom:16px;">≡ƒÜÇ The Question Every Exporter Must Ask</p>
++      <h2 style="font-family:'Playfair Display',serif; font-size:clamp(2rem,6vw,3.8rem); color: #fff; line-height:1.15; font-weight:900; margin-bottom:20px;">
+         Why Exporters, Manufacturers &<br>Suppliers Choose<br>
+         <span style="color:var(--gold); animation: manifesto-pulse 3s infinite;">APD GLOBAL TRADE</span>
+       </h2>
+@@ -1337,13 +1337,13 @@
+ 
+     <!-- THE BIG STATEMENT -->
+     <div class="manifesto-reveal" style="max-width:700px; margin:0 auto 60px; transition-delay:0.15s;">
+-      <p style="font-size:clamp(1.1rem,3vw,1.5rem); color:#cbd5e1; line-height:1.8; margin-bottom:20px;">
++      <p style="font-size:clamp(1.1rem,3vw,1.5rem); color: #cbd5e1; line-height:1.8; margin-bottom:20px;">
+         Because products don't grow businesses...
+       </p>
+-      <div style="font-size:clamp(2.5rem,10vw,5rem); font-weight:900; color:var(--gold); line-height:1; letter-spacing:-1px; animation:manifesto-pulse 3s infinite; margin-bottom:20px;">≡ƒîì BUYERS DO.</div>
+-      <p style="font-size:clamp(1rem,2.5vw,1.25rem); color:#94a3b8; line-height:1.8;">
++      <div style="font-size:clamp(2.5rem,10vw,5rem); font-weight:900; color: var(--gold); line-height:1; letter-spacing:-1px; animation:manifesto-pulse 3s infinite; margin-bottom:20px;">≡ƒîì BUYERS DO.</div>
++      <p style="font-size:clamp(1rem,2.5vw,1.25rem); color: #94a3b8; line-height:1.8;">
+         With APD GLOBAL TRADE, your objective is not just listing products ΓÇö<br>
+-        <strong style="color:#fff;">it is connecting with serious international business opportunities.</strong>
++        <strong style="color: #fff;">it is connecting with serious international business opportunities.</strong>
+       </p>
+     </div>
+ 
+@@ -1352,7 +1352,7 @@
+ 
+     <!-- BENEFITS GRID -->
+     <div class="manifesto-reveal" style="max-width:900px; margin:0 auto 60px; transition-delay:0.25s;">
+-      <p style="font-size:13px; font-weight:800; color:var(--gold); letter-spacing:3px; text-transform:uppercase; margin-bottom:30px;">Benefits</p>
++      <p style="font-size:13px; font-weight:800; color: var(--gold); letter-spacing:3px; text-transform:uppercase; margin-bottom:30px;">Benefits</p>
+       <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; text-align:left;">
+         <div class="manifesto-benefit-item"><span style="color:#22c55e;font-size:18px;flex-shrink:0;">Γ£à</span><span style="color:#e2e8f0;font-weight:600;">International Buyer Expansion Support</span></div>
+         <div class="manifesto-benefit-item"><span style="color:#22c55e;font-size:18px;flex-shrink:0;">Γ£à</span><span style="color:#e2e8f0;font-weight:600;">Importers, Distributors &amp; Procurement Networks</span></div>
+@@ -1367,7 +1367,7 @@
+ 
+     <!-- PRODUCTS STRIP -->
+     <div class="manifesto-reveal" style="max-width:900px; margin:0 auto 60px; transition-delay:0.35s;">
+-      <p style="font-size:13px; font-weight:800; color:var(--gold); letter-spacing:3px; text-transform:uppercase; margin-bottom:24px;">Suitable For</p>
++      <p style="font-size:13px; font-weight:800; color: var(--gold); letter-spacing:3px; text-transform:uppercase; margin-bottom:24px;">Suitable For</p>
+       <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center;">
+         <span class="manifesto-product-chip">≡ƒìÜ Rice</span>
+         <span class="manifesto-product-chip">≡ƒî╢ Spices</span>
+@@ -1385,25 +1385,25 @@
+ 
+     <!-- CLOSING MANIFESTO -->
+     <div class="manifesto-reveal" style="max-width:700px; margin:0 auto 50px; transition-delay:0.45s;">
+-      <p style="font-size:clamp(1rem,2.5vw,1.2rem); color:#94a3b8; margin-bottom:30px; line-height:1.8;">
++      <p style="font-size:clamp(1rem,2.5vw,1.2rem); color: #94a3b8; margin-bottom:30px; line-height:1.8;">
+         Whether you are a startup exporter or an established manufacturer,<br>the goal remains the same:
+       </p>
+       <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-bottom:40px;">
+         <div style="padding:20px; background:rgba(212,175,55,0.05); border:1px solid rgba(212,175,55,0.2); border-radius:12px;">
+           <div style="font-size:28px; margin-bottom:8px;">≡ƒôê</div>
+-          <div style="font-weight:800; color:#fff; font-size:14px;">More Buyer Opportunities</div>
++          <div style="font-weight:800; color: #fff; font-size:14px;">More Buyer Opportunities</div>
+         </div>
+         <div style="padding:20px; background:rgba(212,175,55,0.05); border:1px solid rgba(212,175,55,0.2); border-radius:12px;">
+           <div style="font-size:28px; margin-bottom:8px;">≡ƒñ¥</div>
+-          <div style="font-weight:800; color:#fff; font-size:14px;">More Distributor Connections</div>
++          <div style="font-weight:800; color: #fff; font-size:14px;">More Distributor Connections</div>
+         </div>
+         <div style="padding:20px; background:rgba(212,175,55,0.05); border:1px solid rgba(212,175,55,0.2); border-radius:12px;">
+           <div style="font-size:28px; margin-bottom:8px;">≡ƒîì</div>
+-          <div style="font-weight:800; color:#fff; font-size:14px;">More International Markets</div>
++          <div style="font-weight:800; color: #fff; font-size:14px;">More International Markets</div>
+         </div>
+         <div style="padding:20px; background:rgba(212,175,55,0.05); border:1px solid rgba(212,175,55,0.2); border-radius:12px;">
+           <div style="font-size:28px; margin-bottom:8px;">≡ƒÜó</div>
+-          <div style="font-weight:800; color:#fff; font-size:14px;">More Export Business</div>
++          <div style="font-weight:800; color: #fff; font-size:14px;">More Export Business</div>
+         </div>
+       </div>
+     </div>
+@@ -1411,15 +1411,15 @@
+     <!-- FINAL CALL TO ACTION -->
+     <div class="manifesto-reveal" style="transition-delay:0.55s;">
+       <div style="background:linear-gradient(135deg,rgba(201,164,74,0.12),rgba(15,23,42,0.8)); border:1px solid rgba(212,175,55,0.4); border-radius:20px; padding:40px 30px; max-width:700px; margin:0 auto;">
+-        <p style="font-size:clamp(1.1rem,3vw,1.5rem); font-weight:700; color:#fff; margin-bottom:10px; line-height:1.6;">
++        <p style="font-size:clamp(1.1rem,3vw,1.5rem); font-weight:700; color: #fff; margin-bottom:10px; line-height:1.6;">
+           Don't wait for buyers to find you.
+         </p>
+-        <p style="font-size:clamp(1rem,2.5vw,1.2rem); color:#94a3b8; margin-bottom:30px; line-height:1.7;">
++        <p style="font-size:clamp(1rem,2.5vw,1.2rem); color: #94a3b8; margin-bottom:30px; line-height:1.7;">
+           Position your business where international opportunities can find you.
+         </p>
+-        <div style="font-size:clamp(1.2rem,3vw,1.6rem); font-weight:900; color:var(--gold); margin-bottom:12px; letter-spacing:1px;">≡ƒîì APD GLOBAL TRADE</div>
+-        <p style="color:#94a3b8; font-size:14px; letter-spacing:2px; text-transform:uppercase; margin-bottom:30px;">Global Buyers &nbsp;ΓÇó&nbsp; Global Opportunities &nbsp;ΓÇó&nbsp; Global Growth</p>
+-        <a href="/membership.html" style="display:inline-block; background:linear-gradient(180deg,#facc15,#8B6508); color:#000; padding:18px 50px; border-radius:50px; font-weight:900; font-size:16px; text-decoration:none; letter-spacing:1px; box-shadow:0 15px 40px rgba(212,175,55,0.4); text-transform:uppercase;">
++        <div style="font-size:clamp(1.2rem,3vw,1.6rem); font-weight:900; color: var(--gold); margin-bottom:12px; letter-spacing:1px;">≡ƒîì APD GLOBAL TRADE</div>
++        <p style="color: #94a3b8; font-size:14px; letter-spacing:2px; text-transform:uppercase; margin-bottom:30px;">Global Buyers &nbsp;ΓÇó&nbsp; Global Opportunities &nbsp;ΓÇó&nbsp; Global Growth</p>
++        <a href="/membership.html" style="display:inline-block; background:linear-gradient(180deg,#facc15,#8B6508); color: #000; padding:18px 50px; border-radius:50px; font-weight:900; font-size:16px; text-decoration:none; letter-spacing:1px; box-shadow:0 15px 40px rgba(212,175,55,0.4); text-transform:uppercase;">
+           Position My Business Now ΓåÆ
+         </a>
+       </div>
+@@ -1775,9 +1775,9 @@
+                 <h2 style="font-size: 3.5rem; color: #fff; margin: 0;">Verified Excellence</h2>
+             </div>
+             <div style="display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); padding: 10px 20px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1);">
+-                <span style="color: #fbbc05; font-size: 24px;">ΓÿàΓÿàΓÿàΓÿàΓÿà</span>
+-                <span style="color: #fff; font-weight: 800; font-size: 1.2rem;">4.9 Rating</span>
+-                <span style="color: #94a3b8;">based on 100+ Verified Supplier Reviews</span>
++                <span style="color:#fbbc05; font-size: 24px;">ΓÿàΓÿàΓÿàΓÿàΓÿà</span>
++                <span style="color:#fff; font-weight: 800; font-size: 1.2rem;">4.9 Rating</span>
++                <span style="color:#94a3b8;">based on 100+ Verified Supplier Reviews</span>
+                 <img src="https://www.gstatic.com/images/branding/product/1x/googleg_48dp.png" width="20" height="20" alt="Google">
+             </div>
+         </div>
+@@ -1797,7 +1797,7 @@
+             }
+             .g-card:hover {
+                 transform: translateY(-5px);
+-                border-color: rgba(212, 175, 55, 0.4);
++                border-col<span style="color: rgba(212, 175, 55, 0.4);
+                 background: rgba(212, 175, 55, 0.02);
+             }
+             .g-header {
+@@ -2015,7 +2015,7 @@
+                 }
+                 .product-card:hover {
+                     transform: translateY(-10px);
+-                    border-color: rgba(212, 175, 55, 0.5);
++                    border-col<span style="color: rgba(212, 175, 55, 0.5);
+                     box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 20px rgba(212, 175, 55, 0.1);
+                 }
+                 .product-img {
+@@ -2244,14 +2244,14 @@ border-top:1px solid rgba(201,164,74,.15);
+       <h2 style="
+       font-family:'Playfair Display',serif;
+       font-size:44px;
+-      color:#e7cf88;
++      color: #e7cf88;
+       margin-bottom:40px;">
+         Trade Standards & Compliance Framework
+       </h2>
+       <p style="
+       max-width:850px;
+       margin:0 auto 100px auto;
+-      color:#cbd5f5;
++      color: #cbd5f5;
+       font-size:18px;
+       line-height:1.8;">
+         APD Global Trade operates under a structured compliance philosophy
+@@ -2263,20 +2263,20 @@ border-top:1px solid rgba(201,164,74,.15);
+       gap:50px;
+       text-align:left;">
+         <div>
+-          <h3 style="color:#c9a44a;">KYC & IEC Verification</h3>
+-          <p style="color:#cbd5f5;">Supplier identity screening to maintain trade integrity.</p>
++          <h3 style="color: #c9a44a;">KYC & IEC Verification</h3>
++          <p style="color: #cbd5f5;">Supplier identity screening to maintain trade integrity.</p>
+         </div>
+         <div>
+-          <h3 style="color:#c9a44a;">RFQ Screening</h3>
+-          <p style="color:#cbd5f5;">Manual filtering to reduce non-serious trade inquiries.</p>
++          <h3 style="color: #c9a44a;">RFQ Screening</h3>
++          <p style="color: #cbd5f5;">Manual filtering to reduce non-serious trade inquiries.</p>
+         </div>
+         <div>
+-          <h3 style="color:#c9a44a;">Dispute Escalation Support</h3>
+-          <p style="color:#cbd5f5;">Priority assistance for premium members during trade conflicts.</p>
++          <h3 style="color: #c9a44a;">Dispute Escalation Support</h3>
++          <p style="color: #cbd5f5;">Priority assistance for premium members during trade conflicts.</p>
+         </div>
+         <div>
+-          <h3 style="color:#c9a44a;">Structured Documentation Flow</h3>
+-          <p style="color:#cbd5f5;">Quotation and communication standardization.</p>
++          <h3 style="color: #c9a44a;">Structured Documentation Flow</h3>
++          <p style="color: #cbd5f5;">Quotation and communication standardization.</p>
+         </div>
+       </div>
+     </div>
+@@ -2291,7 +2291,7 @@ border-top:1px solid rgba(201,164,74,.15);
+       <h2 style="
+       font-family:'Playfair Display',serif;
+       font-size:44px;
+-      color:#e7cf88;
++      color: #e7cf88;
+       margin-bottom:80px;">
+         Advisory & Strategic Oversight Panel
+       </h2>
+@@ -2302,20 +2302,20 @@ border-top:1px solid rgba(201,164,74,.15);
+         <div style="background:rgba(11,29,54,.7);
+       padding:40px;border-radius:28px;
+       border:1px solid rgba(201,164,74,.25);">
+-          <h3 style="color:#c9a44a;">Trade Compliance Advisory</h3>
+-          <p style="color:#cbd5f5;">Oversight on supplier verification and global trade standards.</p>
++          <h3 style="color: #c9a44a;">Trade Compliance Advisory</h3>
++          <p style="color: #cbd5f5;">Oversight on supplier verification and global trade standards.</p>
+         </div>
+         <div style="background:rgba(11,29,54,.7);
+       padding:40px;border-radius:28px;
+       border:1px solid rgba(201,164,74,.25);">
+-          <h3 style="color:#c9a44a;">International Market Strategy</h3>
+-          <p style="color:#cbd5f5;">Advisory input on emerging global trade corridors.</p>
++          <h3 style="color: #c9a44a;">International Market Strategy</h3>
++          <p style="color: #cbd5f5;">Advisory input on emerging global trade corridors.</p>
+         </div>
+         <div style="background:rgba(11,29,54,.7);
+       padding:40px;border-radius:28px;
+       border:1px solid rgba(201,164,74,.25);">
+-          <h3 style="color:#c9a44a;">Structured Growth Framework</h3>
+-          <p style="color:#cbd5f5;">Ensuring sustainable expansion of supplier network.</p>
++          <h3 style="color: #c9a44a;">Structured Growth Framework</h3>
++          <p style="color: #cbd5f5;">Ensuring sustainable expansion of supplier network.</p>
+         </div>
+       </div>
+     </div>
+@@ -2342,9 +2342,9 @@ border-top:1px solid rgba(201,164,74,.15);
+               </p>
+               <div style="margin-top: 40px; display: flex; align-items: center; gap: 15px;">
+                   <div style="width: 40px; height: 40px; border-radius: 50%; background: #0a66c2; display: flex; align-items: center; justify-content: center; cursor: pointer;" title="Connect on LinkedIn">
+-                      <span style="color: #fff; font-weight: 800; font-size: 18px;">in</span>
++                      <span style="color:#fff; font-weight: 800; font-size: 18px;">in</span>
+                   </div>
+-                  <span style="color: #94a3b8; font-size: 0.9rem; font-weight: 600;">Verified Leadership Profile</span>
++                  <span style="color:#94a3b8; font-size: 0.9rem; font-weight: 600;">Verified Leadership Profile</span>
+               </div>
+           </div>
+           <div style="width: 350px; height: 450px; background: #010409; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+@@ -2371,7 +2371,7 @@ text-align:center;
+     <h2 style="
+     font-family:'Playfair Display',serif;
+     font-size:44px;
+-    color:#e7cf88;
++    color: #e7cf88;
+     margin-bottom:80px;">
+       Annual Trade Activity Overview
+     </h2>
+@@ -2384,16 +2384,16 @@ text-align:center;
+     font-weight:600;
+   ">
+       <div>
+-        <div style="color:#c9a44a;font-size:38px;">Global</div>
+-        <div style="color:#cbd5f5; font-size: 14px;">Trade Volume</div>
++        <div style="color: #c9a44a;font-size:38px;">Global</div>
++        <div style="color: #cbd5f5; font-size: 14px;">Trade Volume</div>
+       </div>
+       <div>
+-        <div style="color:#c9a44a;font-size:38px;">International</div>
+-        <div style="color:#cbd5f5; font-size: 14px;">Active Nations</div>
++        <div style="color: #c9a44a;font-size:38px;">International</div>
++        <div style="color: #cbd5f5; font-size: 14px;">Active Nations</div>
+       </div>
+       <div>
+-        <div style="color:#c9a44a;font-size:38px;">Verified</div>
+-        <div style="color:#cbd5f5; font-size: 14px;">Sourcing Leads</div>
++        <div style="color: #c9a44a;font-size:38px;">Verified</div>
++        <div style="color: #cbd5f5; font-size: 14px;">Sourcing Leads</div>
+       </div>
+     </div>
+   </section>
+@@ -2407,7 +2407,7 @@ text-align:center;
+     <h2 style="
+     font-family:'Playfair Display',serif;
+     font-size:40px;
+-    color:#e7cf88;
++    color: #e7cf88;
+     margin-bottom:60px;">
+       Global Trade Network Presence
+     </h2>
+@@ -2417,7 +2417,7 @@ text-align:center;
+     flex-wrap:wrap;
+     gap:60px;
+     font-size:18px;
+-    color:#cbd5f5;
++    color: #cbd5f5;
+   ">
+       <div style="background: rgba(255,255,255,0.05); padding: 15px 25px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2);">≡ƒç║≡ƒç╕ North America</div>
+       <div style="background: rgba(255,255,255,0.05); padding: 15px 25px; border-radius: 12px; border: 1px solid rgba(212,175,55,0.2);">≡ƒç¬≡ƒç║ Europe</div>
+@@ -2467,7 +2467,7 @@ text-align:center;
+                     <span style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 900; color: var(--gold); letter-spacing: 1px;">APD</span>
+                 </div>
+                 <div style="display: flex; flex-direction: column; line-height: 1.2;">
+-                    <span style="font-family: 'Playfair Display', serif; font-weight: 900; font-size: 22px; letter-spacing: 1px; color: #fff;">APD <span style="color: var(--gold);">Global</span> Trade</span>
++                    <span style="font-family: 'Playfair Display', serif; font-weight: 900; font-size: 22px; letter-spacing: 1px; color: #fff;">APD <span style="color:var(--gold);">Global</span> Trade</span>
+                     <span style="font-size: 9px; font-weight: 800; letter-spacing: 2px; color: #94a3b8; text-transform: uppercase;">For Elite Exporters</span>
+                 </div>
+             </div>
+@@ -3065,9 +3065,7 @@ body { top: 0 !important; }
+           <div style="width:1px;height:30px;background:rgba(212,175,55,0.3);"></div>\
+           <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">\
+             <span style="color:#22c55e;font-size:11px;font-weight:900;">Γ£à MSME</span>\
+-            <span style="col  <script src="/assets/js/ai-chatbot.js"></script>
+-
+-  <!-- QUICK RFQ MODAL -->
++            <!-- QUICK RFQ MODAL -->
+   <div id="rfqModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(10px); z-index: 999999; justify-content: center; align-items: center;">
+       <div style="background: #0f172a; border: 1px solid rgba(212,175,55,0.4); border-radius: 20px; padding: 40px; max-width: 500px; width: 90%; box-shadow: 0 20px 50px rgba(0,0,0,0.8); position: relative;">
+           <div onclick="document.getElementById('rfqModal').style.display='none';" style="position: absolute; top: 20px; right: 20px; color: #cbd5e1; cursor: pointer; font-size: 1.5rem;">Γ£ò</div>
+@@ -3184,7 +3182,15 @@ body { top: 0 !important; }
+     };
+   </script>
+ 
+-</body>
++
++  <script src="//code.tidio.co/zs195w58z0vrzcknn4gkbosvrnn63xfe.js" async></script>
++  
++
++
++  
++  
++  
++  </body>
+ 
+ </html>
+ 

@@ -630,3 +630,20 @@ header nav a[style*="color:var(--gold)"] {
         left: -50%;
     }
 }
+
+/* FORCE CHAT WIDGETS (TIDIO / TRADE COPILOT) TO THE LEFT SIDE TO NOT COVER WHATSAPP */
+#tidio-chat, 
+#tidio-chat-iframe, 
+iframe[title="Tidio Chat"], 
+iframe[id^="tidio-chat"],
+div[id^="tidio-chat"],
+.sales-bot-widget {
+    left: 20px !important;
+    right: auto !important;
+}
+
+#tidio-chat-code, #tidio-chat-container {
+    left: 20px !important;
+    right: auto !important;
+}
+
