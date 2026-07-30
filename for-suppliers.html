@@ -183,5 +183,27 @@ product and capacity match the requirement.</p>
 <a href="/buyer-rfqs.html" class="btn outline">See Buyer Demand</a>
 </section>
 
+
+<style>
+  /* Force Tidio Chat widget to left side so it never covers WhatsApp floating button */
+  #tidio-chat, #tidio-chat-iframe, iframe[title="Tidio Chat"], div[id^="tidio-chat"] {
+      left: 20px !important;
+      right: auto !important;
+  }
+</style>
+<script id="tidio-auto-open">
+  document.addEventListener("tidioChat-ready", function() {
+      setTimeout(function() {
+          try {
+              window.tidioChatApi.open();
+              const el = document.getElementById("tidio-chat") || document.getElementById("tidio-chat-iframe") || document.querySelector("iframe[title='Tidio Chat']");
+              if (el) { el.style.left = "20px"; el.style.right = "auto"; }
+          } catch(e){}
+      }, 2000);
+  });
+</script>
+
+<script src="//code.tidio.co/zs195w58z0vrzcknn4gkbosvrnn63xfe.js" async></script>
+
 </body>
 </html>
