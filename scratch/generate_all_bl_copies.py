@@ -1,0 +1,134 @@
+import os
+
+def generate_bl(commodity, hs_code, date_str, filename):
+    html_content = f"""<!DOCTYPE html>
+<html>
+<head>
+<style>
+    @page {{ size: A4 portrait; margin: 12mm; background-color: #ffffff; }}
+    body {{ font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 9pt; color: #000; margin: 0; padding: 0; }}
+    *, *::before, *::after {{ box-sizing: border-box; }}
+    table {{ width: 100%; border-collapse: collapse; table-layout: fixed; }}
+    td, th {{ border: 1px solid #000; padding: 6px; vertical-align: top; word-wrap: break-word; }}
+    .label {{ font-size: 7pt; text-transform: uppercase; display: block; margin-bottom: 4px; color: #333; }}
+    .value {{ font-size: 10pt; font-weight: bold; font-family: 'Courier New', Courier, monospace; }}
+    .header-title {{ font-size: 18pt; font-weight: bold; text-align: center; letter-spacing: 1px; padding: 20px 0; vertical-align: middle; }}
+    .particulars th {{ font-size: 8pt; text-align: center; background-color: #f9f9f9; }}
+    .particulars td {{ height: 400px; }}
+    .redacted {{ color: #555; letter-spacing: 1px; }}
+</style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td colspan="2" style="width: 50%; height: 75px;">
+                <span class="label">Shipper</span><span class="value redacted">*** REDACTED ***</span>
+            </td>
+            <td colspan="2" style="width: 50%;">
+                <span class="label">BILL OF LADING No.</span><span class="value redacted">*** REDACTED ***</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="height: 75px;">
+                <span class="label">Consignee</span>
+                <span class="value">TO THE ORDER OF <br><span class="redacted">*** REDACTED ***</span></span>
+            </td>
+            <td colspan="2" rowspan="2" class="header-title">
+                BILL OF LADING<br><span style="font-size: 11pt; font-weight: normal; font-family: Arial, sans-serif;">ORIGINAL</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="height: 75px;">
+                <span class="label">Notify Party</span><span class="value redacted">*** REDACTED ***</span>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%;"><span class="label">Vessel & Voyage No.</span><span class="value redacted">*** REDACTED ***</span></td>
+            <td style="width: 25%;"><span class="label">Port of Loading</span><span class="value">ANY PORT, INDIA</span></td>
+            <td colspan="2" style="width: 50%;"><span class="label">Place of Receipt</span><span class="value redacted">*** REDACTED ***</span></td>
+        </tr>
+        <tr>
+            <td><span class="label">Booking Ref.</span><span class="value redacted">*** REDACTED ***</span></td>
+            <td><span class="label">Port of Discharge</span><span class="value">ANY PORT, GULF</span></td>
+            <td colspan="2"><span class="label">Place of Delivery</span><span class="value redacted">*** REDACTED ***</span></td>
+        </tr>
+    </table>
+    
+    <table class="particulars" style="border-top: none;">
+        <tr>
+            <td colspan="4" style="text-align: center; border-bottom: none; height: auto; font-size: 7.5pt; font-weight: bold; background-color: #fff; padding: 4px;">
+                PARTICULARS FURNISHED BY THE SHIPPER - NOT CHECKED BY CARRIER - CARRIER NOT RESPONSIBLE
+            </td>
+        </tr>
+        <tr>
+            <th style="width: 25%;">Container Numbers, Seal<br>Numbers and Marks</th>
+            <th style="width: 45%;">Description of Packages and Goods</th>
+            <th style="width: 15%;">Gross Cargo<br>Weight</th>
+            <th style="width: 15%;">Measurement</th>
+        </tr>
+        <tr>
+            <td>
+                <span class="value redacted">*** REDACTED ***</span><br><br><br>
+                <span class="label">Seal Numbers:</span><span class="value redacted">*** REDACTED ***</span>
+            </td>
+            <td>
+                <span class="value">
+                    25 x 20' DRY VAN<br><br>CONTAINING:<br><br>
+                    {commodity}<br>HS CODE: {hs_code}<br><br>
+                    PACKED IN 25 KGS PP BAGS<br>TOTAL 27,000 BAG(S)<br>NET WT: 675,000.00 KGS
+                </span>
+            </td>
+            <td style="text-align: right;"><span class="value">677,160.000<br>KGS</span></td>
+            <td style="text-align: right;"><span class="value redacted">***</span></td>
+        </tr>
+    </table>
+
+    <table style="border-top: none;">
+        <tr>
+            <td colspan="2" style="width: 50%; height: 80px;">
+                <span class="label">Freight & Charges</span><span class="value">AS PER AGREEMENT<br>FREIGHT PREPAID</span>
+            </td>
+            <td colspan="2" style="width: 50%;">
+                <span class="label">Carrier's Receipt</span><span class="value">25 cntrs</span>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%;"><span class="label">Place and Date of Issue</span><span class="value">INDIA<br>{date_str}</span></td>
+            <td style="width: 25%;"><span class="label">Shipped on Board Date</span><span class="value">{date_str}</span></td>
+            <td colspan="2" style="text-align: center; vertical-align: middle;">
+                <span class="label">Signed on behalf of the Carrier</span>
+                <span class="value redacted" style="font-size: 14pt;">[ SIGNATURE REDACTED ]</span>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>"""
+    
+    downloads_dir = r"C:\Users\DELL\Downloads"
+    filepath = os.path.join(downloads_dir, filename)
+    with open(filepath, 'w', encoding='utf-8') as f:
+        f.write(html_content)
+    print(f"Saved: {filepath}")
+
+# Dates requested:
+# 1) Today's date: 30-JULY-2026
+# 2) 1st July 2026: 01-JULY-2026
+# 3) 2nd June 2021: 02-JUNE-2021
+# 4) 2nd June 2026: 02-JUNE-2026
+
+variations = [
+    # Basmati Rice
+    ("INDIAN BASMATI RICE", "10063020", "30-JULY-2026", "BL_Basmati_30Jul2026.html"),
+    ("INDIAN BASMATI RICE", "10063020", "01-JULY-2026", "BL_Basmati_01Jul2026.html"),
+    ("INDIAN BASMATI RICE", "10063020", "02-JUNE-2021", "BL_Basmati_02Jun2021.html"),
+    ("INDIAN BASMATI RICE", "10063020", "02-JUNE-2026", "BL_Basmati_02Jun2026.html"),
+    
+    # IR 64 Parboiled Rice
+    ("INDIAN IR 64 PARBOILED RICE", "10063010", "30-JULY-2026", "BL_IR64_30Jul2026.html"),
+    ("INDIAN IR 64 PARBOILED RICE", "10063010", "01-JULY-2026", "BL_IR64_01Jul2026.html"),
+    ("INDIAN IR 64 PARBOILED RICE", "10063010", "02-JUNE-2021", "BL_IR64_02Jun2021.html"),
+    ("INDIAN IR 64 PARBOILED RICE", "10063010", "02-JUNE-2026", "BL_IR64_02Jun2026.html"),
+]
+
+for comm, hs, dt, fname in variations:
+    generate_bl(comm, hs, dt, fname)
