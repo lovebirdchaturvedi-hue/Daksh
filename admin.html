@@ -244,10 +244,11 @@ async function loadSuppliers() {
             <button class="pass" style="background:#22c55e; color:#fff;" onclick="upd('${d.id}',{plan:'custom_credits', status:'approved', totalCredits:5, unlocksUsed:0, unlockedLeads:[]})">+5 Credits</button>
             <button class="pass" style="background:#22c55e; color:#fff;" onclick="upd('${d.id}',{plan:'custom_credits', status:'approved', totalCredits:8, unlocksUsed:0, unlockedLeads:[]})">+8 Credits</button>
             <button class="pass" onclick="upd('${d.id}',{plan:'3_day_trial', status:'approved', unlocksUsed:0, unlockedLeads:[]})">Assign 3-Day Trial</button>
-            <button class="gold" onclick="upd('${d.id}',{plan:'trial_3m', status:'approved', unlocksUsed:0, unlockedLeads:[]})">Set 3-Mo Trial</button>
-            <button class="platinum" onclick="upd('${d.id}',{plan:'pro_6m', status:'approved', unlocksUsed:0, unlockedLeads:[]})">Set 6-Mo Elite</button>
-            <button class="premium" onclick="upd('${d.id}',{plan:'elite_12m', status:'approved', unlocksUsed:0, unlockedLeads:[]})">Set 12-Mo Elite</button>
-            <button class="lifetime" onclick="upd('${d.id}',{plan:'lifetime', status:'approved', role:'buyer'})">Set Lifetime (Buyer)</button>
+            <button class="gold" onclick="upd('${d.id}',{plan:'trial_3m', status:'approved', unlocksUsed:0, unlockedLeads:[]})">Professional Pass</button>
+            <button class="platinum" onclick="upd('${d.id}',{plan:'pro_6m', status:'approved', unlocksUsed:0, unlockedLeads:[]})">Institutional Elite</button>
+            <button class="premium" onclick="upd('${d.id}',{plan:'elite_12m', status:'approved', unlocksUsed:0, unlockedLeads:[]})">Global Enterprise</button>
+            <button class="premium" style="background:linear-gradient(135deg, #d97706, #fbbf24);" onclick="upd('${d.id}',{plan:'nexus', status:'approved', unlocksUsed:0, unlockedLeads:[]})">APD Global Trade Nexus™ 4999 USD Plan</button>
+            <button class="lifetime" onclick="upd('${d.id}',{plan:'buyer_1yr', status:'approved', role:'buyer'})">1 Years Buyer Membership</button>
             <button class="free" onclick="upd('${d.id}',{plan:'free'})">Free</button>
             <button class="ban" onclick="upd('${d.id}',{status:'banned'})">Ban</button>
             ${isLegacy ? `<button class="ban" style="background:#000" onclick="del('${d.id}')">Delete</button>` : ''}
