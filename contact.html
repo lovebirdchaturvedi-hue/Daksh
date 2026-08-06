@@ -453,61 +453,39 @@
         </p>
     </footer>
 
-    <!-- FIREBASE INTEGRATION -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-functions.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-            authDomain: "apd-globaltrade-prod.firebaseapp.com",
-            projectId: "apd-globaltrade-prod",
-            storageBucket: "apd-globaltrade-prod.firebasestorage.app",
-            messagingSenderId: "226407312435",
-            appId: "1:226407312435:web:f8a54b1132af3899170746"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const functions = getFunctions(app, "us-central1");
-        const sendContactEmail = httpsCallable(functions, 'sendContactEmail');
-
-        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+    <!-- CONTACT FORM HANDLER -->
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
             const status = document.getElementById('formStatus');
             
-            const data = {
-                name: document.getElementById('form-name').value,
-                email: document.getElementById('form-email').value,
-                subject: document.getElementById('form-subject').value,
-                message: document.getElementById('form-message').value
-            };
+            const name = document.getElementById('form-name').value;
+            const email = document.getElementById('form-email').value;
+            const subject = document.getElementById('form-subject').value;
+            const message = document.getElementById('form-message').value;
 
             btn.disabled = true;
             btn.textContent = 'TRANSMITTING...';
             status.style.display = 'block';
             status.style.background = 'rgba(212, 175, 55, 0.1)';
             status.style.color = 'var(--gold)';
-            status.textContent = 'Initiating secure transmission sequence...';
+            status.textContent = 'Preparing secure transmission...';
 
-            try {
-                const result = await sendContactEmail(data);
-                if (result.data.success) {
-                    status.style.background = 'rgba(34, 197, 94, 0.1)';
-                    status.style.color = '#22c55e';
-                    status.textContent = '✅ ' + result.data.message;
-                    document.getElementById('contactForm').reset();
-                } else {
-                    throw new Error(result.data.error || 'Transmission failed');
-                }
-            } catch (err) {
-                status.style.background = 'rgba(239, 68, 68, 0.1)';
-                status.style.color = '#ef4444';
-                status.textContent = '❌ Error: ' + err.message;
-            } finally {
+            setTimeout(() => {
+                const text = `*New Corporate Inquiry*\n\n*Entity:* ${name}\n*Email:* ${email}\n*Subject:* ${subject}\n*Message:* ${message}`;
+                const waUrl = `https://wa.me/919266418868?text=${encodeURIComponent(text)}`;
+                
+                window.open(waUrl, '_blank');
+                
+                status.style.background = 'rgba(34, 197, 94, 0.1)';
+                status.style.color = '#22c55e';
+                status.textContent = '✅ Transmission ready! Please send the WhatsApp message to complete your inquiry.';
+                document.getElementById('contactForm').reset();
+                
                 btn.disabled = false;
                 btn.textContent = 'Transmit Securely';
-            }
+            }, 800);
         });
     </script>
 
