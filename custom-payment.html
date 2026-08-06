@@ -245,10 +245,18 @@
             <input type="text" id="refName" placeholder="e.g. Reliance Global Imports">
         </div>
 
-        <div class="input-group">
-            <label>Negotiated Amount</label>
-            <input type="number" id="payAmount" placeholder="0.00">
-            <div class="currency-tag">INR</div>
+        <div class="input-group" style="display: flex; gap: 10px;">
+            <div style="flex: 1;">
+                <label>Negotiated Amount</label>
+                <input type="number" id="payAmount" placeholder="0.00" style="width: 100%;">
+            </div>
+            <div style="width: 110px;">
+                <label>Currency</label>
+                <select id="currencySelect" style="width: 100%; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); padding: 16px 10px; border-radius: 12px; color: white; font-size: 1.1rem; font-weight: 600; outline: none; transition: all 0.3s ease; font-family: 'Inter', sans-serif;" onchange="handleCurrencyChange()">
+                    <option value="INR">INR</option>
+                    <option value="USD">USD</option>
+                </select>
+            </div>
         </div>
 
         
@@ -279,9 +287,24 @@
     </div>
 
     <script>
+        function handleCurrencyChange() {
+            const curr = document.getElementById('currencySelect').value;
+            const phonepeBtn = document.getElementById('payBtn');
+            if (curr === 'USD') {
+                phonepeBtn.disabled = true;
+                phonepeBtn.style.opacity = '0.5';
+                phonepeBtn.title = 'PhonePe only supports INR';
+            } else {
+                phonepeBtn.disabled = false;
+                phonepeBtn.style.opacity = '1';
+                phonepeBtn.title = '';
+            }
+        }
+
         async function initiateRazorpayCustomPayment() {
             const amount = document.getElementById('payAmount').value;
             const refName = document.getElementById('refName').value;
+            const currency = document.getElementById('currencySelect').value;
             const btn = document.getElementById('razorpayBtn');
             const status = document.getElementById('statusMsg');
 
@@ -305,7 +328,7 @@
                 const res = await fetch('/api/razorpay-create-order', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ amount: parseInt(amount), currency: 'INR' })
+                    body: JSON.stringify({ amount: parseInt(amount), currency: currency })
                 });
                 const data = await res.json();
 

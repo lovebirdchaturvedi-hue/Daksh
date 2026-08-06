@@ -6,10 +6,13 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { amount, currency = 'INR', receipt = 'receipt_' + Date.now() } = req.body;
+    let { amount, currency = 'INR', receipt = 'receipt_' + Date.now() } = req.body;
+    
+    // Convert to subunits (paise for INR, cents for USD)
+    amount = Math.round(amount * 100);
 
     if (!amount || amount < 100) {
-        return res.status(400).json({ error: 'Invalid amount (minimum 100 paise)' });
+        return res.status(400).json({ error: 'Invalid amount (minimum 1 INR/USD)' });
     }
 
     const instance = new Razorpay({
