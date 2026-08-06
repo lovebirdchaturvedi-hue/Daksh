@@ -32,7 +32,10 @@ export default async function handler(req, res) {
         return res.status(500).json({ error: 'Failed to create order' });
     }
 
-    return res.status(200).json(order);
+    return res.status(200).json({
+        ...order,
+        key_id: process.env.RAZORPAY_KEY_ID
+    });
   } catch (err) {
     console.error("Razorpay Create Order Error:", err);
     return res.status(500).json({ error: err.message || 'Internal Server Error' });

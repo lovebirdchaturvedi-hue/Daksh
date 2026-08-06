@@ -1699,7 +1699,7 @@ Dashboard</a>
 
             // 2. Open Razorpay Checkout
             var options = {
-                "key": "rzp_test_TMQmeVth3hlUux", // We pass the key_id to the frontend
+                "key": data.key_id || "rzp_test_TMQmeVth3hlUux",
                 "amount": data.amount,
                 "currency": data.currency,
                 "name": "APD Global Trade",
