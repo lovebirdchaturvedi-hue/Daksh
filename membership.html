@@ -941,26 +941,63 @@ Dashboard</a>
         </div>
         </div>
 
-        <div style="margin: 60px auto 30px; max-width: 800px; padding: 40px 30px; background: #0f172a; border: 2px solid #ef4444; border-radius: 20px; text-align: center; box-shadow: 0 0 30px rgba(239, 68, 68, 0.4); position: relative; overflow: hidden; animation: trial-pulse 2s infinite;">
+        <div style="margin: 60px auto 30px; max-width: 1000px; padding: 40px 30px; background: #0f172a; border: 2px solid #ef4444; border-radius: 20px; text-align: center; box-shadow: 0 0 30px rgba(239, 68, 68, 0.4); position: relative; overflow: hidden; animation: trial-pulse 2s infinite;">
             <style>
                 @keyframes trial-pulse {
                     0% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.4); border-color: #ef4444; }
                     50% { box-shadow: 0 0 50px rgba(239, 68, 68, 0.8); border-color: #f87171; }
                     100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.4); border-color: #ef4444; }
                 }
+                .trial-box {
+                    flex: 1; min-width: 300px; background: linear-gradient(180deg, #1e293b, #0f172a); border: 2px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; display: flex; flex-direction: column; position: relative; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+                }
+                .trial-box:hover {
+                    transform: translateY(-10px); border-color: #facc15; box-shadow: 0 20px 40px rgba(250, 204, 21, 0.2);
+                }
+                .trial-box-premium {
+                    border-color: #facc15; box-shadow: 0 10px 30px rgba(250, 204, 21, 0.2);
+                }
+                .trial-box-premium::before {
+                    content: 'MOST POPULAR'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #facc15; color: #000; font-size: 11px; font-weight: 800; padding: 4px 15px; border-radius: 20px; letter-spacing: 1px;
+                }
             </style>
             
-            <h3 style="color: #fff; font-size: 28px; font-weight: 800; margin-bottom: 15px;">🤔 <span style="color: #ef4444; text-shadow: 0 0 10px rgba(239, 68, 68, 0.8);">CONFUSED?</span> Start Small.</h3>
-            <p style="color: #facc15; font-size: 20px; font-weight: 700; margin-bottom: 30px; letter-spacing: 0.5px;">Go and Get the verified 5 Buyers in just <span class="show-usd" style="color: #fff; background: rgba(255,255,255,0.1); padding: 2px 10px; border-radius: 6px;">149 USD</span><span class="show-inr" style="color: #fff; background: rgba(255,255,255,0.1); padding: 2px 10px; border-radius: 6px;">14,900 INR</span></p>
+            <h3 style="color: #fff; font-size: 32px; font-weight: 800; margin-bottom: 30px;">🤔 <span style="color: #ef4444; text-shadow: 0 0 10px rgba(239, 68, 68, 0.8);">CONFUSED?</span> Start Small.</h3>
             
-            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                <a href="/custom-payment.html" class="btn" style="background: linear-gradient(135deg, #22c55e, #166534); color: #fff; font-weight: 800; font-size: 16px; padding: 16px 35px; border-radius: 50px; text-decoration: none; box-shadow: 0 4px 20px rgba(34, 197, 94, 0.5); border: 2px solid #4ade80; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    💳 PAY NOW & GET 5 BUYERS
-                </a>
+            <div style="display: flex; gap: 30px; justify-content: center; flex-wrap: wrap;">
                 
-                <a href="https://wa.me/919266418868?text=Hi, I want to know more about the Trial Plan (5 Buyers for 149 USD / 14,900 INR). Can I get a payment link?" class="btn" style="background: rgba(30, 41, 59, 0.8); color: #fff; font-weight: 700; font-size: 15px; padding: 16px 35px; border-radius: 50px; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(30, 41, 59, 0.8)'">
-                    💬 WhatsApp - Talk to Someone
-                </a>
+                <!-- 3 BUYERS PLAN -->
+                <div class="trial-box">
+                    <h4 style="color: #fff; font-size: 24px; font-weight: 800; margin-bottom: 10px;">Get 3 Verified Buyers</h4>
+                    <p style="color: #facc15; font-size: 28px; font-weight: 900; margin-bottom: 15px; text-shadow: 0 2px 10px rgba(250,204,21,0.3);">
+                        <span class="show-usd">149 USD</span>
+                        <span class="show-inr">9,999 INR</span>
+                    </p>
+                    <p style="color: #94a3b8; font-size: 14px; margin-bottom: 25px; line-height: 1.5;">Perfect to test our elite buyer network with absolutely zero risk.</p>
+                    <a href="#" onclick="initiatePayment('3 Verified Buyers (Trial)', 149, 9999); return false;" class="btn" style="background: linear-gradient(135deg, #22c55e, #166534); color: #fff; font-weight: 800; font-size: 16px; padding: 15px 20px; border-radius: 50px; text-decoration: none; box-shadow: 0 4px 20px rgba(34, 197, 94, 0.5); border: 2px solid #4ade80; transition: transform 0.2s; margin-bottom: 15px; margin-top: auto;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                        💳 PAY NOW
+                    </a>
+                    <a href="https://wa.me/919266418868?text=Hi, I want to know more about the 3 Buyers Trial Plan (149 USD / 9999 INR)." class="btn" style="background: rgba(30, 41, 59, 0.8); color: #fff; font-weight: 700; font-size: 14px; padding: 12px 20px; border-radius: 50px; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(30, 41, 59, 0.8)'">
+                        💬 WhatsApp Us
+                    </a>
+                </div>
+
+                <!-- 5 BUYERS PLAN -->
+                <div class="trial-box trial-box-premium">
+                    <h4 style="color: #fff; font-size: 24px; font-weight: 800; margin-bottom: 10px;">Get 5 Verified Buyers</h4>
+                    <p style="color: #facc15; font-size: 28px; font-weight: 900; margin-bottom: 15px; text-shadow: 0 2px 10px rgba(250,204,21,0.3);">
+                        <span class="show-usd">199 USD</span>
+                        <span class="show-inr">14,900 INR</span>
+                    </p>
+                    <p style="color: #94a3b8; font-size: 14px; margin-bottom: 25px; line-height: 1.5;">Maximum ROI. Get 5 highly active institutional buyers and scale faster.</p>
+                    <a href="#" onclick="initiatePayment('5 Verified Buyers (Trial)', 199, 14900); return false;" class="btn" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: #fff; font-weight: 800; font-size: 16px; padding: 15px 20px; border-radius: 50px; text-decoration: none; box-shadow: 0 4px 20px rgba(59, 130, 246, 0.5); border: 2px solid #60a5fa; transition: transform 0.2s; margin-bottom: 15px; margin-top: auto;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                        💳 PAY NOW
+                    </a>
+                    <a href="https://wa.me/919266418868?text=Hi, I want to know more about the 5 Buyers Trial Plan (199 USD / 14900 INR)." class="btn" style="background: rgba(30, 41, 59, 0.8); color: #fff; font-weight: 700; font-size: 14px; padding: 12px 20px; border-radius: 50px; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(30, 41, 59, 0.8)'">
+                        💬 WhatsApp Us
+                    </a>
+                </div>
+
             </div>
         </div>
 
@@ -1693,7 +1730,12 @@ Dashboard</a>
                 },
                 onApprove: function (data, actions) {
                     return actions.order.capture().then(function () {
-                        window.location.href = "/payment-status.html";
+                        if (planName.includes('Trial')) {
+                            let redirectUrl = 'https://wa.me/919266418868?text=Hi,%20I%20have%20successfully%20paid%20for%20the%20' + encodeURIComponent(planName) + '%20plan.%20Please%20send%20me%20the%20details.';
+                            window.location.href = redirectUrl;
+                        } else {
+                            window.location.href = "/payment-status.html";
+                        }
                     });
                 }
             }).render("#" + containerId);
@@ -1742,7 +1784,12 @@ Dashboard</a>
                         });
                         const verifyData = await verifyRes.json();
                         if (verifyData.success) {
-                            window.location.href = '/payment-status.html';
+                            if (selectedPlan.name.includes('Trial')) {
+                                let redirectUrl = 'https://wa.me/919266418868?text=Hi,%20I%20have%20successfully%20paid%20for%20the%20' + encodeURIComponent(selectedPlan.name) + '%20plan.%20Please%20send%20me%20the%20details.';
+                                window.location.href = redirectUrl;
+                            } else {
+                                window.location.href = '/payment-status.html';
+                            }
                         } else {
                             err.innerText = 'Payment verification failed.';
                             err.style.display = 'block';

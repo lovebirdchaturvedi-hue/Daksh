@@ -935,6 +935,86 @@
 
     <!-- ============================================================ -->
   
+  <!-- ENHANCED TRUSTED BRANDS SECTION (HERO EXTENSION) -->
+  <style>
+      .trusted-brands-hero {
+          background: rgba(2, 6, 23, 0.95);
+          backdrop-filter: blur(10px);
+          padding: 25px 20px;
+          border-top: 1px solid rgba(212,175,55,0.2);
+          border-bottom: 1px solid rgba(212,175,55,0.2);
+          position: relative;
+          z-index: 20;
+          text-align: center;
+      }
+      .trusted-brands-title-hero {
+          color: #94a3b8;
+          font-size: 0.8rem;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          margin-bottom: 15px;
+          font-weight: 700;
+      }
+      .trusted-brands-grid-hero {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 40px;
+          flex-wrap: wrap;
+          max-width: 1200px;
+          margin: 0 auto;
+      }
+      .brand-logo-hero {
+          font-size: 1.3rem;
+          font-weight: 900;
+          font-family: 'Playfair Display', serif;
+          color: #94a3b8;
+          opacity: 0.6;
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      }
+      .brand-logo-hero:hover {
+          opacity: 1;
+          color: #fff;
+          transform: translateY(-2px);
+      }
+      .brand-logo-hero svg {
+          opacity: 0.8;
+      }
+      .brand-logo-hero:hover svg {
+          opacity: 1;
+          fill: var(--gold);
+      }
+      @media (max-width: 768px) {
+          .trusted-brands-grid-hero { gap: 20px; justify-content: center; }
+          .brand-logo-hero { font-size: 1rem; }
+      }
+  </style>
+  <div class="trusted-brands-hero">
+      <div class="trusted-brands-title-hero">Trusted by 4,200+ Global Exporters and Institutional Partners</div>
+      <div class="trusted-brands-grid-hero">
+          <div class="brand-logo-hero">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#94a3b8"><path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13h-13L12 6.5z"/></svg> 
+              Global Trade Council
+          </div>
+          <div class="brand-logo-hero">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#94a3b8"><path d="M4 4h16v16H4V4zm2 2v12h12V6H6zm2 2h8v2H8V8zm0 4h8v2H8v-2z"/></svg>
+              Intl. Exporters Assoc.
+          </div>
+          <div class="brand-logo-hero">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#94a3b8"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+              Certified Bulk Suppliers
+          </div>
+          <div class="brand-logo-hero">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#94a3b8"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 9h-2V7h-2v5H6v-2H4v6h2v-2h2v2h2v-2h2v2h2v-6h-2v2zm6 0h-2V7h-2v7h4v-2z"/></svg>
+              Apex Commodities
+          </div>
+      </div>
+  </div>
+  
   <!-- ============================================================ -->
   <!-- APD LIVE MARKET TICKER - GLOBAL TRADE INDICES -->
   <!-- ============================================================ -->
@@ -1333,26 +1413,61 @@
         </div>
     </section>
 
-    <div style="margin: 60px auto 30px; max-width: 800px; padding: 40px 30px; background: #0f172a; border: 2px solid #ef4444; border-radius: 20px; text-align: center; box-shadow: 0 0 30px rgba(239, 68, 68, 0.4); position: relative; overflow: hidden; animation: trial-pulse 2s infinite;">
+    <div style="margin: 60px auto 30px; max-width: 1000px; padding: 40px 30px; background: #0f172a; border: 2px solid #ef4444; border-radius: 20px; text-align: center; box-shadow: 0 0 30px rgba(239, 68, 68, 0.4); position: relative; overflow: hidden; animation: trial-pulse 2s infinite;">
         <style>
             @keyframes trial-pulse {
                 0% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.4); border-color: #ef4444; }
                 50% { box-shadow: 0 0 50px rgba(239, 68, 68, 0.8); border-color: #f87171; }
                 100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.4); border-color: #ef4444; }
             }
+            .trial-box {
+                flex: 1; min-width: 300px; background: linear-gradient(180deg, #1e293b, #0f172a); border: 2px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; display: flex; flex-direction: column; position: relative; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            }
+            .trial-box:hover {
+                transform: translateY(-10px); border-color: #facc15; box-shadow: 0 20px 40px rgba(250, 204, 21, 0.2);
+            }
+            .trial-box-premium {
+                border-color: #facc15; box-shadow: 0 10px 30px rgba(250, 204, 21, 0.2);
+            }
+            .trial-box-premium::before {
+                content: 'MOST POPULAR'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #facc15; color: #000; font-size: 11px; font-weight: 800; padding: 4px 15px; border-radius: 20px; letter-spacing: 1px;
+            }
         </style>
         
-        <h3 style="color: #fff; font-size: 28px; font-weight: 800; margin-bottom: 15px;">🤔 <span style="color: #ef4444; text-shadow: 0 0 10px rgba(239, 68, 68, 0.8);">CONFUSED?</span> Start Small.</h3>
-        <p style="color: #facc15; font-size: 20px; font-weight: 700; margin-bottom: 30px; letter-spacing: 0.5px;">Go and Get the verified 5 Buyers in just <span style="color: #fff; background: rgba(255,255,255,0.1); padding: 2px 10px; border-radius: 6px;">149 USD</span> or <span style="color: #fff; background: rgba(255,255,255,0.1); padding: 2px 10px; border-radius: 6px;">14,900 INR</span></p>
+        <h3 style="color: #fff; font-size: 32px; font-weight: 800; margin-bottom: 30px;">🤔 <span style="color: #ef4444; text-shadow: 0 0 10px rgba(239, 68, 68, 0.8);">CONFUSED?</span> Start Small.</h3>
         
-        <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-            <a href="/custom-payment.html" class="btn" style="background: linear-gradient(135deg, #22c55e, #166534); color: #fff; font-weight: 800; font-size: 16px; padding: 16px 35px; border-radius: 50px; text-decoration: none; box-shadow: 0 4px 20px rgba(34, 197, 94, 0.5); border: 2px solid #4ade80; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                💳 PAY NOW & GET 5 BUYERS
-            </a>
+        <div style="display: flex; gap: 30px; justify-content: center; flex-wrap: wrap;">
             
-            <a href="https://wa.me/919266418868?text=Hi, I want to know more about the Trial Plan (5 Buyers for 149 USD / 14,900 INR). Can I get a payment link?" class="btn" style="background: rgba(30, 41, 59, 0.8); color: #fff; font-weight: 700; font-size: 15px; padding: 16px 35px; border-radius: 50px; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(30, 41, 59, 0.8)'">
-                💬 WhatsApp - Talk to Someone
-            </a>
+            <!-- 3 BUYERS PLAN -->
+            <div class="trial-box">
+                <h4 style="color: #fff; font-size: 24px; font-weight: 800; margin-bottom: 10px;">Get 3 Verified Buyers</h4>
+                <p style="color: #facc15; font-size: 28px; font-weight: 900; margin-bottom: 15px; text-shadow: 0 2px 10px rgba(250,204,21,0.3);">
+                    149 USD <span style="font-size: 14px; font-weight: 400; color: #94a3b8;">/</span> 9,999 INR
+                </p>
+                <p style="color: #94a3b8; font-size: 14px; margin-bottom: 25px; line-height: 1.5;">Perfect to test our elite buyer network with absolutely zero risk.</p>
+                <a href="/membership.html" class="btn" style="background: linear-gradient(135deg, #22c55e, #166534); color: #fff; font-weight: 800; font-size: 16px; padding: 15px 20px; border-radius: 50px; text-decoration: none; box-shadow: 0 4px 20px rgba(34, 197, 94, 0.5); border: 2px solid #4ade80; transition: transform 0.2s; margin-bottom: 15px; margin-top: auto;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    💳 GET STARTED NOW
+                </a>
+                <a href="https://wa.me/919266418868?text=Hi, I want to know more about the 3 Buyers Trial Plan (149 USD / 9999 INR)." class="btn" style="background: rgba(30, 41, 59, 0.8); color: #fff; font-weight: 700; font-size: 14px; padding: 12px 20px; border-radius: 50px; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(30, 41, 59, 0.8)'">
+                    💬 WhatsApp Us
+                </a>
+            </div>
+
+            <!-- 5 BUYERS PLAN -->
+            <div class="trial-box trial-box-premium">
+                <h4 style="color: #fff; font-size: 24px; font-weight: 800; margin-bottom: 10px;">Get 5 Verified Buyers</h4>
+                <p style="color: #facc15; font-size: 28px; font-weight: 900; margin-bottom: 15px; text-shadow: 0 2px 10px rgba(250,204,21,0.3);">
+                    199 USD <span style="font-size: 14px; font-weight: 400; color: #94a3b8;">/</span> 14,900 INR
+                </p>
+                <p style="color: #94a3b8; font-size: 14px; margin-bottom: 25px; line-height: 1.5;">Maximum ROI. Get 5 highly active institutional buyers and scale faster.</p>
+                <a href="/membership.html" class="btn" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: #fff; font-weight: 800; font-size: 16px; padding: 15px 20px; border-radius: 50px; text-decoration: none; box-shadow: 0 4px 20px rgba(59, 130, 246, 0.5); border: 2px solid #60a5fa; transition: transform 0.2s; margin-bottom: 15px; margin-top: auto;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    💳 GET STARTED NOW
+                </a>
+                <a href="https://wa.me/919266418868?text=Hi, I want to know more about the 5 Buyers Trial Plan (199 USD / 14900 INR)." class="btn" style="background: rgba(30, 41, 59, 0.8); color: #fff; font-weight: 700; font-size: 14px; padding: 12px 20px; border-radius: 50px; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(30, 41, 59, 0.8)'">
+                    💬 WhatsApp Us
+                </a>
+            </div>
+
         </div>
     </div>
 
@@ -1360,69 +1475,6 @@
     <!-- INSTITUTIONAL FOOTER -->
     </div>
   </section>
-
-  <!-- NEW: Trusted Brands Section (Imaginary) -->
-  <style>
-      .trusted-brands-container {
-          background: #000;
-          padding: 40px 20px;
-          border-top: 1px solid rgba(212,175,55,0.2);
-          border-bottom: 1px solid rgba(212,175,55,0.2);
-          text-align: center;
-      }
-      .trusted-brands-title {
-          color: #94a3b8;
-          font-size: 0.9rem;
-          text-transform: uppercase;
-          letter-spacing: 2px;
-          margin-bottom: 30px;
-      }
-      .trusted-brands-grid {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 50px;
-          flex-wrap: wrap;
-          max-width: 1000px;
-          margin: 0 auto;
-      }
-      .brand-logo {
-          font-size: 1.5rem;
-          font-weight: 900;
-          font-family: 'Playfair Display', serif;
-          opacity: 0.5;
-          transition: opacity 0.3s ease, transform 0.3s ease;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          filter: grayscale(100%);
-      }
-      .brand-logo:hover {
-          opacity: 1;
-          filter: grayscale(0%);
-          transform: translateY(-5px);
-      }
-      .brand-apex { color: #4A90E2; }
-      .brand-nexus { color: #E74C3C; }
-      .brand-nova { color: #F1C40F; }
-      .brand-summit { color: #2ECC71; }
-      .brand-prime { color: #9B59B6; }
-      @media (max-width: 768px) {
-          .trusted-brands-grid { gap: 30px; }
-          .brand-logo { font-size: 1.2rem; }
-      }
-  </style>
-  <div class="trusted-brands-container">
-      <div class="trusted-brands-title">Trusted by 100+ Top Exporters and Trading Companies</div>
-      <div class="trusted-brands-grid">
-          <div class="brand-logo brand-apex"><span>🌍</span> ApexGlobal</div>
-          <div class="brand-logo brand-nexus"><span>⚡</span> NexusTrade</div>
-          <div class="brand-logo brand-nova"><span>🚀</span> NovaLogistics</div>
-          <div class="brand-logo brand-summit"><span>🏔️</span> SummitBulk</div>
-          <div class="brand-logo brand-prime"><span>💎</span> PrimeSourcing</div>
-      </div>
-  </div>
-
   <!-- VERIFIED SUPPLIER SHOWCASE -->
   <section style="padding: 80px 8%; background: #020617; position: relative;">
       <h2 style="text-align: center; color: #fff; font-family: 'Playfair Display', serif; font-size: 2.8rem; margin-bottom: 50px;">Featured <span style="color: var(--gold);">Verified</span> Suppliers</h2>
