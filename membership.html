@@ -1210,7 +1210,7 @@ Dashboard</a>
             </div>
         </div>
 
-                <!-- GLOBAL BANKING PARTNERS SECTION (PREMIUM) -->
+                        <!-- GLOBAL BANKING PARTNERS SECTION (PREMIUM) -->
         <div style="background: #020617; border: 1px solid rgba(212,175,55,0.3); border-radius: 20px; padding: 40px; max-width: 1100px; margin: 0 auto 60px; position: relative; overflow: hidden;">
             <div style="position: absolute; top: -10%; left: -5%; width: 40%; height: 40%; background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%); pointer-events: none;"></div>
             
@@ -1229,6 +1229,8 @@ Dashboard</a>
                     transition: all 0.3s ease;
                     position: relative;
                     overflow: hidden;
+                    display: flex;
+                    flex-direction: column;
                 }
                 .premium-bank-card:hover {
                     transform: translateY(-5px);
@@ -1273,18 +1275,22 @@ Dashboard</a>
                     letter-spacing: 1px;
                 }
                 .bank-card-details {
+                    display: grid;
+                    grid-template-columns: auto 1fr;
+                    gap: 6px 12px;
                     font-size: 13px;
                     color: #cbd5e1;
-                    line-height: 1.8;
+                    line-height: 1.4;
+                    width: 100%;
                 }
                 .bank-card-label {
                     color: #94a3b8;
-                    display: inline-block;
-                    width: 90px;
+                    white-space: nowrap;
                 }
                 .bank-card-value {
                     color: #fff;
                     font-weight: 600;
+                    word-break: break-word;
                 }
                 
                 .premium-bank-card.gold-tier {
@@ -1315,15 +1321,12 @@ Dashboard</a>
                             <div class="bank-card-subtitle" style="color: #cbd5e1;">The Currency Cloud Limited (UK)</div>
                         </div>
                     </div>
-                    <div class="bank-card-details" style="font-size: 14px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
-                        <div>
-                            <span class="bank-card-label">Holder Name:</span> <span class="bank-card-value">APD GLOBAL TRADE</span><br>
-                            <span class="bank-card-label">Account No:</span> <span class="bank-card-value">GB82TCCL04143422806894</span><br>
-                        </div>
-                        <div>
-                            <span class="bank-card-label">BIC/SWIFT:</span> <span class="bank-card-value">TCCLGB3L</span><br>
-                            <span class="bank-card-label">Address:</span> <span class="bank-card-value">1 Sheldon Square, London, UK</span>
-                        </div>
+                    <div class="bank-card-details" style="font-size: 14px; grid-template-columns: auto 1fr;">
+                        <div class="bank-card-label">Holder Name:</div> <div class="bank-card-value">APD GLOBAL TRADE</div>
+                        <div class="bank-card-label">Account No:</div> <div class="bank-card-value">GB82TCCL04143422806894</div>
+                        <div class="bank-card-label">Account Type:</div> <div class="bank-card-value">Business Checking</div>
+                        <div class="bank-card-label">BIC/SWIFT:</div> <div class="bank-card-value">TCCLGB3L</div>
+                        <div class="bank-card-label">Address:</div> <div class="bank-card-value">1 Sheldon Square, London, UK</div>
                     </div>
                 </div>
 
@@ -1337,10 +1340,11 @@ Dashboard</a>
                         </div>
                     </div>
                     <div class="bank-card-details">
-                        <span class="bank-card-label">Holder Name:</span> <span class="bank-card-value">APD GLOBAL TRADE</span><br>
-                        <span class="bank-card-label">Account No:</span> <span class="bank-card-value">8302840763</span><br>
-                        <span class="bank-card-label">Routing (ACH):</span> <span class="bank-card-value">026073150</span><br>
-                        <span class="bank-card-label">Address:</span> <span class="bank-card-value" style="font-size:12px;">5 Penn Plaza, 14th Floor, NY 10001, US</span>
+                        <div class="bank-card-label">Holder Name:</div> <div class="bank-card-value">APD GLOBAL TRADE</div>
+                        <div class="bank-card-label">Account No:</div> <div class="bank-card-value">8302840763</div>
+                        <div class="bank-card-label">Account Type:</div> <div class="bank-card-value">Business Checking</div>
+                        <div class="bank-card-label">Routing (ACH):</div> <div class="bank-card-value">026073150</div>
+                        <div class="bank-card-label">Address:</div> <div class="bank-card-value" style="font-size:12px;">5 Penn Plaza, 14th Floor, NY 10001, US</div>
                     </div>
                 </div>
 
@@ -1354,10 +1358,11 @@ Dashboard</a>
                         </div>
                     </div>
                     <div class="bank-card-details">
-                        <span class="bank-card-label">Holder Name:</span> <span class="bank-card-value">APD GLOBAL TRADE</span><br>
-                        <span class="bank-card-label">Account No:</span> <span class="bank-card-value">48040137</span><br>
-                        <span class="bank-card-label">Sort Code:</span> <span class="bank-card-value">608382</span><br>
-                        <span class="bank-card-label">Address:</span> <span class="bank-card-value" style="font-size:12px;">68 King William Street, London, UK</span>
+                        <div class="bank-card-label">Holder Name:</div> <div class="bank-card-value">APD GLOBAL TRADE</div>
+                        <div class="bank-card-label">Account No:</div> <div class="bank-card-value">48040137</div>
+                        <div class="bank-card-label">Account Type:</div> <div class="bank-card-value">Business Checking</div>
+                        <div class="bank-card-label">Sort Code:</div> <div class="bank-card-value">608382</div>
+                        <div class="bank-card-label">Address:</div> <div class="bank-card-value" style="font-size:12px;">68 King William Street, London, UK</div>
                     </div>
                 </div>
 
@@ -1371,10 +1376,11 @@ Dashboard</a>
                         </div>
                     </div>
                     <div class="bank-card-details">
-                        <span class="bank-card-label">Holder Name:</span> <span class="bank-card-value">APD GLOBAL TRADE</span><br>
-                        <span class="bank-card-label">IBAN:</span> <span class="bank-card-value">DE41202208000048040137</span><br>
-                        <span class="bank-card-label">BIC/SWIFT:</span> <span class="bank-card-value">SXPYDEHH</span><br>
-                        <span class="bank-card-label">Address:</span> <span class="bank-card-value" style="font-size:12px;">Maximilianstraße 54, 80538 München, DE</span>
+                        <div class="bank-card-label">Holder Name:</div> <div class="bank-card-value">APD GLOBAL TRADE</div>
+                        <div class="bank-card-label">IBAN:</div> <div class="bank-card-value">DE41202208000048040137</div>
+                        <div class="bank-card-label">Account Type:</div> <div class="bank-card-value">Business Checking</div>
+                        <div class="bank-card-label">BIC/SWIFT:</div> <div class="bank-card-value">SXPYDEHH</div>
+                        <div class="bank-card-label">Address:</div> <div class="bank-card-value" style="font-size:12px;">Maximilianstraße 54, 80538 München, DE</div>
                     </div>
                 </div>
 
@@ -1388,10 +1394,11 @@ Dashboard</a>
                         </div>
                     </div>
                     <div class="bank-card-details">
-                        <span class="bank-card-label">Holder Name:</span> <span class="bank-card-value">APD GLOBAL TRADE</span><br>
-                        <span class="bank-card-label">Account No:</span> <span class="bank-card-value">962668612</span><br>
-                        <span class="bank-card-label">Routing:</span> <span class="bank-card-value">035210009</span><br>
-                        <span class="bank-card-label">Address:</span> <span class="bank-card-value" style="font-size:12px;">736 Meridian Road N.E, Calgary, CA</span>
+                        <div class="bank-card-label">Holder Name:</div> <div class="bank-card-value">APD GLOBAL TRADE</div>
+                        <div class="bank-card-label">Account No:</div> <div class="bank-card-value">962668612</div>
+                        <div class="bank-card-label">Account Type:</div> <div class="bank-card-value">Business Checking</div>
+                        <div class="bank-card-label">Routing:</div> <div class="bank-card-value">035210009</div>
+                        <div class="bank-card-label">Address:</div> <div class="bank-card-value" style="font-size:12px;">736 Meridian Road N.E, Calgary, CA</div>
                     </div>
                 </div>
 
@@ -1405,10 +1412,11 @@ Dashboard</a>
                         </div>
                     </div>
                     <div class="bank-card-details">
-                        <span class="bank-card-label">Holder Name:</span> <span class="bank-card-value">APD GLOBAL TRADE</span><br>
-                        <span class="bank-card-label">Account No:</span> <span class="bank-card-value">048040138</span><br>
-                        <span class="bank-card-label">BSB Code:</span> <span class="bank-card-value">252000</span><br>
-                        <span class="bank-card-label">Address:</span> <span class="bank-card-value" style="font-size:12px;">Level 11/10 Carrington St, Sydney, AU</span>
+                        <div class="bank-card-label">Holder Name:</div> <div class="bank-card-value">APD GLOBAL TRADE</div>
+                        <div class="bank-card-label">Account No:</div> <div class="bank-card-value">048040138</div>
+                        <div class="bank-card-label">Account Type:</div> <div class="bank-card-value">Business Checking</div>
+                        <div class="bank-card-label">BSB Code:</div> <div class="bank-card-value">252000</div>
+                        <div class="bank-card-label">Address:</div> <div class="bank-card-value" style="font-size:12px;">Level 11/10 Carrington St, Sydney, AU</div>
                     </div>
                 </div>
 
@@ -1422,10 +1430,11 @@ Dashboard</a>
                         </div>
                     </div>
                     <div class="bank-card-details">
-                        <span class="bank-card-label">Holder Name:</span> <span class="bank-card-value">APD GLOBAL TRADE</span><br>
-                        <span class="bank-card-label">Account No:</span> <span class="bank-card-value">DK6189000048040137</span><br>
-                        <span class="bank-card-label">BIC/SWIFT:</span> <span class="bank-card-value">SXPYDKKK</span><br>
-                        <span class="bank-card-label">Address:</span> <span class="bank-card-value" style="font-size:12px;">Lautrupsgade 13-15, 2100 Copenhagen, DK</span>
+                        <div class="bank-card-label">Holder Name:</div> <div class="bank-card-value">APD GLOBAL TRADE</div>
+                        <div class="bank-card-label">Account No:</div> <div class="bank-card-value">DK6189000048040137</div>
+                        <div class="bank-card-label">Account Type:</div> <div class="bank-card-value">Business Checking</div>
+                        <div class="bank-card-label">BIC/SWIFT:</div> <div class="bank-card-value">SXPYDKKK</div>
+                        <div class="bank-card-label">Address:</div> <div class="bank-card-value" style="font-size:12px;">Lautrupsgade 13-15, 2100 Copenhagen, DK</div>
                     </div>
                 </div>
 
@@ -1439,8 +1448,7 @@ Dashboard</a>
                 </a>
             </div>
         </div>
-
-        <!-- ENTERPRISE QUALIFICATION FORM -->
+\n        <!-- ENTERPRISE QUALIFICATION FORM -->
         <div style="background: #0f172a; border: 2px solid rgba(37,99,235,0.4); border-radius: 20px; padding: 40px; max-width: 700px; margin: 0 auto 60px;">
             <div style="text-align: center; margin-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 20px;">
                 <span style="color: #60a5fa; font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 6px;">Enterprise Solutions Desk</span>
