@@ -1,0 +1,296 @@
+<script>
+    let currentCurrency = 'INR';
+    let selectedPlan = { name: '', usd: 0, inr: 0 };
+
+    function toggleCurrency() {
+        currentCurrency = currentCurrency === 'USD' ? 'INR' : 'USD';
+        const knob = document.getElementById('toggle-knob');
+        const lUSD = document.getElementById('label-usd');
+        const lINR = document.getElementById('label-inr');
+        
+        document.body.classList.remove('currency-inr', 'currency-usd');
+        document.body.classList.add(currentCurrency === 'INR' ? 'currency-inr' : 'currency-usd');
+
+        if (currentCurrency === 'INR') {
+            knob.style.left = '32px';
+            lINR.style.opacity = '1';
+            lINR.style.fontWeight = '700';
+            lINR.style.color = 'var(--gold)';
+            lUSD.style.opacity = '0.6';
+            lUSD.style.fontWeight = '400';
+            lUSD.style.color = '#fff';
+        } else {
+            knob.style.left = '2px';
+            lUSD.style.opacity = '1';
+            lUSD.style.fontWeight = '700';
+            lUSD.style.color = 'var(--gold)';
+            lINR.style.opacity = '0.6';
+            lINR.style.fontWeight = '400';
+            lINR.style.color = '#fff';
+        }
+    }
+
+    function initiatePayment(planName, usd, inr) {
+        selectedPlan = { name: planName, usd, inr };
+        
+        let usdEquiv = 0;
+        if (inr === 59000) usdEquiv = 499;
+        else if (inr === 168000) usdEquiv = 2000;
+        else if (inr === 294000) usdEquiv = 3500;
+        else usdEquiv = usd;
+
+        document.getElementById('modalPlanName').innerText = planName;
+        document.getElementById('modalPriceUSD').innerText = '$' + usd.toLocaleString();
+        document.getElementById('modalPriceINR').innerText = '₹' + inr.toLocaleString();
+        document.getElementById('modalPriceINRManual').innerText = '₹' + inr.toLocaleString();
+        document.getElementById('modalPriceUSDEquiv').innerText = '$' + usdEquiv.toLocaleString() + '.00';
+        
+        document.getElementById("paymentModal").style.display = "flex";
+        
+        if (currentCurrency === 'INR') { switchPayment('qr'); } else { switchPayment('paypal'); }
+        
+        renderPayPal(usd, planName, "paypalButtons");
+        if (usdEquiv > 0) { renderPayPal(usdEquiv, planName + " (INR Base)", "paypalButtonsINR"); }
+    }
+
+    function switchPayment(method) {
+        const tPayPal = document.getElementById('tab-paypal');
+        const tQR = document.getElementById('tab-qr');
+        const tManual = document.getElementById('tab-manual');
+        const sPayPal = document.getElementById('paypalSection');
+        const sQR = document.getElementById('qrSection');
+        const sManual = document.getElementById('manualSection');
+        
+        tPayPal.style.background = 'transparent'; tPayPal.style.color = '#94a3b8';
+        tQR.style.background = 'transparent'; tQR.style.color = '#94a3b8';
+        tManual.style.background = 'transparent'; tManual.style.color = '#94a3b8';
+        sPayPal.style.display = 'none';
+        sQR.style.display = 'none';
+        sManual.style.display = 'none';
+
+        if (method === 'paypal') {
+            tPayPal.style.background = 'var(--gold)'; tPayPal.style.color = 'black';
+            sPayPal.style.display = 'block';
+        } else if (method === 'qr') {
+            tQR.style.background = 'var(--gold)'; tQR.style.color = 'black';
+            sQR.style.display = 'block';
+        } else {
+            tManual.style.background = 'var(--gold)'; tManual.style.color = 'black';
+            sManual.style.display = 'block';
+        }
+    }
+
+    function renderPayPal(amount, planName, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = "";
+        setTimeout(function () {
+            paypal.Buttons({
+                createOrder: function (data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            description: planName + " – APD Global Trade",
+                            amount: { currency_code: "USD", value: amount.toFixed(2) }
+                        }]
+                    });
+                },
+                onApprove: function (data, actions) {
+                    return actions.order.capture().then(function () {
+                        window.location.href = "/payment-status.html";
+                    });
+                }
+            }).render("#" + containerId);
+        }, 400);
+    }
+
+    async function initiatePhonePe() {
+        const btn = document.getElementById('phonepeBtn');
+        const err = document.getElementById('phonepeError');
+        btn.innerText = 'Initializing...';
+        btn.disabled = true;
+        try {
+            const res = await fetch('/api/phonepe-init', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ amount: selectedPlan.inr, planName: selectedPlan.name })
+            });
+            const data = await res.json();
+            if (data.success && data.url) { window.location.href = data.url; } 
+            else { err.innerText = data.error || 'Failed.'; err.style.display = 'block'; btn.innerText = 'PAY VIA PHONEPE'; btn.disabled = false; }
+        } catch(e) { err.innerText = 'Network error.'; err.style.display = 'block'; btn.innerText = 'PAY VIA PHONEPE'; btn.disabled = false; }
+    }
+
+    function closeModal() { document.getElementById("paymentModal").style.display = "none"; }
+    function toggleDrawer() {
+        document.getElementById('sideDrawer').classList.toggle('active');
+        document.getElementById('drawerOverlay').classList.toggle('active');
+    }
+    
+    // Force render on load
+    setTimeout(() => { currentCurrency = 'USD'; toggleCurrency(); }, 100);
+  </script>
+
+---SCRIPT---
+
+<script>
+    function toggleWaHub() {
+        const hub = document.getElementById('waHub');
+        hub.classList.toggle('active');
+    }
+
+    // Auto-detect GeoIP and switch to USD if outside India
+    document.addEventListener("DOMContentLoaded", () => {
+        fetch('https://ipapi.co/json/')
+            .then(res => res.json())
+            .then(data => {
+                if (data.country_code && data.country_code !== 'IN') {
+                    if (typeof currentCurrency !== 'undefined' && currentCurrency === 'INR' && typeof toggleCurrency === 'function') {
+                        // Switch knob and prices to USD
+                        toggleCurrency();
+                    }
+                }
+            })
+            .catch(err => console.log('GeoIP detection failed'));
+
+        // Exit Intent Popup Logic
+        let hasShownExitIntent = false;
+
+        // Desktop Exit Intent
+        document.addEventListener('mouseleave', (e) => {
+            if (e.clientY < 0 && !hasShownExitIntent) {
+                showExitIntent();
+            }
+        });
+
+        // Mobile Exit Intent (Fast scroll up)
+        let lastScrollTop = window.scrollY || document.documentElement.scrollTop;
+        let lastScrollTime = Date.now();
+        
+        window.addEventListener('scroll', () => {
+            if (hasShownExitIntent) return;
+            let currentScrollTop = window.scrollY || document.documentElement.scrollTop;
+            let currentTime = Date.now();
+            let timeDiff = currentTime - lastScrollTime;
+            let scrollDiff = lastScrollTop - currentScrollTop;
+
+            // If scrolling UP fast (> 100px in < 200ms)
+            if (scrollDiff > 100 && timeDiff < 200) {
+                showExitIntent();
+            }
+            
+            lastScrollTop = currentScrollTop;
+            lastScrollTime = currentTime;
+        }, { passive: true });
+
+        // Timer Fallback (Show after 60s if not shown)
+        setTimeout(() => {
+            if (!hasShownExitIntent) {
+                showExitIntent();
+            }
+        }, 60000);
+
+        function showExitIntent() {
+            // Check session storage to not annoy users
+            if (sessionStorage.getItem('exitIntentShown')) return;
+            
+            document.getElementById('exitIntentModal').style.display = 'flex';
+            hasShownExitIntent = true;
+            sessionStorage.setItem('exitIntentShown', 'true');
+        }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('buy') === '3') {
+            setTimeout(() => {
+                initiatePayment('3 Verified Buyers', 59, 4999);
+            }, 500);
+        }
+    });
+  </script>
+
+---SCRIPT---
+
+<div id="paymentModal" style="
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(2, 6, 23, 0.98);
+    backdrop-filter: blur(20px);
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    padding: 20px;">
+    
+    <div style="background:#111827; color:#fff; padding:35px; border-radius:30px; width:100%; max-width:500px; border: 1px solid var(--gold); position: relative; box-shadow: 0 40px 100px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto;">
+      
+      <div onclick="closeModal()" style="position: absolute; top: 25px; right: 25px; cursor: pointer; color: #94a3b8; font-size: 24px;">✕</div>
+      
+      <h3 id="modalPlanName" style="font-family: 'Playfair Display', serif; font-size: 28px; color: var(--gold); margin-bottom: 10px;">Complete Your Investment</h3>
+      <p style="color: #94a3b8; margin-bottom: 40px;">Select your preferred institutional payment channel.</p>
+      
+      <div style="display: flex; background: #1e293b; padding: 5px; border-radius: 12px; margin-bottom: 30px;">
+          <div id="tab-paypal" onclick="switchPayment('paypal')" style="flex: 1; text-align: center; padding: 10px; border-radius: 8px; cursor: pointer; background: var(--gold); color: black; font-weight: 700; font-size: 13px;">PayPal</div>
+          <div id="tab-qr" onclick="switchPayment('qr')" style="flex: 1; text-align: center; padding: 10px; border-radius: 8px; cursor: pointer; color: #94a3b8; font-weight: 600; font-size: 13px;">PhonePe (Auto)</div>
+          <div id="tab-manual" onclick="switchPayment('manual')" style="flex: 1; text-align: center; padding: 10px; border-radius: 8px; cursor: pointer; color: #94a3b8; font-weight: 600; font-size: 13px;">Manual QR</div>
+      </div>
+
+      <!-- PAYPAL SECTION -->
+      <div id="paypalSection">
+          <div style="font-size: 2rem; font-weight: 800; margin-bottom: 20px;" id="modalPriceUSD">$499</div>
+          <div id="paypalButtons"></div>
+          <p style="font-size: 0.9rem; color: #cbd5e1; margin-top: 20px; border-left: 3px solid var(--gold); padding-left: 15px;">
+            <b>NOTE:</b> For USD, select PayPal and make a quick payment. If you prefer a direct link or have issues, message us on WhatsApp immediately.
+          </p>
+      </div>
+
+      <!-- QR & ELITE EXPORT POSTER SECTION -->
+      <div id="qrSection" style="display: none; text-align: center; padding: 0;">
+          <div style="background: linear-gradient(135deg, #020617, #0b1d36); padding: 40px; border-radius: 20px; border: 1px solid var(--gold); margin-top: 10px;">
+              
+              <h2 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 24px; margin-bottom: 5px;">Secure Payment Gateway</h2>
+              <p style="color: #cbd5e1; font-size: 14px; margin-bottom: 30px;">100% encrypted checkout via PhonePe.</p>
+              
+              <div style="font-size: 2.2rem; font-weight: 800; margin-bottom: 5px; color: #4ade80;" id="modalPriceINR">₹59,000</div>
+              <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 25px;">(Including 18% GST Compliance)</p>
+              
+              <div style="background: rgba(212, 175, 55, 0.1); border-left: 4px solid var(--gold); padding: 20px; border-radius: 8px; text-align: left; margin-bottom: 30px;">
+                  <p style="font-size: 0.95rem; color: #fff; margin: 0; line-height: 1.6;">
+                      🇮🇳 <b>INDIAN SUPPLIERS:</b><br>
+                      • Pay securely using PhonePe, GPay, or any UPI.<br>
+                      • Instant Access activation upon successful payment.<br>
+                      • Powered by PhonePe Business.
+                  </p>
+              </div>
+
+              <div id="desktopQR" style="display: none; background: white; padding: 15px; border-radius: 16px; margin: 0 auto 20px auto; width: fit-content; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 4px solid var(--gold);">
+                  <img src="/assets/img/payment_qr.jpg" alt="APD Institutional QR" style="width: 250px; height: auto; display: block; border-radius: 8px;">
+                  <p style="color: black; font-weight: bold; margin-top: 10px; font-size: 14px;">Scan & Pay ₹<span id="qrAmountTxt">59,000</span></p>
+              </div>
+
+              <button id="phonepeBtn" class="btn" style="background: #5f259f; color: white; font-size: 1.1rem; padding: 20px; width: 100%; border: 2px solid white; display: flex; align-items: center; justify-content: center; gap: 10px;" onclick="initiatePhonePe()">
+                  PAY VIA PHONEPE
+              </button>
+              <div id="phonepeError" style="color: #ef4444; margin-top: 15px; font-size: 14px; display: none;"></div>
+          </div>
+          
+          <!-- ALTERNATIVE PAYPAL FOR INR PLANS -->
+          <div style="padding: 30px 0;">
+              <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px;">International? Pay USD Equivalent via PayPal</p>
+              <div id="paypalButtonsINR"></div>
+              <p style="font-size: 0.75rem; color: #64748b; margin-top: 12px;">Institutional Clearance: <span id="modalPriceUSDEquiv">$499.00</span></p>
+          </div>
+      </div>
+
+      <!-- MANUAL QR SECTION -->
+      <div id="manualSection" style="display: none; text-align: center;">
+          <div style="font-size: 2rem; font-weight: 800; margin-bottom: 25px; color: var(--gold);" id="modalPriceINRManual">₹59,000</div>
+          <div style="background: white; padding: 10px; display: inline-block; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+              <img src="/assets/img/payment_qr.jpg" alt="Manual QR Code" style="width: 240px; height: auto; display: block; border-radius: 8px;">
+          </div>
+          <p style="font-size: 0.95rem; color: #cbd5e1; margin-bottom: 20px;"><b>Payable to: APD GLOBAL TRADE</b><br>Accepting Google Pay, PhonePe, Paytm & BHIM.</p>
+          <button class="btn" style="margin-top: auto; background: #22c55e; color: white;" onclick="window.location.href='https://wa.me/919266418868?text=I%20have%20made%20the%20Manual%20UPI%20payment.%20Here%20is%20the%20screenshot.'">Verify & Activate Access</button>
+      </div>
+
+    </div>
+  </div>

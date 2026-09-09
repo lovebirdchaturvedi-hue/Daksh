@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+html = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -369,3 +369,7 @@
     </script>
 </body>
 </html>
+"""
+with open('buyer-rfqs.html', 'w', encoding='utf-8') as f:
+    f.write(html)
+print("Updated buyer-rfqs.html with 500+ dynamic leads UI.")

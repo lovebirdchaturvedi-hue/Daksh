@@ -1,0 +1,86 @@
+Buttons calling initiatePayment:
+Line 1004: <a href="#" onclick="initiatePayment('Verified Buyer Membership (1 Year)', 2500, 210000); return false;" style="display: inline-block; background: linear-gradient(90deg, #ef4444, #dc2626); color: #fff; padding: 16px 40px; border-radius: 50px; font-weight: 800; font-size: 16px; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; box-shadow: 0 10px 25px rgba(239, 68, 68, 0.6); animation: pulseButton 2s infinite;">Pay Now to Become a Verified Buyer <span style="font-size: 11px; background: rgba(0,0,0,0.3); padding: 4px 10px; border-radius: 6px; margin-left: 8px; vertical-align: middle;">PayPal / BHIM</span></a>
+Line 1092: <a href="#" onclick="initiatePayment('APD Global Trade Nexus', 4999, 450000); return false;" style="background: #10b981; color: #fff; padding: 14px 32px; border-radius: 8px; font-weight: 800; text-decoration: none; font-size: 14px; white-space: nowrap; transition: transform 0.2s; box-shadow: 0 4px 20px rgba(16,185,129,0.3); display: flex; align-items: center; gap: 8px;">
+Line 1125: <a href="#" onclick="initiatePayment('Custom Enterprise Plan (5-20 Crore)', 1800, 150000); return false;" style="background: #10b981; color: #fff; padding: 8px 14px; border-radius: 6px; font-weight: 700; font-size: 12px; text-decoration: none;">Pay Now (PayPal/BHIM)</a>
+Line 1134: <a href="#" onclick="initiatePayment('Custom Enterprise Plan (20-100 Crore)', 4200, 350000); return false;" style="background: #10b981; color: #fff; padding: 8px 14px; border-radius: 6px; font-weight: 700; font-size: 12px; text-decoration: none;">Pay Now (PayPal/BHIM)</a>
+Line 1143: <a href="#" onclick="initiatePayment('Custom Enterprise Plan (Above 100 Crore)', 8500, 700000); return false;" style="background: #10b981; color: #fff; padding: 8px 14px; border-radius: 6px; font-weight: 700; font-size: 12px; text-decoration: none;">Pay Now (PayPal/BHIM)</a>
+
+Payment Modals or JS Scripts:
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-EXRC4SWZ71');
+  </script>
+
+    <style>
+      .show-inr, .show-inr-block { display: none !important; }
+      .show-usd, .show-usd-block { display: inline !important; }
+      div.show-usd-block, li.show-usd-block { display: block !important; }
+      
+      body.currency-inr .show-inr { display: inline !important; }
+      body.currency-inr .show-inr-block { display: block !important; }
+      body.currency-inr .show-usd, body.currency-inr .show-usd-block { display: none !important; }
+    </style>
+</head>
+
+<body>
+
+      <!-- ============================================================ -->
+  <!-- EXECUTIVE 3D PILL ACTION BAR (ZERO OVERLAP) -->
+  <!-- ============================================================ -->
+  <div style="background: rgba(2, 6, 23, 0.98); border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding: 8px 5%; display: flex; justi
+...[truncated]...
+
+    let currentCurrency = 'INR';
+    let selectedPlan = { name: '', usd: 0, inr: 0 };
+
+    function toggleCurrency() {
+        currentCurrency = currentCurrency === 'USD' ? 'INR' : 'USD';
+        const knob = document.getElementById('toggle-knob');
+        const lUSD = document.getElementById('label-usd');
+        const lINR = document.getElementById('label-inr');
+        
+        document.body.classList.remove('currency-inr', 'currency-usd');
+        document.body.classList.add(currentCurrency === 'INR' ? 'currency-inr' : 'currency-usd');
+
+        if (currentCurrency === 'INR') {
+            knob.style.left = '32px';
+            lINR.style.opacity = '1';
+            lINR.style.fontWeight = '700';
+            lINR.style.color = 'var(--gold)';
+            lUSD.style.opacity = '0.6';
+            lUSD.style.fontWeight = '400';
+            lUSD.style.color = '#fff';
+        } else {
+            knob.style.left = '2px';
+            lUSD.style.opacity = '1';
+            lUSD.style.fontWeigh
+...[truncated]...
+
+      const activities = [
+          "<strong>Manufacturer in Gujarat</strong> just closed a $45k deal.",
+          "<strong>Textile Exporter in Surat</strong> just upgraded to Elite.",
+          "<strong>Ceramic Supplier in Morbi</strong> received 3 new RFQs.",
+          "<strong>Agro Trader in MP</strong> verified their IEC profile.",
+          "<strong>Spice Exporter in Kerala</strong> matched with UAE buyer."
+      ];
+      
+      setInterval(() => {
+          const toast = document.getElementById('liveActivityToast');
+          const msg = document.getElementById('toastMessage');
+          // Pick random message
+          msg.innerHTML = activities[Math.floor(Math.random() * activities.length)];
+          // Slide in
+          toast.style.left = '30px';
+          
+          // Slide out after 5s
+          setTimeout(() => {
+              toast.style.left = '-400px';
+          }, 5000);
+      }, 15000); // Every 15 seconds
+  </script>
+
+  <!-- GLOBAL HELPLINE HUB (PREMIUM REGIONAL 
+...[truncated]...

@@ -1,6 +1,36 @@
 import re
 
-html_content = """        <!-- GLOBAL BANKING PARTNERS SECTION (PREMIUM) -->
+# 1. Update index.html
+with open('index.html', 'r', encoding='utf-8') as f:
+    html = f.read()
+
+# Remove auto-open
+html = re.sub(r'<script id="tidio-auto-open">.*?</script>', '', html, flags=re.DOTALL)
+
+# Find whatsapp button and move it left by changing 'right: 30px;' to 'right: 110px;'
+html = re.sub(r'(\.whatsapp-float\s*\{[^}]*right:\s*)30px', r'\g<1>110px', html)
+
+with open('index.html', 'w', encoding='utf-8') as f:
+    f.write(html)
+
+# 2. Update membership.html
+with open('membership.html', 'r', encoding='utf-8') as f:
+    m_html = f.read()
+
+# Remove auto-open
+m_html = re.sub(r'<script id="tidio-auto-open">.*?</script>', '', m_html, flags=re.DOTALL)
+
+# Find whatsapp button and move it left by changing 'right: 30px;' to 'right: 110px;'
+m_html = re.sub(r'(\.whatsapp-float\s*\{[^}]*right:\s*)30px', r'\g<1>110px', m_html)
+
+# Now replace the Bank Transfer Details
+start_tag = '<!-- GLOBAL BANK TRANSFER DETAILS -->'
+end_tag = '<!-- ENTERPRISE QUALIFICATION FORM -->'
+
+start_idx = m_html.find(start_tag)
+end_idx = m_html.find(end_tag)
+
+new_bank_details = """        <!-- GLOBAL BANKING PARTNERS SECTION (PREMIUM) -->
         <div style="background: #020617; border: 1px solid rgba(212,175,55,0.3); border-radius: 20px; padding: 40px; max-width: 1100px; margin: 0 auto 60px; position: relative; overflow: hidden;">
             <div style="position: absolute; top: -10%; left: -5%; width: 40%; height: 40%; background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%); pointer-events: none;"></div>
             
@@ -19,8 +49,6 @@ html_content = """        <!-- GLOBAL BANKING PARTNERS SECTION (PREMIUM) -->
                     transition: all 0.3s ease;
                     position: relative;
                     overflow: hidden;
-                    display: flex;
-                    flex-direction: column;
                 }
                 .premium-bank-card:hover {
                     transform: translateY(-5px);
@@ -65,22 +93,18 @@ html_content = """        <!-- GLOBAL BANKING PARTNERS SECTION (PREMIUM) -->
                     letter-spacing: 1px;
                 }
                 .bank-card-details {
-                    display: grid;
-                    grid-template-columns: auto 1fr;
-                    gap: 6px 12px;
                     font-size: 13px;
                     color: #cbd5e1;
-                    line-height: 1.4;
-                    width: 100%;
+                    line-height: 1.8;
                 }
                 .bank-card-label {
                     color: #94a3b8;
-                    white-space: nowrap;
+                    display: inline-block;
+                    width: 90px;
                 }
                 .bank-card-value {
                     color: #fff;
                     font-weight: 600;
-                    word-break: break-word;
                 }
                 
                 .premium-bank-card.gold-tier {
@@ -111,12 +135,15 @@ html_content = """        <!-- GLOBAL BANKING PARTNERS SECTION (PREMIUM) -->
                             <div class="bank-card-subtitle" style="color: #cbd5e1;">The Currency Cloud Limited (UK)</div>
                         </div>
                     </div>
-                    <div class="bank-card-details" style="font-size: 14px; grid-template-columns: auto 1fr;">
-                        <div class="bank-card-label">Holder Name:</div> <div class="bank-card-value">APD GLOBAL TRADE</div>
-                        <div class="bank-card-label">Account No:</div> <div class="bank-card-value">GB82TCCL04143422806894</div>
-                        <div class="bank-card-label">Account Type:</div> <div class="bank-card-value">Business Checking</div>
-                        <div class="bank-card-label">BIC/SWIFT:</div> <div class="bank-card-value">TCCLGB3L</div>
-                        <div class="bank-card-label">Address:</div> <div class="bank-card-value">1 Sheldon Square, London, UK</div>
+                    <div class="bank-card-details" style="font-size: 14px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                        <div>
+                            <span class="bank-card-label">Holder Name:</span> <span class="bank-card-value">APD GLOBAL TRADE</span><br>
+                            <span class="bank-card-label">Account No:</span> <span class="bank-card-value">GB82TCCL04143422806894</span><br>
+                        </div>
+                        <div>
+                            <span class="bank-card-label">BIC/SWIFT:</span> <span class="bank-card-value">TCCLGB3L</span><br>
+                            <span class="bank-card-label">Address:</span> <span class="bank-card-value">1 Sheldon Square, London, UK</span>
+                        </div>
                     </div>
                 </div>
 
@@ -130,11 +157,10 @@ html_content = """        <!-- GLOBAL BANKING PARTNERS SECTION (PREMIUM) -->
                         </div>
                     </div>
                     <div class="bank-card-details">
-                        <div class="bank-card-label">Holder Name:</div> <div class="bank-card-value">APD GLOBAL TRADE</div>
-                        <div class="bank-card-label">Account No:</div> <div class="bank-card-value">8302840763</div>
-                        <div class="bank-card-label">Account Type:</div> <div class="bank-card-value">Business Checking</div>
-                        <div class="bank-card-label">Routing (ACH):</div> <div class="bank-card-value">026073150</div>
-                        <div class="bank-card-label">Address:</div> <div class="bank-card-value" style="font-size:12px;">5 Penn Plaza, 14th Floor, NY 10001, US</div>
+                        <span class="bank-card-label">Holder Name:</span> <span class="bank-card-value">APD GLOBAL TRADE</span><br>
+                        <span class="bank-card-label">Account No:</span> <span class="bank-card-value">8302840763</span><br>
+                        <span class="bank-card-label">Routing (ACH):</span> <span class="bank-card-value">026073150</span><br>
+                        <span class="bank-card-label">Address:</span> <span class="bank-card-value" style="font-size:12px;">5 Penn Plaza, 14th Floor, NY 10001, US</span>
                     </div>
                 </div>
 
@@ -148,11 +174,10 @@ html_content = """        <!-- GLOBAL BANKING PARTNERS SECTION (PREMIUM) -->
                         </div>
                     </div>
                     <div class="bank-card-details">
-                        <div class="bank-card-label">Holder Name:</div> <div class="bank-card-value">APD GLOBAL TRADE</div>
-                        <div class="bank-card-label">Account No:</div> <div class="bank-card-value">48040137</div>
-                        <div class="bank-card-label">Account Type:</div> <div class="bank-card-value">Business Checking</div>
-                        <div class="bank-card-label">Sort Code:</div> <div class="bank-card-value">608382</div>
-                        <div class="bank-card-label">Address:</div> <div class="bank-card-value" style="font-size:12px;">68 King William Street, London, UK</div>
+                        <span class="bank-card-label">Holder Name:</span> <span class="bank-card-value">APD GLOBAL TRADE</span><br>
+                        <span class="bank-card-label">Account No:</span> <span class="bank-card-value">48040137</span><br>
+                        <span class="bank-card-label">Sort Code:</span> <span class="bank-card-value">608382</span><br>
+                        <span class="bank-card-label">Address:</span> <span class="bank-card-value" style="font-size:12px;">68 King William Street, London, UK</span>
                     </div>
                 </div>
 
@@ -166,11 +191,10 @@ html_content = """        <!-- GLOBAL BANKING PARTNERS SECTION (PREMIUM) -->
                         </div>
                     </div>
                     <div class="bank-card-details">
-                        <div class="bank-card-label">Holder Name:</div> <div class="bank-card-value">APD GLOBAL TRADE</div>
-                        <div class="bank-card-label">IBAN:</div> <div class="bank-card-value">DE41202208000048040137</div>
-                        <div class="bank-card-label">Account Type:</div> <div class="bank-card-value">Business Checking</div>
-                        <div class="bank-card-label">BIC/SWIFT:</div> <div class="bank-card-value">SXPYDEHH</div>
-                        <div class="bank-card-label">Address:</div> <div class="bank-card-value" style="font-size:12px;">Maximilianstraße 54, 80538 München, DE</div>
+                        <span class="bank-card-label">Holder Name:</span> <span class="bank-card-value">APD GLOBAL TRADE</span><br>
+                        <span class="bank-card-label">IBAN:</span> <span class="bank-card-value">DE41202208000048040137</span><br>
+                        <span class="bank-card-label">BIC/SWIFT:</span> <span class="bank-card-value">SXPYDEHH</span><br>
+                        <span class="bank-card-label">Address:</span> <span class="bank-card-value" style="font-size:12px;">Maximilianstraße 54, 80538 München, DE</span>
                     </div>
                 </div>
 
@@ -184,11 +208,10 @@ html_content = """        <!-- GLOBAL BANKING PARTNERS SECTION (PREMIUM) -->
                         </div>
                     </div>
                     <div class="bank-card-details">
-                        <div class="bank-card-label">Holder Name:</div> <div class="bank-card-value">APD GLOBAL TRADE</div>
-                        <div class="bank-card-label">Account No:</div> <div class="bank-card-value">962668612</div>
-                        <div class="bank-card-label">Account Type:</div> <div class="bank-card-value">Business Checking</div>
-                        <div class="bank-card-label">Routing:</div> <div class="bank-card-value">035210009</div>
-                        <div class="bank-card-label">Address:</div> <div class="bank-card-value" style="font-size:12px;">736 Meridian Road N.E, Calgary, CA</div>
+                        <span class="bank-card-label">Holder Name:</span> <span class="bank-card-value">APD GLOBAL TRADE</span><br>
+                        <span class="bank-card-label">Account No:</span> <span class="bank-card-value">962668612</span><br>
+                        <span class="bank-card-label">Routing:</span> <span class="bank-card-value">035210009</span><br>
+                        <span class="bank-card-label">Address:</span> <span class="bank-card-value" style="font-size:12px;">736 Meridian Road N.E, Calgary, CA</span>
                     </div>
                 </div>
 
@@ -202,11 +225,10 @@ html_content = """        <!-- GLOBAL BANKING PARTNERS SECTION (PREMIUM) -->
                         </div>
                     </div>
                     <div class="bank-card-details">
-                        <div class="bank-card-label">Holder Name:</div> <div class="bank-card-value">APD GLOBAL TRADE</div>
-                        <div class="bank-card-label">Account No:</div> <div class="bank-card-value">048040138</div>
-                        <div class="bank-card-label">Account Type:</div> <div class="bank-card-value">Business Checking</div>
-                        <div class="bank-card-label">BSB Code:</div> <div class="bank-card-value">252000</div>
-                        <div class="bank-card-label">Address:</div> <div class="bank-card-value" style="font-size:12px;">Level 11/10 Carrington St, Sydney, AU</div>
+                        <span class="bank-card-label">Holder Name:</span> <span class="bank-card-value">APD GLOBAL TRADE</span><br>
+                        <span class="bank-card-label">Account No:</span> <span class="bank-card-value">048040138</span><br>
+                        <span class="bank-card-label">BSB Code:</span> <span class="bank-card-value">252000</span><br>
+                        <span class="bank-card-label">Address:</span> <span class="bank-card-value" style="font-size:12px;">Level 11/10 Carrington St, Sydney, AU</span>
                     </div>
                 </div>
 
@@ -220,11 +242,10 @@ html_content = """        <!-- GLOBAL BANKING PARTNERS SECTION (PREMIUM) -->
                         </div>
                     </div>
                     <div class="bank-card-details">
-                        <div class="bank-card-label">Holder Name:</div> <div class="bank-card-value">APD GLOBAL TRADE</div>
-                        <div class="bank-card-label">Account No:</div> <div class="bank-card-value">DK6189000048040137</div>
-                        <div class="bank-card-label">Account Type:</div> <div class="bank-card-value">Business Checking</div>
-                        <div class="bank-card-label">BIC/SWIFT:</div> <div class="bank-card-value">SXPYDKKK</div>
-                        <div class="bank-card-label">Address:</div> <div class="bank-card-value" style="font-size:12px;">Lautrupsgade 13-15, 2100 Copenhagen, DK</div>
+                        <span class="bank-card-label">Holder Name:</span> <span class="bank-card-value">APD GLOBAL TRADE</span><br>
+                        <span class="bank-card-label">Account No:</span> <span class="bank-card-value">DK6189000048040137</span><br>
+                        <span class="bank-card-label">BIC/SWIFT:</span> <span class="bank-card-value">SXPYDKKK</span><br>
+                        <span class="bank-card-label">Address:</span> <span class="bank-card-value" style="font-size:12px;">Lautrupsgade 13-15, 2100 Copenhagen, DK</span>
                     </div>
                 </div>
 
@@ -240,19 +261,10 @@ html_content = """        <!-- GLOBAL BANKING PARTNERS SECTION (PREMIUM) -->
         </div>
 """
 
-with open('membership.html', 'r', encoding='utf-8') as f:
-    m_html = f.read()
-
-start_tag = '<!-- GLOBAL BANKING PARTNERS SECTION (PREMIUM) -->'
-end_tag = '<!-- ENTERPRISE QUALIFICATION FORM -->'
-
-start_idx = m_html.find(start_tag)
-end_idx = m_html.find(end_tag)
-
 if start_idx != -1 and end_idx != -1:
-    m_html = m_html[:start_idx] + html_content + '\\n        ' + m_html[end_idx:]
+    m_html = m_html[:start_idx] + new_bank_details + '\n        ' + m_html[end_idx:]
     with open('membership.html', 'w', encoding='utf-8') as f:
         f.write(m_html)
     print('Successfully updated membership.html')
 else:
-    print('Could not find boundaries')
+    print('Could not find boundaries in membership.html')
