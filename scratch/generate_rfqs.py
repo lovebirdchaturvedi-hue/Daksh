@@ -2,21 +2,49 @@ import json
 import random
 
 commodities = [
-    "Non-Basmati Rice (IR64/Swarna)", "Basmati Rice (1121 Sella)", "Turmeric Finger (Nizamabad)", 
-    "Cumin Seeds (Jeera)", "Green Cardamom (8mm)", "Milling Wheat", "Refined Sugar (ICUMSA 45)",
-    "Raw Cotton (Shankar-6)", "HMS 1&2 Scrap Metal", "Copper Cathodes (Grade A 99.99%)",
-    "Aluminum Ingots (A7)", "Solar Panels (Monocrystalline 550W)", "CNC Milling Machines",
-    "Cotton T-Shirts (180 GSM)", "Denim Jeans (Men)", "Frozen Vannamei Shrimp",
-    "Arabica Coffee Beans", "CTC Black Tea", "Raw Cashew Nuts (W320)",
-    "Red Lentils (Masoor Dal)", "Yellow Soybeans (Non-GMO)", "Urea Fertilizer 46% N",
-    "Portland Cement (Grade 42.5)", "Bitumen (Grade 60/70)", "Crude Palm Oil (CPO)",
-    "Refined Sunflower Oil", "Soybean Meal", "Yellow Corn (Animal Feed)", 
-    "Onions (Red Nasik)", "Fresh Cavendish Bananas", "Mango Pulp (Alphonso)",
+    # Grains & Cereals
+    "Non-Basmati Rice (IR64/Swarna)", "Basmati Rice (1121 Sella)", "Basmati Rice (Pusa 1121)", 
+    "Basmati Rice (1509 Sella)", "Basmati Rice (Traditional)", "Non-Basmati Rice (PR14)", 
+    "Non-Basmati Rice (Sona Masoori)", "Broken Rice (100%)", "Parboiled Rice",
+    "Milling Wheat", "Yellow Maize (Animal Feed)", "White Maize (Human Consumption)",
+    
+    # Sugar
+    "Refined Sugar (ICUMSA 45)", "Refined Sugar (ICUMSA 150)", "Raw Sugar (ICUMSA 600-1200)",
+    
+    # Spices
+    "Turmeric Finger (Nizamabad)", "Cumin Seeds (Jeera)", "Green Cardamom (8mm)", 
     "Black Pepper (500 GL)", "Coriander Seeds", "Sesame Seeds (Hulled)",
-    "Peanuts (Bold 40/50)", "Desiccated Coconut (Fine)", "Jute Bags",
+    
+    # Oils
+    "Crude Palm Oil (CPO)", "Refined Palm Olein (CP10)", "Refined Sunflower Oil", 
+    "Crude Sunflower Oil", "Refined Soybean Oil",
+    
+    # Pulses & Legumes
+    "Red Lentils (Masoor Dal)", "Yellow Lentils (Moong Dal)", "Black Gram (Urad Dal)", 
+    "Pigeon Peas (Toor Dal)", "Yellow Soybeans (Non-GMO)", "Peanuts (Bold 40/50)",
+    
+    # Coffee & Cocoa
+    "Arabica Coffee Beans (Grade 1)", "Robusta Coffee Beans", "Raw Cocoa Beans", 
+    "Cocoa Powder (Alkalized)", "Cocoa Butter", "CTC Black Tea",
+    
+    # Frozen Foods & Nonveg
+    "Frozen Vannamei Shrimp", "Frozen Halal Beef (Quarter Carcass)", "Frozen Chicken Paws (Grade A)", 
+    "Frozen Whole Chicken", "Frozen Atlantic Salmon", "Frozen Mackerel Fish",
+    
+    # Fresh Produce & Nuts
+    "Onions (Red Nasik)", "Fresh Cavendish Bananas", "Mango Pulp (Alphonso)",
+    "Raw Cashew Nuts (W320)", "Desiccated Coconut (Fine)",
+    
+    # Industrial & Metals
+    "HMS 1&2 Scrap Metal", "Copper Cathodes (Grade A 99.99%)", "Aluminum Ingots (A7)", 
+    "Urea Fertilizer 46% N", "Portland Cement (Grade 42.5)", "Bitumen (Grade 60/70)", 
+    "PET Resin (Bottle Grade)", "TMT Steel Bars", "Polished Granite Slabs", "Ceramic Wall Tiles (300x600)",
+    
+    # Manufactured Goods
+    "Raw Cotton (Shankar-6)", "Cotton T-Shirts (180 GSM)", "Denim Jeans (Men)", 
+    "Solar Panels (Monocrystalline 550W)", "CNC Milling Machines", "Jute Bags",
     "Leather Safety Gloves", "Surgical Masks (3-Ply)", "Nitrile Examination Gloves",
-    "Ceramic Wall Tiles (300x600)", "Polished Granite Slabs", "TMT Steel Bars",
-    "Kraft Paper (120 GSM)", "Corrugated Boxes", "PET Resin (Bottle Grade)"
+    "Kraft Paper (120 GSM)", "Corrugated Boxes"
 ]
 
 countries = [
@@ -44,21 +72,14 @@ last_names = ["Smith", "Al-Fayed", "Muller", "Garcia", "Silva", "Johnson", "Brow
               "Al-Maktoum", "Khan", "Rahman", "Chen", "Lee", "Kim", "Nguyen", "Patel", "Sharma", "Singh",
               "Rossi", "Costa", "Martinez", "Gonzalez", "Rodriguez", "Fernandez", "Lopez", "Perez", "Gomez"]
 
-# Generate 512 leads
+# Generate 1500 leads
 leads = []
-for i in range(512):
-    # Random ID
+for i in range(1500):
     rfq_id = f"RFQ-{random.randint(100000, 999999)}"
-    
-    # Name obfuscation
     fname = random.choice(first_names)
     lname = random.choice(last_names)
     obfuscated_name = f"{fname} {lname[0]}***"
-    
-    # Select country
     country = random.choice(countries)
-    
-    # Select commodity
     commodity = random.choice(commodities)
     
     # Determine quantity and metric based on commodity
@@ -73,10 +94,19 @@ for i in range(512):
     else:
         metric = "MT"
         qty = random.randint(20, 5000)
-        target_price = f"${random.randint(300, 1500)} / MT"
+        if "Rice" in commodity or "Maize" in commodity or "Wheat" in commodity:
+            target_price = f"${random.randint(250, 600)} / MT"
+        elif "Sugar" in commodity:
+            target_price = f"${random.randint(450, 650)} / MT"
+        elif "Oil" in commodity:
+            target_price = f"${random.randint(800, 1400)} / MT"
+        elif "Frozen" in commodity:
+            target_price = f"${random.randint(1500, 4500)} / MT"
+        elif "Coffee" in commodity or "Cocoa" in commodity:
+            target_price = f"${random.randint(2500, 5500)} / MT"
+        else:
+            target_price = f"${random.randint(300, 1500)} / MT"
         
-    # Generate a random face using UI Faces / Random User generic avatars based on random numbers
-    # We use a mix of male and female avatars from randomuser.me
     gender = random.choice(["men", "women"])
     avatar_num = random.randint(1, 99)
     avatar_url = f"https://randomuser.me/api/portraits/{gender}/{avatar_num}.jpg"
@@ -99,4 +129,4 @@ js_content = f"const liveRfqsData = {json.dumps(leads, indent=2)};"
 with open('assets/js/live_rfqs_data.js', 'w', encoding='utf-8') as f:
     f.write(js_content)
 
-print("Generated 512 leads in assets/js/live_rfqs_data.js")
+print("Generated 1500 leads in assets/js/live_rfqs_data.js")
