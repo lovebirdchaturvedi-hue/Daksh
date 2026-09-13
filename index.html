@@ -3447,7 +3447,23 @@ body { top: 0 !important; }
       <div style="background: #0f172a; border: 1px solid rgba(212,175,55,0.4); border-radius: 20px; padding: 40px; max-width: 500px; width: 90%; box-shadow: 0 20px 50px rgba(0,0,0,0.8); position: relative;">
           <div onclick="document.getElementById('rfqModal').style.display='none';" style="position: absolute; top: 20px; right: 20px; color: #cbd5e1; cursor: pointer; font-size: 1.5rem;">✕</div>
           <h3 style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 20px;">Post Live Order</h3>
-          <p style="color: #94a3b8; margin-bottom: 30px; font-size: 0.95rem;">Instantly broadcast your buy requirement to our vetted suppliers.</p>
+          <p style="color: #94a3b8; margin-bottom: 10px; font-size: 0.95rem;">Instantly broadcast your buy requirement to our vetted suppliers.</p>
+<div style="margin-bottom: 25px; padding: 10px; background: rgba(220, 38, 38, 0.1); border: 1px solid rgba(220, 38, 38, 0.3); border-radius: 8px; display: flex; align-items: center; gap: 10px;">
+    <span style="display: inline-block; width: 8px; height: 8px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 8px #ef4444; animation: pulse 1.5s infinite;"></span>
+    <span style="color: #fca5a5; font-size: 13px; font-weight: 600;" id="liveViewerCount">-- Exporters currently active and ready to quote</span>
+</div>
+<script>
+    // Random viewer count logic (sometimes over 1000)
+    document.addEventListener("DOMContentLoaded", function() {
+        const countEl = document.getElementById("liveViewerCount");
+        if(countEl) {
+            const isHigh = Math.random() > 0.7; // 30% chance to be over 1000
+            const count = isHigh ? Math.floor(Math.random() * 500) + 1000 : Math.floor(Math.random() * 800) + 100;
+            countEl.innerText = count.toLocaleString() + " Exporters currently active and ready to quote";
+        }
+    });
+</script>
+
           <form onsubmit="handleQuickRFQ(event)" style="display: flex; flex-direction: column; gap: 15px;">
               <div class="rfq-flex" style="display: flex; gap: 15px;">
                   <input type="text" id="qr_name" placeholder="Your Name" required style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
@@ -3466,7 +3482,7 @@ body { top: 0 !important; }
               </div>
               <input type="text" id="qr_dest" placeholder="Destination Port (e.g., Jebel Ali, Dubai)" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
               <textarea id="qr_specs" placeholder="Any Specifications Required (Optional)" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none; min-height: 80px; resize: vertical;"></textarea>
-              <button type="submit" id="qr_btn" style="background: linear-gradient(90deg, var(--gold), #facc15); color: #000; font-weight: 900; padding: 15px; border: none; border-radius: 10px; font-size: 1.1rem; cursor: pointer; text-transform: uppercase; margin-top: 10px; transition: 0.3s; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);">Broadcast RFQ</button>
+              <button type="submit" id="qr_btn" style="background: linear-gradient(90deg, var(--gold), #facc15); color: #000; font-weight: 900; padding: 15px; border: none; border-radius: 10px; font-size: 1.1rem; cursor: pointer; text-transform: uppercase; margin-top: 10px; transition: 0.3s; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);">Pay & Post Live Order</button>
           </form>
       </div>
   </div>
@@ -3534,7 +3550,7 @@ body { top: 0 !important; }
         btn.disabled = true;
 
         try {
-            await addDoc(collection(db, "rfqs"), {
+            const docRef = await addDoc(collection(db, "rfqs"), {
                 buyerName: document.getElementById("qr_name").value,
                 company: document.getElementById("qr_company").value,
                 whatsapp: document.getElementById("qr_whatsapp").value,
@@ -3542,17 +3558,22 @@ body { top: 0 !important; }
                 quantity: document.getElementById("qr_qty").value + " " + document.getElementById("qr_unit").value,
                 destination: document.getElementById("qr_dest").value,
                 specifications: document.getElementById("qr_specs").value,
-                status: "open",
+                status: "payment_pending",
                 source: "homepage_quick",
                 createdAt: serverTimestamp()
             });
-            alert('RFQ Posted Successfully! Suppliers will be notified.');
-            document.getElementById('rfqModal').style.display='none';
-            e.target.reset();
+            
+            // Redirect to payment gateway
+            const isUSD = document.body.classList && document.body.classList.contains('currency-usd');
+            const amount = isUSD ? 499 : 49000;
+            const currency = isUSD ? 'USD' : 'INR';
+            
+            window.location.href = `/custom-payment.html?amount=${amount}&currency=${currency}&ref=LiveOrder_${docRef.id}`;
+            return; // Exit here so it doesn't alert or reset
         } catch (err) {
             alert('Error posting RFQ: ' + err.message);
         } finally {
-            btn.innerText = "Broadcast RFQ";
+            btn.innerText = "Pay & Post Live Order";
             btn.disabled = false;
         }
     };
