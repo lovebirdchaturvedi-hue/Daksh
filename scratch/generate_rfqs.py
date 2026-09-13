@@ -102,8 +102,14 @@ for i in range(1500):
         qty = random.randint(5000, 100000)
         target_price = f"${round(random.uniform(0.5, 15.0), 2)} / Pc"
     else:
-        metric = "MT"
-        qty = random.randint(20, 5000)
+        if random.random() < 0.5:
+            qty_val = random.randint(1, 25) * 22
+            qty_str = f"{qty_val:,} MT"
+        else:
+            container_type = random.choice(["20ft FCL", "40ft FCL"])
+            qty_val = random.randint(2, 20)
+            qty_str = f"{qty_val}x {container_type}"
+        
         if "Rice" in commodity or "Maize" in commodity or "Wheat" in commodity:
             target_price = f"${random.randint(250, 600)} / MT"
         elif "Sugar" in commodity:
@@ -127,7 +133,7 @@ for i in range(1500):
         "country": country["name"],
         "flag": country["flag"],
         "commodity": commodity,
-        "quantity": f"{qty:,} {metric}",
+        "quantity": qty_str if 'qty_str' in locals() else f"{qty:,} {metric}",
         "target_price": target_price,
         "avatar": avatar_url,
         "posted": f"🔴 LIVE ({random.randint(1, 59)} mins ago)"

@@ -338,7 +338,7 @@ window.unlockRfq = async (rfqId, supplierId) => {
     }
 
     try {
-        const msg = `🔓 Live RFQ Unlocked!\nSupplier: ${s.companyName || 'Unknown'}\nLead ID: ${rfqId}`;
+        const msg = `🔓 Live Order Unlocked!\nSupplier: ${s.companyName || 'Unknown'}\nLead ID: ${rfqId}`;
         await fetch('/api/send', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
