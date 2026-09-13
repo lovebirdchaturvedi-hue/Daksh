@@ -518,5 +518,22 @@
 
 <script src="//code.tidio.co/zs195w58z0vrzcknn4gkbosvrnn63xfe.js" async></script>
 
+
+    <script>
+        // Auto-fill from URL parameters
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if(urlParams.has('amount')) {
+                document.getElementById('payAmount').value = urlParams.get('amount');
+            }
+            if(urlParams.has('ref')) {
+                document.getElementById('refName').value = urlParams.get('ref');
+            }
+            if(urlParams.has('currency')) {
+                document.getElementById('currencySelect').value = urlParams.get('currency');
+            }
+        });
+    </script>
+
 </body>
 </html>
