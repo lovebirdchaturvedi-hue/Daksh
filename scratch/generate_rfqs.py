@@ -15,6 +15,16 @@ commodities = [
     "Turmeric Finger (Nizamabad)", "Cumin Seeds (Jeera)", "Green Cardamom (8mm)", 
     "Black Pepper (500 GL)", "Coriander Seeds", "Sesame Seeds (Hulled)",
     
+    # Dry Fruits & Nuts
+    "Cashew Nuts (W320/W240)", "Almonds (Nonpareil/Carmel)", "Walnuts (Light Halves)",
+    "Pistachios (Roasted & Salted)", "Raisins (Golden/Black)", "Dried Figs", 
+    "Dried Dates (Khadrawi/Zahidi)", "Macadamia Nuts",
+    
+    # Egyptian Herbs & Botanicals
+    "Dried Hibiscus Flower (Roselle)", "Sweet Basil Leaves (Crushed)", "Peppermint Leaves",
+    "Chamomile Flowers (Premium grade)", "Marjoram Leaves", "Lemongrass Cut", 
+    "Dried Parsley Leaves", "Dried Dill Weed", "Calendula Petals", "Thyme Leaves",
+    
     # Oils
     "Crude Palm Oil (CPO)", "Refined Palm Olein (CP10)", "Refined Sunflower Oil", 
     "Crude Sunflower Oil", "Refined Soybean Oil",
@@ -120,7 +130,7 @@ for i in range(1500):
         "quantity": f"{qty:,} {metric}",
         "target_price": target_price,
         "avatar": avatar_url,
-        "posted": f"{random.randint(1, 48)} hours ago"
+        "posted": f"🔴 LIVE ({random.randint(1, 59)} mins ago)"
     }
     leads.append(lead)
 

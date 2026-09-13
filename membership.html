@@ -2012,10 +2012,11 @@ Dashboard</a>
 
         try {
             // 1. Create Order
+            const amt = currentCurrency === 'USD' ? selectedPlan.usd : selectedPlan.inr;
             const res = await fetch('/api/razorpay-create-order', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ amount: selectedPlan.inr, currency: 'INR' })
+                body: JSON.stringify({ amount: amt, currency: currentCurrency })
             });
             const data = await res.json();
 
