@@ -289,7 +289,7 @@
               <img src="/assets/img/payment_qr.jpg" alt="Manual QR Code" style="width: 240px; height: auto; display: block; border-radius: 8px;">
           </div>
           <p style="font-size: 0.95rem; color: #cbd5e1; margin-bottom: 20px;"><b>Payable to: APD GLOBAL TRADE</b><br>Accepting Google Pay, PhonePe, Paytm & BHIM.</p>
-          <button class="btn" style="margin-top: auto; background: #22c55e; color: white;" onclick="window.location.href='https://wa.me/919266418868?text=I%20have%20made%20the%20Manual%20UPI%20payment.%20Here%20is%20the%20screenshot.'">Verify & Activate Access</button>
+          <button class="btn" style="margin-top: auto; background: #22c55e; color: white;" onclick="window.location.href='https://wa.me/919990332340?text=I%20have%20made%20the%20Manual%20UPI%20payment.%20Here%20is%20the%20screenshot.'">Verify & Activate Access</button>
       </div>
 
     </div>

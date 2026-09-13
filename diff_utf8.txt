@@ -54,9 +54,9 @@ index 2d3b707..c7a7b68 100644
      </nav>
      
      <div class="header-contact desktop-only" style="display: flex; flex-direction: column; text-align: right; font-size: 13px; font-weight: 700; color: #fff;">
--        <span style="color: var(--gold);">≡ƒô₧ +91 92664 18868</span>
+-        <span style="color: var(--gold);">≡ƒô₧ +91 99903 32340</span>
 -        <span style="color: #25D366; margin-top: 2px;">≡ƒô▓ WhatsApp: +91 97181 73015</span>
-+        <span style="color:var(--gold);">≡ƒô₧ +91 92664 18868</span>
++        <span style="color:var(--gold);">≡ƒô₧ +91 99903 32340</span>
 +        <span style="color:#25D366; margin-top: 2px;">≡ƒô▓ WhatsApp: +91 97181 73015</span>
      </div>
    </header>

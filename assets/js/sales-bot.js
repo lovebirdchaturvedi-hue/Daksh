@@ -22,7 +22,7 @@ const functions = getFunctions(app, "us-central1"); // Hardcoded region for reli
     const SalesBot = {
     isOpen: false,
     history: [],
-    handoffNumbers: ['919266418868', '919217114472'],
+    handoffNumbers: ['919990332340', '919217114472'],
     botName: 'Trade Copilot',
     botStatus: 'AI INVOICE & TRADE ASSISTANT',
     avatar: '/assets/img/sales-agent.png',

@@ -3,7 +3,7 @@ const fetch = require('node-fetch'); // or native fetch if Node 18+
 async function testUltramsg() {
     const instance = "instance168990";
     const token = "yx9xaxy5k1nbqjat";
-    const to = "+919266418868";
+    const to = "+919990332340";
     const body = "Test from APD Server";
 
     const url = `https://api.ultramsg.com/${instance}/messages/chat`;
