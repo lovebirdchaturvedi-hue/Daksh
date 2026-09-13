@@ -1927,7 +1927,13 @@ Dashboard</a>
         document.getElementById('modalPriceUSD').innerText = '$' + usd.toLocaleString();
         document.getElementById('modalPriceINR').innerText = '₹' + inr.toLocaleString();
         document.getElementById('modalPriceINRManual').innerText = '₹' + inr.toLocaleString();
-        if(document.getElementById('modalPriceRazorpay')) document.getElementById('modalPriceRazorpay').innerText = '₹' + inr.toLocaleString();
+        if(document.getElementById('modalPriceRazorpay')) {
+            if (currentCurrency === 'USD') {
+                document.getElementById('modalPriceRazorpay').innerText = '$' + usd.toLocaleString();
+            } else {
+                document.getElementById('modalPriceRazorpay').innerText = '₹' + inr.toLocaleString();
+            }
+        }
         document.getElementById('modalPriceUSDEquiv').innerText = '$' + usdEquiv.toLocaleString() + '.00';
         
         document.getElementById("paymentModal").style.display = "flex";
