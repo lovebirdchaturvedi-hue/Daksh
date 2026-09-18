@@ -947,7 +947,20 @@
             }
         </style>
         
-          <!-- MARKETPLACE SEARCH BAR -->
+          
+        <!-- I AM SUPPLIER / BUYER BUTTONS -->
+        <div class="fade-in" style="display: flex; gap: 20px; justify-content: center; margin: 30px auto 40px auto; flex-wrap: wrap; z-index: 20; position: relative;">
+            <a href="supplier-dashboard.html" style="background: #2563eb; color: white; padding: 15px 40px; border-radius: 40px; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 10px; font-size: 16px; font-family: 'Outfit', sans-serif; box-shadow: 0 10px 25px rgba(37,99,235,0.3); transition: 0.3s; border: 1px solid #3b82f6;">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                I am Supplier
+            </a>
+            <a href="buyer-dashboard.html" style="background: rgba(255,255,255,0.05); color: white; padding: 15px 40px; border-radius: 40px; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 10px; font-size: 16px; font-family: 'Outfit', sans-serif; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(10px); transition: 0.3s;">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                I am Buyer
+            </a>
+        </div>
+
+        <!-- MARKETPLACE SEARCH BAR -->
         <div class="fade-in" style="width: 100%; max-width: 800px; margin: 60px auto 15px auto; position: relative; z-index: 20;">
             <form id="heroSearchForm" action="/buyer-rfqs.html" method="GET" class="hero-search-inner" style="display: flex; background: rgba(2, 6, 23, 0.8); border: 2px solid rgba(212, 175, 55, 0.5); border-radius: 50px; overflow: hidden; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
                 <select style="background: rgba(255,255,255,0.05); border: none; border-right: 1px solid rgba(212,175,55,0.3); color: #fff; padding: 15px 20px; font-weight: 700; outline: none; cursor: pointer;">
@@ -2228,7 +2241,68 @@
       </div>
   </section>
 
-  <section style="padding: 120px 8%; background: #020617; position: relative; overflow: hidden;">
+  
+<section style="padding: 50px 8%; background: #0f172a; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
+    <h3 style="color: #94a3b8; font-size: 16px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 40px;">Business Associate Partners</h3>
+    <div style="display: flex; gap: 50px; justify-content: center; flex-wrap: wrap; opacity: 0.5; filter: grayscale(100%); align-items: center;">
+        <h2 style="color: #fff; font-family: 'Playfair Display', serif; font-size: 28px; margin:0;">KRBL Limited</h2>
+        <h2 style="color: #fff; font-family: 'Arial', sans-serif; font-size: 28px; font-weight: 900; margin:0;">WONDER CEMENT</h2>
+        <h2 style="color: #fff; font-family: 'Times New Roman', serif; font-size: 28px; font-style: italic; margin:0;">Al Maha Foods</h2>
+        <h2 style="color: #fff; font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; margin:0;">SAIL</h2>
+        <h2 style="color: #fff; font-family: 'Playfair Display', serif; font-size: 28px; margin:0;">GLOBAL AGRO</h2>
+    </div>
+</section>
+
+
+<section style="padding: 80px 8%; background: #020617;">
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 50px;">
+            <h2 style="color: #fff; font-family: 'Playfair Display', serif; font-size: 36px; margin-bottom: 15px;">Recent Blogs &amp; Market Insights</h2>
+            <p style="color: #94a3b8; font-size: 1.1rem;">Stay updated with global trade trends and commodity analytics.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            
+            <div style="background: #0f172a; border-radius: 15px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; cursor: pointer;">
+                <div style="height: 200px; background: url('https://images.unsplash.com/photo-1586201375761-83865001e8ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;"></div>
+                <div style="padding: 25px;">
+                    <span style="color: var(--gold); font-size: 12px; font-weight: 700; text-transform: uppercase;">Rice Export</span>
+                    <h3 style="color: #fff; font-size: 20px; margin: 10px 0 15px; font-family: 'Outfit', sans-serif;">Buy Sella Basmati Rice in Bulk from Verified Indian Suppliers</h3>
+                    <div style="color: #64748b; font-size: 13px; display: flex; justify-content: space-between;">
+                        <span>By Trade Analytics</span>
+                        <span>18-Sep-2026</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: #0f172a; border-radius: 15px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; cursor: pointer;">
+                <div style="height: 200px; background: url('https://images.unsplash.com/photo-1621317581373-f931d8c1c4f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;"></div>
+                <div style="padding: 25px;">
+                    <span style="color: var(--gold); font-size: 12px; font-weight: 700; text-transform: uppercase;">Pulses &amp; Beans</span>
+                    <h3 style="color: #fff; font-size: 20px; margin: 10px 0 15px; font-family: 'Outfit', sans-serif;">Global Shortage: Procuring Red Kidney Beans for Middle East Markets</h3>
+                    <div style="color: #64748b; font-size: 13px; display: flex; justify-content: space-between;">
+                        <span>By Trade Analytics</span>
+                        <span>16-Sep-2026</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: #0f172a; border-radius: 15px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; cursor: pointer;">
+                <div style="height: 200px; background: url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;"></div>
+                <div style="padding: 25px;">
+                    <span style="color: var(--gold); font-size: 12px; font-weight: 700; text-transform: uppercase;">Market Trends</span>
+                    <h3 style="color: #fff; font-size: 20px; margin: 10px 0 15px; font-family: 'Outfit', sans-serif;">Indian Agri Exports to Global Markets: 2026 Q4 Forecast</h3>
+                    <div style="color: #64748b; font-size: 13px; display: flex; justify-content: space-between;">
+                        <span>By Trade Analytics</span>
+                        <span>12-Sep-2026</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section style="padding: 120px 8%; background: #020617; position: relative; overflow: hidden;">
     <div style="position: absolute; top: 10%; right: -5%; width: 30%; height: 30%; background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%); pointer-events: none;"></div>
     
     <div class="container" style="position: relative; z-index: 10;">
@@ -2930,6 +3004,45 @@ text-align:center;
             
         </div>
     </section>
+
+<div class="seo-quick-links" style="background: #000; padding: 40px 8%; border-top: 1px solid rgba(255,255,255,0.1); color: #64748b; font-size: 13px; line-height: 1.8;">
+    <div class="container">
+        <h4 style="color: #fff; margin-bottom: 20px; font-family: 'Outfit', sans-serif; font-size: 20px;">Quick Links &amp; Popular Searches</h4>
+        <div style="margin-bottom: 15px;">
+            <strong style="color: #94a3b8;">Agro Commodity:</strong> 
+            <a href="#" style="color: #64748b; text-decoration: none;">Basmati Rice</a> | 
+            <a href="#" style="color: #64748b; text-decoration: none;">Wheat</a> | 
+            <a href="#" style="color: #64748b; text-decoration: none;">Long Grain Rice</a> | 
+            <a href="#" style="color: #64748b; text-decoration: none;">Sugar</a> | 
+            <a href="#" style="color: #64748b; text-decoration: none;">Spices</a> | 
+            <a href="#" style="color: #64748b; text-decoration: none;">Pulses</a> | 
+            <a href="#" style="color: #64748b; text-decoration: none;">Edible Oils</a> | 
+            <a href="#" style="color: #64748b; text-decoration: none;">Dry Fruits</a>
+        </div>
+        <div style="margin-bottom: 15px;">
+            <strong style="color: #94a3b8;">Top Searches:</strong> 
+            <a href="#" style="color: #64748b; text-decoration: none;">Buy Rice in Bulk</a> | 
+            <a href="#" style="color: #64748b; text-decoration: none;">Rice Importers in Saudi Arabia</a> | 
+            <a href="#" style="color: #64748b; text-decoration: none;">Brazilian Sugar Exporters</a> | 
+            <a href="#" style="color: #64748b; text-decoration: none;">Export Agro Industries</a> | 
+            <a href="#" style="color: #64748b; text-decoration: none;">Top 10 Cement Manufacturers</a> | 
+            <a href="#" style="color: #64748b; text-decoration: none;">Steel Billets Export</a> | 
+            <a href="#" style="color: #64748b; text-decoration: none;">Best Spice Exporter in India</a> | 
+            <a href="#" style="color: #64748b; text-decoration: none;">Sella Basmati Rice</a> | 
+            <a href="#" style="color: #64748b; text-decoration: none;">Wheat Importing Countries</a>
+        </div>
+        <div style="margin-bottom: 15px;">
+            <strong style="color: #94a3b8;">Spices &amp; Pulses:</strong> 
+            <a href="#" style="color: #64748b; text-decoration: none;">Black Pepper</a> | 
+            <a href="#" style="color: #64748b; text-decoration: none;">Cumin Seeds</a> | 
+            <a href="#" style="color: #64748b; text-decoration: none;">Turmeric</a> | 
+            <a href="#" style="color: #64748b; text-decoration: none;">Red Chilli</a> | 
+            <a href="#" style="color: #64748b; text-decoration: none;">Red Kidney Beans</a> | 
+            <a href="#" style="color: #64748b; text-decoration: none;">Chickpeas</a>
+        </div>
+    </div>
+</div>
+
 <footer style="background: #020617; padding: 100px 8% 60px; border-top: 1px solid rgba(255,255,255,0.05); color: #94a3b8; text-align: left;">
     <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 60px;">
         
