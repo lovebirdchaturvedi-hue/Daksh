@@ -1,0 +1,6 @@
+import sys
+with open('index.html', 'r', encoding='utf-8') as f:
+    text = f.read()
+
+count = text.count('id="rfqModal"')
+print('Number of rfqModal IDs:', count)

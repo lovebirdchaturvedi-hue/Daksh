@@ -1,26 +1,25 @@
-import os
+import glob
+import codecs
 
-for filename in ['buyer-rfqs.html', 'vip-dashboard.html', 'supplier-rfqs.html']:
-    if os.path.exists(filename):
-        with open(filename, 'r', encoding='utf-8') as f:
-            text = f.read()
-            
-        text = text.replace(
-            "onclick=\"window.location.href='/custom-payment.html?amount=49&currency=USD&ref=UnlockLead_' + lead.id\">Unlock Lead ($49)</button>",
-            "onclick=\"window.location.href='/custom-payment.html?amount=49&currency=USD&ref=UnlockLead_${lead.id}'\">Submit Quote</button>"
-        )
-        with open(filename, 'w', encoding='utf-8') as f:
-            f.write(text)
+html_files = glob.glob('*.html')
 
-if os.path.exists('supplier-dashboard.html'):
-    with open('supplier-dashboard.html', 'r', encoding='utf-8') as f:
-        text = f.read()
+for file in html_files:
+    if file == 'index.html':
+        continue
     
-    text = text.replace(
-        '⭐ Unlock Lead ($49)',
-        '⭐ Unlock Buyer Now'
-    )
-    with open('supplier-dashboard.html', 'w', encoding='utf-8') as f:
-        f.write(text)
+    try:
+        with codecs.open(file, 'r', encoding='utf-8', errors='ignore') as f:
+            text = f.read()
+        
+        text = text.replace('href="#" onclick="document.getElementById(\'rfqModal\').style.display=\'flex\'; return false;"',
+                            'href="/create-rfq.html"')
+        
+        text = text.replace('href="#" onclick="toggleDrawer(); document.getElementById(\'rfqModal\').style.display=\'flex\'; return false;"',
+                            'href="/create-rfq.html"')
+                            
+        with codecs.open(file, 'w', encoding='utf-8') as f:
+            f.write(text)
+    except Exception as e:
+        print(f"Skipping {file}: {e}")
 
-print("Fixed buttons successfully.")
+print("Fixed broken buttons on all non-index pages.")
