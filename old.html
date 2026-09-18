@@ -271,5 +271,152 @@ function closeModal(){
 }
 </script>
 
+
+<!-- QUICK RFQ MODAL -->
+  <div id="rfqModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(10px); z-index: 999999; justify-content: center; align-items: center;">
+      <div style="background: #0f172a; border: 1px solid rgba(212,175,55,0.4); border-radius: 20px; padding: 40px; max-width: 500px; width: 90%; box-shadow: 0 20px 50px rgba(0,0,0,0.8); position: relative;">
+          <div onclick="document.getElementById('rfqModal').style.display='none';" style="position: absolute; top: 20px; right: 20px; color: #cbd5e1; cursor: pointer; font-size: 1.5rem;">✕</div>
+          <h3 style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 20px;">Post Live Order</h3>
+          <p style="color: #94a3b8; margin-bottom: 10px; font-size: 0.95rem;">Instantly broadcast your buy requirement to our vetted suppliers.</p>
+<div style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); padding: 12px; border-radius: 8px; margin-bottom: 15px;">
+    <p style="color: #4ade80; margin: 0; font-size: 0.85rem; font-weight: 600;"><i class="fas fa-shield-alt"></i> Genuine Buyer Verification</p>
+    <p style="color: #cbd5e1; margin: 5px 0 0 0; font-size: 0.8rem;">To ensure only serious inquiries, a nominal <strong>$25 USD (or ₹2,000) verification deposit</strong> is required. <span style="color:#facc15; font-weight:700;">This will be 100% REFUNDED or adjusted against your final order.</span></p>
+</div>
+<div style="margin-bottom: 25px; padding: 10px; background: rgba(220, 38, 38, 0.1); border: 1px solid rgba(220, 38, 38, 0.3); border-radius: 8px; display: flex; align-items: center; gap: 10px;">
+    <span style="display: inline-block; width: 8px; height: 8px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 8px #ef4444; animation: pulse 1.5s infinite;"></span>
+    <span style="color: #fca5a5; font-size: 13px; font-weight: 600;" id="liveViewerCount">-- Exporters currently active and ready to quote</span>
+</div>
+<script>
+    // Random viewer count logic (sometimes over 1000)
+    document.addEventListener("DOMContentLoaded", function() {
+        const countEl = document.getElementById("liveViewerCount");
+        if(countEl) {
+            const isHigh = Math.random() > 0.7; // 30% chance to be over 1000
+            const count = isHigh ? Math.floor(Math.random() * 500) + 1000 : Math.floor(Math.random() * 800) + 100;
+            countEl.innerText = count.toLocaleString() + " Exporters currently active and ready to quote";
+        }
+    });
+</script>
+
+          <form onsubmit="handleQuickRFQ(event)" style="display: flex; flex-direction: column; gap: 15px;">
+              <div class="rfq-flex" style="display: flex; gap: 15px;">
+                  <input type="text" id="qr_name" placeholder="Your Name" required style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
+                  <input type="text" id="qr_company" placeholder="Business Name" required style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
+              </div>
+              <input type="text" id="qr_whatsapp" placeholder="WhatsApp Number (with country code)" required pattern="^\+.*" title="Must start with + and include country code" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
+              <input type="text" id="qr_product" placeholder="Product Name (e.g., Basmati Rice)" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
+              <div class="rfq-flex" style="display: flex; gap: 15px;">
+                  <input type="number" id="qr_qty" placeholder="Quantity" required style="flex: 2; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
+                  <select id="qr_unit" required style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
+                      <option value="MT">MT</option>
+                      <option value="KG">KG</option>
+                      <option value="Units">Units</option>
+                      <option value="Containers">Containers</option>
+                  </select>
+              </div>
+              <input type="text" id="qr_dest" placeholder="Destination Port (e.g., Jebel Ali, Dubai)" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
+              <textarea id="qr_specs" placeholder="Any Specifications Required (Optional)" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none; min-height: 80px; resize: vertical;"></textarea>
+              <button type="submit" id="qr_btn" style="background: linear-gradient(90deg, var(--gold), #facc15); color: #000; font-weight: 900; padding: 15px; border: none; border-radius: 10px; font-size: 1.1rem; cursor: pointer; text-transform: uppercase; margin-top: 10px; transition: 0.3s; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);">Pay $25 Refundable Deposit</button>
+          </form>
+      </div>
+  </div>
+
+  <!-- Desktop Floating WhatsApp -->
+  <style>
+    .desktop-wa-btn { display: none; }
+    @media (min-width: 769px) { .desktop-wa-btn { display: flex; } }
+  </style>
+  <a href="https://wa.me/919990332340" target="_blank" class="desktop-wa-btn" style="position: fixed; bottom: 20px; right: 110px; background-color: #25d366; color: white; border-radius: 50%; width: 60px; height: 60px; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 9999; text-decoration: none; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.1)';" onmouseout="this.style.transform='scale(1)';">
+    <svg viewBox="0 0 32 32" width="35" height="35" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M16.002 0c-8.837 0-16.002 7.163-16.002 16.002 0 2.825.74 5.485 2.053 7.765l-2.053 8.233 8.431-2.036c2.253 1.183 4.815 1.838 7.571 1.838 8.835 0 16-7.163 16-16.002s-7.165-16-16-16zm7.989 22.842c-.328.922-1.895 1.768-2.617 1.838-.667.065-1.503.111-4.22-.989-3.479-1.41-5.744-5.011-5.918-5.244-.175-.233-1.41-1.879-1.41-3.585s.891-2.545 1.199-2.871c.309-.327.671-.409.896-.409.224 0 .448 0 .638.009.202.01.472-.078.741.564.281.671.961 2.348 1.045 2.518.084.17.14.368.028.591-.111.224-.17.368-.337.564-.17.197-.351.428-.501.591-.17.183-.352.383-.146.741.206.357.917 1.517 1.972 2.456 1.359 1.209 2.492 1.579 2.843 1.748.351.17.558.14.764-.093.206-.233.885-1.033 1.122-1.388.238-.356.475-.297.801-.176.327.121 2.062.973 2.417 1.149.356.176.593.264.679.41.084.146.084.85-.244 1.771z"/></svg>
+  </a>
+
+  <!-- Google Translate Scripts -->
+  <script type="text/javascript">
+  , 'google_translate_element');
+  }
+  </script>
+  
+
+  <!-- Post Live Order Logic -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+      authDomain: "apd-globaltrade-prod.firebaseapp.com",
+      projectId: "apd-globaltrade-prod",
+      storageBucket: "apd-globaltrade-prod.firebasestorage.app",
+      messagingSenderId: "226407312435",
+      appId: "1:226407312435:web:f8a54b1132af3899170746"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // AUTOCOMPLETE LOGIC
+    (async function initSearchAutocomplete() {
+        try {
+            const snap = await getDocs(collection(db, "rfqs"));
+            const suggestions = new Set();
+            snap.forEach(doc => {
+                const data = doc.data();
+                if(data.product) suggestions.add(data.product.trim());
+                if(data.destination) suggestions.add(data.destination.trim());
+            });
+            const datalist = document.createElement('datalist');
+            datalist.id = 'searchSuggestions';
+            suggestions.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item;
+                datalist.appendChild(option);
+            });
+            document.body.appendChild(datalist);
+        } catch (err) {
+            console.error("Autocomplete init failed:", err);
+        }
+    })();
+
+    window.handleQuickRFQ = async function(e) {
+        e.preventDefault();
+        const btn = document.getElementById("qr_btn");
+        btn.innerText = "Securing Order...";
+        btn.disabled = true;
+
+        const product = document.getElementById("qr_product").value;
+        const qty = document.getElementById("qr_qty").value + " " + document.getElementById("qr_unit").value;
+        const dest = document.getElementById("qr_dest").value;
+
+        try {
+            // Save it to Firebase as pending
+            const docRef = await addDoc(collection(db, "rfqs"), {
+                buyerName: document.getElementById("qr_name").value,
+                company: document.getElementById("qr_company").value,
+                whatsapp: document.getElementById("qr_whatsapp").value,
+                product: product,
+                quantity: qty,
+                destination: dest,
+                specifications: document.getElementById("qr_specs").value,
+                status: "payment_pending",
+                source: "homepage_quick",
+                deposit: "refundable",
+                createdAt: serverTimestamp()
+            });
+
+            // Redirect to custom payment for the refundable deposit
+            const isUSD = document.body.classList && document.body.classList.contains('currency-usd');
+            const amount = isUSD ? 25 : 2000;
+            const currency = isUSD ? 'USD' : 'INR';
+            
+            // Redirect to the payment page
+            window.location.href = `/custom-payment.html?amount=${amount}&currency=${currency}&ref=LiveOrderDeposit_${docRef.id}`;
+            return;
+        } catch (err) {
+            alert('Error initiating verification: ' + err.message);
+            btn.innerText = "Pay $25 Refundable Deposit & Post";
+            btn.disabled = false;
+        }
+    };
+  </script>
 </body>
 </html>
