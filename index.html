@@ -524,6 +524,13 @@
             100% { box-shadow: 0 0 10px rgba(239, 68, 68, 0.5); }
         }
     </style>
+<style>
+@keyframes heavyBlink {
+  0% { transform: scale(1); opacity: 1; box-shadow: 0 0 20px #ef4444; }
+  50% { transform: scale(1.08); opacity: 0.8; box-shadow: 0 0 40px #f97316; }
+  100% { transform: scale(1); opacity: 1; box-shadow: 0 0 20px #ef4444; }
+}
+</style>
 </head>
 
 
@@ -555,11 +562,11 @@
   <!-- EXECUTIVE 3D PILL ACTION BAR (ZERO OVERLAP) -->
   <!-- ============================================================ -->
   <div style="background: rgba(2, 6, 23, 0.98); border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding: 8px 5%; display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; z-index: 99998; position: relative;">
-      <a href="/buyer-rfqs.html" style="background: linear-gradient(90deg, #ef4444, #f97316); color: #fff !important; padding: 8px 20px; font-weight: 900 !important; font-size: 0.8rem !important; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; display: inline-flex; justify-content: center; align-items: center; gap: 6px; box-shadow: 0 0 20px rgba(239, 68, 68, 0.6); animation: glowingPulse 2s infinite; text-shadow: 0 1px 3px rgba(0,0,0,0.5); text-decoration: none; white-space: nowrap;">
-          <span style="width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: pulse 1s infinite;"></span>
-          🔥 LIVE ORDERS (1,500+)
+      <a href="/buyer-rfqs.html" style="background: linear-gradient(90deg, #ef4444, #b91c1c); color: #fff !important; padding: 15px 30px !important; border-radius: 50px; font-weight: 900 !important; font-size: 20px !important; display: inline-flex; align-items: center; gap: 10px; border: 2px solid #fff; box-shadow: 0 0 30px rgba(239, 68, 68, 1); animation: heavyBlink 1.5s infinite; text-shadow: 0 2px 5px rgba(0,0,0,0.8); text-transform: uppercase;">
+          <span style="width: 12px; height: 12px; background: #fff; border-radius: 50%; animation: pulse 0.5s infinite;"></span>
+          🚨 LIVE BUYER ORDERS (1,500+) 🚨
       </a>
-      <a href="#" onclick="document.getElementById('rfqModal').style.display='flex'; return false;" style="background: linear-gradient(180deg, #22c55e, #166534); color: #fff; padding: 8px 20px; font-weight: 800; font-size: 0.8rem; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.4); text-shadow: 0 1px 2px rgba(0,0,0,0.5); text-decoration: none; white-space: nowrap; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">POST LIVE ORDER</a>
+      <a href="#" onclick="document.getElementById('rfqModal').style.display='flex'; return false;" style="background: linear-gradient(180deg, #22c55e, #166534); color: #fff; padding: 8px 20px; font-weight: 800; font-size: 0.8rem; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.4); text-shadow: 0 1px 2px rgba(0,0,0,0.5); text-decoration: none; white-space: nowrap; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">🚨 LIVE ORDERS 🚨 ORDER</a>
       <a href="/membership.html" style="background: linear-gradient(180deg, #facc15, #8B6508); color: #000; padding: 8px 20px; font-weight: 800; font-size: 0.8rem; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.6); text-shadow: 0 1px 2px rgba(255,255,255,0.5); text-decoration: none; white-space: nowrap; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">GET INSTANT BUYER</a>
       <a href="/register-supplier.html" style="background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.4); color: #fff; padding: 8px 20px; font-weight: 700; font-size: 0.8rem; border-radius: 50px; letter-spacing: 0.5px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); text-decoration: none; white-space: nowrap; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Create Free Profile</a>
       <a href="/register-buyer.html" style="background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid rgba(148, 163, 184, 0.4); color: #fff; padding: 8px 20px; font-weight: 700; font-size: 0.8rem; border-radius: 50px; letter-spacing: 0.5px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); text-decoration: none; text-transform: uppercase; white-space: nowrap; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"><span style="color:#60a5fa; margin-right: 4px;">✦</span> BECOME A VERIFIED BUYER</a>
@@ -676,9 +683,9 @@
               </div>
           </div>
       </div>
-      <a href="/buyer-rfqs.html" style="background: linear-gradient(90deg, #ef4444, #f97316); color: #fff !important; padding: 6px 16px !important; border-radius: 30px; font-weight: 900 !important; font-size: 13.5px !important; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 0 20px rgba(239, 68, 68, 0.6); animation: glowingPulse 2s infinite; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">
-          <span style="width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: pulse 1s infinite;"></span>
-          🔥 LIVE ORDERS (1,500+)
+      <a href="/buyer-rfqs.html" style="background: linear-gradient(90deg, #ef4444, #b91c1c); color: #fff !important; padding: 15px 30px !important; border-radius: 50px; font-weight: 900 !important; font-size: 20px !important; display: inline-flex; align-items: center; gap: 10px; border: 2px solid #fff; box-shadow: 0 0 30px rgba(239, 68, 68, 1); animation: heavyBlink 1.5s infinite; text-shadow: 0 2px 5px rgba(0,0,0,0.8); text-transform: uppercase;">
+          <span style="width: 12px; height: 12px; background: #fff; border-radius: 50%; animation: pulse 0.5s infinite;"></span>
+          🚨 LIVE BUYER ORDERS (1,500+) 🚨
       </a>
       <a href="#" onclick="document.getElementById('rfqModal').style.display='flex'; return false;" style="color: var(--gold) !important; font-weight: 700 !important;">Post Live Order <span style="background: rgba(212,175,55,0.2); color: var(--gold); border: 1px solid rgba(212,175,55,0.4); font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; margin-left: 4px; vertical-align: middle;">FREE</span></a>
       <a href="/suppliers.html">Suppliers</a>
@@ -700,26 +707,40 @@
     </div>
   
     <style>
-        .mobile-post-btn { display: none !important; }
-        @media(max-width: 768px) {
-            .mobile-post-btn { 
+        .mobile-post-btn { 
                 display: flex !important; 
-                background: linear-gradient(180deg, #22c55e, #166534); 
+                background: linear-gradient(180deg, #ef4444, #b91c1c); 
                 color: #fff !important; 
-                padding: 6px 12px; 
-                font-weight: 800; 
-                font-size: 0.75rem; 
+                padding: 10px 20px; 
+                font-weight: 900; 
+                font-size: 1rem; 
                 border-radius: 50px; 
                 text-decoration: none;
                 align-items: center;
                 white-space: nowrap;
-                box-shadow: 0 4px 10px rgba(34, 197, 94, 0.3);
+                box-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
+                animation: heavyBlink 1.5s infinite;
+            }
+        @media(max-width: 768px) {
+            .mobile-post-btn { 
+                display: flex !important; 
+                background: linear-gradient(180deg, #ef4444, #b91c1c); 
+                color: #fff !important; 
+                padding: 10px 20px; 
+                font-weight: 900; 
+                font-size: 1rem; 
+                border-radius: 50px; 
+                text-decoration: none;
+                align-items: center;
+                white-space: nowrap;
+                box-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
+                animation: heavyBlink 1.5s infinite;
             }
         }
     </style>
     <div style="display: flex; align-items: center; gap: 10px;">
         <a href="#" onclick="document.getElementById('rfqModal').style.display='flex'; return false;" class="mobile-post-btn">
-            POST LIVE
+            🚨 LIVE ORDERS 🚨
         </a>
     </div>
   </header>
@@ -744,11 +765,11 @@
   ">
       <!-- MOBILE DRAWER TOP 4 EXECUTIVE 3D PILL BUTTONS -->
       <div style="display: flex; flex-direction: column; gap: 10px; margin: 20px 0; padding: 0 10px;">
-          <a href="/buyer-rfqs.html" style="background: linear-gradient(90deg, #ef4444, #f97316); color: #fff !important; padding: 12px 20px; font-weight: 900 !important; font-size: 0.9rem !important; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; display: inline-flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 0 20px rgba(239, 68, 68, 0.6); animation: glowingPulse 2s infinite; text-shadow: 0 1px 3px rgba(0,0,0,0.5); text-decoration: none;">
-              <span style="width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: pulse 1s infinite;"></span>
-              🔥 LIVE ORDERS (1,500+)
-          </a>
-          <a href="#" onclick="toggleDrawer(); document.getElementById('rfqModal').style.display='flex'; return false;" style="background: linear-gradient(180deg, #22c55e, #166534); color: #fff; padding: 12px 20px; font-weight: 800; font-size: 0.9rem; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 6px 18px rgba(34, 197, 94, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.4); text-align: center; text-decoration: none;">POST LIVE ORDER</a>
+          <a href="/buyer-rfqs.html" style="background: linear-gradient(90deg, #ef4444, #b91c1c); color: #fff !important; padding: 15px 30px !important; border-radius: 50px; font-weight: 900 !important; font-size: 20px !important; display: inline-flex; align-items: center; gap: 10px; border: 2px solid #fff; box-shadow: 0 0 30px rgba(239, 68, 68, 1); animation: heavyBlink 1.5s infinite; text-shadow: 0 2px 5px rgba(0,0,0,0.8); text-transform: uppercase;">
+          <span style="width: 12px; height: 12px; background: #fff; border-radius: 50%; animation: pulse 0.5s infinite;"></span>
+          🚨 LIVE BUYER ORDERS (1,500+) 🚨
+      </a>
+          <a href="#" onclick="toggleDrawer(); document.getElementById('rfqModal').style.display='flex'; return false;" style="background: linear-gradient(180deg, #22c55e, #166534); color: #fff; padding: 12px 20px; font-weight: 800; font-size: 0.9rem; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 6px 18px rgba(34, 197, 94, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.4); text-align: center; text-decoration: none;">🚨 LIVE ORDERS 🚨 ORDER</a>
           <a href="/membership.html" style="background: linear-gradient(180deg, #facc15, #8B6508); color: #000; padding: 12px 20px; font-weight: 800; font-size: 0.9rem; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 6px 18px rgba(212, 175, 55, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.6); text-align: center; text-decoration: none;">GET INSTANT BUYER</a>
           <a href="/register-supplier.html" style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(212, 175, 55, 0.4); color: #fff; padding: 12px 20px; font-weight: 700; font-size: 0.9rem; border-radius: 50px; letter-spacing: 0.5px; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5); text-align: center; text-decoration: none;">Create Free Profile</a>
           <a href="/register-buyer.html" style="background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid rgba(148, 163, 184, 0.4); color: #fff; padding: 12px 20px; font-weight: 700; font-size: 0.9rem; border-radius: 50px; letter-spacing: 0.5px; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5); text-align: center; text-decoration: none; text-transform: uppercase;"><span style="color:#60a5fa; margin-right: 4px;">✦</span> BECOME A VERIFIED BUYER</a>
@@ -2856,7 +2877,60 @@ text-align:center;
     <!-- INSTITUTIONAL FOOTER -->
 
 
-  <footer style="background: #020617; padding: 100px 8% 60px; border-top: 1px solid rgba(255,255,255,0.05); color: #94a3b8; text-align: left;">
+  
+    <!-- ========================================== -->
+    <!-- TRUST BADGES & NEWSLETTER SECTION -->
+    <!-- ========================================== -->
+    <section style="background: #020617; padding: 60px 20px; border-top: 1px solid rgba(255,255,255,0.05);">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+            
+            <!-- Trust Badges -->
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 30px; margin-bottom: 50px; filter: grayscale(100%) opacity(0.7);">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 24px;">🛡️</span>
+                    <span style="color: #fff; font-weight: 700; font-size: 14px; letter-spacing: 1px;">AES-256 SECURE</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 24px;">🤝</span>
+                    <span style="color: #fff; font-weight: 700; font-size: 14px; letter-spacing: 1px;">ESCROW PROTECTION</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 24px;">🌐</span>
+                    <span style="color: #fff; font-weight: 700; font-size: 14px; letter-spacing: 1px;">TRADOLOGIE VERIFIED PARTNER</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 24px;">🏦</span>
+                    <span style="color: #fff; font-weight: 700; font-size: 14px; letter-spacing: 1px;">RAZORPAY TRUSTED</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 24px;">📜</span>
+                    <span style="color: #fff; font-weight: 700; font-size: 14px; letter-spacing: 1px;">FIEO MEMBER ALIGNED</span>
+                </div>
+            </div>
+
+            <!-- Newsletter Box -->
+            <div style="background: linear-gradient(135deg, #0f172a, #1e293b); border: 1px solid rgba(212,175,55,0.2); border-radius: 20px; padding: 50px 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); max-width: 800px; margin: 0 auto; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%); border-radius: 50%;"></div>
+                
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 32px; color: var(--gold); margin: 0 0 15px 0;">Global Trade Market Intelligence</h3>
+                <p style="color: #94a3b8; font-size: 15px; margin: 0 0 30px 0; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+                    Join 14,000+ top-tier exporters and institutional buyers. Get weekly commodity price trends, international tender alerts, and geopolitical trade shifts delivered straight to your inbox.
+                </p>
+                
+                <form action="https://formspree.io/f/xgogjdll" method="POST" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
+                    <input type="hidden" name="_subject" value="New Newsletter Subscriber - APD Global Trade">
+                    <input type="email" name="email" required placeholder="Enter your corporate email address" style="flex: 1; min-width: 250px; max-width: 400px; padding: 16px 20px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: #fff; font-size: 15px; outline: none; transition: 0.3s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+                    <button type="submit" style="padding: 16px 35px; border-radius: 50px; border: none; background: linear-gradient(90deg, #d4af37, #facc15); color: #000; font-weight: 800; font-size: 15px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(212,175,55,0.3);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Subscribe Now</button>
+                </form>
+                
+                <div style="color: #64748b; font-size: 11px; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px;">
+                    No spam. Unsubscribe anytime. 100% Data Privacy Guaranteed.
+                </div>
+            </div>
+            
+        </div>
+    </section>
+<footer style="background: #020617; padding: 100px 8% 60px; border-top: 1px solid rgba(255,255,255,0.05); color: #94a3b8; text-align: left;">
     <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 60px;">
         
         <!-- Column 1: Branding -->

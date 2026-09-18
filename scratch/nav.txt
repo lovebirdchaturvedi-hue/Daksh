@@ -1,0 +1,158 @@
+<header id="main-header" style="position: sticky; top: 0; z-index: 10000; background: rgba(2, 6, 23, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease;">
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <div class="menu-toggle" onclick="toggleDrawer()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <a href="/" class="logo premium-logo" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+            <div style="width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #020617, #1a1a1a); border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);">
+                <span style="font-family: 'Outfit', serif; font-size: 17px; font-weight: 900; color: var(--gold); letter-spacing: 1px;">APD</span>
+            </div>
+            <div style="display: flex; flex-direction: column; line-height: 1.1;">
+                <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 19px; color: #fff; letter-spacing: 0.5px;">APD <span style="color: var(--gold);">Global</span> Trade</span>
+                <span style="font-size: 9px; font-weight: 700; letter-spacing: 1.5px; color: #94a3b8; text-transform: uppercase;">ELITE B2B TRADE PLATFORM</span>
+            </div>
+        </a>
+    </div>
+    <style>
+        /* MEGA MENU STYLES */
+        .mega-menu-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .mega-menu-wrapper:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .mega-menu {
+            position: absolute;
+            top: 100%;
+            left: -150px;
+            width: 600px;
+            background: rgba(2, 6, 23, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            z-index: 100000;
+        }
+        .mega-menu h4 {
+            color: var(--gold);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 5px;
+        }
+        .mega-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .mega-menu ul li {
+            margin-bottom: 10px;
+        }
+        .mega-menu ul li a {
+            color: #cbd5e1 !important;
+            font-size: 0.8rem !important;
+            text-transform: capitalize !important;
+            letter-spacing: 0px !important;
+            font-weight: 500 !important;
+        }
+        .mega-menu ul li a:hover {
+            color: var(--gold) !important;
+            padding-left: 5px;
+        }
+        .mega-menu ul li a::after { display: none !important; }
+    </style>
+    <nav style="display: flex; align-items: center; gap: 4px;">
+      <a href="/">Home</a>
+      <div class="mega-menu-wrapper">
+          <a href="#" style="cursor: default;">Categories ▾</a>
+          <div class="mega-menu">
+              <div>
+                  <h4>🌾 Agri & Food</h4>
+                  <ul>
+                      <li><a href="/buyer-rfqs.html?q=rice">Basmati & Non-Basmati</a></li>
+                      <li><a href="/buyer-rfqs.html?q=sugar">Sugar & Sweeteners</a></li>
+                      <li><a href="/buyer-rfqs.html?q=spices">Spices & Herbs</a></li>
+                      <li><a href="/buyer-rfqs.html?q=oil">Edible Oils</a></li>
+                  </ul>
+              </div>
+              <div>
+                  <h4>🏗️ Industrial</h4>
+                  <ul>
+                      <li><a href="/buyer-rfqs.html?q=steel">Steel & Metals</a></li>
+                      <li><a href="/buyer-rfqs.html?q=cement">Cement & Construction</a></li>
+                      <li><a href="/buyer-rfqs.html?q=chemicals">Chemicals & Polymers</a></li>
+                      <li><a href="/buyer-rfqs.html?q=machinery">Heavy Machinery</a></li>
+                  </ul>
+              </div>
+              <div>
+                  <h4>👗 Consumer Goods</h4>
+                  <ul>
+                      <li><a href="/buyer-rfqs.html?q=textiles">Textiles & Apparel</a></li>
+                      <li><a href="/buyer-rfqs.html?q=electronics">Electronics</a></li>
+                      <li><a href="/buyer-rfqs.html?q=leather">Leather Products</a></li>
+                      <li><a href="/buyer-rfqs.html?q=fmcg">FMCG & Packaging</a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <a href="/buyer-rfqs.html" style="background: linear-gradient(90deg, #ef4444, #f97316); color: #fff !important; padding: 6px 16px !important; border-radius: 30px; font-weight: 900 !important; font-size: 13.5px !important; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 0 20px rgba(239, 68, 68, 0.6); animation: glowingPulse 2s infinite; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">
+          <span style="width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: pulse 1s infinite;"></span>
+          🔥 LIVE ORDERS (1,500+)
+      </a>
+      <a href="#" onclick="document.getElementById('rfqModal').style.display='flex'; return false;" style="color: var(--gold) !important; font-weight: 700 !important;">Post Live Order <span style="background: rgba(212,175,55,0.2); color: var(--gold); border: 1px solid rgba(212,175,55,0.4); font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; margin-left: 4px; vertical-align: middle;">FREE</span></a>
+      <a href="/suppliers.html">Suppliers</a>
+      <a href="/learn-exporting.html">Learn Exporting</a>
+      <a href="/membership.html" style="background: linear-gradient(135deg, #d4af37, #b8860b) !important; color: #020617 !important; padding: 8px 18px !important; border-radius: 30px !important; font-weight: 700 !important; margin-left: 8px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);">Membership</a>
+      <a href="/franchise.html" style="color: var(--gold) !important;">Franchise</a>
+      <a href="/contact.html">Contact</a>
+    
+      <!-- MINI SEARCH BAR (Shown on scroll via JS) -->
+      <form id="mini-search" action="/buyer-rfqs.html" method="GET" style="display: none; align-items: center; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3); border-radius: 30px; overflow: hidden; margin-left: 10px; transition: all 0.3s ease;">
+          <input type="text" placeholder="Search..." style="background: transparent; border: none; color: #fff; padding: 6px 12px; font-size: 0.85rem; outline: none; width: 140px;" name="q" list="searchSuggestions">
+          <button type="submit" style="background: var(--gold); border: none; padding: 8px 15px; cursor: pointer; font-weight: 800; font-size: 0.85rem; color: #000;">🔍</button>
+      </form>
+      
+      
+
+      <div id="google_translate_element" style="margin-left: 15px;"></div>
+    </nav>
+    </div>
+  
+    <style>
+        .mobile-post-btn { display: none !important; }
+        @media(max-width: 768px) {
+            .mobile-post-btn { 
+                display: flex !important; 
+                background: linear-gradient(180deg, #22c55e, #166534); 
+                color: #fff !important; 
+                padding: 6px 12px; 
+                font-weight: 800; 
+                font-size: 0.75rem; 
+                border-radius: 50px; 
+                text-decoration: none;
+                align-items: center;
+                white-space: nowrap;
+                box-shadow: 0 4px 10px rgba(34, 197, 94, 0.3);
+            }
+        }
+    </style>
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <a href="#" onclick="document.getElementById('rfqModal').style.display='flex'; return false;" class="mobile-post-btn">
+            POST LIVE
+        </a>
+    </div>
+  </header>
