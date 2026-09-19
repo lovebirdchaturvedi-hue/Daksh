@@ -1183,7 +1183,7 @@ Dashboard</a>
         <p style="color: #94a3b8; font-size: 1rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
             If you have discussed a custom institutional package or a negotiated discount with our trade desk, please use our secure flexible settlement portal.
         </p>
-        <a href="/custom-payment.html" style="display: inline-block; background: transparent; border: 2px solid var(--gold); color: var(--gold); padding: 15px 40px; border-radius: 50px; font-weight: 800; text-decoration: none; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;">
+        <a href="/membership.html" style="display: inline-block; background: transparent; border: 2px solid var(--gold); color: var(--gold); padding: 15px 40px; border-radius: 50px; font-weight: 800; text-decoration: none; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;">
             Access Custom Payment Portal →
         </a>
     </div>
@@ -2115,7 +2115,7 @@ Dashboard</a>
             const currency = isUSD ? 'USD' : 'INR';
             
             // Redirect to the payment page
-            window.location.href = `/custom-payment.html?amount=${amount}&currency=${currency}&ref=LiveOrderDeposit_${docRef.id}`;
+            window.location.href = `/membership.html`;
             return;
         } catch (err) {
             alert('Error initiating verification: ' + err.message);

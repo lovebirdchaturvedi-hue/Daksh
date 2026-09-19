@@ -511,7 +511,7 @@ window.submitBid = async () => {
         document.getElementById('paymentPromptSection').style.display = 'block';
         
         document.getElementById('payQuoteBtn').onclick = function() {
-            window.location.href = '/custom-payment.html?amount=49&currency=USD&ref=UnlockLead_' + currentLeadId;
+            window.location.href = '/membership.html' + currentLeadId;
         };
     }
     </script>
@@ -655,7 +655,7 @@ window.submitBid = async () => {
             const currency = isUSD ? 'USD' : 'INR';
             
             // Redirect to the payment page
-            window.location.href = `/custom-payment.html?amount=${amount}&currency=${currency}&ref=LiveOrderDeposit_${docRef.id}`;
+            window.location.href = `/membership.html`;
             return;
         } catch (err) {
             alert('Error initiating verification: ' + err.message);

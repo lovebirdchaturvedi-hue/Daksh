@@ -481,7 +481,7 @@
             const currency = isUSD ? 'USD' : 'INR';
             
             // Redirect to the payment page
-            window.location.href = `/custom-payment.html?amount=${amount}&currency=${currency}&ref=LiveOrderDeposit_${docRef.id}`;
+            window.location.href = `/membership.html`;
             return;
         } catch (err) {
             alert('Error initiating verification: ' + err.message);
