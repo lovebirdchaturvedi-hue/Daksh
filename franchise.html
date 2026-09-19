@@ -351,12 +351,9 @@
         <h3 style="color: #d4af37; font-size: 24px;">Franchise Allocation Consulting</h3>
         <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 15px;">Complete End-to-End Setup</p>
         
-        <div class="price" style="margin-top: 5px; margin-bottom: 10px;">₹49,000 <span style="font-size: 14px; font-weight: normal; color: #94a3b8;">Total Consulting Fee</span></div>
+        <div class="price" style="margin-top: 5px; margin-bottom: 10px;">₹49,000 <span style="font-size: 14px; font-weight: normal; color: #94a3b8;">Service Charges</span></div>
         
-        <div style="background: rgba(239, 68, 68, 0.1); border-left: 3px solid #ef4444; padding: 12px; margin-bottom: 25px; border-radius: 4px;">
-            <p style="font-size: 0.9rem; color: #f87171; margin: 0; line-height: 1.4;"><strong>Booking Amount:</strong> ₹11,000 (Non-Refundable)</p>
-            <p style="font-size: 0.8rem; color: #94a3b8; margin: 5px 0 0 0; line-height: 1.4;">The remaining balance of ₹38,000 is strictly payable ONLY upon successful franchise allocation.</p>
-        </div>
+        
 
         <h4 style="margin-top: 25px; margin-bottom: 15px; color: #fff; font-size: 16px;">Consultation Includes:</h4>
         <ul style="margin-bottom: 30px; line-height: 1.8; color: #cbd5e1; font-size: 14px; list-style: none; padding-left: 0;">
@@ -408,14 +405,14 @@
                     <span style="font-size: 0.8rem; color: #cbd5e1; line-height: 1.5;">
                         <strong>I agree to the Terms & Conditions:</strong><br>
                         1. We do not guarantee a franchise, as it depends strictly on brand policies, your location, and existing area demand.<br>
-                        2. The initial consultation fee of ₹11,000 is strictly non-refundable under any circumstances.<br>
-                        3. I agree to pay the balance of ₹38,000 upon successful franchise allocation.
+                        
+                        
                     </span>
                 </label>
             </div>
 
             <button type="submit" id="submitBtn" class="btn" style="background: #5f259f; color: white; font-weight: 800; width: 100%; border: 2px solid white;">
-                SUBMIT & PAY ₹11,000
+                SUBMIT APPLICATION
             </button>
             <div id="phonepeError" style="color: #ef4444; margin-top: 15px; font-size: 14px; display: none; text-align: center;"></div>
         </form>
@@ -479,14 +476,14 @@
             } else { 
                 err.innerText = data.error || 'Payment gateway failed. Your form is saved. Contact support.';
                 err.style.display = 'block'; 
-                btn.innerText = 'SUBMIT & PAY ₹11,000'; 
+                btn.innerText = 'SUBMIT APPLICATION'; 
                 btn.disabled = false; 
             }
         } catch(error) {
             console.error("Error submitting form: ", error);
             err.innerText = 'Network Error. Please try again.';
             err.style.display = 'block';
-            btn.innerText = 'SUBMIT & PAY ₹11,000';
+            btn.innerText = 'SUBMIT APPLICATION';
             btn.disabled = false;
         }
     }
