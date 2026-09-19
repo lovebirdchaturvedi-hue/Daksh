@@ -2123,7 +2123,27 @@ Dashboard</a>
             btn.disabled = false;
         }
     };
-  </script>
+  
+    window.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const plan = urlParams.get('plan');
+        
+        if (plan === '3buyers') {
+            setTimeout(() => {
+                initiatePayment('3 Verified Buyers Trial', 149, 9999);
+                // Dynamically update the main membership heading so they know what they are paying for
+                document.querySelector('.membership-header h1').innerHTML = "You're getting <span style='color: #facc15;'>3 Verified Buyers</span>";
+                document.querySelector('.membership-header p').innerHTML = "Complete your secure payment below to instantly unlock your institutional buyer contacts.";
+            }, 500);
+        } else if (plan === '5buyers') {
+            setTimeout(() => {
+                initiatePayment('5 Verified Buyers Trial', 199, 14900);
+                document.querySelector('.membership-header h1').innerHTML = "You're getting <span style='color: #facc15;'>5 Verified Buyers</span>";
+                document.querySelector('.membership-header p').innerHTML = "Complete your secure payment below to instantly unlock your institutional buyer contacts.";
+            }, 500);
+        }
+    });
+</script>
 </body>
 
 </html>
