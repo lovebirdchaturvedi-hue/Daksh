@@ -43,7 +43,7 @@ button {
   <div style="background: rgba(2, 6, 23, 0.98); border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding: 8px 5%; display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; z-index: 99998; position: relative;">
       <a href="/buyer-rfqs.html" style="background: linear-gradient(90deg, #ef4444, #f97316); color: #fff !important; padding: 8px 20px; font-weight: 900 !important; font-size: 0.8rem !important; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; display: inline-flex; justify-content: center; align-items: center; gap: 6px; box-shadow: 0 0 20px rgba(239, 68, 68, 0.6); animation: glowingPulse 2s infinite; text-shadow: 0 1px 3px rgba(0,0,0,0.5); text-decoration: none; white-space: nowrap;">
           <span style="width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: pulse 1s infinite;"></span>
-          🔥 LIVE ORDERS (1,500+)
+           ACTIVE RFQs (1,500+)
       </a>
       <a href="/create-rfq.html" style="background: linear-gradient(180deg, #22c55e, #166534); color: #fff; padding: 8px 20px; font-weight: 800; font-size: 0.8rem; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.4); text-shadow: 0 1px 2px rgba(0,0,0,0.5); text-decoration: none; white-space: nowrap; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">POST LIVE ORDER</a>
       <a href="/membership.html" style="background: linear-gradient(180deg, #facc15, #8B6508); color: #000; padding: 8px 20px; font-weight: 800; font-size: 0.8rem; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.6); text-shadow: 0 1px 2px rgba(255,255,255,0.5); text-decoration: none; white-space: nowrap; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">GET INSTANT BUYER</a>
@@ -160,7 +160,7 @@ button {
     <input id="destination" placeholder="Delivery Destination" required>
     <textarea id="requirements" placeholder="Specifications & details" required></textarea>
 
-    <button type="submit" style="background: linear-gradient(90deg, #d4af37, #facc15); color: #000; font-weight: 800; padding: 16px; font-size: 16px; border: none; border-radius: 8px; cursor: pointer; width: 100%;">Pay & Post Live Order</button>
+    <button type="submit" style="background: linear-gradient(90deg, #d4af37, #facc15); color: #000; font-weight: 800; padding: 16px; font-size: 16px; border: none; border-radius: 8px; cursor: pointer; width: 100%;">Submit Secure B2B RFQ</button>
 
   </form>
 </section>
@@ -301,10 +301,7 @@ document.getElementById("rfqForm").addEventListener("submit", async (e) => {
           <div onclick="document.getElementById('rfqModal').style.display='none';" style="position: absolute; top: 20px; right: 20px; color: #cbd5e1; cursor: pointer; font-size: 1.5rem;">✕</div>
           <h3 style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 20px;">Post Live Order</h3>
           <p style="color: #94a3b8; margin-bottom: 10px; font-size: 0.95rem;">Instantly broadcast your buy requirement to our vetted suppliers.</p>
-<div style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); padding: 12px; border-radius: 8px; margin-bottom: 15px;">
-    <p style="color: #4ade80; margin: 0; font-size: 0.85rem; font-weight: 600;"><i class="fas fa-shield-alt"></i> Genuine Buyer Verification</p>
-    <p style="color: #cbd5e1; margin: 5px 0 0 0; font-size: 0.8rem;">To ensure only serious inquiries, a nominal <strong>$25 USD (or ₹2,000) verification deposit</strong> is required. <span style="color:#facc15; font-weight:700;">This will be 100% REFUNDED or adjusted against your final order.</span></p>
-</div>
+
 <div style="margin-bottom: 25px; padding: 10px; background: rgba(220, 38, 38, 0.1); border: 1px solid rgba(220, 38, 38, 0.3); border-radius: 8px; display: flex; align-items: center; gap: 10px;">
     <span style="display: inline-block; width: 8px; height: 8px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 8px #ef4444; animation: pulse 1.5s infinite;"></span>
     <span style="color: #fca5a5; font-size: 13px; font-weight: 600;" id="liveViewerCount">-- Exporters currently active and ready to quote</span>
@@ -339,7 +336,7 @@ document.getElementById("rfqForm").addEventListener("submit", async (e) => {
               </div>
               <input type="text" id="qr_dest" placeholder="Destination Port (e.g., Jebel Ali, Dubai)" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
               <textarea id="qr_specs" placeholder="Any Specifications Required (Optional)" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none; min-height: 80px; resize: vertical;"></textarea>
-              <button type="submit" id="qr_btn" style="background: linear-gradient(90deg, var(--gold), #facc15); color: #000; font-weight: 900; padding: 15px; border: none; border-radius: 10px; font-size: 1.1rem; cursor: pointer; text-transform: uppercase; margin-top: 10px; transition: 0.3s; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);">Pay $25 Refundable Deposit</button>
+              <button type="submit" id="qr_btn" style="background: linear-gradient(90deg, var(--gold), #facc15); color: #000; font-weight: 900; padding: 15px; border: none; border-radius: 10px; font-size: 1.1rem; cursor: pointer; text-transform: uppercase; margin-top: 10px; transition: 0.3s; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);">Secure Verification</button>
           </form>
       </div>
   </div>
@@ -436,7 +433,7 @@ document.getElementById("rfqForm").addEventListener("submit", async (e) => {
             return;
         } catch (err) {
             alert('Error initiating verification: ' + err.message);
-            btn.innerText = "Pay $25 Refundable Deposit & Post";
+            btn.innerText = "Secure Verification & Post";
             btn.disabled = false;
         }
     };
