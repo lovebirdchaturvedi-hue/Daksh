@@ -304,26 +304,10 @@
         });
     </script>
 
-<style>
-  /* Force Tidio Chat widget to left side so it never covers WhatsApp floating button */
-  #tidio-chat, #tidio-chat-iframe, iframe[title="Tidio Chat"], div[id^="tidio-chat"] {
-      left: 20px !important;
-      right: auto !important;
-  }
-</style>
-<script id="tidio-auto-open">
-  document.addEventListener("tidioChat-ready", function() {
-      setTimeout(function() {
-          try {
-              window.tidioChatApi.open();
-              const el = document.getElementById("tidio-chat") || document.getElementById("tidio-chat-iframe") || document.querySelector("iframe[title='Tidio Chat']");
-              if (el) { el.style.left = "20px"; el.style.right = "auto"; }
-          } catch(e){}
-      }, 2000);
-  });
-</script>
 
-<script src="//code.tidio.co/zs195w58z0vrzcknn4gkbosvrnn63xfe.js" async></script>
+
+
+
 
 
 <!-- QUICK RFQ MODAL -->
@@ -469,5 +453,20 @@
         }
     };
   </script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6abfcc62beb8e034c00dd833/1k3ujcoou';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
 </body>
 </html>
