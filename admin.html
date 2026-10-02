@@ -93,6 +93,7 @@ footer{
 <th>Phone</th>
 <th>ID (UID)</th>
 <th>Status</th>
+<th>Compliance (T&C)</th>
 <th>Plan</th>
 <th>Unlocks</th>
 <th>Actions</th>
@@ -185,7 +186,7 @@ onAuthStateChanged(auth, async (user) => {
 // Load suppliers
 window.loadSuppliers = loadSuppliers;
 async function loadSuppliers() {
-  tbody.innerHTML = "<tr><td colspan='12'>Loading suppliers…</td></tr>";
+  tbody.innerHTML = "<tr><td colspan='13'>Loading suppliers…</td></tr>";
 
   try {
     const q = query(collection(db, "suppliers"), limit(3000));
@@ -195,7 +196,7 @@ async function loadSuppliers() {
     ]);
 
     if (snap.empty) {
-      tbody.innerHTML = "<tr><td colspan='12'>No suppliers found</td></tr>";
+      tbody.innerHTML = "<tr><td colspan='13'>No suppliers found</td></tr>";
       return;
     }
 
@@ -260,12 +261,12 @@ async function loadSuppliers() {
         </tr>`;
     });
 
-    tbody.innerHTML = htmlOutput || "<tr><td colspan='12'>No suppliers match the filter</td></tr>";
+    tbody.innerHTML = htmlOutput || "<tr><td colspan='13'>No suppliers match the filter</td></tr>";
     filterSuppliersTable();
 
   } catch (err) {
     console.error("Error loading suppliers:", err);
-    tbody.innerHTML = `<tr><td colspan='12' >Error loading suppliers: ${err.message}</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan='13' >Error loading suppliers: ${err.message}</td></tr>`;
   }
 }
 
