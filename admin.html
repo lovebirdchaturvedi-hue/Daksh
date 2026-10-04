@@ -134,7 +134,7 @@ import {
   signOut
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import {
-  getFirestore,
+  getFirestore, initializeFirestore,
   collection,
   getDocs,
   doc,
@@ -157,7 +157,7 @@ const app = initializeApp({
 });
 
 const auth = getAuth(app);
-const db = getFirestore(app);
+const db = initializeFirestore(app, { experimentalForceLongPolling: true });
 const tbody = document.getElementById("tbody");
 
 // Auth guard
@@ -190,7 +190,10 @@ async function loadSuppliers() {
 
   try {
     const q = query(collection(db, "suppliers"), limit(3000));
-    const snap = await getDocs(q);
+    const snap = await Promise.race([
+        getDocs(q),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("Database connection blocked! Please turn off your Ad-Blocker (Brave Shields, uBlock) or try an Incognito window. Firestore cannot connect.")), 12000))
+    ]);
 
     if (snap.empty) {
       tbody.innerHTML = "<tr><td colspan='13'>No suppliers found</td></tr>";
@@ -392,7 +395,7 @@ document.getElementById("logoutBtn").onclick = async () => {
   <!-- Post Live Order Logic -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, addDoc, serverTimestamp, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { getFirestore, initializeFirestore, collection, addDoc, serverTimestamp, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
@@ -404,7 +407,7 @@ document.getElementById("logoutBtn").onclick = async () => {
     };
 
     const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+    const db = initializeFirestore(app, { experimentalForceLongPolling: true });
 
     // AUTOCOMPLETE LOGIC
     (async function initSearchAutocomplete() {
