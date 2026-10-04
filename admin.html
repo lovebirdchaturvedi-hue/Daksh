@@ -134,7 +134,7 @@ import {
   signOut
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 import {
-  getFirestore, initializeFirestore,
+  getFirestore,
   collection,
   getDocs,
   doc,
@@ -157,7 +157,7 @@ const app = initializeApp({
 });
 
 const auth = getAuth(app);
-const db = initializeFirestore(app, { experimentalForceLongPolling: true });
+const db = getFirestore(app);
 const tbody = document.getElementById("tbody");
 
 // Auth guard
@@ -189,7 +189,7 @@ async function loadSuppliers() {
   tbody.innerHTML = "<tr><td colspan='13'>Loading suppliers…</td></tr>";
 
   try {
-    const q = query(collection(db, "suppliers"), limit(50));
+    const q = query(collection(db, "suppliers"), limit(500));
     const snap = await getDocs(q);
 
     if (snap.empty) {
@@ -237,6 +237,7 @@ async function loadSuppliers() {
           <td>${s.phone || s.contact || s.whatsapp || "-"}</td>
           <td style="font-size:10px; font-family:monospace; color:#64748b;">${warning} ${d.id}</td>
           <td><b>${s.status || "pending"}</b></td>
+          <td>${s.tcSigned ? \'<span style="background:#16a34a; color:white; padding:3px 6px; border-radius:4px; font-size:10px; font-weight:bold;">SIGNED</span>\' : \'<span style="background:#ef4444; color:white; padding:3px 6px; border-radius:4px; font-size:10px; font-weight:bold;">PENDING</span>\'}</td>
           <td style="font-size:12px;">${planName}</td>
           <td><span style="color:#c9a44a; font-weight:800;">${s.unlocksUsed || 0}</span> / ${unlockTotal}</td>
           <td style="display: flex; flex-wrap: wrap; gap: 4px; max-width: 320px;">
@@ -392,7 +393,7 @@ document.getElementById("logoutBtn").onclick = async () => {
   <!-- Post Live Order Logic -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, initializeFirestore, collection, addDoc, serverTimestamp, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, serverTimestamp, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
@@ -404,7 +405,7 @@ document.getElementById("logoutBtn").onclick = async () => {
     };
 
     const app = initializeApp(firebaseConfig);
-    const db = initializeFirestore(app, { experimentalForceLongPolling: true });
+    const db = getFirestore(app);
 
     // AUTOCOMPLETE LOGIC
     (async function initSearchAutocomplete() {
