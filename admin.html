@@ -141,7 +141,7 @@ import {
   updateDoc,
   deleteDoc,
   query,
-  limit
+  limit, enableIndexedDbPersistence
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const ADMIN_EMAIL = "admin@apdglobaltrade.com";
@@ -158,6 +158,10 @@ const app = initializeApp({
 
 const auth = getAuth(app);
 const db = getFirestore(app);
+try {
+  enableIndexedDbPersistence(db).catch((err) => { console.log("Persistence error:", err); });
+} catch(e) {}
+
 const tbody = document.getElementById("tbody");
 
 // Auth guard
@@ -189,7 +193,7 @@ async function loadSuppliers() {
   tbody.innerHTML = "<tr><td colspan='13'>Loading suppliers…</td></tr>";
 
   try {
-    const q = query(collection(db, "suppliers"), limit(500));
+    const q = query(collection(db, "suppliers"), limit, enableIndexedDbPersistence(500));
     const snap = await getDocs(q);
 
     if (snap.empty) {
@@ -406,6 +410,10 @@ document.getElementById("logoutBtn").onclick = async () => {
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+try {
+  enableIndexedDbPersistence(db).catch((err) => { console.log("Persistence error:", err); });
+} catch(e) {}
+
 
     // AUTOCOMPLETE LOGIC
     (async function initSearchAutocomplete() {
