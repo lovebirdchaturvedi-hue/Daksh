@@ -190,10 +190,7 @@ async function loadSuppliers() {
 
   try {
     const q = query(collection(db, "suppliers"), limit(3000));
-    const snap = await Promise.race([
-        getDocs(q),
-        new Promise((_, reject) => setTimeout(() => reject(new Error("Firebase Query Timeout - Connection Blocked or Hanging!")), 8000))
-    ]);
+    const snap = await getDocs(q);
 
     if (snap.empty) {
       tbody.innerHTML = "<tr><td colspan='13'>No suppliers found</td></tr>";
