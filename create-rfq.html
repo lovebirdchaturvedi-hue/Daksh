@@ -336,7 +336,8 @@ document.getElementById("rfqForm").addEventListener("submit", async (e) => {
 
   <!-- Google Translate Scripts -->
   <script type="text/javascript">
-  , 'google_translate_element');
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
   }
   </script>
   
