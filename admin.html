@@ -157,11 +157,7 @@ const app = initializeApp({
 });
 
 const auth = getAuth(app);
-const db = initializeFirestore(app, { experimentalForceLongPolling: true });
-try {
-  enableIndexedDbPersistence(db).catch((err) => { console.log("Persistence error:", err); });
-} catch(e) {}
-
+const db = getFirestore(app);
 const tbody = document.getElementById("tbody");
 
 // Auth guard
@@ -409,13 +405,8 @@ document.getElementById("logoutBtn").onclick = async () => {
     };
 
     const app = initializeApp(firebaseConfig);
-    const db = initializeFirestore(app, { experimentalForceLongPolling: true });
-try {
-  enableIndexedDbPersistence(db).catch((err) => { console.log("Persistence error:", err); });
-} catch(e) {}
-
-
-    // AUTOCOMPLETE LOGIC
+    const db = getFirestore(app);
+// AUTOCOMPLETE LOGIC
     (async function initSearchAutocomplete() {
         try {
             const snap = await getDocs(collection(db, "rfqs"));
