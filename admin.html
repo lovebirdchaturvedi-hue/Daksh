@@ -189,11 +189,8 @@ async function loadSuppliers() {
   tbody.innerHTML = "<tr><td colspan='13'>Loading suppliers…</td></tr>";
 
   try {
-    const q = query(collection(db, "suppliers"), limit(3000));
-    const snap = await Promise.race([
-        getDocs(q),
-        new Promise((_, reject) => setTimeout(() => reject(new Error("Database connection blocked! Please turn off your Ad-Blocker (Brave Shields, uBlock) or try an Incognito window. Firestore cannot connect.")), 12000))
-    ]);
+    const q = query(collection(db, "suppliers"), limit(50));
+    const snap = await getDocs(q);
 
     if (snap.empty) {
       tbody.innerHTML = "<tr><td colspan='13'>No suppliers found</td></tr>";
