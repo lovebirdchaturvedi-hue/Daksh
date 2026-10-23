@@ -99,29 +99,46 @@
         header#main-header {
             width: 100% !important;
             max-width: 100% !important;
-            padding: 12px 30px !important;
+            padding: 12px 35px !important;
             background: rgba(2, 6, 23, 0.95) !important;
             backdrop-filter: blur(20px) !important;
             -webkit-backdrop-filter: blur(20px) !important;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2) !important;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25) !important;
             display: flex !important;
             justify-content: space-between !important;
             align-items: center !important;
             box-sizing: border-box !important;
+            gap: 20px !important;
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 10000 !important;
+        }
+
+        .header-brand-group {
+            display: flex !important;
+            align-items: center !important;
+            gap: 16px !important;
+            flex-shrink: 0 !important;
+            min-width: max-content !important;
         }
 
         .logo.premium-logo {
             transform: none !important;
             margin: 0 !important;
             flex-shrink: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 14px !important;
+            text-decoration: none !important;
         }
 
         header nav {
             display: flex !important;
             align-items: center !important;
-            gap: 16px !important;
+            gap: 12px !important;
             flex-wrap: nowrap !important;
             margin: 0 !important;
+            flex-shrink: 0 !important;
         }
 
         header nav a {
@@ -663,19 +680,61 @@
 </div>
 
 <header id="main-header" style="position: sticky; top: 0; z-index: 10000; background: rgba(2, 6, 23, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease;">
-    <div style="display: flex; align-items: center; gap: 20px;">
+    <div class="header-brand-group" style="display: flex; align-items: center; gap: 16px; flex-shrink: 0; min-width: max-content;">
         <div class="menu-toggle" onclick="toggleDrawer()">
             <span></span>
             <span></span>
             <span></span>
         </div>
-        <a href="/" class="logo premium-logo" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
-            <div style="width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #020617, #1a1a1a); border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);">
-                <span style="font-family: 'Outfit', serif; font-size: 17px; font-weight: 900; color: var(--gold); letter-spacing: 1px;">APD</span>
+        <a href="/" class="logo premium-logo" style="display: flex; align-items: center; gap: 14px; text-decoration: none; flex-shrink: 0;">
+            <!-- ULTRA-PREMIUM 3D GOLD EMBOSSED CREST LOGO -->
+            <div class="apd-round-crest" style="width: 48px; height: 48px; flex-shrink: 0; filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.45)); transition: transform 0.3s ease;">
+                <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="goldGradH" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#fef08a" />
+                      <stop offset="25%" stop-color="#facc15" />
+                      <stop offset="60%" stop-color="#d4af37" />
+                      <stop offset="100%" stop-color="#854d0e" />
+                    </linearGradient>
+                    <linearGradient id="metalRimH" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#facc15" />
+                      <stop offset="50%" stop-color="#451a03" />
+                      <stop offset="100%" stop-color="#facc15" />
+                    </linearGradient>
+                    <radialGradient id="discBgH" cx="50%" cy="50%" r="50%">
+                      <stop offset="0%" stop-color="#0f172a" />
+                      <stop offset="85%" stop-color="#020617" />
+                      <stop offset="100%" stop-color="#000000" />
+                    </radialGradient>
+                    <filter id="goldGlowH" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="1.5" result="blur" />
+                      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    </filter>
+                  </defs>
+                  <!-- Outer 3D Gold Ring & Rim -->
+                  <circle cx="50" cy="50" r="48" stroke="url(#goldGradH)" stroke-width="2.5" />
+                  <circle cx="50" cy="50" r="45.5" stroke="url(#metalRimH)" stroke-width="1.2" />
+                  <circle cx="50" cy="50" r="43.5" fill="url(#discBgH)" />
+                  <!-- Precision Compass Ticks -->
+                  <circle cx="50" cy="50" r="42" stroke="url(#goldGradH)" stroke-width="0.8" stroke-dasharray="2 3" opacity="0.6" />
+                  <!-- Subtle Globe Coordinates Grid -->
+                  <ellipse cx="50" cy="50" rx="36" ry="16" stroke="url(#goldGradH)" stroke-width="0.75" opacity="0.3" />
+                  <ellipse cx="50" cy="50" rx="16" ry="36" stroke="url(#goldGradH)" stroke-width="0.75" opacity="0.3" />
+                  <line x1="14" y1="50" x2="86" y2="50" stroke="url(#goldGradH)" stroke-width="0.75" opacity="0.35" />
+                  <line x1="50" y1="14" x2="50" y2="86" stroke="url(#goldGradH)" stroke-width="0.75" opacity="0.35" />
+                  <!-- Inner Golden Ring -->
+                  <circle cx="50" cy="50" r="30" stroke="url(#goldGradH)" stroke-width="1" opacity="0.45" />
+                  <!-- APD Luxury Serif Monogram -->
+                  <text x="50" y="58" font-family="'Cinzel', 'Playfair Display', Georgia, serif" font-size="24" font-weight="900" fill="url(#goldGradH)" text-anchor="middle" letter-spacing="1.5" filter="url(#goldGlowH)">APD</text>
+                  <!-- Top Star & Bottom Institutional Label -->
+                  <polygon points="50,17 52,22 57,22 53,25 54,30 50,27 46,30 47,25 43,22 48,22" fill="url(#goldGradH)" />
+                  <text x="50" y="80" font-family="'Outfit', -apple-system, sans-serif" font-size="6" font-weight="800" fill="#facc15" text-anchor="middle" letter-spacing="1.8">GLOBAL</text>
+                </svg>
             </div>
-            <div style="display: flex; flex-direction: column; line-height: 1.1;">
-                <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 19px; color: #fff; letter-spacing: 0.5px;">APD <span style="color: var(--gold);">Global</span> Trade</span>
-                <span style="font-size: 9px; font-weight: 700; letter-spacing: 1.5px; color: #94a3b8; text-transform: uppercase;">ELITE B2B TRADE PLATFORM</span>
+            <div style="display: flex; flex-direction: column; line-height: 1.15; flex-shrink: 0; min-width: max-content;">
+                <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 19px; color: #fff; letter-spacing: 0.5px; white-space: nowrap;">APD <span style="background: linear-gradient(135deg, #fde047, #d4af37, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Global</span> Trade</span>
+                <span style="font-size: 9px; font-weight: 700; letter-spacing: 1.6px; color: #94a3b8; text-transform: uppercase; white-space: nowrap;">ELITE B2B TRADE PLATFORM</span>
             </div>
         </a>
     </div>
@@ -692,31 +751,32 @@
         }
         .mega-menu {
             position: absolute;
-            top: 100%;
-            left: -150px;
+            top: calc(100% + 8px);
+            left: 0;
             width: 600px;
-            background: rgba(2, 6, 23, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 12px;
-            padding: 30px;
+            background: rgba(2, 6, 23, 0.98);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 14px;
+            padding: 26px;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 20px;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(15px);
-            transition: all 0.3s ease;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            transform: translateY(10px);
+            transition: all 0.25s ease;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.85), 0 0 30px rgba(212,175,55,0.15);
             z-index: 100000;
         }
         .mega-menu h4 {
             color: var(--gold);
             font-family: 'Outfit', sans-serif;
-            font-size: 1rem;
-            margin-bottom: 15px;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 5px;
+            padding-bottom: 6px;
         }
         .mega-menu ul {
             list-style: none;
@@ -724,7 +784,7 @@
             margin: 0;
         }
         .mega-menu ul li {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         .mega-menu ul li a {
             color: #cbd5e1 !important;
@@ -735,14 +795,16 @@
         }
         .mega-menu ul li a:hover {
             color: var(--gold) !important;
-            padding-left: 5px;
+            padding-left: 4px;
         }
         .mega-menu ul li a::after { display: none !important; }
     </style>
-    <nav style="display: flex; align-items: center; gap: 4px;">
-      <a href="/">Home</a>
+    <nav style="display: flex; align-items: center; gap: 10px; margin-left: 20px; flex-shrink: 0; white-space: nowrap;">
+      <a href="/" style="color: #cbd5e1; font-weight: 600; text-decoration: none; padding: 6px 8px;">Home</a>
       <div class="mega-menu-wrapper">
-          <a href="#" style="cursor: default;">Categories ▾</a>
+          <a href="#" style="background: rgba(212, 175, 55, 0.12); border: 1px solid rgba(212, 175, 55, 0.45); color: #facc15 !important; padding: 6px 14px !important; border-radius: 8px !important; font-weight: 700 !important; font-size: 12.5px !important; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(212,175,55,0.22)'" onmouseout="this.style.background='rgba(212,175,55,0.12)'">
+              <span>📂</span> Categories <span style="font-size: 9px; opacity: 0.8;">▼</span>
+          </a>
           <div class="mega-menu">
               <div>
                   <h4>🌾 Agri & Food</h4>
@@ -910,13 +972,35 @@
       </div>
 
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
-          <div class="logo premium-logo" style="display: flex; align-items: center; gap: 12px;">
-              <div style="width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #020617, #1a1a1a); border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);">
-                  <span style="font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 900; color: var(--gold); letter-spacing: 1px;">APD</span>
+          <div class="logo premium-logo" style="display: flex; align-items: center; gap: 14px;">
+              <div class="apd-round-crest" style="width: 44px; height: 44px; flex-shrink: 0; filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.45));">
+                  <svg width="44" height="44" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="goldGradD" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#fef08a" />
+                        <stop offset="25%" stop-color="#facc15" />
+                        <stop offset="60%" stop-color="#d4af37" />
+                        <stop offset="100%" stop-color="#854d0e" />
+                      </linearGradient>
+                      <radialGradient id="discBgD" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#0f172a" />
+                        <stop offset="100%" stop-color="#020617" />
+                      </radialGradient>
+                    </defs>
+                    <circle cx="50" cy="50" r="48" stroke="url(#goldGradD)" stroke-width="2.5" />
+                    <circle cx="50" cy="50" r="44" fill="url(#discBgD)" />
+                    <circle cx="50" cy="50" r="42" stroke="url(#goldGradD)" stroke-width="0.8" stroke-dasharray="2 3" opacity="0.6" />
+                    <ellipse cx="50" cy="50" rx="36" ry="16" stroke="url(#goldGradD)" stroke-width="0.75" opacity="0.3" />
+                    <ellipse cx="50" cy="50" rx="16" ry="36" stroke="url(#goldGradD)" stroke-width="0.75" opacity="0.3" />
+                    <circle cx="50" cy="50" r="30" stroke="url(#goldGradD)" stroke-width="1" opacity="0.45" />
+                    <text x="50" y="58" font-family="'Cinzel', 'Playfair Display', Georgia, serif" font-size="24" font-weight="900" fill="url(#goldGradD)" text-anchor="middle" letter-spacing="1.5">APD</text>
+                    <polygon points="50,17 52,22 57,22 53,25 54,30 50,27 46,30 47,25 43,22 48,22" fill="url(#goldGradD)" />
+                    <text x="50" y="80" font-family="'Outfit', sans-serif" font-size="6" font-weight="800" fill="#facc15" text-anchor="middle" letter-spacing="1.8">GLOBAL</text>
+                  </svg>
               </div>
-              <div style="display: flex; flex-direction: column; line-height: 1.1;">
-                  <span style="font-family: 'Playfair Display', serif; font-weight: 900; font-size: 18px; color: #fff;">APD <span style="color: var(--gold);">Global</span></span>
-                  <span style="font-size: 8.5px; font-weight: 800; letter-spacing: 2px; color: #94a3b8; text-transform: uppercase;">For Elite Exporters</span>
+              <div style="display: flex; flex-direction: column; line-height: 1.15;">
+                  <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 18px; color: #fff;">APD <span style="color: var(--gold);">Global</span> Trade</span>
+                  <span style="font-size: 8.5px; font-weight: 800; letter-spacing: 2px; color: #94a3b8; text-transform: uppercase;">ELITE B2B PLATFORM</span>
               </div>
           </div>
           <div onclick="toggleDrawer()" style="color: var(--gold); font-size: 32px; cursor: pointer;">✕</div>
@@ -3242,12 +3326,34 @@ text-align:center;
         <!-- Column 1: Branding -->
         <div>
             <div class="logo premium-logo" style="margin-bottom: 25px; display: flex; align-items: center; gap: 15px;">
-                <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #020617, #1a1a1a); border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);">
-                    <span style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 900; color: var(--gold); letter-spacing: 1px;">APD</span>
+                <div class="apd-round-crest" style="width: 50px; height: 50px; flex-shrink: 0; filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.45));">
+                    <svg width="50" height="50" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="goldGradF" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#fef08a" />
+                          <stop offset="25%" stop-color="#facc15" />
+                          <stop offset="60%" stop-color="#d4af37" />
+                          <stop offset="100%" stop-color="#854d0e" />
+                        </linearGradient>
+                        <radialGradient id="discBgF" cx="50%" cy="50%" r="50%">
+                          <stop offset="0%" stop-color="#0f172a" />
+                          <stop offset="100%" stop-color="#020617" />
+                        </radialGradient>
+                      </defs>
+                      <circle cx="50" cy="50" r="48" stroke="url(#goldGradF)" stroke-width="2.5" />
+                      <circle cx="50" cy="50" r="44" fill="url(#discBgF)" />
+                      <circle cx="50" cy="50" r="42" stroke="url(#goldGradF)" stroke-width="0.8" stroke-dasharray="2 3" opacity="0.6" />
+                      <ellipse cx="50" cy="50" rx="36" ry="16" stroke="url(#goldGradF)" stroke-width="0.75" opacity="0.3" />
+                      <ellipse cx="50" cy="50" rx="16" ry="36" stroke="url(#goldGradF)" stroke-width="0.75" opacity="0.3" />
+                      <circle cx="50" cy="50" r="30" stroke="url(#goldGradF)" stroke-width="1" opacity="0.45" />
+                      <text x="50" y="58" font-family="'Cinzel', 'Playfair Display', Georgia, serif" font-size="24" font-weight="900" fill="url(#goldGradF)" text-anchor="middle" letter-spacing="1.5">APD</text>
+                      <polygon points="50,17 52,22 57,22 53,25 54,30 50,27 46,30 47,25 43,22 48,22" fill="url(#goldGradF)" />
+                      <text x="50" y="80" font-family="'Outfit', sans-serif" font-size="6" font-weight="800" fill="#facc15" text-anchor="middle" letter-spacing="1.8">GLOBAL</text>
+                    </svg>
                 </div>
-                <div style="display: flex; flex-direction: column; line-height: 1.2;">
-                    <span style="font-family: 'Playfair Display', serif; font-weight: 900; font-size: 22px; letter-spacing: 1px; color: #fff;">APD <span style="color: var(--gold);">Global</span> Trade</span>
-                    <span style="font-size: 9px; font-weight: 800; letter-spacing: 2px; color: #94a3b8; text-transform: uppercase;">For Elite Exporters</span>
+                <div style="display: flex; flex-direction: column; line-height: 1.15;">
+                    <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 21px; letter-spacing: 0.5px; color: #fff;">APD <span style="background: linear-gradient(135deg, #fde047, #d4af37, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Global</span> Trade</span>
+                    <span style="font-size: 9px; font-weight: 800; letter-spacing: 2px; color: #94a3b8; text-transform: uppercase;">ELITE B2B TRADE PLATFORM</span>
                 </div>
             </div>
             <p style="font-size: 0.9rem; line-height: 1.8;"><b>Headquartered in Rajasthan, India | Serving 70+ countries</b><br>The world's most trusted corridor for verified international trade. We bridge the gap between institutional buyers and professional exporters through audited data and secure communication.</p>
