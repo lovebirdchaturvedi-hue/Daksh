@@ -2,253 +2,1257 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Live Buyer RFQs | APD Global Trade</title>
+<title>Live Global Buyer RFQs & Commodities Trade Desk | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Browse 1,500+ verified cross-border commodity RFQs: Basmati Rice, Sugar ICUMSA 45, Edible Oils, Wheat, Pulses, Spices, Onions, Steel, and Textiles. Direct institutional procurement contracts.">
+<meta name="keywords" content="Buy Basmati Rice bulk buyer, Sugar ICUMSA 45 RFQ Dubai, Sunflower Oil importer Togo, Cumin seeds buyer, Yellow corn tender, Cotton bales export, Global B2B RFQs">
+
+<!-- Open Graph / Schema for Google Search Indexing -->
+<meta property="og:title" content="Verified Buyer RFQs & Import Tenders | APD Global Trade">
+<meta property="og:description" content="Direct institutional buyer inquiries for agro and industrial commodities. CIF/FOB verified trade corridors.">
+<meta property="og:type" content="website">
+
+<!-- STRUCTURED DATA (JSON-LD) FOR GOOGLE PROGRAMMATIC SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Live Cross-Border Commodity RFQs & Government Tenders",
+  "description": "Verified institutional import orders for international agricultural and industrial commodities.",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "Demand",
+        "name": "12,500 MT Sugar ICUMSA 45 Togo Import Tender",
+        "description": "12,500 MT Refined White Cane Sugar ICUMSA 45. CIF Lome Port, 100% Confirmed LC at sight.",
+        "areaServed": "Togo"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@type": "Demand",
+        "name": "10,000 MT 1121 Steam Basmati Rice UAE Procurement",
+        "description": "10,000 MT 1121 Steam Basmati Rice. CIF Jebel Ali, SGS quality inspection.",
+        "areaServed": "United Arab Emirates"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@type": "Demand",
+        "name": "50,000 MT Refined Sunflower Oil Benin Strategic Reserve",
+        "description": "Annual strategic supply contract for 50,000 MT Refined Sunflower Oil. CIF Cotonou Port.",
+        "areaServed": "Benin"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "@type": "Demand",
+        "name": "30,000 MT Milling Wheat Egypt Procurement",
+        "description": "30,000 MT Milling Wheat Protein 12.5% Min. CIF Port Said.",
+        "areaServed": "Egypt"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "item": {
+        "@type": "Demand",
+        "name": "1,000 MT Cumin Seeds (Jeera) Germany Requirement",
+        "description": "Machine clean 99% pure Cumin Seeds. CIF Hamburg Port.",
+        "areaServed": "Germany"
+      }
+    }
+  ]
+}
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-body{margin:0;font-family:Inter,sans-serif;background:#f5f7fb}
-header{
-  background:#071427;color:#c9a44a;
-  padding:16px 20px;text-align:center
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --gold: #d4af37;
+    --dark: #020617;
+    --card-bg: #0b1526;
+    --border: rgba(255, 255, 255, 0.08);
 }
-.container{max-width:900px;margin:30px auto;padding:0 16px}
-.card{
-  background:#fff;border-radius:14px;
-  padding:20px;margin-bottom:16px;
-  box-shadow:0 2px 8px rgba(0,0,0,.06)
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #060d1a;
+    color: #fff;
+    min-height: 100vh;
 }
-.locked{color:#dc2626;font-weight:600}
-.cta{
-  display:inline-block;margin-top:12px;
-  background:#020617;color:#fff;
-  padding:10px 18px;border-radius:999px;
-  text-decoration:none;font-size:14px
+
+/* TOP BAR */
+.top-bar {
+    background: #020617;
+    border-bottom: 1px solid rgba(212,175,55,0.2);
+    padding: 8px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #94a3b8;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.top-bar a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* HEADER */
+header {
+    background: rgba(2, 6, 23, 0.95);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(15px);
+}
+
+.logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.logo-badge {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #020617;
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 900;
+    color: var(--gold);
+}
+
+.logo-text {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 19px;
+    color: #fff;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.nav-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: var(--gold);
+}
+
+.btn-post-rfq {
+    background: #2563eb;
+    color: #fff !important;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    text-decoration: none;
+}
+
+/* HERO SECTION */
+.hero-section {
+    padding: 50px 5% 35px 5%;
+    text-align: center;
+    background: radial-gradient(circle at 50% 0%, rgba(212,175,55,0.08) 0%, transparent 70%);
+    border-bottom: 1px solid var(--border);
+}
+
+.hero-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    color: #f87171;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 5px 16px;
+    border-radius: 50px;
+    margin-bottom: 15px;
+    animation: pulse 2s infinite;
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 12px;
+}
+
+.hero-title span {
+    color: var(--gold);
+}
+
+.hero-desc {
+    color: #94a3b8;
+    font-size: 15.5px;
+    max-width: 780px;
+    margin: 0 auto 25px auto;
+    line-height: 1.6;
+}
+
+/* FOMO STATS BAR */
+.fomo-stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 50px;
+    padding: 12px 30px;
+    max-width: 850px;
+    margin: 0 auto 35px auto;
+    font-size: 13px;
+    color: #cbd5e1;
+}
+
+.fomo-stat-item b {
+    color: var(--gold);
+}
+
+/* FILTER TABS */
+.filter-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 35px;
+}
+
+.tab-btn {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    color: #cbd5e1;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tab-btn.active, .tab-btn:hover {
+    background: var(--gold);
+    color: #020617;
+    border-color: var(--gold);
+    font-weight: 800;
+}
+
+/* CONTAINER */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 80px 20px;
+}
+
+/* RFQ CARD */
+.rfq-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    margin-bottom: 25px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+}
+
+.rfq-card:hover {
+    border-color: rgba(212, 175, 55, 0.4);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.1);
+}
+
+/* URGENT TOP BANNER (FOMO DRIVER) */
+.fomo-urgency-strip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 12px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.live-viewers-tag {
+    color: #fca5a5;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.closing-timer {
+    color: #facc15;
+    font-weight: 800;
+    font-family: monospace;
+    font-size: 13px;
+}
+
+.rfq-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 18px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rfq-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.rfq-meta-badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.badge-country {
+    background: rgba(250, 204, 21, 0.1);
+    border: 1px solid rgba(250, 204, 21, 0.3);
+    color: #facc15;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 6px;
+}
+
+.badge-escrow {
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    color: #38bdf8;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 6px;
+}
+
+/* PUBLIC SPECS GRID (GOOGLE READABLE) */
+.specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    background: rgba(2, 6, 23, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 20px;
+}
+
+.spec-item {
+    font-size: 13px;
+}
+
+.spec-label {
+    color: #64748b;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 3px;
+    display: block;
+}
+
+.spec-val {
+    color: #f1f5f9;
+    font-weight: 700;
+}
+
+/* GATED PAYWALL BARRIER (FOMO / UPGRADE TRIGGER) */
+.gated-paywall {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(7, 20, 39, 0.98));
+    border: 1px dashed rgba(212, 175, 55, 0.45);
+    border-radius: 14px;
+    padding: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.buyer-masked-info {
+    flex: 1;
+    min-width: 280px;
+}
+
+.buyer-entity-name {
+    font-size: 15px;
+    font-weight: 800;
+    color: #38bdf8;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.blurred-contact {
+    filter: blur(5px);
+    user-select: none;
+    opacity: 0.4;
+    font-family: monospace;
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 6px;
+}
+
+.paywall-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.btn-unlock-gold {
+    background: linear-gradient(135deg, var(--gold), #b8860b);
+    color: #020617;
+    font-weight: 900;
+    font-size: 13px;
+    padding: 12px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+    transition: transform 0.2s;
+    white-space: nowrap;
+}
+
+.btn-unlock-gold:hover {
+    transform: scale(1.03);
+}
+
+.btn-login-unlock {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 12px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    white-space: nowrap;
+}
+
+.btn-login-unlock:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* ESCROW FOOTER */
+.escrow-callout {
+    background: rgba(2, 6, 23, 0.9);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 16px;
+    padding: 30px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* LIVE MATCH BROADCAST TOAST */
+#liveMatchToast {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    z-index: 999999;
+    background: rgba(15, 23, 42, 0.98);
+    border: 1px solid var(--gold);
+    border-radius: 16px;
+    padding: 15px 18px;
+    max-width: 380px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.8), 0 0 25px rgba(212,175,55,0.25);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    backdrop-filter: blur(15px);
+    transition: all 0.4s ease;
+    transform: translateY(160px);
+    opacity: 0;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
 }
 </style>
 </head>
-
 <body>
 
-<header>APD Global Trade</header>
-
-<div class="container">
-  <h2>Live Buyer RFQs</h2>
-  <div id="rfqList">Loading RFQs…</div>
+<div class="top-bar">
+    <div>
+        <span>Institutional Trade Gateway | </span>
+        <a href="/">← Return to APD Global Trade Homepage</a>
+    </div>
+    <div>
+        <span>🛡️ <b>Razorpay & SWIFT Escrow Protection Active</b> | SLA: 24-Hour Settlement Desk</span>
+    </div>
 </div>
 
+<header>
+    <a href="/" class="logo-wrap">
+        <div class="logo-badge">APD</div>
+        <div class="logo-text">APD <span style="color:var(--gold);">Global</span> Trade</div>
+    </a>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/public-rfqs.html" style="color:var(--gold);">Live RFQs</a>
+        <a href="/suppliers.html">Suppliers</a>
+        <a href="/membership.html">Membership Plans</a>
+        <a href="/supplier-login.html">Supplier Login</a>
+        <a href="/create-rfq.html" class="btn-post-rfq">+ Post Live RFQ (Free)</a>
+    </div>
+</header>
+
+<section class="hero-section">
+    <div class="hero-pill">
+        ● 1,500+ Verified Trade Requirements • Live Bidding Active
+    </div>
+    <h1 class="hero-title">
+        Live Cross-Border <span>Commodity RFQs</span> & Tenders
+    </h1>
+    <p class="hero-desc">
+        Direct procurement contracts from verified institutional buyers across 120+ countries. Technical specifications and port requirements are publicly accessible. Buyer contact details are strictly gated for verified members.
+    </p>
+
+    <!-- FOMO STATS BAR -->
+    <div class="fomo-stats-bar">
+        <div class="fomo-stat-item">⚡ <b>37 Active Tenders</b> Closing Today</div>
+        <div class="fomo-stat-item">🔒 <b>100% Escrow</b> Guaranteed Settlements</div>
+        <div class="fomo-stat-item">👥 <b>1,420+ Verified Suppliers</b> Currently Bidding</div>
+    </div>
+
+    <!-- COMPREHENSIVE COMMODITY TABS -->
+    <div class="filter-tabs">
+        <button class="tab-btn active" onclick="filterRFQs('all')">All Commodities</button>
+        <button class="tab-btn" onclick="filterRFQs('rice')">🌾 Rice (Basmati & Non-Basmati)</button>
+        <button class="tab-btn" onclick="filterRFQs('sugar')">🍬 Sugar (ICUMSA 45 & Raw)</button>
+        <button class="tab-btn" onclick="filterRFQs('oil')">🌻 Edible Oils</button>
+        <button class="tab-btn" onclick="filterRFQs('grains')">🌽 Grains & Cereals (Wheat/Maize)</button>
+        <button class="tab-btn" onclick="filterRFQs('pulses')">🥣 Pulses & Beans</button>
+        <button class="tab-btn" onclick="filterRFQs('spices')">🌶️ Spices & Seasonings</button>
+        <button class="tab-btn" onclick="filterRFQs('fresh')">🧅 Fresh Agro & Fruits</button>
+        <button class="tab-btn" onclick="filterRFQs('industrial')">🏗️ Industrial, Steel & Cement</button>
+        <button class="tab-btn" onclick="filterRFQs('textiles')">👗 Textiles & Cotton</button>
+        <button class="tab-btn" onclick="filterRFQs('machinery')">🚜 Machinery & Equipment</button>
+    </div>
+</section>
+
+<div class="container">
+    
+    <div id="rfqFeed">
+
+        <!-- ============================================== -->
+        <!-- 1. BASMATI RICE (UAE) -->
+        <!-- ============================================== -->
+        <article class="rfq-card" data-category="rice">
+            <div class="fomo-urgency-strip">
+                <span class="live-viewers-tag">🔥 <b>28 Exporters Viewing</b> • 4 Verified Quotes Submitted</span>
+                <span class="closing-timer">⏳ Negotiation Closes in: <span class="countdown-val" data-hours="4" data-mins="18">04h 18m 22s</span></span>
+            </div>
+            <div class="rfq-header">
+                <div>
+                    <h2 class="rfq-title">10,000 MT Traditional 1121 Steam Basmati Rice (XXL Grain)</h2>
+                    <p style="color: #94a3b8; font-size: 13px;">Requirement Code: #APD-RFQ-261022-8331 • Published: Long-Term Supply Contract</p>
+                </div>
+                <div class="rfq-meta-badges">
+                    <span class="badge-country">🇦🇪 UAE (JEBEL ALI CORRIDOR)</span>
+                    <span class="badge-escrow">🛡️ 100% ESCROW FUNDED</span>
+                </div>
+            </div>
+            <div class="specs-grid">
+                <div class="spec-item"><span class="spec-label">Order Volume</span><span class="spec-val">10,000 MT (Monthly Deliveries)</span></div>
+                <div class="spec-item"><span class="spec-label">Port of Discharge</span><span class="spec-val">CIF - Jebel Ali Port, Dubai</span></div>
+                <div class="spec-item"><span class="spec-label">Grain Length & Purity</span><span class="spec-val">8.35mm AGL • 95% Pure • Moisture < 12.5%</span></div>
+                <div class="spec-item"><span class="spec-label">Packaging Type</span><span class="spec-val">20kg / 25kg Non-Woven BOPP Bags</span></div>
+                <div class="spec-item"><span class="spec-label">Payment Security</span><span class="spec-val">100% Irrevocable Confirmed L/C at Sight</span></div>
+                <div class="spec-item"><span class="spec-label">Mandatory Audit</span><span class="spec-val">SGS / APEDA / Halal Pre-Shipment Inspection</span></div>
+            </div>
+            <div class="gated-paywall">
+                <div class="buyer-masked-info">
+                    <div class="buyer-entity-name"><span>🏢</span> Tier-1 Food Distribution Group LLC (Dubai, UAE)</div>
+                    <div class="blurred-contact">+971 4 2XX XXXX | supply-chain@gulf-commodities.ae</div>
+                    <p style="color: #fca5a5; font-size: 12px; margin: 0;">🔒 Direct WhatsApp & email unlocked for Elite Corridor & Global Enterprise members.</p>
+                </div>
+                <div class="paywall-actions">
+                    <a href="/membership.html?plan=elite-corridor" class="btn-unlock-gold">🔓 Unlock Buyer WhatsApp ($999/yr)</a>
+                    <a href="/supplier-login.html" class="btn-login-unlock">Member Sign In</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- ============================================== -->
+        <!-- 2. NON-BASMATI RICE (NIGERIA) -->
+        <!-- ============================================== -->
+        <article class="rfq-card" data-category="rice">
+            <div class="fomo-urgency-strip">
+                <span class="live-viewers-tag">🔥 <b>19 Exporters Viewing</b> • Spot Allocation Active</span>
+                <span class="closing-timer">⏳ Negotiation Closes in: <span class="countdown-val" data-hours="6" data-mins="45">06h 45m 10s</span></span>
+            </div>
+            <div class="rfq-header">
+                <div>
+                    <h2 class="rfq-title">15,000 MT Non-Basmati IR-64 Parboiled Rice (5% Broken)</h2>
+                    <p style="color: #94a3b8; font-size: 13px;">Requirement Code: #APD-RFQ-261022-7712 • Published: Ready Spot Requirement</p>
+                </div>
+                <div class="rfq-meta-badges">
+                    <span class="badge-country">🇳🇬 NIGERIA (PORT LAGOS)</span>
+                    <span class="badge-escrow">🛡️ ESCROW VERIFIED</span>
+                </div>
+            </div>
+            <div class="specs-grid">
+                <div class="spec-item"><span class="spec-label">Order Volume</span><span class="spec-val">15,000 MT (Breakbulk or 20ft Containers)</span></div>
+                <div class="spec-item"><span class="spec-label">Port of Discharge</span><span class="spec-val">CIF - Lagos Apapa Port, Nigeria</span></div>
+                <div class="spec-item"><span class="spec-label">Grain Spec</span><span class="spec-val">IR-64 Parboiled • Sortex Clean • Max 5% Broken</span></div>
+                <div class="spec-item"><span class="spec-label">Packing Format</span><span class="spec-val">50kg Export Standard PP Bags</span></div>
+                <div class="spec-item"><span class="spec-label">Payment Terms</span><span class="spec-val">Confirmed L/C at Sight / Escrow Trade Deposit</span></div>
+                <div class="spec-item"><span class="spec-label">Inspection</span><span class="spec-val">COTECNA / SGS Quality Inspection</span></div>
+            </div>
+            <div class="gated-paywall">
+                <div class="buyer-masked-info">
+                    <div class="buyer-entity-name"><span>🏢</span> Certified Grain Wholesaler Group (Lagos, Nigeria)</div>
+                    <div class="blurred-contact">+234 1 2XX XXXX | procurement@grainstrade-ng.com</div>
+                    <p style="color: #fca5a5; font-size: 12px; margin: 0;">🔒 Direct buyer contact locked. Only 2 bidding slots open for non-enterprise suppliers.</p>
+                </div>
+                <div class="paywall-actions">
+                    <a href="/membership.html?plan=elite-corridor" class="btn-unlock-gold">🔓 Unlock Buyer Contact ($999/yr)</a>
+                    <a href="/supplier-login.html" class="btn-login-unlock">Member Sign In</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- ============================================== -->
+        <!-- 3. SUGAR ICUMSA 45 (TOGO) -->
+        <!-- ============================================== -->
+        <article class="rfq-card" data-category="sugar">
+            <div class="fomo-urgency-strip">
+                <span class="live-viewers-tag">🔥 <b>34 Exporters Viewing</b> • High-Volume Sovereign Tender</span>
+                <span class="closing-timer">⏳ Negotiation Closes in: <span class="countdown-val" data-hours="3" data-mins="12">03h 12m 44s</span></span>
+            </div>
+            <div class="rfq-header">
+                <div>
+                    <h2 class="rfq-title">12,500 MT Refined White Cane Sugar ICUMSA 45</h2>
+                    <p style="color: #94a3b8; font-size: 13px;">Requirement Code: #APD-RFQ-261022-8491 • Published: Active Spot Negotiation</p>
+                </div>
+                <div class="rfq-meta-badges">
+                    <span class="badge-country">🇹🇬 TOGO (LOME PORT)</span>
+                    <span class="badge-escrow">🛡️ 100% ESCROW BACKED</span>
+                </div>
+            </div>
+            <div class="specs-grid">
+                <div class="spec-item"><span class="spec-label">Order Volume</span><span class="spec-val">12,500 Metric Tons</span></div>
+                <div class="spec-item"><span class="spec-label">Port of Discharge</span><span class="spec-val">CIF - Lome Port, Togo</span></div>
+                <div class="spec-item"><span class="spec-label">Specification Grade</span><span class="spec-val">ICUMSA 45 RBU (Polarization: 99.8% Min)</span></div>
+                <div class="spec-item"><span class="spec-label">Packaging Type</span><span class="spec-val">50 KG PP Bags with Inner Polyethylene Liner</span></div>
+                <div class="spec-item"><span class="spec-label">Payment Terms</span><span class="spec-val">100% Irrevocable Confirmed L/C at Sight</span></div>
+                <div class="spec-item"><span class="spec-label">Audit Standards</span><span class="spec-val">SGS / Bureau Veritas Pre-Shipment Audit</span></div>
+            </div>
+            <div class="gated-paywall">
+                <div class="buyer-masked-info">
+                    <div class="buyer-entity-name"><span>🏛️</span> Institutional Procurement Directorate (Togo)</div>
+                    <div class="blurred-contact">+228 22 XX XX XX | procurement@agro-import-tg.com</div>
+                    <p style="color: #fca5a5; font-size: 12px; margin: 0;">🔒 Direct WhatsApp & email coordinates locked behind institutional membership.</p>
+                </div>
+                <div class="paywall-actions">
+                    <a href="/membership.html?plan=elite-corridor" class="btn-unlock-gold">🔓 Unlock Buyer WhatsApp ($999/yr)</a>
+                    <a href="/supplier-login.html" class="btn-login-unlock">Member Sign In</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- ============================================== -->
+        <!-- 4. RAW SUGAR VHP (BANGLADESH) -->
+        <!-- ============================================== -->
+        <article class="rfq-card" data-category="sugar">
+            <div class="fomo-urgency-strip">
+                <span class="live-viewers-tag">🔥 <b>14 Exporters Viewing</b> • Refinery Processing Contract</span>
+                <span class="closing-timer">⏳ Negotiation Closes in: <span class="countdown-val" data-hours="8" data-mins="20">08h 20m 00s</span></span>
+            </div>
+            <div class="rfq-header">
+                <div>
+                    <h2 class="rfq-title">25,000 MT Raw Cane Sugar VHP (ICUMSA 600 - 1200)</h2>
+                    <p style="color: #94a3b8; font-size: 13px;">Requirement Code: #APD-RFQ-261022-6641 • Published: Bulk Vessel Vessel Shipment</p>
+                </div>
+                <div class="rfq-meta-badges">
+                    <span class="badge-country">🇧🇩 BANGLADESH (CHITTAGONG)</span>
+                    <span class="badge-escrow">🛡️ L/C CONFIRMED</span>
+                </div>
+            </div>
+            <div class="specs-grid">
+                <div class="spec-item"><span class="spec-label">Contract Volume</span><span class="spec-val">25,000 MT (Supramax Vessel Bulk)</span></div>
+                <div class="spec-item"><span class="spec-label">Port of Delivery</span><span class="spec-val">CFR - Chittagong Port, Bangladesh</span></div>
+                <div class="spec-item"><span class="spec-label">Polarization & Moisture</span><span class="spec-val">Polarization 99.2% Min • Moisture 0.15% Max</span></div>
+                <div class="spec-item"><span class="spec-label">Payment Security</span><span class="spec-val">Confirmed Irrevocable L/C at Sight</span></div>
+            </div>
+            <div class="gated-paywall">
+                <div class="buyer-masked-info">
+                    <div class="buyer-entity-name"><span>🏭</span> Leading Sugar Refining Mills Ltd (Dhaka, Bangladesh)</div>
+                    <div class="blurred-contact">+880 2 9XX XXXX | raw-sugar@refinery-bd.com</div>
+                    <p style="color: #fca5a5; font-size: 12px; margin: 0;">🔒 High-volume raw commodity contract. Priority routing for Global Enterprise.</p>
+                </div>
+                <div class="paywall-actions">
+                    <a href="/membership.html?plan=global-enterprise" class="btn-unlock-gold" style="background: linear-gradient(135deg, #f59e0b, #d97706);">🏆 Enterprise Access ($2,499)</a>
+                    <a href="/supplier-login.html" class="btn-login-unlock">Member Sign In</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- ============================================== -->
+        <!-- 5. REFINED SUNFLOWER OIL (BENIN) -->
+        <!-- ============================================== -->
+        <article class="rfq-card" data-category="oil">
+            <div class="fomo-urgency-strip">
+                <span class="live-viewers-tag">🔥 <b>41 Exporters Viewing</b> • Annual Sovereign Supply Contract</span>
+                <span class="closing-timer">⏳ Negotiation Closes in: <span class="countdown-val" data-hours="2" data-mins="50">02h 50m 18s</span></span>
+            </div>
+            <div class="rfq-header">
+                <div>
+                    <h2 class="rfq-title">50,000 MT Refined Sunflower Oil (Grade A Pure)</h2>
+                    <p style="color: #94a3b8; font-size: 13px;">Requirement Code: #APD-RFQ-261022-8151 • Published: Government Strategic Reserve</p>
+                </div>
+                <div class="rfq-meta-badges">
+                    <span class="badge-country">🇧🇯 BENIN (COTONOU PORT)</span>
+                    <span class="badge-escrow">🛡️ ESCROW PROTECTED</span>
+                </div>
+            </div>
+            <div class="specs-grid">
+                <div class="spec-item"><span class="spec-label">Contract Quantity</span><span class="spec-val">50,000 Metric Tons (Annual Contract)</span></div>
+                <div class="spec-item"><span class="spec-label">Port of Delivery</span><span class="spec-val">CIF - Cotonou Port, Benin</span></div>
+                <div class="spec-item"><span class="spec-label">Quality Standard</span><span class="spec-val">100% Pure Refined • Non-GMO • FFA < 0.1%</span></div>
+                <div class="spec-item"><span class="spec-label">Packing Formats</span><span class="spec-val">Flexitanks (Bulk) & 1L/5L PET Bottles</span></div>
+                <div class="spec-item"><span class="spec-label">Payment Structure</span><span class="spec-val">100% Transferable L/C from Top-25 Global Bank</span></div>
+                <div class="spec-item"><span class="spec-label">Audit Standards</span><span class="spec-val">ISO 22000, HACCP, SGS Inspection</span></div>
+            </div>
+            <div class="gated-paywall">
+                <div class="buyer-masked-info">
+                    <div class="buyer-entity-name"><span>🏛️</span> National Food Security Board Consignee (Benin)</div>
+                    <div class="blurred-contact">+229 21 XX XX XX | logistics@agro-national.bj</div>
+                    <p style="color: #fca5a5; font-size: 12px; margin: 0;">🔒 Priority government contract. Unlocked instantly for Global Enterprise members.</p>
+                </div>
+                <div class="paywall-actions">
+                    <a href="/membership.html?plan=global-enterprise" class="btn-unlock-gold" style="background: linear-gradient(135deg, #f59e0b, #d97706);">🏆 Global Enterprise Access ($2,499)</a>
+                    <a href="/supplier-login.html" class="btn-login-unlock">Member Sign In</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- ============================================== -->
+        <!-- 6. MILLING WHEAT (EGYPT) -->
+        <!-- ============================================== -->
+        <article class="rfq-card" data-category="grains">
+            <div class="fomo-urgency-strip">
+                <span class="live-viewers-tag">🔥 <b>32 Exporters Viewing</b> • State Flour Mills Allocation</span>
+                <span class="closing-timer">⏳ Negotiation Closes in: <span class="countdown-val" data-hours="5" data-mins="10">05h 10m 15s</span></span>
+            </div>
+            <div class="rfq-header">
+                <div>
+                    <h2 class="rfq-title">30,000 MT Milling Wheat (Protein 12.5% Min)</h2>
+                    <p style="color: #94a3b8; font-size: 13px;">Requirement Code: #APD-RFQ-261022-5501 • Published: Bulk Grain Carrier</p>
+                </div>
+                <div class="rfq-meta-badges">
+                    <span class="badge-country">🇪🇬 EGYPT (PORT SAID)</span>
+                    <span class="badge-escrow">🛡️ 100% ESCROW FUNDED</span>
+                </div>
+            </div>
+            <div class="specs-grid">
+                <div class="spec-item"><span class="spec-label">Order Volume</span><span class="spec-val">30,000 Metric Tons (Panamax Bulk)</span></div>
+                <div class="spec-item"><span class="spec-label">Port of Delivery</span><span class="spec-val">CIF - Port Said / Alexandria, Egypt</span></div>
+                <div class="spec-item"><span class="spec-label">Quality Standards</span><span class="spec-val">Protein 12.5% Min • Moisture 13.5% Max • Test Weight 77kg/hl</span></div>
+                <div class="spec-item"><span class="spec-label">Payment Security</span><span class="spec-val">Confirmed L/C payable at sight against Shipping Documents</span></div>
+            </div>
+            <div class="gated-paywall">
+                <div class="buyer-masked-info">
+                    <div class="buyer-entity-name"><span>🏛️</span> Certified Flour Milling Syndicate (Cairo, Egypt)</div>
+                    <div class="blurred-contact">+20 2 2XX XXXX | grain-import@flourmills-eg.com</div>
+                    <p style="color: #fca5a5; font-size: 12px; margin: 0;">🔒 Direct telephone & WhatsApp desk locked behind membership paywall.</p>
+                </div>
+                <div class="paywall-actions">
+                    <a href="/membership.html?plan=elite-corridor" class="btn-unlock-gold">🔓 Unlock Buyer WhatsApp ($999/yr)</a>
+                    <a href="/supplier-login.html" class="btn-login-unlock">Member Sign In</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- ============================================== -->
+        <!-- 7. YELLOW MAIZE / CORN (OMAN) -->
+        <!-- ============================================== -->
+        <article class="rfq-card" data-category="grains">
+            <div class="fomo-urgency-strip">
+                <span class="live-viewers-tag">🔥 <b>16 Exporters Viewing</b> • Animal Feed Manufacturer</span>
+                <span class="closing-timer">⏳ Negotiation Closes in: <span class="countdown-val" data-hours="7" data-mins="30">07h 30m 50s</span></span>
+            </div>
+            <div class="rfq-header">
+                <div>
+                    <h2 class="rfq-title">15,000 MT Yellow Maize / Corn (Animal Feed Grade 2)</h2>
+                    <p style="color: #94a3b8; font-size: 13px;">Requirement Code: #APD-RFQ-261022-4419 • Published: Spot Feeder Contract</p>
+                </div>
+                <div class="rfq-meta-badges">
+                    <span class="badge-country">🇴🇲 OMAN (SOHAR PORT)</span>
+                    <span class="badge-escrow">🛡️ ESCROW BACKED</span>
+                </div>
+            </div>
+            <div class="specs-grid">
+                <div class="spec-item"><span class="spec-label">Order Volume</span><span class="spec-val">15,000 MT</span></div>
+                <div class="spec-item"><span class="spec-label">Port of Delivery</span><span class="spec-val">CIF - Sohar Port, Oman</span></div>
+                <div class="spec-item"><span class="spec-label">Specifications</span><span class="spec-val">Moisture 14% Max • Protein 8.5% Min • Aflatoxin < 20 ppb</span></div>
+                <div class="spec-item"><span class="spec-label">Payment Security</span><span class="spec-val">100% Confirmed Bank L/C at Sight</span></div>
+            </div>
+            <div class="gated-paywall">
+                <div class="buyer-masked-info">
+                    <div class="buyer-entity-name"><span>🏢</span> Feed & Poultry Feed Mills LLC (Sohar, Oman)</div>
+                    <div class="blurred-contact">+968 26 XX XXXX | procurement@omanfeed.om</div>
+                    <p style="color: #fca5a5; font-size: 12px; margin: 0;">🔒 Direct WhatsApp & email coordinates locked for Elite Corridor members.</p>
+                </div>
+                <div class="paywall-actions">
+                    <a href="/membership.html?plan=elite-corridor" class="btn-unlock-gold">🔓 Unlock Buyer Contact ($999/yr)</a>
+                    <a href="/supplier-login.html" class="btn-login-unlock">Member Sign In</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- ============================================== -->
+        <!-- 8. KABULI CHICKPEAS (TURKEY) -->
+        <!-- ============================================== -->
+        <article class="rfq-card" data-category="pulses">
+            <div class="fomo-urgency-strip">
+                <span class="live-viewers-tag">🔥 <b>22 Exporters Viewing</b> • Direct Processing Plant</span>
+                <span class="closing-timer">⏳ Negotiation Closes in: <span class="countdown-val" data-hours="4" data-mins="50">04h 50m 30s</span></span>
+            </div>
+            <div class="rfq-header">
+                <div>
+                    <h2 class="rfq-title">5,000 MT Kabuli Chickpeas (75-80 Count / 8-9mm Jumbo)</h2>
+                    <p style="color: #94a3b8; font-size: 13px;">Requirement Code: #APD-RFQ-261022-3321 • Published: Active Container Tender</p>
+                </div>
+                <div class="rfq-meta-badges">
+                    <span class="badge-country">🇹🇷 TURKEY (MERSIN PORT)</span>
+                    <span class="badge-escrow">🛡️ ESCROW DEPOSIT VERIFIED</span>
+                </div>
+            </div>
+            <div class="specs-grid">
+                <div class="spec-item"><span class="spec-label">Quantity</span><span class="spec-val">5,000 MT (25kg Bags Containerized)</span></div>
+                <div class="spec-item"><span class="spec-label">Port of Delivery</span><span class="spec-val">CIF - Mersin Port, Turkey</span></div>
+                <div class="spec-item"><span class="spec-label">Grade Standard</span><span class="spec-val">Caliber 75/80 Count • Moisture 12% Max • Sortex 99.5%</span></div>
+                <div class="spec-item"><span class="spec-label">Payment Terms</span><span class="spec-val">20% Advance via Escrow, 80% against BL</span></div>
+            </div>
+            <div class="gated-paywall">
+                <div class="buyer-masked-info">
+                    <div class="buyer-entity-name"><span>🏢</span> Major Mediterranean Pulses Importer (Mersin, Turkey)</div>
+                    <div class="blurred-contact">+90 324 XX XX XX | trade@mersinpulses.tr</div>
+                    <p style="color: #fca5a5; font-size: 12px; margin: 0;">🔒 Direct buyer contact locked. Instant unlock available on Elite Corridor.</p>
+                </div>
+                <div class="paywall-actions">
+                    <a href="/membership.html?plan=elite-corridor" class="btn-unlock-gold">🔓 Unlock Buyer WhatsApp ($999/yr)</a>
+                    <a href="/supplier-login.html" class="btn-login-unlock">Member Sign In</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- ============================================== -->
+        <!-- 9. CUMIN SEEDS (GERMANY) -->
+        <!-- ============================================== -->
+        <article class="rfq-card" data-category="spices">
+            <div class="fomo-urgency-strip">
+                <span class="live-viewers-tag">🔥 <b>31 Exporters Viewing</b> • EU Quality Compliant Spices</span>
+                <span class="closing-timer">⏳ Negotiation Closes in: <span class="countdown-val" data-hours="3" data-mins="40">03h 40m 12s</span></span>
+            </div>
+            <div class="rfq-header">
+                <div>
+                    <h2 class="rfq-title">1,000 MT Cumin Seeds (Jeera Machine Clean 99% Pure)</h2>
+                    <p style="color: #94a3b8; font-size: 13px;">Requirement Code: #APD-RFQ-261022-2290 • Published: European Spice Extraction</p>
+                </div>
+                <div class="rfq-meta-badges">
+                    <span class="badge-country">🇩🇪 GERMANY (HAMBURG PORT)</span>
+                    <span class="badge-escrow">🛡️ 100% ESCROW PROTECTED</span>
+                </div>
+            </div>
+            <div class="specs-grid">
+                <div class="spec-item"><span class="spec-label">Order Quantity</span><span class="spec-val">1,000 MT (40 x 40ft High Cube Containers)</span></div>
+                <div class="spec-item"><span class="spec-label">Port of Delivery</span><span class="spec-val">CIF - Hamburg Port, Germany</span></div>
+                <div class="spec-item"><span class="spec-label">Pesticide Residue</span><span class="spec-val">EU MRL Compliant • Salmonella Negative • 99% Purity</span></div>
+                <div class="spec-item"><span class="spec-label">Packaging Type</span><span class="spec-val">25kg Paper / Jute Bags with Inner Poly</span></div>
+                <div class="spec-item"><span class="spec-label">Payment Security</span><span class="spec-val">Confirmed Bank L/C or SWIFT Trade Escrow</span></div>
+            </div>
+            <div class="gated-paywall">
+                <div class="buyer-masked-info">
+                    <div class="buyer-entity-name"><span>🏢</span> Premier European Seasoning & Flavor Ingredients GmbH (Hamburg)</div>
+                    <div class="blurred-contact">+49 40 3XX XXXX | spices-procurement@gewuerze-de.com</div>
+                    <p style="color: #fca5a5; font-size: 12px; margin: 0;">🔒 Direct buyer email & WhatsApp locked for Elite Corridor members.</p>
+                </div>
+                <div class="paywall-actions">
+                    <a href="/membership.html?plan=elite-corridor" class="btn-unlock-gold">🔓 Unlock Buyer Contact ($999/yr)</a>
+                    <a href="/supplier-login.html" class="btn-login-unlock">Member Sign In</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- ============================================== -->
+        <!-- 10. FRESH RED ONIONS (MALAYSIA) -->
+        <!-- ============================================== -->
+        <article class="rfq-card" data-category="fresh">
+            <div class="fomo-urgency-strip">
+                <span class="live-viewers-tag">🔥 <b>27 Exporters Viewing</b> • Urgent Perishable Spot Corridors</span>
+                <span class="closing-timer">⏳ Negotiation Closes in: <span class="countdown-val" data-hours="1" data-mins="55">01h 55m 08s</span></span>
+            </div>
+            <div class="rfq-header">
+                <div>
+                    <h2 class="rfq-title">2,000 MT Fresh Red Onions (Nashik / Maharashtra Grade 45mm-60mm)</h2>
+                    <p style="color: #94a3b8; font-size: 13px;">Requirement Code: #APD-RFQ-261022-1145 • Published: Weekly Reefer Shipments</p>
+                </div>
+                <div class="rfq-meta-badges">
+                    <span class="badge-country">🇲🇾 MALAYSIA (PORT KLANG)</span>
+                    <span class="badge-escrow">🛡️ 100% ESCROW ADVANCE</span>
+                </div>
+            </div>
+            <div class="specs-grid">
+                <div class="spec-item"><span class="spec-label">Weekly Volume</span><span class="spec-val">2,000 MT (Reefer Containers 40ft)</span></div>
+                <div class="spec-item"><span class="spec-label">Port of Delivery</span><span class="spec-val">CIF - Port Klang, Malaysia</span></div>
+                <div class="spec-item"><span class="spec-label">Size Specification</span><span class="spec-val">45mm to 60mm Diameter • Well Cured & Clean</span></div>
+                <div class="spec-item"><span class="spec-label">Packing Type</span><span class="spec-val">5kg / 10kg Red Mesh Bags</span></div>
+                <div class="spec-item"><span class="spec-label">Payment Security</span><span class="spec-val">100% Advance Escrow Payment</span></div>
+            </div>
+            <div class="gated-paywall">
+                <div class="buyer-masked-info">
+                    <div class="buyer-entity-name"><span>🏢</span> Wholesale Fresh Produce Importers Sdn Bhd (Kuala Lumpur)</div>
+                    <div class="blurred-contact">+60 3 7XX XXXX | agro-orders@klwholesale.my</div>
+                    <p style="color: #fca5a5; font-size: 12px; margin: 0;">🔒 Direct buyer WhatsApp unlocked immediately on Elite Corridor tier.</p>
+                </div>
+                <div class="paywall-actions">
+                    <a href="/membership.html?plan=elite-corridor" class="btn-unlock-gold">🔓 Unlock Buyer WhatsApp ($999/yr)</a>
+                    <a href="/supplier-login.html" class="btn-login-unlock">Member Sign In</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- ============================================== -->
+        <!-- 11. STRUCTURAL STEEL BILLETS (VIETNAM) -->
+        <!-- ============================================== -->
+        <article class="rfq-card" data-category="industrial">
+            <div class="fomo-urgency-strip">
+                <span class="live-viewers-tag">🔥 <b>18 Exporters Viewing</b> • Rolling Mill Raw Material</span>
+                <span class="closing-timer">⏳ Negotiation Closes in: <span class="countdown-val" data-hours="6" data-mins="15">06h 15m 45s</span></span>
+            </div>
+            <div class="rfq-header">
+                <div>
+                    <h2 class="rfq-title">20,000 MT Structural Steel Billets (Grade 3SP / 5SP 150x150mm)</h2>
+                    <p style="color: #94a3b8; font-size: 13px;">Requirement Code: #APD-RFQ-261022-9901 • Published: Bulk Heavy Cargo</p>
+                </div>
+                <div class="rfq-meta-badges">
+                    <span class="badge-country">🇻🇳 VIETNAM (HAIPHONG PORT)</span>
+                    <span class="badge-escrow">🛡️ 100% BANK L/C</span>
+                </div>
+            </div>
+            <div class="specs-grid">
+                <div class="spec-item"><span class="spec-label">Order Volume</span><span class="spec-val">20,000 Metric Tons (Bulk Vessel)</span></div>
+                <div class="spec-item"><span class="spec-label">Port of Delivery</span><span class="spec-val">CFR - Haiphong Port, Vietnam</span></div>
+                <div class="spec-item"><span class="spec-label">Dimensions</span><span class="spec-val">150mm x 150mm x 12m Length</span></div>
+                <div class="spec-item"><span class="spec-label">Standard Standards</span><span class="spec-val">ASTM A615 / GOST 380-2005 Compliant</span></div>
+            </div>
+            <div class="gated-paywall">
+                <div class="buyer-masked-info">
+                    <div class="buyer-entity-name"><span>🏭</span> Industrial Steel Rolling Corporation (Hanoi, Vietnam)</div>
+                    <div class="blurred-contact">+84 24 3XX XXXX | steel-procure@vietnam-industrial.vn</div>
+                    <p style="color: #fca5a5; font-size: 12px; margin: 0;">🔒 High-value industrial procurement. Priority routing for Global Enterprise.</p>
+                </div>
+                <div class="paywall-actions">
+                    <a href="/membership.html?plan=global-enterprise" class="btn-unlock-gold" style="background: linear-gradient(135deg, #f59e0b, #d97706);">🏆 Enterprise Access ($2,499)</a>
+                    <a href="/supplier-login.html" class="btn-login-unlock">Member Sign In</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- ============================================== -->
+        <!-- 12. RAW COTTON BALES (BANGLADESH) -->
+        <!-- ============================================== -->
+        <article class="rfq-card" data-category="textiles">
+            <div class="fomo-urgency-strip">
+                <span class="live-viewers-tag">🔥 <b>25 Exporters Viewing</b> • Textile Spinning Mills Contract</span>
+                <span class="closing-timer">⏳ Negotiation Closes in: <span class="countdown-val" data-hours="4" data-mins="05">04h 05m 20s</span></span>
+            </div>
+            <div class="rfq-header">
+                <div>
+                    <h2 class="rfq-title">10,000 Bales Raw Cotton Shankar-6 (Staple: 28-29mm, Mic: 3.8-4.2)</h2>
+                    <p style="color: #94a3b8; font-size: 13px;">Requirement Code: #APD-RFQ-261022-7788 • Published: Annual Spinning Contract</p>
+                </div>
+                <div class="rfq-meta-badges">
+                    <span class="badge-country">🇧🇩 BANGLADESH (CHITTAGONG)</span>
+                    <span class="badge-escrow">🛡️ 100% ESCROW SECURED</span>
+                </div>
+            </div>
+            <div class="specs-grid">
+                <div class="spec-item"><span class="spec-label">Order Volume</span><span class="spec-val">10,000 Bales (170kg Standard Bales)</span></div>
+                <div class="spec-item"><span class="spec-label">Port of Delivery</span><span class="spec-val">CIF - Chittagong Port, Bangladesh</span></div>
+                <div class="spec-item"><span class="spec-label">Staple & Micronaire</span><span class="spec-val">Length: 29mm • Mic: 3.8 to 4.2 • Strength: 28.5+ GPT</span></div>
+                <div class="spec-item"><span class="spec-label">Payment Terms</span><span class="spec-val">100% At Sight Irrevocable Confirmed L/C</span></div>
+            </div>
+            <div class="gated-paywall">
+                <div class="buyer-masked-info">
+                    <div class="buyer-entity-name"><span>🏢</span> Apex Textile Spinning Mills Consortium (Dhaka, Bangladesh)</div>
+                    <div class="blurred-contact">+880 2 8XX XXXX | rawcotton@apextextiles-bd.com</div>
+                    <p style="color: #fca5a5; font-size: 12px; margin: 0;">🔒 Direct buyer contact locked behind membership paywall.</p>
+                </div>
+                <div class="paywall-actions">
+                    <a href="/membership.html?plan=elite-corridor" class="btn-unlock-gold">🔓 Unlock Buyer WhatsApp ($999/yr)</a>
+                    <a href="/supplier-login.html" class="btn-login-unlock">Member Sign In</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- ============================================== -->
+        <!-- 13. AGRICULTURAL TRACTORS & MACHINERY (KENYA) -->
+        <!-- ============================================== -->
+        <article class="rfq-card" data-category="machinery">
+            <div class="fomo-urgency-strip">
+                <span class="live-viewers-tag">🔥 <b>12 Exporters Viewing</b> • East Africa Development Project</span>
+                <span class="closing-timer">⏳ Negotiation Closes in: <span class="countdown-val" data-hours="9" data-mins="40">09h 40m 10s</span></span>
+            </div>
+            <div class="rfq-header">
+                <div>
+                    <h2 class="rfq-title">50 Units 75HP 4WD Agricultural Heavy Duty Tractors with Implements</h2>
+                    <p style="color: #94a3b8; font-size: 13px;">Requirement Code: #APD-RFQ-261022-5512 • Published: Govt Agricultural Modernization</p>
+                </div>
+                <div class="rfq-meta-badges">
+                    <span class="badge-country">🇰🇪 KENYA (MOMBASA PORT)</span>
+                    <span class="badge-escrow">🛡️ SWIFT ESCROW PROTECTED</span>
+                </div>
+            </div>
+            <div class="specs-grid">
+                <div class="spec-item"><span class="spec-label">Order Quantity</span><span class="spec-val">50 Units 4WD 75HP Tractors + Disc Ploughs</span></div>
+                <div class="spec-item"><span class="spec-label">Port of Delivery</span><span class="spec-val">CIF - Mombasa Port, Kenya</span></div>
+                <div class="spec-item"><span class="spec-label">Engine Spec</span><span class="spec-val">4-Cylinder Turbo Diesel • Tropical Cooling Package</span></div>
+                <div class="spec-item"><span class="spec-label">Payment Security</span><span class="spec-val">100% Confirmed Sovereign L/C at Sight</span></div>
+            </div>
+            <div class="gated-paywall">
+                <div class="buyer-masked-info">
+                    <div class="buyer-entity-name"><span>🏛️</span> Agricultural Mechanization Board (Nairobi, Kenya)</div>
+                    <div class="blurred-contact">+254 20 2XX XXXX | tenders@agrimech-ke.org</div>
+                    <p style="color: #fca5a5; font-size: 12px; margin: 0;">🔒 Sovereign tender. Priority routing for Global Enterprise members.</p>
+                </div>
+                <div class="paywall-actions">
+                    <a href="/membership.html?plan=global-enterprise" class="btn-unlock-gold" style="background: linear-gradient(135deg, #f59e0b, #d97706);">🏆 Enterprise Access ($2,499)</a>
+                    <a href="/supplier-login.html" class="btn-login-unlock">Member Sign In</a>
+                </div>
+            </div>
+        </article>
+
+    </div>
+
+    <!-- DYNAMIC FIREBASE FEED CONTAINER (FOR LIVE USER-POSTED ORDERS) -->
+    <div id="dynamicFirebaseRfqs"></div>
+
+    <!-- ESCROW TRADE SETTLEMENT NOTICE -->
+    <div class="escrow-callout">
+        <h3 style="color: var(--gold); font-size: 24px; margin-bottom: 12px; font-family: 'Playfair Display', serif;">
+            🛡️ 100% Escrow Trade Settlement Protection
+        </h3>
+        <p style="color: #cbd5e1; font-size: 14.5px; max-width: 800px; margin: 0 auto 25px auto; line-height: 1.6;">
+            All transactions across APD Global Trade are backed by institutional escrow protocols (Razorpay & SWIFT Escrow Accounts). Buyer capital is locked upon contract execution and disbursed to the verified supplier only upon independent validation of original Bills of Lading, SGS/Bureau Veritas Inspection Certificates, and DGFT clearance.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+            <a href="/membership.html" style="background: linear-gradient(135deg, var(--gold), #b8860b); color: #000; padding: 14px 32px; border-radius: 50px; font-weight: 900; font-size: 14px; text-decoration: none; box-shadow: 0 4px 15px rgba(212,175,55,0.4);">
+                Upgrade to Elite Corridor ($999/yr)
+            </a>
+            <a href="https://wa.me/919266418868?text=Hi%2C%20I%20want%20to%20learn%20more%20about%20APD%20Escrow%20Protection%20and%20Buyer%20RFQs." target="_blank" style="background: rgba(255,255,255,0.08); color: #fff; padding: 14px 28px; border-radius: 50px; font-weight: 700; font-size: 14px; text-decoration: none; border: 1px solid rgba(255,255,255,0.2);">
+                💬 Contact Senior Trade Desk (WhatsApp)
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<!-- REAL-TIME MATCH BROADCAST TOAST (FOMO DRIVER) -->
+<div id="liveMatchToast">
+    <div style="width: 38px; height: 38px; border-radius: 50%; background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; animation: pulse 1s infinite;">
+        🚨
+    </div>
+    <div style="flex: 1;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <span style="color: var(--gold); font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;">Real-Time Match Broadcast</span>
+            <span onclick="document.getElementById('liveMatchToast').style.opacity='0'" style="color: #64748b; font-size: 16px; cursor: pointer;">✕</span>
+        </div>
+        <p id="liveMatchText" style="color: #f1f5f9; font-size: 13px; margin: 0; line-height: 1.4;">
+            Verified Buyer from Dammam just requested <b>5,000 MT 1509 Sella Basmati Rice</b>. Instant alert dispatched to matching Elite Corridor suppliers!
+        </p>
+        <span style="display: inline-block; margin-top: 6px; color: #38bdf8; font-size: 11.5px; font-weight: 700;">● Unlocked for Elite & Enterprise tiers</span>
+    </div>
+</div>
+
+<!-- INTERACTIVE FILTER & DYNAMIC FOMO SCRIPTS -->
+<script>
+function filterRFQs(category) {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    const cards = document.querySelectorAll('.rfq-card');
+    cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+// REAL-TIME COUNTDOWN TICKER SIMULATION
+document.addEventListener('DOMContentLoaded', function() {
+    setInterval(function() {
+        document.querySelectorAll('.countdown-val').forEach(el => {
+            let h = parseInt(el.getAttribute('data-hours') || "3");
+            let m = parseInt(el.getAttribute('data-mins') || "20");
+            let parts = el.innerText.match(/(\d+)h\s*(\d+)m\s*(\d+)s/);
+            if (parts) {
+                let sec = parseInt(parts[3]) - 1;
+                let min = parseInt(parts[2]);
+                let hour = parseInt(parts[1]);
+                if (sec < 0) { sec = 59; min--; }
+                if (min < 0) { min = 59; hour--; }
+                if (hour < 0) { hour = 4; min = 30; sec = 0; }
+                el.innerText = (hour < 10 ? '0' + hour : hour) + 'h ' + (min < 10 ? '0' + min : min) + 'm ' + (sec < 10 ? '0' + sec : sec) + 's';
+            }
+        });
+    }, 1000);
+
+    // CYCLIC REAL-TIME MATCH BROADCASTS (FOMO TICKER)
+    const matchAlerts = [
+        "Verified Buyer from Dammam requested 5,000 MT 1509 Sella Basmati Rice. Instant WhatsApp alert sent to Elite tier!",
+        "Government Tender Authority (Benin) active: 50,000 MT Sunflower Oil. Priority routing for Global Enterprise!",
+        "Wholesaler from Hamburg requested 1,000 MT Cumin Seeds (Jeera). Bidding window closes in 3 hours!",
+        "Institutional buyer from Jeddah requested 20,000 MT Milling Wheat. Lead unlocked by 2 verified exporters!",
+        "Trading House from Lome, Togo deposited Escrow for 12,500 MT Sugar ICUMSA 45. Bidding closing soon!"
+    ];
+    let alertIdx = 0;
+    const toast = document.getElementById('liveMatchToast');
+    const toastTxt = document.getElementById('liveMatchText');
+
+    function showToast() {
+        if (!toast || !toastTxt) return;
+        toastTxt.innerHTML = matchAlerts[alertIdx % matchAlerts.length];
+        alertIdx++;
+        toast.style.transform = 'translateY(0)';
+        toast.style.opacity = '1';
+        setTimeout(function() {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(160px)';
+        }, 7000);
+    }
+
+    setTimeout(showToast, 3000);
+    setInterval(showToast, 18000);
+});
+</script>
+
+<!-- DYNAMIC FIREBASE INTEGRATION -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
-  getFirestore,collection,query,where,orderBy,getDocs
+  getFirestore, collection, query, where, orderBy, limit, getDocs
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const app = initializeApp({
-  apiKey:"AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-  authDomain:"apd-globaltrade-prod.firebaseapp.com",
-  projectId:"apd-globaltrade-prod"
+  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+  authDomain: "apd-globaltrade-prod.firebaseapp.com",
+  projectId: "apd-globaltrade-prod"
 });
 
 const db = getFirestore(app);
-const rfqList = document.getElementById("rfqList");
+const dynContainer = document.getElementById("dynamicFirebaseRfqs");
 
-async function loadRFQs(){
-  try{
-    const snap = await getDocs(
-      query(
-        collection(db,"rfqs"),
-        where("status","==","open"),
-        orderBy("createdAt","desc")
-      )
-    );
-
-    if(snap.empty){
-      rfqList.innerHTML="<p>No RFQs available yet.</p>";
-      return;
+async function loadDynamicRFQs() {
+    try {
+        const snap = await getDocs(
+            query(collection(db, "rfqs"), where("status", "==", "open"), limit(8))
+        );
+        if (!snap.empty) {
+            let html = "";
+            snap.forEach(d => {
+                const r = d.data();
+                html += `
+                <article class="rfq-card" data-category="all">
+                    <div class="fomo-urgency-strip">
+                        <span class="live-viewers-tag">🔥 <b>Live Buyer Requirement</b> • Reverse Auction Active</span>
+                        <span class="closing-timer">⏳ Negotiation Active: Verified Bidding Corridor</span>
+                    </div>
+                    <div class="rfq-header">
+                        <div>
+                            <h2 class="rfq-title">${r.product || "International Commodity Requirement"}</h2>
+                            <p style="color: #94a3b8; font-size: 13px;">Requirement Code: #${d.id.substring(0,8).toUpperCase()} • Verified Live RFQ</p>
+                        </div>
+                        <div class="rfq-meta-badges">
+                            <span class="badge-country">${(r.deliveryPort || "GLOBAL CORRIDOR").toUpperCase()}</span>
+                            <span class="badge-escrow">🛡️ ESCROW BACKED</span>
+                        </div>
+                    </div>
+                    <div class="specs-grid">
+                        <div class="spec-item"><span class="spec-label">Order Volume</span><span class="spec-val">${r.quantity || "As per export contract"}</span></div>
+                        <div class="spec-item"><span class="spec-label">Destination Port</span><span class="spec-val">${r.deliveryPort || "FOB / CIF Designated Port"}</span></div>
+                        <div class="spec-item"><span class="spec-label">Packaging Standard</span><span class="spec-val">${r.packaging || "Export Containerized Packing"}</span></div>
+                        <div class="spec-item"><span class="spec-label">Payment Security</span><span class="spec-val">100% Confirmed L/C or Escrow Trade Desk</span></div>
+                    </div>
+                    <div class="gated-paywall">
+                        <div class="buyer-masked-info">
+                            <div class="buyer-entity-name"><span>🏢</span> Verified Corporate Importer (${r.deliveryPort || "International"})</div>
+                            <div class="blurred-contact">+XX XXX XXX XXXX | trade@verified-procurement.corp</div>
+                            <p style="color: #fca5a5; font-size: 12px; margin: 0;">🔒 Direct buyer contact locked. Unlocked for Elite & Enterprise tier members.</p>
+                        </div>
+                        <div class="paywall-actions">
+                            <a href="/membership.html?plan=elite-corridor" class="btn-unlock-gold">🔓 Unlock Buyer Contact ($999/yr)</a>
+                            <a href="/supplier-login.html" class="btn-login-unlock">Member Sign In</a>
+                        </div>
+                    </div>
+                </article>
+                `;
+            });
+            dynContainer.innerHTML = html;
+        }
+    } catch(e) {
+        console.log("Dynamic RFQs loaded with static fallbacks.");
     }
-
-    rfqList.innerHTML="";
-    snap.forEach(d=>{
-      const r=d.data();
-      rfqList.innerHTML+=`
-        <div class="card">
-          <h3>${r.product || "-"}</h3>
-          <p><b>Quantity:</b> ${r.quantity || "-"}</p>
-          <p><b>Destination:</b> ${r.deliveryPort || "-"}</p>
-          <p class="locked">🔒 Buyer contact locked</p>
-          <a class="cta" href="/supplier-login.html">
-            Login / Register to Unlock
-          </a>
-        </div>
-      `;
-    });
-  }catch(e){
-    console.error(e);
-    rfqList.innerHTML="<p>Error loading RFQs.</p>";
-  }
 }
 
-loadRFQs();
+loadDynamicRFQs();
 </script>
-
-
-<!-- QUICK RFQ MODAL -->
-  <div id="rfqModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(10px); z-index: 999999; justify-content: center; align-items: center;">
-      <div style="background: #0f172a; border: 1px solid rgba(212,175,55,0.4); border-radius: 20px; padding: 40px; max-width: 500px; width: 90%; box-shadow: 0 20px 50px rgba(0,0,0,0.8); position: relative;">
-          <div onclick="document.getElementById('rfqModal').style.display='none';" style="position: absolute; top: 20px; right: 20px; color: #cbd5e1; cursor: pointer; font-size: 1.5rem;">✕</div>
-          <h3 style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 20px;">Post Live Order</h3>
-          <p style="color: #94a3b8; margin-bottom: 10px; font-size: 0.95rem;">Instantly broadcast your buy requirement to our vetted suppliers.</p>
-
-<div style="margin-bottom: 25px; padding: 10px; background: rgba(220, 38, 38, 0.1); border: 1px solid rgba(220, 38, 38, 0.3); border-radius: 8px; display: flex; align-items: center; gap: 10px;">
-    <span style="display: inline-block; width: 8px; height: 8px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 8px #ef4444; animation: pulse 1.5s infinite;"></span>
-    <span style="color: #fca5a5; font-size: 13px; font-weight: 600;" id="liveViewerCount">-- Exporters currently active and ready to quote</span>
-</div>
-<script>
-    // Random viewer count logic (sometimes over 1000)
-    document.addEventListener("DOMContentLoaded", function() {
-        const countEl = document.getElementById("liveViewerCount");
-        if(countEl) {
-            const isHigh = Math.random() > 0.7; // 30% chance to be over 1000
-            const count = isHigh ? Math.floor(Math.random() * 500) + 1000 : Math.floor(Math.random() * 800) + 100;
-            countEl.innerText = count.toLocaleString() + " Exporters currently active and ready to quote";
-        }
-    });
-</script>
-
-          <form onsubmit="handleQuickRFQ(event)" style="display: flex; flex-direction: column; gap: 15px;">
-              <div class="rfq-flex" style="display: flex; gap: 15px;">
-                  <input type="text" id="qr_name" placeholder="Your Name" required style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
-                  <input type="text" id="qr_company" placeholder="Business Name" required style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
-              </div>
-              <input type="text" id="qr_whatsapp" placeholder="WhatsApp Number (with country code)" required pattern="^\+.*" title="Must start with + and include country code" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
-              <input type="text" id="qr_product" placeholder="Product Name (e.g., Basmati Rice)" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
-              <div class="rfq-flex" style="display: flex; gap: 15px;">
-                  <input type="number" id="qr_qty" placeholder="Quantity" required style="flex: 2; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
-                  <select id="qr_unit" required style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
-                      <option value="MT">MT</option>
-                      <option value="KG">KG</option>
-                      <option value="Units">Units</option>
-                      <option value="Containers">Containers</option>
-                  </select>
-              </div>
-              <input type="text" id="qr_dest" placeholder="Destination Port (e.g., Jebel Ali, Dubai)" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
-              <textarea id="qr_specs" placeholder="Any Specifications Required (Optional)" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none; min-height: 80px; resize: vertical;"></textarea>
-              <button type="submit" id="qr_btn" style="background: linear-gradient(90deg, var(--gold), #facc15); color: #000; font-weight: 900; padding: 15px; border: none; border-radius: 10px; font-size: 1.1rem; cursor: pointer; text-transform: uppercase; margin-top: 10px; transition: 0.3s; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);">Secure Verification</button>
-          </form>
-      </div>
-  </div>
-
-  <!-- Desktop Floating WhatsApp -->
-  <style>
-    .desktop-wa-btn { display: none; }
-    @media (min-width: 769px) { .desktop-wa-btn { display: flex; } }
-  </style>
-  <a href="https://wa.me/919990332340" target="_blank" class="desktop-wa-btn" style="position: fixed; bottom: 20px; right: 110px; background-color: #25d366; color: white; border-radius: 50%; width: 60px; height: 60px; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 9999; text-decoration: none; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.1)';" onmouseout="this.style.transform='scale(1)';">
-    <svg viewBox="0 0 32 32" width="35" height="35" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M16.002 0c-8.837 0-16.002 7.163-16.002 16.002 0 2.825.74 5.485 2.053 7.765l-2.053 8.233 8.431-2.036c2.253 1.183 4.815 1.838 7.571 1.838 8.835 0 16-7.163 16-16.002s-7.165-16-16-16zm7.989 22.842c-.328.922-1.895 1.768-2.617 1.838-.667.065-1.503.111-4.22-.989-3.479-1.41-5.744-5.011-5.918-5.244-.175-.233-1.41-1.879-1.41-3.585s.891-2.545 1.199-2.871c.309-.327.671-.409.896-.409.224 0 .448 0 .638.009.202.01.472-.078.741.564.281.671.961 2.348 1.045 2.518.084.17.14.368.028.591-.111.224-.17.368-.337.564-.17.197-.351.428-.501.591-.17.183-.352.383-.146.741.206.357.917 1.517 1.972 2.456 1.359 1.209 2.492 1.579 2.843 1.748.351.17.558.14.764-.093.206-.233.885-1.033 1.122-1.388.238-.356.475-.297.801-.176.327.121 2.062.973 2.417 1.149.356.176.593.264.679.41.084.146.084.85-.244 1.771z"/></svg>
-  </a>
-
-  <!-- Google Translate Scripts -->
-  <script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-  }
-  </script>
-  
-
-  <!-- Post Live Order Logic -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, addDoc, serverTimestamp, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-      authDomain: "apd-globaltrade-prod.firebaseapp.com",
-      projectId: "apd-globaltrade-prod",
-      storageBucket: "apd-globaltrade-prod.firebasestorage.app",
-      messagingSenderId: "226407312435",
-      appId: "1:226407312435:web:f8a54b1132af3899170746"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    // AUTOCOMPLETE LOGIC
-    (async function initSearchAutocomplete() {
-        try {
-            const snap = await getDocs(collection(db, "rfqs"));
-            const suggestions = new Set();
-            snap.forEach(doc => {
-                const data = doc.data();
-                if(data.product) suggestions.add(data.product.trim());
-                if(data.destination) suggestions.add(data.destination.trim());
-            });
-            const datalist = document.createElement('datalist');
-            datalist.id = 'searchSuggestions';
-            suggestions.forEach(item => {
-                const option = document.createElement('option');
-                option.value = item;
-                datalist.appendChild(option);
-            });
-            document.body.appendChild(datalist);
-        } catch (err) {
-            console.error("Autocomplete init failed:", err);
-        }
-    })();
-
-    window.handleQuickRFQ = async function(e) {
-        e.preventDefault();
-        const btn = document.getElementById("qr_btn");
-        btn.innerText = "Securing Order...";
-        btn.disabled = true;
-
-        const product = document.getElementById("qr_product").value;
-        const qty = document.getElementById("qr_qty").value + " " + document.getElementById("qr_unit").value;
-        const dest = document.getElementById("qr_dest").value;
-
-        try {
-            // Save it to Firebase as pending
-            const docRef = await addDoc(collection(db, "rfqs"), {
-                buyerName: document.getElementById("qr_name").value,
-                company: document.getElementById("qr_company").value,
-                whatsapp: document.getElementById("qr_whatsapp").value,
-                product: product,
-                quantity: qty,
-                destination: dest,
-                specifications: document.getElementById("qr_specs").value,
-                status: "payment_pending",
-                source: "homepage_quick",
-                deposit: "refundable",
-                createdAt: serverTimestamp()
-            });
-
-            // Redirect to custom payment for the refundable deposit
-            const isUSD = document.body.classList && document.body.classList.contains('currency-usd');
-            const amount = isUSD ? 25 : 2000;
-            const currency = isUSD ? 'USD' : 'INR';
-            
-            // Redirect to the payment page
-            window.location.href = `/membership.html`;
-            return;
-        } catch (err) {
-            alert('Error initiating verification: ' + err.message);
-            btn.innerText = "Secure Verification & Post";
-            btn.disabled = false;
-        }
-    };
-  </script>
-
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6abfcc62beb8e034c00dd833/1k3ujcoou';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
 
 </body>
 </html>

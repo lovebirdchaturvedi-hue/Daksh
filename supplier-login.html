@@ -2,328 +2,573 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Elite Supplier Login | APD Global Trade</title>
+<title>Global Trade Portal Login | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
-* { box-sizing: border-box; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
     --gold: #d4af37;
     --dark: #020617;
+    --darker: #071427;
+    --accent-blue: #0284c7;
+    --border-color: rgba(255, 255, 255, 0.08);
 }
 
 body {
-    margin: 0;
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #071427, #020617);
+    background: #060d1a;
     color: #fff;
     min-height: 100vh;
-    display: block; /* Changed from flex to allow header */
+    display: flex;
+    flex-direction: column;
     position: relative;
     overflow-x: hidden;
 }
 
-body::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 800px; height: 800px;
-    background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* Header & Drawer Styles */
-header {
+/* TOP SLIM BAR */
+.portal-topbar {
+    background: #020617;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    padding: 10px 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 5%;
-    background: rgba(2,6,23,0.8);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 1000;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-header nav a {
-    color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; margin-left: 25px; transition: 0.3s; font-family: 'Inter', sans-serif;
-}
-header nav a:hover { color: var(--gold); }
-.menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-.menu-toggle span { width: 25px; height: 2px; background: #fff; transition: 0.3s; }
-
-.drawer-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5); backdrop-filter: blur(5px);
-    z-index: 100000; display: none; opacity: 0; transition: 0.3s;
-}
-.drawer-overlay.active { display: block; opacity: 1; }
-.side-drawer {
-    position: fixed; top: 0; right: -100%; width: 100%; height: 100%;
-    background: rgba(2,6,23,0.98); backdrop-filter: blur(25px);
-    z-index: 100001; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 100px 10%; display: flex; flex-direction: column; gap: 25px; overflow-y: auto;
-}
-.side-drawer.active { right: 0; }
-
-@media(min-width: 1025px) {
-    .side-drawer, .drawer-overlay { display: none !important; }
+    font-size: 12px;
+    color: #94a3b8;
 }
 
-@media(max-width: 1024px) {
-    header nav { display: none; }
-    .menu-toggle { display: flex; }
+.portal-topbar a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 700;
 }
 
-.logo-container {
+/* MAIN SPLIT CONTAINER (TRADOLOGIE STYLE) */
+.split-container {
+    flex: 1;
+    display: flex;
+    min-height: calc(100vh - 45px);
+}
+
+/* LEFT COLUMN: ENTERPRISE BENEFITS */
+.left-pane {
+    flex: 1.1;
+    background: linear-gradient(135deg, #071427 0%, #030a16 100%);
+    padding: 60px 6% 60px 8%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-bottom: 40px;
+    justify-content: center;
+    border-right: 1px solid var(--border-color);
+    position: relative;
 }
 
-.logo-icon {
-    width: 60px;
-    height: 60px;
+.left-pane::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at 10% 20%, rgba(212,175,55,0.06) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.brand-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 6px 14px;
+    border-radius: 50px;
+    width: fit-content;
+    margin-bottom: 25px;
+}
+
+.left-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.25;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.left-title span {
+    color: var(--gold);
+}
+
+.left-subtitle {
+    color: #94a3b8;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 540px;
+}
+
+.feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    max-width: 580px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 16px 20px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(212, 175, 55, 0.3);
+    transform: translateX(4px);
+}
+
+.feature-icon-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: rgba(2, 6, 23, 0.8);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.feature-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #f1f5f9;
+    margin-bottom: 4px;
+}
+
+.feature-desc {
+    font-size: 13px;
+    color: #94a3b8;
+    line-height: 1.5;
+}
+
+/* RIGHT COLUMN: AUTH PANEL */
+.right-pane {
+    flex: 0.9;
+    background: #081120;
+    padding: 60px 8% 60px 6%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 440px;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 38px 32px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.auth-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    margin-bottom: 15px;
+}
+
+.auth-logo-icon {
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #020617, #1a1a1a);
+    background: #020617;
     border: 2px solid var(--gold);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-    margin-bottom: 15px;
-}
-
-.logo-icon span {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 900;
-    color: var(--gold);
-    letter-spacing: 1px;
-}
-
-.logo-text {
-    font-family: 'Playfair Display', serif;
-    font-weight: 900;
-    font-size: 28px;
-    color: #fff;
-    letter-spacing: 1px;
-    line-height: 1.1;
-}
-
-.logo-sub {
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 3px;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-top: 5px;
-}
-
-.card {
-    background: rgba(15, 23, 42, 0.6);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding: 50px 40px;
-    width: 100%;
-    max-width: 420px;
-    border-radius: 20px;
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.02);
-    text-align: center;
-    z-index: 2;
-}
-
-.card h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px;
-    margin: 0 0 10px 0;
-    color: #fff;
-}
-
-.card p {
-    color: #94a3b8;
-    font-size: 14px;
-    margin: 0 0 30px 0;
-}
-
-input {
-    width: 100%;
-    padding: 16px 20px;
-    margin-bottom: 20px;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(0,0,0,0.3);
-    color: #fff;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 15px;
-    box-sizing: border-box;
-    transition: 0.3s;
+    font-weight: 900;
+    color: var(--gold);
 }
 
-input:focus {
-    outline: none;
-    border-color: var(--gold);
-    background: rgba(0,0,0,0.5);
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
-}
-
-button {
-    width: 100%;
-    padding: 16px;
-    margin-top: 10px;
-    background: linear-gradient(135deg, var(--gold), #8B6508);
-    color: #000;
-    border: none;
-    border-radius: 50px;
+.auth-logo-text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 19px;
     font-weight: 800;
-    font-size: 16px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    color: #fff;
+}
+
+.auth-welcome {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+}
+
+.auth-sub {
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+/* ROLE TOGGLE TABS */
+.role-toggle {
+    display: flex;
+    background: rgba(2, 6, 23, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 24px;
+}
+
+.role-btn {
+    flex: 1;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #94a3b8;
+    background: transparent;
+    border: none;
+    border-radius: 7px;
     cursor: pointer;
-    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
-    transition: 0.3s;
+    transition: all 0.2s;
+    text-align: center;
 }
 
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+.role-btn.active {
+    background: var(--gold);
+    color: #020617;
+    font-weight: 800;
+    box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
 }
 
-.links {
-    margin-top: 25px;
+.form-group {
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.form-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #cbd5e1;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 13px 15px;
+    background: rgba(2, 6, 23, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.form-input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+}
+
+.form-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 13px;
-}
-
-.links a {
-    color: #94a3b8;
-    text-decoration: none;
-    cursor: pointer;
-    transition: 0.3s;
-    font-weight: 500;
-}
-
-.links a:hover {
-    color: var(--gold);
-}
-
-#error {
-    color: #ef4444;
-    font-size: 14px;
-    margin-top: 15px;
-    font-weight: 600;
-}
-
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    color: rgba(255,255,255,0.3);
     font-size: 12px;
-    padding: 20px;
-    letter-spacing: 1px;
+    margin-bottom: 22px;
 }
 
+.form-row label {
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.form-row a {
+    color: var(--gold);
+    text-decoration: none;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 14px;
+    background: #0284c7;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-login:hover {
+    background: #0369a1;
+    box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #64748b;
+    font-size: 12px;
+}
+
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.divider span {
+    padding: 0 10px;
+    text-transform: uppercase;
+}
+
+.btn-otp {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    color: #4ade80;
+    border: 1px solid rgba(74, 222, 128, 0.4);
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.btn-otp:hover {
+    background: rgba(74, 222, 128, 0.1);
+    border-color: #4ade80;
+}
+
+.auth-footer {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 13px;
+    color: #94a3b8;
+    line-height: 1.6;
+}
+
+.auth-footer a {
+    color: var(--gold);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+.error-msg {
+    color: #ef4444;
+    font-size: 13px;
+    margin-top: 10px;
+    text-align: center;
+    display: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+    .split-container {
+        flex-direction: column;
+    }
+    .left-pane {
+        padding: 40px 6%;
+    }
+    .right-pane {
+        padding: 40px 6%;
+    }
+}
 </style>
 </head>
-
 <body>
 
-<!-- DESKTOP HEADER -->
-<header>
-    <div style="display: flex; align-items: center; gap: 20px;">
-        <div class="menu-toggle" onclick="toggleDrawer()">
-            <span></span><span></span><span></span>
-        </div>
-        <a href="/" style="display: flex; align-items: center; gap: 15px; text-decoration: none;">
-            <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #020617, #1a1a1a); border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);">
-                <span style="font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 900; color: var(--gold);">APD</span>
-            </div>
-            <div style="display: flex; flex-direction: column; line-height: 1.1;">
-                <span style="font-family: 'Playfair Display', serif; font-weight: 900; font-size: 20px; color: #fff;">APD <span style="color: var(--gold);">Global</span></span>
-            </div>
-        </a>
+<!-- SLIM TOP BAR -->
+<div class="portal-topbar">
+    <div>
+        <span>Institutional Trade Gateway | </span>
+        <a href="/">← Return to APD Global Trade Homepage</a>
     </div>
-    <nav style="display: flex; align-items: center;">
-        <a href="/">Home</a>
-        <a href="/buyer-rfqs.html">Buyer RFQs</a>
-        <a href="/suppliers.html">Suppliers</a>
-        <a href="/learn-exporting.html">Learn Exporting</a>
-        <a href="/membership.html">Membership</a>
-        <a href="/contact.html">Contact</a>
-        <div style="display: flex; align-items: center; gap: 15px; border-left: 1px solid rgba(212,175,55,0.2); padding-left: 20px; margin-left: 20px;">
-            <a href="/register-supplier.html" style="background: linear-gradient(135deg, var(--gold), #8B6508); color: #000; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3); transition: transform 0.3s, box-shadow 0.3s;">Sign Up Free</a>
-        </div>
-    </nav>
-</header>
-
-<!-- MOBILE DRAWER -->
-<div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
-<div class="side-drawer" id="sideDrawer">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
-        <div style="display: flex; align-items: center; gap: 12px;">
-            <div style="width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #020617, #1a1a1a); border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);">
-                <span style="font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 900; color: var(--gold);">APD</span>
-            </div>
-            <div style="display: flex; flex-direction: column; line-height: 1.1;">
-                <span style="font-family: 'Playfair Display', serif; font-weight: 900; font-size: 18px; color: #fff;">APD <span style="color: var(--gold);">Global</span></span>
-            </div>
-        </div>
-        <div onclick="toggleDrawer()" style="color: var(--gold); font-size: 32px; cursor: pointer;">✕</div>
-    </div>
-    <a href="/index.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 10px;">Dashboard</a>
-    <a href="/buyer-rfqs.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 10px;">Verified RFQs</a>
-    <a href="/suppliers.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 10px;">Elite Suppliers</a>
-    <a href="/learn-exporting.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 10px;">Learn Exporting</a>
-    <a href="/membership.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 10px;">Join Membership</a>
-    <div style="padding: 20px 10px 0;">
-        <a href="/register-supplier.html" style="font-size: 1.2rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; display: block; margin-bottom: 15px;">Sign Up Free</a>
+    <div>
+        <span>Security SLA: <b>24-Hour Verified Desk</b> | 🔒 Escrow Protected</span>
     </div>
 </div>
 
-<script>
-    function toggleDrawer() {
-        document.getElementById('sideDrawer').classList.toggle('active');
-        document.getElementById('drawerOverlay').classList.toggle('active');
-    }
-</script>
+<!-- SPLIT PORTAL VIEW -->
+<div class="split-container">
+    
+    <!-- LEFT COLUMN: TRADOLOGIE-INSPIRED ENTERPRISE VALUE -->
+    <div class="left-pane">
+        
+        <div class="brand-badge">
+            🌐 Cross-Border B2B Marketplace
+        </div>
 
-<div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 100px 20px 80px; box-sizing: border-box; position: relative; z-index: 1;">
-<div class="card">
-  <div class="logo-container">
-      <div class="logo-icon"><span>APD</span></div>
-      <div class="logo-text">APD <span style="color: var(--gold);">Global</span> Trade</div>
-      <div class="logo-sub">For Elite Exporters</div>
-  </div>
+        <h1 class="left-title">
+            Transforming Global Trade Operations with <span>Real-Time Insights</span>
+        </h1>
 
-  <h2>Supplier Login</h2>
-  <p>Secure Access to Verified Global RFQs</p>
+        <p class="left-subtitle">
+            Connect directly with verified importers, corporate buyers, and institutional supply corridors across 120+ countries. Zero cold calls. 100% verified settlement.
+        </p>
 
-  <input id="email" type="email" placeholder="Institutional Email">
-  <input id="password" type="password" placeholder="Password">
+        <div class="feature-list">
+            
+            <div class="feature-item">
+                <div class="feature-icon-box">🏢</div>
+                <div>
+                    <div class="feature-title">Access 1 Million+ Verified Global Buyers</div>
+                    <div class="feature-desc">Connect directly with certified importers, distributors, and trading houses actively seeking Basmati Rice, Refined Sugar, Edible Oils, and Industrial Goods.</div>
+                </div>
+            </div>
 
-  <button id="loginBtn">Authenticate</button>
+            <div class="feature-item">
+                <div class="feature-icon-box">⚡</div>
+                <div>
+                    <div class="feature-title">Save on Costs and Time</div>
+                    <div class="feature-desc">Say goodbye to expensive physical trade shows, international travel, and large business development overheads. APD automates client matchmaking.</div>
+                </div>
+            </div>
 
-  <div class="links">
-    <a id="forgotBtn">Forgot Password?</a>
-    <a href="/register-supplier.html" style="color: var(--gold);">Create Profile</a>
-  </div>
+            <div class="feature-item">
+                <div class="feature-icon-box">📩</div>
+                <div>
+                    <div class="feature-title">Receive Daily Verified Live Requirements</div>
+                    <div class="feature-desc">Get AI-matched, real-time RFQs tailored directly to your commodities, grade specifications, and port handling capabilities.</div>
+                </div>
+            </div>
 
-  <div id="error"></div>
+            <div class="feature-item">
+                <div class="feature-icon-box">🛡️</div>
+                <div>
+                    <div class="feature-title">100% Escrow Trade Settlement Protection</div>
+                    <div class="feature-desc">Trade with complete peace of mind. Powered by Razorpay & SWIFT Escrow accounts with payout verified upon Bill of Lading & SGS inspection.</div>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon-box">🌐</div>
+                <div>
+                    <div class="feature-title">Exhibit Digitally, 24/7</div>
+                    <div class="feature-desc">Open your verified digital showroom and present your export-grade inventory to sovereign procurement desks across the world.</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN: AUTH PANEL -->
+    <div class="right-pane">
+        
+        <div class="auth-card">
+            
+            <div class="auth-header">
+                <a href="/" class="auth-logo">
+                    <div class="auth-logo-icon">APD</div>
+                    <div class="auth-logo-text">APD <span style="color:var(--gold);">Global</span> Trade</div>
+                </a>
+                <h2 class="auth-welcome" id="portalHeaderTitle">Welcome Back</h2>
+                <p class="auth-sub" id="portalHeaderSub">Enter your credentials to access your trade panel</p>
+            </div>
+
+            <!-- ROLE SELECTOR -->
+            <div class="role-toggle">
+                <button type="button" class="role-btn active" id="btnRoleSupplier" onclick="selectRole('supplier')">
+                    🏢 Supplier Portal
+                </button>
+                <button type="button" class="role-btn" id="btnRoleBuyer" onclick="selectRole('buyer')">
+                    🛒 Buyer Portal
+                </button>
+            </div>
+
+            <form id="loginForm" onsubmit="return false;">
+                
+                <div class="form-group">
+                    <label class="form-label">Email Address *</label>
+                    <input type="email" id="email" class="form-input" placeholder="e.g. trade@yourcompany.com" required autocomplete="email">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password *</label>
+                    <input type="password" id="password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+                </div>
+
+                <div class="form-row">
+                    <label>
+                        <input type="checkbox" id="rememberMe" style="accent-color:var(--gold);">
+                        Remember me
+                    </label>
+                    <a href="#" id="forgotBtn">Forgot Password?</a>
+                </div>
+
+                <button type="button" id="loginBtn" class="btn-login">
+                    Login to Trade Portal
+                </button>
+
+                <div id="error" class="error-msg"></div>
+
+                <div class="divider">
+                    <span>Or</span>
+                </div>
+
+                <a href="https://wa.me/919266418868?text=Hi%2C%20I%20want%20to%20login%20via%20OTP%20for%20my%20APD%20Global%20Trade%20account." target="_blank" class="btn-otp">
+                    <span>💬</span> Login / Registration with WhatsApp OTP
+                </a>
+
+            </form>
+
+            <div class="auth-footer" id="authFooterLinks">
+                Don't have an account?<br>
+                <a href="/register-supplier.html" id="linkRegSupplier" style="color:#facc15;">Register as Supplier</a>
+                <span style="color:#475569; margin: 0 6px;">|</span>
+                <a href="/register-buyer.html" id="linkRegBuyer" style="color:#38bdf8;">Register as Buyer (Free)</a>
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
-</div>
 
+<!-- FIREBASE SCRIPT -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
@@ -333,232 +578,107 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const app = initializeApp({
-  apiKey:"AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-  authDomain:"apd-globaltrade-prod.firebaseapp.com",
-  projectId:"apd-globaltrade-prod"
+  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+  authDomain: "apd-globaltrade-prod.firebaseapp.com",
+  projectId: "apd-globaltrade-prod"
 });
 
 const auth = getAuth(app);
 const error = document.getElementById("error");
 const btn = document.getElementById("loginBtn");
 
+let activeRole = 'supplier';
+
+window.selectRole = function(role) {
+    activeRole = role;
+    const btnSup = document.getElementById('btnRoleSupplier');
+    const btnBuy = document.getElementById('btnRoleBuyer');
+    const headTitle = document.getElementById('portalHeaderTitle');
+    const headSub = document.getElementById('portalHeaderSub');
+    
+    if (role === 'buyer') {
+        btnBuy.classList.add('active');
+        btnSup.classList.remove('active');
+        headTitle.innerText = "Buyer Trade Desk";
+        headSub.innerText = "Access your procurement orders, supplier quotes & L/C status";
+    } else {
+        btnSup.classList.add('active');
+        btnBuy.classList.remove('active');
+        headTitle.innerText = "Supplier Trade Desk";
+        headSub.innerText = "Enter your credentials to access your seller panel";
+    }
+};
+
+// Check query param for buyer
+document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('type') === 'buyer') {
+        selectRole('buyer');
+    }
+    const savedEmail = localStorage.getItem('apd_saved_email');
+    if (savedEmail) {
+        document.getElementById('email').value = savedEmail;
+        document.getElementById('rememberMe').checked = true;
+    }
+});
+
 btn.onclick = async () => {
+  error.style.display = "none";
   error.textContent = "";
   btn.textContent = "AUTHENTICATING...";
-  try{
+  btn.disabled = true;
+
+  try {
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
 
-    const res = await signInWithEmailAndPassword(auth,email,password);
-
-    // 🔐 ADMIN CHECK
-    if(res.user.email === "admin@apdglobaltrade.com"){
-      location.href="/admin.html";
-    }else{
-      location.href="/supplier-dashboard.html";
+    if (!email || !password) {
+        throw new Error("Please enter both email and password.");
     }
 
-  }catch(e){
-    error.textContent = "Authentication failed. Please check your credentials.";
-    btn.textContent = "AUTHENTICATE";
+    if (document.getElementById('rememberMe').checked) {
+        localStorage.setItem('apd_saved_email', email);
+    } else {
+        localStorage.removeItem('apd_saved_email');
+    }
+
+    const res = await signInWithEmailAndPassword(auth, email, password);
+
+    // ADMIN CHECK
+    if (res.user.email === "admin@apdglobaltrade.com") {
+      location.href = "/admin.html";
+    } else if (activeRole === 'buyer') {
+      location.href = "/buyer-rfqs.html";
+    } else {
+      location.href = "/supplier-dashboard.html";
+    }
+
+  } catch(e) {
+    error.textContent = e.message || "Authentication failed. Please verify credentials.";
+    error.style.display = "block";
+    btn.textContent = "Login to Trade Portal";
+    btn.disabled = false;
   }
 };
 
-document.getElementById("forgotBtn").onclick = async () => {
-  error.textContent = "";
+document.getElementById("forgotBtn").onclick = async (e) => {
+  e.preventDefault();
+  error.style.display = "none";
   const email = document.getElementById("email").value.trim();
   if(!email){
-    error.textContent = "Enter your email address first to reset.";
+    error.textContent = "Please enter your email above and click 'Forgot Password' again.";
+    error.style.display = "block";
     return;
   }
-  await sendPasswordResetEmail(auth,email);
-  error.style.color="#4ade80";
-  error.textContent="Password reset link dispatched securely.";
+  try {
+    await sendPasswordResetEmail(auth, email);
+    alert("Password reset instructions sent to " + email);
+  } catch(e) {
+    error.textContent = "Error sending password reset: " + e.message;
+    error.style.display = "block";
+  }
 };
 </script>
-
-<footer>
-  © 2026 APD GLOBAL TRADE · INSTITUTIONAL INFRASTRUCTURE
-</footer>
-
-<a href="https://wa.me/919990332340" target="_blank"
-style="position:fixed;bottom:25px;right:25px;width:60px;height:60px;
-background:#25D366;color:#fff;border-radius:50%;
-display:flex;align-items:center;justify-content:center;
-font-size:30px;box-shadow:0 10px 30px rgba(37, 211, 102, 0.4);
-z-index:9999;text-decoration:none;transition:0.3s;"
-onmouseover="this.style.transform='scale(1.1)'"
-onmouseout="this.style.transform='scale(1)'">💬</a>
-
-
-<!-- Trade Copilot Integration -->
-<link rel="stylesheet" href="/assets/css/sales-bot.css?v=1.5">
-<script src="/assets/js/sales-bot.js?v=1.5" type="module"></script>
-
-
-
-
-
-
-
-<!-- QUICK RFQ MODAL -->
-  <div id="rfqModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(10px); z-index: 999999; justify-content: center; align-items: center;">
-      <div style="background: #0f172a; border: 1px solid rgba(212,175,55,0.4); border-radius: 20px; padding: 40px; max-width: 500px; width: 90%; box-shadow: 0 20px 50px rgba(0,0,0,0.8); position: relative;">
-          <div onclick="document.getElementById('rfqModal').style.display='none';" style="position: absolute; top: 20px; right: 20px; color: #cbd5e1; cursor: pointer; font-size: 1.5rem;">✕</div>
-          <h3 style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 20px;">Post Live Order</h3>
-          <p style="color: #94a3b8; margin-bottom: 10px; font-size: 0.95rem;">Instantly broadcast your buy requirement to our vetted suppliers.</p>
-
-<div style="margin-bottom: 25px; padding: 10px; background: rgba(220, 38, 38, 0.1); border: 1px solid rgba(220, 38, 38, 0.3); border-radius: 8px; display: flex; align-items: center; gap: 10px;">
-    <span style="display: inline-block; width: 8px; height: 8px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 8px #ef4444; animation: pulse 1.5s infinite;"></span>
-    <span style="color: #fca5a5; font-size: 13px; font-weight: 600;" id="liveViewerCount">-- Exporters currently active and ready to quote</span>
-</div>
-<script>
-    // Random viewer count logic (sometimes over 1000)
-    document.addEventListener("DOMContentLoaded", function() {
-        const countEl = document.getElementById("liveViewerCount");
-        if(countEl) {
-            const isHigh = Math.random() > 0.7; // 30% chance to be over 1000
-            const count = isHigh ? Math.floor(Math.random() * 500) + 1000 : Math.floor(Math.random() * 800) + 100;
-            countEl.innerText = count.toLocaleString() + " Exporters currently active and ready to quote";
-        }
-    });
-</script>
-
-          <form onsubmit="handleQuickRFQ(event)" style="display: flex; flex-direction: column; gap: 15px;">
-              <div class="rfq-flex" style="display: flex; gap: 15px;">
-                  <input type="text" id="qr_name" placeholder="Your Name" required style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
-                  <input type="text" id="qr_company" placeholder="Business Name" required style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
-              </div>
-              <input type="text" id="qr_whatsapp" placeholder="WhatsApp Number (with country code)" required pattern="^\+.*" title="Must start with + and include country code" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
-              <input type="text" id="qr_product" placeholder="Product Name (e.g., Basmati Rice)" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
-              <div class="rfq-flex" style="display: flex; gap: 15px;">
-                  <input type="number" id="qr_qty" placeholder="Quantity" required style="flex: 2; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
-                  <select id="qr_unit" required style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
-                      <option value="MT">MT</option>
-                      <option value="KG">KG</option>
-                      <option value="Units">Units</option>
-                      <option value="Containers">Containers</option>
-                  </select>
-              </div>
-              <input type="text" id="qr_dest" placeholder="Destination Port (e.g., Jebel Ali, Dubai)" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
-              <textarea id="qr_specs" placeholder="Any Specifications Required (Optional)" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none; min-height: 80px; resize: vertical;"></textarea>
-              <button type="submit" id="qr_btn" style="background: linear-gradient(90deg, var(--gold), #facc15); color: #000; font-weight: 900; padding: 15px; border: none; border-radius: 10px; font-size: 1.1rem; cursor: pointer; text-transform: uppercase; margin-top: 10px; transition: 0.3s; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);">Secure Verification</button>
-          </form>
-      </div>
-  </div>
-
-  <!-- Desktop Floating WhatsApp -->
-  <style>
-    .desktop-wa-btn { display: none; }
-    @media (min-width: 769px) { .desktop-wa-btn { display: flex; } }
-  </style>
-  <a href="https://wa.me/919990332340" target="_blank" class="desktop-wa-btn" style="position: fixed; bottom: 20px; right: 110px; background-color: #25d366; color: white; border-radius: 50%; width: 60px; height: 60px; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 9999; text-decoration: none; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.1)';" onmouseout="this.style.transform='scale(1)';">
-    <svg viewBox="0 0 32 32" width="35" height="35" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M16.002 0c-8.837 0-16.002 7.163-16.002 16.002 0 2.825.74 5.485 2.053 7.765l-2.053 8.233 8.431-2.036c2.253 1.183 4.815 1.838 7.571 1.838 8.835 0 16-7.163 16-16.002s-7.165-16-16-16zm7.989 22.842c-.328.922-1.895 1.768-2.617 1.838-.667.065-1.503.111-4.22-.989-3.479-1.41-5.744-5.011-5.918-5.244-.175-.233-1.41-1.879-1.41-3.585s.891-2.545 1.199-2.871c.309-.327.671-.409.896-.409.224 0 .448 0 .638.009.202.01.472-.078.741.564.281.671.961 2.348 1.045 2.518.084.17.14.368.028.591-.111.224-.17.368-.337.564-.17.197-.351.428-.501.591-.17.183-.352.383-.146.741.206.357.917 1.517 1.972 2.456 1.359 1.209 2.492 1.579 2.843 1.748.351.17.558.14.764-.093.206-.233.885-1.033 1.122-1.388.238-.356.475-.297.801-.176.327.121 2.062.973 2.417 1.149.356.176.593.264.679.41.084.146.084.85-.244 1.771z"/></svg>
-  </a>
-
-  <!-- Google Translate Scripts -->
-  <script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-  }
-  </script>
-  
-
-  <!-- Post Live Order Logic -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, addDoc, serverTimestamp, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-      authDomain: "apd-globaltrade-prod.firebaseapp.com",
-      projectId: "apd-globaltrade-prod",
-      storageBucket: "apd-globaltrade-prod.firebasestorage.app",
-      messagingSenderId: "226407312435",
-      appId: "1:226407312435:web:f8a54b1132af3899170746"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    // AUTOCOMPLETE LOGIC
-    (async function initSearchAutocomplete() {
-        try {
-            const snap = await getDocs(collection(db, "rfqs"));
-            const suggestions = new Set();
-            snap.forEach(doc => {
-                const data = doc.data();
-                if(data.product) suggestions.add(data.product.trim());
-                if(data.destination) suggestions.add(data.destination.trim());
-            });
-            const datalist = document.createElement('datalist');
-            datalist.id = 'searchSuggestions';
-            suggestions.forEach(item => {
-                const option = document.createElement('option');
-                option.value = item;
-                datalist.appendChild(option);
-            });
-            document.body.appendChild(datalist);
-        } catch (err) {
-            console.error("Autocomplete init failed:", err);
-        }
-    })();
-
-    window.handleQuickRFQ = async function(e) {
-        e.preventDefault();
-        const btn = document.getElementById("qr_btn");
-        btn.innerText = "Securing Order...";
-        btn.disabled = true;
-
-        const product = document.getElementById("qr_product").value;
-        const qty = document.getElementById("qr_qty").value + " " + document.getElementById("qr_unit").value;
-        const dest = document.getElementById("qr_dest").value;
-
-        try {
-            // Save it to Firebase as pending
-            const docRef = await addDoc(collection(db, "rfqs"), {
-                buyerName: document.getElementById("qr_name").value,
-                company: document.getElementById("qr_company").value,
-                whatsapp: document.getElementById("qr_whatsapp").value,
-                product: product,
-                quantity: qty,
-                destination: dest,
-                specifications: document.getElementById("qr_specs").value,
-                status: "payment_pending",
-                source: "homepage_quick",
-                deposit: "refundable",
-                createdAt: serverTimestamp()
-            });
-
-            // Redirect to custom payment for the refundable deposit
-            const isUSD = document.body.classList && document.body.classList.contains('currency-usd');
-            const amount = isUSD ? 25 : 2000;
-            const currency = isUSD ? 'USD' : 'INR';
-            
-            // Redirect to the payment page
-            window.location.href = `/membership.html`;
-            return;
-        } catch (err) {
-            alert('Error initiating verification: ' + err.message);
-            btn.innerText = "Secure Verification & Post";
-            btn.disabled = false;
-        }
-    };
-  </script>
-
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6abfcc62beb8e034c00dd833/1k3ujcoou';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
 
 </body>
 </html>
