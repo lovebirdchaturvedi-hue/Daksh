@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Elite Supplier Login | APD Global Trade</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; }
+
+:root {
+    --gold: #d4af37;
+    --dark: #020617;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #071427, #020617);
+    color: #fff;
+    min-height: 100vh;
+    display: block; /* Changed from flex to allow header */
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Header & Drawer Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: rgba(2,6,23,0.8);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+header nav a {
+    color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; margin-left: 25px; transition: 0.3s; font-family: 'Inter', sans-serif;
+}
+header nav a:hover { color: var(--gold); }
+.menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.menu-toggle span { width: 25px; height: 2px; background: #fff; transition: 0.3s; }
+
+.drawer-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); backdrop-filter: blur(5px);
+    z-index: 100000; display: none; opacity: 0; transition: 0.3s;
+}
+.drawer-overlay.active { display: block; opacity: 1; }
+.side-drawer {
+    position: fixed; top: 0; right: -100%; width: 100%; height: 100%;
+    background: rgba(2,6,23,0.98); backdrop-filter: blur(25px);
+    z-index: 100001; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 100px 10%; display: flex; flex-direction: column; gap: 25px; overflow-y: auto;
+}
+.side-drawer.active { right: 0; }
+
+@media(min-width: 1025px) {
+    .side-drawer, .drawer-overlay { display: none !important; }
+}
+
+@media(max-width: 1024px) {
+    header nav { display: none; }
+    .menu-toggle { display: flex; }
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.logo-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #020617, #1a1a1a);
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    margin-bottom: 15px;
+}
+
+.logo-icon span {
+    font-famil

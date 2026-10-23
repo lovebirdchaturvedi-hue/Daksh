@@ -679,5 +679,29 @@ s0.parentNode.insertBefore(s1,s0);
 </script>
 <!--End of Tawk.to Script-->
 
+
+<!-- TIDIO LIVE CHAT (Trial - Positioned Aside on Left, No Auto-Open) -->
+<style id="tidio-aside-style">
+  #tidio-chat, #tidio-chat-iframe, iframe[title="Tidio Chat"], div[id^="tidio-chat"] {
+    left: 20px !important;
+    right: auto !important;
+  }
+  @media (max-width: 768px) {
+    #tidio-chat, #tidio-chat-iframe, iframe[title="Tidio Chat"], div[id^="tidio-chat"] {
+      left: 15px !important;
+      right: auto !important;
+      bottom: 80px !important;
+    }
+  }
+</style>
+<script id="tidio-quiet-mode">
+  document.addEventListener("tidioChat-ready", function() {
+    if (window.tidioChatApi && typeof window.tidioChatApi.close === 'function') {
+      window.tidioChatApi.close();
+    }
+  });
+</script>
+<script src="//code.tidio.co/8visrbojjsul260n5eacseaogagyamer.js" async></script>
+
 </body>
 </html>
