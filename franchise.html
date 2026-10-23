@@ -1,425 +1,1179 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <title>Elite Trade Membership | APD Global Trade</title>
+  <title>FMCG Brand Distributorship & Franchise Allocation | APD Global Trade</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Secure exclusive FMCG distributorship and franchise rights for Bisleri, Amul, Mother Dairy, PepsiCo, Coca-Cola, Nestlé, ITC, and Britannia through APD Global Trade.">
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap"
-    rel="stylesheet">
-  <script src="/assets/js/social-proof.js"></script>
+  <!-- PWA Meta Tags -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#020617">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="APD Trade">
+  <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/icon-192.png">
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="/assets/js/mobile-pwa.js" defer></script>
 
   <style>
     :root {
         --gold: #d4af37;
+        --gold-bright: #facc15;
         --navy: #071427;
-        --dark: #0a0f1c;
+        --dark: #020617;
+        --card-bg: #0b1526;
+        --border: rgba(255, 255, 255, 0.08);
     }
+    
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
     body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: #0a0f1c;
-      color: #e5e7eb;
-      overflow-x: hidden;
+        font-family: 'Inter', sans-serif;
+        background: #060d1a;
+        color: #e5e7eb;
+        overflow-x: hidden;
+        min-height: 100vh;
     }
 
+    /* TOP INSTITUTIONAL BAR */
+    .top-bar {
+        background: #020617;
+        border-bottom: 1px solid rgba(212,175,55,0.25);
+        padding: 8px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+        color: #94a3b8;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .top-bar b {
+        color: var(--gold);
+    }
+
+    /* HEADER */
     header {
-      background: #071427;
-      padding: 18px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(212, 175, 55, .15);
-      position: relative;
-      z-index: 1000;
+        background: rgba(2, 6, 23, 0.95);
+        padding: 14px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(15px);
     }
 
-    .logo {
-      font-family: 'Playfair Display', serif;
-      color: var(--gold);
-      font-size: 20px;
-      font-weight: 700;
+    .logo-wrap {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+    }
+
+    .logo-badge {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: #020617;
+        border: 2px solid var(--gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 900;
+        color: var(--gold);
+    }
+
+    .logo-text {
+        font-family: 'Outfit', sans-serif;
+        font-weight: 800;
+        font-size: 19px;
+        color: #fff;
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        gap: 20px;
     }
 
     nav a {
-      color: #cbd5e1;
-      text-decoration: none;
-      margin-left: 25px;
-      font-size: 14px;
-      font-weight: 500;
-      transition: color 0.3s;
+        color: #cbd5e1;
+        text-decoration: none;
+        font-size: 13.5px;
+        font-weight: 600;
+        transition: color 0.2s;
     }
 
-    nav a:hover {
-      color: var(--gold);
+    nav a:hover, nav a.active {
+        color: var(--gold);
     }
 
+    .btn-apply-head {
+        background: linear-gradient(135deg, var(--gold), #b8860b);
+        color: #000 !important;
+        font-weight: 900 !important;
+        padding: 8px 18px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 12.5px !important;
+    }
+
+    /* HERO SECTION */
     .hero {
-      padding: 140px 20px;
-      text-align: center;
-      background: linear-gradient(180deg, #071427, #0a0f1c);
-      border-bottom: 1px solid rgba(212, 175, 55, .15);
+        padding: 60px 5% 45px 5%;
+        text-align: center;
+        background: radial-gradient(circle at 50% 0%, rgba(212,175,55,0.12) 0%, transparent 70%);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .hero-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(212, 175, 55, 0.12);
+        border: 1px solid var(--gold);
+        color: var(--gold);
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        padding: 6px 18px;
+        border-radius: 50px;
+        margin-bottom: 18px;
     }
 
     .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 52px;
-      background: linear-gradient(90deg, #d4af37, #facc15, #d4af37);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 30px;
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        font-weight: 900;
+        color: #fff;
+        margin-bottom: 15px;
+        line-height: 1.2;
+    }
+
+    .hero h1 span {
+        color: var(--gold);
     }
 
     .hero p {
-      max-width: 850px;
-      margin: auto;
-      font-size: 20px;
-      color: #9ca3af;
-      line-height: 1.8;
+        max-width: 820px;
+        margin: auto;
+        font-size: 16px;
+        color: #94a3b8;
+        line-height: 1.7;
+        margin-bottom: 30px;
     }
 
-    .container {
-      max-width: 1200px;
-      margin: 120px auto;
-      padding: 0 20px;
+    /* STATS STRIP */
+    .hero-stats {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        max-width: 900px;
+        margin: 0 auto;
     }
 
-    .section-title {
-      text-align: center;
-      font-size: 34px;
-      margin-bottom: 10px;
-      font-weight: 600;
+    .stat-box {
+        background: rgba(15, 23, 42, 0.8);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: 12px;
+        padding: 12px 20px;
+        min-width: 180px;
     }
 
-    .subtitle {
-      text-align: center;
-      color: #9ca3af;
-      margin-bottom: 70px;
-    }
-
-    .plans {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 40px;
-    }
-
-    .plan {
-      background: #111827;
-      padding: 60px 45px;
-      border-radius: 30px;
-      border: 1px solid rgba(212, 175, 55, 0.15);
-      transition: .4s ease;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-    }
-
-    .plan:hover {
-      transform: translateY(-12px);
-      border: 1px solid var(--gold);
-      box-shadow: 0 30px 80px rgba(212, 175, 55, 0.25);
-    }
-
-    .highlight {
-      border: 2px solid var(--gold);
-    }
-
-    .badge {
-      display: inline-block;
-      background: var(--gold);
-      color: #000;
-      padding: 6px 16px;
-      font-size: 12px;
-      border-radius: 999px;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-
-    .plan h3 {
-      font-size: 26px;
-      margin-bottom: 15px
-    }
-
-    .price {
-      font-size: 42px;
-      font-weight: 700;
-      margin: 15px 0
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 30px 0
-    }
-
-    ul li {
-      margin: 16px 0;
-      font-size: 15px;
-      color: #cbd5e1;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-    }
-
-    .btn {
-      width: 100%;
-      padding: 18px;
-      border-radius: 999px;
-      border: none;
-      font-weight: 700;
-      font-size: 16px;
-      cursor: pointer;
-      background: linear-gradient(90deg, var(--gold), #facc15);
-      color: #000;
-      transition: transform 0.3s;
-    }
-    .btn:hover { transform: scale(1.02); }
-
-    /* MOBILE NAVIGATION ELEMENTS (HIDDEN ON DESKTOP) */
-    .menu-toggle {
-        display: none !important;
-        flex-direction: column;
-        gap: 5px;
-        cursor: pointer;
-        z-index: 10001;
-    }
-    .menu-toggle span {
-        width: 25px;
-        height: 2px;
-        background: var(--gold);
-        transition: 0.3s;
-    }
-
-    .side-drawer {
-        position: fixed;
-        top: 0;
-        left: -100%; /* PULLED COMPLETELY OFF-SCREEN */
-        width: 300px;
-        height: 100%;
-        background: #020617;
-        z-index: 100000;
-        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        padding: 80px 40px;
-        border: none !important; /* REMOVED RENDERED BORDER */
-        visibility: hidden;
-        opacity: 0;
-    }
-    .side-drawer.active { 
-        left: 0; 
-        display: block; 
-        visibility: visible; 
-        opacity: 1;
-        box-shadow: 20px 0 80px rgba(0,0,0,0.8); /* SHADOW ONLY WHEN OPEN */
-    }
-    .side-drawer a {
-        display: block;
+    .stat-num {
+        font-family: 'Outfit', sans-serif;
+        font-size: 22px;
+        font-weight: 900;
         color: #fff;
+    }
+
+    .stat-label {
+        font-size: 11.5px;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-top: 2px;
+    }
+
+    /* CONTAINER */
+    .container {
+        max-width: 1200px;
+        margin: 50px auto 80px auto;
+        padding: 0 20px;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 45px;
+    }
+
+    .section-header h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.3rem;
+        color: #fff;
+        margin-bottom: 10px;
+    }
+
+    .section-header p {
+        color: #94a3b8;
+        font-size: 15px;
+        max-width: 650px;
+        margin: 0 auto;
+    }
+
+    /* FMCG BRAND GRID */
+    .brands-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+        gap: 25px;
+        margin-bottom: 70px;
+    }
+
+    .brand-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .brand-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(212, 175, 55, 0.45);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.15);
+    }
+
+    .brand-top {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 15px;
+    }
+
+    .brand-icon-box {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: #020617;
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+    }
+
+    .brand-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: 20px;
+        font-weight: 800;
+        color: #fff;
+    }
+
+    .brand-tag {
+        font-size: 11px;
+        color: #38bdf8;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .brand-specs {
+        background: rgba(2, 6, 23, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 12px 14px;
+        margin-bottom: 16px;
+        font-size: 12.5px;
+        line-height: 1.8;
+    }
+
+    .spec-row {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .spec-key {
+        color: #64748b;
+    }
+
+    .spec-val {
+        color: #f1f5f9;
+        font-weight: 700;
+    }
+
+    .brand-products {
+        font-size: 12.5px;
+        color: #94a3b8;
+        line-height: 1.5;
+        margin-bottom: 20px;
+        flex-grow: 1;
+    }
+
+    .btn-select-brand {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(212, 175, 55, 0.4);
+        color: var(--gold);
+        font-weight: 800;
+        font-size: 13px;
+        padding: 10px 16px;
+        border-radius: 50px;
+        text-align: center;
+        cursor: pointer;
         text-decoration: none;
-        font-size: 18px;
-        margin-bottom: 25px;
+        transition: all 0.2s;
+    }
+
+    .btn-select-brand:hover {
+        background: var(--gold);
+        color: #000;
+    }
+
+    /* STEP SWITCHER TABS */
+    .step-switcher {
+        display: flex;
+        max-width: 650px;
+        margin: 0 auto 35px auto;
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: 50px;
+        padding: 5px;
+        gap: 6px;
+    }
+
+    .step-btn {
+        flex: 1;
+        padding: 12px 18px;
+        border-radius: 50px;
+        border: none;
+        background: transparent;
+        color: #94a3b8;
+        font-weight: 700;
+        font-size: 13.5px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: center;
+    }
+
+    .step-btn.active {
+        background: linear-gradient(135deg, var(--gold), #b8860b);
+        color: #000;
+        font-weight: 900;
+    }
+
+    /* APPLICATION & ALLOCATION PRICING SECTION */
+    .allocation-box {
+        background: #0f172a;
+        border: 1px solid rgba(212, 175, 55, 0.35);
+        border-radius: 24px;
+        padding: 40px;
+        max-width: 800px;
+        margin: 0 auto 50px auto;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .price-display-wrap {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        margin: 15px 0 20px 0;
+        flex-wrap: wrap;
+    }
+
+    .old-price {
+        font-size: 22px;
+        color: #64748b;
+        text-decoration: line-through;
+        font-weight: 500;
+    }
+
+    .new-price {
+        font-size: 44px;
+        font-weight: 900;
+        color: #4ade80;
+        font-family: 'Outfit', sans-serif;
+    }
+
+    .price-period {
+        font-size: 14px;
+        color: #94a3b8;
+    }
+
+    .form-group {
+        margin-bottom: 18px;
+        text-align: left;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 6px;
+        color: #cbd5e1;
+        font-size: 13px;
         font-weight: 600;
     }
 
-    .drawer-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.7);
-        z-index: 99999;
-        display: none;
-    }
-    .drawer-overlay.active { display: block; }
-
-    /* ULTIMATE RESPONSIVE FIXES */
-    @media (max-width: 1024px) {
-        header nav { display: none !important; }
-        .menu-toggle { display: flex !important; }
-        .side-drawer { display: block; } /* Allow drawer on mobile */
-        header { padding: 15px 25px !important; }
-    }
-
-    @media (max-width: 768px) {
-        .hero { padding: 100px 20px !important; }
-        .hero h1 { font-size: 2.2rem !important; }
-        .hero p { font-size: 1rem !important; }
-        .container { margin: 40px auto !important; }
-        
-        .plan { padding: 40px 25px !important; }
-        ul li { 
-            font-size: 13px !important; 
-            line-height: 1.4 !important;
-            margin: 12px 0 !important;
-        }
-        
-        .plans {
-            grid-template-columns: 1fr !important;
-        }
-    }
-
-    /* FLASH SALE STYLES */
-    .flash-sale-bar {
-        background: linear-gradient(90deg, #ef4444, #f59e0b, #ef4444);
-        background-size: 200% auto;
-        animation: shimmer 3s linear infinite;
-        color: white;
-        text-align: center;
-        padding: 12px;
-        font-weight: 800;
+    .form-control {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(2, 6, 23, 0.7);
+        color: #fff;
         font-size: 14px;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        position: sticky;
-        top: 0;
-        z-index: 10002;
+        outline: none;
+        transition: border-color 0.2s;
     }
-    @keyframes shimmer { to { background-position: 200% center; } }
-    .countdown-box { display: inline-flex; gap: 10px; margin-left: 15px; font-family: monospace; font-size: 18px; }
-  </style>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EXRC4SWZ71"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('config', 'G-EXRC4SWZ71');
-  </script>
+    .form-control:focus {
+        border-color: var(--gold);
+    }
+
+    /* TERMS & CONDITIONS BOX */
+    .terms-box {
+        background: rgba(2, 6, 23, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 18px;
+        font-size: 12.5px;
+        color: #94a3b8;
+        line-height: 1.7;
+        margin: 20px 0;
+        text-align: left;
+        max-height: 220px;
+        overflow-y: auto;
+    }
+
+    .terms-box b {
+        color: #cbd5e1;
+    }
+
+    .btn-pay-now {
+        background: linear-gradient(135deg, var(--gold), #b8860b);
+        color: #000;
+        font-weight: 900;
+        font-size: 16px;
+        padding: 16px;
+        border-radius: 50px;
+        border: none;
+        width: 100%;
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+        transition: transform 0.2s;
+    }
+
+    .btn-pay-now:hover {
+        transform: scale(1.02);
+    }
+
+    /* ONBOARDING SUCCESS DOCKET */
+    .success-docket {
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(6, 13, 26, 0.98));
+        border: 2px solid var(--gold);
+        border-radius: 20px;
+        padding: 35px 25px;
+        text-align: center;
+        max-width: 750px;
+        margin: 0 auto;
+        box-shadow: 0 0 35px rgba(212, 175, 55, 0.25);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+        header {
+            padding: 12px 4%;
+        }
+        nav {
+            display: none !important;
+        }
+        .hero {
+            padding: 35px 4% 30px 4%;
+        }
+        .hero h1 {
+            font-size: 2rem;
+        }
+        .hero p {
+            font-size: 14px;
+        }
+        .stat-box {
+            min-width: 140px;
+            padding: 10px;
+        }
+        .stat-num {
+            font-size: 18px;
+        }
+        .allocation-box {
+            padding: 24px 16px;
+            border-radius: 18px;
+        }
+        .new-price {
+            font-size: 34px;
+        }
+        .step-switcher {
+            flex-direction: column;
+            border-radius: 20px;
+        }
+        .step-btn {
+            padding: 10px;
+            font-size: 12.5px;
+        }
+    }
+  </style>
 </head>
 
 <body>
 
-      <!-- ============================================================ -->
-  <!-- EXECUTIVE 3D PILL ACTION BAR (ZERO OVERLAP) -->
-  <!-- ============================================================ -->
-  <div style="background: rgba(2, 6, 23, 0.98); border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding: 8px 5%; display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; z-index: 99998; position: relative;">
-      <a href="/buyer-rfqs.html" style="background: linear-gradient(90deg, #ef4444, #f97316); color: #fff !important; padding: 8px 20px; font-weight: 900 !important; font-size: 0.8rem !important; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; display: inline-flex; justify-content: center; align-items: center; gap: 6px; box-shadow: 0 0 20px rgba(239, 68, 68, 0.6); animation: glowingPulse 2s infinite; text-shadow: 0 1px 3px rgba(0,0,0,0.5); text-decoration: none; white-space: nowrap;">
-          <span style="width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: pulse 1s infinite;"></span>
-           ACTIVE RFQs (1,500+)
-      </a>
-      <a href="/create-rfq.html" style="background: linear-gradient(180deg, #22c55e, #166534); color: #fff; padding: 8px 20px; font-weight: 800; font-size: 0.8rem; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.4); text-shadow: 0 1px 2px rgba(0,0,0,0.5); text-decoration: none; white-space: nowrap; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">POST LIVE ORDER</a>
-      <a href="/membership.html" style="background: linear-gradient(180deg, #facc15, #8B6508); color: #000; padding: 8px 20px; font-weight: 800; font-size: 0.8rem; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.6); text-shadow: 0 1px 2px rgba(255,255,255,0.5); text-decoration: none; white-space: nowrap; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">GET INSTANT BUYER</a>
-      <a href="/register-supplier.html" style="background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.4); color: #fff; padding: 8px 20px; font-weight: 700; font-size: 0.8rem; border-radius: 50px; letter-spacing: 0.5px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); text-decoration: none; white-space: nowrap; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Create Free Profile</a>
-      <a href="/register-buyer.html" style="background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid rgba(148, 163, 184, 0.4); color: #fff; padding: 8px 20px; font-weight: 700; font-size: 0.8rem; border-radius: 50px; letter-spacing: 0.5px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); text-decoration: none; text-transform: uppercase; white-space: nowrap; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"><span style="color:#60a5fa; margin-right: 4px;">✦</span> BECOME A VERIFIED BUYER</a>
+  <!-- TOP INSTITUTIONAL BAR -->
+  <div class="top-bar">
+      <div>
+          <span>🟢 <b>FMCG BRAND CORRIDOR</b> | Authorized Distributorship & Exclusive Territory Allocation Desk</span>
+      </div>
+      <div>
+          <span>Corporate Verification SLA: <b>24-Hour Review</b> | 🔒 Escrow Protected</span>
+      </div>
   </div>
 
+  <!-- STICKY HEADER -->
   <header>
-      <div style="display: flex; align-items: center; gap: 20px;">
-          <div class="menu-toggle" onclick="toggleDrawer()">
-              <span></span>
-              <span></span>
-              <span></span>
-          </div>
-          <div class="logo">APD <span style="color: #fff;">Global</span> Trade</div>
-      </div>
+      <a href="/" class="logo-wrap">
+          <div class="logo-badge">APD</div>
+          <div class="logo-text">APD <span style="color:var(--gold);">Global</span> Trade</div>
+      </a>
       <nav>
-        <a href="/">Home</a>
-        <a href="/buyer-rfqs.html">Buyer RFQs</a>
-        <a href="/suppliers.html">Suppliers</a>
-        <a href="/register-supplier.html">Create Profile</a>
-        <a href="/membership.html">Membership</a>
-        <a href="/contact.html">Contact</a>
-      
-      
+          <a href="/">Home</a>
+          <a href="/public-rfqs.html">Live RFQs</a>
+          <a href="/franchise.html" class="active">FMCG Distributorships</a>
+          <a href="/suppliers.html">Suppliers</a>
+          <a href="/membership.html">Membership</a>
+          <a href="/contact.html">Contact</a>
+          <a href="#bookingSection" class="btn-apply-head">Apply Now (₹21,000)</a>
+      </nav>
+  </header>
 
-    </nav>
-    </header>
-
-    <!-- PREMIUM SIDE DRAWER -->
-    <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
-    <div class="side-drawer" id="sideDrawer">
-      <a href="/index.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 40px; display: block;">Dashboard</a>
-      <a href="/buyer-rfqs.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 40px; display: block;">Verified RFQs</a>
-      <a href="/suppliers.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 40px; display: block;">Elite Suppliers</a>
-      <a href="/membership.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 40px; display: block;">Join Membership</a>
-      <a href="/contact.html" style="font-size: 1.4rem; font-family: 'Playfair Display', serif; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 40px; display: block;">Contact Support</a>
-    </div>
-
-  
+  <!-- HERO SECTION -->
   <section class="hero">
-    <h1>Global Franchise & Distributorship</h1>
-    <p>
-      Secure exclusive franchise and distribution rights for top-tier brands like Amul. We provide end-to-end consulting, legal setup, and procurement facilitation to launch your local franchise successfully.
-    </p>
+      <div class="hero-pill">
+          🏛️ OFFICIAL BRAND ALLOCATION GATEWAY
+      </div>
+      <h1>Global Franchise & <span>FMCG Distributorship</span></h1>
+      <p>
+          Secure authorized distributorships, super-stockist rights, and exclusive pin-code territory allocation for India's leading consumer giants: Bisleri, Amul, Mother Dairy, PepsiCo, Coca-Cola, Nestlé, ITC, and Britannia. Complete end-to-end consulting, location viability checks, and direct corporate liaison.
+      </p>
+
+      <div class="hero-stats">
+          <div class="stat-box">
+              <div class="stat-num">8+ Top Brands</div>
+              <div class="stat-label">Verified FMCG Corridors</div>
+          </div>
+          <div class="stat-box">
+              <div class="stat-num">5,000+ Codes</div>
+              <div class="stat-label">Territory Feasibility Audits</div>
+          </div>
+          <div class="stat-box">
+              <div class="stat-num">8% – 18%</div>
+              <div class="stat-label">High-Velocity ROI Margins</div>
+          </div>
+          <div class="stat-box">
+              <div class="stat-num">₹21,000</div>
+              <div class="stat-label">Full Allocation Service</div>
+          </div>
+      </div>
   </section>
 
+  <!-- MAIN CONTAINER -->
   <div class="container">
-    <h2 class="section-title">Franchise Consulting & Setup</h2>
-    <p class="subtitle">Secure your territory with official brand partnerships.</p>
-
-    <div class="plans" style="display: flex; justify-content: center; margin-bottom: 80px;">
-      <div class="plan highlight" style="max-width: 600px; width: 100%; text-align: left;">
-        <div class="badge" style="background: #d4af37; color: black; margin-bottom: 15px;">⭐ EXCLUSIVE OPPORTUNITY</div>
-        <h3 style="color: #d4af37; font-size: 24px;">Franchise Allocation Consulting</h3>
-        <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 15px;">Complete End-to-End Setup</p>
-        
-        <div class="price" style="margin-top: 5px; margin-bottom: 10px;">₹49,000 <span style="font-size: 14px; font-weight: normal; color: #94a3b8;">Service Charges</span></div>
-        
-        
-
-        <h4 style="margin-top: 25px; margin-bottom: 15px; color: #fff; font-size: 16px;">Consultation Includes:</h4>
-        <ul style="margin-bottom: 30px; line-height: 1.8; color: #cbd5e1; font-size: 14px; list-style: none; padding-left: 0;">
-          <li><span style="color: #4ade80;">✅</span> Location Viability & Demand Analysis</li>
-          <li><span style="color: #4ade80;">✅</span> Official Brand Application Processing</li>
-          <li><span style="color: #4ade80;">✅</span> Documentation & Legal Compliance Setup</li>
-          <li><span style="color: var(--gold);">✨</span> End-to-End Liaison with Brand Executives</li>
-          <li><span style="color: var(--gold);">✨</span> Supply Chain & Procurement Setup</li>
-        </ul>
-
-        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 30px 0;">
-
-        <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; color: var(--gold); margin-bottom: 15px;">Application Form</h3>
-        <form id="franchiseForm" onsubmit="submitApplication(event)">
-            <div style="margin-bottom: 15px;">
-                <label style="display: block; margin-bottom: 5px; color: #cbd5e1; font-size: 13px;">Full Name *</label>
-                <input type="text" id="f_name" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: white; box-sizing: border-box;">
-            </div>
-            
-            <div style="margin-bottom: 15px;">
-                <label style="display: block; margin-bottom: 5px; color: #cbd5e1; font-size: 13px;">WhatsApp Number (with Country Code) *</label>
-                <input type="text" id="f_whatsapp" required placeholder="+91..." pattern="^\+.*" title="Must start with + and include country code" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: white; box-sizing: border-box;">
-            </div>
-
-            <div style="margin-bottom: 15px;">
-                <label style="display: block; margin-bottom: 5px; color: #cbd5e1; font-size: 13px;">Target Company / Franchise (e.g., Amul) *</label>
-                <input type="text" id="f_company" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: white; box-sizing: border-box;">
-            </div>
-
-            <div style="margin-bottom: 15px;">
-                <label style="display: block; margin-bottom: 5px; color: #cbd5e1; font-size: 13px;">Type of Franchise *</label>
-                <select id="f_type" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: white; box-sizing: border-box;">
-                    <option value="">Select Type</option>
-                    <option value="Retail Outlet">Retail Outlet</option>
-                    <option value="Distribution Level">Distribution Level</option>
-                    <option value="Master Franchise">Master Franchise</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-
-            <div style="margin-bottom: 25px;">
-                <label style="display: block; margin-bottom: 5px; color: #cbd5e1; font-size: 13px;">Full Address for Proposed Franchise *</label>
-                <textarea id="f_address" required rows="3" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: white; box-sizing: border-box;"></textarea>
-            </div>
-
-            <div style="background: rgba(255,255,255,0.02); padding: 15px; border-radius: 8px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05);">
-                <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;">
-                    <input type="checkbox" id="termsAgree" required style="margin-top: 4px; width: 18px; height: 18px; cursor: pointer;">
-                    <span style="font-size: 0.8rem; color: #cbd5e1; line-height: 1.5;">
-                        <strong>I agree to the Terms & Conditions:</strong><br>
-                        1. We do not guarantee a franchise, as it depends strictly on brand policies, your location, and existing area demand.<br>
-                        
-                        
-                    </span>
-                </label>
-            </div>
-
-            <button type="submit" id="submitBtn" class="btn" style="background: #5f259f; color: white; font-weight: 800; width: 100%; border: 2px solid white;">
-                SUBMIT APPLICATION
-            </button>
-            <div id="phonepeError" style="color: #ef4444; margin-top: 15px; font-size: 14px; display: none; text-align: center;"></div>
-        </form>
+      
+      <!-- SECTION 1: TRADOLOGIE-INSPIRED FMCG BRAND DIRECTORY -->
+      <div class="section-header">
+          <span style="color:var(--gold); font-size:12px; font-weight:800; letter-spacing:1px; text-transform:uppercase;">
+              ⭐ Authorized Brand Corridors
+          </span>
+          <h2>Explore Top FMCG Distributorships</h2>
+          <p>
+              Direct dealership and wholesale distribution models with verified space, fleet, and working capital requirements.
+          </p>
       </div>
-    </div>
+
+      <div class="brands-grid">
+          
+          <!-- 1. BISLERI -->
+          <div class="brand-card" id="card-bisleri">
+              <div class="brand-top">
+                  <div class="brand-icon-box">💧</div>
+                  <div>
+                      <div class="brand-title">Bisleri</div>
+                      <div class="brand-tag">Packaged Water & Beverages</div>
+                  </div>
+              </div>
+              <div class="brand-specs">
+                  <div class="spec-row"><span class="spec-key">Investment:</span><span class="spec-val">₹5L – ₹15L</span></div>
+                  <div class="spec-row"><span class="spec-key">Godown Space:</span><span class="spec-val">1,500 – 2,000 sq.ft.</span></div>
+                  <div class="spec-row"><span class="spec-key">Delivery Fleet:</span><span class="spec-val">1–2 Trucks (Tata Ace)</span></div>
+                  <div class="spec-row"><span class="spec-key">Profit Margin:</span><span class="spec-val" style="color:#4ade80;">10% – 15%</span></div>
+              </div>
+              <div class="brand-products">
+                  <b>Key Lines:</b> 250ml/500ml/1L/2L bottles, 20L bulk water jars, Vedica Himalayan natural spring water, Limonata, Club Soda.
+              </div>
+              <button class="btn-select-brand" onclick="selectBrandForApplication('Bisleri')">
+                  Apply for Bisleri Distributorship →
+              </button>
+          </div>
+
+          <!-- 2. AMUL -->
+          <div class="brand-card" id="card-amul">
+              <div class="brand-top">
+                  <div class="brand-icon-box">🥛</div>
+                  <div>
+                      <div class="brand-title">Amul</div>
+                      <div class="brand-tag">Dairy & Ice Cream Giant</div>
+                  </div>
+              </div>
+              <div class="brand-specs">
+                  <div class="spec-row"><span class="spec-key">Investment:</span><span class="spec-val">₹3L – ₹10L</span></div>
+                  <div class="spec-row"><span class="spec-key">Required Space:</span><span class="spec-val">300 – 1,200 sq.ft.</span></div>
+                  <div class="spec-row"><span class="spec-key">Infrastructure:</span><span class="spec-val">Deep Freezers / Cold Room</span></div>
+                  <div class="spec-row"><span class="spec-key">Profit Margin:</span><span class="spec-val" style="color:#4ade80;">8% – 18%</span></div>
+              </div>
+              <div class="brand-products">
+                  <b>Key Lines:</b> Fresh Pouch Milk, Amul Butter, Processed Cheese, Ice Cream tubs/cones, Ghee, Paneer, Chocolates, Shakes.
+              </div>
+              <button class="btn-select-brand" onclick="selectBrandForApplication('Amul')">
+                  Apply for Amul Dealership →
+              </button>
+          </div>
+
+          <!-- 3. MOTHER DAIRY -->
+          <div class="brand-card" id="card-mother-dairy">
+              <div class="brand-top">
+                  <div class="brand-icon-box">🍦</div>
+                  <div>
+                      <div class="brand-title">Mother Dairy</div>
+                      <div class="brand-tag">Dairy & Safal Consumer Foods</div>
+                  </div>
+              </div>
+              <div class="brand-specs">
+                  <div class="spec-row"><span class="spec-key">Investment:</span><span class="spec-val">₹4L – ₹12L</span></div>
+                  <div class="spec-row"><span class="spec-key">Required Space:</span><span class="spec-val">500 – 1,500 sq.ft.</span></div>
+                  <div class="spec-row"><span class="spec-key">Cold Chain:</span><span class="spec-val">Insulated Storage</span></div>
+                  <div class="spec-row"><span class="spec-key">Profit Margin:</span><span class="spec-val" style="color:#4ade80;">9% – 16%</span></div>
+              </div>
+              <div class="brand-products">
+                  <b>Key Lines:</b> Full Cream/Toned Milk, Ice Creams, Safal Frozen Green Peas/Sweet Corn/Veggies, Dhara Edible Oils, Fruit Juices.
+              </div>
+              <button class="btn-select-brand" onclick="selectBrandForApplication('Mother Dairy')">
+                  Apply for Mother Dairy Agency →
+              </button>
+          </div>
+
+          <!-- 4. PEPSICO -->
+          <div class="brand-card" id="card-pepsico">
+              <div class="brand-top">
+                  <div class="brand-icon-box">🥤</div>
+                  <div>
+                      <div class="brand-title">PepsiCo</div>
+                      <div class="brand-tag">Beverages & Snack Foods</div>
+                  </div>
+              </div>
+              <div class="brand-specs">
+                  <div class="spec-row"><span class="spec-key">Investment:</span><span class="spec-val">₹6L – ₹18L</span></div>
+                  <div class="spec-row"><span class="spec-key">Godown Space:</span><span class="spec-val">1,200 – 2,500 sq.ft.</span></div>
+                  <div class="spec-row"><span class="spec-key">Distribution:</span><span class="spec-val">Daily Retail Route Fleet</span></div>
+                  <div class="spec-row"><span class="spec-key">Profit Margin:</span><span class="spec-val" style="color:#4ade80;">10% – 18%</span></div>
+              </div>
+              <div class="brand-products">
+                  <b>Key Lines:</b> Pepsi, Mountain Dew, 7UP, Mirinda, Sting Energy Drink, Lay's Potato Chips, Kurkure, Tropicana 100%, Doritos.
+              </div>
+              <button class="btn-select-brand" onclick="selectBrandForApplication('PepsiCo')">
+                  Apply for PepsiCo Distributorship →
+              </button>
+          </div>
+
+          <!-- 5. COCA-COLA -->
+          <div class="brand-card" id="card-coca-cola">
+              <div class="brand-top">
+                  <div class="brand-icon-box">🥤</div>
+                  <div>
+                      <div class="brand-title">Coca-Cola</div>
+                      <div class="brand-tag">Global Beverage Corporation</div>
+                  </div>
+              </div>
+              <div class="brand-specs">
+                  <div class="spec-row"><span class="spec-key">Investment:</span><span class="spec-val">₹6L – ₹18L</span></div>
+                  <div class="spec-row"><span class="spec-key">Godown Space:</span><span class="spec-val">1,200 – 2,500 sq.ft.</span></div>
+                  <div class="spec-row"><span class="spec-key">Delivery Model:</span><span class="spec-val">Direct Store Delivery (DSD)</span></div>
+                  <div class="spec-row"><span class="spec-key">Profit Margin:</span><span class="spec-val" style="color:#4ade80;">10% – 17%</span></div>
+              </div>
+              <div class="brand-products">
+                  <b>Key Lines:</b> Coca-Cola, Thums Up, Sprite, Fanta, Limca, Maaza Mango Drink, Kinley Packaged Drinking Water, Minute Maid.
+              </div>
+              <button class="btn-select-brand" onclick="selectBrandForApplication('Coca-Cola')">
+                  Apply for Coca-Cola Dealership →
+              </button>
+          </div>
+
+          <!-- 6. NESTLE -->
+          <div class="brand-card" id="card-nestle">
+              <div class="brand-top">
+                  <div class="brand-icon-box">🍜</div>
+                  <div>
+                      <div class="brand-title">Nestlé</div>
+                      <div class="brand-tag">Packaged Food & Nutrition</div>
+                  </div>
+              </div>
+              <div class="brand-specs">
+                  <div class="spec-row"><span class="spec-key">Investment:</span><span class="spec-val">₹5L – ₹16L</span></div>
+                  <div class="spec-row"><span class="spec-key">Godown Space:</span><span class="spec-val">1,000 – 2,000 sq.ft.</span></div>
+                  <div class="spec-row"><span class="spec-key">Channel:</span><span class="spec-val">Super-Stockist / General Trade</span></div>
+                  <div class="spec-row"><span class="spec-key">Profit Margin:</span><span class="spec-val" style="color:#4ade80;">8% – 14%</span></div>
+              </div>
+              <div class="brand-products">
+                  <b>Key Lines:</b> Maggi 2-Minute Noodles & Sauces, Nescafé Instant Coffee, KitKat, Munch, Everyday Dairy Whitener, Cerelac.
+              </div>
+              <button class="btn-select-brand" onclick="selectBrandForApplication('Nestlé')">
+                  Apply for Nestlé Super-Stockist →
+              </button>
+          </div>
+
+          <!-- 7. ITC CONSUMER -->
+          <div class="brand-card" id="card-itc">
+              <div class="brand-top">
+                  <div class="brand-icon-box">🌾</div>
+                  <div>
+                      <div class="brand-title">ITC Consumer</div>
+                      <div class="brand-tag">Staples, Snacks & Personal Care</div>
+                  </div>
+              </div>
+              <div class="brand-specs">
+                  <div class="spec-row"><span class="spec-key">Investment:</span><span class="spec-val">₹5L – ₹15L</span></div>
+                  <div class="spec-row"><span class="spec-key">Godown Space:</span><span class="spec-val">1,000 – 2,000 sq.ft.</span></div>
+                  <div class="spec-row"><span class="spec-key">Network:</span><span class="spec-val">Wholesale & Modern Retail Hub</span></div>
+                  <div class="spec-row"><span class="spec-key">Profit Margin:</span><span class="spec-val" style="color:#4ade80;">8% – 15%</span></div>
+              </div>
+              <div class="brand-products">
+                  <b>Key Lines:</b> Aashirvaad Atta, Ghee & Spices, Sunfeast Biscuits, Bingo! Chips, YiPPee! Instant Noodles, Savlon Hygiene.
+              </div>
+              <button class="btn-select-brand" onclick="selectBrandForApplication('ITC Consumer')">
+                  Apply for ITC Distributorship →
+              </button>
+          </div>
+
+          <!-- 8. BRITANNIA & PARLE -->
+          <div class="brand-card" id="card-britannia">
+              <div class="brand-top">
+                  <div class="brand-icon-box">🍪</div>
+                  <div>
+                      <div class="brand-title">Britannia & Parle</div>
+                      <div class="brand-tag">High-Velocity Biscuits & Foods</div>
+                  </div>
+              </div>
+              <div class="brand-specs">
+                  <div class="spec-row"><span class="spec-key">Investment:</span><span class="spec-val">₹4L – ₹12L</span></div>
+                  <div class="spec-row"><span class="spec-key">Godown Space:</span><span class="spec-val">800 – 1,500 sq.ft.</span></div>
+                  <div class="spec-row"><span class="spec-key">Velocity:</span><span class="spec-val">Daily Turnaround Distribution</span></div>
+                  <div class="spec-row"><span class="spec-key">Profit Margin:</span><span class="spec-val" style="color:#4ade80;">7% – 14%</span></div>
+              </div>
+              <div class="brand-products">
+                  <b>Key Lines:</b> Good Day, Marie Gold, Bourbon, Milk Bikis, Winkin Cow, Parle-G, Monaco, Krackjack, Hide & Seek, Rusk.
+              </div>
+              <button class="btn-select-brand" onclick="selectBrandForApplication('Britannia')">
+                  Apply for Britannia / Parle Agency →
+              </button>
+          </div>
+
+      </div>
+
+      <!-- SECTION 2: APPLICATION & PAYMENT TABS -->
+      <div id="bookingSection" style="scroll-margin-top: 100px;">
+          
+          <div class="step-switcher">
+              <button id="btnStep1" class="step-btn active" onclick="switchStep(1)">
+                  💳 Step 1: Pay ₹21,000 Allocation Fee
+              </button>
+              <button id="btnStep2" class="step-btn" onclick="switchStep(2)">
+                  📝 Step 2: Legal Agreement Form (Post-Payment)
+              </button>
+          </div>
+
+          <!-- VIEW 1: BOOKING & PAYMENT (₹21,000) -->
+          <div id="viewStep1" class="allocation-box">
+              
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                  <span style="background: rgba(212,175,55,0.15); border: 1px solid var(--gold); color: var(--gold); padding: 5px 15px; border-radius: 50px; font-size: 11px; font-weight: 800; text-transform: uppercase;">
+                      🏛️ Corporate Allocation Service
+                  </span>
+                  <span style="color: #4ade80; font-size: 12px; font-weight: 700;">
+                      🔒 100% Escrow & Compliance Protected
+                  </span>
+              </div>
+
+              <h3 style="font-family:'Playfair Display', serif; font-size: 28px; color: #fff; margin-top: 15px; margin-bottom: 5px;">
+                  Franchise & FMCG Allocation Consulting
+              </h3>
+              <p style="color: #94a3b8; font-size: 14px;">
+                  Complete end-to-end territory feasibility, corporate documentation, and regional brand management liaison.
+              </p>
+
+              <div class="price-display-wrap">
+                  <span class="old-price">₹49,000</span>
+                  <span class="new-price">₹21,000</span>
+                  <span class="price-period">One-Time Allocation & Verification Charge (Inclusive of GST)</span>
+              </div>
+
+              <div style="background: rgba(2, 6, 23, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 18px; margin-bottom: 25px;">
+                  <h4 style="color: var(--gold); font-size: 14px; margin-bottom: 10px;">Your ₹21,000 Service Deliverable Includes:</h4>
+                  <ul style="list-style: none; padding: 0; line-height: 2; font-size: 13.5px; color: #cbd5e1;">
+                      <li>✅ <b>Pin-Code Feasibility & Demand Audit:</b> Verification of territory vacancy with brand sales teams.</li>
+                      <li>✅ <b>Corporate File Preparation:</b> Drafting of business docket, MSME compliance, and financial files.</li>
+                      <li>✅ <b>Direct ASM Liaison:</b> Formal meeting routing with the Area Sales Manager for physical audit.</li>
+                      <li>✅ <b>Warehouse & Fleet Advisory:</b> Setup guidance for pallet racking, cold-chains, and delivery logistics.</li>
+                      <li>✅ <b>Immediate Access to Legal Onboarding Agreement Form</b> with complete terms & conditions.</li>
+                  </ul>
+              </div>
+
+              <!-- PRELIMINARY FORM -->
+              <form id="prelimForm" onsubmit="handleInitialBooking(event)">
+                  
+                  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+                      
+                      <div class="form-group">
+                          <label>Applicant Full Name *</label>
+                          <input type="text" id="p_name" class="form-control" required placeholder="e.g. Rajesh Kumar Sharma">
+                      </div>
+
+                      <div class="form-group">
+                          <label>WhatsApp Number (with +91) *</label>
+                          <input type="text" id="p_whatsapp" class="form-control" required placeholder="+91 9876543210" pattern="^\+.*" title="Must include country code starting with +">
+                      </div>
+
+                      <div class="form-group">
+                          <label>Target FMCG Brand *</label>
+                          <select id="p_brand" class="form-control" required>
+                              <option value="">Select FMCG Brand</option>
+                              <option value="Bisleri">Bisleri (Packaged Water & Beverages)</option>
+                              <option value="Amul">Amul (Dairy & Ice Creams)</option>
+                              <option value="Mother Dairy">Mother Dairy (Dairy, Ice Cream & Safal)</option>
+                              <option value="PepsiCo">PepsiCo (Pepsi, Mountain Dew, Lay's, Kurkure)</option>
+                              <option value="Coca-Cola">Coca-Cola (Coke, Thums Up, Sprite, Maaza)</option>
+                              <option value="Nestlé">Nestlé (Maggi, Nescafé, KitKat)</option>
+                              <option value="ITC Consumer">ITC Consumer (Aashirvaad, Sunfeast, Bingo)</option>
+                              <option value="Britannia">Britannia & Parle (Biscuits & Foods)</option>
+                              <option value="Other FMCG">Other FMCG / General Super-Stockist</option>
+                          </select>
+                      </div>
+
+                      <div class="form-group">
+                          <label>Distributorship Format *</label>
+                          <select id="p_format" class="form-control" required>
+                              <option value="Exclusive Territory Distributorship">Exclusive Territory Distributorship</option>
+                              <option value="Wholesale Super-Stockist Hub">Wholesale Super-Stockist Hub</option>
+                              <option value="Exclusive Brand Retail Parlour / Kiosk">Exclusive Brand Retail Parlour / Kiosk</option>
+                              <option value="Master Regional Franchise">Master Regional Franchise</option>
+                          </select>
+                      </div>
+
+                      <div class="form-group" style="grid-column: 1 / -1;">
+                          <label>Proposed City, State & Target Pin Code(s) *</label>
+                          <input type="text" id="p_location" class="form-control" required placeholder="e.g. Jaipur, Rajasthan — 302001, 302015">
+                      </div>
+
+                  </div>
+
+                  <!-- TERMS ACCORDION SUMMARY -->
+                  <div class="terms-box">
+                      <b>Summary Terms & Conditions:</b><br>
+                      1. <b>Facilitation Role:</b> APD Global Trade provides professional consulting, territory vacancy screening, and direct corporate liaison. Final commercial allotment is governed by the principal brand's regional policies and warehouse audit.<br>
+                      2. <b>Security Deposits:</b> The ₹21,000 fee covers APD's institutional application and viability audit. Any direct security deposits (e.g. ₹1L–₹3L) are payable solely to the brand company upon formal allotment.<br>
+                      3. <b>Alternative Allocation:</b> In case your primary brand preference is saturated in your selected pin-code, APD will facilitate an equivalent alternative top-tier FMCG brand without additional consulting charges.<br>
+                      4. <b>Post-Payment Unlocking:</b> Once payment is submitted, the applicant is immediately routed to the legally binding full Onboarding Agreement Form with complete contractual clauses.
+                  </div>
+
+                  <div style="margin-bottom: 25px; text-align: left;">
+                      <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;">
+                          <input type="checkbox" id="p_agree" required style="margin-top: 4px; width: 18px; height: 18px; cursor: pointer;">
+                          <span style="font-size: 13px; color: #cbd5e1; line-height: 1.5;">
+                              I agree to the Terms & Conditions and understand that ₹21,000 is the institutional allocation charge. Once paid, I will access the complete legal onboarding agreement form.
+                          </span>
+                      </label>
+                  </div>
+
+                  <!-- PAYMENT ACTION BUTTONS -->
+                  <button type="submit" id="btnPayBooking" class="btn-pay-now">
+                      PROCEED TO PAY ₹21,000 VIA PHONEPE / UPI →
+                  </button>
+
+                  <div style="display:flex; justify-content:center; gap: 15px; margin-top: 15px; flex-wrap: wrap;">
+                      <button type="button" onclick="showManualUPI()" style="background:transparent; border:1px solid rgba(212,175,55,0.4); color:var(--gold); font-size:12px; font-weight:700; padding:8px 16px; border-radius:30px; cursor:pointer;">
+                          📱 View BHIM / UPI QR (Scan & Pay ₹21,000)
+                      </button>
+                      <button type="button" onclick="switchStep(2)" style="background:transparent; border:none; color:#38bdf8; font-size:12px; font-weight:700; text-decoration:underline; cursor:pointer;">
+                          Already Paid? Complete Step 2 Agreement Form ➔
+                      </button>
+                  </div>
+
+                  <div id="bookingError" style="color: #ef4444; margin-top: 15px; font-size: 13.5px; display: none; text-align: center;"></div>
+              </form>
+
+              <!-- MANUAL UPI QR MODAL -->
+              <div id="manualUpiModal" style="display:none; margin-top:30px; background:rgba(2,6,23,0.9); border:1px solid var(--gold); border-radius:16px; padding:25px; text-align:center;">
+                  <h4 style="color:var(--gold); font-size:18px; margin-bottom:8px;">Scan & Pay ₹21,000 via any UPI App</h4>
+                  <p style="font-size:12.5px; color:#94a3b8; margin-bottom:15px;">Google Pay • PhonePe • Paytm • BHIM • Cred</p>
+                  <div style="background:white; padding:12px; display:inline-block; border-radius:12px; border:2px solid var(--gold);">
+                      <img src="/assets/img/payment_qr.jpg" alt="APD UPI QR" style="width:220px; height:auto; display:block;">
+                  </div>
+                  <div style="margin-top:15px; font-size:13px; color:#cbd5e1;">
+                      <b>Beneficiary: APD GLOBAL TRADE</b><br>
+                      After payment, keep your UTR / Transaction ID ready and click <b>"Step 2: Legal Agreement Form"</b> above to complete your legal application!
+                  </div>
+                  <button type="button" onclick="document.getElementById('manualUpiModal').style.display='none'" style="margin-top:15px; background:rgba(255,255,255,0.1); border:none; color:#fff; padding:6px 16px; border-radius:20px; cursor:pointer; font-size:12px;">Close QR</button>
+              </div>
+
+          </div>
+
+          <!-- VIEW 2: POST-PAYMENT LEGAL ONBOARDING AGREEMENT FORM -->
+          <div id="viewStep2" class="allocation-box" style="display: none;">
+              
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:15px; margin-bottom:25px;">
+                  <div>
+                      <span style="background: rgba(34,197,94,0.15); border: 1px solid #22c55e; color: #4ade80; padding: 4px 12px; border-radius: 50px; font-size: 11px; font-weight: 800; text-transform: uppercase;">
+                          ✅ Post-Payment Legal Agreement
+                      </span>
+                      <h3 style="font-family:'Playfair Display', serif; font-size: 24px; color: #fff; margin-top: 8px;">
+                          FMCG Distributorship & Franchise Allocation Legal Docket
+                      </h3>
+                  </div>
+                  <div style="font-size: 12px; color: #94a3b8;">
+                      Docket Ref: <b style="color:var(--gold);">APD-FMCG-2026-FORM</b>
+                  </div>
+              </div>
+
+              <!-- FULL CONTRACTUAL TERMS & CONDITIONS -->
+              <div style="background: rgba(2, 6, 23, 0.85); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 14px; padding: 22px; margin-bottom: 30px; text-align: left;">
+                  <h4 style="color: var(--gold); font-size: 15px; margin-bottom: 12px; display:flex; align-items:center; gap:8px;">
+                      📜 Master Legal Terms & Conditions of Distributorship Allocation
+                  </h4>
+                  <div style="font-size: 12.5px; color: #cbd5e1; line-height: 1.8; max-height: 280px; overflow-y: auto; padding-right: 10px;">
+                      <p><b>Clause 1 (Scope of Corporate Facilitation):</b> APD GLOBAL TRADE (The Facilitator) agrees to provide specialized consulting, location viability audits, corporate file preparation, and direct liaison with the regional Area Sales Manager (ASM) and Trade Executives of the designated FMCG Brand.</p>
+                      
+                      <p><b>Clause 2 (Exclusive Territory Allocation):</b> Territory allocation is conducted based on vacant commercial pin codes and designated retail clustering. The Principal Brand maintains exclusive authority to sanction territory borders in accordance with national non-compete distribution distance buffers.</p>
+                      
+                      <p><b>Clause 3 (Principal Security Deposit & Inventory):</b> The ₹21,000 consideration paid to APD Global Trade constitutes an institutional allocation and due-diligence consulting fee. Security deposits required by the brand (typically ₹1,00,000 to ₹3,00,000) and initial inventory purchases remain payable directly to the principal brand upon formal sanction.</p>
+                      
+                      <p><b>Clause 4 (Alternative Category Allocation Guarantee):</b> In the event that the applicant's primary requested brand is saturated in the designated pin codes, APD Global Trade guarantees facilitation and allocation assistance with an equivalent tier-one FMCG brand within the same product vertical (e.g., Coca-Cola for PepsiCo, Mother Dairy for Amul) without any additional fee.</p>
+                      
+                      <p><b>Clause 5 (Mandatory Infrastructure & Due Diligence):</b> The applicant represents and warrants that they possess or will establish: (a) Commercial warehouse space adhering to brand guidelines (1,000–2,000 sq.ft.), (b) Active GSTIN and FSSAI licenses, (c) Requisite delivery vehicles for local retail coverage.</p>
+                      
+                      <p><b>Clause 6 (Non-Refundable Allocation Fee):</b> The ₹21,000 consulting fee is non-refundable once territory research, documentation preparation, and ASM corporate liaison procedures have commenced.</p>
+                  </div>
+              </div>
+
+              <!-- FULL ONBOARDING FORM -->
+              <form id="onboardingForm" onsubmit="handleOnboardingSubmit(event)">
+                  
+                  <h4 style="color: #fff; font-size: 16px; margin-bottom: 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                      1. Entity & Statutory Identification
+                  </h4>
+
+                  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 25px;">
+                      
+                      <div class="form-group">
+                          <label>Registered Business / Firm Name *</label>
+                          <input type="text" id="o_firm" class="form-control" required placeholder="e.g. Sharma FMCG Enterprises">
+                      </div>
+
+                      <div class="form-group">
+                          <label>Constitution of Firm *</label>
+                          <select id="o_constitution" class="form-control" required>
+                              <option value="Sole Proprietorship">Sole Proprietorship</option>
+                              <option value="Partnership Firm">Partnership Firm</option>
+                              <option value="Private Limited Company">Private Limited Company</option>
+                              <option value="Limited Liability Partnership (LLP)">Limited Liability Partnership (LLP)</option>
+                              <option value="Individual (New Setup)">Individual (New Setup)</option>
+                          </select>
+                      </div>
+
+                      <div class="form-group">
+                          <label>GST Number (GSTIN) *</label>
+                          <input type="text" id="o_gst" class="form-control" required placeholder="15-digit GSTIN or 'Applied For'" pattern=".{10,15}">
+                      </div>
+
+                      <div class="form-group">
+                          <label>Permanent Account Number (PAN) *</label>
+                          <input type="text" id="o_pan" class="form-control" required placeholder="10-digit PAN Number" pattern="[A-Z0-9]{10}">
+                      </div>
+
+                  </div>
+
+                  <h4 style="color: #fff; font-size: 16px; margin-bottom: 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                      2. Primary Signatory & Infrastructure
+                  </h4>
+
+                  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 25px;">
+                      
+                      <div class="form-group">
+                          <label>Authorized Signatory Name *</label>
+                          <input type="text" id="o_signatory" class="form-control" required placeholder="Full Name as on Aadhaar">
+                      </div>
+
+                      <div class="form-group">
+                          <label>WhatsApp / Mobile Number *</label>
+                          <input type="text" id="o_mobile" class="form-control" required placeholder="+91 9876543210">
+                      </div>
+
+                      <div class="form-group">
+                          <label>Commercial Warehouse Area (Sq. Ft.) *</label>
+                          <input type="number" id="o_sqft" class="form-control" required placeholder="e.g. 1500" min="200">
+                      </div>
+
+                      <div class="form-group">
+                          <label>Warehouse Ownership *</label>
+                          <select id="o_ownership" class="form-control" required>
+                              <option value="Owned Property">Owned Property</option>
+                              <option value="Rented / Leased Agreement">Rented / Leased Agreement</option>
+                              <option value="To be Rented Post Approval">To be Rented Post Approval</option>
+                          </select>
+                      </div>
+
+                      <div class="form-group" style="grid-column: 1 / -1;">
+                          <label>Complete Commercial Warehouse Address *</label>
+                          <textarea id="o_warehouse_addr" class="form-control" rows="2" required placeholder="Plot / Godown Number, Industrial Area / Street, City, State"></textarea>
+                      </div>
+
+                      <div class="form-group">
+                          <label>Target Pin Code(s) for Exclusivity *</label>
+                          <input type="text" id="o_pincodes" class="form-control" required placeholder="e.g. 302001, 302004, 302015">
+                      </div>
+
+                      <div class="form-group">
+                          <label>Available Delivery Vehicles *</label>
+                          <select id="o_vehicles" class="form-control" required>
+                              <option value="1 Light Commercial Vehicle (Tata Ace / Bolero)">1 Vehicle (Tata Ace / Bolero)</option>
+                              <option value="2 Commercial Vehicles">2 Commercial Vehicles</option>
+                              <option value="3+ Commercial Fleet">3+ Commercial Fleet</option>
+                              <option value="Three Wheeler (Piaggio / Bajaj)">Three Wheeler Commercial</option>
+                              <option value="Will Purchase / Lease Post Approval">Will Purchase / Lease Post Approval</option>
+                          </select>
+                      </div>
+
+                  </div>
+
+                  <h4 style="color: #fff; font-size: 16px; margin-bottom: 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                      3. Fee Settlement & Legal Declaration
+                  </h4>
+
+                  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 25px;">
+                      
+                      <div class="form-group">
+                          <label>Payment Mode / Gateway *</label>
+                          <select id="o_paymode" class="form-control" required>
+                              <option value="PhonePe Online Gateway">PhonePe Online Gateway</option>
+                              <option value="Razorpay Online Gateway">Razorpay Online Gateway</option>
+                              <option value="UPI / QR Direct Transfer">UPI / QR Direct Transfer</option>
+                              <option value="Bank NEFT / RTGS">Bank NEFT / RTGS</option>
+                          </select>
+                      </div>
+
+                      <div class="form-group">
+                          <label>Payment Reference / UTR Number *</label>
+                          <input type="text" id="o_utr" class="form-control" required placeholder="12-digit UTR or Order ID">
+                      </div>
+
+                      <div class="form-group" style="grid-column: 1 / -1;">
+                          <label>Digital Signature (Type Full Legal Name) *</label>
+                          <input type="text" id="o_signature" class="form-control" required placeholder="Type your full legal name as digital endorsement">
+                      </div>
+
+                  </div>
+
+                  <div style="margin-bottom: 25px; text-align: left;">
+                      <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;">
+                          <input type="checkbox" id="o_legal_agree" required style="margin-top: 4px; width: 18px; height: 18px; cursor: pointer;">
+                          <span style="font-size: 13px; color: #cbd5e1; line-height: 1.5;">
+                              <b>I solemnly declare</b> that all representations made herein are accurate. I have read, understood, and accept all Master Legal Terms & Conditions of the APD Global Trade FMCG Distributorship & Franchise Allocation Program.
+                          </span>
+                      </label>
+                  </div>
+
+                  <button type="submit" id="btnSubmitDocket" class="btn-pay-now" style="background: linear-gradient(135deg, #22c55e, #15803d); color: white;">
+                      SUBMIT LEGAL ONBOARDING DOCKET & ALLOCATION FILE
+                  </button>
+                  <div id="docketError" style="color: #ef4444; margin-top: 15px; font-size: 13.5px; display: none; text-align: center;"></div>
+              </form>
+
+              <!-- SUCCESS CONFIRMATION CONTAINER -->
+              <div id="docketSuccessView" style="display: none; margin-top: 25px;">
+                  <div class="success-docket">
+                      <div style="font-size: 42px; margin-bottom: 10px;">🎉</div>
+                      <h3 style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 26px; margin-bottom: 8px;">
+                          Application Docket Successfully Lodged!
+                      </h3>
+                      <p style="color: #cbd5e1; font-size: 14px; margin-bottom: 20px;">
+                          Your legal agreement and FMCG distributorship application have been registered under Reference ID:
+                      </p>
+                      <div style="background: rgba(2,6,23,0.8); border: 1px dashed var(--gold); padding: 12px; border-radius: 10px; font-size: 22px; font-weight: 900; color: #4ade80; font-family: monospace; margin-bottom: 25px;" id="dispRefId">
+                          APD-FMCG-2026-XXXX
+                      </div>
+                      <p style="color: #94a3b8; font-size: 13px; line-height: 1.6; margin-bottom: 25px;">
+                          Our Senior Institutional Trade Officer and Area Liaison Desk have been notified. A copy of your verified docket has been queued for Area Sales Manager (ASM) territory inspection.
+                      </p>
+                      <a id="btnWhatsappDesk" href="#" target="_blank" class="btn-pay-now" style="display:inline-block; text-decoration:none; background:#22c55e; color:#fff; width:auto; padding:12px 30px;">
+                          💬 Connect with Senior Allotment Officer on WhatsApp →
+                      </a>
+                  </div>
+              </div>
+
+          </div>
+
+      </div>
+
   </div>
 
+  <!-- FOOTER -->
+  <footer style="background: #020617; padding: 50px 8% 40px; border-top: 1px solid rgba(255,255,255,0.05); color: #94a3b8; text-align: left;">
+      <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
+          <div>
+              <h4 style="color: white; margin-bottom: 15px; font-size: 13px; text-transform: uppercase;">Corporate Identity</h4>
+              <p style="font-size: 12.5px; line-height: 1.8; color: #cbd5e1;">
+                  <b>APD GLOBAL TRADE</b><br>
+                  GSTIN: 08ATLPC3583G1ZL<br>
+                  IEC Code: ATLPC3583G<br>
+                  Reg. Office: Jaipur, Rajasthan, India
+              </p>
+          </div>
+          <div>
+              <h4 style="color: white; margin-bottom: 15px; font-size: 13px; text-transform: uppercase;">FMCG Corridors</h4>
+              <p style="font-size: 12.5px; line-height: 1.8; color: #cbd5e1;">
+                  Bisleri • Amul • Mother Dairy • PepsiCo • Coca-Cola • Nestlé • ITC • Britannia • Parle
+              </p>
+          </div>
+          <div>
+              <h4 style="color: white; margin-bottom: 15px; font-size: 13px; text-transform: uppercase;">Direct Trade Desk</h4>
+              <p style="font-size: 12.5px; line-height: 1.8; color: #cbd5e1;">
+                  WhatsApp Desk: +91 92664 18868<br>
+                  Support SLA: 24-Hour Verified Turnaround<br>
+                  Institutional Settlement Protected
+              </p>
+          </div>
+      </div>
+      <div style="max-width: 1200px; margin: 30px auto 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 11.5px; color: #64748b; line-height: 1.6;">
+          <b>Legal Governance Disclaimer:</b> APD GLOBAL TRADE provides professional trade matchmaking, market feasibility, and corporate allocation consulting. Allocation of brand dealerships and distributorships remains subject to principal company internal vacancy audits and territory due diligence.
+      </div>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC & FIREBASE -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
     import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
@@ -436,657 +1190,211 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    window.submitApplication = async function(e) {
+    // STEP SWITCHING LOGIC
+    window.switchStep = function(stepNum) {
+        const v1 = document.getElementById('viewStep1');
+        const v2 = document.getElementById('viewStep2');
+        const b1 = document.getElementById('btnStep1');
+        const b2 = document.getElementById('btnStep2');
+
+        if (stepNum === 1) {
+            v1.style.display = 'block';
+            v2.style.display = 'none';
+            b1.classList.add('active');
+            b2.classList.remove('active');
+        } else {
+            v1.style.display = 'none';
+            v2.style.display = 'block';
+            b1.classList.remove('active');
+            b2.classList.add('active');
+            document.getElementById('viewStep2').scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    window.showManualUPI = function() {
+        const m = document.getElementById('manualUpiModal');
+        m.style.display = m.style.display === 'none' ? 'block' : 'none';
+        if (m.style.display === 'block') {
+            m.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    // SELECT BRAND AND AUTO-SCROLL
+    window.selectBrandForApplication = function(brandName) {
+        const selectEl = document.getElementById('p_brand');
+        if (selectEl) {
+            for (let i = 0; i < selectEl.options.length; i++) {
+                if (selectEl.options[i].value.toLowerCase().includes(brandName.toLowerCase())) {
+                    selectEl.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+        window.switchStep(1);
+        document.getElementById('bookingSection').scrollIntoView({ behavior: 'smooth' });
+    };
+
+    // HANDLE INITIAL BOOKING & PAYMENT OF RS 21,000
+    window.handleInitialBooking = async function(e) {
         e.preventDefault();
-        const btn = document.getElementById('submitBtn');
-        const err = document.getElementById('phonepeError');
-        
-        if(!document.getElementById('termsAgree').checked) {
+        const btn = document.getElementById('btnPayBooking');
+        const err = document.getElementById('bookingError');
+
+        if (!document.getElementById('p_agree').checked) {
             err.innerText = "Please agree to the Terms & Conditions.";
             err.style.display = "block";
             return;
         }
 
-        btn.innerText = 'Initializing Payment...';
+        btn.innerText = 'Initializing Secure Payment (₹21,000)...';
         btn.disabled = true;
         err.style.display = "none";
 
+        const name = document.getElementById('p_name').value;
+        const whatsapp = document.getElementById('p_whatsapp').value;
+        const brand = document.getElementById('p_brand').value;
+        const format = document.getElementById('p_format').value;
+        const location = document.getElementById('p_location').value;
+
         try {
-            // First save to DB
-            const docRef = await addDoc(collection(db, "franchise_applications"), {
-                name: document.getElementById('f_name').value,
-                whatsapp: document.getElementById('f_whatsapp').value,
-                company: document.getElementById('f_company').value,
-                type: document.getElementById('f_type').value,
-                address: document.getElementById('f_address').value,
+            // Save initial booking to Firestore
+            await addDoc(collection(db, "franchise_applications"), {
+                name: name,
+                whatsapp: whatsapp,
+                brand: brand,
+                format: format,
+                location: location,
+                amount: 21000,
                 status: "Pending Payment",
                 timestamp: serverTimestamp()
             });
 
-            // Then initiate PhonePe
+            // Store in sessionStorage so step 2 form is pre-filled
+            sessionStorage.setItem('apd_fmcg_prelim', JSON.stringify({
+                name, whatsapp, brand, location
+            }));
+
+            // Call PhonePe gateway with 21,000
             const res = await fetch('/api/phonepe-init', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ amount: 49000, planName: 'Franchise Consultation Booking' })
+                body: JSON.stringify({
+                    amount: 21000,
+                    planName: `FMCG Distributorship (${brand}) Booking`
+                })
             });
+
             const data = await res.json();
-            
-            if (data.success && data.url) { 
-                window.location.href = data.url; 
-            } else { 
-                err.innerText = data.error || 'Payment gateway failed. Your form is saved. Contact support.';
-                err.style.display = 'block'; 
-                btn.innerText = 'SUBMIT APPLICATION'; 
-                btn.disabled = false; 
+
+            if (data.success && data.url) {
+                window.location.href = data.url;
+            } else {
+                // If payment gateway keys or environment fallback occurs, seamlessly route to Step 2 with manual confirmation
+                console.warn("Gateway returned fallback:", data.error);
+                err.innerText = "Online gateway standby. You can scan the QR code to pay ₹21,000 and proceed to Step 2.";
+                err.style.display = "block";
+                window.showManualUPI();
+                btn.innerText = 'PROCEED TO PAY ₹21,000 VIA PHONEPE / UPI →';
+                btn.disabled = false;
             }
-        } catch(error) {
-            console.error("Error submitting form: ", error);
-            err.innerText = 'Network Error. Please try again.';
-            err.style.display = 'block';
-            btn.innerText = 'SUBMIT APPLICATION';
+        } catch (error) {
+            console.error("Booking error:", error);
+            err.innerText = "Network Error. Please try again or pay using the UPI QR below.";
+            err.style.display = "block";
+            window.showManualUPI();
+            btn.innerText = 'PROCEED TO PAY ₹21,000 VIA PHONEPE / UPI →';
             btn.disabled = false;
         }
-    }
-  </script>
-<footer style="background: #020617; padding: 60px 8% 40px; border-top: 1px solid rgba(255,255,255,0.05); color: #94a3b8; text-align: left;">
-    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;">
-        
-        <div>
-            <h4 style="color: white; margin-bottom: 20px; font-size: 13px; text-transform: uppercase;">Business Identity</h4>
-            <ul style="list-style: none; padding: 0; font-size: 0.8rem; line-height: 2.0; color: #cbd5e1;">
-                <li><strong>Entity:</strong> APD GLOBAL TRADE</li>
-                <li><strong>GSTIN:</strong> 08ATLPC3583G1ZL</li>
-                <li><strong>IEC Code:</strong> ATLPC3583G</li>
-                <li><strong>Reg. Office:</strong> Jaipur, Rajasthan, India</li>
-            </ul>
-        </div>
-
-        <div>
-            <h4 style="color: white; margin-bottom: 20px; font-size: 13px; text-transform: uppercase;">Legal</h4>
-            <ul style="list-style: none; padding: 0; font-size: 0.8rem; line-height: 2.0;">
-                <li><a href="/terms.html" style="color: inherit; text-decoration: none;">Terms & Conditions</a></li>
-                <li><a href="/privacy.html" style="color: inherit; text-decoration: none;">Privacy Policy</a></li>
-                <li><a href="/refund-policy.html" style="color: inherit; text-decoration: none;">Refund Policy</a></li>
-            </ul>
-        </div>
-        
-    </div>
-    
-    <div style="max-width: 1200px; margin: 30px auto 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.7rem; color: #64748b; line-height: 1.5;">
-        <strong>Legal Disclaimer:</strong> APD GLOBAL TRADE provides structured business matchmaking and trade facilitation services. Commercial outcomes depend on mutual due diligence.
-    </div>
-  </footer>
-
-  <!-- PREMIUM PAYMENT MODAL -->
-  <div id="paymentModal" style="
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(2, 6, 23, 0.98);
-    backdrop-filter: blur(20px);
-    align-items:center;
-    justify-content:center;
-    z-index:9999;
-    padding: 20px;">
-    
-    <div style="background:#111827; color:#fff; padding:50px; border-radius:30px; width:100%; max-width:500px; border: 1px solid var(--gold); position: relative; box-shadow: 0 40px 100px rgba(0,0,0,0.5);">
-      
-      <div onclick="closeModal()" style="position: absolute; top: 25px; right: 25px; cursor: pointer; color: #94a3b8; font-size: 24px;">✕</div>
-      
-      <h3 id="modalPlanName" style="font-family: 'Playfair Display', serif; font-size: 28px; color: var(--gold); margin-bottom: 10px;">Complete Your Investment</h3>
-      <p style="color: #94a3b8; margin-bottom: 40px;">Select your preferred institutional payment channel.</p>
-      
-      <div style="display: flex; background: #1e293b; padding: 5px; border-radius: 12px; margin-bottom: 30px;">
-          <div id="tab-paypal" onclick="switchPayment('paypal')" style="flex: 1; text-align: center; padding: 10px; border-radius: 8px; cursor: pointer; background: var(--gold); color: black; font-weight: 700; font-size: 13px;">PayPal</div>
-          <div id="tab-qr" onclick="switchPayment('qr')" style="flex: 1; text-align: center; padding: 10px; border-radius: 8px; cursor: pointer; color: #94a3b8; font-weight: 600; font-size: 13px;">PhonePe (Auto)</div>
-          <div id="tab-manual" onclick="switchPayment('manual')" style="flex: 1; text-align: center; padding: 10px; border-radius: 8px; cursor: pointer; color: #94a3b8; font-weight: 600; font-size: 13px;">Manual QR</div>
-      </div>
-
-      <!-- PAYPAL SECTION -->
-      <div id="paypalSection">
-          <div style="font-size: 2rem; font-weight: 800; margin-bottom: 20px;" id="modalPriceUSD">$499</div>
-          <div id="paypalButtons"></div>
-          <p style="font-size: 0.9rem; color: #cbd5e1; margin-top: 20px; border-left: 3px solid var(--gold); padding-left: 15px;">
-            <b>NOTE:</b> For USD, select PayPal and make a quick payment. If you prefer a direct link or have issues, message us on WhatsApp immediately.
-          </p>
-      </div>
-
-      <!-- QR & ELITE EXPORT POSTER SECTION -->
-      <div id="qrSection" style="display: none; text-align: center; padding: 0;">
-          <div style="background: linear-gradient(135deg, #020617, #0b1d36); padding: 40px; border-radius: 20px; border: 1px solid var(--gold); margin-top: 10px;">
-              
-              <h2 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 24px; margin-bottom: 5px;">Secure Payment Gateway</h2>
-              <p style="color: #cbd5e1; font-size: 14px; margin-bottom: 30px;">100% encrypted checkout via PhonePe.</p>
-              
-              <div style="font-size: 2.2rem; font-weight: 800; margin-bottom: 5px; color: #4ade80;" id="modalPriceINR">₹59,000</div>
-              <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 25px;">(Including 18% GST Compliance)</p>
-              
-              <div style="background: rgba(212, 175, 55, 0.1); border-left: 4px solid var(--gold); padding: 20px; border-radius: 8px; text-align: left; margin-bottom: 30px;">
-                  <p style="font-size: 0.95rem; color: #fff; margin: 0; line-height: 1.6;">
-                      🇮🇳 <b>INDIAN SUPPLIERS:</b><br>
-                      • Pay securely using PhonePe, GPay, or any UPI.<br>
-                      • Instant Access activation upon successful payment.<br>
-                      • Powered by PhonePe Business.
-                  </p>
-              </div>
-
-              <div id="desktopQR" style="display: none; background: white; padding: 15px; border-radius: 16px; margin: 0 auto 20px auto; width: fit-content; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 4px solid var(--gold);">
-                  <img src="/assets/img/payment_qr.jpg" alt="APD Institutional QR" style="width: 250px; height: auto; display: block; border-radius: 8px;">
-                  <p style="color: black; font-weight: bold; margin-top: 10px; font-size: 14px;">Scan & Pay ₹<span id="qrAmountTxt">59,000</span></p>
-              </div>
-
-              <button id="phonepeBtn" class="btn" style="background: #5f259f; color: white; font-size: 1.1rem; padding: 20px; width: 100%; border: 2px solid white; display: flex; align-items: center; justify-content: center; gap: 10px;" onclick="initiatePhonePe()">
-                  PAY VIA PHONEPE
-              </button>
-              <div id="phonepeError" style="color: #ef4444; margin-top: 15px; font-size: 14px; display: none;"></div>
-          </div>
-          
-          <!-- ALTERNATIVE PAYPAL FOR INR PLANS -->
-          <div style="padding: 30px 0;">
-              <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px;">International? Pay USD Equivalent via PayPal</p>
-              <div id="paypalButtonsINR"></div>
-              <p style="font-size: 0.75rem; color: #64748b; margin-top: 12px;">Institutional Clearance: <span id="modalPriceUSDEquiv">$499.00</span></p>
-          </div>
-      </div>
-
-      <!-- MANUAL QR SECTION -->
-      <div id="manualSection" style="display: none; text-align: center;">
-          <div style="font-size: 2rem; font-weight: 800; margin-bottom: 25px; color: var(--gold);" id="modalPriceINRManual">₹59,000</div>
-          <div style="background: white; padding: 10px; display: inline-block; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-              <img src="/assets/img/payment_qr.jpg" alt="Manual QR Code" style="width: 240px; height: auto; display: block; border-radius: 8px;">
-          </div>
-          <p style="font-size: 0.95rem; color: #cbd5e1; margin-bottom: 20px;"><b>Payable to: APD GLOBAL TRADE</b><br>Accepting Google Pay, PhonePe, Paytm & BHIM.</p>
-          <button class="btn" style="background: #22c55e; color: white;" onclick="window.location.href='https://wa.me/919990332340?text=I%20have%20made%20the%20Manual%20UPI%20payment.%20Here%20is%20the%20screenshot.'">Verify & Activate Access</button>
-      </div>
-
-    </div>
-  </div>
-
-  <script
-    src="https://www.paypal.com/sdk/js?client-id=ASJK-aoiFIIKpTgmRComyW1w0VYUbexsGzzzQnJqZGcKy_6yE3r-Y0tIRXXHTqHH1AVd5IXzFBNtWte4&currency=USD"></script>
-
-  <script>
-    let currentCurrency = 'INR';
-    let selectedPlan = { name: '', usd: 0, inr: 0 };
-
-    function toggleCurrency() {
-        currentCurrency = currentCurrency === 'USD' ? 'INR' : 'USD';
-        const knob = document.getElementById('toggle-knob');
-        const lUSD = document.getElementById('label-usd');
-        const lINR = document.getElementById('label-inr');
-        
-        if (currentCurrency === 'INR') {
-            knob.style.left = '32px';
-            lINR.style.opacity = '1';
-            lINR.style.fontWeight = '700';
-            lINR.style.color = 'var(--gold)';
-            lUSD.style.opacity = '0.6';
-            lUSD.style.fontWeight = '400';
-            lUSD.style.color = '#fff';
-            
-            // Update Prices
-            document.getElementById('price-trial').innerHTML = '<s style="font-size: 1rem; color: #64748b; font-weight: 500;">₹51,000</s> ₹19,999';
-            document.getElementById('price-pro').innerHTML = '<s style="font-size: 1rem; color: #64748b; font-weight: 500;">₹99,000</s> ₹49,000';
-            document.getElementById('price-elite').innerHTML = '<s style="font-size: 1rem; color: #64748b; font-weight: 500;">₹1,75,000</s> ₹99,000';
-
-            document.getElementById('tax-trial').innerText = 'Inclusive of 18% GST & Verification';
-            document.getElementById('tax-pro').innerText = 'Inclusive of 18% GST';
-            document.getElementById('tax-elite').innerText = 'Inclusive of 18% GST';
-        } else {
-            knob.style.left = '2px';
-            lUSD.style.opacity = '1';
-            lUSD.style.fontWeight = '700';
-            lUSD.style.color = 'var(--gold)';
-            lINR.style.opacity = '0.6';
-            lINR.style.fontWeight = '400';
-            lINR.style.color = '#fff';
-            
-            // Update Prices
-            document.getElementById('price-trial').innerHTML = '<s style="font-size: 1rem; color: #64748b; font-weight: 500;">$599</s> $249';
-            document.getElementById('price-pro').innerHTML = '<s style="font-size: 1rem; color: #64748b; font-weight: 500;">$1,199</s> $599';
-            document.getElementById('price-elite').innerHTML = '<s style="font-size: 1rem; color: #64748b; font-weight: 500;">$1,999</s> $999';
-
-            document.getElementById('tax-trial').innerText = 'For exporters ready to explore';
-            document.getElementById('tax-pro').innerText = 'For serious exporters ready to scale';
-            document.getElementById('tax-elite').innerText = 'Maximum authority package';
-        }
-    }
-
-    function initiatePayment(planName, usd, inr) {
-        selectedPlan = { name: planName, usd, inr };
-        
-        let usdEquiv = 0;
-        if (inr === 59000) usdEquiv = 499;
-        else if (inr === 168000) usdEquiv = 2000;
-        else if (inr === 294000) usdEquiv = 3500;
-        else usdEquiv = usd;
-
-        document.getElementById('modalPlanName').innerText = planName;
-        document.getElementById('modalPriceUSD').innerText = '$' + usd.toLocaleString();
-        document.getElementById('modalPriceINR').innerText = '₹' + inr.toLocaleString();
-        document.getElementById('modalPriceINRManual').innerText = '₹' + inr.toLocaleString();
-        document.getElementById('modalPriceUSDEquiv').innerText = '$' + usdEquiv.toLocaleString() + '.00';
-        
-        document.getElementById("paymentModal").style.display = "flex";
-        
-        if (currentCurrency === 'INR') { switchPayment('qr'); } else { switchPayment('paypal'); }
-        
-        renderPayPal(usd, planName, "paypalButtons");
-        if (usdEquiv > 0) { renderPayPal(usdEquiv, planName + " (INR Base)", "paypalButtonsINR"); }
-    }
-
-    function switchPayment(method) {
-        const tPayPal = document.getElementById('tab-paypal');
-        const tQR = document.getElementById('tab-qr');
-        const tManual = document.getElementById('tab-manual');
-        const sPayPal = document.getElementById('paypalSection');
-        const sQR = document.getElementById('qrSection');
-        const sManual = document.getElementById('manualSection');
-        
-        tPayPal.style.background = 'transparent'; tPayPal.style.color = '#94a3b8';
-        tQR.style.background = 'transparent'; tQR.style.color = '#94a3b8';
-        tManual.style.background = 'transparent'; tManual.style.color = '#94a3b8';
-        sPayPal.style.display = 'none';
-        sQR.style.display = 'none';
-        sManual.style.display = 'none';
-
-        if (method === 'paypal') {
-            tPayPal.style.background = 'var(--gold)'; tPayPal.style.color = 'black';
-            sPayPal.style.display = 'block';
-        } else if (method === 'qr') {
-            tQR.style.background = 'var(--gold)'; tQR.style.color = 'black';
-            sQR.style.display = 'block';
-        } else {
-            tManual.style.background = 'var(--gold)'; tManual.style.color = 'black';
-            sManual.style.display = 'block';
-        }
-    }
-
-    function renderPayPal(amount, planName, containerId) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        container.innerHTML = "";
-        setTimeout(function () {
-            paypal.Buttons({
-                createOrder: function (data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{
-                            description: planName + " – APD Global Trade",
-                            amount: { currency_code: "USD", value: amount.toFixed(2) }
-                        }]
-                    });
-                },
-                onApprove: function (data, actions) {
-                    return actions.order.capture().then(function () {
-                        window.location.href = "/payment-status.html";
-                    });
-                }
-            }).render("#" + containerId);
-        }, 400);
-    }
-
-    async function initiatePhonePe() {
-        const btn = document.getElementById('phonepeBtn');
-        const err = document.getElementById('phonepeError');
-        btn.innerText = 'Initializing...';
-        btn.disabled = true;
-        try {
-            const res = await fetch('/api/phonepe-init', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ amount: selectedPlan.inr, planName: selectedPlan.name })
-            });
-            const data = await res.json();
-            if (data.success && data.url) { window.location.href = data.url; } 
-            else { err.innerText = data.error || 'Failed.'; err.style.display = 'block'; btn.innerText = 'PAY VIA PHONEPE'; btn.disabled = false; }
-        } catch(e) { err.innerText = 'Network error.'; err.style.display = 'block'; btn.innerText = 'PAY VIA PHONEPE'; btn.disabled = false; }
-    }
-
-    function closeModal() { document.getElementById("paymentModal").style.display = "none"; }
-    function toggleDrawer() {
-        document.getElementById('sideDrawer').classList.toggle('active');
-        document.getElementById('drawerOverlay').classList.toggle('active');
-    }
-    
-    // Force render on load
-    setTimeout(() => { currentCurrency = 'USD'; toggleCurrency(); }, 100);
-  </script>
-
-  <!-- GLOBAL HELPLINE HUB (PREMIUM REGIONAL TOGGLES) -->
-  <div id="waHub" class="wa-hub">
-      <div class="wa-hub-header">
-          <span>SELECT REGIONAL TRADE DESK</span>
-          <span onclick="toggleWaHub()" style="cursor: pointer; opacity: 0.6;">✕</span>
-      </div>
-      <!-- NEW EXPORTERS DESK -->
-      <a href="https://wa.me/919217114472" target="_blank" class="wa-hub-item" style="background: rgba(212,175,55,0.05); border-left: 3px solid var(--gold);">
-          <span class="flag"></span>
-          <div class="desk-info">
-              <div class="desk-name" style="color: var(--gold);">NEW EXPORTERS DESK</div>
-              <div class="desk-status">+91 92171 14472 • Priority Support</div>
-          </div>
-      </a>
-      <a href="https://wa.me/84848469144" target="_blank" class="wa-hub-item">
-          <span class="flag">🌏</span>
-          <div class="desk-info">
-              <div class="desk-name">SOUTHEAST ASIA DESK</div>
-              <div class="desk-status">The Best Region • 24/7 Support</div>
-          </div>
-      </a>
-      <a href="https://wa.me/639510960950" target="_blank" class="wa-hub-item">
-          <span class="flag">🌏</span>
-          <div class="desk-info">
-              <div class="desk-name">ASIA PACIFIC DESK</div>
-              <div class="desk-status">Trade Intelligence Desk</div>
-          </div>
-      </a>
-      <a href="https://wa.me/237658309636" target="_blank" class="wa-hub-item">
-          <span class="flag">🌍</span>
-          <div class="desk-info">
-              <div class="desk-name">AFRICA DESK</div>
-              <div class="desk-status">Africa Sourcing Hub</div>
-          </div>
-      </a>
-      <a href="https://wa.me/919990332340" target="_blank" class="wa-hub-item">
-          <span class="flag">🌍</span>
-          <div class="desk-info">
-              <div class="desk-name">MIDDLE EAST & SA DESK</div>
-              <div class="desk-status">Middle East Corridor Desk</div>
-          </div>
-      </a>
-      <div style="padding: 15px; text-align: center; font-size: 10px; color: #64748b; letter-spacing: 1px;">
-          APD GLOBAL TRADE INSTITUTIONAL NETWORK
-      </div>
-  </div>
-
-  <div class="float-wa" onclick="toggleWaHub()">
-      <svg width="35" height="35" viewBox="0 0 24 24" fill="white"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 3.825 0 6.938 3.112 6.938 6.938 0 3.825-3.113 6.938-6.938 6.938z"/></svg>
-  </div>
-
-  <style>
-    .wa-hub {
-        position: fixed;
-        bottom: 100px;
-        right: 30px;
-        width: 320px;
-        background: rgba(15, 23, 42, 0.98);
-        backdrop-filter: blur(25px);
-        border: 1px solid rgba(212, 175, 55, 0.4);
-        border-radius: 30px;
-        z-index: 100004;
-        box-shadow: 0 40px 100px rgba(0,0,0,0.7);
-        display: none;
-        flex-direction: column;
-        overflow: hidden;
-        animation: hubSlide 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-    @keyframes hubSlide {
-        from { opacity: 0; transform: translateY(30px) scale(0.9); }
-        to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    .wa-hub.active { display: flex; }
-    .wa-hub-header {
-        padding: 22px;
-        background: linear-gradient(90deg, rgba(212, 175, 55, 0.2), transparent);
-        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-        font-size: 11px;
-        font-weight: 800;
-        color: var(--gold);
-        letter-spacing: 2px;
-        display: flex;
-        justify-content: space-between;
-        text-transform: uppercase;
-    }
-    .wa-hub-item {
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        padding: 20px 25px;
-        text-decoration: none;
-        border-bottom: 1px solid rgba(255,255,255,0.03);
-        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-    .wa-hub-item:hover {
-        background: rgba(212, 175, 55, 0.12);
-        padding-left: 35px;
-        border-left: 4px solid var(--gold);
-    }
-    .wa-hub-item .flag { font-size: 28px; filter: drop-shadow(0 0 5px rgba(0,0,0,0.3)); }
-    .wa-hub-item .desk-name {
-        font-size: 14px;
-        font-weight: 700;
-        color: #fff;
-        margin-bottom: 4px;
-        letter-spacing: 0.5px;
-    }
-    .wa-hub-item .desk-status {
-        font-size: 11px;
-        color: #94a3b8;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-    .wa-hub-item .desk-status::before {
-        content: '';
-        width: 6px;
-        height: 6px;
-        background: #4ade80;
-        border-radius: 50%;
-        display: inline-block;
-        box-shadow: 0 0 10px #4ade80;
-    }
-    .float-wa {
-        position: fixed;
-        bottom: 30px;
-        right: 110px;
-        background: linear-gradient(135deg, #25D366, #128C7E);
-        color: white;
-        width: 65px;
-        height: 65px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 15px 40px rgba(37, 211, 102, 0.4);
-        z-index: 100005;
-        cursor: pointer;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .float-wa:hover { transform: scale(1.15) rotate(15deg); box-shadow: 0 20px 50px rgba(37, 211, 102, 0.6); }
-    
-    @media (max-width: 768px) {
-        .wa-hub { width: calc(100% - 40px); right: 20px; bottom: 100px; border-radius: 25px; }
-        .float-wa { width: 55px; height: 55px; bottom: 25px; right: 110px; }
-        .wa-hub-item { padding: 18px 20px; }
-    }
-  </style>
-
-  <script>
-    function toggleWaHub() {
-        const hub = document.getElementById('waHub');
-        hub.classList.toggle('active');
-    }
-
-    // Auto-detect GeoIP and switch to USD if outside India
-    document.addEventListener("DOMContentLoaded", () => {
-        fetch('https://ipapi.co/json/')
-            .then(res => res.json())
-            .then(data => {
-                if (data.country_code && data.country_code !== 'IN') {
-                    if (typeof currentCurrency !== 'undefined' && currentCurrency === 'INR' && typeof toggleCurrency === 'function') {
-                        // Switch knob and prices to USD
-                        toggleCurrency();
-                    }
-                }
-            })
-            .catch(err => console.log('GeoIP detection failed'));
-    });
-  </script>
-
-
-
-
-
-
-<!-- QUICK RFQ MODAL -->
-  <div id="rfqModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(10px); z-index: 999999; justify-content: center; align-items: center;">
-      <div style="background: #0f172a; border: 1px solid rgba(212,175,55,0.4); border-radius: 20px; padding: 40px; max-width: 500px; width: 90%; box-shadow: 0 20px 50px rgba(0,0,0,0.8); position: relative;">
-          <div onclick="document.getElementById('rfqModal').style.display='none';" style="position: absolute; top: 20px; right: 20px; color: #cbd5e1; cursor: pointer; font-size: 1.5rem;">✕</div>
-          <h3 style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 20px;">Post Live Order</h3>
-          <p style="color: #94a3b8; margin-bottom: 10px; font-size: 0.95rem;">Instantly broadcast your buy requirement to our vetted suppliers.</p>
-
-<div style="margin-bottom: 25px; padding: 10px; background: rgba(220, 38, 38, 0.1); border: 1px solid rgba(220, 38, 38, 0.3); border-radius: 8px; display: flex; align-items: center; gap: 10px;">
-    <span style="display: inline-block; width: 8px; height: 8px; background: #ef4444; border-radius: 50%; box-shadow: 0 0 8px #ef4444; animation: pulse 1.5s infinite;"></span>
-    <span style="color: #fca5a5; font-size: 13px; font-weight: 600;" id="liveViewerCount">-- Exporters currently active and ready to quote</span>
-</div>
-<script>
-    // Random viewer count logic (sometimes over 1000)
-    document.addEventListener("DOMContentLoaded", function() {
-        const countEl = document.getElementById("liveViewerCount");
-        if(countEl) {
-            const isHigh = Math.random() > 0.7; // 30% chance to be over 1000
-            const count = isHigh ? Math.floor(Math.random() * 500) + 1000 : Math.floor(Math.random() * 800) + 100;
-            countEl.innerText = count.toLocaleString() + " Exporters currently active and ready to quote";
-        }
-    });
-</script>
-
-          <form onsubmit="handleQuickRFQ(event)" style="display: flex; flex-direction: column; gap: 15px;">
-              <div class="rfq-flex" style="display: flex; gap: 15px;">
-                  <input type="text" id="qr_name" placeholder="Your Name" required style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
-                  <input type="text" id="qr_company" placeholder="Business Name" required style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
-              </div>
-              <input type="text" id="qr_whatsapp" placeholder="WhatsApp Number (with country code)" required pattern="^\+.*" title="Must start with + and include country code" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
-              <input type="text" id="qr_product" placeholder="Product Name (e.g., Basmati Rice)" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
-              <div class="rfq-flex" style="display: flex; gap: 15px;">
-                  <input type="number" id="qr_qty" placeholder="Quantity" required style="flex: 2; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
-                  <select id="qr_unit" required style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
-                      <option value="MT">MT</option>
-                      <option value="KG">KG</option>
-                      <option value="Units">Units</option>
-                      <option value="Containers">Containers</option>
-                  </select>
-              </div>
-              <input type="text" id="qr_dest" placeholder="Destination Port (e.g., Jebel Ali, Dubai)" required style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none;">
-              <textarea id="qr_specs" placeholder="Any Specifications Required (Optional)" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: #fff; font-size: 1rem; outline: none; min-height: 80px; resize: vertical;"></textarea>
-              <button type="submit" id="qr_btn" style="background: linear-gradient(90deg, var(--gold), #facc15); color: #000; font-weight: 900; padding: 15px; border: none; border-radius: 10px; font-size: 1.1rem; cursor: pointer; text-transform: uppercase; margin-top: 10px; transition: 0.3s; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);">Secure Verification</button>
-          </form>
-      </div>
-  </div>
-
-  <!-- Desktop Floating WhatsApp -->
-  <style>
-    .desktop-wa-btn { display: none; }
-    @media (min-width: 769px) { .desktop-wa-btn { display: flex; } }
-  </style>
-  <a href="https://wa.me/919990332340" target="_blank" class="desktop-wa-btn" style="position: fixed; bottom: 20px; right: 110px; background-color: #25d366; color: white; border-radius: 50%; width: 60px; height: 60px; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 9999; text-decoration: none; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.1)';" onmouseout="this.style.transform='scale(1)';">
-    <svg viewBox="0 0 32 32" width="35" height="35" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M16.002 0c-8.837 0-16.002 7.163-16.002 16.002 0 2.825.74 5.485 2.053 7.765l-2.053 8.233 8.431-2.036c2.253 1.183 4.815 1.838 7.571 1.838 8.835 0 16-7.163 16-16.002s-7.165-16-16-16zm7.989 22.842c-.328.922-1.895 1.768-2.617 1.838-.667.065-1.503.111-4.22-.989-3.479-1.41-5.744-5.011-5.918-5.244-.175-.233-1.41-1.879-1.41-3.585s.891-2.545 1.199-2.871c.309-.327.671-.409.896-.409.224 0 .448 0 .638.009.202.01.472-.078.741.564.281.671.961 2.348 1.045 2.518.084.17.14.368.028.591-.111.224-.17.368-.337.564-.17.197-.351.428-.501.591-.17.183-.352.383-.146.741.206.357.917 1.517 1.972 2.456 1.359 1.209 2.492 1.579 2.843 1.748.351.17.558.14.764-.093.206-.233.885-1.033 1.122-1.388.238-.356.475-.297.801-.176.327.121 2.062.973 2.417 1.149.356.176.593.264.679.41.084.146.084.85-.244 1.771z"/></svg>
-  </a>
-
-  <!-- Google Translate Scripts -->
-  <script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-  }
-  </script>
-  
-
-  <!-- Post Live Order Logic -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, addDoc, serverTimestamp, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-      authDomain: "apd-globaltrade-prod.firebaseapp.com",
-      projectId: "apd-globaltrade-prod",
-      storageBucket: "apd-globaltrade-prod.firebasestorage.app",
-      messagingSenderId: "226407312435",
-      appId: "1:226407312435:web:f8a54b1132af3899170746"
     };
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    // AUTOCOMPLETE LOGIC
-    (async function initSearchAutocomplete() {
-        try {
-            const snap = await getDocs(collection(db, "rfqs"));
-            const suggestions = new Set();
-            snap.forEach(doc => {
-                const data = doc.data();
-                if(data.product) suggestions.add(data.product.trim());
-                if(data.destination) suggestions.add(data.destination.trim());
-            });
-            const datalist = document.createElement('datalist');
-            datalist.id = 'searchSuggestions';
-            suggestions.forEach(item => {
-                const option = document.createElement('option');
-                option.value = item;
-                datalist.appendChild(option);
-            });
-            document.body.appendChild(datalist);
-        } catch (err) {
-            console.error("Autocomplete init failed:", err);
-        }
-    })();
-
-    window.handleQuickRFQ = async function(e) {
+    // HANDLE POST-PAYMENT LEGAL ONBOARDING DOCKET SUBMISSION
+    window.handleOnboardingSubmit = async function(e) {
         e.preventDefault();
-        const btn = document.getElementById("qr_btn");
-        btn.innerText = "Securing Order...";
-        btn.disabled = true;
+        const btn = document.getElementById('btnSubmitDocket');
+        const err = document.getElementById('docketError');
 
-        const product = document.getElementById("qr_product").value;
-        const qty = document.getElementById("qr_qty").value + " " + document.getElementById("qr_unit").value;
-        const dest = document.getElementById("qr_dest").value;
+        if (!document.getElementById('o_legal_agree').checked) {
+            err.innerText = "Please accept the Master Legal Terms & Conditions.";
+            err.style.display = "block";
+            return;
+        }
+
+        btn.innerText = 'Lodging Legal Application Docket...';
+        btn.disabled = true;
+        err.style.display = "none";
+
+        const refId = 'APD-FMCG-' + Math.floor(100000 + Math.random() * 900000);
+
+        const docketData = {
+            referenceId: refId,
+            firmName: document.getElementById('o_firm').value,
+            constitution: document.getElementById('o_constitution').value,
+            gstin: document.getElementById('o_gst').value,
+            pan: document.getElementById('o_pan').value,
+            signatory: document.getElementById('o_signatory').value,
+            mobile: document.getElementById('o_mobile').value,
+            warehouseSqFt: document.getElementById('o_sqft').value,
+            warehouseOwnership: document.getElementById('o_ownership').value,
+            warehouseAddress: document.getElementById('o_warehouse_addr').value,
+            pincodes: document.getElementById('o_pincodes').value,
+            vehicles: document.getElementById('o_vehicles').value,
+            paymentMode: document.getElementById('o_paymode').value,
+            paymentUtr: document.getElementById('o_utr').value,
+            digitalSignature: document.getElementById('o_signature').value,
+            serviceFeePaid: 21000,
+            status: "Lodged - Queued for ASM Review",
+            timestamp: serverTimestamp()
+        };
 
         try {
-            // Save it to Firebase as pending
-            const docRef = await addDoc(collection(db, "rfqs"), {
-                buyerName: document.getElementById("qr_name").value,
-                company: document.getElementById("qr_company").value,
-                whatsapp: document.getElementById("qr_whatsapp").value,
-                product: product,
-                quantity: qty,
-                destination: dest,
-                specifications: document.getElementById("qr_specs").value,
-                status: "payment_pending",
-                source: "homepage_quick",
-                deposit: "refundable",
-                createdAt: serverTimestamp()
-            });
+            await addDoc(collection(db, "fmcg_onboarding_agreements"), docketData);
 
-            // Redirect to custom payment for the refundable deposit
-            const isUSD = document.body.classList && document.body.classList.contains('currency-usd');
-            const amount = isUSD ? 25 : 2000;
-            const currency = isUSD ? 'USD' : 'INR';
+            document.getElementById('onboardingForm').style.display = 'none';
+            document.getElementById('dispRefId').innerText = refId;
             
-            // Redirect to the payment page
-            window.location.href = `/membership.html`;
-            return;
-        } catch (err) {
-            alert('Error initiating verification: ' + err.message);
-            btn.innerText = "Secure Verification & Post";
+            const waText = encodeURIComponent(
+                `Hello APD Global Trade Desk, I have completed the ₹21,000 FMCG Distributorship Legal Agreement for ${docketData.firmName}. My Application Docket ID is ${refId}. UTR: ${docketData.paymentUtr}. Please schedule my ASM territory audit.`
+            );
+            document.getElementById('btnWhatsappDesk').href = `https://wa.me/919266418868?text=${waText}`;
+
+            document.getElementById('docketSuccessView').style.display = 'block';
+            document.getElementById('docketSuccessView').scrollIntoView({ behavior: 'smooth' });
+        } catch (error) {
+            console.error("Docket submission error:", error);
+            err.innerText = "Submission Error. Please check fields or contact our WhatsApp Trade Desk.";
+            err.style.display = "block";
+            btn.innerText = 'SUBMIT LEGAL ONBOARDING DOCKET & ALLOCATION FILE';
             btn.disabled = false;
         }
     };
-  </script>
 
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6abfcc62beb8e034c00dd833/1k3ujcoou';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+    // ON PAGE LOAD: CHECK URL PARAMETERS (?brand=bisleri or ?step=2 or ?payment=success)
+    document.addEventListener("DOMContentLoaded", function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const brandParam = urlParams.get('brand');
+        const stepParam = urlParams.get('step');
+        const paymentParam = urlParams.get('payment');
+
+        if (brandParam) {
+            window.selectBrandForApplication(brandParam);
+        }
+
+        if (stepParam === '2' || paymentParam === 'success') {
+            window.switchStep(2);
+        }
+
+        // Try to pre-fill Step 2 if prelim data exists
+        const cached = sessionStorage.getItem('apd_fmcg_prelim');
+        if (cached) {
+            try {
+                const p = JSON.parse(cached);
+                if (document.getElementById('o_signatory')) document.getElementById('o_signatory').value = p.name || '';
+                if (document.getElementById('o_mobile')) document.getElementById('o_mobile').value = p.whatsapp || '';
+                if (document.getElementById('o_warehouse_addr')) document.getElementById('o_warehouse_addr').value = p.location || '';
+            } catch(e) {}
+        }
+    });
+  </script>
 
 </body>
-
 </html>
