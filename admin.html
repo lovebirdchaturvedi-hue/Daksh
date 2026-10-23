@@ -37,7 +37,30 @@ footer{
   background:#020617;color:#9ca3af;
   text-align:center;padding:40px 20px;font-size:14px
 }
+/* ADMIN MOBILE PWA */
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column !important;
+    gap: 12px !important;
+    text-align: center !important;
+    padding: 12px 15px !important;
+  }
+  .container {
+    margin: 15px auto 85px auto !important;
+    padding: 10px !important;
+    border-radius: 8px !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  table {
+    min-width: 650px !important;
+  }
+}
 </style>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#020617">
+    <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
+    <script src="/assets/js/mobile-pwa.js" defer></script>
 </head>
 
 <body>

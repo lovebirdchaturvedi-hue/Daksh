@@ -519,7 +519,138 @@ header {
     50% { opacity: 1; }
     100% { opacity: 0.6; }
 }
+
+/* ============================================================ */
+/* ULTRA-PREMIUM MOBILE OPTIMIZATIONS (APP EXPERIENCE)         */
+/* ============================================================ */
+.header-mobile-btns {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 10px 4% !important;
+    }
+    .nav-links {
+        display: none !important;
+    }
+    .header-mobile-btns {
+        display: flex !important;
+        align-items: center;
+        gap: 8px;
+    }
+    .top-bar {
+        font-size: 11px !important;
+        padding: 6px 4% !important;
+        justify-content: center !important;
+        text-align: center !important;
+    }
+    .top-bar > div:last-child {
+        display: none !important;
+    }
+    .hero-section {
+        padding: 25px 4% 20px 4% !important;
+    }
+    .hero-title {
+        font-size: 1.75rem !important;
+        line-height: 1.25 !important;
+    }
+    .hero-desc {
+        font-size: 13.5px !important;
+        line-height: 1.5 !important;
+        margin-bottom: 18px !important;
+    }
+    .fomo-stats-bar {
+        padding: 10px 14px !important;
+        gap: 10px !important;
+        font-size: 11px !important;
+        border-radius: 14px !important;
+        margin-bottom: 20px !important;
+    }
+    /* Smooth swipeable horizontal category pills */
+    .filter-tabs {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        justify-content: flex-start !important;
+        padding: 4px 5px 12px 5px !important;
+        margin-bottom: 20px !important;
+        gap: 6px !important;
+        scrollbar-width: none;
+    }
+    .filter-tabs::-webkit-scrollbar {
+        display: none;
+    }
+    .tab-btn {
+        flex-shrink: 0 !important;
+        padding: 7px 14px !important;
+        font-size: 12px !important;
+        border-radius: 20px !important;
+    }
+    .container {
+        padding: 0 10px 90px 10px !important;
+    }
+    .rfq-card {
+        padding: 18px 14px !important;
+        border-radius: 16px !important;
+        margin-bottom: 18px !important;
+    }
+    .rfq-title {
+        font-size: 18px !important;
+        line-height: 1.3 !important;
+    }
+    .fomo-urgency-strip {
+        padding: 7px 10px !important;
+        font-size: 11px !important;
+    }
+    .specs-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        padding: 12px !important;
+    }
+    .spec-item {
+        font-size: 12px !important;
+    }
+    .gated-paywall {
+        padding: 16px 14px !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 14px !important;
+    }
+    .buyer-masked-info {
+        min-width: 0 !important;
+        width: 100% !important;
+    }
+    .paywall-actions {
+        width: 100% !important;
+        flex-direction: column !important;
+    }
+    .btn-unlock-gold, .btn-login-unlock {
+        width: 100% !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+        padding: 12px 16px !important;
+        font-size: 13px !important;
+    }
+    #liveMatchToast {
+        bottom: 76px !important;
+        left: 10px !important;
+        right: 10px !important;
+        max-width: calc(100% - 20px) !important;
+        padding: 12px 14px !important;
+        font-size: 12px !important;
+    }
+}
 </style>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#020617">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="APD Trade">
+    <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/icon-192.png">
+    <script src="/assets/js/mobile-pwa.js" defer></script>
 </head>
 <body>
 

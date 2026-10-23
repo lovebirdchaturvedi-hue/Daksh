@@ -1,20 +1,49 @@
 {
-  "name": "APD Global Trade – Supplier App",
+  "name": "APD Global Trade – Institutional B2B Network",
   "short_name": "APD Trade",
-  "start_url": "/supplier-login.html",
+  "description": "The Verified Corridor for Cross-Border B2B Trade & Commodity Procurement",
+  "start_url": "/public-rfqs.html",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#020617",
   "theme_color": "#020617",
   "icons": [
     {
       "src": "/assets/icons/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/assets/icons/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
-  ]
+  ],
+  "shortcuts": [
+    {
+      "name": "Live RFQs",
+      "short_name": "RFQs",
+      "description": "View live commodity buying orders",
+      "url": "/public-rfqs.html",
+      "icons": [{ "src": "/assets/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Supplier Portal",
+      "short_name": "Login",
+      "description": "Access supplier trade panel",
+      "url": "/supplier-login.html",
+      "icons": [{ "src": "/assets/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Post Buy Order",
+      "short_name": "Post RFQ",
+      "description": "Submit commodity procurement requirement",
+      "url": "/create-rfq.html",
+      "icons": [{ "src": "/assets/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "categories": ["business", "finance", "shopping"]
 }

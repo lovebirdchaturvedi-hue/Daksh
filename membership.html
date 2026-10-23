@@ -273,7 +273,27 @@
     }
     @keyframes shimmer { to { background-position: 200% center; } }
     .countdown-box { display: inline-flex; gap: 10px; margin-left: 15px; font-family: monospace; font-size: 18px; }
-  </style>
+  
+/* MEMBERSHIP MOBILE PWA RESPONSIVENESS */
+.membership-plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+}
+@media (max-width: 768px) {
+    .membership-plans-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+        padding: 0 4px !important;
+    }
+    .plan {
+        padding: 30px 20px !important;
+        border-radius: 16px !important;
+    }
+    .price {
+        font-size: 34px !important;
+    }
+}
+</style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-EXRC4SWZ71"></script>
   <script>
@@ -294,6 +314,14 @@
       body.currency-inr .show-usd, body.currency-inr .show-usd-block { display: none !important; }
     </style>
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#020617">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="APD Trade">
+    <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/icon-192.png">
+    <script src="/assets/js/mobile-pwa.js" defer></script>
 </head>
 
 <body>
@@ -998,7 +1026,7 @@ Dashboard</a>
     </div>
 
     <div id="tab-memberships" class="tab-content active">
-        <div class="plans" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;">
+        <div class="plans membership-plans-grid" style="gap: 25px;">
             
             <!-- TIER 1: VERIFIED SUPPLIER ($299 / YR) -->
             <div class="plan" style="display: flex; flex-direction: column; background: #111827; border: 1px solid rgba(255,255,255,0.08); padding: 40px 35px; border-radius: 20px; text-align: left; position: relative;">
