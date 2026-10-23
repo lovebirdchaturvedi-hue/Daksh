@@ -43,10 +43,9 @@
     deferredPrompt = e;
     console.log('[APD PWA] Captured beforeinstallprompt event');
 
-    // Show floating install banner unless user dismissed it in this session
-    if (!isStandalone && !sessionStorage.getItem('apd_pwa_banner_dismissed')) {
-      showInstallBanner();
-    }
+    // Banner disabled per user request to prevent overlap with chat widgets
+    const oldBanner = document.getElementById('apd-pwa-install-banner');
+    if (oldBanner) oldBanner.remove();
 
     // Enable any custom install buttons across pages
     document.querySelectorAll('.pwa-install-trigger').forEach((btn) => {
@@ -80,78 +79,28 @@
       if (isIOS) {
         showIosInstructionsModal();
       } else {
-        showToast('ℹ️ To install: Open browser menu (⋮) and tap "Install app" or "Add to Home screen"');
+        showDesktopInstallModal();
       }
     }
   }
 
   function showInstallBanner() {
-    if (document.getElementById('apd-pwa-install-banner') || isStandalone) return;
-
-    const banner = document.createElement('div');
-    banner.id = 'apd-pwa-install-banner';
-    banner.innerHTML = `
-      <div class="apd-pwa-content">
-        <div class="apd-pwa-icon">
-          <img src="/assets/icons/icon-192.png" alt="APD App" width="38" height="38" style="border-radius:10px;">
-        </div>
-        <div class="apd-pwa-text">
-          <div class="apd-pwa-title">APD Global Trade App</div>
-          <div class="apd-pwa-subtitle">Instant Buyer Inquiries • Live RFQs • Fast Portal</div>
-        </div>
-        <div class="apd-pwa-actions">
-          <button id="apd-pwa-btn-install" class="apd-pwa-install-btn">Install App</button>
-          <button id="apd-pwa-btn-close" class="apd-pwa-close-btn" aria-label="Dismiss">✕</button>
-        </div>
-      </div>
-    `;
-
-    document.body.appendChild(banner);
-
-    document.getElementById('apd-pwa-btn-install').addEventListener('click', () => {
-      triggerPwaInstall();
-    });
-
-    document.getElementById('apd-pwa-btn-close').addEventListener('click', () => {
-      hideInstallBanner();
-      sessionStorage.setItem('apd_pwa_banner_dismissed', '1');
-    });
+    // Completely disabled per user instruction: no app banners that cover UI
+    const existing = document.getElementById('apd-pwa-install-banner');
+    if (existing) existing.remove();
   }
 
   function hideInstallBanner() {
     const banner = document.getElementById('apd-pwa-install-banner');
-    if (banner) {
-      banner.style.opacity = '0';
-      banner.style.transform = 'translateY(100%)';
-      setTimeout(() => banner.remove(), 300);
-    }
+    if (banner) banner.remove();
   }
 
   function showIosInstructionsModal() {
-    let modal = document.getElementById('apd-ios-pwa-modal');
-    if (!modal) {
-      modal = document.createElement('div');
-      modal.id = 'apd-ios-pwa-modal';
-      modal.innerHTML = `
-        <div class="apd-ios-modal-backdrop"></div>
-        <div class="apd-ios-modal-box">
-          <div style="font-size:32px; margin-bottom:10px;">📲</div>
-          <h3 style="color:#fff; font-size:18px; font-weight:800; margin-bottom:8px;">Install APD Trade on iPhone / iPad</h3>
-          <p style="color:#94a3b8; font-size:13px; line-height:1.6; margin-bottom:18px;">
-            Enjoy instant full-screen access to Live RFQs and the Trade Desk without opening Safari each time:
-          </p>
-          <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.3); border-radius:12px; padding:14px; text-align:left; font-size:13px; color:#cbd5e1; margin-bottom:18px;">
-            <div style="margin-bottom:8px;">1. Tap the <b>Share</b> button <span style="font-size:16px;">⎋</span> at the bottom of Safari.</div>
-            <div style="margin-bottom:8px;">2. Scroll down and tap <b>'Add to Home Screen'</b> <span style="font-size:16px;">⊞</span>.</div>
-            <div>3. Tap <b>'Add'</b> in the top-right corner.</div>
-          </div>
-          <button id="apd-ios-modal-close" style="background:var(--gold,#d4af37); color:#000; border:none; font-weight:900; font-size:14px; padding:12px 28px; border-radius:50px; cursor:pointer; width:100%;">Got It</button>
-        </div>
-      `;
-      document.body.appendChild(modal);
-      modal.querySelector('#apd-ios-modal-close').addEventListener('click', () => modal.remove());
-      modal.querySelector('.apd-ios-modal-backdrop').addEventListener('click', () => modal.remove());
-    }
+    // Disabled per user instruction
+  }
+
+  function showDesktopInstallModal() {
+    // Disabled per user instruction
   }
 
   function showToast(message) {
@@ -236,9 +185,11 @@
     const style = document.createElement('style');
     style.id = 'apd-pwa-styles';
     style.textContent = `
-      /* PWA Floating Install Banner */
+      /* PWA Floating Install Banner (Disabled per user request) */
       #apd-pwa-install-banner {
-        position: fixed;
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
         bottom: 74px;
         left: 12px;
         right: 12px;
@@ -311,9 +262,10 @@
       @media (min-width: 769px) {
         #apd-pwa-install-banner {
           bottom: 25px;
-          left: auto;
-          right: 25px;
-          width: 380px;
+          left: 95px;
+          right: auto;
+          width: 360px;
+          z-index: 9999;
         }
       }
 

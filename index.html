@@ -537,8 +537,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="APD Trade">
     <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/icon-192.png">
-    <script src="/assets/js/mobile-pwa.js" defer></script>
+    <!-- PWA engine disabled per user instruction to ensure zero floating widget interference -->
 
 <style>
 /* ============================================================ */
@@ -606,18 +605,25 @@
 
   
   <!-- ============================================================ -->
-  <!-- EXECUTIVE 3D PILL ACTION BAR (ZERO OVERLAP) -->
+  <!-- EXECUTIVE 3D PILL ACTION BAR (COMPACT & 100% RESPONSIVE) -->
   <!-- ============================================================ -->
-  <div style="background: rgba(2, 6, 23, 0.98); border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding: 8px 5%; display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; z-index: 99998; position: relative;">
-      <a href="/buyer-rfqs.html" style="background: linear-gradient(90deg, #ef4444, #b91c1c); color: #fff !important; padding: 15px 30px !important; border-radius: 50px; font-weight: 900 !important; font-size: 20px !important; display: inline-flex; align-items: center; gap: 10px; border: 2px solid #fff; box-shadow: 0 0 30px rgba(239, 68, 68, 1); animation: heavyBlink 1.5s infinite; text-shadow: 0 2px 5px rgba(0,0,0,0.8); text-transform: uppercase;">
-          <span style="width: 12px; height: 12px; background: #fff; border-radius: 50%; animation: pulse 0.5s infinite;"></span>
-           LIVE BUYER ORDERS (1,500+) 
+  <div style="background: rgba(2, 6, 23, 0.98); border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding: 7px 3%; display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: nowrap; overflow-x: auto; z-index: 99998; position: relative;">
+      <a href="/buyer-rfqs.html" style="background: linear-gradient(90deg, #ef4444, #b91c1c); color: #fff !important; padding: 7px 16px !important; border-radius: 50px; font-weight: 800 !important; font-size: 12px !important; display: inline-flex; align-items: center; gap: 6px; border: 1px solid #f87171; box-shadow: 0 0 15px rgba(239, 68, 68, 0.6); animation: heavyBlink 1.5s infinite; text-transform: uppercase; white-space: nowrap; text-decoration: none;">
+          <span style="width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: pulse 0.5s infinite;"></span>
+          🔴 LIVE BUYER ORDERS (1,500+) 
       </a>
-      <a href="/franchise.html" style="background: linear-gradient(135deg, #0284c7, #0369a1); color: #fff; padding: 10px 22px; font-weight: 900; font-size: 0.85rem; border-radius: 50px; letter-spacing: 0.5px; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.45), inset 0 2px 4px rgba(255, 255, 255, 0.3); text-decoration: none; text-transform: uppercase; white-space: nowrap; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">🏪 GET FMCG SERVICES</a>
-      <a href="/create-rfq.html" style="background: linear-gradient(180deg, #22c55e, #166534); color: #fff; padding: 8px 20px; font-weight: 800; font-size: 0.8rem; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.4); text-shadow: 0 1px 2px rgba(0,0,0,0.5); text-decoration: none; white-space: nowrap; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"> ACTIVE RFQs  ORDER</a>
-      <a href="/membership.html" style="background: linear-gradient(180deg, #facc15, #8B6508); color: #000; padding: 8px 20px; font-weight: 800; font-size: 0.8rem; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.6); text-shadow: 0 1px 2px rgba(255,255,255,0.5); text-decoration: none; white-space: nowrap; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">GET INSTANT BUYER</a>
-      <a href="/register-supplier.html" style="background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.4); color: #fff; padding: 8px 20px; font-weight: 700; font-size: 0.8rem; border-radius: 50px; letter-spacing: 0.5px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); text-decoration: none; white-space: nowrap; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Create Free Profile</a>
-      <a href="/register-buyer.html" style="background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid rgba(148, 163, 184, 0.4); color: #fff; padding: 8px 20px; font-weight: 700; font-size: 0.8rem; border-radius: 50px; letter-spacing: 0.5px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); text-decoration: none; text-transform: uppercase; white-space: nowrap; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"><span style="color:#60a5fa; margin-right: 4px;">✦</span> BECOME A VERIFIED BUYER</a>
+      <a href="/franchise.html" style="background: linear-gradient(135deg, #0284c7, #0369a1); color: #fff; padding: 7px 16px; font-weight: 800; font-size: 12px; border-radius: 50px; letter-spacing: 0.5px; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4); text-decoration: none; text-transform: uppercase; white-space: nowrap; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+          🏪 GET FMCG SERVICES
+      </a>
+      <a href="/create-rfq.html" style="background: linear-gradient(180deg, #22c55e, #166534); color: #fff; padding: 7px 15px; font-weight: 700; font-size: 11.5px; border-radius: 50px; text-transform: uppercase; letter-spacing: 0.5px; text-decoration: none; white-space: nowrap; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+          📋 POST LIVE ORDER
+      </a>
+      <a href="/membership.html" style="background: linear-gradient(180deg, #facc15, #8B6508); color: #000; padding: 7px 15px; font-weight: 800; font-size: 11.5px; border-radius: 50px; text-transform: uppercase; letter-spacing: 0.5px; text-decoration: none; white-space: nowrap; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+          ⚡ GET INSTANT BUYER
+      </a>
+      <a href="/supplier-login.html" style="background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(212, 175, 55, 0.4); color: var(--gold); padding: 7px 15px; font-weight: 700; font-size: 11.5px; border-radius: 50px; text-decoration: none; white-space: nowrap; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+          🏢 SUPPLIER PORTAL
+      </a>
   </div>
 
   
@@ -767,15 +773,12 @@
               </div>
           </div>
       </div>
-      <a href="/buyer-rfqs.html" style="background: linear-gradient(90deg, #ef4444, #b91c1c); color: #fff !important; padding: 15px 30px !important; border-radius: 50px; font-weight: 900 !important; font-size: 20px !important; display: inline-flex; align-items: center; gap: 10px; border: 2px solid #fff; box-shadow: 0 0 30px rgba(239, 68, 68, 1); animation: heavyBlink 1.5s infinite; text-shadow: 0 2px 5px rgba(0,0,0,0.8); text-transform: uppercase;">
-          <span style="width: 12px; height: 12px; background: #fff; border-radius: 50%; animation: pulse 0.5s infinite;"></span>
-           LIVE BUYER ORDERS (1,500+) 
-      </a>
-      <a href="/create-rfq.html" style="color: var(--gold) !important; font-weight: 700 !important;">Post Live Order <span style="background: rgba(212,175,55,0.2); color: var(--gold); border: 1px solid rgba(212,175,55,0.4); font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; margin-left: 4px; vertical-align: middle;">FREE</span></a>
+      <a href="/buyer-rfqs.html" style="color: #ef4444 !important; font-weight: 700 !important;">🔴 Live RFQs</a>
+      <a href="/create-rfq.html" style="color: var(--gold) !important; font-weight: 700 !important;">Post Order <span style="background: rgba(212,175,55,0.2); color: var(--gold); border: 1px solid rgba(212,175,55,0.4); font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; margin-left: 4px; vertical-align: middle;">FREE</span></a>
       <a href="/suppliers.html">Suppliers</a>
       <a href="/learn-exporting.html">Learn Exporting</a>
-      <a href="/membership.html" style="background: linear-gradient(135deg, #d4af37, #b8860b) !important; color: #020617 !important; padding: 8px 18px !important; border-radius: 30px !important; font-weight: 700 !important; margin-left: 8px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);">Membership</a>
-      <a href="/franchise.html" style="background: linear-gradient(135deg, #0284c7, #0369a1) !important; color: #fff !important; padding: 7px 16px !important; border-radius: 30px !important; font-weight: 800 !important; font-size: 12.5px !important; text-transform: uppercase !important; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4); text-decoration: none !important; margin-left: 6px;">🏪 GET FMCG SERVICES</a>
+      <a href="/membership.html" style="background: linear-gradient(135deg, #d4af37, #b8860b) !important; color: #020617 !important; padding: 7px 16px !important; border-radius: 30px !important; font-weight: 700 !important; margin-left: 6px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);">Membership</a>
+      <a href="/franchise.html" style="color: #38bdf8 !important; font-weight: 700 !important; margin-left: 4px;">🏪 FMCG</a>
       <a href="/contact.html">Contact</a>
     
       <!-- MINI SEARCH BAR (Shown on scroll via JS) -->
@@ -3901,7 +3904,7 @@ body { top: 0 !important; }
     .desktop-wa-btn { display: none; }
     @media (min-width: 769px) { .desktop-wa-btn { display: flex; } }
   </style>
-  <a href="https://wa.me/919990332340" target="_blank" class="desktop-wa-btn" style="position: fixed; bottom: 20px; right: 110px; background-color: #25d366; color: white; border-radius: 50%; width: 60px; height: 60px; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 9999; text-decoration: none; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.1)';" onmouseout="this.style.transform='scale(1)';">
+  <a href="https://wa.me/919990332340" target="_blank" class="desktop-wa-btn" style="position: fixed; bottom: 95px; right: 20px; background-color: #25d366; color: white; border-radius: 50%; width: 60px; height: 60px; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 9999; text-decoration: none; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.1)';" onmouseout="this.style.transform='scale(1)';">
     <svg viewBox="0 0 32 32" width="35" height="35" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M16.002 0c-8.837 0-16.002 7.163-16.002 16.002 0 2.825.74 5.485 2.053 7.765l-2.053 8.233 8.431-2.036c2.253 1.183 4.815 1.838 7.571 1.838 8.835 0 16-7.163 16-16.002s-7.165-16-16-16zm7.989 22.842c-.328.922-1.895 1.768-2.617 1.838-.667.065-1.503.111-4.22-.989-3.479-1.41-5.744-5.011-5.918-5.244-.175-.233-1.41-1.879-1.41-3.585s.891-2.545 1.199-2.871c.309-.327.671-.409.896-.409.224 0 .448 0 .638.009.202.01.472-.078.741.564.281.671.961 2.348 1.045 2.518.084.17.14.368.028.591-.111.224-.17.368-.337.564-.17.197-.351.428-.501.591-.17.183-.352.383-.146.741.206.357.917 1.517 1.972 2.456 1.359 1.209 2.492 1.579 2.843 1.748.351.17.558.14.764-.093.206-.233.885-1.033 1.122-1.388.238-.356.475-.297.801-.176.327.121 2.062.973 2.417 1.149.356.176.593.264.679.41.084.146.084.85-.244 1.771z"/></svg>
   </a>
 
@@ -4147,7 +4150,7 @@ s0.parentNode.insertBefore(s1,s0);
 </div>
 
 <!-- AUTOMATED MATCH INTELLIGENCE ALERT TOAST -->
-<div id="matchAlertToast" style="position: fixed; bottom: 30px; left: 30px; z-index: 999999; background: rgba(15, 23, 42, 0.95); border: 1px solid var(--gold); border-radius: 16px; padding: 16px 20px; max-width: 380px; box-shadow: 0 15px 35px rgba(0,0,0,0.7), 0 0 20px rgba(212,175,55,0.25); display: flex; align-items: flex-start; gap: 14px; backdrop-filter: blur(15px); transition: all 0.5s ease; transform: translateY(150px); opacity: 0;">
+<div id="matchAlertToast" style="position: fixed; bottom: 95px; left: 25px; z-index: 999999; background: rgba(15, 23, 42, 0.95); border: 1px solid var(--gold); border-radius: 16px; padding: 16px 20px; max-width: 380px; box-shadow: 0 15px 35px rgba(0,0,0,0.7), 0 0 20px rgba(212,175,55,0.25); display: flex; align-items: flex-start; gap: 14px; backdrop-filter: blur(15px); transition: all 0.5s ease; transform: translateY(150px); opacity: 0;">
     <div style="width: 38px; height: 38px; border-radius: 50%; background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; animation: pulse 1s infinite;">
         🚨
     </div>
