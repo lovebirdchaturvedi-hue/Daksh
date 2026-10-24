@@ -692,8 +692,8 @@ btn.addEventListener("click", async () => {
       allProducts: selectedProducts, // Full list of selections
       productsString: allProductsString,
       email: email.toLowerCase(),
-      status: "pending",
-      plan: "free",
+      status: "active",
+      plan: "buyer_free",
       role: "buyer",
       unlockedLeads: [],
       unlocksUsed: 0,
@@ -703,7 +703,7 @@ btn.addEventListener("click", async () => {
     });
 
     try {
-        const adminMsg = ` New Supplier Registered (Free Trial)!\nCompany: ${company}\nPhone: ${contact}\nEmail: ${email.toLowerCase()}\nProducts: ${allProductsString}`;
+        const adminMsg = `🛒 New Buyer Registered!\nCompany: ${company}\nPhone: ${contact}\nEmail: ${email.toLowerCase()}\nProducts: ${allProductsString}`;
         await fetch('/api/send', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -713,16 +713,15 @@ btn.addEventListener("click", async () => {
                 to: "+919990332340",
                 body: adminMsg
             })
-        });
+        }).catch(()=>{});
     } catch(e) { console.error("Notify Admin error", e); }
 
-    await signOut(auth);
-
-    successEl.textContent = "Application submitted securely. Awaiting institutional approval.";
+    successEl.style.color = "#38bdf8";
+    successEl.textContent = "✅ Buyer account created successfully! Directing to Live Trade Desk...";
 
     setTimeout(()=>{
-      location.href="/supplier-login.html";
-    },2000);
+      location.href = "/buyer-rfqs.html";
+    }, 1200);
 
   }catch(err){
     errorEl.textContent = err.message;

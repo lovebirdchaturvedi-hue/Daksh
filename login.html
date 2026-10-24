@@ -586,20 +586,27 @@ body {
                 <div id="error" class="error-msg"></div>
 
                 <div class="divider">
-                    <span>Or</span>
+                    <span>New to APD Global Trade?</span>
                 </div>
 
-                <a href="https://wa.me/919266418868?text=Hi%2C%20I%20want%20to%20login%20via%20OTP%20for%20my%20APD%20Global%20Trade%20account." target="_blank" class="btn-otp">
-                    <span>💬</span> Login / Registration with WhatsApp OTP
-                </a>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <a href="/register-supplier.html" id="linkRegSupplier" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 15px; background: rgba(212, 175, 55, 0.12); color: #facc15; border: 1.5px solid rgba(212, 175, 55, 0.55); border-radius: 10px; font-weight: 800; font-size: 13.5px; text-decoration: none; box-sizing: border-box; transition: all 0.2s;" onmouseover="this.style.background='rgba(212,175,55,0.22)'" onmouseout="this.style.background='rgba(212,175,55,0.12)'">
+                        <span>🏢</span> Register as Supplier (Free Instant Access)
+                    </a>
+                    <a href="/register-buyer.html" id="linkRegBuyer" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px 15px; background: rgba(56, 189, 248, 0.1); color: #38bdf8; border: 1.5px solid rgba(56, 189, 248, 0.45); border-radius: 10px; font-weight: 800; font-size: 13.5px; text-decoration: none; box-sizing: border-box; transition: all 0.2s;" onmouseover="this.style.background='rgba(56,189,248,0.2)'" onmouseout="this.style.background='rgba(56,189,248,0.1)'">
+                        <span>🛒</span> Register as Buyer (Post RFQ Free)
+                    </a>
+                </div>
 
             </form>
 
-            <div class="auth-footer" id="authFooterLinks">
-                Don't have an account?<br>
-                <a href="/register-supplier.html" id="linkRegSupplier" style="color:#facc15;">Register as Supplier</a>
-                <span style="color:#475569; margin: 0 6px;">|</span>
-                <a href="/register-buyer.html" id="linkRegBuyer" style="color:#38bdf8;">Register as Buyer (Free)</a>
+            <div class="auth-footer" id="authFooterLinks" style="margin-top: 20px;">
+                <p style="margin: 0; font-size: 12.5px; color: #94a3b8;">
+                    Need help logging in? 
+                    <a href="https://wa.me/919266418868?text=Hi%2C%20I%20need%20assistance%20logging%20in%20to%20my%20APD%20Global%20Trade%20account." target="_blank" style="color: #4ade80; text-decoration: none; font-weight: 700; margin-left: 4px;">
+                        💬 Chat with Support on WhatsApp
+                    </a>
+                </p>
             </div>
 
         </div>
