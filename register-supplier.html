@@ -338,9 +338,9 @@ footer a { color: rgba(255,255,255,0.5); text-decoration: none; margin: 0 5px; }
   <h1>Supplier Registration</h1>
   <p class="subtitle">Establish your Institutional Profile to access 5M+ Verified Global Buyers.</p>
   
-  <div style="background: rgba(212, 175, 55, 0.1); border: 1px dashed var(--gold); border-radius: 12px; padding: 15px; margin-bottom: 25px; text-align: center;">
-      <h3 style="margin: 0 0 5px 0; font-family: 'Playfair Display', serif; color: var(--gold); font-size: 18px; text-shadow: 1px 1px 0 #8B6508, 2px 2px 0 #5c4205;">Unlike others, we don't force memberships upfront.</h3>
-      <p style="margin: 0; font-size: 13px; color: #cbd5e1;">Take a <strong>3-Day Free Trial</strong>, unlock real buyers, see the value, and <em>then</em> decide.</p>
+  <div style="background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 12px; padding: 15px; margin-bottom: 25px; text-align: center;">
+      <h3 style="margin: 0 0 5px 0; font-family: 'Playfair Display', serif; color: var(--gold); font-size: 18px;">Instant Access to Live Global Buyer Requirements</h3>
+      <p style="margin: 0; font-size: 13px; color: #cbd5e1;">Register your company profile to browse verified procurement orders matching your commodity catalog.</p>
   </div>
 
   <input id="company" placeholder="Company Name">
@@ -711,7 +711,7 @@ btn.addEventListener("click", async () => {
       productsString: allProductsString,
       email: email.toLowerCase(),
       status: "active",
-      plan: "3_day_trial",
+      plan: "free",
       unlockedLeads: [],
       unlocksUsed: 0,
       targetMarket: selectedMarkets,
@@ -749,63 +749,7 @@ btn.addEventListener("click", async () => {
 });
 </script>
 
-<div style="margin: 60px auto 30px; max-width: 1000px; padding: 40px 30px; background: #0f172a; border: 2px solid #ef4444; border-radius: 20px; text-align: center; box-shadow: 0 0 30px rgba(239, 68, 68, 0.4); position: relative; overflow: hidden; animation: trial-pulse 2s infinite;">
-    <style>
-        @keyframes trial-pulse {
-            0% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.4); border-color: #ef4444; }
-            50% { box-shadow: 0 0 50px rgba(239, 68, 68, 0.8); border-color: #f87171; }
-            100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.4); border-color: #ef4444; }
-        }
-        .trial-box {
-            flex: 1; min-width: 300px; background: linear-gradient(180deg, #1e293b, #0f172a); border: 2px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 30px; display: flex; flex-direction: column; position: relative; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .trial-box:hover {
-            transform: translateY(-10px); border-color: #facc15; box-shadow: 0 20px 40px rgba(250, 204, 21, 0.2);
-        }
-        .trial-box-premium {
-            border-color: #facc15; box-shadow: 0 10px 30px rgba(250, 204, 21, 0.2);
-        }
-        .trial-box-premium::before {
-            content: 'MOST POPULAR'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #facc15; color: #000; font-size: 11px; font-weight: 800; padding: 4px 15px; border-radius: 20px; letter-spacing: 1px;
-        }
-    </style>
-    
-    <h3 style="color: #fff; font-size: 32px; font-weight: 800; margin-bottom: 30px;">🤔 <span style="color: #ef4444; text-shadow: 0 0 10px rgba(239, 68, 68, 0.8);">CONFUSED?</span> Start Small.</h3>
-    
-    <div style="display: flex; gap: 30px; justify-content: center; flex-wrap: wrap;">
-        
-        <!-- 3 BUYERS PLAN -->
-        <div class="trial-box">
-            <h4 style="color: #fff; font-size: 24px; font-weight: 800; margin-bottom: 10px;">Standard Compliance Audit</h4>
-            <p style="color: #facc15; font-size: 28px; font-weight: 900; margin-bottom: 15px; text-shadow: 0 2px 10px rgba(250,204,21,0.3);">
-                149 USD <span style="font-size: 14px; font-weight: 400; color: #94a3b8;">/</span> 9,999 INR
-            </p>
-            <p style="color: #94a3b8; font-size: 14px; margin-bottom: 25px; line-height: 1.5;">Entry-level compliance auditing and B2B matching for emerging exporters.</p>
-            <a href="/membership.html?plan=3buyers" class="btn" style="background: linear-gradient(135deg, #22c55e, #166534); color: #fff; font-weight: 800; font-size: 16px; padding: 15px 20px; border-radius: 50px; text-decoration: none; box-shadow: 0 4px 20px rgba(34, 197, 94, 0.5); border: 2px solid #4ade80; transition: transform 0.2s; margin-bottom: 15px; margin-top: auto;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                💳 GET STARTED NOW
-            </a>
-            <a href="https://wa.me/919990332340?text=Hi, I want to know more about the 3 Buyers Trial Plan (149 USD / 9999 INR)." class="btn" style="background: rgba(30, 41, 59, 0.8); color: #fff; font-weight: 700; font-size: 14px; padding: 12px 20px; border-radius: 50px; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(30, 41, 59, 0.8)'">
-                💬 WhatsApp Us
-            </a>
-        </div>
 
-        <!-- 5 BUYERS PLAN -->
-        <div class="trial-box trial-box-premium">
-            <h4 style="color: #fff; font-size: 24px; font-weight: 800; margin-bottom: 10px;">Enterprise Sourcing Portfolio</h4>
-            <p style="color: #facc15; font-size: 28px; font-weight: 900; margin-bottom: 15px; text-shadow: 0 2px 10px rgba(250,204,21,0.3);">
-                199 USD <span style="font-size: 14px; font-weight: 400; color: #94a3b8;">/</span> 14,900 INR
-            </p>
-            <p style="color: #94a3b8; font-size: 14px; margin-bottom: 25px; line-height: 1.5;">Comprehensive institutional matching, dedicated account management, and priority routing.</p>
-            <a href="/membership.html?plan=5buyers" class="btn" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: #fff; font-weight: 800; font-size: 16px; padding: 15px 20px; border-radius: 50px; text-decoration: none; box-shadow: 0 4px 20px rgba(59, 130, 246, 0.5); border: 2px solid #60a5fa; transition: transform 0.2s; margin-bottom: 15px; margin-top: auto;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                💳 GET STARTED NOW
-            </a>
-            <a href="https://wa.me/919990332340?text=Hi, I want to know more about the 5 Buyers Trial Plan (199 USD / 14900 INR)." class="btn" style="background: rgba(30, 41, 59, 0.8); color: #fff; font-weight: 700; font-size: 14px; padding: 12px 20px; border-radius: 50px; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(30, 41, 59, 0.8)'">
-                💬 WhatsApp Us
-            </a>
-        </div>
-
-    </div>
-</div>
 
 <footer>
   © 2026 APD GLOBAL TRADE · <a href="/terms.html">TERMS</a> · <a href="/privacy.html">PRIVACY</a>

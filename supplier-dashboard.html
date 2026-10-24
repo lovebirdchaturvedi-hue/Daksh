@@ -218,18 +218,10 @@ onAuthStateChanged(auth, async (user) => {
       'gold': 'Professional Pass'
     };
 
-    const PAID_PLANS = ["trial_3m", "pro_6m", "elite_12m", "premium", "platinum", "gold"];
+    const PAID_PLANS = ["trial_3m", "pro_6m", "elite_12m", "premium", "platinum", "gold", "paid_member"];
     const isPaid = PAID_PLANS.includes(s.plan);
-    const TRIAL_CREDITS = 3;
-    const unlocksUsed = s.unlocksUsed || 0;
-    let creditsLeft = isPaid ? 9999 : Math.max(0, TRIAL_CREDITS - unlocksUsed);
 
-    let planDisplay = planMap[s.plan] || "3-Day Free Trial";
-    if (isPaid) {
-      planDisplay += " · Unlimited Verified Leads";
-    } else {
-      planDisplay += ` · (${creditsLeft} free unlocks remaining)`;
-    }
+    let planDisplay = isPaid ? "⭐ Institutional Premium Member" : "Standard Account (Browse Only)";
     document.getElementById("plan").innerText = planDisplay;
 
     // Fetch Total Bids
@@ -254,17 +246,14 @@ onAuthStateChanged(auth, async (user) => {
                 badge.innerText = "⭐ Premium Member · Full Access";
                 badge.style.background = "#d4af37";
                 badge.style.color = "#000";
-            } else if (creditsLeft > 0) {
-                badge.innerText = `🔓 ${creditsLeft} Free Unlocks Left`;
-                badge.style.background = "#22c55e";
-                badge.style.color = "#fff";
             } else {
-                badge.innerText = "0 Credits Left · Upgrade Plan";
-                badge.style.background = "#dc2626";
-                badge.style.color = "#fff";
+                badge.innerText = "🔒 Membership Required to Reveal Contacts";
+                badge.style.background = "#071427";
+                badge.style.border = "1px solid #d4af37";
+                badge.style.color = "#facc15";
             }
         }
-        renderSupplierMatchedRFQs(s, user.uid, creditsLeft, isPaid);
+        renderSupplierMatchedRFQs(s, user.uid, isPaid);
     }
 
   } catch (e) {
@@ -279,8 +268,8 @@ document.getElementById("logout").onclick = async ()=>{
   location.href="/supplier-login.html";
 };
 
-// Render matched RFQs with hidden main details and NO target price
-function renderSupplierMatchedRFQs(s, uid, creditsLeft, isPaid) {
+// Render matched RFQs with hidden main details and NO target price (No free unlocks)
+function renderSupplierMatchedRFQs(s, uid, isPaid) {
     const container = document.getElementById('leadsContainer');
     const tabsContainer = document.getElementById('commodityTabs');
     const commodityDisplay = document.getElementById('commodityDisplay');
@@ -413,8 +402,8 @@ function renderSupplierMatchedRFQs(s, uid, creditsLeft, isPaid) {
             // Masked details (Target price removed completely!)
             const buyerDisplayName = isUnlocked ? (rfq.name || "Ahmed Al-Futtaim") : (rfq.name ? rfq.name.replace(/([a-zA-Z]{2})[a-zA-Z]+/g, '$1***') : "Ahmed Al-***");
             const companyDisplayName = isUnlocked ? `${rfq.country} Global Trade Corp LLC` : `Verified ${rfq.country} Importer LLC`;
-            const phoneDisplay = isUnlocked ? `+971 52 384 7129` : `+971 52 *** **** [Hidden]`;
-            const emailDisplay = isUnlocked ? `procurement@${rfq.country.toLowerCase().replace(/\s+/g,'')}trade.com` : `trade-desk@***.com [Hidden]`;
+            const phoneDisplay = isUnlocked ? `+971 52 384 7129` : `+971 52 *** **** [Locked]`;
+            const emailDisplay = isUnlocked ? `procurement@${rfq.country.toLowerCase().replace(/\s+/g,'')}trade.com` : `trade-desk@***.com [Locked]`;
 
             card.innerHTML = `
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; gap: 10px;">
@@ -439,13 +428,13 @@ function renderSupplierMatchedRFQs(s, uid, creditsLeft, isPaid) {
                     <div><span style="color: #64748b; font-size: 11px; display: block;">INSPECTION</span><b>SGS / Intertek</b></div>
                 </div>
 
-                <!-- MAIN BUYER DETAILS (MASKED / HIDDEN UNLESS UNLOCKED) -->
+                <!-- MAIN BUYER DETAILS (STRICTLY LOCKED UNLESS PAID MEMBER) -->
                 <div id="details-${rfqId}" style="background: ${isUnlocked ? '#f0fdf4' : '#fafaf9'}; border: 1px ${isUnlocked ? 'solid #22c55e' : 'dashed #d4af37'}; border-radius: 10px; padding: 14px; margin-bottom: 12px; font-size: 13px; line-height: 1.8;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                         <span style="background: ${isUnlocked ? '#22c55e' : '#071427'}; color: ${isUnlocked ? '#fff' : '#facc15'}; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 4px;">
-                            ${isUnlocked ? '✅ UNLOCKED BUYER DOSSIER' : '🔒 BUYER CONTACT DETAILS HIDDEN'}
+                            ${isUnlocked ? '✅ UNLOCKED BUYER DOSSIER' : '🔒 BUYER CONTACT DETAILS LOCKED'}
                         </span>
-                        ${!isUnlocked ? '<span style="font-size: 11px; color: #dc2626; font-weight: 700;">Visible to Verified Members</span>' : ''}
+                        ${!isUnlocked ? '<span style="font-size: 11px; color: #dc2626; font-weight: 800;">Requires Paid APD Membership</span>' : ''}
                     </div>
                     <div><b>👤 Buyer Representative:</b> ${buyerDisplayName}</div>
                     <div><b>🏢 Corporate Entity:</b> ${companyDisplayName}</div>
@@ -456,25 +445,19 @@ function renderSupplierMatchedRFQs(s, uid, creditsLeft, isPaid) {
                 <!-- ACTION BUTTONS -->
                 <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
                     ${isUnlocked ? `
-                        <a href="https://wa.me/971523847129?text=Hello%20${encodeURIComponent(rfq.commodity)}%20Quote%20from%20APD%20Supplier" target="_blank" style="flex: 1; min-width: 160px; background: #22c55e; color: #fff; text-align: center; padding: 10px 14px; border-radius: 8px; font-weight: 800; text-decoration: none; font-size: 13px;">
+                        <a href="https://wa.me/971523847129?text=Hello%20${encodeURIComponent(rfq.commodity)}%20Quote%20from%20APD%20Supplier" target="_blank" style="flex: 1; min-width: 160px; background: #22c55e; color: #fff; text-align: center; padding: 12px 14px; border-radius: 8px; font-weight: 800; text-decoration: none; font-size: 13px;">
                             💬 Contact Buyer on WhatsApp
                         </a>
-                        <button onclick="openQuoteModal('${rfqId}')" style="flex: 1; min-width: 140px; background: #071427; color: #facc15; border: 1px solid #d4af37; padding: 10px 14px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 13px;">
+                        <button onclick="openQuoteModal('${rfqId}')" style="flex: 1; min-width: 140px; background: #071427; color: #facc15; border: 1px solid #d4af37; padding: 12px 14px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 13px;">
                             📝 Submit Official Quote
                         </button>
                     ` : `
-                        ${creditsLeft > 0 ? `
-                            <button id="btn-unlock-${rfqId}" onclick="handleUnlockLead('${rfqId}', '${encodeURIComponent(rfq.commodity)}', '${rfq.country}')" style="flex: 1; min-width: 160px; background: linear-gradient(135deg, #d4af37, #b8860b); color: #000; border: none; padding: 11px 16px; border-radius: 8px; font-weight: 800; font-size: 13px; cursor: pointer; box-shadow: 0 2px 8px rgba(212,175,55,0.3);">
-                                🔓 Unlock Buyer (${creditsLeft} Free Credit${creditsLeft > 1 ? 's' : ''} Left)
-                            </button>
-                        ` : `
-                            <a href="/membership.html" style="flex: 1; min-width: 160px; background: #071427; color: #facc15; text-align: center; border: 1.5px solid #d4af37; padding: 11px 16px; border-radius: 8px; font-weight: 800; text-decoration: none; font-size: 13px;">
-                                ⭐ Upgrade to Unlock Buyer Phone & Email
-                            </a>
-                        `}
-                        <button onclick="openQuoteModal('${rfqId}')" style="background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; padding: 11px 16px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 13px;">
+                        <a href="/membership.html" style="flex: 1; min-width: 200px; background: linear-gradient(135deg, #d4af37, #b8860b); color: #000; text-align: center; border: none; padding: 12px 18px; border-radius: 8px; font-weight: 900; text-decoration: none; font-size: 13px; box-shadow: 0 4px 12px rgba(212,175,55,0.3); display: flex; align-items: center; justify-content: center; gap: 6px;">
+                            <span>⭐</span> Upgrade to Membership to Unlock Buyer WhatsApp & Email
+                        </a>
+                        <a href="/membership.html" style="background: #f1f5f9; color: #0f172a; border: 1px solid #cbd5e1; padding: 12px 16px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 13px;">
                             📝 Submit Quote
-                        </button>
+                        </a>
                     `}
                 </div>
             `;
@@ -484,50 +467,6 @@ function renderSupplierMatchedRFQs(s, uid, creditsLeft, isPaid) {
     }
 
     renderCardsForFilter();
-
-    // Unlock handler
-    window.handleUnlockLead = async (rfqId, commodityName, countryName) => {
-        if (creditsLeft <= 0) {
-            if (confirm("You have used all your free unlock credits. Upgrade to Premium Membership to unlock unlimited verified buyers! View plans?")) {
-                window.location.href = "/membership.html";
-            }
-            return;
-        }
-
-        if (!confirm(`Use 1 credit to reveal direct phone, WhatsApp & email for this ${decodeURIComponent(commodityName)} buyer in ${countryName}?`)) {
-            return;
-        }
-
-        try {
-            await updateDoc(doc(db, "suppliers", uid), {
-                unlocksUsed: increment(1),
-                unlockedLeads: arrayUnion(rfqId),
-                lastUnlockDate: serverTimestamp()
-            });
-
-            creditsLeft--;
-            if (!s.unlockedLeads) s.unlockedLeads = [];
-            s.unlockedLeads.push(rfqId);
-
-            // Update badge
-            const badge = document.getElementById("creditBadge");
-            if (badge) {
-                if (creditsLeft > 0) {
-                    badge.innerText = `🔓 ${creditsLeft} Free Unlocks Left`;
-                } else {
-                    badge.innerText = "0 Credits Left · Upgrade Plan";
-                    badge.style.background = "#dc2626";
-                }
-            }
-
-            // Re-render
-            renderCardsForFilter();
-
-        } catch (err) {
-            console.error("Unlock error:", err);
-            alert("Could not process unlock: " + err.message);
-        }
-    };
 }
 </script>
 
