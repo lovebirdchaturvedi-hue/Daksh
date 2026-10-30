@@ -1,4 +1,355 @@
 const liveRfqsData = [
+{
+  "id": "RFQ-AGRI-101",
+  "name": "Tariq Al-M***",
+  "country": "UAE",
+  "flag": "\ud83c\udde6\ud83c\uddea",
+  "commodity": "Pigeon Peas (Toor Dal / Yellow Split Peas)",
+  "quantity": "250 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/32.jpg",
+  "posted": "\ud83d\udd34 LIVE (4 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-102",
+  "name": "Hassan K***",
+  "country": "Saudi Arabia",
+  "flag": "\ud83c\uddf8\ud83c\udde6",
+  "commodity": "Whole Pigeon Peas (Machine Cleaned Grade A)",
+  "quantity": "500 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/45.jpg",
+  "posted": "\ud83d\udd34 LIVE (12 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-103",
+  "name": "Nawaf S***",
+  "country": "Oman",
+  "flag": "\ud83c\uddf4\ud83c\uddf2",
+  "commodity": "Pigeon Peas (Toor Dal / Arhar)",
+  "quantity": "180 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/61.jpg",
+  "posted": "\ud83d\udd34 LIVE (18 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-104",
+  "name": "Farhan B***",
+  "country": "Bangladesh",
+  "flag": "\ud83c\udde7\ud83c\udde9",
+  "commodity": "Pigeon Peas (Yellow Split Peas C&F Chittagong)",
+  "quantity": "1,200 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/29.jpg",
+  "posted": "\ud83d\udd34 LIVE (22 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-105",
+  "name": "David M***",
+  "country": "Kenya",
+  "flag": "\ud83c\uddf0\ud83c\uddea",
+  "commodity": "Pigeon Peas (Export Standard 99% Purity)",
+  "quantity": "400 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/54.jpg",
+  "posted": "\ud83d\udd34 LIVE (35 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-106",
+  "name": "Nguyen V***",
+  "country": "Vietnam",
+  "flag": "\ud83c\uddfb\ud83c\uddf3",
+  "commodity": "Yellow Maize (Animal Feed Grade #2, Max 14% Moisture)",
+  "quantity": "5,000 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/41.jpg",
+  "posted": "\ud83d\udd34 LIVE (5 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-107",
+  "name": "Bambang H***",
+  "country": "Indonesia",
+  "flag": "\ud83c\uddee\ud83c\udde9",
+  "commodity": "Non-GMO Yellow Maize (Corn Feed Bulk Vessel)",
+  "quantity": "12,500 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/72.jpg",
+  "posted": "\ud83d\udd34 LIVE (9 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-108",
+  "name": "Khaled F***",
+  "country": "Egypt",
+  "flag": "\ud83c\uddea\ud83c\uddec",
+  "commodity": "White Maize (Human Consumption Grade 1)",
+  "quantity": "2,500 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/19.jpg",
+  "posted": "\ud83d\udd34 LIVE (15 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-109",
+  "name": "Rashid A***",
+  "country": "UAE",
+  "flag": "\ud83c\udde6\ud83c\uddea",
+  "commodity": "Maize (Yellow Corn Grade A, Sortex Cleaned)",
+  "quantity": "750 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/88.jpg",
+  "posted": "\ud83d\udd34 LIVE (28 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-110",
+  "name": "Siti N***",
+  "country": "Malaysia",
+  "flag": "\ud83c\uddf2\ud83c\uddfe",
+  "commodity": "Maize / Feed Corn (Bulk In Container CIF Port Klang)",
+  "quantity": "1,500 MT",
+  "avatar": "https://randomuser.me/api/portraits/women/62.jpg",
+  "posted": "\ud83d\udd34 LIVE (31 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-111",
+  "name": "Tran M***",
+  "country": "Vietnam",
+  "flag": "\ud83c\uddfb\ud83c\uddf3",
+  "commodity": "Non-GMO Soybeans (Protein 36% Min, Oil 18% Min)",
+  "quantity": "3,000 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/53.jpg",
+  "posted": "\ud83d\udd34 LIVE (7 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-112",
+  "name": "Omar A***",
+  "country": "Saudi Arabia",
+  "flag": "\ud83c\uddf8\ud83c\udde6",
+  "commodity": "Soybeans (Food Grade Yellow Soya Beans)",
+  "quantity": "1,000 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/66.jpg",
+  "posted": "\ud83d\udd34 LIVE (11 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-113",
+  "name": "Pieter V***",
+  "country": "Netherlands",
+  "flag": "\ud83c\uddf3\ud83c\uddf1",
+  "commodity": "Organic Soybeans (IP Certified Non-GMO CIF Rotterdam)",
+  "quantity": "500 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/83.jpg",
+  "posted": "\ud83d\udd34 LIVE (19 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-114",
+  "name": "Mohammad R***",
+  "country": "Bangladesh",
+  "flag": "\ud83c\udde7\ud83c\udde9",
+  "commodity": "Soybean Meal (De-oiled Soya Cake 48% Protein)",
+  "quantity": "2,000 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/37.jpg",
+  "posted": "\ud83d\udd34 LIVE (27 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-115",
+  "name": "Saeed Z***",
+  "country": "UAE",
+  "flag": "\ud83c\udde6\ud83c\uddea",
+  "commodity": "Soybeans (Bulk In Container CIF Jebel Ali)",
+  "quantity": "800 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/14.jpg",
+  "posted": "\ud83d\udd34 LIVE (40 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-116",
+  "name": "Sheikh M***",
+  "country": "UAE",
+  "flag": "\ud83c\udde6\ud83c\uddea",
+  "commodity": "1121 Steam Basmati Rice (Extra Long Grain 8.35mm)",
+  "quantity": "500 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/22.jpg",
+  "posted": "\ud83d\udd34 LIVE (2 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-117",
+  "name": "Abdulaziz R***",
+  "country": "Saudi Arabia",
+  "flag": "\ud83c\uddf8\ud83c\udde6",
+  "commodity": "Traditional Basmati Rice (Aged 2 Years, Sortex 100%)",
+  "quantity": "1,000 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/78.jpg",
+  "posted": "\ud83d\udd34 LIVE (8 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-118",
+  "name": "Kofi A***",
+  "country": "Ghana",
+  "flag": "\ud83c\uddec\ud83c\udded",
+  "commodity": "IR64 Parboiled Rice (5% Broken, 50kg Bags)",
+  "quantity": "3,500 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/33.jpg",
+  "posted": "\ud83d\udd34 LIVE (14 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-119",
+  "name": "Hamad Q***",
+  "country": "Qatar",
+  "flag": "\ud83c\uddf6\ud83c\udde6",
+  "commodity": "1509 Golden Sella Basmati Rice (Export Quality)",
+  "quantity": "400 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/59.jpg",
+  "posted": "\ud83d\udd34 LIVE (21 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-120",
+  "name": "Chandra P***",
+  "country": "Malaysia",
+  "flag": "\ud83c\uddf2\ud83c\uddfe",
+  "commodity": "Sona Masoori Rice (Raw / Steam, Silky Polished)",
+  "quantity": "300 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/91.jpg",
+  "posted": "\ud83d\udd34 LIVE (33 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-121",
+  "name": "Ahmed Al-N***",
+  "country": "UAE",
+  "flag": "\ud83c\udde6\ud83c\uddea",
+  "commodity": "Green Grams (Mung Beans - Polished Grade A 3.5mm)",
+  "quantity": "350 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/27.jpg",
+  "posted": "\ud83d\udd34 LIVE (6 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-122",
+  "name": "Suresh P***",
+  "country": "Singapore",
+  "flag": "\ud83c\uddf8\ud83c\uddec",
+  "commodity": "Whole Green Mung Beans (Sprouting Quality 98% Germination)",
+  "quantity": "200 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/44.jpg",
+  "posted": "\ud83d\udd34 LIVE (16 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-123",
+  "name": "Fahad J***",
+  "country": "Saudi Arabia",
+  "flag": "\ud83c\uddf8\ud83c\udde6",
+  "commodity": "Green Grams (Yellow Moong Dal Washed / Split)",
+  "quantity": "450 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/68.jpg",
+  "posted": "\ud83d\udd34 LIVE (24 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-124",
+  "name": "Bao T***",
+  "country": "Vietnam",
+  "flag": "\ud83c\uddfb\ud83c\uddf3",
+  "commodity": "Green Mung Beans (Sortex Cleaned CIF Haiphong)",
+  "quantity": "600 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/82.jpg",
+  "posted": "\ud83d\udd34 LIVE (38 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-125",
+  "name": "John S***",
+  "country": "UK",
+  "flag": "\ud83c\uddec\ud83c\udde7",
+  "commodity": "Green Grams / Mung Beans (Food Grade Retail Packed)",
+  "quantity": "150 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/71.jpg",
+  "posted": "\ud83d\udd34 LIVE (42 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-126",
+  "name": "Mustafa K***",
+  "country": "Turkey",
+  "flag": "\ud83c\uddf9\ud83c\uddf7",
+  "commodity": "Red Split Lentils (Masoor Dal Football / Sortex)",
+  "quantity": "1,500 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/15.jpg",
+  "posted": "\ud83d\udd34 LIVE (3 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-127",
+  "name": "Zaid B***",
+  "country": "Jordan",
+  "flag": "\ud83c\uddef\ud83c\uddf4",
+  "commodity": "Whole Red Lentils (Crimson Grade #1 99.5% Purity)",
+  "quantity": "700 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/38.jpg",
+  "posted": "\ud83d\udd34 LIVE (13 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-128",
+  "name": "Rashid M***",
+  "country": "UAE",
+  "flag": "\ud83c\udde6\ud83c\uddea",
+  "commodity": "Lentils (Red Lentils / Yellow Lentils Split)",
+  "quantity": "400 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/49.jpg",
+  "posted": "\ud83d\udd34 LIVE (20 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-129",
+  "name": "Ibrahim E***",
+  "country": "Egypt",
+  "flag": "\ud83c\uddea\ud83c\uddec",
+  "commodity": "Brown Lentils (Pardina Grade CIF Alexandria)",
+  "quantity": "850 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/63.jpg",
+  "posted": "\ud83d\udd34 LIVE (29 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-130",
+  "name": "Kamal H***",
+  "country": "Bangladesh",
+  "flag": "\ud83c\udde7\ud83c\udde9",
+  "commodity": "Red Lentils (Australian/Canadian Grade Red Split)",
+  "quantity": "2,200 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/75.jpg",
+  "posted": "\ud83d\udd34 LIVE (36 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-131",
+  "name": "Ali Al-H***",
+  "country": "Saudi Arabia",
+  "flag": "\ud83c\uddf8\ud83c\udde6",
+  "commodity": "Pearl Millet (Green Bajra - Export Grade 99% Purity)",
+  "quantity": "600 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/51.jpg",
+  "posted": "\ud83d\udd34 LIVE (5 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-132",
+  "name": "Sultan M***",
+  "country": "UAE",
+  "flag": "\ud83c\udde6\ud83c\uddea",
+  "commodity": "Millets (Pearl Millet / Finger Millet Ragi)",
+  "quantity": "300 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/85.jpg",
+  "posted": "\ud83d\udd34 LIVE (17 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-133",
+  "name": "Klaus W***",
+  "country": "Germany",
+  "flag": "\ud83c\udde9\ud83c\uddea",
+  "commodity": "Organic Millets (Dehulled Proso & Foxtail Millet)",
+  "quantity": "180 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/93.jpg",
+  "posted": "\ud83d\udd34 LIVE (23 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-134",
+  "name": "Hassan M***",
+  "country": "Oman",
+  "flag": "\ud83c\uddf4\ud83c\uddf2",
+  "commodity": "Sorghum (White Jowar Grain - Machine Cleaned)",
+  "quantity": "450 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/31.jpg",
+  "posted": "\ud83d\udd34 LIVE (32 mins ago)"
+},
+{
+  "id": "RFQ-AGRI-135",
+  "name": "Jacob T***",
+  "country": "South Africa",
+  "flag": "\ud83c\uddff\ud83c\udde6",
+  "commodity": "Millets (Pearl Millet Bajra / Yellow Grain)",
+  "quantity": "500 MT",
+  "avatar": "https://randomuser.me/api/portraits/men/67.jpg",
+  "posted": "\ud83d\udd34 LIVE (41 mins ago)"
+},
+
   {
     "id": "RFQ-572734",
     "name": "Kevin B***",

@@ -167,7 +167,10 @@ import {
   limit, enableIndexedDbPersistence
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const ADMIN_EMAIL = "admin@apdglobaltrade.com";
+const ADMIN_EMAILS = [
+  "admin@apdglobaltrade.com",
+  "ashishchaturvedi@ymail.com"
+];
 
 // Firebase init
 const app = initializeApp({
@@ -185,10 +188,10 @@ const tbody = document.getElementById("tbody");
 
 // Auth guard
 let authGuardTimeout = setTimeout(() => {
-  if (document.getElementById("tbody").innerHTML.includes("Loading")) {
-      document.getElementById("tbody").innerHTML = `<tr><td colspan="12" >AUTH HANGING: Firebase auth is taking a while to respond. Please check your connection or refresh.</td></tr>`;
+  if (document.getElementById("tbody") && document.getElementById("tbody").innerHTML.includes("Loading")) {
+      document.getElementById("tbody").innerHTML = `<tr><td colspan="13" style="color:#d97706; padding:20px; font-weight:700;">Connecting to APD Control Hub... Click <button onclick="loadSuppliers()" style="padding:4px 10px; margin-left:6px; cursor:pointer;">Retry</button> if your connection is slow.</td></tr>`;
   }
-}, 12000);
+}, 8000);
 
 onAuthStateChanged(auth, async (user) => {
   clearTimeout(authGuardTimeout);
@@ -197,7 +200,12 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
-  if (user.email !== ADMIN_EMAIL) {
+  const userEmail = (user.email || "").toLowerCase().trim();
+  const token = await user.getIdTokenResult().catch(() => null);
+  const isClaimAdmin = token?.claims?.role === 'admin';
+  const isEmailAdmin = ADMIN_EMAILS.includes(userEmail);
+
+  if (!isEmailAdmin && !isClaimAdmin) {
     alert("Admins only");
     location.href = "/supplier-dashboard.html";
     return;
@@ -212,7 +220,7 @@ async function loadSuppliers() {
   tbody.innerHTML = "<tr><td colspan='13'>Loading suppliers…</td></tr>";
 
   try {
-    const q = query(collection(db, "suppliers"), limit(500));
+    const q = query(collection(db, "suppliers"), limit(100));
     const snap = await getDocs(q);
 
     if (snap.empty) {
@@ -260,7 +268,7 @@ async function loadSuppliers() {
           <td>${s.phone || s.contact || s.whatsapp || "-"}</td>
           <td style="font-size:10px; font-family:monospace; color:#64748b;">${warning} ${d.id}</td>
           <td><b>${s.status || "pending"}</b></td>
-          <td>${s.tcSigned ? \'<span style="background:#16a34a; color:white; padding:3px 6px; border-radius:4px; font-size:10px; font-weight:bold;">SIGNED</span>\' : \'<span style="background:#ef4444; color:white; padding:3px 6px; border-radius:4px; font-size:10px; font-weight:bold;">PENDING</span>\'}</td>
+          <td>${s.tcSigned ? '<span style="background:#16a34a; color:white; padding:3px 6px; border-radius:4px; font-size:10px; font-weight:bold;">SIGNED</span>' : '<span style="background:#ef4444; color:white; padding:3px 6px; border-radius:4px; font-size:10px; font-weight:bold;">PENDING</span>'}</td>
           <td style="font-size:12px;">${planName}</td>
           <td><span style="color:#c9a44a; font-weight:800;">${s.unlocksUsed || 0}</span> / ${unlockTotal}</td>
           <td style="display: flex; flex-wrap: wrap; gap: 4px; max-width: 320px;">
@@ -282,12 +290,21 @@ async function loadSuppliers() {
         </tr>`;
     });
 
+    if (htmlOutput) {
+      try { localStorage.setItem('apd_admin_cached_html', htmlOutput); } catch(e){}
+    }
     tbody.innerHTML = htmlOutput || "<tr><td colspan='13'>No suppliers match the filter</td></tr>";
     filterSuppliersTable();
 
   } catch (err) {
     console.error("Error loading suppliers:", err);
-    tbody.innerHTML = `<tr><td colspan='13' >Error loading suppliers: ${err.message}</td></tr>`;
+    const cached = localStorage.getItem('apd_admin_cached_html');
+    if (cached) {
+      tbody.innerHTML = `<tr><td colspan="13" style="background:#fffbeb; color:#92400e; padding:12px; font-weight:700; border-bottom:2px solid #f59e0b;">⚠️ Firestore sync notice: ${err.message}. Displaying cached session records. <button onclick="loadSuppliers()" style="padding:4px 8px; cursor:pointer;">Retry Sync</button></td></tr>` + cached;
+      filterSuppliersTable();
+    } else {
+      tbody.innerHTML = `<tr><td colspan='13' style="color:#ef4444; padding:20px; font-weight:700;">Status: ${err.message}. Click <button onclick="loadSuppliers()" style="padding:4px 10px; cursor:pointer;">Retry</button></td></tr>`;
+    }
   }
 }
 

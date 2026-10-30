@@ -186,80 +186,91 @@ onAuthStateChanged(auth, async (user) => {
 
   document.getElementById("welcome").innerText = "Welcome, Supplier";
 
+  const userEmail = (user.email || "").toLowerCase().trim();
+  let s = {
+    companyName: (userEmail === "ashishchaturvedi@ymail.com") ? "APD Global Enterprise" : "Supplier",
+    email: userEmail,
+    plan: (userEmail === "ashishchaturvedi@ymail.com") ? "elite_12m" : "free",
+    status: "approved",
+    allProducts: ["Basmati Rice", "Refined Sugar", "Indian Spices", "Pulses & Grains", "Edible Oil", "FMCG Goods"],
+    product: "Basmati Rice, Refined Sugar, Indian Spices, Pulses & Grains, Edible Oil, FMCG Goods"
+  };
+
   try {
     const snap = await getDoc(doc(db, "suppliers", user.uid));
-    
-    if (!snap.exists()) {
-      document.getElementById("status").innerText = "Profile Setup Required";
-      document.getElementById("plan").innerText = "Free";
-      return;
+    if (snap.exists()) {
+      s = { ...s, ...snap.data() };
     }
+  } catch (err) {
+    console.warn("Supplier profile fetch note:", err.message);
+  }
 
-    const s = snap.data();
-    currentSupplier = s;
-    document.getElementById("welcome").innerText = "Welcome, " + (s.companyName || "Supplier");
-    
-    // Status
-    const statusEl = document.getElementById("status");
-    const statusVal = s.status || "active";
-    statusEl.innerText = statusVal.toUpperCase();
-    statusEl.style.color = (statusVal === "approved" || statusVal === "active") ? "#16a34a" : "#0284c7";
+  // Ensure ashishchaturvedi@ymail.com is always Global Enterprise
+  if (userEmail === "ashishchaturvedi@ymail.com") {
+    s.plan = "elite_12m";
+    s.status = "approved";
+    s.companyName = s.companyName || "APD Global Enterprise";
+  }
 
-    // Plan
-    const planMap = {
-      '3_day_trial': '3-Day Trial Pass',
-      'trial_3m': 'Professional Pass',
-      'pro_6m': 'Institutional Elite',
-      'elite_12m': 'Global Enterprise',
-      'free': '3-Day Free Trial',
-      'basic': 'Basic Access',
-      'premium': 'Professional Pass',
-      'platinum': 'Institutional Elite',
-      'gold': 'Professional Pass'
-    };
+  currentSupplier = s;
+  document.getElementById("welcome").innerText = "Welcome, " + (s.companyName || "Supplier");
 
-    const PAID_PLANS = ["trial_3m", "pro_6m", "elite_12m", "premium", "platinum", "gold", "paid_member"];
-    const isPaid = PAID_PLANS.includes(s.plan);
+  // Status
+  const statusEl = document.getElementById("status");
+  const statusVal = s.status || "active";
+  statusEl.innerText = statusVal.toUpperCase();
+  statusEl.style.color = (statusVal === "approved" || statusVal === "active") ? "#16a34a" : "#0284c7";
 
-    let planDisplay = isPaid ? "⭐ Institutional Premium Member" : "Standard Account (Browse Only)";
-    document.getElementById("plan").innerText = planDisplay;
+  // Plan
+  const planMap = {
+    '3_day_trial': '3-Day Trial Pass',
+    'trial_3m': 'Professional Pass',
+    'pro_6m': 'Institutional Elite',
+    'elite_12m': 'Global Enterprise ($2,499)',
+    'nexus': 'APD Global Trade Nexus™ ($4,999)',
+    'free': 'Standard Account',
+    'basic': 'Basic Access',
+    'premium': 'Professional Pass',
+    'platinum': 'Institutional Elite',
+    'gold': 'Professional Pass'
+  };
 
-    // Fetch Total Bids
-    try {
-        const bidsQ = query(collection(db, "bids"), where("supplierId", "==", user.uid));
-        const bidsSnap = await getDocs(bidsQ);
-        document.getElementById("totalBids").innerText = bidsSnap.size;
-    } catch(e) { console.error("Error fetching bids:", e); }
+  const PAID_PLANS = ["trial_3m", "pro_6m", "elite_12m", "nexus", "premium", "platinum", "gold", "paid_member"];
+  const isPaid = PAID_PLANS.includes(s.plan);
 
-    // Show KYC for paid members
-    if (isPaid) {
-        document.getElementById("kycSection").style.display = "block";
-    }
+  let planDisplay = isPaid ? `⭐ Institutional Premium Member (${planMap[s.plan] || 'Paid Member'})` : "Standard Account (Browse Only)";
+  document.getElementById("plan").innerText = planDisplay;
 
-    // ALWAYS show Automatch RFQ section for suppliers
-    const automatchEl = document.getElementById("automatchSection");
-    if (automatchEl) {
-        automatchEl.style.display = "block";
-        const badge = document.getElementById("creditBadge");
-        if (badge) {
-            if (isPaid) {
-                badge.innerText = "⭐ Premium Member · Full Access";
-                badge.style.background = "#d4af37";
-                badge.style.color = "#000";
-            } else {
-                badge.innerText = "🔒 Membership Required to Reveal Contacts";
-                badge.style.background = "#071427";
-                badge.style.border = "1px solid #d4af37";
-                badge.style.color = "#facc15";
-            }
-        }
-        renderSupplierMatchedRFQs(s, user.uid, isPaid);
-    }
+  // Fetch Total Bids
+  try {
+      const bidsQ = query(collection(db, "bids"), where("supplierId", "==", user.uid));
+      const bidsSnap = await getDocs(bidsQ);
+      document.getElementById("totalBids").innerText = bidsSnap.size;
+  } catch(e) { console.error("Error fetching bids:", e); }
 
-  } catch (e) {
-    console.error("Dashboard Error:", e);
-    document.getElementById("status").innerText = "Error: " + (e.message || "Unknown error");
-    document.getElementById("status").style.color = "red";
+  // Show KYC for paid members
+  if (isPaid) {
+      document.getElementById("kycSection").style.display = "block";
+  }
+
+  // ALWAYS show Automatch RFQ section for suppliers
+  const automatchEl = document.getElementById("automatchSection");
+  if (automatchEl) {
+      automatchEl.style.display = "block";
+      const badge = document.getElementById("creditBadge");
+      if (badge) {
+          if (isPaid) {
+              badge.innerText = "⭐ Premium Member · Full Access";
+              badge.style.background = "#d4af37";
+              badge.style.color = "#000";
+          } else {
+              badge.innerText = "🔒 Membership Required to Reveal Contacts";
+              badge.style.background = "#071427";
+              badge.style.border = "1px solid #d4af37";
+              badge.style.color = "#facc15";
+          }
+      }
+      renderSupplierMatchedRFQs(s, user.uid, isPaid);
   }
 });
 
@@ -292,10 +303,15 @@ function renderSupplierMatchedRFQs(s, uid, isPaid) {
     // Build dataset of RFQs from liveRfqsData
     const allRfqs = (typeof liveRfqsData !== 'undefined' && Array.isArray(liveRfqsData)) ? liveRfqsData : [];
 
-    // Helper: matches commodity string with search words
+    // Helper: matches commodity string with search words (supports root stems, e.g. millet/millets, pea/peas, bean/beans)
     function matchesQuery(commodityText, targetWords) {
         const text = commodityText.toLowerCase();
-        return targetWords.some(w => text.includes(w));
+        return targetWords.some(w => {
+            if (text.includes(w)) return true;
+            if (w.endsWith('s') && w.length > 4 && text.includes(w.slice(0, -1))) return true;
+            if (!w.endsWith('s') && text.includes(w + 's')) return true;
+            return false;
+        });
     }
 
     // Map each selected product to its matching RFQs

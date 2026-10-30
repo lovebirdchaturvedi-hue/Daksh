@@ -78,8 +78,11 @@ button{
   const db = getFirestore(app);
   const auth = getAuth(app);
 
+  const ADMIN_EMAILS = ["admin@apdglobaltrade.com", "ashishchaturvedi@ymail.com"];
+
   onAuthStateChanged(auth, user => {
-    if(!user || user.email !== "admin@apdglobaltrade.com"){
+    const uEmail = (user?.email || "").toLowerCase().trim();
+    if(!user || !ADMIN_EMAILS.includes(uEmail)){
       window.location.href = "/admin-login.html";
     } else {
       loadApplications();
