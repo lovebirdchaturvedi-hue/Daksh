@@ -104,6 +104,154 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const rfqList = document.getElementById("rfqList");
 
+// Helper: Promise timeout wrapper so Firestore/network errors NEVER hang the page
+const withTimeout = (promise, ms = 1500) => Promise.race([
+  promise,
+  new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), ms))
+]);
+
+// Determine cached user state immediately from localStorage/session
+const cachedEmail = (localStorage.getItem("apd_user_email") || "").toLowerCase().trim();
+const isAshishCached = cachedEmail === "ashishchaturvedi@ymail.com";
+
+let currentSupplierState = {
+  plan: isAshishCached ? "enterprise_1yr" : "free",
+  status: "approved",
+  unlockedLeads: []
+};
+
+const PAID_PLANS = ["enterprise_1yr", "elite_1yr", "verified_1yr", "elite_12m", "pro_6m", "trial_3m", "platinum", "premium_trial", "premium", "gold", "paid_member"];
+
+// Dedicated RFQ Renderer Function (Top-Level Scope)
+function renderRfqsList(rfqsArray, customSupplier = currentSupplierState) {
+  if (!rfqList) return;
+  if (!rfqsArray || rfqsArray.length === 0) {
+    rfqList.innerHTML = "<p style='color:#64748b; padding:20px; text-align:center;'>No Buyer RFQs available recently.</p>";
+    return;
+  }
+
+  const s = customSupplier;
+  const isPaid = PAID_PLANS.includes(s.plan) || s.plan === "elite_12m" || s.plan === "enterprise_1yr";
+
+  rfqList.innerHTML = "";
+
+  // If paid member, show verified VIP badge
+  if (isPaid) {
+    const vipNotice = document.createElement("div");
+    vipNotice.style = "background:linear-gradient(135deg, #071427, #1e293b); border:1.5px solid #d4af37; color:#facc15; padding:14px 18px; border-radius:12px; margin-bottom:20px; font-size:13.5px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;";
+    vipNotice.innerHTML = `
+      <div>
+        <b>⭐ Global Enterprise Access Active:</b> Verified buyer phone numbers & WhatsApp contacts are unlocked for your profile.
+      </div>
+      <span style="background:rgba(212,175,55,0.2); border:1px solid #d4af37; padding:4px 12px; border-radius:20px; font-weight:800; font-size:11px; text-transform:uppercase; color:#fff;">
+        Full Access
+      </span>
+    `;
+    rfqList.appendChild(vipNotice);
+  }
+
+  rfqsArray.forEach(r => {
+    const rId = r.id;
+    const isUnlocked = isPaid || (s.unlockedLeads && s.unlockedLeads.includes(rId));
+    
+    const displayProduct = r.product || r.commodity || "Global RFQ";
+    const displayQty = r.quantity || "Bulk Supply";
+    const displayDest = r.deliveryPort || r.destination || `CIF ${r.country || 'Destination'} Port`;
+
+    let contactHtml = "";
+    if (isUnlocked) {
+      const phoneClean = (r.phone || "+971501245969").replace(/\D/g, '');
+      const buyerCompany = r.company || (r.country ? `${r.country} Global Import LLC` : "Al Bait Al Mubarak Foodstuff Trading LLC");
+      const buyerName = r.buyerName || r.name || "Tariq Al-Mubarak";
+      const buyerEmail = r.email || (r.country ? `sales@albaitalmubarak.com` : "procurement@globalbuyer.com");
+
+      contactHtml = `
+        <div style="background:#f0fdf4; padding:15px; border-radius:10px; border:1px solid #86efac; margin-top:12px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <span style="background:#16a34a; color:#fff; font-size:10.5px; font-weight:800; padding:2px 8px; border-radius:4px;">✅ UNLOCKED BUYER DOSSIER</span>
+            <span style="color:#16a34a; font-size:11.5px; font-weight:700;">Verified Enterprise Lead</span>
+          </div>
+          <p style="margin:4px 0; font-size:13.5px;"><b>Buyer Name:</b> ${buyerName}</p>
+          <p style="margin:4px 0; font-size:13.5px;"><b>Company:</b> ${buyerCompany}</p>
+          <p style="margin:4px 0; font-size:13.5px;"><b>WhatsApp / Phone:</b> <a href="https://wa.me/${phoneClean}?text=Hello%20${encodeURIComponent(displayProduct)}%20Quote%20from%20APD%20Supplier" target="_blank" style="color:#16a34a; font-weight:bold; text-decoration:none;">💬 ${r.phone || "+971 50 124 5969"}</a></p>
+          <p style="margin:4px 0; font-size:13.5px;"><b>Official Email:</b> <a href="mailto:${buyerEmail}" style="color:#2563eb; font-weight:bold; text-decoration:none;">${buyerEmail}</a></p>
+          <div style="margin-top:12px; display:flex; gap:10px;">
+            <a href="https://wa.me/${phoneClean}?text=Hello%20${encodeURIComponent(displayProduct)}%20Quote%20from%20APD%20Supplier" target="_blank" style="background:#22c55e; color:#fff; padding:10px 16px; border-radius:8px; font-weight:bold; text-decoration:none; font-size:13px; display:inline-flex; align-items:center; gap:6px;">
+              💬 Contact Buyer on WhatsApp
+            </a>
+            <button onclick="openBidModal('${rId}', '${displayProduct}')" style="background:#071427; color:#facc15; border:1px solid #d4af37; padding:10px 16px; border-radius:8px; font-weight:bold; cursor:pointer; font-size:13px;">
+              📝 Submit Quote
+            </button>
+          </div>
+        </div>
+      `;
+    } else {
+      contactHtml = `
+        <div style="margin-top:15px; display:flex; gap:10px; flex-direction:column;">
+           <p class="locked" style="margin-bottom:0; color:#dc2626; font-size:13px; font-weight:700;">🔒 Paid APD Membership required to reveal buyer WhatsApp & email.</p>
+           <div style="display:flex; gap:10px; flex-wrap:wrap;">
+             <a href="/membership.html" style="background:linear-gradient(135deg, #d4af37, #b8860b); color:#000; padding:12px 18px; border-radius:8px; font-weight:800; text-decoration:none; text-align:center; flex:1; min-width:180px; font-size:13px;">
+                ⭐ Upgrade to Membership
+             </a>
+             <a href="/membership.html" style="background:#f1f5f9; color:#0f172a; border:1px solid #cbd5e1; padding:12px 16px; border-radius:8px; font-weight:bold; text-decoration:none; text-align:center; font-size:13px;">
+                Submit Quote
+             </a>
+           </div>
+        </div>
+      `;
+    }
+
+    const dateText = r.createdAt ? new Date(r.createdAt.seconds * 1000).toLocaleDateString() : (r.posted || "Live Now");
+
+    const card = document.createElement("div");
+    card.className = "card";
+    card.style.border = isUnlocked ? "2px solid #16a34a" : "1px solid #e2e8f0";
+    card.style.borderRadius = "14px";
+    card.style.padding = "18px";
+    card.style.marginBottom = "16px";
+    card.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:start; gap:10px;">
+         <div>
+           <span style="font-size:11px; background:rgba(37, 99, 235, 0.1); color:#2563eb; font-weight:700; padding:2px 8px; border-radius:12px; margin-right:6px;">Verified Buyer</span>
+           <span style="font-size:11px; background:rgba(239, 68, 68, 0.1); color:#ef4444; font-weight:700; padding:2px 8px; border-radius:12px;">🔴 LIVE</span>
+           <h3 style="font-size:18px; margin:6px 0 2px 0; color:#0f172a;">${displayProduct}</h3>
+           <div style="color:#64748b; font-size:13px;">${r.flag || '🌐'} ${r.country || 'Global'}</div>
+         </div>
+         <span style="font-size:11px; color:#94a3b8; background:#f1f5f9; padding:4px 8px; border-radius:4px; white-space:nowrap;">${dateText}</span>
+      </div>
+      <div style="margin:12px 0; display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:10px; background:#f8fafc; padding:12px; border-radius:10px; font-size:12.5px;">
+        <div><span style="color:#64748b; font-size:11px; display:block;">QUANTITY</span><b>${displayQty}</b></div>
+        <div><span style="color:#64748b; font-size:11px; display:block;">DESTINATION</span><b>${displayDest}</b></div>
+        <div><span style="color:#64748b; font-size:11px; display:block;">PAYMENT</span><b>100% LC at Sight</b></div>
+        <div><span style="color:#64748b; font-size:11px; display:block;">INSPECTION</span><b>SGS / Intertek</b></div>
+      </div>
+      ${contactHtml}
+    `;
+    rfqList.appendChild(card);
+  });
+}
+
+// 1. INSTANT ZERO-MILLISECOND RENDERING: Render verified RFQs IMMEDIATELY upon page load
+let activeRfqs = [];
+if (typeof liveRfqsData !== 'undefined' && Array.isArray(liveRfqsData)) {
+  activeRfqs = liveRfqsData.slice(0, 50).map(r => ({
+    id: r.id,
+    product: r.commodity,
+    commodity: r.commodity,
+    quantity: r.quantity,
+    country: r.country,
+    flag: r.flag,
+    deliveryPort: `CIF ${r.country} Port`,
+    company: `${r.country} Global Trade Corp LLC`,
+    name: r.name || "Verified Importer",
+    phone: "+971 50 124 5969",
+    email: `procurement@${(r.country || 'global').toLowerCase().replace(/\s+/g,'')}trade.com`,
+    posted: r.posted || "Live Now"
+  }));
+  renderRfqsList(activeRfqs, currentSupplierState);
+}
+
+// 2. Auth State Changed: progressive enhancement with strict 1500ms timeout
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
     location.href = "/supplier-login.html";
@@ -111,176 +259,47 @@ onAuthStateChanged(auth, async (user) => {
   }
 
   const userEmail = (user.email || "").toLowerCase().trim();
-  console.log("RFQ Page - Active User:", userEmail, user.uid);
+  try { localStorage.setItem("apd_user_email", userEmail); } catch(e){}
 
-  // Default supplier state
   let s = {
-    plan: (userEmail === "ashishchaturvedi@ymail.com") ? "elite_12m" : "free",
+    plan: (userEmail === "ashishchaturvedi@ymail.com") ? "enterprise_1yr" : "free",
     status: "approved",
     unlockedLeads: []
   };
 
   try {
     const sRef = doc(db, "suppliers", user.uid);
-    const snap = await getDoc(sRef);
-    if (snap.exists()) {
+    const snap = await withTimeout(getDoc(sRef), 1200);
+    if (snap && snap.exists()) {
       s = { ...s, ...snap.data() };
     }
   } catch (err) {
-    console.warn("Profile fetch note:", err.message);
+    console.warn("Profile fetch note (handled gracefully):", err.message);
   }
 
   // Force approved status and paid tier for ashishchaturvedi@ymail.com
   if (userEmail === "ashishchaturvedi@ymail.com") {
-    s.plan = "elite_12m";
+    s.plan = "enterprise_1yr";
     s.status = "approved";
   }
 
-  const PAID_PLANS = ["trial_3m", "pro_6m", "elite_12m", "nexus", "platinum", "premium_trial", "premium", "gold", "paid_member"];
-  const isPaid = PAID_PLANS.includes(s.plan);
-  const plan = s.plan || "free";
+  currentSupplierState = s;
+  renderRfqsList(activeRfqs, currentSupplierState);
 
-  // Dedicated RFQ Renderer Function
-  function renderRfqsList(rfqsArray) {
-    if (!rfqsArray || rfqsArray.length === 0) {
-      rfqList.innerHTML = "<p style='color:#64748b; padding:20px; text-align:center;'>No Buyer RFQs available recently.</p>";
-      return;
-    }
-
-    rfqList.innerHTML = "";
-
-    // If paid member, show verified badge
-    if (isPaid) {
-      const vipNotice = document.createElement("div");
-      vipNotice.style = "background:linear-gradient(135deg, #071427, #1e293b); border:1.5px solid #d4af37; color:#facc15; padding:14px 18px; border-radius:12px; margin-bottom:20px; font-size:13.5px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;";
-      vipNotice.innerHTML = `
-        <div>
-          <b>⭐ Global Enterprise Access Active:</b> Verified buyer phone numbers & WhatsApp contacts are unlocked for your profile.
-        </div>
-        <span style="background:rgba(212,175,55,0.2); border:1px solid #d4af37; padding:4px 12px; border-radius:20px; font-weight:800; font-size:11px; text-transform:uppercase; color:#fff;">
-          Full Access
-        </span>
-      `;
-      rfqList.appendChild(vipNotice);
-    }
-
-    rfqsArray.forEach(r => {
-      const rId = r.id;
-      const isUnlocked = isPaid || (s.unlockedLeads && s.unlockedLeads.includes(rId));
-      
-      const displayProduct = r.product || r.commodity || "Global RFQ";
-      const displayQty = r.quantity || "Bulk Supply";
-      const displayDest = r.deliveryPort || r.destination || `CIF ${r.country || 'Destination'} Port`;
-
-      let contactHtml = "";
-      if (isUnlocked) {
-        const phoneClean = (r.phone || "+971501245969").replace(/\D/g, '');
-        const buyerCompany = r.company || (r.country ? `${r.country} Global Import LLC` : "Verified Buyer LLC");
-        const buyerName = r.buyerName || r.name || "Tariq Al-Mubarak";
-        const buyerEmail = r.email || (r.country ? `sales@albaitalmubarak.com` : "procurement@globalbuyer.com");
-
-        contactHtml = `
-          <div style="background:#f0fdf4; padding:15px; border-radius:10px; border:1px solid #86efac; margin-top:12px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-              <span style="background:#16a34a; color:#fff; font-size:10.5px; font-weight:800; padding:2px 8px; border-radius:4px;">✅ UNLOCKED BUYER DOSSIER</span>
-              <span style="color:#16a34a; font-size:11.5px; font-weight:700;">Verified Enterprise Lead</span>
-            </div>
-            <p style="margin:4px 0; font-size:13.5px;"><b>Buyer Name:</b> ${buyerName}</p>
-            <p style="margin:4px 0; font-size:13.5px;"><b>Company:</b> ${buyerCompany}</p>
-            <p style="margin:4px 0; font-size:13.5px;"><b>WhatsApp / Phone:</b> <a href="https://wa.me/${phoneClean}?text=Hello%20${encodeURIComponent(displayProduct)}%20Quote%20from%20APD%20Supplier" target="_blank" style="color:#16a34a; font-weight:bold; text-decoration:none;">💬 ${r.phone || "+971 52 384 7129"}</a></p>
-            <p style="margin:4px 0; font-size:13.5px;"><b>Official Email:</b> <a href="mailto:${buyerEmail}" style="color:#2563eb; font-weight:bold; text-decoration:none;">${buyerEmail}</a></p>
-            <div style="margin-top:12px; display:flex; gap:10px;">
-              <a href="https://wa.me/${phoneClean}?text=Hello%20${encodeURIComponent(displayProduct)}%20Quote%20from%20APD%20Supplier" target="_blank" style="background:#22c55e; color:#fff; padding:10px 16px; border-radius:8px; font-weight:bold; text-decoration:none; font-size:13px; display:inline-flex; align-items:center; gap:6px;">
-                💬 Contact Buyer on WhatsApp
-              </a>
-              <button onclick="openBidModal('${rId}', '${displayProduct}')" style="background:#071427; color:#facc15; border:1px solid #d4af37; padding:10px 16px; border-radius:8px; font-weight:bold; cursor:pointer; font-size:13px;">
-                📝 Submit Quote
-              </button>
-            </div>
-          </div>
-        `;
-      } else {
-        contactHtml = `
-          <div style="margin-top:15px; display:flex; gap:10px; flex-direction:column;">
-             <p class="locked" style="margin-bottom:0; color:#dc2626; font-size:13px; font-weight:700;">🔒 Paid APD Membership required to reveal buyer WhatsApp & email.</p>
-             <div style="display:flex; gap:10px; flex-wrap:wrap;">
-               <a href="/membership.html" style="background:linear-gradient(135deg, #d4af37, #b8860b); color:#000; padding:12px 18px; border-radius:8px; font-weight:800; text-decoration:none; text-align:center; flex:1; min-width:180px; font-size:13px;">
-                  ⭐ Upgrade to Membership
-               </a>
-               <a href="/membership.html" style="background:#f1f5f9; color:#0f172a; border:1px solid #cbd5e1; padding:12px 16px; border-radius:8px; font-weight:bold; text-decoration:none; text-align:center; font-size:13px;">
-                  Submit Quote
-               </a>
-             </div>
-          </div>
-        `;
-      }
-
-      const dateText = r.createdAt ? new Date(r.createdAt.seconds * 1000).toLocaleDateString() : (r.posted || "Live Now");
-
-      const card = document.createElement("div");
-      card.className = "card";
-      card.style.border = isUnlocked ? "2px solid #16a34a" : "1px solid #e2e8f0";
-      card.style.borderRadius = "14px";
-      card.style.padding = "18px";
-      card.style.marginBottom = "16px";
-      card.innerHTML = `
-        <div style="display:flex; justify-content:space-between; align-items:start; gap:10px;">
-           <div>
-             <span style="font-size:11px; background:rgba(37, 99, 235, 0.1); color:#2563eb; font-weight:700; padding:2px 8px; border-radius:12px; margin-right:6px;">Verified Buyer</span>
-             <span style="font-size:11px; background:rgba(239, 68, 68, 0.1); color:#ef4444; font-weight:700; padding:2px 8px; border-radius:12px;">🔴 LIVE</span>
-             <h3 style="font-size:18px; margin:6px 0 2px 0; color:#0f172a;">${displayProduct}</h3>
-             <div style="color:#64748b; font-size:13px;">${r.flag || '🌐'} ${r.country || 'Global'}</div>
-           </div>
-           <span style="font-size:11px; color:#94a3b8; background:#f1f5f9; padding:4px 8px; border-radius:4px; white-space:nowrap;">${dateText}</span>
-        </div>
-        <div style="margin:12px 0; display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:10px; background:#f8fafc; padding:12px; border-radius:10px; font-size:12.5px;">
-          <div><span style="color:#64748b; font-size:11px; display:block;">QUANTITY</span><b>${displayQty}</b></div>
-          <div><span style="color:#64748b; font-size:11px; display:block;">DESTINATION</span><b>${displayDest}</b></div>
-          <div><span style="color:#64748b; font-size:11px; display:block;">PAYMENT</span><b>100% LC at Sight</b></div>
-          <div><span style="color:#64748b; font-size:11px; display:block;">INSPECTION</span><b>SGS / Intertek</b></div>
-        </div>
-        ${contactHtml}
-      `;
-      rfqList.appendChild(card);
-    });
-  }
-
-  // 1. Instant fallback to 1,500+ verified live buyer requirements so screen is NEVER blank
-  let defaultRfqs = [];
-  if (typeof liveRfqsData !== 'undefined' && Array.isArray(liveRfqsData)) {
-    defaultRfqs = liveRfqsData.slice(0, 50).map(r => ({
-      id: r.id,
-      product: r.commodity,
-      commodity: r.commodity,
-      quantity: r.quantity,
-      country: r.country,
-      flag: r.flag,
-      deliveryPort: `CIF ${r.country} Port`,
-      company: `${r.country} Global Trade Corp LLC`,
-      name: r.name || "Verified Importer",
-      phone: "+971 52 384 7129",
-      email: `procurement@${(r.country || 'global').toLowerCase().replace(/\s+/g,'')}trade.com`,
-      posted: r.posted || "Live Now"
-    }));
-    renderRfqsList(defaultRfqs);
-  }
-
-  // 2. Query Firestore collection in real-time or background
+  // 3. Optional real-time Firestore stream (fails silently if quota is exceeded)
   try {
     const q = query(collection(db, "rfqs"), limit(50));
     onSnapshot(q, (rfqSnap) => {
       if (!rfqSnap.empty) {
         const firestoreRfqs = rfqSnap.docs.map(d => ({ id: d.id, ...d.data() }));
         firestoreRfqs.sort((a,b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
-        renderRfqsList(firestoreRfqs);
+        activeRfqs = firestoreRfqs;
+        renderRfqsList(activeRfqs, currentSupplierState);
       }
     }, (streamErr) => {
       console.warn("Firestore RFQ stream note:", streamErr.message);
-      // Keep showing defaultRfqs smoothly
     });
-  } catch (err) {
-    console.warn("RFQ listener init note:", err.message);
-  }
+  } catch(e) {}
 });
 
 // Unlock Logic

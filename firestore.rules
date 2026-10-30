@@ -7,22 +7,30 @@ service cloud.firestore {
       allow create, read: if true;
 
       allow update, delete: if
-        request.auth != null &&
-        request.auth.token.email.lower() == "admin@apdglobaltrade.com";
+        request.auth != null && (
+          request.auth.token.email.lower() == "admin@apdglobaltrade.com" ||
+          request.auth.token.email.lower() == "ashishchaturvedi@ymail.com"
+        );
     }
 
     // ================= SUPPLIERS =================
     match /suppliers/{id} {
 
       allow read, update: if
-        request.auth != null && (request.auth.uid == id || request.auth.token.email.lower() == "admin@apdglobaltrade.com");
+        request.auth != null && (
+          request.auth.uid == id ||
+          request.auth.token.email.lower() == "admin@apdglobaltrade.com" ||
+          request.auth.token.email.lower() == "ashishchaturvedi@ymail.com"
+        );
 
       allow create: if true;
 
       // Allow admin to delete legacy/test accounts from the UI
       allow delete: if 
-        request.auth != null && 
-        request.auth.token.email.lower() == "admin@apdglobaltrade.com";
+        request.auth != null && (
+          request.auth.token.email.lower() == "admin@apdglobaltrade.com" ||
+          request.auth.token.email.lower() == "ashishchaturvedi@ymail.com"
+        );
     }
     
     // ================= FRANCHISE APPLICATIONS =================
@@ -30,8 +38,10 @@ service cloud.firestore {
       allow create: if true;
       
       allow read, update, delete: if
-        request.auth != null &&
-        request.auth.token.email.lower() == "admin@apdglobaltrade.com";
+        request.auth != null && (
+          request.auth.token.email.lower() == "admin@apdglobaltrade.com" ||
+          request.auth.token.email.lower() == "ashishchaturvedi@ymail.com"
+        );
     }
   }
 }

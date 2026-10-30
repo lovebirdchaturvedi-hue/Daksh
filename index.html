@@ -4036,27 +4036,40 @@ body { top: 0 !important; }
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // AUTOCOMPLETE LOGIC
+    // AUTOCOMPLETE LOGIC (Instant synchronous initialization)
     (async function initSearchAutocomplete() {
-        try {
-            const snap = await getDocs(collection(db, "rfqs"));
-            const suggestions = new Set();
-            snap.forEach(doc => {
-                const data = doc.data();
-                if(data.product) suggestions.add(data.product.trim());
-                if(data.destination) suggestions.add(data.destination.trim());
+        const suggestions = new Set();
+        if (typeof liveRfqsData !== 'undefined' && Array.isArray(liveRfqsData)) {
+            liveRfqsData.forEach(r => {
+                if (r.commodity) suggestions.add(r.commodity.trim());
+                if (r.country) suggestions.add(r.country.trim());
             });
-            const datalist = document.createElement('datalist');
-            datalist.id = 'searchSuggestions';
+        }
+        const buildList = () => {
+            let datalist = document.getElementById('searchSuggestions');
+            if (!datalist) {
+                datalist = document.createElement('datalist');
+                datalist.id = 'searchSuggestions';
+                document.body.appendChild(datalist);
+            }
+            datalist.innerHTML = '';
             suggestions.forEach(item => {
                 const option = document.createElement('option');
                 option.value = item;
                 datalist.appendChild(option);
             });
-            document.body.appendChild(datalist);
-        } catch (err) {
-            console.error("Autocomplete init failed:", err);
-        }
+        };
+        buildList();
+        try {
+            const timeoutPromise = new Promise((_, rej) => setTimeout(() => rej(new Error("Timeout")), 1500));
+            const snap = await Promise.race([getDocs(collection(db, "rfqs")), timeoutPromise]);
+            snap.forEach(doc => {
+                const data = doc.data();
+                if(data.product) suggestions.add(data.product.trim());
+                if(data.destination) suggestions.add(data.destination.trim());
+            });
+            buildList();
+        } catch (err) {}
     })();
 
     window.handleQuickRFQ = async function(e) {

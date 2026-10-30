@@ -159,6 +159,13 @@ let currentSupplier = null;
 let currentUid = null;
 let activeCommodityFilter = "ALL_SELECTED";
 
+function withTimeout(promise, ms = 1500) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), ms))
+  ]);
+}
+
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
     location.href = "/supplier-login.html";
@@ -190,14 +197,15 @@ onAuthStateChanged(auth, async (user) => {
   let s = {
     companyName: (userEmail === "ashishchaturvedi@ymail.com") ? "APD Global Enterprise" : "Supplier",
     email: userEmail,
-    plan: (userEmail === "ashishchaturvedi@ymail.com") ? "elite_12m" : "free",
+    plan: (userEmail === "ashishchaturvedi@ymail.com") ? "enterprise_1yr" : "free",
     status: "approved",
+    totalCredits: (userEmail === "ashishchaturvedi@ymail.com") ? 999 : 0,
     allProducts: ["Basmati Rice", "Refined Sugar", "Indian Spices", "Pulses & Grains", "Edible Oil", "FMCG Goods"],
     product: "Basmati Rice, Refined Sugar, Indian Spices, Pulses & Grains, Edible Oil, FMCG Goods"
   };
 
   try {
-    const snap = await getDoc(doc(db, "suppliers", user.uid));
+    const snap = await withTimeout(getDoc(doc(db, "suppliers", user.uid)), 1500);
     if (snap.exists()) {
       s = { ...s, ...snap.data() };
     }
@@ -205,11 +213,12 @@ onAuthStateChanged(auth, async (user) => {
     console.warn("Supplier profile fetch note:", err.message);
   }
 
-  // Ensure ashishchaturvedi@ymail.com is always Global Enterprise
+  // Ensure ashishchaturvedi@ymail.com is always Global Enterprise (1-Year Plan)
   if (userEmail === "ashishchaturvedi@ymail.com") {
-    s.plan = "elite_12m";
+    s.plan = "enterprise_1yr";
     s.status = "approved";
     s.companyName = s.companyName || "APD Global Enterprise";
+    s.totalCredits = 999;
   }
 
   currentSupplier = s;
@@ -221,32 +230,32 @@ onAuthStateChanged(auth, async (user) => {
   statusEl.innerText = statusVal.toUpperCase();
   statusEl.style.color = (statusVal === "approved" || statusVal === "active") ? "#16a34a" : "#0284c7";
 
-  // Plan
+  // Plan (Strictly 1-Year Core Plans)
   const planMap = {
-    '3_day_trial': '3-Day Trial Pass',
-    'trial_3m': 'Professional Pass',
-    'pro_6m': 'Institutional Elite',
-    'elite_12m': 'Global Enterprise ($2,499)',
-    'nexus': 'APD Global Trade Nexus™ ($4,999)',
-    'free': 'Standard Account',
-    'basic': 'Basic Access',
-    'premium': 'Professional Pass',
-    'platinum': 'Institutional Elite',
-    'gold': 'Professional Pass'
+    'enterprise_1yr': '🏆 Global Enterprise ($2,499 / 1 Yr)',
+    'elite_12m': '🏆 Global Enterprise ($2,499 / 1 Yr)',
+    'elite_1yr': '⭐ Elite Corridor ($999 / 1 Yr)',
+    'pro_6m': '⭐ Elite Corridor ($999 / 1 Yr)',
+    'verified_1yr': '✨ Verified Supplier ($299 / 1 Yr)',
+    'trial_3m': '✨ Verified Supplier ($299 / 1 Yr)',
+    'custom_credits': 'Custom Credits',
+    'free': 'Standard Account (Browse Only)'
   };
 
-  const PAID_PLANS = ["trial_3m", "pro_6m", "elite_12m", "nexus", "premium", "platinum", "gold", "paid_member"];
-  const isPaid = PAID_PLANS.includes(s.plan);
+  const PAID_PLANS = ["enterprise_1yr", "elite_12m", "elite_1yr", "pro_6m", "verified_1yr", "trial_3m", "custom_credits", "paid_member"];
+  const isPaid = PAID_PLANS.includes(s.plan) || s.plan === "enterprise_1yr" || s.plan === "elite_12m";
 
-  let planDisplay = isPaid ? `⭐ Institutional Premium Member (${planMap[s.plan] || 'Paid Member'})` : "Standard Account (Browse Only)";
+  let planDisplay = isPaid ? `⭐ Institutional Member (${planMap[s.plan] || 'Paid Member'})` : "Standard Account (Browse Only)";
   document.getElementById("plan").innerText = planDisplay;
 
-  // Fetch Total Bids
+  // Fetch Total Bids with timeout protection
   try {
       const bidsQ = query(collection(db, "bids"), where("supplierId", "==", user.uid));
-      const bidsSnap = await getDocs(bidsQ);
+      const bidsSnap = await withTimeout(getDocs(bidsQ), 1500);
       document.getElementById("totalBids").innerText = bidsSnap.size;
-  } catch(e) { console.error("Error fetching bids:", e); }
+  } catch(e) {
+      document.getElementById("totalBids").innerText = "0";
+  }
 
   // Show KYC for paid members
   if (isPaid) {
@@ -691,27 +700,40 @@ function renderSupplierMatchedRFQs(s, uid, isPaid) {
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // AUTOCOMPLETE LOGIC
+    // AUTOCOMPLETE LOGIC (Instant synchronous initialization)
     (async function initSearchAutocomplete() {
-        try {
-            const snap = await getDocs(collection(db, "rfqs"));
-            const suggestions = new Set();
-            snap.forEach(doc => {
-                const data = doc.data();
-                if(data.product) suggestions.add(data.product.trim());
-                if(data.destination) suggestions.add(data.destination.trim());
+        const suggestions = new Set();
+        if (typeof liveRfqsData !== 'undefined' && Array.isArray(liveRfqsData)) {
+            liveRfqsData.forEach(r => {
+                if (r.commodity) suggestions.add(r.commodity.trim());
+                if (r.country) suggestions.add(r.country.trim());
             });
-            const datalist = document.createElement('datalist');
-            datalist.id = 'searchSuggestions';
+        }
+        const buildList = () => {
+            let datalist = document.getElementById('searchSuggestions');
+            if (!datalist) {
+                datalist = document.createElement('datalist');
+                datalist.id = 'searchSuggestions';
+                document.body.appendChild(datalist);
+            }
+            datalist.innerHTML = '';
             suggestions.forEach(item => {
                 const option = document.createElement('option');
                 option.value = item;
                 datalist.appendChild(option);
             });
-            document.body.appendChild(datalist);
-        } catch (err) {
-            console.error("Autocomplete init failed:", err);
-        }
+        };
+        buildList();
+        try {
+            const timeoutPromise = new Promise((_, rej) => setTimeout(() => rej(new Error("Timeout")), 1500));
+            const snap = await Promise.race([getDocs(collection(db, "rfqs")), timeoutPromise]);
+            snap.forEach(doc => {
+                const data = doc.data();
+                if(data.product) suggestions.add(data.product.trim());
+                if(data.destination) suggestions.add(data.destination.trim());
+            });
+            buildList();
+        } catch (err) {}
     })();
 
     window.handleQuickRFQ = async function(e) {
