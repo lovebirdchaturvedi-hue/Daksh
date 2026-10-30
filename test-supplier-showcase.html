@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>APD Global Trade – Supplier RFQ Portal (Test Supplier)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #d4af37;
+    --gold-light: #facc15;
+    --gold-dark: #b8860b;
+    --navy: #071427;
+    --navy-dark: #020617;
+    --navy-light: #0f172a;
+    --green: #16a34a;
+    --green-bright: #22c55e;
+    --border: #e2e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f1f5f9;
+    color: #0f172a;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* TOP NOTIFICATION / ESCROW TICKER */
+  .top-strip {
+    background: #020617;
+    color: #e2e8f0;
+    padding: 9px 24px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  }
+  .top-badge {
+    background: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 700;
+  }
+
+  /* MAIN HEADER */
+  header {
+    background: #071427;
+    color: #fff;
+    padding: 16px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    border-bottom: 2px solid var(--gold);
+  }
+  .logo-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo-icon {
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: #000;
+    font-weight: 900;
+    font-size: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+  }
+  .logo-title {
+    font-size: 20px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+  .logo-title span { color: var(--gold); }
+  .user-pill {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 8px 16px;
+    border-radius: 30px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+  }
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+    background: var(--gold);
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 13px;
+  }
+
+  /* CONTAINER */
+  .container {
+    max-width: 1060px;
+    margin: 28px auto 60px;
+    padding: 0 20px;
+  }
+
+  /* SUPPLIER PROFILE HERO CARD */
+  .supplier-hero {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px 28px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border: 1px solid var(--border);
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .sup-welcome {
+    font-size: 24px;
+    font-weight: 900;
+    color: #071427;
+    margin-bottom: 6px;
+  }
+  .sup-sub {
+    font-size: 13.5px;
+    color: #64748b;
+  }
+  .sup-sub b { color: #0f172a; }
+  .stats-strip {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+  }
+  .stat-pill {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    padding: 10px 18px;
+    border-radius: 12px;
+    text-align: center;
+  }
+  .stat-val {
+    font-size: 18px;
+    font-weight: 900;
+    color: #071427;
+  }
+  .stat-lbl {
+    font-size: 11px;
+    color: #64748b;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+
+  /* COMMODITY TABS */
+  .tabs-bar {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+  .tab-btn {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    color: #475569;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .tab-btn.active {
+    background: #071427;
+    color: #facc15;
+    border-color: var(--gold);
+    box-shadow: 0 2px 8px rgba(7, 20, 39, 0.2);
+  }
+
+  /* SECTION TITLE */
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+  .sec-title {
+    font-size: 20px;
+    font-weight: 900;
+    color: #071427;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sec-badge {
+    background: #ef4444;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 9px;
+    border-radius: 12px;
+    letter-spacing: 0.5px;
+    animation: pulse 1.5s infinite;
+  }
+
+  /* RFQ CARD STYLES */
+  .rfq-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 22px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+    border: 1.5px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .rfq-card.unlocked-card {
+    border: 2px solid var(--green);
+    box-shadow: 0 8px 30px rgba(34, 197, 94, 0.12);
+    position: relative;
+  }
+  .rfq-card.unlocked-card::before {
+    content: "⭐ UNLOCKED LEAD DEMO";
+    position: absolute;
+    top: -12px;
+    right: 24px;
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    color: #fff;
+    font-size: 10.5px;
+    font-weight: 900;
+    padding: 3px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.8px;
+    box-shadow: 0 2px 8px rgba(22, 163, 74, 0.35);
+  }
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+    gap: 12px;
+  }
+  .country-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+  }
+  .flag { font-size: 22px; }
+  .country-name {
+    font-size: 16px;
+    font-weight: 800;
+    color: #071427;
+  }
+  .verified-buyer-tag {
+    background: rgba(37, 99, 235, 0.1);
+    color: #2563eb;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 12px;
+  }
+  .rfq-commodity-title {
+    font-size: 18px;
+    font-weight: 900;
+    color: #0f172a;
+    letter-spacing: -0.3px;
+  }
+  .quote-requested-badge {
+    background: rgba(212, 175, 55, 0.15);
+    color: #b8860b;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* SPECS GRID */
+  .specs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    background: #f8fafc;
+    padding: 14px 16px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    border: 1px solid #edf2f7;
+  }
+  .spec-item span {
+    font-size: 11px;
+    color: #64748b;
+    display: block;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .spec-item b {
+    font-size: 13.5px;
+    color: #0f172a;
+    font-weight: 800;
+  }
+
+  /* DOSSIER: UNLOCKED STATE */
+  .dossier-unlocked {
+    background: #f0fdf4;
+    border: 1.5px solid #86efac;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 16px;
+  }
+  .dossier-header-unlocked {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #bbf7d0;
+  }
+  .dossier-tag-green {
+    background: #16a34a;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 900;
+    padding: 3px 9px;
+    border-radius: 5px;
+    letter-spacing: 0.5px;
+  }
+  .dossier-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 18px;
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .dossier-grid div b {
+    color: #334155;
+    font-weight: 700;
+  }
+  .contact-val-wa {
+    color: #16a34a;
+    font-weight: 800;
+    text-decoration: none;
+  }
+  .contact-val-email {
+    color: #2563eb;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  /* DOSSIER: LOCKED STATE */
+  .dossier-locked {
+    background: #fafaf9;
+    border: 1.5px dashed var(--gold);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .dossier-header-locked {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #e2e8f0;
+  }
+  .dossier-tag-navy {
+    background: #071427;
+    color: #facc15;
+    font-size: 11px;
+    font-weight: 900;
+    padding: 3px 9px;
+    border-radius: 5px;
+    letter-spacing: 0.5px;
+  }
+  .blur-text {
+    filter: blur(4px);
+    user-select: none;
+    color: #64748b;
+    display: inline-block;
+  }
+  .locked-label {
+    color: #dc2626;
+    font-weight: 800;
+    font-size: 11px;
+    background: #fee2e2;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-left: 6px;
+  }
+
+  /* BUTTONS */
+  .btn-wa-direct {
+    flex: 1;
+    min-width: 220px;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #fff;
+    text-align: center;
+    padding: 13px 20px;
+    border-radius: 10px;
+    font-weight: 900;
+    text-decoration: none;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
+  }
+  .btn-quote-gold {
+    flex: 1;
+    min-width: 180px;
+    background: #071427;
+    color: #facc15;
+    border: 1.5px solid var(--gold);
+    text-align: center;
+    padding: 13px 20px;
+    border-radius: 10px;
+    font-weight: 800;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .btn-upgrade-locked {
+    flex: 1;
+    min-width: 260px;
+    background: linear-gradient(135deg, #d4af37, #b8860b);
+    color: #000;
+    text-align: center;
+    padding: 13px 20px;
+    border-radius: 10px;
+    font-weight: 900;
+    text-decoration: none;
+    font-size: 13.5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 14px rgba(212, 175, 55, 0.3);
+  }
+  .btn-secondary {
+    background: #f1f5f9;
+    color: #0f172a;
+    border: 1px solid #cbd5e1;
+    padding: 13px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 13.5px;
+  }
+
+  .watermark {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 12px;
+    margin-top: 30px;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+  <!-- TOP STRIP -->
+  <div class="top-strip">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span class="top-badge">🛡️ APD ESCROW TRADE PROTECTION</span>
+      <span>Live Procurement Desk • SGS Verified Trade Corridors</span>
+    </div>
+    <div style="font-weight:700; color:var(--gold);">
+      Global B2B Institutional Hub • 1,500+ Verified Buyers
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-box">
+      <div class="logo-icon">APD</div>
+      <div class="logo-title">APD <span>Global</span> Trade</div>
+    </div>
+    <div class="user-pill">
+      <div class="user-avatar">TS</div>
+      <div>
+        <div style="font-size: 13px; font-weight: 800; color: #fff;">Test Supplier</div>
+        <div style="font-size: 11px; color: var(--gold);">Verified Supplier Profile</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- SUPPLIER HERO PROFILE -->
+    <div class="supplier-hero">
+      <div>
+        <div class="sup-welcome">Welcome, Test Supplier</div>
+        <div class="sup-sub">
+          Account Status: <b style="color:var(--green); font-weight:800;">ACTIVE</b> · 
+          Catalog: <b>Basmati Rice, Sugar, Maize, Soybeans, Pigeon Peas, Lentils, Millets</b>
+        </div>
+      </div>
+      <div class="stats-strip">
+        <div class="stat-pill">
+          <div class="stat-val" style="color:var(--green);">1 Unlocked</div>
+          <div class="stat-lbl">Active Dossier</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-val">1,500+</div>
+          <div class="stat-lbl">Live Buyer RFQs</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMMODITY TABS -->
+    <div class="tabs-bar">
+      <button class="tab-btn active">⭐ All Selected Commodities</button>
+      <button class="tab-btn">🌾 Basmati Rice</button>
+      <button class="tab-btn">🌽 Maize (Corn)</button>
+      <button class="tab-btn">🌱 Soybeans</button>
+      <button class="tab-btn">🥣 Pigeon Peas</button>
+      <button class="tab-btn">🍲 Lentils</button>
+      <button class="tab-btn">🌾 Millets</button>
+      <button class="tab-btn">🍬 Refined Sugar</button>
+    </div>
+
+    <!-- SECTION TITLE -->
+    <div class="section-header">
+      <div class="sec-title">
+        <span>Verified Buyer RFQs & Live Import Requirements</span>
+        <span class="sec-badge">🔴 1,500+ LIVE ORDERS</span>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CARD 1: THE UNLOCKED RFQ (100% REAL VERIFIED DUBAI RICE BUYER) -->
+    <!-- ============================================================ -->
+    <div class="rfq-card unlocked-card">
+      <div class="card-top">
+        <div>
+          <div class="country-line">
+            <span class="flag">🇦🇪</span>
+            <span class="country-name">United Arab Emirates (Dubai)</span>
+            <span class="verified-buyer-tag">Verified Commercial Importer</span>
+            <span style="background:rgba(34,197,94,0.15); color:var(--green); font-size:11px; font-weight:800; padding:2px 8px; border-radius:12px;">🔴 LIVE (4 mins ago)</span>
+          </div>
+          <h2 class="rfq-commodity-title">1121 Steam Basmati Rice (XXL Long Grain 8.35mm)</h2>
+        </div>
+        <div>
+          <span class="quote-requested-badge">Competitive Quote Requested</span>
+        </div>
+      </div>
+
+      <!-- SPECS -->
+      <div class="specs-grid">
+        <div class="spec-item">
+          <span>Target Quantity</span>
+          <b>500 Metric Tons</b>
+        </div>
+        <div class="spec-item">
+          <span>Delivery Port</span>
+          <b>CIF Jebel Ali Port, Dubai</b>
+        </div>
+        <div class="spec-item">
+          <span>Payment Terms</span>
+          <b>100% Irrevocable L/C at Sight</b>
+        </div>
+        <div class="spec-item">
+          <span>Inspection & Audit</span>
+          <b>SGS / Intertek at Load Port</b>
+        </div>
+      </div>
+
+      <!-- UNLOCKED BUYER DOSSIER -->
+      <div class="dossier-unlocked">
+        <div class="dossier-header-unlocked">
+          <span class="dossier-tag-green">✅ UNLOCKED BUYER DOSSIER (ACTIVE ACCESS)</span>
+          <span style="font-size:12px; color:var(--green); font-weight:800;">Real Verified Commercial Buyer · Ready for Contact</span>
+        </div>
+        <div class="dossier-grid">
+          <div><b>👤 Sourcing Head:</b> Tariq Al-Mubarak (Commodity Sourcing & Procurement)</div>
+          <div><b>🏢 Corporate Entity:</b> Al Bait Al Mubarak Foodstuff Trading LLC</div>
+          <div><b>📞 Direct WhatsApp / Phone:</b> <a href="https://wa.me/971501245969" class="contact-val-wa" target="_blank">💬 +971 50 124 5969</a></div>
+          <div><b>📧 Procurement Email:</b> <a href="mailto:sales@albaitalmubarak.com" class="contact-val-email">sales@albaitalmubarak.com</a></div>
+          <div style="grid-column: 1 / -1;"><b>📍 Corporate Office & Warehouse:</b> Tamani Arts Building, Business Bay, Dubai, UAE (Discharge: Jebel Ali Port)</div>
+        </div>
+      </div>
+
+      <!-- ACTIONS -->
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a href="https://wa.me/971501245969?text=Hello%2C%20regarding%20the%201121%20Basmati%20Rice%20RFQ%20on%20APD%20Global%20Trade" target="_blank" class="btn-wa-direct">
+          <span>💬</span> Contact Buyer on WhatsApp (+971 50 124 5969)
+        </a>
+        <a href="#" class="btn-quote-gold">
+          📝 Submit Official Quote
+        </a>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CARD 2: LOCKED RFQ (PIGEON PEAS / TOOR DAL) -->
+    <!-- ============================================================ -->
+    <div class="rfq-card">
+      <div class="card-top">
+        <div>
+          <div class="country-line">
+            <span class="flag">🇸🇦</span>
+            <span class="country-name">Saudi Arabia (Jeddah Islamic Port)</span>
+            <span class="verified-buyer-tag">Institutional Buyer</span>
+            <span style="background:rgba(239,68,68,0.1); color:#ef4444; font-size:11px; font-weight:800; padding:2px 8px; border-radius:12px;">🔴 LIVE (12 mins ago)</span>
+          </div>
+          <h2 class="rfq-commodity-title">Whole Pigeon Peas (Machine Cleaned Grade A - Toor Dal)</h2>
+        </div>
+        <div>
+          <span class="quote-requested-badge">Competitive Quote Requested</span>
+        </div>
+      </div>
+
+      <div class="specs-grid">
+        <div class="spec-item">
+          <span>Target Quantity</span>
+          <b>500 Metric Tons</b>
+        </div>
+        <div class="spec-item">
+          <span>Delivery Port</span>
+          <b>CIF Jeddah Islamic Port</b>
+        </div>
+        <div class="spec-item">
+          <span>Payment Terms</span>
+          <b>100% Confirmed LC at Sight</b>
+        </div>
+        <div class="spec-item">
+          <span>Inspection & Audit</span>
+          <b>SGS / Cotecna Quality Cert</b>
+        </div>
+      </div>
+
+      <!-- LOCKED DOSSIER -->
+      <div class="dossier-locked">
+        <div class="dossier-header-locked">
+          <span class="dossier-tag-navy">🔒 BUYER CONTACT DETAILS LOCKED</span>
+          <span style="font-size:11.5px; color:#dc2626; font-weight:800;">Requires Paid APD Membership</span>
+        </div>
+        <div class="dossier-grid">
+          <div><b>👤 Buyer Representative:</b> <span class="blur-text">Tariq Al-Mansoor</span> <span class="locked-label">[Hidden]</span></div>
+          <div><b>🏢 Corporate Entity:</b> <span class="blur-text">Al-Mansoor Grain Trading KSA</span> <span class="locked-label">[Hidden]</span></div>
+          <div><b>📞 Direct WhatsApp / Phone:</b> <span class="blur-text">+966 50 821 4492</span> <span class="locked-label">[Locked]</span></div>
+          <div><b>📧 Official Email:</b> <span class="blur-text">trade-desk@almansoor.sa</span> <span class="locked-label">[Locked]</span></div>
+          <div style="grid-column: 1 / -1;"><b>📍 Corporate Address:</b> <span class="blur-text">King Fahd Road, Business Gate Sector 4, Riyadh, KSA</span> <span class="locked-label">[Locked]</span></div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a href="#" class="btn-upgrade-locked">
+          <span>⭐</span> Upgrade to Membership to Unlock Buyer WhatsApp & Email
+        </a>
+        <a href="#" class="btn-secondary">
+          📝 Submit Quote
+        </a>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CARD 3: LOCKED RFQ (YELLOW MAIZE / CORN) -->
+    <!-- ============================================================ -->
+    <div class="rfq-card">
+      <div class="card-top">
+        <div>
+          <div class="country-line">
+            <span class="flag">🇻🇳</span>
+            <span class="country-name">Vietnam (Cai Mep / Haiphong)</span>
+            <span class="verified-buyer-tag">Verified Feed Mill Corp</span>
+            <span style="background:rgba(239,68,68,0.1); color:#ef4444; font-size:11px; font-weight:800; padding:2px 8px; border-radius:12px;">🔴 LIVE (20 mins ago)</span>
+          </div>
+          <h2 class="rfq-commodity-title">Yellow Maize (Animal Feed Grade #2, Max 14% Moisture)</h2>
+        </div>
+        <div>
+          <span class="quote-requested-badge">Competitive Quote Requested</span>
+        </div>
+      </div>
+
+      <div class="specs-grid">
+        <div class="spec-item">
+          <span>Target Quantity</span>
+          <b>5,000 Metric Tons</b>
+        </div>
+        <div class="spec-item">
+          <span>Delivery Port</span>
+          <b>CIF Cai Mep International Port</b>
+        </div>
+        <div class="spec-item">
+          <span>Payment Terms</span>
+          <b>100% Irrevocable L/C at Sight</b>
+        </div>
+        <div class="spec-item">
+          <span>Inspection & Audit</span>
+          <b>SGS Guaranteed Purity</b>
+        </div>
+      </div>
+
+      <div class="dossier-locked">
+        <div class="dossier-header-locked">
+          <span class="dossier-tag-navy">🔒 BUYER CONTACT DETAILS LOCKED</span>
+          <span style="font-size:11.5px; color:#dc2626; font-weight:800;">Requires Paid APD Membership</span>
+        </div>
+        <div class="dossier-grid">
+          <div><b>👤 Buyer Representative:</b> <span class="blur-text">Nguyen Van Thanh</span> <span class="locked-label">[Hidden]</span></div>
+          <div><b>🏢 Corporate Entity:</b> <span class="blur-text">Vietnam Agri Feed Imports Joint Stock Co</span> <span class="locked-label">[Hidden]</span></div>
+          <div><b>📞 Direct WhatsApp / Phone:</b> <span class="blur-text">+84 91 832 1092</span> <span class="locked-label">[Locked]</span></div>
+          <div><b>📧 Official Email:</b> <span class="blur-text">procurement@vietfeed-corp.vn</span> <span class="locked-label">[Locked]</span></div>
+          <div style="grid-column: 1 / -1;"><b>📍 Corporate Address:</b> <span class="blur-text">District 1, Saigon Trade Center, Ho Chi Minh City, Vietnam</span> <span class="locked-label">[Locked]</span></div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a href="#" class="btn-upgrade-locked">
+          <span>⭐</span> Upgrade to Membership to Unlock Buyer WhatsApp & Email
+        </a>
+        <a href="#" class="btn-secondary">
+          📝 Submit Quote
+        </a>
+      </div>
+    </div>
+
+    <!-- WATERMARK -->
+    <div class="watermark">
+      APD Global Trade (apdglobaltrade.com) • Official Supplier Trade Panel Demonstration • Confidential Trade Lead Dossier
+    </div>
+
+  </div>
+
+</body>
+</html>

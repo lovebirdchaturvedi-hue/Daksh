@@ -174,10 +174,10 @@ onAuthStateChanged(auth, async (user) => {
 
       let contactHtml = "";
       if (isUnlocked) {
-        const phoneClean = (r.phone || "+971523847129").replace(/\D/g, '');
+        const phoneClean = (r.phone || "+971501245969").replace(/\D/g, '');
         const buyerCompany = r.company || (r.country ? `${r.country} Global Import LLC` : "Verified Buyer LLC");
-        const buyerName = r.buyerName || r.name || "Ahmed Al-Futtaim";
-        const buyerEmail = r.email || (r.country ? `trade@${r.country.toLowerCase().replace(/\s+/g,'')}buyer.com` : "procurement@globalbuyer.com");
+        const buyerName = r.buyerName || r.name || "Tariq Al-Mubarak";
+        const buyerEmail = r.email || (r.country ? `sales@albaitalmubarak.com` : "procurement@globalbuyer.com");
 
         contactHtml = `
           <div style="background:#f0fdf4; padding:15px; border-radius:10px; border:1px solid #86efac; margin-top:12px;">
