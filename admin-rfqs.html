@@ -2,171 +2,680 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Admin – RFQ Management | APD Global Trade</title>
+<title>Admin – RFQ & Live Order Command Center | APD Global Trade</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+
 <style>
-body{margin:0;font-family:Inter,Arial;background:#f5f7fb}
-header{
-  background:#020617;color:#c9a44a;
-  padding:18px 30px;
-  display:flex;justify-content:space-between;align-items:center
+:root {
+  --navy-bg: #020617;
+  --card-bg: #0f172a;
+  --gold: #d4af37;
+  --gold-hover: #facc15;
 }
-a{color:#e5e7eb;text-decoration:none;margin-left:16px}
-.container{
-  max-width:1000px;margin:30px auto;
-  background:#fff;padding:24px;border-radius:14px
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Arial, sans-serif;
+  background: #f8fafc;
+  color: #0f172a;
+  font-size: 12px;
 }
-input,select{
-  width:100%;padding:10px;margin-bottom:10px;
-  border-radius:6px;border:1px solid #d1d5db
+header {
+  background: #020617;
+  color: #fff;
+  padding: 12px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1.5px solid rgba(212, 175, 55, 0.4);
 }
-button{
-  padding:8px 12px;margin:4px;
-  border:none;border-radius:6px;
-  cursor:pointer;font-size:13px;font-weight:600
+header a {
+  color: #cbd5e1;
+  text-decoration: none;
+  margin-left: 14px;
+  font-size: 12px;
+  font-weight: 700;
+  transition: 0.2s;
 }
-.primary{background:#c9a44a;color:#071427}
-.edit{background:#2563eb;color:#fff}
-.live{background:#16a34a;color:#fff}
-.draft{background:#f59e0b;color:#000}
-.hide{background:#64748b;color:#fff}
-.del{background:#dc2626;color:#fff}
-.rfq{
-  border-bottom:1px solid #e5e7eb;
-  padding:14px 0
+header a:hover {
+  color: #facc15;
 }
-.small{font-size:13px;color:#6b7280}
-.status{font-weight:700}
+.container {
+  max-width: 98%;
+  margin: 16px auto;
+  box-sizing: border-box;
+}
+.admin-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px 24px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  border: 1px solid #e2e8f0;
+  margin-bottom: 18px;
+}
+.tab-btn {
+  padding: 8px 18px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background: #f1f5f9;
+  color: #475569;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 12px;
+  transition: 0.2s;
+}
+.tab-btn.active {
+  background: #020617;
+  color: #facc15;
+  border-color: #d4af37;
+}
+input, select, textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  box-sizing: border-box;
+  font-size: 12px;
+  margin-bottom: 10px;
+  outline: none;
+  background: #fff;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: #d4af37;
+  box-shadow: 0 0 0 2px rgba(212,175,55,0.2);
+}
+button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+}
+.btn-gold {
+  background: linear-gradient(135deg, #facc15 0%, #d4af37 50%, #b8860b 100%);
+  color: #000;
+  font-weight: 900;
+  padding: 9px 20px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  box-shadow: 0 2px 8px rgba(212,175,55,0.35);
+}
+.edit { background: #2563eb; }
+.live { background: #16a34a; }
+.draft { background: #f59e0b; color: #000; }
+.hide { background: #64748b; }
+.del { background: #dc2626; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 6px 8px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+  font-size: 11px;
+}
+th {
+  background: #020617;
+  color: #f8fafc;
+  font-weight: 700;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <div>APD Global Trade — Admin RFQs</div>
-  <div>
+  <div style="display: flex; align-items: center; gap: 10px;">
+    <span style="font-size: 20px;">📦</span>
+    <b style="font-size: 14px; letter-spacing: 0.3px;">APD Global Trade — RFQ & Order Command Center</b>
+  </div>
+  <div style="display: flex; align-items: center; gap: 12px;">
     <a href="/admin.html">Supplier Admin</a>
-    <a href="/buyer-rfqs.html" target="_blank">View RFQs</a>
-    <a href="#" id="logout">Logout</a>
+    <a href="/admin-crm.html">CRM Pipeline</a>
+    <a href="/buyer-rfqs.html" target="_blank" style="color: #4ade80;">View Live Trade Board ↗</a>
+    <button id="logoutBtn" style="background: #dc2626; font-size: 11px; padding: 5px 12px;">Logout</button>
   </div>
 </header>
 
 <div class="container">
 
-<h3>Post New RFQ</h3>
+  <!-- TOP ACTION TOOLBAR -->
+  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
+    <div style="display: flex; gap: 8px;">
+      <button id="tabSingleBtn" class="tab-btn active" onclick="switchRfqTab('single')">📝 Post Single RFQ</button>
+      <button id="tabBulkBtn" class="tab-btn" onclick="switchRfqTab('bulk')">⚡ Bulk Upload (As Many RFQs As You Want)</button>
+    </div>
+    <div id="rfqStatsBadge" style="background: #fff; border: 1px solid #cbd5e1; padding: 6px 14px; border-radius: 6px; font-weight: 700; font-size: 11.5px; color: #334155;">
+      Total Live RFQs: <b id="totalLiveCount" style="color: #16a34a;">Loading…</b>
+    </div>
+  </div>
 
-<input id="product" placeholder="Product name">
-<input id="quantity" placeholder="Quantity (e.g. 500 MT)">
-<input id="country" placeholder="Country">
-<input id="buyerName" placeholder="Buyer company">
-<input id="email" placeholder="Buyer email">
-<input id="phone" placeholder="Buyer phone">
+  <!-- SECTION 1: SINGLE RFQ POSTER -->
+  <div id="singleRfqSection" class="admin-card">
+    <h3 style="margin: 0 0 12px 0; font-size: 14px; color: #020617; display: flex; align-items: center; gap: 6px;">
+      <span>📝</span> Publish Individual Buyer RFQ
+    </h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px;">
+      <div>
+        <label style="font-weight: 700; display: block; margin-bottom: 4px;">Commodity / Product Name *</label>
+        <input id="product" placeholder="e.g. Sugar ICUMSA 45, Basmati Rice 1121, Milling Wheat" required>
+      </div>
+      <div>
+        <label style="font-weight: 700; display: block; margin-bottom: 4px;">Target Quantity *</label>
+        <input id="quantity" placeholder="e.g. 5,000 MT, 50,000 MT, 10 Containers" required>
+      </div>
+      <div>
+        <label style="font-weight: 700; display: block; margin-bottom: 4px;">Destination Country / Port *</label>
+        <input id="country" placeholder="e.g. UAE (Jebel Ali), Saudi Arabia (Jeddah), Rotterdam" required>
+      </div>
+      <div>
+        <label style="font-weight: 700; display: block; margin-bottom: 4px;">Buyer Company Name *</label>
+        <input id="buyerName" placeholder="e.g. Al Bait Al Mubarak Foodstuff LLC" required>
+      </div>
+      <div>
+        <label style="font-weight: 700; display: block; margin-bottom: 4px;">Buyer Email Address</label>
+        <input id="email" type="email" placeholder="e.g. procurement@albaitfood.ae">
+      </div>
+      <div>
+        <label style="font-weight: 700; display: block; margin-bottom: 4px;">Buyer WhatsApp / Phone *</label>
+        <input id="phone" placeholder="e.g. +971 52 384 7129">
+      </div>
+      <div>
+        <label style="font-weight: 700; display: block; margin-bottom: 4px;">Payment Terms</label>
+        <select id="paymentTerms">
+          <option value="100% Irrevocable LC at Sight">100% Irrevocable LC at Sight</option>
+          <option value="Confirmed LC at Sight">Confirmed LC at Sight</option>
+          <option value="SBLC / DLC Transferable">SBLC / DLC Transferable</option>
+          <option value="30% Advance TT + 70% against BL">30% Advance TT + 70% against BL</option>
+          <option value="Escrow Secured / APD Guarantee">Escrow Secured / APD Guarantee</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-weight: 700; display: block; margin-bottom: 4px;">Specifications & Packaging</label>
+        <input id="specs" placeholder="e.g. Max 0.04% Moisture, 50kg PP Bags, Inspection SGS">
+      </div>
+    </div>
+    <div style="margin-top: 6px; display: flex; justify-content: flex-end; gap: 8px;">
+      <button class="btn-gold" onclick="postSingleRFQ()">🚀 Publish Live RFQ</button>
+    </div>
+    <div id="singlePostStatus" style="display: none; margin-top: 10px; padding: 8px 12px; border-radius: 6px; font-weight: 700;"></div>
+  </div>
 
-<button class="primary" onclick="postRFQ()">Publish RFQ</button>
+  <!-- SECTION 2: BULK RFQ UPLOADER (UPLOAD AS MANY AS YOU WANT) -->
+  <div id="bulkRfqSection" class="admin-card" style="display: none; background: #faf9f6; border: 1.5px solid #d4af37;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+      <div>
+        <h3 style="margin: 0; font-size: 15px; color: #071427; display: flex; align-items: center; gap: 6px;">
+          <span>⚡</span> Bulk RFQ Uploader (Upload As Many RFQs As You Want)
+        </h3>
+        <p style="margin: 4px 0 0; color: #64748b; font-size: 11.5px;">
+          Paste CSV rows or load a file. You can upload 10, 100, 500, or thousands of buyer requirements at once.
+        </p>
+      </div>
+      <button onclick="loadSampleTemplate()" style="background: #020617; color: #facc15; font-size: 11px;">📋 Load Sample CSV Data</button>
+    </div>
 
-<hr style="margin:30px 0">
+    <div style="margin-bottom: 12px;">
+      <div style="font-weight: 700; color: #334155; margin-bottom: 4px; font-size: 11px;">
+        Format: <code>Commodity, Quantity, Destination/Country, Buyer Company, Phone, Email, Payment Terms, Specs</code>
+      </div>
+      <textarea id="bulkCsvTextarea" rows="7" placeholder="Paste your CSV or Tabular RFQ rows here, e.g.:
+Sugar ICUMSA 45, 12500 MT, Jebel Ali Dubai, Al Khaleej Food Trading LLC, +971523847129, procurement@alkhaleej.ae, 100% LC at Sight, 50KG PP Bags
+Milling Wheat Grade 2, 25000 MT, Dammam Port KSA, Arabian Grains Corp, +966501234567, wheat@arabiangrains.sa, Confirmed LC, Moisture max 12%
+Basmati Rice 1121 Steam, 500 MT, Sohar Oman, Gulf Import Export SAOC, +96891234567, info@gulfimport.om, 30% TT 70% BL, 25kg non-woven bags" style="font-family: monospace; font-size: 11px;"></textarea>
+    </div>
 
-<h3>Existing RFQs</h3>
-<div id="rfqs">Loading RFQs…</div>
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <input type="file" id="bulkCsvFileInput" accept=".csv, .txt" style="width: auto; margin-bottom: 0;" onchange="handleCsvFileSelected(event)">
+        <button onclick="parseBulkInput()" style="background: #0284c7; padding: 8px 16px;">🔍 Parse & Preview</button>
+      </div>
+      <button id="publishAllBulkBtn" class="btn-gold" style="display: none;" onclick="publishAllParsedRFQs()">
+        🚀 Publish All (<span id="parsedCountLabel">0</span>) RFQs to Live Board
+      </button>
+    </div>
+
+    <!-- Preview Container -->
+    <div id="bulkPreviewContainer" style="display: none; margin-top: 14px; border-top: 1px dashed #d4af37; padding-top: 12px;">
+      <div style="font-weight: 700; color: #0f172a; margin-bottom: 6px;">Parsed Preview (<span id="previewCount">0</span> RFQs Ready):</div>
+      <div style="max-height: 220px; overflow-y: auto; border: 1px solid #cbd5e1; border-radius: 6px;">
+        <table id="previewTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Commodity</th>
+              <th>Quantity</th>
+              <th>Destination</th>
+              <th>Buyer</th>
+              <th>Phone</th>
+              <th>Payment</th>
+            </tr>
+          </thead>
+          <tbody id="previewTbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="bulkProgressStatus" style="display: none; margin-top: 10px; padding: 8px 12px; border-radius: 6px; font-weight: 700;"></div>
+  </div>
+
+  <!-- SECTION 3: EXISTING RFQs TABLE & CONTROLS -->
+  <div class="admin-card">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+      <div style="display: flex; gap: 8px; align-items: center; flex: 1; max-width: 480px;">
+        <input id="rfqSearchInput" placeholder="🔍 Search RFQs by commodity, country, buyer, phone..." style="margin-bottom: 0;" onkeyup="filterRfqTable()">
+        <button onclick="filterRfqTable()" style="background: #020617; color: #facc15; padding: 8px 16px;">Search</button>
+      </div>
+      <div style="display: flex; gap: 6px; align-items: center;">
+        <select id="rfqStatusFilter" style="width: auto; margin-bottom: 0; padding: 6px 10px;" onchange="filterRfqTable()">
+          <option value="all">All Statuses</option>
+          <option value="live" selected>Live Orders Only</option>
+          <option value="draft">Drafts</option>
+          <option value="hidden">Hidden</option>
+        </select>
+        <button onclick="loadRFQs()" style="background: #020617; color: #facc15; padding: 7px 12px;">🔄 Refresh</button>
+      </div>
+    </div>
+
+    <div style="overflow-x: auto; border: 1px solid #e2e8f0; border-radius: 6px;">
+      <table>
+        <thead>
+          <tr>
+            <th style="min-width: 140px;">Commodity</th>
+            <th style="min-width: 90px;">Quantity</th>
+            <th style="min-width: 120px;">Destination</th>
+            <th style="min-width: 140px;">Buyer Company</th>
+            <th style="min-width: 110px;">Phone / WhatsApp</th>
+            <th style="min-width: 130px;">Payment Terms</th>
+            <th style="width: 75px; text-align: center;">Status</th>
+            <th style="min-width: 200px;">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="rfqsTbody">
+          <tr><td colspan="8" style="text-align: center; padding: 18px; color: #64748b;">Loading RFQs…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth,onAuthStateChanged,signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore,collection,addDoc,getDocs,updateDoc,deleteDoc,doc,serverTimestamp } 
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc, serverTimestamp, query, orderBy, limit } 
 from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const ADMIN_EMAILS=["admin@apdglobaltrade.com","ashishchaturvedi@ymail.com"];
+const ADMIN_EMAILS = [
+  "admin@apdglobaltrade.com",
+  "ashishchaturvedi@ymail.com"
+];
 
-const app=initializeApp({
-  apiKey:"AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
-  authDomain:"apd-globaltrade-prod.firebaseapp.com",
-  projectId:"apd-globaltrade-prod"
+const app = initializeApp({
+  apiKey: "AIzaSyABA-KRY6bY7K2QZwLhQ2piHjQVLLceiGs",
+  authDomain: "apd-globaltrade-prod.firebaseapp.com",
+  projectId: "apd-globaltrade-prod"
 });
 
-const auth=getAuth(app);
-const db=getFirestore(app);
-const rfqsDiv=document.getElementById("rfqs");
+const auth = getAuth(app);
+const db = getFirestore(app);
+let allLiveRFQs = [];
+let parsedBulkItems = [];
 
-onAuthStateChanged(auth,user=>{
+// Auth check
+onAuthStateChanged(auth, user => {
   const uEmail = (user?.email || "").toLowerCase().trim();
-  if(!user || !ADMIN_EMAILS.includes(uEmail)){
-    location.href="/supplier-login.html";
+  if (!user || !ADMIN_EMAILS.includes(uEmail)) {
+    location.href = "/supplier-login.html";
     return;
   }
   loadRFQs();
 });
 
-window.postRFQ=async()=>{
-  await addDoc(collection(db,"rfqs"),{
-    product:product.value,
-    quantity:quantity.value,
-    country:country.value,
-    buyerName:buyerName.value,
-    email:email.value,
-    phone:phone.value,
-    status:"live",
-    createdAt:serverTimestamp()
-  });
-  product.value=quantity.value=country.value=buyerName.value=email.value=phone.value="";
-  loadRFQs();
+// Tab switching
+window.switchRfqTab = function(tab) {
+  const singleBtn = document.getElementById("tabSingleBtn");
+  const bulkBtn = document.getElementById("tabBulkBtn");
+  const singleSec = document.getElementById("singleRfqSection");
+  const bulkSec = document.getElementById("bulkRfqSection");
+
+  if (tab === 'bulk') {
+    singleBtn.classList.remove('active');
+    bulkBtn.classList.add('active');
+    singleSec.style.display = 'none';
+    bulkSec.style.display = 'block';
+  } else {
+    bulkBtn.classList.remove('active');
+    singleBtn.classList.add('active');
+    bulkSec.style.display = 'none';
+    singleSec.style.display = 'block';
+  }
 };
 
-async function loadRFQs(){
-  rfqsDiv.innerHTML="";
-  const snap=await getDocs(collection(db,"rfqs"));
+// Post Single RFQ
+window.postSingleRFQ = async () => {
+  const productEl = document.getElementById("product");
+  const qtyEl = document.getElementById("quantity");
+  const countryEl = document.getElementById("country");
+  const buyerEl = document.getElementById("buyerName");
+  const emailEl = document.getElementById("email");
+  const phoneEl = document.getElementById("phone");
+  const termsEl = document.getElementById("paymentTerms");
+  const specsEl = document.getElementById("specs");
+  const statusDiv = document.getElementById("singlePostStatus");
 
-  if(snap.empty){
-    rfqsDiv.innerHTML="<p>No RFQs yet</p>";
+  if (!productEl.value || !qtyEl.value || !countryEl.value) {
+    alert("Please fill in Commodity, Quantity, and Destination.");
     return;
   }
 
-  snap.forEach(d=>{
-    const r=d.data();
-    rfqsDiv.innerHTML+=`
-      <div class="rfq">
-        <b>${r.product}</b> (${r.country})<br>
-        ${r.quantity}<br>
-        <span class="small">Buyer: ${r.buyerName||"-"}</span><br>
-        <span class="status">Status: ${r.status||"live"}</span><br>
+  statusDiv.style.display = "block";
+  statusDiv.style.background = "#eff6ff";
+  statusDiv.style.color = "#1d4ed8";
+  statusDiv.innerText = "⏳ Publishing RFQ to live trade desk...";
 
-        <button class="edit" onclick="editRFQ('${d.id}')">Edit</button>
-        <button class="live" onclick="setStatus('${d.id}','live')">Live</button>
-        <button class="draft" onclick="setStatus('${d.id}','draft')">Draft</button>
-        <button class="hide" onclick="setStatus('${d.id}','hidden')">Hide</button>
-        <button class="del" onclick="del('${d.id}')">Delete</button>
-      </div>
-    `;
+  try {
+    const payload = {
+      product: productEl.value.trim(),
+      commodity: productEl.value.trim(),
+      quantity: qtyEl.value.trim(),
+      country: countryEl.value.trim(),
+      destination: countryEl.value.trim(),
+      buyerName: buyerEl.value.trim() || "Verified Institutional Importer",
+      email: emailEl.value.trim() || "trade-desk@apdglobaltrade.com",
+      phone: phoneEl.value.trim() || "+971 52 384 7129",
+      whatsapp: phoneEl.value.trim() || "+971 52 384 7129",
+      paymentTerms: termsEl.value,
+      specifications: specsEl.value.trim() || "Export Quality Standard",
+      status: "live",
+      createdAtMs: Date.now(),
+      createdAt: serverTimestamp()
+    };
+
+    const docRef = await addDoc(collection(db, "rfqs"), payload);
+    payload.id = docRef.id;
+    allLiveRFQs.unshift(payload);
+
+    statusDiv.style.background = "#dcfce7";
+    statusDiv.style.color = "#16a34a";
+    statusDiv.innerHTML = `✅ Successfully published <b>${payload.commodity}</b>!`;
+
+    productEl.value = qtyEl.value = countryEl.value = buyerEl.value = emailEl.value = phoneEl.value = specsEl.value = "";
+    renderRfqTable(allLiveRFQs);
+    setTimeout(() => { statusDiv.style.display = "none"; }, 4000);
+  } catch (err) {
+    statusDiv.style.background = "#fee2e2";
+    statusDiv.style.color = "#dc2626";
+    statusDiv.innerText = "Error publishing: " + err.message;
+  }
+};
+
+// Sample CSV Template Loader
+window.loadSampleTemplate = function() {
+  document.getElementById("bulkCsvTextarea").value = 
+`Sugar ICUMSA 45, 12500 MT, Jebel Ali Dubai UAE, Al Khaleej Food Trading LLC, +971523847129, procurement@alkhaleej.ae, 100% LC at Sight, 50KG PP Bags SGS Inspected
+Milling Wheat Grade 2, 25000 MT, Dammam Port KSA, Arabian Grains Corp, +966501234567, wheat@arabiangrains.sa, Confirmed LC at Sight, Protein 12.5% max
+Basmati Rice 1121 Steam, 500 MT, Sohar Oman, Gulf Import Export SAOC, +96891234567, info@gulfimport.om, 30% TT 70% BL, 25kg non-woven bags
+Sunflower Edible Oil, 3000 MT, Rotterdam Netherlands, EuroCommodity BV, +31201234567, sourcing@eurocommodity.nl, Irrevocable DLC, Refined Grade A Flexitanks
+Yellow Corn / Maize, 10000 MT, Haiphong Port Vietnam, Indochina Feedstuffs JSC, +84981234567, corn@indochinafeed.vn, LC at Sight, Animal Feed Moisture max 14%
+Pigeon Peas / Toor, 2000 MT, Nhava Sheva Mumbai, Global Agro Pulse Corp, +919876543210, pulses@globalpulse.in, 100% LC, Machine Cleaned 99% Purity`;
+  parseBulkInput();
+};
+
+// File upload handler
+window.handleCsvFileSelected = function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(evt) {
+    document.getElementById("bulkCsvTextarea").value = evt.target.result;
+    parseBulkInput();
+  };
+  reader.readAsText(file);
+};
+
+// Parse bulk input rows
+window.parseBulkInput = function() {
+  const raw = document.getElementById("bulkCsvTextarea").value.trim();
+  if (!raw) {
+    alert("Please paste CSV data or select a file first.");
+    return;
+  }
+
+  const lines = raw.split(/\r?\n/).map(l => l.trim()).filter(l => l.length > 3);
+  parsedBulkItems = [];
+
+  lines.forEach(line => {
+    // Skip header line if present
+    if (line.toLowerCase().startsWith('commodity,') || line.toLowerCase().startsWith('product,')) return;
+
+    // Split by comma
+    const parts = line.split(',').map(p => p.trim());
+    if (parts.length >= 2) {
+      parsedBulkItems.push({
+        commodity: parts[0] || "Commodity",
+        product: parts[0] || "Commodity",
+        quantity: parts[1] || "Bulk Order",
+        country: parts[2] || "Global Port",
+        destination: parts[2] || "Global Port",
+        buyerName: parts[3] || "Verified Institutional Importer",
+        phone: parts[4] || "+971 52 384 7129",
+        whatsapp: parts[4] || "+971 52 384 7129",
+        email: parts[5] || "procurement@apdglobaltrade.com",
+        paymentTerms: parts[6] || "100% LC at Sight",
+        specifications: parts[7] || "Standard Export Specifications",
+        status: "live",
+        createdAtMs: Date.now()
+      });
+    }
   });
+
+  const previewContainer = document.getElementById("bulkPreviewContainer");
+  const previewTbody = document.getElementById("previewTbody");
+  const publishBtn = document.getElementById("publishAllBulkBtn");
+  const parsedCountLabel = document.getElementById("parsedCountLabel");
+  const previewCount = document.getElementById("previewCount");
+
+  if (parsedBulkItems.length > 0) {
+    previewContainer.style.display = "block";
+    publishBtn.style.display = "inline-block";
+    parsedCountLabel.innerText = parsedBulkItems.length;
+    previewCount.innerText = parsedBulkItems.length;
+
+    let rowsHtml = "";
+    parsedBulkItems.slice(0, 50).forEach((item, idx) => {
+      rowsHtml += `<tr>
+        <td><b>${idx + 1}</b></td>
+        <td><b>${item.commodity}</b></td>
+        <td>${item.quantity}</td>
+        <td>${item.destination}</td>
+        <td>${item.buyerName}</td>
+        <td>${item.phone}</td>
+        <td>${item.paymentTerms}</td>
+      </tr>`;
+    });
+    if (parsedBulkItems.length > 50) {
+      rowsHtml += `<tr><td colspan="7" style="text-align:center; color:#64748b; font-weight:700;">+ ${parsedBulkItems.length - 50} more records ready to publish</td></tr>`;
+    }
+    previewTbody.innerHTML = rowsHtml;
+  } else {
+    alert("Could not parse any valid rows. Please check format.");
+  }
+};
+
+// Publish all parsed bulk items
+window.publishAllParsedRFQs = async function() {
+  if (parsedBulkItems.length === 0) return;
+  const statusDiv = document.getElementById("bulkProgressStatus");
+  const publishBtn = document.getElementById("publishAllBulkBtn");
+
+  publishBtn.disabled = true;
+  statusDiv.style.display = "block";
+  statusDiv.style.background = "#eff6ff";
+  statusDiv.style.color = "#1d4ed8";
+  statusDiv.innerHTML = `⏳ Publishing <b>${parsedBulkItems.length}</b> RFQs to Live Trade Desk...`;
+
+  let published = 0;
+  for (const item of parsedBulkItems) {
+    try {
+      item.createdAt = serverTimestamp();
+      const docRef = await addDoc(collection(db, "rfqs"), item);
+      item.id = docRef.id;
+      allLiveRFQs.unshift(item);
+      published++;
+    } catch(err) {
+      console.warn("Item publish note:", err.message);
+    }
+  }
+
+  statusDiv.style.background = "#dcfce7";
+  statusDiv.style.color = "#16a34a";
+  statusDiv.innerHTML = `✅ Successfully published <b>${published}</b> of <b>${parsedBulkItems.length}</b> RFQs live!`;
+  
+  publishBtn.disabled = false;
+  document.getElementById("bulkCsvTextarea").value = "";
+  document.getElementById("bulkPreviewContainer").style.display = "none";
+  publishBtn.style.display = "none";
+  parsedBulkItems = [];
+  renderRfqTable(allLiveRFQs);
+};
+
+// Load existing RFQs
+async function loadRFQs() {
+  const tbody = document.getElementById("rfqsTbody");
+  tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 18px; color: #64748b;">Loading RFQs…</td></tr>`;
+
+  try {
+    const q = query(collection(db, "rfqs"), orderBy("createdAt", "desc"), limit(200));
+    const snap = await getDocs(q);
+
+    allLiveRFQs = [];
+    if (!snap.empty) {
+      snap.forEach(d => {
+        allLiveRFQs.push({ id: d.id, ...d.data() });
+      });
+    }
+  } catch (err) {
+    console.warn("Firestore query note (fallback to live_rfqs_data):", err.message);
+    // fallback to live_rfqs_data
+    if (typeof allRfqs !== 'undefined' && Array.isArray(allRfqs)) {
+      allLiveRFQs = allRfqs.slice(0, 100).map((r, idx) => ({
+        id: r.id || `RFQ-M${idx+1}`,
+        commodity: r.commodity,
+        quantity: r.quantity,
+        country: r.country,
+        destination: r.country,
+        buyerName: r.name || "Verified Importer LLC",
+        phone: "+971 52 384 7129",
+        paymentTerms: "100% LC at Sight",
+        status: "live"
+      }));
+    }
+  }
+
+  renderRfqTable(allLiveRFQs);
 }
 
-window.setStatus=async(id,status)=>{
-  await updateDoc(doc(db,"rfqs",id),{status});
-  loadRFQs();
-};
+// Render RFQ table
+function renderRfqTable(list) {
+  const tbody = document.getElementById("rfqsTbody");
+  const countEl = document.getElementById("totalLiveCount");
+  if (countEl) countEl.innerText = `${list.length} Orders`;
 
-window.del=async(id)=>{
-  if(confirm("Delete this RFQ?")){
-    await deleteDoc(doc(db,"rfqs",id));
-    loadRFQs();
+  if (list.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 18px;">No RFQs found</td></tr>`;
+    return;
+  }
+
+  let html = "";
+  list.forEach(r => {
+    const rId = r.id || "ID_" + Math.random().toString(36).substring(7);
+    const st = (r.status || "live").toLowerCase();
+    const stColor = st === 'live' ? '#16a34a' : (st === 'draft' ? '#d97706' : '#64748b');
+
+    html += `
+      <tr id="row_${rId}">
+        <td><b>${r.commodity || r.product || "-"}</b></td>
+        <td>${r.quantity || "-"}</td>
+        <td>${r.destination || r.country || "-"}</td>
+        <td>${r.buyerName || "-"}</td>
+        <td>${r.phone || r.whatsapp || "-"}</td>
+        <td>${r.paymentTerms || "LC at Sight"}</td>
+        <td style="text-align: center;">
+          <span style="background: rgba(0,0,0,0.06); color: ${stColor}; padding: 2px 7px; border-radius: 10px; font-weight: 800; font-size: 10px;">${st.toUpperCase()}</span>
+        </td>
+        <td>
+          <button class="live" onclick="setStatus('${rId}','live')">Live</button>
+          <button class="draft" onclick="setStatus('${rId}','draft')">Draft</button>
+          <button class="hide" onclick="setStatus('${rId}','hidden')">Hide</button>
+          <button class="del" onclick="del('${rId}')">Del</button>
+        </td>
+      </tr>
+    `;
+  });
+
+  tbody.innerHTML = html;
+  filterRfqTable();
+}
+
+window.setStatus = async (id, status) => {
+  const item = allLiveRFQs.find(r => r.id === id);
+  if (item) item.status = status;
+  renderRfqTable(allLiveRFQs);
+
+  try {
+    await updateDoc(doc(db, "rfqs", id), { status });
+  } catch(e) {
+    console.warn("Status update note:", e.message);
   }
 };
 
-window.editRFQ=async(id)=>{
-  const p=prompt("Product name");
-  if(!p) return;
-  await updateDoc(doc(db,"rfqs",id),{product:p});
-  loadRFQs();
+window.del = async (id) => {
+  if (confirm("Delete this RFQ from the live trade board?")) {
+    allLiveRFQs = allLiveRFQs.filter(r => r.id !== id);
+    renderRfqTable(allLiveRFQs);
+
+    try {
+      await deleteDoc(doc(db, "rfqs", id));
+    } catch(e) {
+      console.warn("Delete note:", e.message);
+    }
+  }
 };
 
-logout.onclick=async()=>{
+window.filterRfqTable = function() {
+  const query = (document.getElementById("rfqSearchInput")?.value || "").toLowerCase().trim();
+  const statusFilter = document.getElementById("rfqStatusFilter")?.value || "all";
+  const rows = document.getElementById("rfqsTbody").querySelectorAll("tr");
+
+  rows.forEach(row => {
+    if (row.cells.length <= 1) return;
+    const text = row.innerText.toLowerCase();
+    const stCell = row.cells[6]?.innerText.toLowerCase() || "";
+
+    const matchesQuery = !query || text.includes(query);
+    const matchesStatus = (statusFilter === "all") || (stCell.includes(statusFilter));
+
+    row.style.display = (matchesQuery && matchesStatus) ? "" : "none";
+  });
+};
+
+document.getElementById("logoutBtn").onclick = async () => {
   await signOut(auth);
-  location.href="/supplier-login.html";
+  location.href = "/supplier-login.html";
 };
 </script>
-
 
 <!-- QUICK RFQ MODAL -->
   <div id="rfqModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(10px); z-index: 999999; justify-content: center; align-items: center;">
