@@ -793,10 +793,10 @@ btn.addEventListener("click", async () => {
     } catch(e) { console.error("Notify Admin error", e); }
 
     successEl.style.color = "#4ade80";
-    successEl.textContent = "✅ Account created successfully! Directing to your Matched RFQs Dashboard...";
+    successEl.textContent = "✨ Account created successfully! Preparing your Executive Trade Desk to expand your business worldwide...";
 
     setTimeout(()=>{
-      location.href = "/supplier-dashboard.html";
+      location.href = "/supplier-dashboard.html?signup=success";
     }, 1200);
 
   }catch(err){
