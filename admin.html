@@ -6,23 +6,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;font-size:12px;}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;background:#f8fafc;font-size:11px;color:#0f172a;}
 header{
   background:#020617;color:#fff;
-  padding:10px 20px;
-  display:flex;justify-content:space-between;align-items:center
+  padding:8px 18px;
+  display:flex;justify-content:space-between;align-items:center;
 }
 .container{
-  max-width:98%;margin:40px auto;
-  background:#fff;border-radius:12px;overflow-x:auto;
+  max-width:99.2%;margin:12px auto;
+  background:#fff;border-radius:8px;overflow-x:auto;box-shadow:0 1px 4px rgba(0,0,0,0.06);
 }
-table{width:100%;border-collapse:collapse}
-th,td{padding:8px;border-bottom:1px solid #e5e7eb;text-align:left;font-size:12px;}
-th{background:#020617;color:#fff}
+table{width:100%;border-collapse:collapse;table-layout:auto;}
+th,td{padding:5px 7px;border-bottom:1px solid #e2e8f0;text-align:left;font-size:10.5px;line-height:1.3;}
+th{background:#020617;color:#f8fafc;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:0.3px;white-space:nowrap;position:sticky;top:0;z-index:10;}
 button{
-  padding:6px 10px;margin:2px;
-  border:none;border-radius:4px;
-  cursor:pointer;font-size:10px;color:#fff
+  padding:3px 6px;margin:1px;
+  border:none;border-radius:3px;
+  cursor:pointer;font-size:9.5px;font-weight:700;color:#fff;white-space:nowrap;
 }
 .approve{background:#16a34a}
 .pass{background:#c9a44a; color:#000; font-weight:700}
@@ -35,25 +35,34 @@ button{
 .lifetime{background:#9333ea}
 footer{
   background:#020617;color:#9ca3af;
-  text-align:center;padding:40px 20px;font-size:14px
+  text-align:center;padding:25px 15px;font-size:12px;
+}
+/* REAL-TIME BADGE PULSE */
+@keyframes realTimePulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+  70% { transform: scale(1.02); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+.new-signup-row {
+  background: #f0fdf4 !important;
+  border-left: 3px solid #22c55e !important;
 }
 /* ADMIN MOBILE PWA */
-
 @media (max-width: 768px) {
   header {
     flex-direction: column !important;
-    gap: 12px !important;
+    gap: 8px !important;
     text-align: center !important;
-    padding: 12px 15px !important;
+    padding: 10px !important;
   }
   .container {
-    margin: 15px auto 85px auto !important;
-    padding: 10px !important;
-    border-radius: 8px !important;
+    margin: 10px auto 70px auto !important;
+    padding: 6px !important;
+    border-radius: 6px !important;
     -webkit-overflow-scrolling: touch !important;
   }
   table {
-    min-width: 650px !important;
+    min-width: 600px !important;
   }
 }
 </style>
@@ -61,6 +70,7 @@ footer{
     <meta name="theme-color" content="#020617">
     <link rel="apple-touch-icon" href="/assets/icons/icon-192.png">
     <script src="/assets/js/mobile-pwa.js" defer></script>
+    <script src="/assets/js/master_suppliers_data.js"></script>
 </head>
 
 <body>
@@ -79,75 +89,81 @@ footer{
       <a href="/register-buyer.html" style="background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid rgba(148, 163, 184, 0.4); color: #fff; padding: 8px 20px; font-weight: 700; font-size: 0.8rem; border-radius: 50px; letter-spacing: 0.5px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); text-decoration: none; text-transform: uppercase; white-space: nowrap; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"><span style="color:#60a5fa; margin-right: 4px;">✦</span> BECOME A VERIFIED BUYER</a>
   </div>
 
-  <header>
-  <h3 style="margin:0;">Admin – Supplier Management</h3>
-  <div style="display:flex; gap: 20px; align-items:center;">
-    <label style="cursor:pointer; display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; color:#cbd5e1; background:rgba(255,255,255,0.1); padding:8px 12px; border-radius:8px;">
-      <input type="checkbox" id="hideBulkToggle" checked style="width:16px; height:16px; cursor:pointer;" onchange="loadSuppliers()"> 
-      Hide Bulk CRM Leads
+    <header>
+  <h3 style="margin:0; font-size:15px; font-weight:800; letter-spacing:0.3px;">Admin – Supplier & Buyer Management</h3>
+  <div style="display:flex; gap: 15px; align-items:center;">
+    <label style="cursor:pointer; display:flex; align-items:center; gap:6px; font-size:11px; font-weight:600; color:#cbd5e1; background:rgba(255,255,255,0.08); padding:5px 10px; border-radius:6px;" title="Filter to show direct portal signups only, or uncheck to view all 1,000+ verified suppliers and exporters">
+      <input type="checkbox" id="hideBulkToggle" style="width:14px; height:14px; cursor:pointer;" onchange="filterSuppliersTable()"> 
+      Filter Direct Signups Only (Hide Bulk Exporters)
     </label>
-    <a href="/admin-franchise.html" style="color: #d4af37; text-decoration: none; font-weight: bold; margin-right: 15px;">Franchise Admin</a>
-    <button id="logoutBtn" style="background:#dc2626;">Logout</button>
+    <a href="/admin-franchise.html" style="color: #d4af37; text-decoration: none; font-weight: bold; font-size:12px; margin-right: 5px;">Franchise Admin</a>
+    <button id="logoutBtn" style="background:#dc2626; font-size:10.5px; padding:4px 10px;">Logout</button>
   </div>
 </header>
 
 <!-- DIRECT PLAN ASSIGNMENT TOOLBAR -->
-<div style="max-width:98%; margin: 15px auto 0; background: linear-gradient(135deg, #071427, #0f172a); border: 1.5px solid #d4af37; border-radius: 12px; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; flex-wrap: wrap; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
-  <div style="display: flex; align-items: center; gap: 10px;">
-    <span style="font-size: 22px;">⚡</span>
+<div style="max-width:99.2%; margin: 8px auto 0; background: linear-gradient(135deg, #071427, #0f172a); border: 1.5px solid #d4af37; border-radius: 8px; padding: 8px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+  <div style="display: flex; align-items: center; gap: 8px;">
+    <span style="font-size: 16px;">⚡</span>
     <div>
-      <div style="color: #facc15; font-weight: 800; font-size: 14px;">Instant Plan Grant (One-Year Plans)</div>
-      <div style="color: #94a3b8; font-size: 12px;">Assign any 1-Year plan directly to any supplier email</div>
+      <div style="color: #facc15; font-weight: 800; font-size: 12px;">Instant Plan Grant (One-Year Plans)</div>
+      <div style="color: #94a3b8; font-size: 10.5px;">Assign any 1-Year plan directly to any supplier email</div>
     </div>
   </div>
-  <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-    <input type="email" id="quickAssignEmail" placeholder="supplier@email.com" value="ashishchaturvedi@ymail.com" style="background: #1e293b; border: 1px solid #475569; color: #fff; padding: 9px 14px; border-radius: 8px; font-size: 13px; min-width: 240px; outline: none;">
-    <select id="quickAssignPlanSelect" style="background: #1e293b; border: 1.5px solid #d4af37; color: #facc15; padding: 9px 14px; border-radius: 8px; font-size: 13px; font-weight: 700; outline: none; cursor: pointer;">
+  <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+    <input type="email" id="quickAssignEmail" placeholder="supplier@email.com" value="ashishchaturvedi@ymail.com" style="background: #1e293b; border: 1px solid #475569; color: #fff; padding: 5px 10px; border-radius: 6px; font-size: 11px; min-width: 200px; outline: none;">
+    <select id="quickAssignPlanSelect" style="background: #1e293b; border: 1.5px solid #d4af37; color: #facc15; padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; outline: none; cursor: pointer;">
       <option value="enterprise_1yr" selected>🏆 Global Enterprise ($2,499 / 1 Year)</option>
       <option value="elite_1yr">⭐ Elite Corridor ($999 / 1 Year)</option>
       <option value="verified_1yr">✨ Verified Supplier ($299 / 1 Year)</option>
       <option value="free">Standard Free Account</option>
     </select>
-    <button onclick="quickAssignPlanToEmail()" style="background: linear-gradient(135deg, #d4af37, #b8860b); color: #000; font-weight: 900; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-size: 13px; box-shadow: 0 4px 12px rgba(212,175,55,0.35);">
+    <button onclick="quickAssignPlanToEmail()" style="background: linear-gradient(135deg, #d4af37, #b8860b); color: #000; font-weight: 900; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 11px; box-shadow: 0 2px 6px rgba(212,175,55,0.35);">
       ⚡ Assign & Activate
     </button>
   </div>
-  <div id="quickAssignStatus" style="width: 100%; display: none; font-size: 12.5px; font-weight: 700; padding: 6px 10px; border-radius: 6px;"></div>
+  <div id="quickAssignStatus" style="width: 100%; display: none; font-size: 11px; font-weight: 700; padding: 5px 8px; border-radius: 5px;"></div>
 </div>
 
 <!-- SEARCH & FILTER BAR -->
-<div style="max-width:98%; margin: 20px auto 0; display:flex; justify-content:space-between; align-items:center; background:#fff; padding: 14px 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); gap: 15px; flex-wrap: wrap;">
-  <div style="display:flex; gap:10px; align-items:center; flex:1; max-width:650px;">
-    <input type="text" id="adminSearchInput" placeholder="🔍 Search by company name, email, phone, product, ID, status..." style="flex:1; padding: 10px 16px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 13px; outline: none; transition: 0.2s;" onkeyup="filterSuppliersTable()">
-    <button onclick="filterSuppliersTable()" style="background:#020617; color:#facc15; font-weight:700; padding:10px 22px; border:none; border-radius:8px; font-size:13px; cursor:pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">Search</button>
-    <button onclick="clearAdminSearch()" style="background:#e2e8f0; color:#475569; font-weight:600; padding:10px 16px; border:none; border-radius:8px; font-size:13px; cursor:pointer;">Clear</button>
+<div style="max-width:99.2%; margin: 8px auto 0; display:flex; justify-content:space-between; align-items:center; background:#fff; padding: 8px 14px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); gap: 10px; flex-wrap: wrap;">
+  <div style="display:flex; gap:8px; align-items:center; flex:1; max-width:620px;">
+    <input type="text" id="adminSearchInput" placeholder="🔍 Search company name, email, phone, product, ID, status..." style="flex:1; padding: 6px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 11px; outline: none; transition: 0.2s;" onkeyup="filterSuppliersTable()">
+    <button onclick="filterSuppliersTable()" style="background:#020617; color:#facc15; font-weight:700; padding:6px 14px; border:none; border-radius:6px; font-size:11px; cursor:pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">Search</button>
+    <button onclick="clearAdminSearch()" style="background:#e2e8f0; color:#475569; font-weight:600; padding:6px 10px; border:none; border-radius:6px; font-size:11px; cursor:pointer;">Clear</button>
   </div>
-  <div id="supplierCountBadge" style="font-weight:700; font-size:13px; color:#334155; background:#f1f5f9; padding: 8px 14px; border-radius: 8px; border: 1px solid #e2e8f0;">
-    Total Suppliers: <b>0</b>
+  <div style="display:flex; gap:10px; align-items:center;">
+    <div id="realTimeIndicator" style="display:inline-flex; align-items:center; gap:5px; font-size:10.5px; font-weight:700; color:#16a34a; background:#dcfce7; padding:4px 9px; border-radius:12px;">
+      <span style="width:6px; height:6px; background:#16a34a; border-radius:50%; animation:realTimePulse 1.5s infinite;"></span>
+      REAL-TIME LIVE
+    </div>
+    <div id="supplierCountBadge" style="font-weight:700; font-size:11px; color:#334155; background:#f1f5f9; padding: 5px 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+      Total Suppliers: <b>0</b>
+    </div>
   </div>
 </div>
 
-<div class="container" style="margin-top: 15px;">
+<div class="container" style="margin-top: 8px;">
 <table>
 <thead>
 <tr>
-<th>Company</th>
-<th>Type</th>
-<th>Email</th>
-<th>Products</th>
-<th>Market</th>
-<th>Comments</th>
-<th>Phone</th>
-<th>ID (UID)</th>
-<th>Status</th>
-<th>Compliance (T&C)</th>
-<th>Plan</th>
-<th>Unlocks</th>
-<th>Actions</th>
+<th style="min-width:125px; max-width:150px;">Company</th>
+<th style="width:65px; text-align:center;">Type</th>
+<th style="min-width:145px; max-width:185px;">Email</th>
+<th style="min-width:130px; max-width:180px;">Products</th>
+<th style="min-width:80px; max-width:115px;">Market</th>
+<th style="min-width:85px; max-width:125px;">Comments</th>
+<th style="min-width:95px; max-width:110px;">Phone</th>
+<th style="min-width:70px; max-width:90px;">ID (UID)</th>
+<th style="width:70px; text-align:center;">Status</th>
+<th style="width:55px; text-align:center;">T&C</th>
+<th style="min-width:115px; max-width:145px;">Plan</th>
+<th style="width:55px; text-align:center;">Unlocks</th>
+<th style="min-width:280px;">Actions</th>
 </tr>
 </thead>
 <tbody id="tbody">
-<tr><td colspan="12">Loading suppliers…</td></tr>
+<tr><td colspan="13" style="text-align:center; padding:18px; font-size:11px; color:#64748b;">Loading 1,000+ Suppliers...</td></tr>
 </tbody>
 </table>
 </div>
@@ -216,8 +232,29 @@ const withTimeout = (promise, ms = 2000) => Promise.race([
   new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), ms))
 ]);
 
-// Fallback suppliers data in case of Firestore offline/quota limit
+// Master list reference in memory
+let allSuppliers = [];
+
+// Fallback suppliers data in case of initial startup
 const DEFAULT_FALLBACK_SUPPLIERS = [
+  {
+    id: "Q5I2U9z0VPUt3DStq9798zXsJJ93",
+    companyName: "XYZ Test Global Trading LLC",
+    role: "supplier",
+    email: "xyztest@gmail.com",
+    productsString: "Maize, Soybeans, Pigeon Peas, Basmati Rice, Sugar ICUMSA 45",
+    targetMarket: ["UAE", "Saudi Arabia", "Vietnam"],
+    comment: "Newly Registered Institutional Supplier",
+    phone: "+91 98765 43210",
+    status: "active",
+    tcSigned: true,
+    plan: "free",
+    unlocksUsed: 0,
+    totalCredits: 0,
+    createdAtMs: 1793426349521,
+    isRealUser: true,
+    isBulkLead: false
+  },
   {
     id: "EWa9un4MaJfdiVmQlj3Jcvw2sPQ2",
     companyName: "APD Global Enterprise",
@@ -231,7 +268,10 @@ const DEFAULT_FALLBACK_SUPPLIERS = [
     tcSigned: true,
     plan: "enterprise_1yr",
     unlocksUsed: 0,
-    totalCredits: 999
+    totalCredits: 999,
+    createdAtMs: 1793300000000,
+    isRealUser: true,
+    isBulkLead: false
   },
   {
     id: "At9s3VZyFXZeyULa3oBpFHMdoFF3",
@@ -246,37 +286,10 @@ const DEFAULT_FALLBACK_SUPPLIERS = [
     tcSigned: true,
     plan: "enterprise_1yr",
     unlocksUsed: 0,
-    totalCredits: 9999
-  },
-  {
-    id: "0ujhKWpEiqNBeu6hZxdMm8OoIQ93",
-    companyName: "Varadraj Global Commodities",
-    role: "supplier",
-    email: "bhosalevaradraj@gmail.com",
-    productsString: "Spices, Onion, Agro Produce",
-    targetMarket: ["Middle East"],
-    comment: "Active Verified Agro Exporter",
-    phone: "+91 98220 12345",
-    status: "approved",
-    tcSigned: true,
-    plan: "elite_1yr",
-    unlocksUsed: 2,
-    totalCredits: 500
-  },
-  {
-    id: "20GsI09aXdV86D94ccG0tS6tbX13",
-    companyName: "Chauhan Agro Exports",
-    role: "supplier",
-    email: "ajayviratsinghchauhan@gmail.com",
-    productsString: "Pigeon Peas, Maize, Grains",
-    targetMarket: ["Vietnam", "Indonesia"],
-    comment: "Agri Commodity Supplier",
-    phone: "+91 94140 54321",
-    status: "approved",
-    tcSigned: true,
-    plan: "verified_1yr",
-    unlocksUsed: 1,
-    totalCredits: 100
+    totalCredits: 9999,
+    createdAtMs: 1793200000000,
+    isRealUser: true,
+    isBulkLead: false
   }
 ];
 
@@ -310,101 +323,290 @@ const planMap = {
   'free': 'Standard Free'
 };
 
-function renderSuppliersTable(suppliersList) {
+// Timestamp helper for strict latest to oldest sorting
+function getTimestampMs(s) {
+  if (typeof s.createdAtMs === 'number' && s.createdAtMs > 0) return s.createdAtMs;
+  if (s.createdAt && typeof s.createdAt.seconds === 'number') return s.createdAt.seconds * 1000;
+  if (s.createdAt && typeof s.createdAt === 'string') {
+    const parsed = Date.parse(s.createdAt);
+    if (!isNaN(parsed)) return parsed;
+  }
+  if (s.isRealUser) return 1790000000000;
+  return 1700000000000;
+}
+
+// Sort latest to oldest
+function sortLatestFirst(list) {
+  return list.sort((a, b) => getTimestampMs(b) - getTimestampMs(a));
+}
+
+// Update count badge
+function updateCountBadge(visibleCount, totalCount) {
+  const badge = document.getElementById("supplierCountBadge");
+  if (badge) {
+    if (typeof totalCount === 'number' && visibleCount !== totalCount) {
+      badge.innerHTML = `Showing <b style="color:#16a34a">${visibleCount}</b> of <b>${totalCount}</b> suppliers`;
+    } else {
+      badge.innerHTML = `Total Suppliers: <b>${visibleCount}</b>`;
+    }
+  }
+}
+
+// Render Suppliers Table with fit-to-screen compact styles
+function renderSuppliersTable(suppliersList, highlightId = null) {
   let htmlOutput = "";
   const hideBulk = document.getElementById('hideBulkToggle')?.checked;
+  let renderedCount = 0;
+  let totalSuppliersCount = suppliersList.length;
 
   suppliersList.forEach(s => {
     const sId = s.id || s._id || "ID_" + Math.random().toString(36).substring(7);
-    if (hideBulk && (s.isBulkLead || sId.startsWith("bulk_"))) return;
+    const isBulk = s.isBulkLead || sId.startsWith("bulk_");
+    if (hideBulk && isBulk) return;
+    renderedCount++;
 
     const planName = planMap[s.plan] || s.plan || "Standard Free";
-    const unlockTotal = (s.plan === 'custom_credits') ? (s.totalCredits || 0) : ((s.plan === 'verified_1yr' || s.plan === 'trial_3m') ? '100' : '∞');
+    const unlockTotal = (s.plan === 'custom_credits') ? (s.totalCredits || 0) : ((s.plan === 'enterprise_1yr' || s.plan === 'elite_1yr') ? '∞' : (s.plan === 'verified_1yr' ? '100' : '0'));
     const isLegacy = sId.length < 20;
     const warning = isLegacy ? '<span title="Legacy ID" style="cursor:help;">⚠️</span>' : '';
 
+    const st = (s.status || "pending").toLowerCase();
+    let statusBadge = "";
+    if (st === 'approved' || st === 'active') {
+      statusBadge = `<span id="status_badge_${sId}" style="background:#dcfce7; color:#16a34a; padding:2px 6px; border-radius:10px; font-weight:800; font-size:9.5px;">APPROVED</span>`;
+    } else if (st === 'banned') {
+      statusBadge = `<span id="status_badge_${sId}" style="background:#fee2e2; color:#dc2626; padding:2px 6px; border-radius:10px; font-weight:800; font-size:9.5px;">BANNED</span>`;
+    } else {
+      statusBadge = `<span id="status_badge_${sId}" style="background:#fef9c3; color:#854d0e; padding:2px 6px; border-radius:10px; font-weight:800; font-size:9.5px;">PENDING</span>`;
+    }
+
+    const typeBadge = s.role === 'buyer' 
+      ? '<span style="background:#f3e8ff; color:#9333ea; font-weight:800; font-size:9.5px; padding:2px 6px; border-radius:4px;">BUYER</span>' 
+      : (isBulk 
+          ? '<span style="background:#f1f5f9; color:#475569; font-weight:700; font-size:9.5px; padding:2px 5px; border-radius:4px;">CRM LEAD</span>' 
+          : '<span style="background:#dcfce7; color:#16a34a; font-weight:800; font-size:9.5px; padding:2px 6px; border-radius:4px;">PORTAL</span>');
+
+    const productsText = (s.productsString || s.product) ? (s.productsString || s.product) : "-";
+    const marketText = (s.targetMarket && Array.isArray(s.targetMarket)) ? s.targetMarket.join(', ') : (s.targetMarket || "-");
+    const commentText = s.comment || "-";
+    const isHighlight = s.isNewRealtime || sId === highlightId;
+
     htmlOutput += `
-      <tr id="row_${sId}">
-        <td><b>${s.companyName || "-"}</b></td>
-        <td>${s.role === 'buyer' ? '<span style="color:#9333ea; font-weight:800; font-size:11px;">BUYER</span>' : '<span style="color:#16a34a; font-weight:800; font-size:11px;">SUPPLIER</span>'}</td>
-        <td><b style="color:#0f172a;">${s.email || "-"}</b></td>
-        <td style="max-width:200px; font-size:12px;">${(s.productsString || s.product) ? (s.productsString || s.product) : "-"}</td>
-        <td>${(s.targetMarket && Array.isArray(s.targetMarket)) ? s.targetMarket.join(', ') : (s.targetMarket || "-")}</td>
-        <td style="max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${s.comment || ""}">${s.comment || "-"}</td>
-        <td>${s.phone || s.contact || s.whatsapp || "-"}</td>
-        <td style="font-size:10px; font-family:monospace; color:#64748b;">${warning} ${sId}</td>
-        <td><span style="background:${s.status === 'approved' ? '#dcfce7' : '#fef9c3'}; color:${s.status === 'approved' ? '#16a34a' : '#854d0e'}; padding:3px 8px; border-radius:12px; font-weight:800; font-size:11px;">${(s.status || "pending").toUpperCase()}</span></td>
-        <td>${s.tcSigned ? '<span style="background:#16a34a; color:white; padding:3px 6px; border-radius:4px; font-size:10px; font-weight:bold;">SIGNED</span>' : '<span style="background:#ef4444; color:white; padding:3px 6px; border-radius:4px; font-size:10px; font-weight:bold;">PENDING</span>'}</td>
-        <td style="font-size:12px; font-weight:700; color:#b8860b;" id="plan_label_${sId}">${planName}</td>
-        <td><span style="color:#c9a44a; font-weight:800;">${s.unlocksUsed || 0}</span> / ${unlockTotal}</td>
-        <td style="display: flex; flex-wrap: wrap; gap: 4px; max-width: 380px;">
-          <button class="approve" onclick="upd('${sId}',{status:'approved'})">Approve</button>
+      <tr id="row_${sId}" class="${isHighlight ? 'new-signup-row' : ''}">
+        <td style="max-width:145px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${s.companyName || ''}"><b>${s.companyName || "-"}</b></td>
+        <td style="text-align:center;">${typeBadge}</td>
+        <td style="max-width:175px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${s.email || ''}"><b style="color:#0f172a;">${s.email || "-"}</b></td>
+        <td style="max-width:160px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:10px;" title="${productsText}">${productsText}</td>
+        <td style="max-width:110px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${marketText}">${marketText}</td>
+        <td style="max-width:115px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${commentText}">${commentText}</td>
+        <td style="max-width:105px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${s.phone || s.contact || s.whatsapp || "-"}</td>
+        <td style="font-size:9.5px; font-family:monospace; color:#64748b; max-width:85px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${sId}">${warning} ${sId.slice(0, 10)}...</td>
+        <td style="text-align:center;">${statusBadge}</td>
+        <td style="text-align:center;">${s.tcSigned ? '<span style="background:#16a34a; color:white; padding:2px 5px; border-radius:3px; font-size:9.5px; font-weight:bold;">SIGNED</span>' : '<span style="background:#ef4444; color:white; padding:2px 5px; border-radius:3px; font-size:9.5px; font-weight:bold;">PENDING</span>'}</td>
+        <td style="font-size:10.5px; font-weight:700; color:#b8860b; max-width:130px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" id="plan_label_${sId}" title="${planName}">${planName}</td>
+        <td style="text-align:center;"><span style="color:#c9a44a; font-weight:800;">${s.unlocksUsed || 0}</span> / ${unlockTotal}</td>
+        <td style="display: flex; flex-wrap: wrap; gap: 2px; align-items: center;">
+          <button class="approve" onclick="upd('${sId}',{status:'approved'})" title="Approve Supplier">Approve</button>
           
           <!-- 3 ONE-YEAR PLANS (ALL 1 YEAR) -->
-          <button style="background:linear-gradient(135deg, #071427, #1e293b); border:1.5px solid #d4af37; color:#facc15; font-weight:800; padding:4px 8px; border-radius:4px; font-size:11px; cursor:pointer;" onclick="upd('${sId}',{plan:'enterprise_1yr', status:'approved', totalCredits:999, unlocksUsed:0, unlockedLeads:[]})">
-            🏆 Global Enterprise ($2,499 / 1 Yr)
+          <button style="background:linear-gradient(135deg, #071427, #1e293b); border:1px solid #d4af37; color:#facc15; font-weight:800; padding:2.5px 5px; border-radius:3px; font-size:9.5px; cursor:pointer;" onclick="upd('${sId}',{plan:'enterprise_1yr', status:'approved', totalCredits:999, unlocksUsed:0, unlockedLeads:[]})" title="Global Enterprise ($2,499 / 1 Yr)">
+            🏆 Enterprise ($2,499)
           </button>
-          <button style="background:linear-gradient(135deg, #d4af37, #b8860b); color:#000; font-weight:800; padding:4px 8px; border-radius:4px; font-size:11px; cursor:pointer;" onclick="upd('${sId}',{plan:'elite_1yr', status:'approved', totalCredits:500, unlocksUsed:0, unlockedLeads:[]})">
-            ⭐ Elite Corridor ($999 / 1 Yr)
+          <button style="background:linear-gradient(135deg, #d4af37, #b8860b); color:#000; font-weight:800; padding:2.5px 5px; border-radius:3px; font-size:9.5px; cursor:pointer;" onclick="upd('${sId}',{plan:'elite_1yr', status:'approved', totalCredits:500, unlocksUsed:0, unlockedLeads:[]})" title="Elite Corridor ($999 / 1 Yr)">
+            ⭐ Elite ($999)
           </button>
-          <button style="background:#0284c7; color:#fff; font-weight:800; padding:4px 8px; border-radius:4px; font-size:11px; cursor:pointer;" onclick="upd('${sId}',{plan:'verified_1yr', status:'approved', totalCredits:100, unlocksUsed:0, unlockedLeads:[]})">
-            ✨ Verified Supplier ($299 / 1 Yr)
+          <button style="background:#0284c7; color:#fff; font-weight:800; padding:2.5px 5px; border-radius:3px; font-size:9.5px; cursor:pointer;" onclick="upd('${sId}',{plan:'verified_1yr', status:'approved', totalCredits:100, unlocksUsed:0, unlockedLeads:[]})" title="Verified Supplier ($299 / 1 Yr)">
+            ✨ Verified ($299)
           </button>
 
           <!-- CREDITS & UTILITIES -->
-          <button class="pass" style="background:#22c55e; color:#fff;" onclick="upd('${sId}',{plan:'custom_credits', status:'approved', totalCredits:5, unlocksUsed:0})">+5 Credits</button>
-          <button class="free" onclick="upd('${sId}',{plan:'free'})">Free</button>
-          <button class="ban" onclick="upd('${sId}',{status:'banned'})">Ban</button>
-          ${isLegacy ? `<button class="ban" style="background:#000" onclick="del('${sId}')">Delete</button>` : ''}
+          <button class="pass" style="background:#22c55e; color:#fff;" onclick="upd('${sId}',{plan:'custom_credits', status:'approved', totalCredits:5, unlocksUsed:0})" title="+5 Credits">+5</button>
+          <button class="free" onclick="upd('${sId}',{plan:'free'})" title="Free Plan">Free</button>
+          
+          <!-- BAN & UNBAN ACTIONS -->
+          <button class="ban" onclick="upd('${sId}',{status:'banned'})" title="Ban / Suspend User">Ban</button>
+          <button class="unban" onclick="upd('${sId}',{status:'approved'})" title="Unban / Restore User">Unban</button>
+          
+          ${isLegacy ? `<button class="ban" style="background:#000" onclick="del('${sId}')" title="Delete Legacy Record">Del</button>` : ''}
         </td>
       </tr>`;
   });
 
-  tbody.innerHTML = htmlOutput || "<tr><td colspan='13'>No suppliers match the filter</td></tr>";
-  filterSuppliersTable();
+  tbody.innerHTML = htmlOutput || "<tr><td colspan='13' style='text-align:center; padding:15px;'>No suppliers match the filter</td></tr>";
+  updateCountBadge(renderedCount, totalSuppliersCount);
 }
 
-// Load suppliers with timeout & resilient fallback
+// Load suppliers with timeout & resilient master data
 window.loadSuppliers = loadSuppliers;
 async function loadSuppliers() {
-  tbody.innerHTML = "<tr><td colspan='13'>Loading suppliers…</td></tr>";
+  tbody.innerHTML = "<tr><td colspan='13' style='text-align:center; padding:18px; font-size:11px; color:#64748b;'>Loading 1,000+ Suppliers...</td></tr>";
 
-  // Check cached records first
-  const cached = localStorage.getItem('apd_admin_cached_suppliers_json');
-  if (cached) {
-    try {
-      const parsed = JSON.parse(cached);
-      if (Array.isArray(parsed) && parsed.length > 0) {
-        renderSuppliersTable(parsed);
-      }
-    } catch(e){}
+  // 1. Start with masterSuppliersData (1,032 records: real users + bulk exporters)
+  let baseList = [];
+  if (typeof masterSuppliersData !== 'undefined' && Array.isArray(masterSuppliersData) && masterSuppliersData.length > 0) {
+    baseList = [...masterSuppliersData];
+  } else {
+    baseList = [...DEFAULT_FALLBACK_SUPPLIERS];
   }
 
+  // 2. Merge apd_recent_signups from localStorage (instant cross-tab registrations)
+  try {
+    const recent = localStorage.getItem('apd_recent_signups');
+    if (recent) {
+      const parsedRecent = JSON.parse(recent);
+      if (Array.isArray(parsedRecent)) {
+        parsedRecent.forEach(r => {
+          const rEmail = (r.email || '').toLowerCase().trim();
+          const existingIdx = baseList.findIndex(s => (s.id && s.id === r.id) || ((s.email || '').toLowerCase().trim() === rEmail));
+          if (existingIdx !== -1) {
+            baseList[existingIdx] = { ...baseList[existingIdx], ...r };
+          } else {
+            baseList.unshift(r);
+          }
+        });
+      }
+    }
+  } catch(e){}
+
+  // 3. Merge local cached admin edits (plans/status changes)
+  try {
+    const cached = localStorage.getItem('apd_admin_cached_suppliers_json');
+    if (cached) {
+      const parsedCached = JSON.parse(cached);
+      if (Array.isArray(parsedCached) && parsedCached.length > 0) {
+        const cachedMap = new Map();
+        parsedCached.forEach(c => {
+          const key = c.id || (c.email || '').toLowerCase().trim();
+          if (key) cachedMap.set(key, c);
+        });
+        baseList = baseList.map(s => {
+          const key = s.id || (s.email || '').toLowerCase().trim();
+          return cachedMap.has(key) ? { ...s, ...cachedMap.get(key) } : s;
+        });
+      }
+    }
+  } catch(e){}
+
+  // 4. Sort latest to oldest
+  allSuppliers = sortLatestFirst(baseList);
+
+  // Render immediately in 0ms!
+  renderSuppliersTable(allSuppliers);
+
+  // 5. Background sync with Firestore (with timeout to never block UI)
   try {
     const q = query(collection(db, "suppliers"), limit(100));
     const snap = await withTimeout(getDocs(q), 1800);
 
     if (snap && !snap.empty) {
       const firestoreList = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      try { localStorage.setItem('apd_admin_cached_suppliers_json', JSON.stringify(firestoreList)); } catch(e){}
-      renderSuppliersTable(firestoreList);
-      return;
+      firestoreList.forEach(fs => {
+        const fsEmail = (fs.email || '').toLowerCase().trim();
+        const idx = allSuppliers.findIndex(s => (s.id && s.id === fs.id) || ((s.email || '').toLowerCase().trim() === fsEmail));
+        if (idx !== -1) {
+          allSuppliers[idx] = { ...allSuppliers[idx], ...fs };
+        } else {
+          allSuppliers.unshift(fs);
+        }
+      });
+      allSuppliers = sortLatestFirst(allSuppliers);
+      try { localStorage.setItem('apd_admin_cached_suppliers_json', JSON.stringify(allSuppliers)); } catch(e){}
+      renderSuppliersTable(allSuppliers);
     }
   } catch (err) {
     console.warn("Firestore suppliers query note (rendering resilient list):", err.message);
   }
-
-  // Fallback to rich default dataset if Firestore is slow or quota reached
-  try { localStorage.setItem('apd_admin_cached_suppliers_json', JSON.stringify(DEFAULT_FALLBACK_SUPPLIERS)); } catch(e){}
-  renderSuppliersTable(DEFAULT_FALLBACK_SUPPLIERS);
 }
 
-// Update supplier plan / status
+// REAL-TIME REGISTRATION SYNC (BroadcastChannel & Storage Event)
+function handleRealtimeSignup(newRecord) {
+  if (!newRecord) return;
+  const newEmail = (newRecord.email || '').toLowerCase().trim();
+  const existingIdx = allSuppliers.findIndex(s => (s.id && s.id === newRecord.id) || ((s.email || '').toLowerCase().trim() === newEmail));
+  
+  newRecord.isNewRealtime = true;
+  newRecord.createdAtMs = newRecord.createdAtMs || Date.now();
+  newRecord.isRealUser = true;
+
+  if (existingIdx !== -1) {
+    allSuppliers[existingIdx] = { ...allSuppliers[existingIdx], ...newRecord };
+  } else {
+    allSuppliers.unshift(newRecord);
+  }
+  
+  allSuppliers = sortLatestFirst(allSuppliers);
+  try { localStorage.setItem('apd_admin_cached_suppliers_json', JSON.stringify(allSuppliers)); } catch(e){}
+  
+  renderSuppliersTable(allSuppliers, newRecord.id);
+
+  // Flash real-time badge
+  const indicator = document.getElementById("realTimeIndicator");
+  if (indicator) {
+    indicator.style.background = "#22c55e";
+    indicator.style.color = "#fff";
+    indicator.innerHTML = `⚡ NEW SIGNUP: ${(newRecord.companyName || newRecord.email).slice(0, 20)}!`;
+    setTimeout(() => {
+      indicator.style.background = "#dcfce7";
+      indicator.style.color = "#16a34a";
+      indicator.innerHTML = `<span style="width:6px; height:6px; background:#16a34a; border-radius:50%; animation:realTimePulse 1.5s infinite;"></span> REAL-TIME LIVE`;
+    }, 4500);
+  }
+}
+
+if (typeof BroadcastChannel !== 'undefined') {
+  try {
+    const channel = new BroadcastChannel('apd_supplier_channel');
+    channel.onmessage = (event) => {
+      if (event.data && (event.data.type === 'NEW_SUPPLIER_REGISTERED' || event.data.type === 'NEW_BUYER_REGISTERED')) {
+        const item = event.data.supplier || event.data.buyer;
+        if (item) handleRealtimeSignup(item);
+      }
+    };
+  } catch(e){}
+}
+
+window.addEventListener('storage', (e) => {
+  if (e.key === 'apd_recent_signups' && e.newValue) {
+    try {
+      const parsed = JSON.parse(e.newValue);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        handleRealtimeSignup(parsed[0]);
+      }
+    } catch(err){}
+  }
+});
+
+// Update supplier plan / status (including BAN and UNBAN)
 window.upd = async (id, data) => {
-  // Update local display immediately for instant feedback
+  // Update status badge immediately in DOM for instant feedback
+  const statusEl = document.getElementById("status_badge_" + id);
+  if (statusEl && data.status) {
+    const st = data.status.toLowerCase();
+    if (st === 'approved' || st === 'active') {
+      statusEl.style.background = '#dcfce7';
+      statusEl.style.color = '#16a34a';
+      statusEl.innerText = 'APPROVED';
+    } else if (st === 'banned') {
+      statusEl.style.background = '#fee2e2';
+      statusEl.style.color = '#dc2626';
+      statusEl.innerText = 'BANNED';
+    } else {
+      statusEl.style.background = '#fef9c3';
+      statusEl.style.color = '#854d0e';
+      statusEl.innerText = st.toUpperCase();
+    }
+  }
+
+  // Update plan label immediately in DOM
   const planLabel = document.getElementById("plan_label_" + id);
   if (planLabel && data.plan) {
     planLabel.innerText = planMap[data.plan] || data.plan;
+  }
+
+  // Update in local memory
+  if (Array.isArray(allSuppliers)) {
+    const item = allSuppliers.find(s => (s.id || s._id) === id);
+    if (item) Object.assign(item, data);
   }
 
   // Update in localStorage cache
@@ -412,15 +614,18 @@ window.upd = async (id, data) => {
     const cached = localStorage.getItem('apd_admin_cached_suppliers_json');
     if (cached) {
       let list = JSON.parse(cached);
-      list = list.map(s => (s.id === id ? { ...s, ...data } : s));
+      list = list.map(s => (((s.id || s._id) === id) ? { ...s, ...data } : s));
       localStorage.setItem('apd_admin_cached_suppliers_json', JSON.stringify(list));
-      renderSuppliersTable(list);
+    } else if (allSuppliers.length > 0) {
+      localStorage.setItem('apd_admin_cached_suppliers_json', JSON.stringify(allSuppliers));
     }
   } catch(e){}
 
-  // Persist to Firestore with timeout
+  // Persist to Firestore with timeout protection
   try {
-    await withTimeout(updateDoc(doc(db, "suppliers", id), data), 2000);
+    if (!id.startsWith('bulk_')) {
+      await withTimeout(updateDoc(doc(db, "suppliers", id), data), 2000);
+    }
   } catch (e) {
     console.warn("Firestore updateDoc sync note:", e.message);
   }
@@ -448,40 +653,44 @@ window.quickAssignPlanToEmail = async function() {
     statusDiv.innerText = "⏳ Updating plan for " + email + "...";
   }
 
-  // Update in local cache
+  // Update in local memory & cache
+  let match = allSuppliers.find(s => (s.email || "").toLowerCase().trim() === email);
+  if (match) {
+    match.plan = plan;
+    match.status = "approved";
+    match.totalCredits = (plan === 'enterprise_1yr') ? 999 : ((plan === 'elite_1yr') ? 500 : 100);
+  } else {
+    match = {
+      id: "uid_" + Math.random().toString(36).substring(7),
+      companyName: email.split('@')[0].toUpperCase() + " TRADE CORP",
+      role: "supplier",
+      email: email,
+      product: "Basmati Rice, Sugar, Spices, Grains",
+      status: "approved",
+      tcSigned: true,
+      plan: plan,
+      totalCredits: 999,
+      createdAtMs: Date.now(),
+      isRealUser: true
+    };
+    allSuppliers.unshift(match);
+  }
+
+  allSuppliers = sortLatestFirst(allSuppliers);
   try {
-    const cached = localStorage.getItem('apd_admin_cached_suppliers_json');
-    let list = cached ? JSON.parse(cached) : [...DEFAULT_FALLBACK_SUPPLIERS];
-    let match = list.find(s => (s.email || "").toLowerCase() === email);
-    if (match) {
-      match.plan = plan;
-      match.status = "approved";
-      match.totalCredits = 999;
-    } else {
-      list.unshift({
-        id: "uid_" + Math.random().toString(36).substring(7),
-        companyName: email.split('@')[0].toUpperCase() + " TRADE CORP",
-        role: "supplier",
-        email: email,
-        product: "Basmati Rice, Sugar, Spices, Grains",
-        status: "approved",
-        tcSigned: true,
-        plan: plan,
-        totalCredits: 999
-      });
-    }
-    localStorage.setItem('apd_admin_cached_suppliers_json', JSON.stringify(list));
-    renderSuppliersTable(list);
+    localStorage.setItem('apd_admin_cached_suppliers_json', JSON.stringify(allSuppliers));
   } catch(e){}
 
-  // Persist to Firestore (try ashishchaturvedi UID or email query)
+  renderSuppliersTable(allSuppliers, match.id);
+
+  // Persist to Firestore
   try {
-    const targetUid = (email === "ashishchaturvedi@ymail.com") ? "EWa9un4MaJfdiVmQlj3Jcvw2sPQ2" : null;
-    if (targetUid) {
+    const targetUid = match.id || ((email === "ashishchaturvedi@ymail.com") ? "EWa9un4MaJfdiVmQlj3Jcvw2sPQ2" : null);
+    if (targetUid && !targetUid.startsWith('bulk_')) {
       await withTimeout(updateDoc(doc(db, "suppliers", targetUid), {
         plan: plan,
         status: "approved",
-        totalCredits: 999,
+        totalCredits: match.totalCredits,
         unlocksUsed: 0
       }), 2000);
     }
@@ -500,21 +709,23 @@ window.quickAssignPlanToEmail = async function() {
 
 window.del = async (id) => {
   if (confirm("Are you sure you want to delete this LEGACY record?")) {
+    allSuppliers = allSuppliers.filter(s => (s.id || s._id) !== id);
     try {
-      const cached = localStorage.getItem('apd_admin_cached_suppliers_json');
-      if (cached) {
-        let list = JSON.parse(cached).filter(s => s.id !== id);
-        localStorage.setItem('apd_admin_cached_suppliers_json', JSON.stringify(list));
-        renderSuppliersTable(list);
+      localStorage.setItem('apd_admin_cached_suppliers_json', JSON.stringify(allSuppliers));
+    } catch(e){}
+    renderSuppliersTable(allSuppliers);
+    try { 
+      if (!id.startsWith('bulk_')) {
+        await withTimeout(deleteDoc(doc(db, "suppliers", id)), 2000); 
       }
     } catch(e){}
-    try { await withTimeout(deleteDoc(doc(db, "suppliers", id)), 2000); } catch(e){}
   }
 };
 
-// Search filter
+// Search filter with instant reactivity
 window.filterSuppliersTable = function() {
   const query = (document.getElementById("adminSearchInput")?.value || "").toLowerCase().trim();
+  const hideBulk = document.getElementById('hideBulkToggle')?.checked;
   const rows = tbody.querySelectorAll("tr");
   let visibleCount = 0;
   let totalCount = 0;
@@ -523,6 +734,13 @@ window.filterSuppliersTable = function() {
     if (row.cells.length <= 1) return;
     totalCount++;
     const text = row.innerText.toLowerCase();
+    const isBulkRow = row.id.startsWith("row_bulk_");
+    
+    if (hideBulk && isBulkRow) {
+      row.style.display = "none";
+      return;
+    }
+
     if (!query || text.includes(query)) {
       row.style.display = "";
       visibleCount++;
@@ -531,10 +749,7 @@ window.filterSuppliersTable = function() {
     }
   });
 
-  const badge = document.getElementById("supplierCountBadge");
-  if (badge) {
-    badge.innerHTML = query ? `Found <b style="color:#16a34a">${visibleCount}</b> of ${totalCount} suppliers` : `Total Suppliers: <b>${totalCount}</b>`;
-  }
+  updateCountBadge(visibleCount, totalCount);
 };
 
 window.clearAdminSearch = function() {

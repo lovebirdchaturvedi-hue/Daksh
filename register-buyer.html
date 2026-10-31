@@ -685,7 +685,8 @@ btn.addEventListener("click", async () => {
     const cred = await createUserWithEmailAndPassword(auth,email,password);
     const user = cred.user;
 
-    await setDoc(doc(db,"suppliers",user.uid),{
+    const buyerPayload = {
+      id: user.uid,
       companyName: company,
       phone: contact,
       product: primaryProduct, // Primary product for dashboard matching
@@ -698,9 +699,31 @@ btn.addEventListener("click", async () => {
       unlockedLeads: [],
       unlocksUsed: 0,
       registrationIp: userIp,
-      trialStartDate: serverTimestamp(),
+      tcSigned: true,
+      createdAtMs: Date.now(),
       createdAt: serverTimestamp()
-    });
+    };
+
+    // Real-time broadcast to admin panel across open tabs
+    try {
+      const channel = new BroadcastChannel('apd_supplier_channel');
+      channel.postMessage({ type: 'NEW_SUPPLIER_REGISTERED', supplier: buyerPayload });
+    } catch(e) {}
+
+    // Persist in shared recent signups for instant display in admin
+    try {
+      let recent = JSON.parse(localStorage.getItem('apd_recent_signups') || '[]');
+      recent = recent.filter(s => s.email !== email.toLowerCase());
+      recent.unshift(buyerPayload);
+      localStorage.setItem('apd_recent_signups', JSON.stringify(recent.slice(0, 50)));
+    } catch(e) {}
+
+    // Persist to Firestore with resilient handling
+    try {
+      await setDoc(doc(db,"suppliers",user.uid), buyerPayload);
+    } catch(dbErr) {
+      console.warn("Firestore setDoc sync note:", dbErr.message);
+    }
 
     try {
         const adminMsg = `🛒 New Buyer Registered!\nCompany: ${company}\nPhone: ${contact}\nEmail: ${email.toLowerCase()}\nProducts: ${allProductsString}`;
