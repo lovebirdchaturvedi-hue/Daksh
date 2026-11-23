@@ -1091,15 +1091,21 @@
             </div>
             <div class="bank-item">
               <span>Account Name:</span>
-              <span>APD Global Trade Pvt Ltd</span>
+              <span>APD Global Trade</span>
             </div>
             <div class="bank-item">
               <span>Account No:</span>
-              <span>000405001234</span>
+              <span style="display: inline-flex; align-items: center; gap: 8px;">
+                <b id="acc-no-val" style="color: #fff; font-size: 0.95rem; letter-spacing: 0.5px;">230801000367</b>
+                <button onclick="copyField('230801000367', 'Account Number')" style="background: rgba(212,175,55,0.25); border: 1px solid var(--gold); color: #fff; font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; cursor: pointer;">Copy</button>
+              </span>
             </div>
             <div class="bank-item">
               <span>IFSC Code:</span>
-              <span>ICIC0000004</span>
+              <span style="display: inline-flex; align-items: center; gap: 8px;">
+                <b id="ifsc-val" style="color: #fff; font-size: 0.95rem; letter-spacing: 0.5px;">ICIC0002308</b>
+                <button onclick="copyField('ICIC0002308', 'IFSC Code')" style="background: rgba(212,175,55,0.25); border: 1px solid var(--gold); color: #fff; font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; cursor: pointer;">Copy</button>
+              </span>
             </div>
             <div class="bank-item">
               <span>Account Type:</span>
@@ -1139,16 +1145,34 @@
 
           <div class="bank-info-table">
             <div class="bank-item">
+              <span>Bank Name:</span>
+              <span>ICICI Bank Ltd</span>
+            </div>
+            <div class="bank-item">
+              <span>Beneficiary / Account Name:</span>
+              <span>APD Global Trade</span>
+            </div>
+            <div class="bank-item">
+              <span>Account No:</span>
+              <span style="display: inline-flex; align-items: center; gap: 8px;">
+                <b style="color: #fff; font-size: 0.95rem;">230801000367</b>
+                <button onclick="copyField('230801000367', 'Account Number')" style="background: rgba(212,175,55,0.25); border: 1px solid var(--gold); color: #fff; font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; cursor: pointer;">Copy</button>
+              </span>
+            </div>
+            <div class="bank-item">
+              <span>IFSC Code / Branch:</span>
+              <span style="display: inline-flex; align-items: center; gap: 8px;">
+                <b style="color: #fff; font-size: 0.95rem;">ICIC0002308</b>
+                <button onclick="copyField('ICIC0002308', 'IFSC Code')" style="background: rgba(212,175,55,0.25); border: 1px solid var(--gold); color: #fff; font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; cursor: pointer;">Copy</button>
+              </span>
+            </div>
+            <div class="bank-item">
               <span>SWIFT / BIC:</span>
               <span>ICICINBBCTS</span>
             </div>
             <div class="bank-item">
               <span>Currency Accepted:</span>
               <span>USD, EUR, GBP, AED</span>
-            </div>
-            <div class="bank-item">
-              <span>Beneficiary:</span>
-              <span>APD Global Trade Pvt Ltd</span>
             </div>
           </div>
 
@@ -1285,6 +1309,14 @@
         alert('UPI ID copied to clipboard: ' + upiId);
       }).catch(() => {
         prompt('Copy UPI ID:', upiId);
+      });
+    }
+
+    function copyField(val, label) {
+      navigator.clipboard.writeText(val).then(() => {
+        alert(label + ' copied to clipboard: ' + val);
+      }).catch(() => {
+        prompt('Copy ' + label + ':', val);
       });
     }
 
