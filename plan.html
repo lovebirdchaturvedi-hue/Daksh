@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;900&family=Noto+Sans+Devanagari:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Razorpay Checkout JS -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <!-- PayPal JavaScript SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD&components=buttons"></script>
   
@@ -1056,21 +1058,31 @@
         <!-- Panel 1: Domestic Payment -->
         <div class="tab-content active" id="panel-domestic">
           
-          <a href="upi://pay?pa=apdglobal@icici&pn=APD%20Global%20Trade&am=49000&cu=INR&tn=6-Month%20Global%20Exporter%20Accelerator" class="btn-upi-mobile">
+          <!-- Razorpay Domestic Button -->
+          <button onclick="payWithRazorpay('INR', 49000)" id="rzp-btn-inr" class="btn-upi-mobile" style="background: linear-gradient(135deg, #0284c7, #0369a1); border: 2px solid #38bdf8; cursor: pointer; margin-bottom: 12px;">
+            <i class="fa-solid fa-credit-card"></i> Pay ₹49,000 via Razorpay (Cards / NetBanking / UPI)
+          </button>
+
+          <!-- Direct Mobile UPI Intent Button -->
+          <a href="upi://pay?pa=apdglobaltrade@okhdfcbank&pn=APD%20Global%20Trade&am=49000&cu=INR&tn=6-Month%20Global%20Exporter%20Accelerator" class="btn-upi-mobile" style="background: linear-gradient(135deg, #22c55e, #16a34a); border: 2px solid #4ade80;">
             <i class="fa-solid fa-mobile-screen-button"></i> Pay ₹49,000 via UPI App (GPay / PhonePe / Paytm)
           </a>
 
-          <div class="upi-box">
-            <div class="qr-frame">
-              <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi%3A%2F%2Fpay%3Fpa%3Dapdglobal%40icici%26pn%3DAPD%2520Global%2520Trade%26am%3D49000%26cu%3DINR%26tn%3D6-Month%2520Global%2520Exporter%2520Accelerator" alt="Scan to pay INR 49,000">
+          <!-- UPI ID Display Box (NO QR CODE) -->
+          <div class="upi-box" style="padding: 22px 18px;">
+            <div style="color: var(--gold-bright); font-weight: 800; font-size: 0.92rem; margin-bottom: 6px;">
+              <i class="fa-solid fa-building-columns"></i> Official Business UPI ID:
             </div>
-            <p style="font-size: 0.8rem; color: #94a3b8;">Scan with Google Pay, PhonePe, Paytm, or BHIM</p>
-            
-            <div class="upi-id-bar">
-              <span id="upi-id-val">apdglobal@icici</span>
-              <button class="copy-btn" onclick="copyUPI()">Copy UPI ID</button>
+            <div class="upi-id-bar" style="background: #020617; border: 1.5px solid var(--border-gold); padding: 12px 16px; border-radius: 12px;">
+              <span id="upi-id-val" style="font-weight: 800; color: #fff; font-size: 1rem; letter-spacing: 0.5px;">apdglobaltrade@okhdfcbank</span>
+              <button class="copy-btn" onclick="copyUPI()" style="padding: 6px 14px; font-size: 0.82rem;">Copy UPI ID</button>
             </div>
+            <p style="font-size: 0.78rem; color: #94a3b8; margin-top: 10px;">
+              Open any UPI app (Google Pay, PhonePe, Paytm, BHIM, CRED), enter this UPI ID, and transfer <b>₹49,000</b>.
+            </p>
           </div>
+
+          <div id="rzp-error-inr" style="color: #ef4444; font-size: 0.85rem; margin-bottom: 12px; display: none; text-align: center;"></div>
 
           <div class="bank-info-table">
             <div class="bank-item">
@@ -1097,19 +1109,31 @@
 
         </div>
 
-        <!-- Panel 2: International Payment -->
+        <!-- Panel 2: International Payment (FIXED 499 USD) -->
         <div class="tab-content" id="panel-intl">
           
-          <div class="paypal-wrapper">
-            <div class="paypal-price">$499 USD</div>
-            <p style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 12px;">
-              Pay securely via Credit Card, Debit Card, or PayPal Account.
+          <div class="paypal-wrapper" style="border: 1.5px solid rgba(56, 189, 248, 0.4);">
+            <div class="paypal-price" style="color: #38bdf8;">$499 USD</div>
+            <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 16px;">
+              Instant Online International Checkout. Supports all global debit/credit cards and PayPal accounts worldwide.
             </p>
 
+            <!-- Razorpay International Gateway (Cards: Visa, MC, Amex) -->
+            <button onclick="payWithRazorpay('USD', 499)" id="rzp-btn-usd" class="btn-upi-mobile" style="background: linear-gradient(135deg, #0284c7, #0369a1); border: 2px solid #38bdf8; cursor: pointer; margin-bottom: 14px; font-size: 1rem;">
+              <i class="fa-solid fa-credit-card"></i> Pay $499 USD via Card / Razorpay
+            </button>
+            <div id="rzp-error-usd" style="color: #ef4444; font-size: 0.85rem; margin-bottom: 12px; display: none;"></div>
+
+            <div style="position: relative; margin: 15px 0; text-align: center;">
+              <span style="background: rgba(15, 23, 42, 0.95); padding: 0 10px; color: #64748b; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">or pay with PayPal</span>
+            </div>
+
+            <!-- PayPal Smart Buttons Container (Fixed $499 USD) -->
             <div id="paypal-button-container"></div>
 
-            <a href="https://www.paypal.com/paypalme/apdglobal/499USD" target="_blank" class="btn-paypal-link">
-              <i class="fa-brands fa-paypal"></i> Direct PayPal.me Link ($499)
+            <!-- Fallback PayPal.me Link -->
+            <a href="https://www.paypal.com/paypalme/apdglobal/499USD" target="_blank" class="btn-paypal-link" style="margin-top: 14px;">
+              <i class="fa-brands fa-paypal"></i> Direct PayPal.me Link ($499 USD)
             </a>
           </div>
 
@@ -1264,7 +1288,77 @@
       });
     }
 
-    // PayPal SDK Buttons render
+    // Razorpay Integration (Live Mode - Supports INR 49000 & USD 499)
+    async function payWithRazorpay(currency, amount) {
+      const btn = currency === 'USD' ? document.getElementById('rzp-btn-usd') : document.getElementById('rzp-btn-inr');
+      const err = currency === 'USD' ? document.getElementById('rzp-error-usd') : document.getElementById('rzp-error-inr');
+      const originalText = btn.innerHTML;
+      
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Initializing Gateway...';
+      btn.disabled = true;
+      if (err) err.style.display = 'none';
+
+      try {
+        const res = await fetch('/api/razorpay-create-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amount: amount, currency: currency })
+        });
+        const data = await res.json();
+
+        if (!res.ok || !data.id) {
+          throw new Error(data.error || 'Failed to initialize payment gateway.');
+        }
+
+        const options = {
+          key: data.key_id || "rzp_live_TaWhEQtbxf1dnI",
+          amount: data.amount,
+          currency: data.currency,
+          name: "APD Global Trade",
+          description: "6-Month Global Exporter Accelerator (" + (currency === 'USD' ? "$499 USD" : "₹49,000 INR") + ")",
+          order_id: data.id,
+          handler: async function (response) {
+            try {
+              await fetch('/api/razorpay-verify', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  razorpay_order_id: response.razorpay_order_id,
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_signature: response.razorpay_signature
+                })
+              });
+            } catch(e) {}
+            
+            const waMsg = encodeURIComponent("Hi APD Global Trade, I have completed the payment of " + (currency === 'USD' ? "$499 USD" : "₹49,000 INR") + " via Razorpay. Order ID: " + response.razorpay_order_id + ", Payment ID: " + response.razorpay_payment_id + ". Please activate my account.");
+            window.location.href = "https://wa.me/919990332340?text=" + waMsg;
+          },
+          theme: { color: "#d4af37" }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.on('payment.failed', function (resp){
+          if (err) {
+            err.innerText = 'Payment failed: ' + resp.error.description;
+            err.style.display = 'block';
+          }
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        });
+        rzp.open();
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      } catch(e) {
+        if (err) {
+          err.innerText = e.message || 'Payment system error. Please retry or transfer via UPI/Bank.';
+          err.style.display = 'block';
+        }
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    }
+
+    // PayPal SDK Buttons render (Fixed $499 USD)
     if (window.paypal) {
       paypal.Buttons({
         style: {
