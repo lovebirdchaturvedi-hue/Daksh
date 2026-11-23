@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>6-Month Global Exporter Accelerator | APD Global Trade</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;900&family=Noto+Sans+Devanagari:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- PayPal JavaScript SDK -->
+  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD&components=buttons"></script>
+  
+  <style>
+    :root {
+      --gold: #d4af37;
+      --gold-bright: #facc15;
+      --gold-dark: #854d0e;
+      --navy: #071427;
+      --dark: #020617;
+      --card-bg: rgba(15, 23, 42, 0.85);
+      --border-gold: rgba(212, 175, 55, 0.3);
+      --green: #22c55e;
+      --wa-green: #25D366;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top center, #0a1128 0%, #020617 100%);
+      color: #e2e8f0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Executive Top Bar */
+    .top-bar {
+      background: rgba(2, 6, 23, 0.98);
+      border-bottom: 1px solid var(--border-gold);
+      padding: 8px 5%;
+      font-size: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 100;
+    }
+
+    .top-bar a {
+      color: var(--gold-bright);
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Header Nav */
+    header {
+      background: rgba(7, 20, 39, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-gold);
+      padding: 14px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-badge {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--gold-bright), var(--gold-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: #020617;
+      font-size: 1.1rem;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+    }
+
+    .logo-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .logo-text span {
+      background: linear-gradient(135deg, #fef08a, var(--gold), var(--gold-bright));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-badge {
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold-bright);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      color: #4ade80;
+      padding: 6px 20px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Outfit', 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #ffffff 30%, #e2e8f0 60%, var(--gold-bright) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-hindi-title {
+      font-size: 1.4rem;
+      color: var(--gold-bright);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #94a3b8;
+      max-width: 860px;
+      margin: 0 auto 30px;
+      line-height: 1.7;
+    }
+
+    /* Currency Switcher */
+    .currency-switch-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 35px;
+    }
+
+    .currency-switch {
+      background: rgba(15, 23, 42, 0.95);
+      border: 1.5px solid var(--border-gold);
+      padding: 6px;
+      border-radius: 50px;
+      display: flex;
+      gap: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+
+    .switch-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 0.95rem;
+      font-weight: 800;
+      padding: 10px 24px;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .switch-btn.active {
+      background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+      color: #020617;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.45);
+    }
+
+    /* Main Grid */
+    .plan-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    @media (max-width: 1024px) {
+      .plan-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Value Details Card */
+    .value-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1.5px solid var(--border-gold);
+      border-radius: 28px;
+      padding: 40px 35px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.65);
+    }
+
+    .plan-header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 25px;
+      margin-bottom: 30px;
+    }
+
+    .plan-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .plan-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .plan-tag {
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold-bright);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .price-block {
+      display: flex;
+      align-items: baseline;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .current-price {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: var(--gold-bright);
+      letter-spacing: -1px;
+    }
+
+    .strikethrough-price {
+      font-size: 1.4rem;
+      color: #64748b;
+      text-decoration: line-through;
+    }
+
+    .validity-text {
+      color: #4ade80;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    /* THE 3 BENEFIT SEGMENTS (BILINGUAL) */
+    .benefit-segment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .segment-card {
+      background: rgba(2, 6, 23, 0.7);
+      border: 1.5px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 24px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .segment-card:hover {
+      border-color: rgba(212, 175, 55, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    .segment-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .segment-badge {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 4px 12px;
+      border-radius: 6px;
+    }
+
+    .badge-pro {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+    }
+
+    .badge-fresh {
+      background: rgba(250, 204, 21, 0.15);
+      color: #facc15;
+      border: 1px solid rgba(250, 204, 21, 0.4);
+    }
+
+    .badge-start {
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.4);
+    }
+
+    .segment-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .segment-hindi-title {
+      font-size: 0.95rem;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .benefit-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .benefit-item i {
+      margin-top: 4px;
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+
+    .item-en {
+      color: #f1f5f9;
+      font-weight: 600;
+    }
+
+    .item-hi {
+      display: block;
+      color: #94a3b8;
+      font-size: 0.85rem;
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    /* Commodities Strip */
+    .commodities-section {
+      margin-top: 30px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .commodities-title {
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gold-bright);
+      margin-bottom: 12px;
+    }
+
+    .commodity-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .comm-tag {
+      background: rgba(2, 6, 23, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      color: #e2e8f0;
+      font-weight: 600;
+    }
+
+    /* Checkout Card (Sticky) */
+    .checkout-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 2px solid var(--gold);
+      border-radius: 28px;
+      padding: 35px 28px;
+      position: sticky;
+      top: 90px;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7), 0 0 30px rgba(212, 175, 55, 0.2);
+    }
+
+    .checkout-header {
+      margin-bottom: 20px;
+    }
+
+    .instant-pill {
+      display: inline-block;
+      background: var(--gold-bright);
+      color: #020617;
+      font-weight: 900;
+      font-size: 0.75rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .checkout-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .checkout-desc {
+      color: #94a3b8;
+      font-size: 0.88rem;
+    }
+
+    /* Payment Tabs */
+    .payment-tab-row {
+      display: flex;
+      background: #020617;
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .pay-tab {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      background: transparent;
+      color: #94a3b8;
+      font-weight: 800;
+      font-size: 0.85rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pay-tab.active {
+      background: #0f172a;
+      color: #fff;
+      border: 1px solid var(--border-gold);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* UPI & Bank */
+    .upi-box {
+      text-align: center;
+      background: rgba(2, 6, 23, 0.8);
+      border: 1px dashed var(--border-gold);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .qr-frame {
+      background: #fff;
+      padding: 14px;
+      border-radius: 16px;
+      display: inline-block;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .qr-frame img {
+      width: 170px;
+      height: 170px;
+      display: block;
+    }
+
+    .upi-id-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #0f172a;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.88rem;
+      margin-top: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .copy-btn {
+      background: var(--gold);
+      border: none;
+      color: #000;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-upi-mobile {
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #fff;
+      text-align: center;
+      text-decoration: none;
+      padding: 14px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 15px rgba(34, 197, 94, 0.35);
+      transition: transform 0.2s;
+    }
+
+    .btn-upi-mobile:hover {
+      transform: translateY(-2px);
+    }
+
+    .bank-info-table {
+      background: rgba(2, 6, 23, 0.8);
+      border-radius: 12px;
+      padding: 15px;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .bank-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .bank-item:last-child {
+      border-bottom: none;
+    }
+
+    .bank-item span:first-child {
+      color: #94a3b8;
+    }
+
+    .bank-item span:last-child {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* PayPal Container */
+    .paypal-wrapper {
+      background: rgba(2, 6, 23, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .paypal-price {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #38bdf8;
+      margin-bottom: 8px;
+    }
+
+    #paypal-button-container {
+      margin-top: 15px;
+    }
+
+    .btn-paypal-link {
+      display: block;
+      width: 100%;
+      background: #0070ba;
+      color: #fff;
+      text-align: center;
+      text-decoration: none;
+      padding: 12px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-top: 12px;
+    }
+
+    /* THE 2 REGISTRATION FORMS SECTION */
+    .forms-onboarding-box {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(15, 23, 42, 0.95));
+      border: 1.5px solid var(--gold);
+      border-radius: 18px;
+      padding: 22px;
+      margin-top: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .forms-heading {
+      color: var(--gold-bright);
+      font-weight: 800;
+      font-size: 1rem;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .forms-hindi-sub {
+      color: #94a3b8;
+      font-size: 0.8rem;
+      margin-bottom: 14px;
+    }
+
+    .form-links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .form-download-card {
+      background: rgba(2, 6, 23, 0.9);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 12px 16px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.25s ease;
+    }
+
+    .form-download-card:hover {
+      border-color: var(--gold-bright);
+      background: rgba(212, 175, 55, 0.15);
+      transform: translateX(4px);
+    }
+
+    .form-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .form-info i {
+      font-size: 1.25rem;
+      color: var(--gold);
+    }
+
+    .form-info div b {
+      display: block;
+      font-size: 0.88rem;
+      color: #fff;
+    }
+
+    .form-info div span {
+      font-size: 0.75rem;
+      color: #94a3b8;
+    }
+
+    .form-action-pill {
+      background: var(--gold);
+      color: #000;
+      font-weight: 800;
+      font-size: 0.72rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* WhatsApp Proof Submission */
+    .wa-proof-action {
+      background: rgba(37, 211, 102, 0.1);
+      border: 1.5px dashed var(--wa-green);
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .wa-proof-title {
+      color: #4ade80;
+      font-size: 0.92rem;
+      font-weight: 800;
+      margin-bottom: 2px;
+    }
+
+    .wa-proof-hindi {
+      color: #cbd5e1;
+      font-size: 0.8rem;
+      margin-bottom: 12px;
+    }
+
+    .btn-wa-submit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+      transition: transform 0.2s;
+    }
+
+    .btn-wa-submit:hover {
+      transform: scale(1.02);
+    }
+
+    /* CLEAN SINGLE FLOATING WHATSAPP BUTTON */
+    .single-wa-float {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: #fff;
+      border-radius: 50%;
+      width: 62px;
+      height: 62px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
+      z-index: 99999;
+      text-decoration: none;
+      transition: transform 0.3s ease;
+    }
+
+    .single-wa-float:hover {
+      transform: scale(1.12);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #64748b;
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border-gold);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Utility Bar -->
+  <div class="top-bar">
+    <a href="/membership.html">
+      <i class="fa-solid fa-crown"></i>
+      <span>VIP Priority Access: 6-Month Global Exporter Accelerator</span>
+    </a>
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <a href="https://wa.me/919990332340" target="_blank" style="color: #4ade80;">
+        <i class="fa-brands fa-whatsapp"></i> +91 99903 32340
+      </a>
+      <span style="color: rgba(255,255,255,0.2);">|</span>
+      <a href="mailto:sales@apdglobaltrade.com" style="color: #cbd5e1;">sales@apdglobaltrade.com</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <a href="/" class="brand-logo">
+      <div class="logo-badge">APD</div>
+      <div class="logo-text">APD <span>GLOBAL</span> TRADE</div>
+    </a>
+    <div class="header-badge">
+      <i class="fa-solid fa-shield-halved"></i> Verified B2B Trade Desk
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+
+    <section class="hero">
+      <div class="hero-badge">
+        <i class="fa-solid fa-circle-check"></i> 100+ Verified Buyers & Complete Trade Launchpad
+      </div>
+      <h1>Scale or Start Your Global Export Business</h1>
+      <div class="hero-hindi-title">
+        व्यापार बढ़ाएं या शून्य से एक्सपोर्ट शुरू करें — 100+ खरीदार और संपूर्ण सहायता
+      </div>
+      <p>
+        Whether you are an established exporter looking for immediate high-volume verified buyers in any commodity, or a beginner starting from scratch — our 6-Month Accelerator delivers 100+ genuine buyers, complete compliance setup, and end-to-end execution.
+      </p>
+
+      <!-- Currency Switcher -->
+      <div class="currency-switch-wrapper">
+        <div class="currency-switch">
+          <button class="switch-btn active" id="btn-inr" onclick="setCurrency('INR')">
+            <span>🇮🇳 India (INR ₹49,000)</span>
+          </button>
+          <button class="switch-btn" id="btn-usd" onclick="setCurrency('USD')">
+            <span>🌍 International (USD $499)</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Plan Grid -->
+    <div class="plan-grid">
+
+      <!-- Left Side: Value Proposition across 3 Audiences (Bilingual) -->
+      <div class="value-card">
+        
+        <div class="plan-header">
+          <div class="plan-title-row">
+            <span class="plan-title">6-Month Global Exporter Accelerator</span>
+            <span class="plan-tag">6 MONTHS ACCESS</span>
+          </div>
+          <div class="price-block">
+            <span class="current-price" id="display-price">₹ 49,000</span>
+            <span class="strikethrough-price" id="display-original">₹ 95,000</span>
+            <span class="validity-text" id="display-sub">One-Time Fee • 6 Months Dedicated Support</span>
+          </div>
+        </div>
+
+        <div class="benefit-segment-list">
+
+          <!-- 1) PROFESSIONAL EXPORTER -->
+          <div class="segment-card">
+            <div class="segment-header">
+              <span class="segment-badge badge-pro">
+                <i class="fa-solid fa-briefcase"></i> Segment 1: Professional Exporters
+              </span>
+            </div>
+            <h3 class="segment-title">1) For Professional & Active Exporters</h3>
+            <div class="segment-hindi-title">अनुभवी व पेशेवर निर्यातकों के लिए — 100+ सत्यापित खरीदार</div>
+            
+            <ul class="benefit-bullets">
+              <li class="benefit-item">
+                <i class="fa-solid fa-circle-check" style="color: #38bdf8;"></i>
+                <div>
+                  <span class="item-en">Access 100+ Verified Buyers for ANY commodity you export:</span>
+                  <span class="item-hi">आप जिस भी उत्पाद का निर्यात करते हैं, उसके लिए 100+ सत्यापित अंतर्राष्ट्रीय खरीदारों की सीधी सूची।</span>
+                </div>
+              </li>
+              <li class="benefit-item">
+                <i class="fa-solid fa-circle-check" style="color: #38bdf8;"></i>
+                <div>
+                  <span class="item-en">Direct Importer Contacts & Live Purchase RFQs:</span>
+                  <span class="item-hi">सीधे विदेशी कंपनियों के प्रोक्योरमेंट हेड्स के मोबाइल नंबर, ईमेल और चालू खरीद ऑर्डर।</span>
+                </div>
+              </li>
+              <li class="benefit-item">
+                <i class="fa-solid fa-circle-check" style="color: #38bdf8;"></i>
+                <div>
+                  <span class="item-en">Active Overseas Demand across UAE, GCC, Europe, US, Africa:</span>
+                  <span class="item-hi">खाड़ी देश (GCC), यूरोप, अमेरिका और अफ्रीका के बाजारों से सीधी मांग व टेंडर।</span>
+                </div>
+              </li>
+              <li class="benefit-item">
+                <i class="fa-solid fa-circle-check" style="color: #38bdf8;"></i>
+                <div>
+                  <span class="item-en">Dedicated Trade Matchmaking Account Manager:</span>
+                  <span class="item-hi">व्यक्तिगत ट्रेड मैनेजर जो खरीदारों से परिचय कराने और कोटेशन फाइनल कराने में मदद करेगा।</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 2) FRESH EXPORTER -->
+          <div class="segment-card">
+            <div class="segment-header">
+              <span class="segment-badge badge-fresh">
+                <i class="fa-solid fa-chart-line"></i> Segment 2: Fresh Exporters
+              </span>
+            </div>
+            <h3 class="segment-title">2) For Fresh Exporters (Ready to Start Shipping)</h3>
+            <div class="segment-hindi-title">नए निर्यातक (जिन्होंने शुरुआत की है पर ऑर्डर नहीं मिल रहे)</div>
+            
+            <ul class="benefit-bullets">
+              <li class="benefit-item">
+                <i class="fa-solid fa-circle-check" style="color: var(--gold-bright);"></i>
+                <div>
+                  <span class="item-en">Practical Step-by-Step Training & Mentorship:</span>
+                  <span class="item-hi">व्यावहारिक एक्सपोर्ट ट्रेनिंग — उत्पाद का चुनाव, पैकेजिंग मानक और अंतर्राष्ट्रीय गुणवत्ता।</span>
+                </div>
+              </li>
+              <li class="benefit-item">
+                <i class="fa-solid fa-circle-check" style="color: var(--gold-bright);"></i>
+                <div>
+                  <span class="item-en">International Costing & Incoterms 2020 (FOB, CIF, CFR):</span>
+                  <span class="item-hi">अंतर्राष्ट्रीय मूल्य निर्धारण (Costing) और इनकोटर्म्स की सटीक गणना ताकि नुकसान न हो।</span>
+                </div>
+              </li>
+              <li class="benefit-item">
+                <i class="fa-solid fa-circle-check" style="color: var(--gold-bright);"></i>
+                <div>
+                  <span class="item-en">100% Safe Payment Methods (LC, Advance TT, Zero-Risk):</span>
+                  <span class="item-hi">धोखाधड़ी से सुरक्षा: सुरक्षित भुगतान शर्तें जैसे 100% एडवांस और कन्फर्मड एलसी (LC)।</span>
+                </div>
+              </li>
+              <li class="benefit-item">
+                <i class="fa-solid fa-circle-check" style="color: var(--gold-bright);"></i>
+                <div>
+                  <span class="item-en">100+ Ready Buyers Aligned to Your Target Product:</span>
+                  <span class="item-hi">आपके चुने हुए उत्पाद के लिए 100+ सक्रिय खरीदार ताकि पहला कंटेनर जल्द रवाना हो सके।</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 3) PLANNING TO START -->
+          <div class="segment-card">
+            <div class="segment-header">
+              <span class="segment-badge badge-start">
+                <i class="fa-solid fa-rocket"></i> Segment 3: Planning to Start
+              </span>
+            </div>
+            <h3 class="segment-title">3) For Those Planning to Start (Zero to One Launch)</h3>
+            <div class="segment-hindi-title">जो एक्सपोर्ट व्यापार शुरू करना चाहते हैं — शून्य से शुरुआत</div>
+            
+            <ul class="benefit-bullets">
+              <li class="benefit-item">
+                <i class="fa-solid fa-circle-check" style="color: #4ade80;"></i>
+                <div>
+                  <span class="item-en">Full Legal & Company Setup Assistance:</span>
+                  <span class="item-hi">कंपनी रजिस्ट्रेशन, IEC (आयात-निर्यात कोड), GST, और पोर्ट AD कोड का पूरा मार्गदर्शन।</span>
+                </div>
+              </li>
+              <li class="benefit-item">
+                <i class="fa-solid fa-circle-check" style="color: #4ade80;"></i>
+                <div>
+                  <span class="item-en">RCMC, APEDA, Spices Board & EPC Registrations:</span>
+                  <span class="item-hi">संबंधित एक्सपोर्ट प्रमोशन काउंसिल (APEDA, मसाला बोर्ड, FIEO) में पंजीकरण की पूरी प्रक्रिया।</span>
+                </div>
+              </li>
+              <li class="benefit-item">
+                <i class="fa-solid fa-circle-check" style="color: #4ade80;"></i>
+                <div>
+                  <span class="item-en">Ready-to-Use Contracts & Legal Export Documentation:</span>
+                  <span class="item-hi">तैयार लीगल कॉन्ट्रैक्ट्स, प्रोफॉर्मा इनवॉइस (PI), पैकिंग लिस्ट और सर्टिफिकेट ऑफ ओरिजिन।</span>
+                </div>
+              </li>
+              <li class="benefit-item">
+                <i class="fa-solid fa-circle-check" style="color: #4ade80;"></i>
+                <div>
+                  <span class="item-en">Sourcing Indian Manufacturers & Handholding till First Shipment:</span>
+                  <span class="item-hi">विश्वसनीय सप्लायर्स खोजने से लेकर पहले शिपमेंट के बंदरगाह से निकलने तक पूरा सहयोग।</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Commodities Strip -->
+        <div class="commodities-section">
+          <div class="commodities-title">Supported Global Commodities & Products | समर्थित उत्पाद</div>
+          <div class="commodity-tags">
+            <span class="comm-tag">🌾 Basmati & Non-Basmati Rice</span>
+            <span class="comm-tag">🌶️ Indian & Global Spices</span>
+            <span class="comm-tag">🍬 Sugar (ICUMSA 45) & Jaggery</span>
+            <span class="comm-tag">🧅 Fresh Onion, Garlic & Produce</span>
+            <span class="comm-tag">☕ Tea, Coffee & Pulses</span>
+            <span class="comm-tag">📦 FMCG & Packaged Foods</span>
+            <span class="comm-tag">👕 Garments & Cotton Textiles</span>
+            <span class="comm-tag">⚙️ Engineering Goods & Hardware</span>
+            <span class="comm-tag">🧪 Industrial Chemicals & Polymers</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Side: Payment & 2 Registration Forms -->
+      <div class="checkout-card">
+        
+        <div class="checkout-header">
+          <span class="instant-pill">Instant Activation</span>
+          <h2 class="checkout-title">Enroll in Accelerator</h2>
+          <p class="checkout-desc">Select payment method below to complete payment & immediately unlock your 2 onboarding forms.</p>
+        </div>
+
+        <!-- Payment Method Tabs -->
+        <div class="payment-tab-row">
+          <button class="pay-tab active" id="tab-inr-btn" onclick="switchPayment('domestic')">
+            <i class="fa-solid fa-qrcode"></i> UPI & Bank (INR)
+          </button>
+          <button class="pay-tab" id="tab-usd-btn" onclick="switchPayment('intl')">
+            <i class="fa-brands fa-paypal"></i> PayPal & Card (USD)
+          </button>
+        </div>
+
+        <!-- Panel 1: Domestic Payment -->
+        <div class="tab-content active" id="panel-domestic">
+          
+          <a href="upi://pay?pa=apdglobal@icici&pn=APD%20Global%20Trade&am=49000&cu=INR&tn=6-Month%20Global%20Exporter%20Accelerator" class="btn-upi-mobile">
+            <i class="fa-solid fa-mobile-screen-button"></i> Pay ₹49,000 via UPI App (GPay / PhonePe / Paytm)
+          </a>
+
+          <div class="upi-box">
+            <div class="qr-frame">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi%3A%2F%2Fpay%3Fpa%3Dapdglobal%40icici%26pn%3DAPD%2520Global%2520Trade%26am%3D49000%26cu%3DINR%26tn%3D6-Month%2520Global%2520Exporter%2520Accelerator" alt="Scan to pay INR 49,000">
+            </div>
+            <p style="font-size: 0.8rem; color: #94a3b8;">Scan with Google Pay, PhonePe, Paytm, or BHIM</p>
+            
+            <div class="upi-id-bar">
+              <span id="upi-id-val">apdglobal@icici</span>
+              <button class="copy-btn" onclick="copyUPI()">Copy UPI ID</button>
+            </div>
+          </div>
+
+          <div class="bank-info-table">
+            <div class="bank-item">
+              <span>Bank Name:</span>
+              <span>ICICI Bank Ltd</span>
+            </div>
+            <div class="bank-item">
+              <span>Account Name:</span>
+              <span>APD Global Trade Pvt Ltd</span>
+            </div>
+            <div class="bank-item">
+              <span>Account No:</span>
+              <span>000405001234</span>
+            </div>
+            <div class="bank-item">
+              <span>IFSC Code:</span>
+              <span>ICIC0000004</span>
+            </div>
+            <div class="bank-item">
+              <span>Account Type:</span>
+              <span>Current Account</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Panel 2: International Payment -->
+        <div class="tab-content" id="panel-intl">
+          
+          <div class="paypal-wrapper">
+            <div class="paypal-price">$499 USD</div>
+            <p style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 12px;">
+              Pay securely via Credit Card, Debit Card, or PayPal Account.
+            </p>
+
+            <div id="paypal-button-container"></div>
+
+            <a href="https://www.paypal.com/paypalme/apdglobal/499USD" target="_blank" class="btn-paypal-link">
+              <i class="fa-brands fa-paypal"></i> Direct PayPal.me Link ($499)
+            </a>
+          </div>
+
+          <div class="bank-info-table">
+            <div class="bank-item">
+              <span>SWIFT / BIC:</span>
+              <span>ICICINBBCTS</span>
+            </div>
+            <div class="bank-item">
+              <span>Currency Accepted:</span>
+              <span>USD, EUR, GBP, AED</span>
+            </div>
+            <div class="bank-item">
+              <span>Beneficiary:</span>
+              <span>APD Global Trade Pvt Ltd</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- THE 2 REGISTRATION FORMS SECTION -->
+        <div class="forms-onboarding-box">
+          <div class="forms-heading">
+            <i class="fa-solid fa-file-signature"></i> Step 2: Download Your 2 Onboarding Forms
+          </div>
+          <div class="forms-hindi-sub">
+            भुगतान के बाद ये 2 फॉर्म तुरंत डाउनलोड करें और भरें:
+          </div>
+
+          <div class="form-links-list">
+            <!-- Form 1: Supplier Agreement -->
+            <a href="/supplier-agreement.html" target="_blank" class="form-download-card">
+              <div class="form-info">
+                <i class="fa-solid fa-file-contract"></i>
+                <div>
+                  <b>1. Institutional Supplier Agreement</b>
+                  <span>सप्लायर अनुबंध व कोड ऑफ कंडक्ट नियम</span>
+                </div>
+              </div>
+              <span class="form-action-pill">Open Form &rarr;</span>
+            </a>
+
+            <!-- Form 2: Consent Declaration -->
+            <a href="/supplier-consent.html" target="_blank" class="form-download-card">
+              <div class="form-info">
+                <i class="fa-solid fa-file-circle-check"></i>
+                <div>
+                  <b>2. Vendor Consent & Declaration Form</b>
+                  <span>KYC सहमति व ट्रेड ऑथराइजेशन घोषणापत्र</span>
+                </div>
+              </div>
+              <span class="form-action-pill">Open Form &rarr;</span>
+            </a>
+
+            <!-- Online Portal Option -->
+            <a href="/register-supplier.html" target="_blank" class="form-download-card" style="border-color: rgba(34, 197, 94, 0.4);">
+              <div class="form-info">
+                <i class="fa-solid fa-user-plus" style="color: #4ade80;"></i>
+                <div>
+                  <b style="color: #4ade80;">Online Supplier Registration Portal</b>
+                  <span>डिजिटल ऑनलाइन सप्लायर फॉर्म भरें</span>
+                </div>
+              </div>
+              <span class="form-action-pill" style="background: #22c55e; color: #fff;">Fill Online &rarr;</span>
+            </a>
+          </div>
+
+          <!-- Step 3: WhatsApp Submission -->
+          <div class="wa-proof-action">
+            <div class="wa-proof-title">
+              <i class="fa-brands fa-whatsapp"></i> Step 3: Submit Screenshot on WhatsApp
+            </div>
+            <div class="wa-proof-hindi">
+              भुगतान का स्क्रीनशॉट इस नंबर पर भेजें ताकि तुरंत एक्टिवेशन हो सके:
+            </div>
+            <a href="https://wa.me/919990332340?text=Hi%20APD%20Global%20Trade%2C%20I%20have%20completed%20the%20payment%20for%20the%206-Month%20Global%20Exporter%20Accelerator%20Plan%20(%E2%82%B949%2C000%20%2F%20%24499%20USD).%20Please%20find%20my%20screenshot%20attached%20and%20activate%20my%20account." target="_blank" class="btn-wa-submit">
+              <i class="fa-brands fa-whatsapp" style="font-size: 1.25rem;"></i> Send Screenshot to +91 99903 32340
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 APD Global Trade. All rights reserved. The Institutional Gateway for Global Trade.</p>
+    <p style="margin-top: 6px; font-size: 0.8rem;">Direct Executive Helpdesk: <a href="https://wa.me/919990332340" style="color: var(--gold-bright); text-decoration: none;">+91 99903 32340</a></p>
+  </footer>
+
+  <!-- CLEAN SINGLE FLOATING WHATSAPP BUTTON (NO CLUTTER) -->
+  <a href="https://wa.me/919990332340" target="_blank" class="single-wa-float" title="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" width="36" height="36" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16.002 0c-8.837 0-16.002 7.163-16.002 16.002 0 2.825.74 5.485 2.053 7.765l-2.053 8.233 8.431-2.036c2.253 1.183 4.815 1.838 7.571 1.838 8.835 0 16-7.163 16-16.002s-7.165-16-16-16zm7.989 22.842c-.328.922-1.895 1.768-2.617 1.838-.667.065-1.503.111-4.22-.989-3.479-1.41-5.744-5.011-5.918-5.244-.175-.233-1.41-1.879-1.41-3.585s.891-2.545 1.199-2.871c.309-.327.671-.409.896-.409.224 0 .448 0 .638.009.202.01.472-.078.741.564.281.671.961 2.348 1.045 2.518.084.17.14.368.028.591-.111.224-.17.368-.337.564-.17.197-.351.428-.501.591-.17.183-.352.383-.146.741.206.357.917 1.517 1.972 2.456 1.359 1.209 2.492 1.579 2.843 1.748.351.17.558.14.764-.093.206-.233.885-1.033 1.122-1.388.238-.356.475-.297.801-.176.327.121 2.062.973 2.417 1.149.356.176.593.264.679.41.084.146.084.85-.244 1.771z"/>
+    </svg>
+  </a>
+
+  <!-- Interactive Currency & Payment Logic -->
+  <script>
+    function setCurrency(curr) {
+      const btnInr = document.getElementById('btn-inr');
+      const btnUsd = document.getElementById('btn-usd');
+      const displayPrice = document.getElementById('display-price');
+      const displayOriginal = document.getElementById('display-original');
+      const displaySub = document.getElementById('display-sub');
+
+      if (curr === 'INR') {
+        btnInr.classList.add('active');
+        btnUsd.classList.remove('active');
+        displayPrice.innerText = '₹ 49,000';
+        displayOriginal.innerText = '₹ 95,000';
+        displaySub.innerText = 'One-Time Fee • 6 Months Dedicated Support';
+        switchPayment('domestic');
+      } else {
+        btnUsd.classList.add('active');
+        btnInr.classList.remove('active');
+        displayPrice.innerText = '$ 499 USD';
+        displayOriginal.innerText = '$ 1,200 USD';
+        displaySub.innerText = 'One-Time International Fee • Full 6-Month Global Access';
+        switchPayment('intl');
+      }
+    }
+
+    function switchPayment(tab) {
+      const tabInrBtn = document.getElementById('tab-inr-btn');
+      const tabUsdBtn = document.getElementById('tab-usd-btn');
+      const panelDomestic = document.getElementById('panel-domestic');
+      const panelIntl = document.getElementById('panel-intl');
+
+      if (tab === 'domestic') {
+        tabInrBtn.classList.add('active');
+        tabUsdBtn.classList.remove('active');
+        panelDomestic.classList.add('active');
+        panelIntl.classList.remove('active');
+      } else {
+        tabUsdBtn.classList.add('active');
+        tabInrBtn.classList.remove('active');
+        panelIntl.classList.add('active');
+        panelDomestic.classList.remove('active');
+      }
+    }
+
+    function copyUPI() {
+      const upiId = document.getElementById('upi-id-val').innerText;
+      navigator.clipboard.writeText(upiId).then(() => {
+        alert('UPI ID copied to clipboard: ' + upiId);
+      }).catch(() => {
+        prompt('Copy UPI ID:', upiId);
+      });
+    }
+
+    // PayPal SDK Buttons render
+    if (window.paypal) {
+      paypal.Buttons({
+        style: {
+          layout: 'vertical',
+          color:  'gold',
+          shape:  'rect',
+          label:  'pay'
+        },
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              description: 'APD Global - 6-Month Global Exporter Accelerator',
+              amount: {
+                currency_code: 'USD',
+                value: '499.00'
+              }
+            }]
+          });
+        },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            alert('Payment completed by ' + details.payer.name.given_name + '! Redirecting to WhatsApp for onboarding...');
+            window.location.href = "https://wa.me/919990332340?text=Hi%20APD%20Global%2C%20I%20have%20successfully%20paid%20%24499%20USD%20via%20PayPal%20(Order%20ID%3A%20" + encodeURIComponent(data.orderID) + ").%20Please%20verify%20and%20start%20my%20onboarding.";
+          });
+        }
+      }).render('#paypal-button-container');
+    }
+  </script>
+</body>
+</html>
